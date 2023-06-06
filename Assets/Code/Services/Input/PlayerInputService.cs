@@ -1,14 +1,25 @@
+using System;
+using UnityEngine;
+
 namespace Services.Input
 {
     public class PlayerInputService : IPlayerInputService
     {
-        public PlayerInputService()
+        private const string InputReaderException = "Input reader is null";
+
+        private IInputReader _inputReader;
+
+        public void RegisterInputReader(IInputReader inputReader)
         {
-            Subscribe();
+            _inputReader = inputReader ?? throw new NullReferenceException(InputReaderException);
+            _inputReader.Init();
         }
 
-        public void Subscribe() { }
+        public Vector2 Direction => _inputReader.Direction;
 
-        public void Cleanup() { }
+        public void Cleanup()
+        {
+            _inputReader = null;
+        }
     }
 }

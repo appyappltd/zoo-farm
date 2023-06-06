@@ -12,10 +12,10 @@ namespace Joystick_Pack.Scripts.Joysticks
 
         [SerializeField] private float moveThreshold = 1;
 
-        protected override void Start()
+        public override void Init()
         {
             MoveThreshold = moveThreshold;
-            base.Start();
+            base.Init();
             background.gameObject.SetActive(false);
         }
 

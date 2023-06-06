@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Services.Input;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Joystick_Pack.Scripts.Base
 {
-    public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+    public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IInputReader
     {
         public float Horizontal => snapX ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x;
 
@@ -49,14 +50,13 @@ namespace Joystick_Pack.Scripts.Base
 
         [SerializeField] protected RectTransform background;
         [SerializeField] private RectTransform handle;
+        
         private RectTransform baseRect;
-
         private Canvas canvas;
         private Camera cam;
+        private Vector2 input;
 
-        private Vector2 input = Vector2.zero;
-
-        protected virtual void Start()
+        public virtual void Init()
         {
             HandleRange = handleRange;
             DeadZone = deadZone;
@@ -71,6 +71,7 @@ namespace Joystick_Pack.Scripts.Base
             handle.anchorMax = center;
             handle.pivot = center;
             handle.anchoredPosition = Vector2.zero;
+            input = Vector2.zero;
         }
 
         public virtual void OnPointerDown(PointerEventData eventData)
