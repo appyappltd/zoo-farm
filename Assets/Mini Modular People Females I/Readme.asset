@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 407619c5c19a54982b3880b5a085c597, type: 3}
+  iconMaxWidth: 192
+  title: Mini Modular Character | Common People | Females
+  sections:
+  - heading: About
+    text: "Thank you for purchasing the Mini Modular Character | Common People | Females asset. This lowpoly
+      stylized character is ideal to build your game or prototype."
+    linkText: 
+    url: 
+  - heading: ✓ Optimization
+    text: "This character is extremely light and can be used in both pc and mobile
+      games. All models share a single texture file, allowing you to customize the colors
+      according to your needs just by duplicanting materials and adjusting the material offset. \n\n⚠*Many models have two material slots, check the <Materials> option in the [ Inspector > Skinned Mesh Renderer ] to add secondary materials and customize colors to fit your needs."
+    linkText: 
+    url: 
+  - heading: ✓ Textures
+    text: "Diffuse/Albedo:\n-256px (.png)\n-Additional 1024px (.png)"
+    linkText: 
+    url: 
+  - heading: ✓ Polycount
+    text: "-Body | 3.2k Tris \n-All accessories | 30k Tris"
+    linkText: 
+    url: 
+  - heading: ✓ Blendshapes
+    text:  "Eyebrows:\nUp\nDown\nAngry\nSad\n\nMouth1:\nSmile1\nSmile2\nSad\nSmall\n\nMouth2:\nSmile\nAngry\n\nNose:\nSize\n\n⚠*Some accessories have a <Size> blendshape so you can adjust to avoid clipping issues with other pieces\n\n⚠*Make sure that the option <Legacy Blend Shape Normals> is checked in the models or set <Blend Shape Normals> to <None> in [ Inspector > Import Settings > Model Tab ] to avoid artifacts when using the blendshapes"
+    linkText:
+    url:
+  - heading: ╳ Animations
+    text:  "This character doesn´t have any animations. *All models have Humanoid rigs (Rigged/Skinned and Mecanim ready)\n\n⚠*Remember to adjust <Muscle & Settings> in the model´s [Rig > Configure] to adjust overlapping and clipping depending of your source animations."
+    linkText:
+    url:
+  - heading: ✓ Modular Design
+    text:  "This character is designed to be modular, making it easy to create a variety of combinations, allowing you to create unique characters and scenes."
+    linkText:
+    url:
+  - heading:
+    text:  "Each asset has been carefully crafted to add a unique touch to your game project!"
+    linkText:
+    url:
+  - heading: ☎ Contact/Support
+    text: 
+    linkText: Asset Store Profile 
+    url: https://assetstore.unity.com/publishers/20594
+  - heading: 
+    text: 
+    linkText: 
+    url: 
+  loadedLayout: 1
