@@ -21,7 +21,19 @@ namespace Infrastructure.States
         public void Enter()
         {
             LoadProgressOrInitNew();
-            _gameStateMachine.Enter<LoadLevelState, string>(LevelNames.First);
+            _gameStateMachine.Enter<LoadLevelState, string>(GetFirstScene());
+        }
+
+        private string GetFirstScene()
+        {
+            string sceneName;
+#if !UNITY_EDITOR
+            sceneName = LevelNames.First;
+#endif
+#if UNITY_EDITOR
+            sceneName = _gameStateMachine.EditorInitialScene;
+#endif
+            return sceneName;
         }
 
         public void Exit() { }

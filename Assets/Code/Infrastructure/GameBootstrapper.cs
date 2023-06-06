@@ -1,6 +1,7 @@
 ﻿using Infrastructure.States;
 using Logic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Infrastructure
 {
@@ -15,6 +16,11 @@ namespace Infrastructure
             LoadingCurtain curtain = Instantiate(_curtain);
             _game = new Game(this, curtain);
             _game.StateMachine.Enter<BootstrapState>();
+
+#if UNITY_EDITOR
+            string sceneName = SceneManager.GetActiveScene().name;
+            _game.StateMachine.EditorInitialScene = sceneName;
+#endif
 
             DontDestroyOnLoad(this);
         }
