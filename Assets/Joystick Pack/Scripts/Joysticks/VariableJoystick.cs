@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Joystick_Pack.Scripts.Base;
+﻿using Joystick_Pack.Scripts.Base;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -27,9 +25,9 @@ namespace Joystick_Pack.Scripts.Joysticks
                 background.gameObject.SetActive(false);
         }
 
-        protected override void Start()
+        public override void Init()
         {
-            base.Start();
+            base.Init();
             fixedPosition = background.anchoredPosition;
             SetMode(joystickType);
         }

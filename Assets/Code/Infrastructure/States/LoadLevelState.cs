@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Factory;
 using Logic;
+using Services.Input;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -9,14 +10,16 @@ namespace Infrastructure.States
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
+        private readonly IPlayerInputService _inputService;
         private readonly LoadingCurtain _curtain;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
-            LoadingCurtain curtain)
+            IPlayerInputService inputService, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
+            _inputService = inputService;
             _curtain = curtain;
         }
 
@@ -34,19 +37,35 @@ namespace Infrastructure.States
         private void OnLoaded()
         {
             InitialGameWorld();
+            GameObject hero = InitHero();
+            FollowCamera(hero.transform);
             InitialHud();
             _stateMachine.Enter<GameLoopState>();
         }
 
+        private void FollowCamera(Transform transform)
+        {
+            Camera.main.GetComponent<CameraMovement>().Construct(transform);
+        }
+
+        private GameObject InitHero()
+        {
+            GameObject hero = _gameFactory.CreateHero(Vector3.zero);
+            hero.GetComponent<PlayerMovement>().Construct(_inputService);
+            return hero;
+        }
+
         private void InitialHud()
         {
-            GameObject hud = _gameFactory.CreateHud();
+            var hud = _gameFactory.CreateHud();
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
+
+            var inputReader = hud.GetComponentInChildren<IInputReader>();
+            _inputService.RegisterInputReader(inputReader);
         }
 
         private void InitialGameWorld()
         {
-            
         }
     }
 }

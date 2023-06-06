@@ -7,6 +7,7 @@ namespace Tools.Extension
     {
         public static Vector3 AddY(this Vector2 vector, float y) =>
             new Vector3(vector.x, y, vector.y);
+        
 
         public static Vector2 RemoveY(this Vector3 vector) =>
             new Vector2(vector.x, vector.z);

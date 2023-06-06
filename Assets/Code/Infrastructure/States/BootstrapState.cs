@@ -1,6 +1,7 @@
 ﻿using Infrastructure.AssetManagement;
 using Infrastructure.Factory;
 using Services;
+using Services.Input;
 using Services.PersistentProgress;
 using Services.Randomizer;
 using Services.SaveLoad;
@@ -34,6 +35,7 @@ namespace Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticDataService();
+            _services.RegisterSingle<IPlayerInputService>(new PlayerInputService());
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
