@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Joystick_Pack.Scripts.Base;
+using UnityEditor;
 using UnityEngine;
 
 namespace Joystick_Pack.Editor
@@ -14,7 +15,7 @@ namespace Joystick_Pack.Editor
         protected SerializedProperty background;
         private SerializedProperty handle;
 
-        protected Vector2 center = new Vector2(0.5f, 0.5f);
+        protected Vector2 Center = new(0.5f, 0.5f);
 
         protected virtual void OnEnable()
         {
@@ -40,9 +41,9 @@ namespace Joystick_Pack.Editor
             if(handle != null)
             {
                 RectTransform handleRect = (RectTransform)handle.objectReferenceValue;
-                handleRect.anchorMax = center;
-                handleRect.anchorMin = center;
-                handleRect.pivot = center;
+                handleRect.anchorMax = Center;
+                handleRect.anchorMin = Center;
+                handleRect.pivot = Center;
                 handleRect.anchoredPosition = Vector2.zero;
             }
         }

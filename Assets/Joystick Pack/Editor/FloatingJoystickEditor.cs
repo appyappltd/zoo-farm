@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Joystick_Pack.Scripts.Joysticks;
+using UnityEditor;
 using UnityEngine;
 
 namespace Joystick_Pack.Editor
@@ -15,7 +16,7 @@ namespace Joystick_Pack.Editor
                 RectTransform backgroundRect = (RectTransform)background.objectReferenceValue;
                 backgroundRect.anchorMax = Vector2.zero;
                 backgroundRect.anchorMin = Vector2.zero;
-                backgroundRect.pivot = center;
+                backgroundRect.pivot = Center;
             }
         }
     }
