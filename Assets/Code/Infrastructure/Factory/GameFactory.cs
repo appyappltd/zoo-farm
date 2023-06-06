@@ -37,6 +37,9 @@ namespace Infrastructure.Factory
             return hero;
         }
 
+        public GameObject CreateHud() =>
+            _assets.Instantiate(AssetPath.HudPath);
+
         private void Register(ISavedProgressReader progressReader)
         {
             if (progressReader is ISavedProgress progressWriter)

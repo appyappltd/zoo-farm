@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Factory;
 using Logic;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -30,7 +31,22 @@ namespace Infrastructure.States
         public void Exit() =>
             _curtain.Hide();
 
-        private void OnLoaded() =>
+        private void OnLoaded()
+        {
+            InitialGameWorld();
+            InitialHud();
             _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void InitialHud()
+        {
+            GameObject hud = _gameFactory.CreateHud();
+            hud.GetComponent<Canvas>().worldCamera = Camera.main;
+        }
+
+        private void InitialGameWorld()
+        {
+            
+        }
     }
 }
