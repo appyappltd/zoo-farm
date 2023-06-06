@@ -452,6 +452,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 682d350fb3ab160449b6f10966b2d704, type: 3}
+--- !u!1 &157380997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 157380998}
+  m_Layer: 0
+  m_Name: CameraParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &157380998
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157380997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 963194228}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &191051345 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7801682755193081926, guid: 72cd3fa79ec74564581b392309e17727, type: 3}
@@ -1420,8 +1452,8 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -1434,13 +1466,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.2048607, y: -0.315046, z: 0.069844015, w: 0.924067}
+  m_LocalRotation: {x: 0.20486072, y: -0.31504604, z: 0.06984402, w: 0.9240671}
   m_LocalPosition: {x: 8, y: 9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 157380998}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 25, y: -37.652, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -1456,7 +1488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distance: 20
   _cameraOffset: {x: 8, y: 9, z: -10}
-  _smoothing: 3.5
+  _smoothing: 6.05
 --- !u!1001 &1000233285
 PrefabInstance:
   m_ObjectHideFlags: 0
