@@ -10,6 +10,10 @@ namespace Infrastructure.States
 {
     public sealed class GameStateMachine
     {
+#if UNITY_EDITOR
+        public string EditorInitialScene;
+#endif
+        
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
