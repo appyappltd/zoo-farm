@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Services;
 using Services.PersistentProgress;
+using UnityEngine;
 
 namespace Infrastructure.Factory
 {
@@ -10,5 +11,6 @@ namespace Infrastructure.Factory
         List<ISavedProgress> ProgressWriters { get; }
         void Cleanup();
         void WarmUp();
+        GameObject CreateHud();
     }
 }
