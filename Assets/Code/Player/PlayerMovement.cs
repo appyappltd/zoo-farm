@@ -1,7 +1,5 @@
 using Joystick_Pack.Scripts.Joysticks;
 using NTC.Global.Cache;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoCache
