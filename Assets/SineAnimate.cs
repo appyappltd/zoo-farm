@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SineAnimate : MonoCache
 {
-    [SerializeField] private float _speed, _min, _max;
-    [SerializeField] private Vector3 _movement, _scale;
+    [SerializeField] private float _speed = 2, _min = 1.5f, _max = 2;
+    [SerializeField] private Vector3 _movement, _scale = new(1,1,0);
 
     private float t = 0;
     private Vector3 startPos, startScale;
