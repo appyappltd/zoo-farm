@@ -1,8 +1,11 @@
-﻿namespace Services.Input
+﻿using UnityEngine;
+
+namespace Services.Input
 {
     public interface IPlayerInputService : IService
     {
-        void Subscribe();
         void Cleanup();
+        void RegisterInputReader(IInputReader inputReader);
+        Vector2 Direction { get; }
     }
 }

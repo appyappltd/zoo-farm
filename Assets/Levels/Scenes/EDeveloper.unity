@@ -6444,6 +6444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 1362265815416060174, guid: 72cd3fa79ec74564581b392309e17727, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1709741306394535552, guid: 72cd3fa79ec74564581b392309e17727, type: 3}
       propertyPath: m_Camera
       value: 

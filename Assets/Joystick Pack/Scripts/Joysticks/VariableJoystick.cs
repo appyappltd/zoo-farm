@@ -27,9 +27,9 @@ namespace Joystick_Pack.Scripts.Joysticks
                 background.gameObject.SetActive(false);
         }
 
-        protected override void Start()
+        public override void Init()
         {
-            base.Start();
+            base.Init();
             fixedPosition = background.anchoredPosition;
             SetMode(joystickType);
         }

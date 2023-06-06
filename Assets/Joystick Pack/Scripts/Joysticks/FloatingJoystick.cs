@@ -5,9 +5,9 @@ namespace Joystick_Pack.Scripts.Joysticks
 {
     public class FloatingJoystick : Joystick
     {
-        protected override void Start()
+        public override void Init()
         {
-            base.Start();
+            base.Init();
             background.gameObject.SetActive(false);
         }
 
