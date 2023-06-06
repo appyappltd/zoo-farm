@@ -7,5 +7,7 @@ namespace Services.Input
         void Cleanup();
         void RegisterInputReader(IInputReader inputReader);
         Vector2 Direction { get; }
+        float Horizontal { get; }
+        float Vertical { get; }
     }
 }

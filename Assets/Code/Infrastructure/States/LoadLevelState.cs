@@ -37,8 +37,22 @@ namespace Infrastructure.States
         private void OnLoaded()
         {
             InitialGameWorld();
+            GameObject hero = InitHero();
+            FollowCamera(hero.transform);
             InitialHud();
             _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void FollowCamera(Transform transform)
+        {
+            Camera.main.GetComponent<CameraMovement>().Construct(transform);
+        }
+
+        private GameObject InitHero()
+        {
+            GameObject hero = _gameFactory.CreateHero(Vector3.zero);
+            hero.GetComponent<PlayerMovement>().Construct(_inputService);
+            return hero;
         }
 
         private void InitialHud()

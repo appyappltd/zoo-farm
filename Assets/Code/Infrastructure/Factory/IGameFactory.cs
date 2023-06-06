@@ -12,5 +12,6 @@ namespace Infrastructure.Factory
         void Cleanup();
         void WarmUp();
         GameObject CreateHud();
+        GameObject CreateHero(Vector3 vector3);
     }
 }

@@ -9,14 +9,15 @@ namespace Services.Input
 
         private IInputReader _inputReader;
 
+        public Vector2 Direction => _inputReader.Direction;
+        public float Horizontal => _inputReader.Horizontal;
+        public float Vertical => _inputReader.Vertical;
         public void RegisterInputReader(IInputReader inputReader)
         {
             _inputReader = inputReader ?? throw new NullReferenceException(InputReaderException);
             _inputReader.Init();
         }
-
-        public Vector2 Direction => _inputReader.Direction;
-
+        
         public void Cleanup()
         {
             _inputReader = null;
