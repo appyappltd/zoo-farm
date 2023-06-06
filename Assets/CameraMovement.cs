@@ -8,7 +8,6 @@ public class CameraMovement : MonoCache
     [SerializeField] private Transform target;
     [SerializeField] private float distance = 20;
     [SerializeField] private Vector3 cameraOffset;
-    [SerializeField] private float _yOffset;
     [SerializeField] private float _smoothing;
 
     private Vector3 offset;
