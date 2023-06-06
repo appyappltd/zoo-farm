@@ -1,8 +1,9 @@
+using NTC.Global.Cache;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SineAnimate : MonoBehaviour
+public class SineAnimate : MonoCache
 {
     [SerializeField] private float _speed, _min, _max;
     [SerializeField] private Vector3 _movement, _scale;
@@ -16,9 +17,9 @@ public class SineAnimate : MonoBehaviour
         startScale = transform.localScale;
     }
 
-    private void Update()
+    protected override void LateRun()
     {
-        t = (t + Time.deltaTime * _speed) % (Mathf.PI * 2);
+        t = (t + Time.fixedDeltaTime * _speed) % (Mathf.PI * 2);
         var k = _min + (Mathf.Sin(t) / 2 + 0.5f) * (_max - _min);
         transform.localPosition = startPos + _movement * k;
         transform.localScale = new Vector3(
