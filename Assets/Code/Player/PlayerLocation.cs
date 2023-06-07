@@ -1,33 +1,26 @@
 using Data;
 using Services.PersistentProgress;
-using Services.SaveLoad;
 using Tools.Extension;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerLocation : MonoBehaviour, ISavedProgressGeneric
+    public class PlayerLocation : MonoBehaviour, ISavedProgress
     {
-        public void LoadProgress(IPersistentProgressService progressService)
+        public void LoadProgress(PlayerProgress progress)
         {
-            var progress = progressService.GetData<PlayerLocationData>();
-            
             var controller = GetComponent<CharacterController>();
             controller.enabled = false;
-            Debug.Log(progress);
-            transform.position = progress.Position.AsUnityVector();
-            transform.rotation = Quaternion.Euler(progress.Rotation.AsUnityVector());
-            Debug.Log($"Load {progress.Position.AsUnityVector()}");
+            transform.position = progress.LevelData.PlayerLocationData.Position.AsUnityVector();
+            transform.rotation = Quaternion.Euler(progress.LevelData.PlayerLocationData.Rotation.AsUnityVector());
+            Debug.Log($"Load {progress.LevelData.PlayerLocationData.Position.AsUnityVector()}");
             controller.enabled = true;
         }
 
-        public void UpdateProgress(IPersistentProgressService progressService)
+        public void UpdateProgress(PlayerProgress progress)
         {
-            var progress = progressService.GetData<PlayerLocationData>();
-            
-            Debug.Log(progress);
-            progress.Position = transform.position.AsVectorData();
-            progress.Rotation = transform.rotation.eulerAngles.AsVectorData();
+            progress.LevelData.PlayerLocationData.Position = transform.position.AsVectorData();
+            progress.LevelData.PlayerLocationData.Rotation = transform.rotation.eulerAngles.AsVectorData();
             Debug.Log($"Update {transform.position}");
         }
     }

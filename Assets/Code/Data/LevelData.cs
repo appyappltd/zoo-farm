@@ -1,10 +1,9 @@
 using System;
-using Services.SaveLoad;
 
 namespace Data
 {
     [Serializable]
-    public class LevelData : ISaveData
+    public class LevelData
     {
         public PlayerLocationData PlayerLocationData;
         

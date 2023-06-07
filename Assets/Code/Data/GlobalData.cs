@@ -1,15 +1,16 @@
 using System;
-using Services.SaveLoad;
 
 namespace Data
 {
     [Serializable]
-    public class GlobalData : ISaveData
+    public class GlobalData
     {
         public Settings Settings;
+        public String LastLevel;
         
-        public GlobalData()
+        public GlobalData(string initialLevel)
         {
+            LastLevel = initialLevel;
             Settings = new Settings();
         }
     }

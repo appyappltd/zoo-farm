@@ -1,9 +1,7 @@
-﻿using Data;
-using Infrastructure.Factory;
+﻿using Infrastructure.Factory;
 using Logic;
 using Services.Input;
 using Services.PersistentProgress;
-using Services.SaveLoad;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -51,8 +49,8 @@ namespace Infrastructure.States
 
         private void InformProgressReaders()
         {
-            foreach (ISavedProgressReaderGeneric progressReader in _gameFactory.ProgressReadersGeneric)
-                progressReader.LoadProgress(_progressService);
+            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
+                progressReader.LoadProgress(_progressService.Progress);
         }
         
         private void FollowCamera(Transform transform)

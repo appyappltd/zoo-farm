@@ -22,49 +22,45 @@ namespace Services.SaveLoad
 
         public void SaveProgress()
         {
-            foreach (ISavedProgressGeneric progressWriter in _gameFactory.ProgressWritersGeneric)
-                progressWriter.UpdateProgress(_progressService);
+            foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriters)
+                progressWriter.UpdateProgress(_progressService.Progress);
 
+            string globalDataLastLevel = GetCurrentLevelKey();
+            _progressService.Progress.GlobalData.LastLevel = globalDataLastLevel;
+            
             Debug.Log("save");
 
             SaveGlobal();
-            SaveLevel(GetCurrentLevelKey());
+            SaveLevel(globalDataLastLevel);
         }
 
-        private void SaveGlobal()
-        {
-            PlayerPrefs.SetString(GlobalProgressKey, _progressService.Progress.ToJson());
-        }
+        private void SaveGlobal() =>
+            PlayerPrefs.SetString(GlobalProgressKey, _progressService.Progress.GlobalData.ToJson());
 
-        private void SaveLevel(string levelKey)
-        {
+        private void SaveLevel(string levelKey) =>
             PlayerPrefs.SetString(levelKey, _progressService.Progress.LevelData.ToJson());
-        }
 
         public bool LoadProgress(out GlobalData globalData, out LevelData levelData)
         {
             globalData = LoadGlobal();
-            levelData = LoadLevel();
+            levelData = default;
 
-            return globalData is not null;
+            if (globalData is null)
+                return false;
+
+            levelData = LoadLevel(globalData.LastLevel);
+            return true;
         }
 
-        private GlobalData LoadGlobal()
-        {
-            return PlayerPrefs.GetString(GlobalProgressKey)?
+        private GlobalData LoadGlobal() => 
+            PlayerPrefs.GetString(GlobalProgressKey)?
                 .ToDeserialized<GlobalData>();
-        }
 
-        private LevelData LoadLevel()
-        {
-            return PlayerPrefs.GetString(GetCurrentLevelKey())?
+        private LevelData LoadLevel(string levelKey) => 
+            PlayerPrefs.GetString(levelKey)?
                 .ToDeserialized<LevelData>();
-        }
 
-        private static string GetCurrentLevelKey()
-        {
-            // return SceneManager.GetActiveScene().name;
-            return "TestScene";
-        }
+        private static string GetCurrentLevelKey() =>
+            SceneManager.GetActiveScene().name;
     }
 }

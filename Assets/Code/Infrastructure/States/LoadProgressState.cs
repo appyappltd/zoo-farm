@@ -52,7 +52,6 @@ namespace Infrastructure.States
                 Debug.Log(globalData);
                 Debug.Log(levelData.PlayerLocationData);
                 
-                _progressService.WarmUp();
                 return;
             }
 
@@ -63,7 +62,6 @@ namespace Infrastructure.States
         {
             Debug.Log("new progress");
             var progress = new PlayerProgress(GetFirstScene());
-            _progressService.WarmUp();
             return progress;
         }
     }
