@@ -1,9 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VolunteerMovement : MonoBehaviour
 {
     private Animator animC;
-    private Transform target = null;
+    private Mover mover;
+
+    private void Awake()
+    {
+        animC = GetComponent<Animator>();
+        mover = GetComponent<Mover>();
+        mover.StartMove += OnMove;
+        mover.GotToPlace += OnMove;
+    }
+
+    private void OnMove() => animC.SetBool("IsMoving", mover.IsMoving);
 }

@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
+    public event UnityAction AddItem;
+    public event UnityAction RemoveItem;
+
+    public int GetCount => items.Count;
     [field: NonSerialized] public Transform DefItemPlace { get; private set; }
 
     [SerializeField, Min(1)] private int _maxAnimals = 1;

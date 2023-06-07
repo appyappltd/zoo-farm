@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class Mover : MonoBehaviour
 {
     public event UnityAction StartMove;
     public event UnityAction GotToPlace;
-    public bool IsMoving = false;
+    [HideInInspector] public bool IsMoving = false;
 
     [SerializeField, Min(.0f)] private float _speed = 5.0f;
     [SerializeField, Min(.0f)] private float _offset = 0.1f;
@@ -24,8 +26,8 @@ public class Mover : MonoBehaviour
 
     private IEnumerator MoveCor(bool useMoveTowards = true)
     {
-        StartMove?.Invoke();
         IsMoving = true;
+        StartMove?.Invoke();
         while ((transform.position - target.position).magnitude > _offset
                 && (!useMoveTowards || lastPos != transform.position))
         {
