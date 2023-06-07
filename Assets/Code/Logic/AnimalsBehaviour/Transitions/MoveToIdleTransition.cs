@@ -8,7 +8,6 @@ namespace Logic.AnimalsBehaviour.Transitions
     public class MoveToIdleTransition : Transition
     {
         [SerializeField] private AnimalMover _mover;
-        [SerializeField] private float _destinationOffset = 0.1f;
 
         private Transform _selfTransform;
 

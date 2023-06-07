@@ -27,7 +27,7 @@ namespace Logic.AnimalsBehaviour
             {
                 Debug.Log(component.GetType());
             }
-            
+
             return new Dictionary<Type, IMonoState>
             {
                 [typeof(AnimalIdleState)] = GetComponentInChildren<AnimalIdleState>(),
