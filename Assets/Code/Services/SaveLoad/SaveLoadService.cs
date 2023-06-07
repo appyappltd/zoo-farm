@@ -22,8 +22,8 @@ namespace Services.SaveLoad
 
         public void SaveProgress()
         {
-            foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriters)
-                progressWriter.UpdateProgress(_progressService.Progress);
+            foreach (ISavedProgressGeneric progressWriter in _gameFactory.ProgressWritersGeneric)
+                progressWriter.UpdateProgress(_progressService);
 
             Debug.Log("save");
 
@@ -41,11 +41,30 @@ namespace Services.SaveLoad
             PlayerPrefs.SetString(levelKey, _progressService.Progress.LevelData.ToJson());
         }
 
-        public PlayerProgress LoadProgress() =>
-            PlayerPrefs.GetString(GlobalProgressKey)?
-                .ToDeserialized<PlayerProgress>();
+        public bool LoadProgress(out GlobalData globalData, out LevelData levelData)
+        {
+            globalData = LoadGlobal();
+            levelData = LoadLevel();
 
-        private static string GetCurrentLevelKey() =>
-            SceneManager.GetActiveScene().name;
+            return globalData is not null;
+        }
+
+        private GlobalData LoadGlobal()
+        {
+            return PlayerPrefs.GetString(GlobalProgressKey)?
+                .ToDeserialized<GlobalData>();
+        }
+
+        private LevelData LoadLevel()
+        {
+            return PlayerPrefs.GetString(GetCurrentLevelKey())?
+                .ToDeserialized<LevelData>();
+        }
+
+        private static string GetCurrentLevelKey()
+        {
+            // return SceneManager.GetActiveScene().name;
+            return "TestScene";
+        }
     }
 }

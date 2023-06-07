@@ -1,6 +1,9 @@
-﻿using Infrastructure.Factory;
+﻿using Data;
+using Infrastructure.Factory;
 using Logic;
 using Services.Input;
+using Services.PersistentProgress;
+using Services.SaveLoad;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -11,15 +14,17 @@ namespace Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
         private readonly IPlayerInputService _inputService;
+        private readonly IPersistentProgressService _progressService;
         private readonly LoadingCurtain _curtain;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
-            IPlayerInputService inputService, LoadingCurtain curtain)
+        public LoadLevelState(GameStateMachine gameStateMachine, LoadingCurtain curtain, SceneLoader sceneLoader,
+            IGameFactory gameFactory, IPlayerInputService inputService, IPersistentProgressService progressService)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
             _inputService = inputService;
+            _progressService = progressService;
             _curtain = curtain;
         }
 
@@ -41,8 +46,15 @@ namespace Infrastructure.States
             FollowCamera(hero.transform);
             InitialHud();
             _stateMachine.Enter<GameLoopState>();
+            InformProgressReaders();
         }
 
+        private void InformProgressReaders()
+        {
+            foreach (ISavedProgressReaderGeneric progressReader in _gameFactory.ProgressReadersGeneric)
+                progressReader.LoadProgress(_progressService);
+        }
+        
         private void FollowCamera(Transform transform)
         {
             Camera.main.GetComponent<CameraMovement>().Construct(transform);

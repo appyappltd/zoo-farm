@@ -5,6 +5,6 @@ namespace Services.SaveLoad
   public interface ISaveLoadService : IService
   {
     void SaveProgress();
-    PlayerProgress LoadProgress();
+    bool LoadProgress(out GlobalData globalData, out LevelData levelData);
   }
 }

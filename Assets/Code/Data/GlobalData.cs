@@ -1,9 +1,10 @@
 using System;
+using Services.SaveLoad;
 
 namespace Data
 {
     [Serializable]
-    public class GlobalData
+    public class GlobalData : ISaveData
     {
         public Settings Settings;
         

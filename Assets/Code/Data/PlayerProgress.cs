@@ -1,9 +1,10 @@
 using System;
+using Services.SaveLoad;
 
 namespace Data
 {
     [Serializable]
-    public class PlayerProgress
+    public class PlayerProgress : ISaveData
     {
         public GlobalData GlobalData;
         public LevelData LevelData;

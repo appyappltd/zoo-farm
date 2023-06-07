@@ -14,7 +14,7 @@ namespace Infrastructure.States
 #if UNITY_EDITOR
         public string EditorInitialScene;
 #endif
-        
+
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
@@ -23,9 +23,9 @@ namespace Infrastructure.States
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services, coroutineRunner),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
-                    services.Single<IGameFactory>(), services.Single<IPlayerInputService>(),
-                    curtain),
+                [typeof(LoadLevelState)] = new LoadLevelState(this,
+                    curtain, sceneLoader, services.Single<IGameFactory>(), services.Single<IPlayerInputService>(),
+                    services.Single<IPersistentProgressService>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),

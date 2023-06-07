@@ -1,6 +1,7 @@
 using Data;
 using Services.PersistentProgress;
 using Services.SaveLoad;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -38,14 +39,31 @@ namespace Infrastructure.States
 
         public void Exit() { }
 
-        private void LoadProgressOrInitNew() =>
-            _progressService.Progress =
-                _saveLoadProgress.LoadProgress()
-                ?? NewProgress();
+        private void LoadProgressOrInitNew()
+        {
+            if (_saveLoadProgress.LoadProgress(out GlobalData globalData, out LevelData levelData))
+            {
+                _progressService.Progress = new PlayerProgress(GetFirstScene())
+                {
+                    GlobalData = globalData,
+                    LevelData = levelData
+                };
+
+                Debug.Log(globalData);
+                Debug.Log(levelData.PlayerLocationData);
+                
+                _progressService.WarmUp();
+                return;
+            }
+
+            _progressService.Progress = NewProgress();
+        }
 
         private PlayerProgress NewProgress()
         {
-            var progress = new PlayerProgress(LevelNames.Initial);
+            Debug.Log("new progress");
+            var progress = new PlayerProgress(GetFirstScene());
+            _progressService.WarmUp();
             return progress;
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Services;
 using Services.PersistentProgress;
+using Services.SaveLoad;
 using UnityEngine;
 
 namespace Infrastructure.Factory
@@ -9,6 +10,8 @@ namespace Infrastructure.Factory
     {
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
+        List<ISavedProgressReaderGeneric> ProgressReadersGeneric { get; }
+        List<ISavedProgressGeneric> ProgressWritersGeneric { get; }
         void Cleanup();
         void WarmUp();
         GameObject CreateHud();
