@@ -23,8 +23,8 @@ public class VolunteerBand : MonoBehaviour
         var mover = volunteer.GetComponent<Mover>();
         var rotater = volunteer.GetComponent<Rotater>();
 
-        mover.Move(_target, false);
         rotater.Rotate(_target);
+        mover.Move(_target, false);
         mover.GotToPlace += () => rotater.Rotate(_defTarget);
 
         UpdateTarget();
