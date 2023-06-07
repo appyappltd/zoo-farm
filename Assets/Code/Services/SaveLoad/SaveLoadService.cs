@@ -3,12 +3,13 @@ using Infrastructure.Factory;
 using Services.PersistentProgress;
 using Tools.Extension;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Services.SaveLoad
 {
     public class SaveLoadService : ISaveLoadService
     {
-        private const string ProgressKey = "Progress";
+        private const string GlobalProgressKey = "GlobalProgress";
 
         private readonly IPersistentProgressService _progressService;
         private readonly IGameFactory _gameFactory;
@@ -25,11 +26,26 @@ namespace Services.SaveLoad
                 progressWriter.UpdateProgress(_progressService.Progress);
 
             Debug.Log("save");
-            PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
+
+            SaveGlobal();
+            SaveLevel(GetCurrentLevelKey());
+        }
+
+        private void SaveGlobal()
+        {
+            PlayerPrefs.SetString(GlobalProgressKey, _progressService.Progress.ToJson());
+        }
+
+        private void SaveLevel(string levelKey)
+        {
+            PlayerPrefs.SetString(levelKey, _progressService.Progress.LevelData.ToJson());
         }
 
         public PlayerProgress LoadProgress() =>
-            PlayerPrefs.GetString(ProgressKey)?
+            PlayerPrefs.GetString(GlobalProgressKey)?
                 .ToDeserialized<PlayerProgress>();
+
+        private static string GetCurrentLevelKey() =>
+            SceneManager.GetActiveScene().name;
     }
 }
