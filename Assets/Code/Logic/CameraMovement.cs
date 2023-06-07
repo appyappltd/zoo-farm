@@ -1,28 +1,29 @@
 using NTC.Global.Cache;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Logic
 {
     public class CameraMovement : MonoCache
     {
-        [SerializeField] private float smoothing;
+        [FormerlySerializedAs("smoothing")] [SerializeField] private float _smoothing;
 
-        private Transform _target;
-        private Transform _parentTransform;
+        private Transform target;
+        private Transform parentTransform;
 
         public void Construct(Transform target)
         {
-            _target = target;
-            _parentTransform = transform.parent;
+            this.target = target;
+            parentTransform = transform.parent;
             enabled = true;
         }
 
         protected override void LateRun()
         {
-            _parentTransform.position = Vector3.Lerp(
-                _parentTransform.position,
-                _target.position,
-                smoothing * Time.smoothDeltaTime);
+            parentTransform.position = Vector3.Lerp(
+                parentTransform.position,
+                target.position,
+                _smoothing * Time.smoothDeltaTime);
         }
     }
 }
