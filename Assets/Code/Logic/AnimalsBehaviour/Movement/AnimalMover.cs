@@ -24,7 +24,7 @@ namespace Logic.AnimalsBehaviour.Movement
         private void Start() =>
             _agent.speed = _maxSpeed;
 
-        private void FixedUpdate() =>
+        protected override void FixedRun() =>
             Rotate();
 
         public void SetDestination(Vector3 position)
@@ -56,7 +56,9 @@ namespace Logic.AnimalsBehaviour.Movement
             transform.rotation = targetRotation;
         }
 
-        private Quaternion GetLookRotation() =>
-            Quaternion.LookRotation(_agent.velocity.ChangeY(0));
+        private Quaternion GetLookRotation()
+        {
+            return Quaternion.LookRotation(_agent.velocity.ChangeY(_agent.transform.position.y));
+        }
     }
 }
