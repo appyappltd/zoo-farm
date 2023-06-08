@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class DropItem : MonoBehaviour
 {
-    [field: NonSerialized] public ItemData ItemData { get; private set; }
+    [field: SerializeField] public ItemData ItemData { get; private set; }
 }

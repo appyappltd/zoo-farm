@@ -11,11 +11,13 @@ public class Inventory : MonoBehaviour
     public event UnityAction RemoveItem;
 
     public int GetCount => items.Count;
-    [field: NonSerialized] public Transform DefItemPlace { get; private set; }
+    public Transform GetItemPlace => itemPlace;
 
-    [SerializeField, Min(1)] private int _maxAnimals = 1;
-    [SerializeField, Min(1)] private int _maxMedical = 1;
-    [SerializeField, Min(1)] private int _maxOther = 3;
+    [field: SerializeField] public Transform DefItemPlace { get; private set; }
+
+    [SerializeField, Min(0)] private int _maxAnimals = 1;
+    [SerializeField, Min(0)] private int _maxMedical = 1;
+    [SerializeField, Min(0)] private int _maxOther = 3;
 
     private List<HandItem> items = new();
     private int maxCount = 1;
@@ -37,8 +39,11 @@ public class Inventory : MonoBehaviour
         if (currType == CreatureType.None)
             ChangeType(item.ItemData.Creature);
         items.Add(item);
-        item.gameObject.transform.SetParent(DefItemPlace);
-        item.GetComponent<Mover>().Move(itemPlace);
+
+        var mover = item.GetComponent<Mover>();
+        mover.Move(itemPlace);
+        mover.GotToPlace += () => item.transform.SetParent(DefItemPlace);
+
         itemPlace = item.NextPlace;
     }
 
