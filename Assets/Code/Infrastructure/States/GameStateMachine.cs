@@ -41,7 +41,7 @@ namespace Infrastructure.States
 
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
-            var state = ChangeState<TState>();
+            TState state = ChangeState<TState>();
             state.Enter(payload);
         }
 

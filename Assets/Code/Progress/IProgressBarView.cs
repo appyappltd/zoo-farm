@@ -6,6 +6,5 @@ namespace Progress
         float Current { get; }
         float CurrentNormalized { get; }
         bool IsEmpty { get; }
-        float ReduceSpeed { get; }
     }
 }

@@ -5,25 +5,41 @@ namespace Logic.AnimalsBehaviour.States
 {
     public class AnimalRestState : State
     {
-        [Header("Components")]
+        [Header("Component References")]
         [SerializeField] private AnimalAnimator _animator;
-        [SerializeField] private IndicatorProgressBar _vitality;
-        [SerializeField] private IndicatorProgressBar _peppiness;
-        [SerializeField] private IndicatorProgressBar _satiety;
+        [SerializeField] private ProgressBarIndicator _vitality;
+        [SerializeField] private ProgressBarIndicator _peppiness;
+        [SerializeField] private ProgressBarIndicator _satiety;
 
-        [Header("Settings")] [Space]
-        [SerializeField] private float _restTime;
+        [Header("Rate Settings")] [Space]
+        [SerializeField] private float _satietySpendRate;
+        [SerializeField] private float _peppinessRecoveryRate;
+        [SerializeField] private float _vitalityRecoveryRate;
 
-        [SerializeField] private float _saturationRecoveryRate;
-        
-
-
-        protected override void OnEnabled() =>
+        protected override void OnEnter()
+        {
             _animator.SetRest();
+            SetBarsActive(false);
+        }
+
+        protected override void OnExit()
+        {
+            SetBarsActive(true);
+        }
+
+        private void SetBarsActive(bool isActive)
+        {
+            _vitality.enabled = isActive;
+            _peppiness.enabled = isActive;
+            _satiety.enabled = isActive;
+        }
 
         protected override void Run()
         {
-            base.Run();
+            float deltaTime = Time.deltaTime;
+            _vitality.ProgressBar.Replenish(deltaTime * _vitalityRecoveryRate);
+            _peppiness.ProgressBar.Replenish(deltaTime * _peppinessRecoveryRate);
+            _satiety.ProgressBar.Spend(deltaTime * _satietySpendRate);
         }
     }
 }

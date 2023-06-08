@@ -10,15 +10,16 @@ namespace Logic.AnimalsBehaviour
     {
         protected override void InitTransitions()
         {
-            foreach (ITransition transition in GetComponentsInChildren<ITransition>())
+            foreach (ITransition transition in GetComponentsInChildren<ITransition>(true))
             {
                 transition.Init(this);
+                transition.Disable();
             }
         }
 
         protected override void SetDefaultState()
         {
-            ChangeState<AnimalIdleState>();
+            Enter<AnimalIdleState>();
         }
 
         protected override Dictionary<Type, IMonoState> GetStates()
@@ -30,8 +31,9 @@ namespace Logic.AnimalsBehaviour
 
             return new Dictionary<Type, IMonoState>
             {
-                [typeof(AnimalIdleState)] = GetComponentInChildren<AnimalIdleState>(),
-                [typeof(AnimalMoveState)] = GetComponentInChildren<AnimalMoveState>(),
+                [typeof(AnimalIdleState)] = GetComponentInChildren<AnimalIdleState>(true),
+                [typeof(AnimalMoveState)] = GetComponentInChildren<AnimalMoveState>(true),
+                [typeof(AnimalRestState)] = GetComponentInChildren<AnimalRestState>(true),
             };
         }
     }

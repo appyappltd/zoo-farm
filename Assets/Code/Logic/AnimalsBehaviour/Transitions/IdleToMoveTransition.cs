@@ -25,7 +25,7 @@ namespace Logic.AnimalsBehaviour.Transitions
 
             if (_elapsedTime > _randomTransitionDelay)
             {
-                StateMachine.ChangeState<AnimalMoveState>();
+                StateMachine.Enter<AnimalMoveState>();
             }
         }
     }

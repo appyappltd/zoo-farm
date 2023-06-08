@@ -4,32 +4,57 @@ using UnityEngine;
 
 namespace Logic.AnimalsBehaviour.States
 {
-    public class AnimalMoveState : State
+    public class AnimalMoveState : PayloadedState<Vector3>
     {
         [SerializeField] private AnimalAnimator _animator;
         [SerializeField] private AnimalMover _mover;
         [SerializeField] private float _maxMoveDistance;
 
+        private Vector3 _payloadPosition;
+        private bool _isHasPayload;
+        
         protected override void Run() =>
             _animator.SetSpeed(_mover.NormalizedSpeed);
 
-        protected override void OnEnabled()
+        protected override void OnEnter()
         {
             _animator.SetMove();
 
+            if (_isHasPayload)
+            {
+                BeginMove(_payloadPosition);
+                return;
+            }
+            
             Vector3 randomOffset = new Vector3(
                 Random.Range(-_maxMoveDistance, _maxMoveDistance),
                 0,
                 Random.Range(-_maxMoveDistance, _maxMoveDistance));
 
-            Debug.Log(randomOffset);
-
             Vector3 destination = transform.position + randomOffset;
-            _mover.SetDestination(destination);
+            BeginMove(destination);
+        }
+
+        protected override void OnExit()
+        {
+        }
+
+        private void BeginMove(Vector3 to)
+        {
+            _mover.SetDestination(to);
             _mover.enabled = true;
         }
 
-        protected override void OnDisabled() =>
+        protected override void OnDisabled()
+        {
             _mover.enabled = false;
+            _isHasPayload = false;
+        }
+
+        protected override void OnPayloadEnter(Vector3 payload)
+        {
+            _payloadPosition = payload;
+            _isHasPayload = true;
+        }
     }
 }

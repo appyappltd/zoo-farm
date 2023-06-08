@@ -8,28 +8,34 @@ namespace MonoStateMachine
 {
     public abstract class State : MonoCache, IMonoState
     {
-        [SerializeField] [RequireInterface(typeof(ITransition))] private List<MonoBehaviour> _toTransitions;
+        [SerializeField] [RequireInterface(typeof(ITransition))] private List<MonoBehaviour> _fromTransitions;
 
         private readonly List<ITransition> _transitions = new List<ITransition>();
 
         private void Awake()
         {
-            foreach (ITransition transition in _toTransitions.Cast<ITransition>())
+            foreach (ITransition transition in _fromTransitions.Cast<ITransition>())
                 _transitions.Add(transition);
 
             OnAwake();
         }
 
+        protected abstract void OnEnter();
+
+        protected abstract void OnExit();
+
         public void EnterBehavior()
         {
-            enabled = true;
+            gameObject.SetActive(true);
             EnableTransitions();
+            OnEnter();
         }
 
         public void ExitBehavior()
         {
-            enabled = false;
+            gameObject.SetActive(false);
             DisableTransitions();
+            OnExit();
         }
 
         protected virtual void OnAwake() { }

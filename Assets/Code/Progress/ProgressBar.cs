@@ -4,10 +4,15 @@ namespace Progress
 {
     public class ProgressBar : IProgressBar
     {
+        private const string ReplenishErrorMessage = "Replenish amount must be positive value";
+        private const string SpendErrorMessage = "Spend amount must be positive value";
+
+        public event Action Full = () => { };
+        public event Action Empty = () => { };
+        
         public float Max { get; }
         public float Current { get; private set; }
-        public float CurrentNormalized { get; }
-        public float ReduceSpeed { get; private set; }
+        public float CurrentNormalized => Current / Max;
         public bool IsEmpty => Current <= 0;
         public ProgressBar(float max, float current)
         {
@@ -15,56 +20,36 @@ namespace Progress
             Current = current;
         }
 
-        public void Tick(float deltaTime)
-        {
-            if (IsEmpty)
-                return;
-
-            Current -= deltaTime * ReduceSpeed;
-
-            if (Current <= 0)
-                Current = 0;
-        }
-
         public void Replenish(float amount)
         {
-            if (Validate(amount,  () => Current + amount < Max))
+            if (Validate(amount, ReplenishErrorMessage, () => Current + amount > Max))
+            {
+                Current = Max;
+                Full.Invoke();
                 return;
+            }
 
             Current += amount;
         }
 
-        private bool Validate(float amount, Func<bool> func)
-        {
-            throw new NotImplementedException();
-        }
-
-        private bool Validate(float amount)
-        {
-            if (amount <= 0)
-                throw new ArgumentException("Replenish amount must be positive value");
-
-            if (Current + amount > Max)
-            {
-                Current = Max;
-                return true;
-            }
-
-            return false;
-        }
-
         public void Spend(float amount)
         {
-            if (amount <= 0 )
-                throw new ArgumentException("Replenish amount must be positive value");
-
-            if (Current - amount < 0)
+            if (Validate(amount, SpendErrorMessage, () => Current - amount < 0))
             {
                 Current = 0;
+                Empty.Invoke();
                 return;
             }
 
             Current -= amount;
+        }
+
+        private bool Validate(float amount, string errorMessage, Func<bool> validateFunc)
+        {
+            if (amount < 0 )
+                throw new ArgumentException(errorMessage);
+
+            return validateFunc();
         }
     }
 }

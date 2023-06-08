@@ -22,14 +22,32 @@ namespace MonoStateMachine
 
         protected abstract Dictionary<Type, IMonoState> GetStates();
 
-        public void ChangeState<TState>() where TState : IMonoState
+        public void Enter<TState>() where TState : class, IMonoState
         {
-            IMonoState behavior = _allBehaviors[typeof(TState)];
-            _currentBehavior?.ExitBehavior();
+            TState behavior = ChangeState<TState>();
             behavior.EnterBehavior();
-            _currentBehavior = behavior;
         }
 
+        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedMonoState<TPayload>
+        {
+            TState behavior = ChangeState<TState>();
+            behavior.EnterBehavior(payload);
+        }
+
+        private TState ChangeState<TState>() where TState : class, IMonoState
+        {
+            _currentBehavior?.ExitBehavior();
+            TState behavior = GetState<TState>();
+            _currentBehavior = behavior;
+
+            Debug.Log($"Enter State {typeof(TState).Name}");
+            
+            return behavior;
+        }
+
+        private TState GetState<TState>() where TState : class, IMonoState =>
+            _allBehaviors[typeof(TState)] as TState;
+        
         private void InitStates() =>
             _allBehaviors = GetStates();
     }

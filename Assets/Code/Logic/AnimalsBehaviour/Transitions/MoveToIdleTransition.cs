@@ -9,18 +9,12 @@ namespace Logic.AnimalsBehaviour.Transitions
     {
         [SerializeField] private AnimalMover _mover;
 
-        private Transform _selfTransform;
-
-        private void Awake() =>
-            _selfTransform = _mover.transform;
-
         protected override void Run()
         {
-            float distance = Vector3.Distance(_selfTransform.position, _mover.DestinationPoint);
-
             if (_mover.Distance <= _mover.StoppingDistance)
             {
-                StateMachine.ChangeState<AnimalIdleState>();
+                Debug.Log($"mover distance {_mover.Distance}");
+                StateMachine.Enter<AnimalIdleState>();
             }
         }
     }

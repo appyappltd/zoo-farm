@@ -9,10 +9,14 @@ namespace MonoStateMachine
         public void Init(MonoStateMachine stateMachine) =>
             StateMachine = stateMachine;
 
-        public void Enable() =>
-            enabled = true;
+        public void Enable()
+        {
+            gameObject.SetActive(true);
+        }
 
-        public void Disable() =>
-            enabled = false;
+        public void Disable()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
