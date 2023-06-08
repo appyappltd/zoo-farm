@@ -11,12 +11,17 @@ namespace Logic.AnimalsBehaviour.Transitions
         
         protected override void OnEnabled()
         {
+
+        }
+
+        protected override void Run()
+        {
             if (IsInRestPlace() == false)
             {
                 StateMachine.Enter<AnimalMoveState, Vector3>(_restPlace.position);
             }
         }
-        
+
         private bool IsInRestPlace() =>
             Vector3.Distance(transform.position, _restPlace.position) <= _restPlaceOffset;
     }

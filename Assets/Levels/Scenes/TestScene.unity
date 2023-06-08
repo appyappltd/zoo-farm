@@ -2100,8 +2100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fromTransitions:
-  - {fileID: 647028028}
   - {fileID: 669497790}
+  - {fileID: 647028028}
   _animator: {fileID: 7971552799162174649}
   _vitality: {fileID: 243540881}
   _peppiness: {fileID: 2009258777}
@@ -3322,7 +3322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _reduceSpeed: 4.58
+  _reduceSpeed: 8.36
 --- !u!4 &2009258778
 Transform:
   m_ObjectHideFlags: 0

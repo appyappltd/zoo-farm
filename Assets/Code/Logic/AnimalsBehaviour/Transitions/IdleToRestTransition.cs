@@ -15,20 +15,23 @@ namespace Logic.AnimalsBehaviour.Transitions
 
         protected override void OnEnabled()
         {
-            if (_peppiness.ProgressBar.IsEmpty)
-            {
-                MoveToRest();
-                return;
-            }
-            
-            // _peppiness.ProgressBar.Empty += MoveToRest;
+            _peppiness.ProgressBar.Empty += MoveToRest;
         }
 
         protected override void OnDisabled()
         {
             _peppiness.ProgressBar.Empty -= MoveToRest;
         }
-        
+
+        protected override void Run()
+        {
+            if (_peppiness.ProgressBar.IsEmpty)
+            {
+                MoveToRest();
+                return;
+            }
+        }
+
         private void MoveToRest()
         {
             StateMachine.Enter<AnimalRestState>();
