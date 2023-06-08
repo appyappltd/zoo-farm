@@ -35,6 +35,7 @@ namespace Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticDataService();
+            _services.RegisterSingle<ICoroutineRunner>(_coroutineRunner);
             _services.RegisterSingle<IPlayerInputService>(new PlayerInputService());
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
