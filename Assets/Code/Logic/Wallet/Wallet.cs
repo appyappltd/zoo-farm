@@ -19,7 +19,6 @@ namespace Logic.Wallet
 
             account += amount;
             return true;
-
         }
 
         public bool TrySpend(int amount)

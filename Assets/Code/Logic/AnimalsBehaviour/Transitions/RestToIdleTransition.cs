@@ -10,7 +10,7 @@ namespace Logic.AnimalsBehaviour.Transitions
 
         protected override void OnEnabled() =>
             _peppiness.ProgressBar.Full += MoveToIdleState;
-        
+
         protected override void OnDisabled() =>
             _peppiness.ProgressBar.Full -= MoveToIdleState;
 
