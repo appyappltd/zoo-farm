@@ -9,11 +9,12 @@ namespace Progress
 
         public event Action Full = () => { };
         public event Action Empty = () => { };
-        
+
         public float Max { get; }
         public float Current { get; private set; }
         public float CurrentNormalized => Current / Max;
         public bool IsEmpty => Current <= 0;
+        public bool IsFull => Current >= Max;
         public ProgressBar(float max, float current)
         {
             Max = max;
