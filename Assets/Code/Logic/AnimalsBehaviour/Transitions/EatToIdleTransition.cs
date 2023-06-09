@@ -1,19 +1,18 @@
-using Logic.AnimalsBehaviour.AnimalStats;
 using Logic.AnimalsBehaviour.States;
 using MonoStateMachine;
 using UnityEngine;
 
 namespace Logic.AnimalsBehaviour.Transitions
 {
-    public class RestToIdleTransition : Transition
+    public class EatToIdleTransition : Transition
     {
-        [SerializeField] private ProgressBarIndicator _peppiness;
+        [SerializeField] private ProgressBarIndicator _satiety;
 
         protected override void OnEnabled() =>
-            _peppiness.ProgressBar.Full += MoveToIdleState;
+            _satiety.ProgressBar.Full += MoveToIdleState;
 
         protected override void OnDisabled() =>
-            _peppiness.ProgressBar.Full -= MoveToIdleState;
+            _satiety.ProgressBar.Full -= MoveToIdleState;
 
         private void MoveToIdleState()
         {

@@ -13,7 +13,6 @@ namespace Logic.AnimalsBehaviour
             foreach (ITransition transition in GetComponentsInChildren<ITransition>(true))
             {
                 transition.Init(this);
-                transition.Disable();
             }
         }
 
@@ -34,6 +33,7 @@ namespace Logic.AnimalsBehaviour
                 [typeof(AnimalIdleState)] = GetComponentInChildren<AnimalIdleState>(true),
                 [typeof(AnimalMoveState)] = GetComponentInChildren<AnimalMoveState>(true),
                 [typeof(AnimalRestState)] = GetComponentInChildren<AnimalRestState>(true),
+                [typeof(AnimalEatState)] = GetComponentInChildren<AnimalEatState>(true),
             };
         }
     }

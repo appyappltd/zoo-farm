@@ -11,11 +11,13 @@ namespace MonoStateMachine
 
         public void Enable()
         {
+            enabled = true;
             gameObject.SetActive(true);
         }
 
         public void Disable()
         {
+            enabled = false;
             gameObject.SetActive(false);
         }
     }

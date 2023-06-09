@@ -20,9 +20,9 @@ namespace MonoStateMachine
             OnAwake();
         }
 
-        protected abstract void OnEnter();
+        protected virtual void OnEnter() { }
 
-        protected abstract void OnExit();
+        protected virtual void OnExit() { }
 
         public void EnterBehavior()
         {

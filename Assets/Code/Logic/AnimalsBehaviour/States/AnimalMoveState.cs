@@ -35,10 +35,6 @@ namespace Logic.AnimalsBehaviour.States
             BeginMove(destination);
         }
 
-        protected override void OnExit()
-        {
-        }
-
         private void BeginMove(Vector3 to)
         {
             _mover.SetDestination(to);

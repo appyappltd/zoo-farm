@@ -11,9 +11,5 @@ namespace Logic.AnimalsBehaviour.States
         {
             _animator.SetIdle();
         }
-
-        protected override void OnExit()
-        {
-        }
     }
 }

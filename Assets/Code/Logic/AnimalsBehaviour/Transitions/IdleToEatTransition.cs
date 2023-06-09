@@ -1,15 +1,14 @@
-using Logic.AnimalsBehaviour.AnimalStats;
 using Logic.AnimalsBehaviour.States;
 using MonoStateMachine;
 using UnityEngine;
 
 namespace Logic.AnimalsBehaviour.Transitions
 {
-    public class IdleToRestTransition : Transition
+    public class IdleToEatTransition : Transition
     {
         [Header("Component References")]
-        [SerializeField] private ProgressBarIndicator _peppiness;
-        [SerializeField] private Transform _restPlace;
+        [SerializeField] private ProgressBarIndicator _satiety;
+        [SerializeField] private Transform _eatPlace;
         
         [Header("Rate Settings")] [Space]
         [SerializeField] private float _restPlaceOffset = 0.5f;
@@ -26,26 +25,26 @@ namespace Logic.AnimalsBehaviour.Transitions
 
         protected override void Run()
         {
-            if (_peppiness.ProgressBar.IsEmpty)
+            if (_satiety.ProgressBar.IsEmpty)
             {
-                MoveToRest();
+                MoveToEat();
                 Disable();
             }
         }
 
-        private void MoveToRest()
+        private void MoveToEat()
         {
             if (IsInRestPlace())
             {
-                StateMachine.Enter<AnimalRestState>();
+                StateMachine.Enter<AnimalEatState>();
                 
                 return;
             }
             
-            StateMachine.Enter<AnimalMoveState, Vector3>(_restPlace.position);
+            StateMachine.Enter<AnimalMoveState, Vector3>(_eatPlace.position);
         }
         
         private bool IsInRestPlace() =>
-            Vector3.Distance(transform.position, _restPlace.position) <= _restPlaceOffset;
+            Vector3.Distance(transform.position, _eatPlace.position) <= _restPlaceOffset;
     }
 }
