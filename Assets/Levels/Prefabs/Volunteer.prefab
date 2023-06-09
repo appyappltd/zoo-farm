@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 4664039552938874061}
   - component: {fileID: 659235615957181102}
   - component: {fileID: 2562806900512505300}
+  - component: {fileID: -310732374932598855}
   m_Layer: 0
   m_Name: Volunteer
   m_TagString: Untagged
@@ -481,6 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DefItemPlace>k__BackingField: {fileID: 3872162317092103650}
+  _inventoryType: 0
   _maxAnimals: 1
   _maxMedical: 1
   _maxOther: 3
@@ -521,6 +523,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _points: []
   useMoveTowards: 0
+--- !u!114 &-310732374932598855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229401633726274375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c9bd4e4f98a9b4d812103e29de7b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1296423078286401506
 GameObject:
   m_ObjectHideFlags: 0

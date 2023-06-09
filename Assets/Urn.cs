@@ -1,17 +1,15 @@
 using Logic.Interactions;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ProductReceiver : MonoBehaviour
+public class Urn : MonoBehaviour
 {
-    [SerializeField] private CreatureType _type;
     [SerializeField, Min(.0f)] private float _time = .2f;
-
-    private Inventory inventory;
+    [SerializeField] private Transform _target;
 
     private void Awake()
     {
-        inventory = GetComponent<Inventory>();
         GetComponent<TriggerObserver>().Enter += player => StartCoroutine(TryTakeItem(player));
         GetComponent<TriggerObserver>().Exit += _ => StopAllCoroutines();
     }
@@ -19,9 +17,14 @@ public class ProductReceiver : MonoBehaviour
     private IEnumerator TryTakeItem(GameObject player)
     {
         var playerInventory = player.GetComponent<Inventory>();
-        while (_type == CreatureType.None || playerInventory.CanGiveItem(_type) && inventory.CanAddItem(_type))
+        while (playerInventory.CanGiveItem())
         {
-            inventory.Add(playerInventory.Remove());
+            var item = playerInventory.Remove();
+            var mover = item.GetComponent<Mover>();
+
+            mover.Move(_target);
+            mover.GotToPlace += () => Destroy(item.gameObject);
+
             yield return new WaitForSeconds(_time);
         }
     }
