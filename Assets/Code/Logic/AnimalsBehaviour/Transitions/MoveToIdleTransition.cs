@@ -13,7 +13,6 @@ namespace Logic.AnimalsBehaviour.Transitions
         {
             if (_mover.Distance <= _mover.StoppingDistance)
             {
-                Debug.Log($"mover distance {_mover.Distance}");
                 StateMachine.Enter<AnimalIdleState>();
             }
         }
