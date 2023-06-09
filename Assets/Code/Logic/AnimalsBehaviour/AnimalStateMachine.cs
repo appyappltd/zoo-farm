@@ -13,7 +13,6 @@ namespace Logic.AnimalsBehaviour
             foreach (ITransition transition in GetComponentsInChildren<ITransition>(true))
             {
                 transition.Init(this);
-                transition.Disable();
             }
         }
 

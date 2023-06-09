@@ -28,24 +28,12 @@ namespace Logic.AnimalsBehaviour.Transitions
             if (_peppiness.ProgressBar.IsEmpty)
             {
                 MoveToRest();
-                return;
             }
         }
 
         private void MoveToRest()
         {
             StateMachine.Enter<AnimalRestState>();
-            
-            // if (IsInRestPlace())
-            // {
-            //     StateMachine.Enter<AnimalRestState>();
-            //     return;
-            // }
-            
-            // StateMachine.Enter<AnimalMoveState, Vector3>(_restPlace.position);
         }
-        
-        private bool IsInRestPlace() =>
-            Vector3.Distance(transform.position, _restPlace.position) <= _restPositionOffset;
     }
 }

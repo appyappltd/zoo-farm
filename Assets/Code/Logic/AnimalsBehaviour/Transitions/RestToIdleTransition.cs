@@ -16,7 +16,6 @@ namespace Logic.AnimalsBehaviour.Transitions
 
         private void MoveToIdleState()
         {
-            Debug.Log("onFull");
             StateMachine.Enter<AnimalIdleState>();
         }
     }
