@@ -14,7 +14,7 @@ public class Delay : MonoBehaviour
     {
         var trigger = GetComponent<TriggerObserver>();
         trigger.Enter += obj => StartCoroutine(Wait(obj));
-        trigger.Exit += obj => StopCoroutine(Wait(obj));
+        trigger.Exit += _ => StopAllCoroutines();
     }
 
     private IEnumerator Wait(GameObject obj)

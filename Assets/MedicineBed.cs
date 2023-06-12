@@ -10,6 +10,7 @@ using Services.AnimalHouse;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(Delay))]
 public class MedicineBed : MonoBehaviour
 {
     [SerializeField] private List<ItemData> _data = new();
@@ -28,7 +29,7 @@ public class MedicineBed : MonoBehaviour
         houseService = AllServices.Container.Single<IAnimalHouseService>();
         
         inventory = GetComponent<Inventory>();
-        GetComponent<TriggerObserver>().Enter += player => Treat(player.GetComponent<Inventory>());
+        GetComponent<Delay>().Complete += player => Treat(player.GetComponent<Inventory>());
 
         inventory.AddItem += item => item.GetComponent<Mover>().GotToPlace += () =>
         {
@@ -61,6 +62,7 @@ public class MedicineBed : MonoBehaviour
         {
             if (handAnimal.ItemData is AnimalItemData animalItemData)
             {
+                Debug.Log("A");
                 houseService.TakeQueueToHouse(() =>
                 {
                     canTreat = false;
