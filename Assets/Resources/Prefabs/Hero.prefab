@@ -6558,14 +6558,9 @@ GameObject:
   - component: {fileID: 1839439113682131347}
   - component: {fileID: 4943368622742371110}
   - component: {fileID: 6386952338648535645}
-<<<<<<< HEAD
-  - component: {fileID: 8950477006495477166}
-  m_Layer: 0
-=======
   - component: {fileID: 9080955615377825703}
   - component: {fileID: 7803516307033350702}
   m_Layer: 6
->>>>>>> Local_Main
   m_Name: Hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6658,11 +6653,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
-<<<<<<< HEAD
---- !u!114 &8950477006495477166
-=======
 --- !u!114 &9080955615377825703
->>>>>>> Local_Main
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6671,9 +6662,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4438565683717128180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 11500000, guid: 42af80c685414db495b781a6491f1e31, type: 3}
-=======
   m_Script: {fileID: 11500000, guid: a7e84bfcba897fa4ca92599a7ebc38f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -6692,7 +6680,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c9bd4e4f98a9b4d812103e29de7b04, type: 3}
->>>>>>> Local_Main
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4552098527280804861

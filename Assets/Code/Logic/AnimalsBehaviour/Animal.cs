@@ -1,4 +1,3 @@
-using System;
 using Logic.AnimalsStateMachine;
 using UnityEngine;
 
@@ -11,15 +10,18 @@ namespace Logic.AnimalsBehaviour
 
         private AnimalId _animalId;
 
-        private void Start()
+        public AnimalId AnimalId => _animalId;
+
+        public void Construct(AnimalId animalId) =>
+            _animalId = animalId;
+
+        public void AttachHouse(AnimalHouse house)
         {
-            _jumper.Jump();
+            _stateMachine.Construct(house.RestPlace, house.EatPlace);
+            Activate();
         }
 
-        public void Construct(AnimalId animalId, AnimalHouse house)
-        {
-            _animalId = animalId;
-            _stateMachine.Construct(house.RestPlace, house.EatPlace);
-        }
+        private void Activate() =>
+            _jumper.Jump();
     }
 }
