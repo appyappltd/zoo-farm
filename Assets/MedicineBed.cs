@@ -1,7 +1,14 @@
+using System;
 using Logic.Interactions;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Data.ItemsData;
+using Infrastructure.Factory;
+using Logic;
+using Logic.AnimalsBehaviour;
+using Services;
+using Services.AnimalHouse;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MedicineBed : MonoBehaviour
 {
@@ -10,16 +17,22 @@ public class MedicineBed : MonoBehaviour
 
     private Inventory inventory;
     private int index = 0;
-    private bool CanTreat = false;
+    private bool canTreat = false;
+    
+    private IGameFactory gameFactory;
+    private IAnimalHouseService houseService;
 
     private void Awake()
     {
+        gameFactory = AllServices.Container.Single<IGameFactory>();
+        houseService = AllServices.Container.Single<IAnimalHouseService>();
+        
         inventory = GetComponent<Inventory>();
         GetComponent<TriggerObserver>().Enter += player => Treat(player.GetComponent<Inventory>());
 
         inventory.AddItem += item => item.GetComponent<Mover>().GotToPlace += () =>
         {
-            CanTreat = true;
+            canTreat = true;
             GetRandomIndex();
             item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
         };
@@ -29,7 +42,7 @@ public class MedicineBed : MonoBehaviour
 
     private void Treat(Inventory playerInventory)
     {
-        if (!CanTreat) 
+        if (!canTreat) 
             return;
         if (!inventory.CanGiveItem())
             return;
@@ -46,13 +59,19 @@ public class MedicineBed : MonoBehaviour
         mover.Move(inventory.DefItemPlace);
         mover.GotToPlace += () =>
         {
-            Instantiate(handAnimal.ItemData.Drop, handAnimal.transform.position,
-                                                  handAnimal.transform.rotation);
+            if (handAnimal.ItemData is AnimalItemData animalItemData)
+            {
+                houseService.TakeQueueToHouse(() =>
+                {
+                    canTreat = false;
+                    Destroy(handAnimal.gameObject);
+                    return gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
+                        .GetComponent<Animal>();
+                });
+            }
 
             Destroy(handAnimal.GetComponent<BubbleHolder>().GetBubble.gameObject);
-            Destroy(handAnimal);
             Destroy(item.gameObject);
         };
-        CanTreat = false;
     }
 }

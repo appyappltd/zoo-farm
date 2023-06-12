@@ -1,11 +1,11 @@
+using System;
 using Logic.AnimalsBehaviour;
 
 namespace Services.AnimalHouse
 {
     public interface IAnimalHouseService : IService
     {
-        bool TryTakeHouse(Animal animal);
-
+        void TakeQueueToHouse(Func<Animal> callback);
         void BuildHouse();
     }
 }
