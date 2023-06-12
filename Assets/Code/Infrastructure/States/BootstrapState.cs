@@ -1,6 +1,7 @@
 ﻿using Infrastructure.AssetManagement;
 using Infrastructure.Factory;
 using Services;
+using Services.AnimalHouse;
 using Services.Input;
 using Services.PersistentProgress;
 using Services.Randomizer;
@@ -47,6 +48,7 @@ namespace Infrastructure.States
                     _services.Single<IAssetProvider>(),
                     _services.Single<IRandomService>(),
                     _services.Single<IPersistentProgressService>()));
+            _services.RegisterSingle<IAnimalHouseService>(new AnimalHouseService(_services.Single<IGameFactory>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),

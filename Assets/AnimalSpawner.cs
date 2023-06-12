@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using Data.ItemsData;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class AnimalSpawner : MonoBehaviour
 {

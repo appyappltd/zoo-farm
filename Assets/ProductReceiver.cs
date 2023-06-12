@@ -1,5 +1,6 @@
 using Logic.Interactions;
 using System.Collections;
+using Data.ItemsData;
 using UnityEngine;
 
 public class ProductReceiver : MonoBehaviour
