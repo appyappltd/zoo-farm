@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
     [SerializeField, Min(0)] private int _maxMedical = 1;
     [SerializeField, Min(0)] private int _maxOther = 3;
 
-    private List<HandItem> items = new();
+    [SerializeField] private List<HandItem> items = new();
     private int maxCount = 1;
     private CreatureType currType = CreatureType.None;
     private Transform itemPlace = null;
@@ -38,7 +38,8 @@ public class Inventory : MonoBehaviour
     public bool CanAddItem(CreatureType type) => maxCount > items.Count
                                               && (currType == CreatureType.None
                                               || currType == type);
-    public bool CanGiveItem(CreatureType type) => currType == type;
+    public bool CanGiveItem(CreatureType type) => items.Count > 0 
+                                               && currType == type;
     public bool CanGiveItem() => items.Count > 0;
 
     public void Add(HandItem item)

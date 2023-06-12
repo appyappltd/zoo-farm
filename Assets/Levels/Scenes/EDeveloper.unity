@@ -464,6 +464,7 @@ MonoBehaviour:
   _maxAnimals: 1
   _maxMedical: 0
   _maxOther: 0
+  items: []
 --- !u!114 &77532838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,8 +527,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f9cb45d83ea60419bfdd4da7ce5b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: []
-  _sprites: []
+  _data:
+  - {fileID: 11400000, guid: 0c89a5387495b0f458b7747ddec523f2, type: 2}
+  - {fileID: 11400000, guid: 94ed44938530343449404e70daf38b84, type: 2}
+  - {fileID: 11400000, guid: 333a4da56d6dca24fafe6bd6a5db5e89, type: 2}
+  - {fileID: 11400000, guid: a154fc248a27c6342b99be713dcaeda7, type: 2}
+  _sprites:
+  - {fileID: 21300000, guid: b212e4dcdaf5b264dae2d42dae0f0580, type: 3}
+  - {fileID: 21300000, guid: 8bcbda62b6418bf428785b6d4682efc3, type: 3}
+  - {fileID: 21300000, guid: 5a7d17443091ddd43b384eb516a22485, type: 3}
+  - {fileID: 21300000, guid: fd25a4e0782652140ab83c1a7ef9a0d6, type: 3}
 --- !u!4 &79667797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 567360348104713023, guid: 32e6202155378ed4f93735981381117f, type: 3}
@@ -3264,6 +3273,7 @@ MonoBehaviour:
   _maxAnimals: 0
   _maxMedical: 1
   _maxOther: 0
+  items: []
 --- !u!114 &874420553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3798,6 +3808,7 @@ MonoBehaviour:
   _maxAnimals: 0
   _maxMedical: 1
   _maxOther: 0
+  items: []
 --- !u!114 &903380696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6540,6 +6551,7 @@ MonoBehaviour:
   _maxAnimals: 0
   _maxMedical: 1
   _maxOther: 0
+  items: []
 --- !u!114 &1624689600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7871,6 +7883,7 @@ MonoBehaviour:
   _maxAnimals: 0
   _maxMedical: 1
   _maxOther: 0
+  items: []
 --- !u!114 &1988734407
 MonoBehaviour:
   m_ObjectHideFlags: 0

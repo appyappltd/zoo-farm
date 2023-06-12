@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parent: {fileID: 6930848208663514377}
-  _state: {fileID: 7896712866374817939}
+  _state: {fileID: 6564643158943892572}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &4964311831488833221
 GameObject:
@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 6930848208663514377}
   - component: {fileID: 6539579365009526868}
   - component: {fileID: 5355320917879896339}
+  - component: {fileID: 4509498779742199813}
   m_Layer: 0
   m_Name: 'Hand TestAnimal '
   m_TagString: Untagged
@@ -333,6 +334,18 @@ MonoBehaviour:
   IsMoving: 0
   _speed: 5
   _offset: 0.1
+--- !u!114 &4509498779742199813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4964311831488833221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf4657d46a54114591461a9c91a9689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5471990362769862164
 GameObject:
   m_ObjectHideFlags: 0
