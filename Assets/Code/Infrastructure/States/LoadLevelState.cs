@@ -1,5 +1,7 @@
 ﻿using Infrastructure.Factory;
 using Logic;
+using Logic.AnimalsBehaviour;
+using Logic.AnimalsStateMachine;
 using Services.Input;
 using Services.PersistentProgress;
 using UnityEngine;
@@ -76,6 +78,11 @@ namespace Infrastructure.States
 
         private void InitialGameWorld()
         {
+            AnimalHouse house = _gameFactory.CreateAnimalHouse(new Vector3(4, 0, 4)).GetComponent<AnimalHouse>();
+            GameObject animal = _gameFactory.CreateAnimal(AnimalType.CatB, Vector3.zero);
+            AnimalId animalId = new AnimalId(AnimalType.CatB, animal.GetHashCode());
+            animal.GetComponent<Animal>().Construct(animalId ,house);
+            house.AttachAnimal(animalId);
         }
     }
 }

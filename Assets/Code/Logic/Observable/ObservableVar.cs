@@ -4,7 +4,7 @@ namespace Logic.Observable
 {
     public class ObservableVar<T> : IObservable<T>
     {
-        private T value;
+        protected T value;
 
         public event Action<T> Changed;
 

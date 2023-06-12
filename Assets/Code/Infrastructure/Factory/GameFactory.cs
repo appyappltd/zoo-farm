@@ -48,6 +48,17 @@ namespace Infrastructure.Factory
             return gameObject;
         }
 
+        public GameObject CreateAnimal(AnimalType animalType, Vector3 at)
+        {
+            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalType}", at);
+            return animal;
+        }
+
+        public GameObject CreateAnimalHouse(Vector3 at)
+        {
+            return InstantiateRegistered(AssetPath.AnimalHousePath, at);
+        }
+        
         private GameObject InstantiateRegistered(string prefabPath)
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath);

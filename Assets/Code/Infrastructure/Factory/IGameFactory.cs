@@ -14,5 +14,7 @@ namespace Infrastructure.Factory
         void WarmUp();
         GameObject CreateHud();
         GameObject CreateHero(Vector3 vector3);
+        GameObject CreateAnimal(AnimalType animalType, Vector3 at);
+        GameObject CreateAnimalHouse(Vector3 at);
     }
 }
