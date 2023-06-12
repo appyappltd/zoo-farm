@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4034820820909915431}
   - component: {fileID: 3351191034983194475}
   - component: {fileID: 6264872607629373425}
+  - component: {fileID: 453499932038694006}
   m_Layer: 7
   m_Name: Hand Pill
   m_TagString: Untagged
@@ -147,6 +148,19 @@ MonoBehaviour:
   IsMoving: 0
   _speed: 5
   _offset: 0.1
+--- !u!114 &453499932038694006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6623978332407664600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1dd5f538c9fef4fb718cd16ec67f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &6668743192535332210
 GameObject:
   m_ObjectHideFlags: 0

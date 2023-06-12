@@ -13,6 +13,8 @@ public class Inventory : MonoBehaviour
     public int GetCount => items.Count;
     public Transform GetItemPlace => itemPlace;
     public CreatureType Type => currType;
+    public ItemData GetDataFirstElement => items.First().ItemData;
+
     [field: SerializeField] public Transform DefItemPlace { get; private set; }
     [SerializeField] private CreatureType _inventoryType = CreatureType.None;
     [SerializeField, Min(0)] private int _maxAnimals = 1;

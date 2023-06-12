@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5724121691355932840}
   - component: {fileID: 2559468788857932141}
   - component: {fileID: 3274271812241170121}
+  - component: {fileID: -4782517099304456306}
   m_Layer: 7
   m_Name: Hand Soap
   m_TagString: Untagged
@@ -64,6 +65,19 @@ MonoBehaviour:
   IsMoving: 0
   _speed: 5
   _offset: 0.1
+--- !u!114 &-4782517099304456306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475779372720190815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1dd5f538c9fef4fb718cd16ec67f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &538634257851519345
 GameObject:
   m_ObjectHideFlags: 0
