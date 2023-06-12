@@ -1,18 +1,17 @@
+using Infrastructure;
 using System.Collections;
+using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.Events;
 
-//  ласс так себе. ƒумаю, он временный, пока не будет €сно, что будет творитьс€ на уровн€х.
 public class VolunteerSpawner : MonoBehaviour
 {
     public event UnityAction<VolunteerMovement> SpawnV;
 
-    [SerializeField, Min(.0f)] private float _time = 10f;
+    [SerializeField] private Vector2 _time = new(5, 40);
     [SerializeField] private Transform _spawnPlace;
-
-    [SerializeField] private VolunteerMovement _volunteer;
-
-    // Ќе знаю, как именно они должны по€вл€тьс€ и тыры-пыры. ѕусть пока будет так.
+    [SerializeField] private GameObject _volunteer;
+    [SerializeField] private AnimalSpawner _animalSpawner;
 
     private void Awake()
     {
@@ -21,14 +20,18 @@ public class VolunteerSpawner : MonoBehaviour
 
     private IEnumerator CreateVolunteer()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         while (true)
         {
-            var v = Instantiate(_volunteer, _spawnPlace.position,
-                                            _spawnPlace.rotation);
-            SpawnV?.Invoke(v);
-            yield return new WaitForSeconds(_time);
+            var v = Instantiate(_volunteer,_spawnPlace.localPosition,_spawnPlace.rotation);
+
+            SpawnV?.Invoke(v.GetComponent<VolunteerMovement>());
+            var inventory = v.GetComponent<Inventory>();
+            var animal = _animalSpawner.InstantiateAnimal(inventory.GetItemPlace);
+            v.GetComponent<Inventory>().Add(animal);
+
+            yield return new WaitForSeconds(Random.Range(_time.x, _time.y));
         }
     }
 }

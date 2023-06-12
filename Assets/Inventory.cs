@@ -7,27 +7,41 @@ using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
-    public event UnityAction AddItem;
+    public event UnityAction<HandItem> AddItem;
     public event UnityAction RemoveItem;
 
     public int GetCount => items.Count;
-    [field: NonSerialized] public Transform DefItemPlace { get; private set; }
+    public Transform GetItemPlace => itemPlace;
+    public CreatureType Type => currType;
+    public ItemData GetDataFirstElement => items.First().ItemData;
 
-    [SerializeField, Min(1)] private int _maxAnimals = 1;
-    [SerializeField, Min(1)] private int _maxMedical = 1;
-    [SerializeField, Min(1)] private int _maxOther = 3;
+    [field: SerializeField] public Transform DefItemPlace { get; private set; }
+    [SerializeField] private CreatureType _inventoryType = CreatureType.None;
+    [SerializeField, Min(0)] private int _maxAnimals = 1;
+    [SerializeField, Min(0)] private int _maxMedical = 1;
+    [SerializeField, Min(0)] private int _maxOther = 3;
 
-    private List<HandItem> items = new();
+    [SerializeField] private List<HandItem> items = new();
     private int maxCount = 1;
     private CreatureType currType = CreatureType.None;
     private Transform itemPlace = null;
 
-    private void Awake() => itemPlace = DefItemPlace;
+    private void Awake()
+    {
+        itemPlace = DefItemPlace;
+
+        if (_inventoryType != CreatureType.None)
+        {
+            SwitchMax(_inventoryType);
+            currType = _inventoryType;
+        }
+    }
 
     public bool CanAddItem(CreatureType type) => maxCount > items.Count
                                               && (currType == CreatureType.None
                                               || currType == type);
-    public bool CanGiveItem(CreatureType type) => currType == type;
+    public bool CanGiveItem(CreatureType type) => items.Count > 0 
+                                               && currType == type;
     public bool CanGiveItem() => items.Count > 0;
 
     public void Add(HandItem item)
@@ -37,9 +51,13 @@ public class Inventory : MonoBehaviour
         if (currType == CreatureType.None)
             ChangeType(item.ItemData.Creature);
         items.Add(item);
-        item.gameObject.transform.SetParent(DefItemPlace);
-        item.GetComponent<Mover>().Move(itemPlace);
+
+        var mover = item.GetComponent<Mover>();
+        mover.Move(itemPlace);
+        mover.GotToPlace += () => item.transform.SetParent(DefItemPlace);
+
         itemPlace = item.NextPlace;
+        AddItem?.Invoke(item);
     }
 
     public HandItem Remove()
@@ -56,14 +74,16 @@ public class Inventory : MonoBehaviour
         else
         {
             itemPlace = DefItemPlace;
-            currType = CreatureType.None;
+            currType = _inventoryType;
         }
+        RemoveItem?.Invoke();
+
         return item;
     }
 
-    private void SwitchMax()
+    private void SwitchMax(CreatureType type)
     {
-        switch (currType)
+        switch (type)
         {
             case CreatureType.Animal:
                 maxCount = _maxAnimals;
@@ -80,6 +100,6 @@ public class Inventory : MonoBehaviour
     private void ChangeType(CreatureType type)
     {
         currType = type;
-        SwitchMax();
+        SwitchMax(currType);
     }
 }

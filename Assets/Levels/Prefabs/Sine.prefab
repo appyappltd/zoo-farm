@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
-  _min: 1.5
-  _max: 2
+  _min: 0.8
+  _max: 1
   _movement: {x: 0, y: 0, z: 0}
-  _scale: {x: 1, y: 1, z: 0}
+  _scale: {x: 1, y: 1, z: 1}
