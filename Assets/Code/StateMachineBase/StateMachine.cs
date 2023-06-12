@@ -1,11 +1,12 @@
 using System.Collections.Generic;
-using UnityEngine;
+using NTC.Global.Cache;
 
 namespace StateMachineBase
 {
-    public abstract class StateMachine : MonoBehaviour
+    public abstract class StateMachine : MonoCache
     {
         private State _currentState;
+        private State _initialState;
 
         private void ChangeState(State newState)
         {
@@ -14,7 +15,16 @@ namespace StateMachineBase
             _currentState.Enter();
         }
 
-        private void Update() => _currentState.Update();
+        public void Stop() =>
+            enabled = false;
+
+        public void Play()
+        {
+            enabled = true;
+        }
+
+        protected override void Run() =>
+            _currentState.Update();
 
         protected void Init(State initialState, Dictionary<State, Dictionary<Transition, State>> states)
         {
@@ -27,6 +37,7 @@ namespace StateMachineBase
                 }
             }
 
+            _initialState = initialState;
             ChangeState(initialState);
         }
     }

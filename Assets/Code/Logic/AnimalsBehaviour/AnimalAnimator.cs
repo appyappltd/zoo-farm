@@ -9,6 +9,7 @@ namespace Logic.AnimalsBehaviour
         private static readonly int Rest = Animator.StringToHash("Rest");
         private static readonly int Eat = Animator.StringToHash("Eat");
         private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int Jump = Animator.StringToHash("Jump");
 
         [SerializeField] private Animator _animator;
 
@@ -23,6 +24,9 @@ namespace Logic.AnimalsBehaviour
 
         public void SetEat() =>
             _animator.CrossFade(Eat, 0.1f);
+
+        public void SetJump() =>
+            _animator.CrossFade(Jump, 0.1f);
 
         public void SetSpeed(float speed) =>
             _animator.SetFloat(Speed, speed);
