@@ -1,3 +1,4 @@
+using System;
 using NaughtyAttributes;
 using Services;
 using Services.AnimalHouse;
@@ -7,6 +8,11 @@ namespace Logic
 {
     public class TestHouseBuild : MonoBehaviour
     {
+        private void Awake()
+        {
+            Build();
+        }
+
         [Button("Build")]
         private void Build()
         {
