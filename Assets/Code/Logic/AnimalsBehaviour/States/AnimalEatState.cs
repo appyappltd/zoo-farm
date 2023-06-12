@@ -1,3 +1,4 @@
+using Logic.AnimalsBehaviour.AnimalStats;
 using MonoStateMachine;
 using UnityEngine;
 
