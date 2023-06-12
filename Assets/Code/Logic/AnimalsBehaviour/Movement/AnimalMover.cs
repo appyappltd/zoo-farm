@@ -52,7 +52,6 @@ namespace Logic.AnimalsBehaviour.Movement
         {
             Quaternion lookRotation = GetLookRotation();
             Quaternion targetRotation = Quaternion.Slerp(transform.rotation, lookRotation, _rotateSpeed * Time.fixedDeltaTime);
-
             transform.rotation = targetRotation;
         }
 

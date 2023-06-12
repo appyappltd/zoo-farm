@@ -35,7 +35,14 @@ namespace Logic.AnimalsStateMachine
         [SerializeField] private Vector2 _idleDelayRange;
         [SerializeField] private float _placeOffset;
 
-        private void Start()
+        public void Construct(Transform houseRestPlace, Transform houseEatPlace)
+        {
+            _restPlace = houseRestPlace;
+            _eatPlace = houseEatPlace;
+            SetUp();
+        }
+
+        private void SetUp()
         {
             State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed);
             State rest = new Rest(_animator, _peppiness, _peppinessReplanishSpeed);

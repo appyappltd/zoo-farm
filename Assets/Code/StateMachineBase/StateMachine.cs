@@ -21,6 +21,11 @@ namespace StateMachineBase
         public void Play()
         {
             enabled = true;
+
+            if (_currentState is null)
+                return;
+            
+            ChangeState(_initialState);
         }
 
         protected override void Run() =>

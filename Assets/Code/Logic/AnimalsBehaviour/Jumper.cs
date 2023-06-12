@@ -1,7 +1,6 @@
 using System;
 using NaughtyAttributes;
 using NTC.Global.Cache;
-using Tools.Extension;
 using UnityEngine;
 
 namespace Logic.AnimalsBehaviour
@@ -18,7 +17,8 @@ namespace Logic.AnimalsBehaviour
         private Vector3 _startPosition;
 
         public event Action Jumped = () => { };
-        
+        public event Action StartJump = () => { };
+
         [Button("Jump")]
         public void Jump()
         {
@@ -26,6 +26,7 @@ namespace Logic.AnimalsBehaviour
             enabled = true;
             _animator.SetJump();
             _startPosition = _transform.position;
+            StartJump.Invoke();
         }
         
         protected override void Run()

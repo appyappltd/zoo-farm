@@ -1,20 +1,44 @@
+using Logic.AnimalsBehaviour.Movement;
+using StateMachineBase;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.AI;
 
 namespace Logic.AnimalsBehaviour
 {
     public class JumpListener : MonoBehaviour
     {
         [SerializeField] private Jumper _jumper;
-        [SerializeField] private UnityEvent _unityEvent;
+        [SerializeField] private StateMachine _stateMachine;
+        [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private AnimalMover _mover;
 
-        private void OnEnable() =>
+        private bool _isMoverEnabled;
+        
+        private void OnEnable()
+        {
             _jumper.Jumped += OnJumped;
+            _jumper.StartJump += OnStartJump;
+        }
 
-        private void OnDisable() =>
-            _jumper.Jumped += OnJumped;
+        private void OnDisable()
+        {
+            _jumper.Jumped -= OnJumped;
+            _jumper.StartJump -= OnStartJump;
+        }
 
-        private void OnJumped() =>
-            _unityEvent?.Invoke();
+        private void OnStartJump()
+        {
+            _stateMachine.Stop();
+            _isMoverEnabled = _mover.enabled;
+            _mover.enabled = false;
+            _agent.enabled = false;
+        }
+        
+        private void OnJumped()
+        {
+            _stateMachine.Play();
+            _mover.enabled = _isMoverEnabled;
+            _agent.enabled = true;
+        }
     }
 }
