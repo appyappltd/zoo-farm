@@ -1,14 +1,13 @@
 using Logic.Interactions;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+[RequireComponent(typeof(Delay))]
 
 public class TransmittingAnimals : MonoBehaviour
 {
     [SerializeField] private VolunteerBand _band;
 
-    private void Awake() => GetComponent<TriggerObserver>().Enter += TryTakeItem;
+    private void Awake() => GetComponent<Delay>().Complete += TryTakeItem;
 
     private void TryTakeItem(GameObject player)
     {

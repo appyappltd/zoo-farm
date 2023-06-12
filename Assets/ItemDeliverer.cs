@@ -1,9 +1,6 @@
-using Logic.Interactions;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
+[RequireComponent(typeof(Delay))]
 public class ItemDeliverer : MonoBehaviour
 {
     private Inventory inventory;
@@ -11,7 +8,7 @@ public class ItemDeliverer : MonoBehaviour
     private void Awake()
     {
         inventory = GetComponent<Inventory>();
-        GetComponent<TriggerObserver>().Enter += PassItem;
+        GetComponent<Delay>().Complete += PassItem;
     }
 
     private void PassItem(GameObject player)

@@ -2,6 +2,8 @@ using Logic.Interactions;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(TriggerObserver))]
+[RequireComponent(typeof(Delay))]
 public class ProductReceiver : MonoBehaviour
 {
     [SerializeField] private CreatureType _type;
@@ -12,7 +14,7 @@ public class ProductReceiver : MonoBehaviour
     private void Awake()
     {
         inventory = GetComponent<Inventory>();
-        GetComponent<TriggerObserver>().Enter += player => StartCoroutine(TryTakeItem(player));
+        GetComponent<Delay>().Complete += player => StartCoroutine(TryTakeItem(player));
         GetComponent<TriggerObserver>().Exit += _ => StopAllCoroutines();
     }
 

@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 77532837}
   - component: {fileID: 77532836}
   - component: {fileID: 77532841}
+  - component: {fileID: 77532842}
   m_Layer: 7
   m_Name: 'Medical Bed '
   m_TagString: Untagged
@@ -537,6 +538,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8bcbda62b6418bf428785b6d4682efc3, type: 3}
   - {fileID: 21300000, guid: 5a7d17443091ddd43b384eb516a22485, type: 3}
   - {fileID: 21300000, guid: fd25a4e0782652140ab83c1a7ef9a0d6, type: 3}
+--- !u!114 &77532842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77532835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edc491d6fb87ea419f51fa345428878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: 1
 --- !u!4 &79667797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 567360348104713023, guid: 32e6202155378ed4f93735981381117f, type: 3}
@@ -3223,6 +3237,7 @@ GameObject:
   - component: {fileID: 874420551}
   - component: {fileID: 874420550}
   - component: {fileID: 874420556}
+  - component: {fileID: 874420557}
   m_Layer: 7
   m_Name: Medicine Place Soap
   m_TagString: Untagged
@@ -3338,6 +3353,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _banner: {fileID: 2080746718}
+--- !u!114 &874420557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874420549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edc491d6fb87ea419f51fa345428878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: 1
 --- !u!1001 &875257651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3758,6 +3786,7 @@ GameObject:
   - component: {fileID: 903380694}
   - component: {fileID: 903380693}
   - component: {fileID: 903380699}
+  - component: {fileID: 903380700}
   m_Layer: 7
   m_Name: Medicine Place Syringe
   m_TagString: Untagged
@@ -3873,6 +3902,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _banner: {fileID: 1008415958}
+--- !u!114 &903380700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903380692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edc491d6fb87ea419f51fa345428878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: 1
 --- !u!1 &904800021
 GameObject:
   m_ObjectHideFlags: 0
@@ -6564,6 +6606,7 @@ GameObject:
   - component: {fileID: 1624689598}
   - component: {fileID: 1624689597}
   - component: {fileID: 1624689603}
+  - component: {fileID: 1624689604}
   m_Layer: 7
   m_Name: Medicine Place Tire
   m_TagString: Untagged
@@ -6679,6 +6722,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _banner: {fileID: 729039111}
+--- !u!114 &1624689604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624689596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edc491d6fb87ea419f51fa345428878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: 1
 --- !u!1 &1636743433
 GameObject:
   m_ObjectHideFlags: 0
@@ -7896,6 +7952,7 @@ GameObject:
   - component: {fileID: 1988734405}
   - component: {fileID: 1988734404}
   - component: {fileID: 1988734410}
+  - component: {fileID: 1988734411}
   m_Layer: 7
   m_Name: 'Medicine Place Pill '
   m_TagString: Untagged
@@ -8011,6 +8068,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _banner: {fileID: 877021088}
+--- !u!114 &1988734411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988734403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edc491d6fb87ea419f51fa345428878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: 1
 --- !u!1001 &2000474177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8977,6 +9047,7 @@ GameObject:
   - component: {fileID: 5904597758824408866}
   - component: {fileID: 5904597758824408865}
   - component: {fileID: 5904597758824408867}
+  - component: {fileID: 5904597758824408868}
   m_Layer: 7
   m_Name: TransmittingAnimals
   m_TagString: Untagged
@@ -9079,6 +9150,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _band: {fileID: 1395226069}
+--- !u!114 &5904597758824408868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546842799137741794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edc491d6fb87ea419f51fa345428878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: 1
 --- !u!4 &6779048267745637749
 Transform:
   m_ObjectHideFlags: 0
