@@ -1,9 +1,6 @@
-using System;
-using Logic.Interactions;
 using System.Collections.Generic;
 using Data.ItemsData;
 using Infrastructure.Factory;
-using Logic;
 using Logic.AnimalsBehaviour;
 using Services;
 using Services.AnimalHouse;
@@ -17,9 +14,10 @@ public class MedicineBed : MonoBehaviour
     [SerializeField] private List<Sprite> _sprites = new();
 
     private Inventory inventory;
+    private ProductReceiver receiver;
     private int index = 0;
     private bool canTreat = false;
-    
+
     private IGameFactory gameFactory;
     private IAnimalHouseService houseService;
 
@@ -27,13 +25,15 @@ public class MedicineBed : MonoBehaviour
     {
         gameFactory = AllServices.Container.Single<IGameFactory>();
         houseService = AllServices.Container.Single<IAnimalHouseService>();
-        
+
         inventory = GetComponent<Inventory>();
+        receiver = GetComponent<ProductReceiver>();
         GetComponent<Delay>().Complete += player => Treat(player.GetComponent<Inventory>());
 
         inventory.AddItem += item => item.GetComponent<Mover>().GotToPlace += () =>
         {
             canTreat = true;
+            receiver.canTake = false;
             GetRandomIndex();
             item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
         };
@@ -43,7 +43,7 @@ public class MedicineBed : MonoBehaviour
 
     private void Treat(Inventory playerInventory)
     {
-        if (!canTreat) 
+        if (!canTreat)
             return;
         if (!inventory.CanGiveItem())
             return;
@@ -57,20 +57,20 @@ public class MedicineBed : MonoBehaviour
         var mover = item.GetComponent<Mover>();
         var handAnimal = inventory.Remove();
 
-        mover.Move(inventory.DefItemPlace);
+        mover.MoveTowards(inventory.DefItemPlace);
         mover.GotToPlace += () =>
         {
-            if (handAnimal.ItemData is AnimalItemData animalItemData)
+            Debug.Log("A");
+            houseService.TakeQueueToHouse(() =>
             {
-                Debug.Log("A");
-                houseService.TakeQueueToHouse(() =>
-                {
-                    canTreat = false;
-                    Destroy(handAnimal.gameObject);
-                    return gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
-                        .GetComponent<Animal>();
-                });
-            }
+                var animalItemData = (AnimalItemData)handAnimal.ItemData;
+                canTreat = false;
+                receiver.canTake = true;
+
+                Destroy(handAnimal.gameObject);
+                return gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
+                    .GetComponent<Animal>();
+            });
 
             Destroy(handAnimal.GetComponent<BubbleHolder>().GetBubble.gameObject);
             Destroy(item.gameObject);

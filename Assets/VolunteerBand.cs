@@ -31,7 +31,7 @@ public class VolunteerBand : MonoBehaviour
         volunteer.GetComponent<PathMover>().SetPoints(new Transform[] { _defTargetOut1, _defTargetOut2 });
 
         rotater.Rotate(_target);
-        mover.Move(_target, false, false);
+        mover.MoveAnimation(_target);
         mover.GotToPlace += () => rotater.Rotate(_defTarget);
 
         UpdateTarget();

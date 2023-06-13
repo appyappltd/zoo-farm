@@ -22,7 +22,7 @@ public class Urn : MonoBehaviour
             var item = playerInventory.Remove();
             var mover = item.GetComponent<Mover>();
 
-            mover.Move(_target);
+            mover.MoveTowards(_target);
             mover.GotToPlace += () => Destroy(item.gameObject);
 
             yield return new WaitForSeconds(_time);

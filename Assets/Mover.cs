@@ -19,30 +19,41 @@ public class Mover : MonoBehaviour
     private Transform target = null;
     private Vector3 lastPos = Vector3.zero;
 
-
-    public void Move(Transform target, bool useMoveTowards = true, bool useTarget = true)
+    public void MoveTowards(Transform target)
     {
         this.target = target;
         _targetPosition = target.position;
-        StartCoroutine(MoveCor(useMoveTowards, useTarget));
+        StartCoroutine(MoveTowardsCor());
     }
 
-    private IEnumerator MoveCor(bool useMoveTowards, bool useTarget)
+    public void MoveAnimation(Transform target)
+    {
+        this.target = target;
+        _targetPosition = target.position;
+        StartCoroutine(MoveAnimationCor());
+    }
+
+    private IEnumerator MoveAnimationCor()
     {
         IsMoving = true;
         StartMove?.Invoke();
-        while (((useTarget &&
-              (transform.position - target.position).magnitude > _offset)
-           || (transform.position - _targetPosition).magnitude > _offset)
-           && (!useMoveTowards || lastPos != transform.position))
+        while ((transform.position - _targetPosition).magnitude > _offset)
+            yield return new WaitForFixedUpdate();
+        IsMoving = false;
+        GotToPlace?.Invoke();
+    }
+
+    private IEnumerator MoveTowardsCor()
+    {
+        IsMoving = true;
+        StartMove?.Invoke();
+        while ((transform.position - target.position).magnitude > _offset
+              && lastPos != transform.position)
         {
-            if (useMoveTowards)
-            {
-                lastPos = transform.position;
-                transform.position = Vector3.MoveTowards(transform.position,
-                                                             target.position,
-                                                             _speed * Time.fixedDeltaTime);
-            }
+            lastPos = transform.position;
+            transform.position = Vector3.MoveTowards(transform.position,
+                                                         target.position,
+                                                         _speed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
         IsMoving = false;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class PathMover : MonoBehaviour
 {
     [SerializeField] private Transform[] _points;
-    [SerializeField] private bool useMoveTowards = true;
 
     private int index = 0;
     private Mover mover;
@@ -31,7 +30,7 @@ public class PathMover : MonoBehaviour
     {
         var point = _points[index];
         rotater.Rotate(point);
-        mover.Move(point, useMoveTowards);
+        mover.MoveAnimation(point);
     }
 
     private void SetPoint()

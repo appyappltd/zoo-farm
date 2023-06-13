@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(Delay))]
 public class ProductReceiver : MonoBehaviour
 {
+    public bool canTake = true;
+
     [SerializeField] private CreatureType _type;
     [SerializeField, Min(.0f)] private float _time = .2f;
 
@@ -21,11 +23,14 @@ public class ProductReceiver : MonoBehaviour
 
     private IEnumerator TryTakeItem(GameObject player)
     {
-        var playerInventory = player.GetComponent<Inventory>();
-        while (_type == CreatureType.None || playerInventory.CanGiveItem(_type) && inventory.CanAddItem(_type))
+        if (canTake)
         {
-            inventory.Add(playerInventory.Remove());
-            yield return new WaitForSeconds(_time);
+            var playerInventory = player.GetComponent<Inventory>();
+            while (_type == CreatureType.None || playerInventory.CanGiveItem(_type) && inventory.CanAddItem(_type))
+            {
+                inventory.Add(playerInventory.Remove());
+                yield return new WaitForSeconds(_time);
+            }
         }
     }
 }
