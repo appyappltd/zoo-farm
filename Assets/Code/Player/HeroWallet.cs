@@ -12,6 +12,7 @@ namespace Player
         private void Awake()
         {
             _wallet = new Wallet();
+            _wallet.Account.Changed += (coins => print($"Current amount of coins: {coins}"));
         }
 
         [Button("Add 100 Coins", EButtonEnableMode.Playmode)]
