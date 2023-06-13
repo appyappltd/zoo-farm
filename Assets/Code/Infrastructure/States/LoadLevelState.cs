@@ -2,6 +2,7 @@
 using Logic;
 using Logic.AnimalsBehaviour;
 using Logic.AnimalsStateMachine;
+using Player;
 using Services.Input;
 using Services.PersistentProgress;
 using UnityEngine;

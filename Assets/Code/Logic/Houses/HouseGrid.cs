@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Infrastructure.Factory;
 using NaughtyAttributes;
+using NTC.Global.System;
 using Services;
 using Services.AnimalHouse;
 using Tools.Constants;
@@ -29,7 +30,7 @@ namespace Logic.Houses
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             FillPositions();
-            _activeHouseCell = _gameFactory.CreateHouseCell(_housePositions.Peek()).GetComponent<HouseCell>();
+            _activeHouseCell = _gameFactory.CreateHouseCell(_housePositions.Dequeue()).GetComponent<HouseCell>();
             _activeHouseCell.BuildHouse += ActivateNext;
         }
 
@@ -90,14 +91,15 @@ namespace Logic.Houses
         [Button("Activate Next")]
         private void ActivateNext()
         {
+            _houseService.BuildHouse(_activeHouseCell.transform.position);
+            
             if (_housePositions.TryDequeue(out Vector3 nextPosition))
             {
-                _houseService.BuildHouse(nextPosition);
                 _activeHouseCell.Reposition(nextPosition);
                 return;
             }
-
-            throw new Exception(MaxHouseCountException);
+            
+            _activeHouseCell.gameObject.Disable();
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class ObservableInt : ObservableVar<int>
     {
-        public ObservableInt(int value) : base(value) { }
+        public ObservableInt(int value = 0) : base(value) { }
 
         public static implicit operator ObservableInt(int n) => new ObservableInt(n);
 
