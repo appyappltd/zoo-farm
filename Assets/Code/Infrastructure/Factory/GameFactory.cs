@@ -54,11 +54,12 @@ namespace Infrastructure.Factory
             return animal;
         }
 
-        public GameObject CreateAnimalHouse(Vector3 at)
-        {
-            return InstantiateRegistered(AssetPath.AnimalHousePath, at);
-        }
-        
+        public GameObject CreateAnimalHouse(Vector3 at) =>
+            InstantiateRegistered(AssetPath.AnimalHousePath, at);
+
+        public GameObject CreateHouseCell(Vector3 at) =>
+            _assets.Instantiate(AssetPath.HouseCellPath, at);
+
         private GameObject InstantiateRegistered(string prefabPath)
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath);

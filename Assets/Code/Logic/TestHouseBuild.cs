@@ -8,6 +8,8 @@ namespace Logic
 {
     public class TestHouseBuild : MonoBehaviour
     {
+        [SerializeField] private Vector3 _spawnPlace;
+
         private void Awake()
         {
             Build();
@@ -16,7 +18,7 @@ namespace Logic
         [Button("Build")]
         private void Build()
         {
-            AllServices.Container.Single<IAnimalHouseService>().BuildHouse();
+            AllServices.Container.Single<IAnimalHouseService>().BuildHouse(_spawnPlace);
         }
     }
 }

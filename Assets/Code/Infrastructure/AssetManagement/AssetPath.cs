@@ -6,5 +6,6 @@ namespace Infrastructure.AssetManagement
         public const string HudPath = "Prefabs/UI/HUD";
         public const string AnimalPath = "Prefabs/Animals";
         public const string AnimalHousePath = "Prefabs/AnimalHouse";
+        public const string HouseCellPath = "Prefabs/HouseCell";
     }
 }

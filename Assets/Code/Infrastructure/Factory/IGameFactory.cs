@@ -16,5 +16,6 @@ namespace Infrastructure.Factory
         GameObject CreateHero(Vector3 vector3);
         GameObject CreateAnimal(AnimalType animalType, Vector3 at);
         GameObject CreateAnimalHouse(Vector3 at);
+        GameObject CreateHouseCell(Vector3 peek);
     }
 }
