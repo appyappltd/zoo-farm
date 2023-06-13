@@ -1,45 +1,59 @@
-using NTC.Global.Cache;
+using System;
 using UnityEngine;
 
 namespace Logic.Translators
 {
-    public abstract class Translator : MonoCache, ITranslator
+    public class Translator : ITranslator
     {
         private const float FinalTranslateValue = 1;
         
-        private ITranslatable _translatable;
+        private readonly ITranslatable _translatable;
+
+        private Func<float, float> _deltaModifiers = f => f;
+        private Func<Vector3, Vector3, float, Vector3> _positionModifiers = Vector3.Lerp;
+
         private Vector3 _toPosition;
         private float _delta;
-        private float _distance;
 
-        [SerializeField] private float _speed;
-        protected Vector3 From { get; private set; }
-        protected Vector3 To { get; private set; }
+        private float _speed;
 
-        protected abstract void Init(ITranslatable translatable);
-        protected abstract Vector3 UpdatePosition(float delta);
+        private Vector3 _from;
+        private Vector3 _to;
 
-        public void Translate(Vector3 from, Vector3 to)
+        private bool IsComplete => _delta >= FinalTranslateValue;
+        
+        protected Translator(ITranslatable translatable)
         {
-            From = from;
-            To = to;
-            enabled = true;
+            _translatable = translatable;
         }
 
-        protected override void Run()
+        public void SetDeltaModifier(Func<float, float> func) =>
+            _deltaModifiers = func ?? throw new NullReferenceException();
+
+        public void SetPositionModifier(Func<Vector3, Vector3, float, Vector3> func) =>
+            _positionModifiers = func ?? throw new NullReferenceException();
+
+        public void Translate(Vector3 from, Vector3 to, float speed)
         {
+            _delta = 0;
+            _from = from;
+            _to = to;
+            _speed = speed;
+        }
+
+        public bool TryUpdate()
+        {
+            if (IsComplete)
+                return false;
+
             UpdateDelta();
-            _translatable.Warp(UpdatePosition(_delta));
-            CheckIsComplete();
+            float delta = _deltaModifiers.Invoke(_delta);
+            Vector3 position = _positionModifiers.Invoke(_from, _to, delta);
+            _translatable.Warp(position);
+            return true;
         }
 
         private void UpdateDelta() =>
-            _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.smoothDeltaTime / _distance);
-        
-        private void CheckIsComplete()
-        {
-            if (_delta >= FinalTranslateValue)
-                enabled = false;
-        }
+            _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.smoothDeltaTime);
     }
 }
