@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31626d599387804091d1cf8f71e0543, type: 3}
+  m_Name: Carrot
+  m_EditorClassIdentifier: 
+  <Hand>k__BackingField: {fileID: 7051816277502987663, guid: 60ade3d69839a9c41b393605c667c765, type: 3}
+  <Drop>k__BackingField: {fileID: 9216882279177989319, guid: a21f79d69ea262f41bab7dd3a906b93a, type: 3}
+  <Creature>k__BackingField: 3
