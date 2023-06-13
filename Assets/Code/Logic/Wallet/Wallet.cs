@@ -26,6 +26,9 @@ namespace Logic.Wallet
             if (Validate(amount, SpendValidateException) == false)
                 return false;
 
+            if (_account.Value - amount < 0)
+                return false;
+
             _account -= amount;
             return true;
         }
