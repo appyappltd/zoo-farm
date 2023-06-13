@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
         items.Add(item);
 
         var mover = item.GetComponent<Mover>();
-        mover.Move(itemPlace);
+        mover.MoveTowards(itemPlace);
         mover.GotToPlace += () => item.transform.SetParent(DefItemPlace);
 
         itemPlace = item.NextPlace;
