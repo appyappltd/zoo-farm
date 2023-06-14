@@ -1,9 +1,10 @@
 using System;
+using NTC.Global.Cache;
 using UnityEngine;
 
 namespace Logic.Translators
 {
-    public abstract class Translatable : MonoBehaviour, ITranslatable
+    public abstract class Translatable : MonoCache, ITranslatable
     {
         private const float FinalTranslateValue = 1;
         
@@ -20,6 +21,9 @@ namespace Logic.Translators
         private bool IsComplete => _delta >= FinalTranslateValue;
 
         protected abstract void OnInit();
+
+        protected void UpdateToPosition(Vector3 newToPosition) =>
+            _to = newToPosition;
 
         public void Init(Vector3 from, Vector3 to)
         {
