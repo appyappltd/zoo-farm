@@ -1,4 +1,4 @@
-using Logic.Observable;
+using Observables;
 using UnityEngine;
 
 namespace Logic.Wallet
@@ -7,17 +7,17 @@ namespace Logic.Wallet
     {
         private const string AddValidateException = "You cannot add negative or zero amount of coins";
         private const string SpendValidateException = "You cannot spend negative or zero amount of coins";
-        
-        private ObservableInt _account = new ObservableInt();
 
-        public IObservable<int> Account => _account;
+        private readonly Observable<int> _account = new Observable<int>();
+
+        public Observable<int> Account => _account;
 
         public bool TryAdd(int amount)
         {
             if (Validate(amount, AddValidateException) == false)
                 return false;
 
-            _account += amount;
+            _account.Value += amount;
             return true;
         }
 
@@ -29,7 +29,7 @@ namespace Logic.Wallet
             if (_account.Value - amount < 0)
                 return false;
 
-            _account -= amount;
+            _account.Value -= amount;
             return true;
         }
 
