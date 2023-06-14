@@ -4,7 +4,7 @@ namespace Logic.Translators
 {
     public interface ITranslatable
     {
-        Vector3 Position { get; }
-        void Warp(Vector3 to);
+        void Init(Vector3 from, Vector3 to);
+        bool TryUpdate();
     }
 }
