@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Logic.Translators
 {
-    public class LinearPositionTranslatable : Translatable
+    public class LinearPositionTranslatable : Translatable<Vector3>
     {
         protected override void OnInit()
         {

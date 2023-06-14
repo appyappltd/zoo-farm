@@ -3,7 +3,7 @@ using NTC.Global.Cache;
 
 namespace Logic.Translators
 {
-    public abstract class Translator : MonoCache, ITranslator
+    public abstract class Translator: MonoCache, ITranslator
     {
         private readonly List<ITranslatable> _translatables = new List<ITranslatable>();
 

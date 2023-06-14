@@ -4,19 +4,17 @@ using UnityEngine;
 
 namespace Logic.Translators
 {
-    public abstract class Translatable : MonoCache, ITranslatable
+    public abstract class Translatable<T> : MonoCache, ITranslatable
     {
         private const float FinalTranslateValue = 1;
 
-        protected Transform ToTransform;
-
         [SerializeField] private float _speed;
-        private Vector3 _from;
-        private Vector3 _to;
+        private T _from;
+        private T _to;
 
         private Func<float, float> _deltaModifiers = f => f;
-        private Func<Vector3, float, Vector3> _vectorModifiers = (vector3, delta) => vector3;
-        private Func<Vector3, Vector3, float, Vector3> _vectorLerp = Vector3.LerpUnclamped;
+        private Func<T, float, T> _valueModifiers = (value, delta) => value;
+        private Func<T, T, float, T> _vectorLerp;
 
         private float _delta;
 
@@ -24,9 +22,9 @@ namespace Logic.Translators
 
         protected abstract void OnInit();
 
-        protected abstract void ApplyTranslation(Vector3 vector);
+        protected abstract void ApplyTranslation(T vector);
 
-        protected void UpdateToPosition(Vector3 newToPosition) =>
+        protected void UpdateToPosition(T newToPosition) =>
             _to = newToPosition;
 
         private void Awake()
@@ -34,7 +32,7 @@ namespace Logic.Translators
             enabled = false;
         }
 
-        public void Init(Vector3 from, Vector3 to)
+        public void Init(T from, T to)
         {
             _delta = 0;
             _from = from;
@@ -49,20 +47,20 @@ namespace Logic.Translators
 
             float delta = UpdateDelta();
             delta = _deltaModifiers.Invoke(delta);
-            Vector3 vector = _vectorLerp.Invoke(_from, _to, delta);
-            vector = _vectorModifiers.Invoke(vector, delta);
-            ApplyTranslation(vector);
+            T value = _vectorLerp.Invoke(_from, _to, delta);
+            value = _valueModifiers.Invoke(value, delta);
+            ApplyTranslation(value);
             return true;
         }
 
-        protected void SetPositionLerp(Func<Vector3, Vector3, float, Vector3> func) =>
+        protected void SetPositionLerp(Func<T, T, float, T> func) =>
             _vectorLerp += func ?? throw new NullReferenceException();
 
         protected void AddDeltaModifier(Func<float, float> func) =>
             _deltaModifiers += func ?? throw new NullReferenceException();
 
-        protected void AddPositionModifier(Func<Vector3, float, Vector3> func) =>
-            _vectorModifiers += func ?? throw new NullReferenceException();
+        protected void AddPositionModifier(Func<T, float, T> func) =>
+            _valueModifiers += func ?? throw new NullReferenceException();
 
         private float UpdateDelta()
         {
