@@ -11,7 +11,7 @@ namespace Logic.Translators
         //     float curveDelta = _curve.Evaluate(delta);
         //     return Vector3.Lerp(from, to, curveDelta);
         // }
-        public CurveTranslator(ITranslatable translatable) : base(translatable)
+        public CurveTranslator(ITranslatable translatable) : base()
         {
         }
     }

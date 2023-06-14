@@ -8,7 +8,7 @@ namespace Logic.Translators
         // {
         //     return Vector3.Slerp(from, to, delta);
         // }
-        public SlerpTranslator(ITranslatable translatable) : base(translatable)
+        public SlerpTranslator(ITranslatable translatable) : base()
         {
         }
     }

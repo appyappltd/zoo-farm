@@ -6,7 +6,7 @@ namespace Logic.Translators
     {
         // protected override Vector3 UpdatePosition(Vector3 from, Vector3 to, float delta) =>
         //     Vector3.Lerp(from, to, delta);
-        public LinearTranslator(ITranslatable translatable) : base(translatable)
+        public LinearTranslator(ITranslatable translatable) : base()
         {
         }
     }
