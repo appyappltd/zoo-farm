@@ -12,11 +12,12 @@ namespace Logic.Translators
         {
             AddDeltaModifier(_timeCurve.Evaluate);
             AddPositionModifier(((vector, delta) => vector.ChangeY(vector.y + _deltaYCurve.Evaluate(delta))));
+            enabled = true;
         }
 
         protected override void Run()
         {
-            UpdateToPosition(transform.position);
+            UpdateToPosition(ToTransform.position);
         }
     }
 }

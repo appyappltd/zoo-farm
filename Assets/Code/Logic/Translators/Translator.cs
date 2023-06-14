@@ -25,6 +25,16 @@ namespace Logic.Translators
             _translatables.Add(translatable);
         }
 
+        public void AddTranslatable(ITranslatable translatable, Vector3 from, Transform to)
+        {
+            if (_translatables.Contains(translatable))
+                return;
+
+            enabled = true;
+            translatable.Init(from, to);
+            _translatables.Add(translatable);
+        }
+
         protected void UpdateTranslatable()
         {
             for (var index = 0; index < _translatables.Count; index++)

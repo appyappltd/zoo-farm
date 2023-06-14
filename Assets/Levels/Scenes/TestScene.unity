@@ -1518,7 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfea18a8a2094122abab904e4aec3aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.18
+  _speed: 0.1
   _timeCurve:
     serializedVersion: 2
     m_Curve:
@@ -2950,7 +2950,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _translator: {fileID: 1982471451}
   _translatables:
-  - {fileID: 892525184}
   - {fileID: 997354632}
   _from: {fileID: 1610844539}
   _to: {fileID: 1304262103}

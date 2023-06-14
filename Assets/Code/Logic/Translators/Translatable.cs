@@ -7,13 +7,15 @@ namespace Logic.Translators
     public abstract class Translatable : MonoCache, ITranslatable
     {
         private const float FinalTranslateValue = 1;
-        
+
+        protected Transform ToTransform;
+
         [SerializeField] private float _speed;
 
         private Func<float, float> _deltaModifiers = f => f;
         private Func<Vector3, float, Vector3> _positionModifiers = (vector3, delta) => vector3;
         private Func<Vector3, Vector3, float, Vector3> _positionLerp = Vector3.LerpUnclamped;
-        
+
         private float _delta;
         private Vector3 _from;
         private Vector3 _to;
@@ -25,11 +27,24 @@ namespace Logic.Translators
         protected void UpdateToPosition(Vector3 newToPosition) =>
             _to = newToPosition;
 
+        private void Awake()
+        {
+            enabled = false;
+        }
+
         public void Init(Vector3 from, Vector3 to)
         {
             _delta = 0;
             _from = from;
             _to = to;
+            OnInit();
+        }
+        
+        public void Init(Vector3 from, Transform to)
+        {
+            _delta = 0;
+            _from = from;
+            ToTransform = to;
             OnInit();
         }
 

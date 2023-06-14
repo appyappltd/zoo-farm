@@ -28,7 +28,7 @@ namespace Logic.Translators
                 _index = 0;
             }
             
-            Translator.AddTranslatable(Translatables[_index], _from.position, _to.position);
+            Translator.AddTranslatable(Translatables[_index], _from.position, _to);
             _index++;
         }
     }
