@@ -17,27 +17,26 @@ public class Plant : MonoBehaviour
     private bool canGrow = true;
 
     private void Awake()
-       => GetComponent<Delay>().Complete += _ =>
-       {
-           if (canGrow)
-               StartCoroutine(Grow());
-       };
+       => GetComponent<Delay>().Complete += _ => StartCoroutine(Grow());
 
     private IEnumerator Grow()
     {
-        canGrow = false;
-        yield return new WaitForSeconds(_time);
-
-        var currStage = Instantiate(_stages[0], transform);
-        for (int i = 1; i < _stages.Count; i++)
+        if (canGrow)
         {
+            canGrow = false;
             yield return new WaitForSeconds(_time);
-            Destroy(currStage);
-            currStage = Instantiate(_stages[i], transform);
-        }
-        GrowUp?.Invoke(currStage);
 
-        var drop = currStage.GetComponent<DropItem>();
-        drop.PickUp += _ => canGrow = true;
+            var currStage = Instantiate(_stages[0], transform);
+            for (int i = 1; i < _stages.Count; i++)
+            {
+                yield return new WaitForSeconds(_time);
+                Destroy(currStage);
+                currStage = Instantiate(_stages[i], transform);
+            }
+            GrowUp?.Invoke(currStage);
+
+            var drop = currStage.GetComponent<DropItem>();
+            drop.PickUp += _ => canGrow = true;
+        }
     }
 }
