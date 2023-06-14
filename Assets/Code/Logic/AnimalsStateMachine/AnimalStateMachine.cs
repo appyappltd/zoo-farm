@@ -39,6 +39,8 @@ namespace Logic.AnimalsStateMachine
         {
             _restPlace = houseRestPlace;
             _eatPlace = houseEatPlace;
+            Debug.Log(_eatPlace);
+            
             SetUp();
         }
 

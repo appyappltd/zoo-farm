@@ -5,19 +5,19 @@ namespace Logic.Wallet
 {
     public class Wallet : IWallet
     {
-        private const string AddValidateException = "You cannot add negative amount of coins";
-        private const string SpendValidateException = "You cannot spend negative amount of coins";
+        private const string AddValidateException = "You cannot add negative or zero amount of coins";
+        private const string SpendValidateException = "You cannot spend negative or zero amount of coins";
         
-        private ObservableInt account;
+        private ObservableInt _account = new ObservableInt();
 
-        public Observable.IObservable<int> Account => account;
+        public IObservable<int> Account => _account;
 
         public bool TryAdd(int amount)
         {
             if (Validate(amount, AddValidateException) == false)
                 return false;
 
-            account += amount;
+            _account += amount;
             return true;
         }
 
@@ -26,7 +26,10 @@ namespace Logic.Wallet
             if (Validate(amount, SpendValidateException) == false)
                 return false;
 
-            account -= amount;
+            if (_account - amount < 0)
+                return false;
+
+            _account -= amount;
             return true;
         }
 

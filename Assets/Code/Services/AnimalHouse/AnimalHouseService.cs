@@ -40,9 +40,9 @@ namespace Services.AnimalHouse
         private Logic.AnimalHouse GetFreeHouse() =>
             _animalHouses.FirstOrDefault(house => house.IsTaken == false);
 
-        public void BuildHouse()
+        public void BuildHouse(Vector3 at)
         {
-            var houseObject = _gameFactory.CreateAnimalHouse(new Vector3(4, 0, 4));
+            var houseObject = _gameFactory.CreateAnimalHouse(at);
             Logic.AnimalHouse builtHouse = houseObject.GetComponent<Logic.AnimalHouse>();
             _animalHouses.Add(builtHouse);
 
