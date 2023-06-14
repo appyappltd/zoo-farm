@@ -15,6 +15,11 @@ namespace Logic.Translators
             enabled = true;
         }
 
+        protected override void ApplyTranslation(Vector3 vector)
+        {
+            transform.position = vector;
+        }
+
         protected override void Run()
         {
             UpdateToPosition(ToTransform.position);
