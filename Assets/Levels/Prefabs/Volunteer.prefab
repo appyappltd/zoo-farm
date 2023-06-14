@@ -372,8 +372,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5563831926245997067}
   - component: {fileID: 8160872385395587745}
-  - component: {fileID: 8972307184243736521}
   - component: {fileID: 9073289311928358728}
+  - component: {fileID: 8426896991394957316}
   - component: {fileID: -3324673149187756082}
   - component: {fileID: 4664039552938874061}
   - component: {fileID: 659235615957181102}
@@ -430,21 +430,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8972307184243736521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1229401633726274375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e476ab998aa5544439408ac537a0b4c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsMoving: 0
-  _speed: 0
-  _offset: 0.5
 --- !u!114 &9073289311928358728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +442,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9b9c173f8320e44ae73c1e9aab7df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8426896991394957316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229401633726274375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994f5c7e5e94c5748b8ee950e114106e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsMoving: 0
+  _offset: 0.1
 --- !u!114 &-3324673149187756082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +485,7 @@ MonoBehaviour:
   _maxAnimals: 1
   _maxMedical: 1
   _maxOther: 3
+  items: []
 --- !u!136 &659235615957181102
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -522,7 +522,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _points: []
-  useMoveTowards: 0
 --- !u!114 &-310732374932598855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c9bd4e4f98a9b4d812103e29de7b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Debug: 0
 --- !u!1 &1296423078286401506
 GameObject:
   m_ObjectHideFlags: 0

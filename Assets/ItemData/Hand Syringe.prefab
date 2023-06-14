@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5280757882689774111}
   - component: {fileID: 5950705635725096069}
-  - component: {fileID: 6730653091609328661}
   - component: {fileID: 1880337820279074908}
+  - component: {fileID: 4594602905420632528}
   m_Layer: 7
   m_Name: Hand Syringe
   m_TagString: Untagged
@@ -81,21 +81,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: 94ed44938530343449404e70daf38b84, type: 2}
   <NextPlace>k__BackingField: {fileID: 4777713950776312174}
---- !u!114 &6730653091609328661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3190679380082420259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e476ab998aa5544439408ac537a0b4c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsMoving: 0
-  _speed: 5
-  _offset: 0.1
 --- !u!114 &1880337820279074908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +94,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
+--- !u!114 &4594602905420632528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190679380082420259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsMoving: 0
+  _speed: 5
+  _offset: 0.1
 --- !u!1 &4463195459638407041
 GameObject:
   m_ObjectHideFlags: 0

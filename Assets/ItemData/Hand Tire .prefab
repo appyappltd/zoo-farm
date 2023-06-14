@@ -124,8 +124,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8987209262653270944}
   - component: {fileID: 7153212878991175094}
-  - component: {fileID: 3947227233656426941}
   - component: {fileID: 5837903861970345006}
+  - component: {fileID: 6106179931511343147}
   m_Layer: 7
   m_Name: 'Hand Tire '
   m_TagString: Untagged
@@ -164,21 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: a154fc248a27c6342b99be713dcaeda7, type: 2}
   <NextPlace>k__BackingField: {fileID: 2974799634259821984}
---- !u!114 &3947227233656426941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9202989804973760702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e476ab998aa5544439408ac537a0b4c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsMoving: 0
-  _speed: 5
-  _offset: 0.1
 --- !u!114 &5837903861970345006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +177,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 3
+--- !u!114 &6106179931511343147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202989804973760702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsMoving: 0
+  _speed: 5
+  _offset: 0.1

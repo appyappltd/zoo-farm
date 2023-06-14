@@ -3,12 +3,12 @@ using UnityEngine;
 public class VolunteerMovement : MonoBehaviour
 {
     private Animator animC;
-    private Mover mover;
+    private AnimationMover mover;
 
     private void Awake()
     {
         animC = GetComponent<Animator>();
-        mover = GetComponent<Mover>();
+        mover = GetComponent<AnimationMover>();
         mover.StartMove += OnMove;
         mover.GotToPlace += OnMove;
     }

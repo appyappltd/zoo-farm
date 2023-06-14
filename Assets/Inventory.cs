@@ -53,8 +53,8 @@ public class Inventory : MonoBehaviour
             ChangeType(item.ItemData.Creature);
         items.Add(item);
 
-        var mover = item.GetComponent<Mover>();
-        mover.MoveTowards(itemPlace);
+        var mover = item.GetComponent<IMover>();
+        mover.Move(itemPlace);
         mover.GotToPlace += () => item.transform.SetParent(DefItemPlace);
 
         itemPlace = item.NextPlace;

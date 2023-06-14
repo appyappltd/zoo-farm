@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8000801437511138021}
   - component: {fileID: 8271202807324816235}
   - component: {fileID: 7051816277502987663}
-  - component: {fileID: 3717795022528550780}
+  - component: {fileID: 6783488995596578406}
   m_Layer: 7
   m_Name: Hand Carrot
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: f4d91619feece4646a7743f4d69c8c87, type: 2}
   <NextPlace>k__BackingField: {fileID: 2563179045923938122}
---- !u!114 &3717795022528550780
+--- !u!114 &6783488995596578406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 854074298446373423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e476ab998aa5544439408ac537a0b4c8, type: 3}
+  m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsMoving: 0

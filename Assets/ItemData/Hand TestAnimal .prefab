@@ -277,8 +277,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6930848208663514377}
   - component: {fileID: 6539579365009526868}
-  - component: {fileID: 5355320917879896339}
   - component: {fileID: 4509498779742199813}
+  - component: {fileID: 5595194519562060319}
   m_Layer: 0
   m_Name: 'Hand TestAnimal '
   m_TagString: Untagged
@@ -319,21 +319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: 7ad160b7fc6fb8c48b9bf476bbe220ed, type: 2}
   <NextPlace>k__BackingField: {fileID: 7287795094581436811}
---- !u!114 &5355320917879896339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4964311831488833221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e476ab998aa5544439408ac537a0b4c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsMoving: 0
-  _speed: 5
-  _offset: 0.1
 --- !u!114 &4509498779742199813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +331,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf4657d46a54114591461a9c91a9689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5595194519562060319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4964311831488833221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsMoving: 0
+  _speed: 5
+  _offset: 0.1
 --- !u!1 &5471990362769862164
 GameObject:
   m_ObjectHideFlags: 0

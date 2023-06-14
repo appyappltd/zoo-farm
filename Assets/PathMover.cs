@@ -7,14 +7,14 @@ public class PathMover : MonoBehaviour
     [SerializeField] private Transform[] _points;
 
     private int index = 0;
-    private Mover mover;
+    private IMover mover;
     private Rotater rotater;
     private bool IsPath = false;
 
     private void Awake()
     {
         rotater = GetComponent<Rotater>();
-        mover = GetComponent<Mover>();
+        mover = GetComponent<IMover>();
         mover.GotToPlace += SetPoint;
     }
 
@@ -30,7 +30,7 @@ public class PathMover : MonoBehaviour
     {
         var point = _points[index];
         rotater.Rotate(point);
-        mover.MoveAnimation(point);
+        mover.Move(point);
     }
 
     private void SetPoint()

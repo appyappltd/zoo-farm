@@ -176,10 +176,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8075731719304908117}
   - component: {fileID: 8860459717152203080}
-  - component: {fileID: -3221612023929459489}
   - component: {fileID: 3901084074631148774}
   - component: {fileID: 8552028406341558363}
   - component: {fileID: 7088786729052875398}
+  - component: {fileID: 3629893390472087885}
   m_Layer: 0
   m_Name: Drop TestAnimal
   m_TagString: Untagged
@@ -202,7 +202,7 @@ Transform:
   - {fileID: 138169668028231756}
   - {fileID: 7466574124851243600}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8860459717152203080
 MonoBehaviour:
@@ -217,21 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: 9f892ea447264ed45aee11cd6f278832, type: 2}
---- !u!114 &-3221612023929459489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6827978266512999114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e476ab998aa5544439408ac537a0b4c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsMoving: 0
-  _speed: 5
-  _offset: 0.1
 --- !u!65 &3901084074631148774
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -278,3 +263,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 1
+--- !u!114 &3629893390472087885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827978266512999114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsMoving: 0
+  _speed: 5
+  _offset: 0.1
