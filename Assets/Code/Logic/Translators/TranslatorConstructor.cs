@@ -14,6 +14,9 @@ namespace Logic.Translators
 
         [SerializeField] private Transform _from;
         [SerializeField] private Transform _to;
+        
+        [SerializeField] private Vector3 _beginScale;
+        [SerializeField] private Vector3 _endScale;
 
         private int _index;
         
@@ -27,8 +30,21 @@ namespace Logic.Translators
             {
                 _index = 0;
             }
+
+
+            ITranslatable translatable = Translatables[_index];
             
-            Translator.AddTranslatable(Translatables[_index], _from.position, _to);
+            if (translatable is LinearScaleTranslatable scaleTranslatable)
+            {
+                scaleTranslatable.Init(_beginScale, _endScale);
+            }
+
+            if (translatable is LinearPositionTranslatable positionTranslatable)
+            {
+                positionTranslatable.Init(_from.position, _to.position);
+            }
+            
+            Translator.AddTranslatable(translatable);
             _index++;
         }
     }

@@ -11,14 +11,14 @@ namespace Logic.Translators
         protected Transform ToTransform;
 
         [SerializeField] private float _speed;
-
-        private Func<float, float> _deltaModifiers = f => f;
-        private Func<Vector3, float, Vector3> _positionModifiers = (vector3, delta) => vector3;
-        private Func<Vector3, Vector3, float, Vector3> _positionLerp = Vector3.LerpUnclamped;
-
-        private float _delta;
         private Vector3 _from;
         private Vector3 _to;
+
+        private Func<float, float> _deltaModifiers = f => f;
+        private Func<Vector3, float, Vector3> _vectorModifiers = (vector3, delta) => vector3;
+        private Func<Vector3, Vector3, float, Vector3> _vectorLerp = Vector3.LerpUnclamped;
+
+        private float _delta;
 
         private bool IsComplete => _delta >= FinalTranslateValue;
 
@@ -41,14 +41,6 @@ namespace Logic.Translators
             _to = to;
             OnInit();
         }
-        
-        public void Init(Vector3 from, Transform to)
-        {
-            _delta = 0;
-            _from = from;
-            ToTransform = to;
-            OnInit();
-        }
 
         public bool TryUpdate()
         {
@@ -57,20 +49,20 @@ namespace Logic.Translators
 
             float delta = UpdateDelta();
             delta = _deltaModifiers.Invoke(delta);
-            Vector3 position = _positionLerp.Invoke(_from, _to, delta);
-            position = _positionModifiers.Invoke(position, delta);
-            ApplyTranslation(position);
+            Vector3 vector = _vectorLerp.Invoke(_from, _to, delta);
+            vector = _vectorModifiers.Invoke(vector, delta);
+            ApplyTranslation(vector);
             return true;
         }
 
         protected void SetPositionLerp(Func<Vector3, Vector3, float, Vector3> func) =>
-            _positionLerp += func ?? throw new NullReferenceException();
+            _vectorLerp += func ?? throw new NullReferenceException();
 
         protected void AddDeltaModifier(Func<float, float> func) =>
             _deltaModifiers += func ?? throw new NullReferenceException();
 
         protected void AddPositionModifier(Func<Vector3, float, Vector3> func) =>
-            _positionModifiers += func ?? throw new NullReferenceException();
+            _vectorModifiers += func ?? throw new NullReferenceException();
 
         private float UpdateDelta()
         {

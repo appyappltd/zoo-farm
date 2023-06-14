@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Logic.Translators
 {
-    public class LinearTranslatable : Translatable
+    public class LinearScaleTranslatable : Translatable
     {
         protected override void OnInit()
         {
@@ -10,7 +10,7 @@ namespace Logic.Translators
 
         protected override void ApplyTranslation(Vector3 vector)
         {
-            transform.position = vector;
+            transform.localScale = vector;
         }
     }
 }

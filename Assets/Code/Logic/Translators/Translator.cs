@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using NTC.Global.Cache;
-using UnityEngine;
 
 namespace Logic.Translators
 {
@@ -15,23 +14,12 @@ namespace Logic.Translators
             enabled = false;
         }
 
-        public void AddTranslatable(ITranslatable translatable, Vector3 from, Vector3 to)
+        public void AddTranslatable(ITranslatable translatable)
         {
             if (_translatables.Contains(translatable))
                 return;
 
             enabled = true;
-            translatable.Init(from, to);
-            _translatables.Add(translatable);
-        }
-
-        public void AddTranslatable(ITranslatable translatable, Vector3 from, Transform to)
-        {
-            if (_translatables.Contains(translatable))
-                return;
-
-            enabled = true;
-            translatable.Init(from, to);
             _translatables.Add(translatable);
         }
 
