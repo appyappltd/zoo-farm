@@ -22,6 +22,8 @@ namespace Logic.Translators
 
         protected abstract void OnInit();
 
+        protected abstract void ApplyTranslation(Vector3 vector);
+
         protected void UpdateToPosition(Vector3 newToPosition) =>
             _to = newToPosition;
 
@@ -42,7 +44,7 @@ namespace Logic.Translators
             delta = _deltaModifiers.Invoke(delta);
             Vector3 position = _positionLerp.Invoke(_from, _to, delta);
             position = _positionModifiers.Invoke(position, delta);
-            Warp(position);
+            ApplyTranslation(position);
             return true;
         }
 
@@ -60,8 +62,5 @@ namespace Logic.Translators
             _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.smoothDeltaTime);
             return _delta;
         }
-        
-        private void Warp(Vector3 to) =>
-            transform.position = to;
     }
 }

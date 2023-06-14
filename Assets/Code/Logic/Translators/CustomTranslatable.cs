@@ -14,6 +14,11 @@ namespace Logic.Translators
             AddPositionModifier(((vector, delta) => vector.ChangeY(vector.y + _deltaYCurve.Evaluate(delta))));
         }
 
+        protected override void ApplyTranslation(Vector3 vector)
+        {
+            transform.position = vector;
+        }
+
         protected override void Run()
         {
             UpdateToPosition(transform.position);
