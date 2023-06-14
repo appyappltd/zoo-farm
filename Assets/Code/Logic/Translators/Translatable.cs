@@ -14,7 +14,7 @@ namespace Logic.Translators
 
         private Func<float, float> _deltaModifiers = f => f;
         private Func<T, float, T> _valueModifiers = (value, delta) => value;
-        private Func<T, T, float, T> _vectorLerp;
+        private Func<T, T, float, T> _valueLerp;
 
         private float _delta;
 
@@ -23,6 +23,7 @@ namespace Logic.Translators
         protected abstract void OnInit();
 
         protected abstract void ApplyTranslation(T vector);
+        protected abstract void SetValueLerp(ref Func<T, T, float, T> valueLerp);
 
         protected void UpdateToPosition(T newToPosition) =>
             _to = newToPosition;
@@ -37,6 +38,7 @@ namespace Logic.Translators
             _delta = 0;
             _from = from;
             _to = to;
+            SetValueLerp(ref _valueLerp);
             OnInit();
         }
 
@@ -47,14 +49,14 @@ namespace Logic.Translators
 
             float delta = UpdateDelta();
             delta = _deltaModifiers.Invoke(delta);
-            T value = _vectorLerp.Invoke(_from, _to, delta);
+            T value = _valueLerp.Invoke(_from, _to, delta);
             value = _valueModifiers.Invoke(value, delta);
             ApplyTranslation(value);
             return true;
         }
 
         protected void SetPositionLerp(Func<T, T, float, T> func) =>
-            _vectorLerp += func ?? throw new NullReferenceException();
+            _valueLerp += func ?? throw new NullReferenceException();
 
         protected void AddDeltaModifier(Func<float, float> func) =>
             _deltaModifiers += func ?? throw new NullReferenceException();

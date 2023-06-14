@@ -34,12 +34,12 @@ namespace Logic.Translators
 
             ITranslatable translatable = Translatables[_index];
             
-            if (translatable is LinearScaleTranslatable scaleTranslatable)
+            if (translatable is CustomScaleTranslatable scaleTranslatable)
             {
                 scaleTranslatable.Init(_beginScale, _endScale);
             }
 
-            if (translatable is LinearPositionTranslatable positionTranslatable)
+            if (translatable is CustomPositionTranslatable positionTranslatable)
             {
                 positionTranslatable.Init(_from.position, _to.position);
             }
