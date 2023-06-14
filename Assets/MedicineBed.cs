@@ -30,7 +30,7 @@ public class MedicineBed : MonoBehaviour
         receiver = GetComponent<ProductReceiver>();
         GetComponent<Delay>().Complete += player => Treat(player.GetComponent<Inventory>());
 
-        inventory.AddItem += item => item.GetComponent<Mover>().GotToPlace += () =>
+        inventory.AddItem += item => item.GetComponent<IMover>().GotToPlace += () =>
         {
             canTreat = true;
             receiver.canTake = false;
@@ -54,10 +54,10 @@ public class MedicineBed : MonoBehaviour
             return;
 
         var item = playerInventory.Remove();
-        var mover = item.GetComponent<Mover>();
+        var mover = item.GetComponent<IMover>();
         var handAnimal = inventory.Remove();
 
-        mover.MoveTowards(inventory.DefItemPlace);
+        mover.Move(inventory.DefItemPlace);
         mover.GotToPlace += () =>
         {
             Debug.Log("A");

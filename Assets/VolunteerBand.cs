@@ -25,12 +25,12 @@ public class VolunteerBand : MonoBehaviour
     public void AddVolunteers(VolunteerMovement volunteer)
     {
         volunteers.Add(volunteer);
-        var mover = volunteer.GetComponent<Mover>();
+        var mover = volunteer.GetComponent<AnimationMover>();
         var rotater = volunteer.GetComponent<Rotater>();
         volunteer.GetComponent<PathMover>().SetPoints(new Transform[] { _defTargetOut1, _defTargetOut2 });
 
         rotater.Rotate(_target);
-        mover.MoveAnimation(_target);
+        mover.Move(_target);
         mover.GotToPlace += () => rotater.Rotate(_defTarget);
 
         UpdateTarget();
@@ -38,7 +38,7 @@ public class VolunteerBand : MonoBehaviour
 
     public bool CanGiveAnimal()
         => volunteers.Count > 0
-        && !volunteers.First().GetComponent<Mover>().IsMoving;
+        && !volunteers.First().GetComponent<AnimationMover>().IsMoving;
 
     public HandItem GetAnimal()
     {

@@ -93,10 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6282852899768448944}
   - component: {fileID: 6040048251457820978}
-  - component: {fileID: 8209502307784263677}
   - component: {fileID: 3742045613527900453}
   - component: {fileID: 2229514142660788951}
   - component: {fileID: 5301312160002519732}
+  - component: {fileID: 1058587634938370855}
   m_Layer: 7
   m_Name: 'Drop Soap '
   m_TagString: Untagged
@@ -118,7 +118,7 @@ Transform:
   m_Children:
   - {fileID: 3041191144385626256}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6040048251457820978
 MonoBehaviour:
@@ -133,21 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: 333a4da56d6dca24fafe6bd6a5db5e89, type: 2}
---- !u!114 &8209502307784263677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3471441151116454134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e476ab998aa5544439408ac537a0b4c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsMoving: 0
-  _speed: 5
-  _offset: 0.1
 --- !u!65 &3742045613527900453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -194,3 +179,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 1
+--- !u!114 &1058587634938370855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471441151116454134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsMoving: 0
+  _speed: 5
+  _offset: 0.1

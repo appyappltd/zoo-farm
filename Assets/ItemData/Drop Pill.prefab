@@ -93,10 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2698230079451041652}
   - component: {fileID: 1249352496918839679}
-  - component: {fileID: 1225436136845065942}
   - component: {fileID: 3232721144377722165}
   - component: {fileID: 1125258840376339439}
   - component: {fileID: 2640072104733434377}
+  - component: {fileID: 944015750623881507}
   m_Layer: 7
   m_Name: Drop Pill
   m_TagString: Untagged
@@ -133,21 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: 0c89a5387495b0f458b7747ddec523f2, type: 2}
---- !u!114 &1225436136845065942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6984699867692257246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e476ab998aa5544439408ac537a0b4c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsMoving: 0
-  _speed: 5
-  _offset: 0.1
 --- !u!65 &3232721144377722165
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -194,3 +179,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 1
+--- !u!114 &944015750623881507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6984699867692257246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsMoving: 0
+  _speed: 5
+  _offset: 0.1

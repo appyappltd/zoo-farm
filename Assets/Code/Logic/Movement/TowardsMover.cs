@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Mover : MonoBehaviour
+public class TowardsMover : MonoBehaviour, IMover
 {
     public event UnityAction StartMove;
     public event UnityAction GotToPlace;
@@ -11,35 +11,16 @@ public class Mover : MonoBehaviour
     [SerializeField, Min(.0f)] private float _speed = 5.0f;
     [SerializeField, Min(.0f)] private float _offset = 0.1f;
 
-    private Vector3 _targetPosition;
     private Transform target = null;
     private Vector3 lastPos = Vector3.zero;
 
-    public void MoveTowards(Transform target)
+    public void Move(Transform target)
     {
         this.target = target;
-        _targetPosition = target.position;
-        StartCoroutine(MoveTowardsCor());
+        StartCoroutine(MoveCor());
     }
 
-    public void MoveAnimation(Transform target)
-    {
-        this.target = target;
-        _targetPosition = target.position;
-        StartCoroutine(MoveAnimationCor());
-    }
-
-    private IEnumerator MoveAnimationCor()
-    {
-        IsMoving = true;
-        StartMove?.Invoke();
-        while ((transform.position - _targetPosition).magnitude > _offset)
-            yield return new WaitForFixedUpdate();
-        IsMoving = false;
-        GotToPlace?.Invoke();
-    }
-
-    private IEnumerator MoveTowardsCor()
+    public IEnumerator MoveCor()
     {
         IsMoving = true;
         StartMove?.Invoke();
