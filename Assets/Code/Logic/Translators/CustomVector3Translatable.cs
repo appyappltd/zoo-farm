@@ -23,7 +23,6 @@ namespace Logic.Translators
         protected override void SetValueLerp(ref Func<Vector3, Vector3, float, Vector3> valueLerp)
         {
             valueLerp = Vector3.Lerp;
-            Debug.Log(valueLerp);
         }
     }
 }
