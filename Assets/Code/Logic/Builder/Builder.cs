@@ -41,17 +41,23 @@ public class Builder : MonoBehaviour
         }
     }
 
+    [Button("Delete", enabledMode: EButtonEnableMode.Playmode)]
+    private void StartDelete()
+    {
+        if (!isBuild)
+            return;
+
+        StartCoroutine(Delete());
+    }
+
     [Button("Build", enabledMode: EButtonEnableMode.Playmode)]
     private void StartBuild()
     {
         if (isBuild)
             return;
-        if (_sine)
-            Destroy(_sine.gameObject);
+        _sine.SetActive(false);
 
-        isBuild = true;
         StartCoroutine(Build());
-
         delay.Complete -= _ => Build();
     }
 
@@ -69,5 +75,27 @@ public class Builder : MonoBehaviour
             translator.AddTranslatable(scale);
             yield return new WaitForSeconds(_time);
         }
+        isBuild = true;
+    }
+
+    private IEnumerator Delete()
+    {
+        for (int i = _components.Count - 1; i >= 0; i--)
+        {
+            var position = _components[i].GetComponent<LinearPositionTranslatable>();
+            var scale = _components[i].GetComponent<LinearScaleTranslatable>();
+
+            position.Init(_components[i].transform.position, defPositions[i]
+                                 + new Vector3(Random.Range(_offset.x, _offset.y),
+                                                Random.Range(0, _offset.y),
+                                                Random.Range(_offset.x, _offset.y)));
+            scale.Init(_components[i].transform.localScale, Vector3.zero);
+
+            translator.AddTranslatable(position);
+            translator.AddTranslatable(scale);
+            yield return new WaitForSeconds(_time);
+        }
+        _sine.SetActive(true);
+        isBuild = false;
     }
 }
