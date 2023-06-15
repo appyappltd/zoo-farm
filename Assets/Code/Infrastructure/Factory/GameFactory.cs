@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Infrastructure.AssetManagement;
+using Pool;
 using Services.PersistentProgress;
 using Services.Randomizer;
 using UnityEngine;
@@ -59,6 +60,9 @@ namespace Infrastructure.Factory
 
         public GameObject CreateHouseCell(Vector3 at) =>
             _assets.Instantiate(AssetPath.HouseCellPath, at);
+
+        public GameObject CreateVisual(VisualType visual, Quaternion identity, Transform container) =>
+            _assets.Instantiate($"{AssetPath.VisualsPath}/{visual}", container);
 
         private GameObject InstantiateRegistered(string prefabPath)
         {

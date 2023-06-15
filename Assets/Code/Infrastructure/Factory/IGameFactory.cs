@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Pool;
 using Services;
 using Services.PersistentProgress;
 using Services.SaveLoad;
@@ -17,5 +18,6 @@ namespace Infrastructure.Factory
         GameObject CreateAnimal(AnimalType animalType, Vector3 at);
         GameObject CreateAnimalHouse(Vector3 at);
         GameObject CreateHouseCell(Vector3 peek);
+        GameObject CreateVisual(VisualType visual, Quaternion identity, Transform container);
     }
 }

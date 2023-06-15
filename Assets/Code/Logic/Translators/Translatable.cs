@@ -1,16 +1,22 @@
 using System;
+using NaughtyAttributes;
 using NTC.Global.Cache;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace Logic.Translators
 {
-    public abstract class Translatable<T> : MonoCache, ITranslatable
+    public abstract class Translatable<T> : MonoCache, ITranslatableInit<T>
     {
         private const float FinalTranslateValue = 1;
 
         [SerializeField] private float _speed;
-        private T _from;
-        private T _to;
+        [SerializeField] private bool _isPreload;
+
+        [ShowIf("_isPreload")]
+        [SerializeField] private T _from;
+        [ShowIf("_isPreload")]
+        [SerializeField] private T _to;
 
         private Func<float, float> _deltaModifiers = f => f;
         private Func<T, float, T> _valueModifiers = (value, delta) => value;
@@ -20,32 +26,59 @@ namespace Logic.Translators
 
         private bool IsComplete => _delta >= FinalTranslateValue;
 
+        public event Action<ITranslatable> Begin = t => {};
+        public event Action<ITranslatable> End = t => {};
+        
         protected abstract void OnInit();
-
         protected abstract void ApplyTranslation(T vector);
         protected abstract void SetValueLerp(ref Func<T, T, float, T> valueLerp);
-
-        protected void UpdateToPosition(T newToPosition) =>
-            _to = newToPosition;
-
+        
         private void Awake()
         {
             enabled = false;
         }
 
+        public void Init()
+        {
+            if (_isPreload == false)
+            {
+                throw new Exception("Preload is not enabled");
+            }
+            
+            _delta = 0;
+            SetValueLerp(ref _valueLerp);
+            OnInit();
+            Begin.Invoke(this);
+        }
+        
         public void Init(T from, T to)
         {
+            if (_isPreload)
+            {
+                throw new Exception("You are trying to set the settings that are predefined");
+            }
+            
             _delta = 0;
             _from = from;
             _to = to;
             SetValueLerp(ref _valueLerp);
             OnInit();
+            Begin.Invoke(this);
         }
+
+        public void Enable() =>
+            gameObject.Enable();
+
+        public void Disable() =>
+            gameObject.Disable();
 
         public bool TryUpdate()
         {
             if (IsComplete)
+            {
+                End.Invoke(this);
                 return false;
+            }
 
             float delta = UpdateDelta();
             delta = _deltaModifiers.Invoke(delta);

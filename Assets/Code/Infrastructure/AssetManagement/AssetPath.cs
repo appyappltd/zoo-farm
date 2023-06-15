@@ -7,5 +7,6 @@ namespace Infrastructure.AssetManagement
         public const string AnimalPath = "Prefabs/Animals";
         public const string AnimalHousePath = "Prefabs/AnimalHouse";
         public const string HouseCellPath = "Prefabs/HouseCell";
+        public const string VisualsPath = "Prefabs/Visuals";
     }
 }

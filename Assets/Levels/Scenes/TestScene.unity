@@ -1386,6 +1386,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.25
+  _isPreload: 0
+  _from: {x: 0, y: 0, z: 0}
+  _to: {x: 0, y: 0, z: 0}
 --- !u!114 &892525185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,6 +1402,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.25
+  _isPreload: 0
+  _from: {x: 0, y: 0, z: 0}
+  _to: {x: 0, y: 0, z: 0}
 --- !u!33 &892525186
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1603,6 +1609,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.2
+  _isPreload: 0
+  _from: {x: 0, y: 0, z: 0}
+  _to: {x: 0, y: 0, z: 0}
   _timeCurve:
     serializedVersion: 2
     m_Curve:
@@ -1712,6 +1721,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.2
+  _isPreload: 1
+  _from: {x: 1, y: 1, z: 1}
+  _to: {x: 0, y: 0, z: 0}
   _timeCurve:
     serializedVersion: 2
     m_Curve:
@@ -3225,13 +3237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _translator: {fileID: 1982471451}
-  _translatables:
-  - {fileID: 997354635}
-  - {fileID: 997354634}
   _from: {fileID: 1610844539}
   _to: {fileID: 1304262103}
-  _beginScale: {x: 1, y: 1, z: 1}
-  _endScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1982471451
 MonoBehaviour:
   m_ObjectHideFlags: 0
