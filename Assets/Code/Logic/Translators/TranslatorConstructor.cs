@@ -16,13 +16,13 @@ namespace Logic.Translators
         [SerializeField] private Transform _from;
         [SerializeField] private Transform _to;
 
-        private TranslatableSpawner _spawner;
+        private VisualTranslatorsSpawner _spawner;
 
         private ITranslator Translator => (ITranslator) _translator;
 
         private void Awake()
         {
-            _spawner = new TranslatableSpawner(
+            _spawner = new VisualTranslatorsSpawner(
                 (() => AllServices.Container.Single<IGameFactory>()
                     .CreateVisual(VisualType.Money, Quaternion.identity, transform)),
                 Translator,

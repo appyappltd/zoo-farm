@@ -25,12 +25,13 @@ namespace Logic.Translators
         private float _delta;
 
         private bool IsComplete => _delta >= FinalTranslateValue;
+        public bool IsPreload => _isPreload;
 
         public event Action<ITranslatable> Begin = t => {};
         public event Action<ITranslatable> End = t => {};
         
         protected abstract void OnInit();
-        protected abstract void ApplyTranslation(T vector);
+        protected abstract void ApplyTranslation(T value);
         protected abstract void SetValueLerp(ref Func<T, T, float, T> valueLerp);
         
         private void Awake()
@@ -87,9 +88,6 @@ namespace Logic.Translators
             ApplyTranslation(value);
             return true;
         }
-
-        protected void SetPositionLerp(Func<T, T, float, T> func) =>
-            _valueLerp += func ?? throw new NullReferenceException();
 
         protected void AddDeltaModifier(Func<float, float> func) =>
             _deltaModifiers += func ?? throw new NullReferenceException();

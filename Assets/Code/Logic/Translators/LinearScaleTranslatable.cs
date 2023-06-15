@@ -9,9 +9,9 @@ namespace Logic.Translators
         {
         }
 
-        protected override void ApplyTranslation(Vector3 vector)
+        protected override void ApplyTranslation(Vector3 value)
         {
-            transform.localScale = vector;
+            transform.localScale = value;
         }
 
         protected override void SetValueLerp(ref Func<Vector3, Vector3, float, Vector3> valueLerp)

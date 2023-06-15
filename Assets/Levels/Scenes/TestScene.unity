@@ -1574,6 +1574,7 @@ GameObject:
   - component: {fileID: 997354634}
   - component: {fileID: 997354637}
   - component: {fileID: 997354636}
+  - component: {fileID: 997354638}
   m_Layer: 0
   m_Name: Traslatable custom
   m_TagString: Untagged
@@ -1870,6 +1871,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997354631}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &997354638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997354631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcaf6d58d3d842c287a71957748483f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainTranslatable: {fileID: 997354634}
+  _subTranslatables:
+  - {fileID: 997354635}
 --- !u!1001 &1000233285
 PrefabInstance:
   m_ObjectHideFlags: 0

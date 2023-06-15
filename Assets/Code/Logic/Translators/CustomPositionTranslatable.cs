@@ -1,13 +1,12 @@
-using System;
 using UnityEngine;
 
 namespace Logic.Translators
 {
     public class CustomPositionTranslatable : CustomVector3Translatable
     {
-        protected override void ApplyTranslation(Vector3 vector)
+        protected override void ApplyTranslation(Vector3 value)
         {
-            transform.position = vector;
+            transform.position = value;
         }
     }
 }
