@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AnimationMover))]
 public class VolunteerMovement : MonoBehaviour
 {
     private Animator animC;
