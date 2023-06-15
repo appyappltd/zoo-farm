@@ -2,10 +2,12 @@
 using Logic;
 using Logic.AnimalsBehaviour;
 using Logic.AnimalsStateMachine;
+using Logic.Wallet;
 using Player;
 using Services.Input;
 using Services.PersistentProgress;
 using Ui.Elements;
+using Ui.Elements.Buttons;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -76,8 +78,10 @@ namespace Infrastructure.States
 
             var inputReader = hud.GetComponentInChildren<IInputReader>();
             _inputService.RegisterInputReader(inputReader);
-            
-            hud.GetComponentInChildren<MoneyView>().Construct(hero.GetComponent<HeroWallet>().Wallet.Account);
+
+            Wallet wallet = hero.GetComponent<HeroWallet>().Wallet;
+            hud.GetComponentInChildren<MoneyView>().Construct(wallet.Account);
+            hud.GetComponentInChildren<AddCoinsButton>().Construct(wallet);
         }
 
         private void InitialGameWorld()
