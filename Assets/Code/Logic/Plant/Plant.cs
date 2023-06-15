@@ -24,7 +24,7 @@ public class Plant : MonoBehaviour
     [Button("Grow", enabledMode: EButtonEnableMode.Playmode)]
     private void StartGrow()
     {
-       StartCoroutine(Grow());
+        StartCoroutine(Grow());
         _sine.SetActive(false);
     }
 

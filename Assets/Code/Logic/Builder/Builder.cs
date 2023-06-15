@@ -1,6 +1,7 @@
 using Logic.Interactions;
 using Logic.Translators;
 using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Builder : MonoBehaviour
     [SerializeField] private List<GameObject> _components;
     [SerializeField] private Vector2 _offset;
     [SerializeField] private GameObject _sine;
+    [SerializeField, Min(.0f)] private float _time = .1f;
 
     private List<Vector3> defSizes = new();
     private List<Vector3> defPositions = new();
@@ -25,7 +27,7 @@ public class Builder : MonoBehaviour
         translator = GetComponent<RunTranslator>();
         delay = GetComponent<Delay>();
 
-        delay.Complete += _ => Build();
+        delay.Complete += _ => StartBuild();
 
         foreach (var c in _components)
         {
@@ -40,13 +42,21 @@ public class Builder : MonoBehaviour
     }
 
     [Button("Build", enabledMode: EButtonEnableMode.Playmode)]
-    private void Build()
+    private void StartBuild()
     {
         if (isBuild)
             return;
         if (_sine)
             Destroy(_sine.gameObject);
 
+        isBuild = true;
+        StartCoroutine(Build());
+
+        delay.Complete -= _ => Build();
+    }
+
+    private IEnumerator Build()
+    {
         for (int i = 0; i < _components.Count; i++)
         {
             var position = _components[i].GetComponent<LinearPositionTranslatable>();
@@ -57,9 +67,7 @@ public class Builder : MonoBehaviour
 
             translator.AddTranslatable(position);
             translator.AddTranslatable(scale);
+            yield return new WaitForSeconds(_time);
         }
-        isBuild = true;
-
-        delay.Complete -= _ => Build();
     }
 }
