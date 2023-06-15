@@ -1,8 +1,9 @@
 ﻿using System;
 using Logic.Translators;
+using Pool;
 using UnityEngine;
 
-namespace Pool
+namespace Logic.Spawners
 {
     public class VisualTranslatorsSpawner : IDisposable
     {
