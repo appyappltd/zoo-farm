@@ -5,6 +5,7 @@ using Logic.AnimalsStateMachine;
 using Player;
 using Services.Input;
 using Services.PersistentProgress;
+using Ui.Elements;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -45,7 +46,7 @@ namespace Infrastructure.States
             InitialGameWorld();
             GameObject hero = InitHero();
             FollowCamera(hero.transform);
-            InitialHud();
+            InitialHud(hero);
             _stateMachine.Enter<GameLoopState>();
             InformProgressReaders();
         }
@@ -68,13 +69,15 @@ namespace Infrastructure.States
             return hero;
         }
 
-        private void InitialHud()
+        private void InitialHud(GameObject hero)
         {
             var hud = _gameFactory.CreateHud();
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
 
             var inputReader = hud.GetComponentInChildren<IInputReader>();
             _inputService.RegisterInputReader(inputReader);
+            
+            hud.GetComponentInChildren<MoneyView>().Construct(hero.GetComponent<HeroWallet>().Wallet.Account);
         }
 
         private void InitialGameWorld()
