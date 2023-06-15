@@ -1,4 +1,5 @@
-﻿using Infrastructure.Factory;
+﻿using System;
+using Infrastructure.Factory;
 using Logic.Translators;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace Pool
         private Transform _container;
         private Pool<ITranslatableInit<Vector3>> _pool;
 
-        public TranslatableSpawner(IGameFactory gameFactory, ITranslator translator, string poolContainerName, int preloadCount,
+        public TranslatableSpawner(Func<GameObject> poolPreloadFunc, ITranslator translator, string poolContainerName, int preloadCount,
             Transform container, Transform fromTransform, Transform toTransform)
         {
             _translator = translator;
@@ -24,7 +25,7 @@ namespace Pool
             _container = container;
             _fromTransform = fromTransform;
             _toTransform = toTransform;
-            InitPool(gameFactory);
+            InitPool(poolPreloadFunc);
         }
 
         public ITranslatable Spawn()
@@ -35,13 +36,13 @@ namespace Pool
             return translatable;
         }
 
-        private void InitPool(IGameFactory gameFactory)
+        private void InitPool(Func<GameObject> poolPreloadFunc)
         {
             _container = new GameObject(_poolContainerName).transform;
             _pool = new Pool<ITranslatableInit<Vector3>>(
                 () =>
                 {
-                    GameObject poolObject = gameFactory.CreateVisual(VisualType.Money, Quaternion.identity, _container);
+                    GameObject poolObject = poolPreloadFunc.Invoke();
                     return poolObject.GetComponent<ITranslatableInit<Vector3>>();
                 },
                 GetAction,

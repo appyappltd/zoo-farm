@@ -22,8 +22,15 @@ namespace Logic.Translators
 
         private void Awake()
         {
-            _spawner = new TranslatableSpawner(AllServices.Container.Single<IGameFactory>(), Translator,
-                "Translatables", 4, transform, _from, _to);
+            _spawner = new TranslatableSpawner(
+                (() => AllServices.Container.Single<IGameFactory>()
+                    .CreateVisual(VisualType.Money, Quaternion.identity, transform)),
+                Translator,
+                "Translatables",
+                4, 
+                transform,
+                _from,
+                _to);
         }
 
         [Button("Translate")]
