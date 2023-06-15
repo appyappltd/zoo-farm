@@ -1,4 +1,5 @@
 using Data.ItemsData;
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -13,11 +14,19 @@ public class Plant : MonoBehaviour
 
     [SerializeField] private List<GameObject> _stages;
     [SerializeField, Min(.0f)] private float _time;
+    [SerializeField] private GameObject _sine;
 
     private bool canGrow = true;
 
     private void Awake()
-       => GetComponent<Delay>().Complete += _ => StartCoroutine(Grow());
+       => GetComponent<Delay>().Complete += _ => StartGrow();
+
+    [Button("Grow", enabledMode: EButtonEnableMode.Playmode)]
+    private void StartGrow()
+    {
+       StartCoroutine(Grow());
+        _sine.SetActive(false);
+    }
 
     private IEnumerator Grow()
     {
@@ -36,7 +45,11 @@ public class Plant : MonoBehaviour
             GrowUp?.Invoke(currStage);
 
             var drop = currStage.GetComponent<DropItem>();
-            drop.PickUp += _ => canGrow = true;
+            drop.PickUp += _ =>
+            {
+                canGrow = true;
+                _sine.SetActive(true);
+            };
         }
     }
 }
