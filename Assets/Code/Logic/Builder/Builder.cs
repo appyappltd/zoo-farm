@@ -1,35 +1,24 @@
-using Logic.Interactions;
 using Logic.Translators;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(TriggerObserver))]
-[RequireComponent(typeof(Delay))]
-[RequireComponent(typeof(RunTranslator))] 
-[RequireComponent(typeof(Consumer))] 
-
 public class Builder : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _components;
     [SerializeField] private Vector2 _offset;
-    [SerializeField] private GameObject _sine;
     [SerializeField, Min(.0f)] private float _time = .1f;
 
     private List<Vector3> defSizes = new();
     private List<Vector3> defPositions = new();
     private RunTranslator translator;
-    private Consumer consumer;
 
     private bool isBuild = false;
 
     private void Awake()
     {
         translator = GetComponent<RunTranslator>();
-        consumer = GetComponent<Consumer>();
-
-        consumer.Bought += StartBuild;
 
         foreach (var c in _components)
         {
@@ -42,6 +31,7 @@ public class Builder : MonoBehaviour
                                                 Random.Range(_offset.x, _offset.y));
         }
     }
+    private void Start() => StartBuild();
 
     [Button("Delete", enabledMode: EButtonEnableMode.Playmode)]
     private void StartDelete()
@@ -57,10 +47,8 @@ public class Builder : MonoBehaviour
     {
         if (isBuild)
             return;
-        _sine.SetActive(false);
 
         StartCoroutine(Build());
-        consumer.Bought -= StartBuild;
     }
 
     private IEnumerator Build()
@@ -97,7 +85,6 @@ public class Builder : MonoBehaviour
             translator.AddTranslatable(scale);
             yield return new WaitForSeconds(_time);
         }
-        _sine.SetActive(true);
         isBuild = false;
     }
 }

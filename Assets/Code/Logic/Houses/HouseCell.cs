@@ -10,29 +10,22 @@ namespace Logic.Houses
     public class HouseCell : MonoBehaviour
     {
         [SerializeField] private int _buildCost = 10;
-        
-        private TriggerObserver _triggerObserver;
-        
+        private Consumer _consumer;
+
         public event Action BuildHouse = () => { };
 
         private void Awake() =>
-            _triggerObserver = GetComponent<TriggerObserver>();
+            _consumer = GetComponent<Consumer>();
 
         private void OnEnable() =>
-            _triggerObserver.Enter += OnEnter;
+            _consumer.Bought += OnEnter;
 
         private void OnDisable() =>
-            _triggerObserver.Enter -= OnEnter;
+            _consumer.Bought -= OnEnter;
 
-        private void OnEnter(GameObject obj)
+        private void OnEnter()
         {
-            if (obj.TryGetComponent(out HeroWallet heroWallet) == false)
-                return;
-            
-            bool hasMoney = heroWallet.Wallet.TrySpend(_buildCost);
-
-            if (hasMoney)
-                BuildHouse.Invoke();
+            BuildHouse.Invoke();
         }
 
         private void OnDrawGizmos()

@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(RunTranslator))]
 [RequireComponent(typeof(Delay))]
 public class Consumer : MonoBehaviour
 {
