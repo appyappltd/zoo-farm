@@ -11,7 +11,7 @@ namespace Logic.Spawners
         
         private Pool<T> _pool;
         private Action _disposeAction = () => { };
-        private Action<T> _onReturnToPool;
+        private Func<Action<T>, Action> _onReturnToPool;
 
         public PooledSpawner(Func<GameObject> poolPreloadFunc, int preloadCount)
         {
@@ -41,19 +41,19 @@ namespace Logic.Spawners
         public void Dispose() =>
             _disposeAction.Invoke();
 
-        public void SetOnReturnToPool(Action<T> action)
+        public void SetOnReturnToPool(Func<Action<T>, Action> action)
         {
             _onReturnToPool = action;
         }
 
-        private void InitPool(Func<GameObject> poolPreloadFunc, Action<T> onReturnToPool)
+        private void InitPool(Func<GameObject> poolPreloadFunc, Func<Action<T>, Action> onReturnToPool)
         {
             _pool = new Pool<T>(
                 () =>
                 {
                     GameObject poolObject = poolPreloadFunc.Invoke();
                     T pooledComponent = poolObject.GetComponent<T>();
-                    onReturnToPool(pooledComponent);
+                    _disposeAction += onReturnToPool( (T pooled) => _pool.Return(pooled));
                     return pooledComponent;
                 },
                 GetAction,

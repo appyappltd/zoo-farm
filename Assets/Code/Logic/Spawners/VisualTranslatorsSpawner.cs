@@ -18,7 +18,12 @@ namespace Logic.Spawners
             _fromTransform = fromTransform;
             _toTransform = toTransform;
 
-            SetOnReturnToPool();
+            SetOnReturnToPool((Action));
+        }
+
+        private Action Action(Action<TranslatableAgent> arg)
+        {
+            throw new NotImplementedException();
         }
 
         protected override void OnSpawn(TranslatableAgent spawned)
