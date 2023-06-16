@@ -18,16 +18,16 @@ public class Builder : MonoBehaviour
     private List<Vector3> defSizes = new();
     private List<Vector3> defPositions = new();
     private RunTranslator translator;
-    private Delay delay;
+    private Consumer consumer;
 
     private bool isBuild = false;
 
     private void Awake()
     {
         translator = GetComponent<RunTranslator>();
-        delay = GetComponent<Delay>();
+        consumer = GetComponent<Consumer>();
 
-        delay.Complete += _ => StartBuild();
+        consumer.Bought += StartBuild;
 
         foreach (var c in _components)
         {
@@ -58,7 +58,7 @@ public class Builder : MonoBehaviour
         _sine.SetActive(false);
 
         StartCoroutine(Build());
-        delay.Complete -= _ => Build();
+        consumer.Bought -= StartBuild;
     }
 
     private IEnumerator Build()
