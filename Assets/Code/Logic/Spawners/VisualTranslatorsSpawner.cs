@@ -1,82 +1,45 @@
 ﻿using System;
 using Logic.Translators;
-using Pool;
 using UnityEngine;
 
 namespace Logic.Spawners
 {
-    public class VisualTranslatorsSpawner : IDisposable
+    public class VisualTranslatorsSpawner : PooledSpawner<TranslatableAgent>
     {
         private readonly ITranslator _translator;
-        private readonly string _poolContainerName;
-        private readonly int _preloadCount;
         private readonly Transform _fromTransform;
         private readonly Transform _toTransform;
 
-        private Transform _container;
-        private Pool<TranslatableAgent> _pool;
-
-        private Action _dispose = () => { };
-
-        public VisualTranslatorsSpawner(Func<GameObject> poolPreloadFunc, ITranslator translator, string poolContainerName, int preloadCount,
-            Transform container, Transform fromTransform, Transform toTransform)
+        public VisualTranslatorsSpawner(Func<GameObject> poolPreloadFunc,
+            int preloadCount, ITranslator translator, Transform fromTransform, Transform toTransform)
+            : base(poolPreloadFunc, preloadCount)
         {
             _translator = translator;
-            _poolContainerName = poolContainerName;
-            _preloadCount = preloadCount;
-            _container = container;
             _fromTransform = fromTransform;
             _toTransform = toTransform;
-            InitPool(poolPreloadFunc);
+
+            SetOnReturnToPool();
         }
 
-        public TranslatableAgent Spawn()
+        protected override void OnSpawn(TranslatableAgent spawned)
         {
-            TranslatableAgent translatableAgent = _pool.Get();
-            _translator.AddTranslatable(translatableAgent.MainTranslatable);
-            
-            foreach (ITranslatable translatable in translatableAgent.SubTranslatables)
+            _translator.AddTranslatable(spawned.MainTranslatable);
+
+            foreach (ITranslatable translatable in spawned.SubTranslatables)
             {
                 _translator.AddTranslatable(translatable);
             }
-            
-            return translatableAgent;
         }
 
-        public void Dispose() =>
-            _dispose.Invoke();
-
-        private void InitPool(Func<GameObject> poolPreloadFunc)
+        protected override void OnReturn(TranslatableAgent agent)
         {
-            _container = new GameObject(_poolContainerName).transform;
-            _pool = new Pool<TranslatableAgent>(
-                () =>
-                {
-                    GameObject poolObject = poolPreloadFunc.Invoke();
-                    TranslatableAgent translatableAgent = poolObject.GetComponent<TranslatableAgent>();
-
-                    void OnEndTranslatable(ITranslatable _) => _pool.Return(translatableAgent);
-
-                    translatableAgent.MainTranslatable.End += OnEndTranslatable;
-                    _dispose += () => translatableAgent.MainTranslatable.End -= OnEndTranslatable;
-
-                    return translatableAgent;
-                },
-                GetAction,
-                ReturnAction,
-                _preloadCount
-            );
-        }
-
-        private void ReturnAction(TranslatableAgent obj)
-        {
-            foreach (ITranslatable translatable in obj.SubTranslatables)
+            foreach (ITranslatable translatable in agent.SubTranslatables)
             {
                 translatable.Disable();
             }
         }
 
-        private void GetAction(TranslatableAgent agent)
+        protected override void OnGet(TranslatableAgent agent)
         {
             if (agent.MainTranslatable.IsPreload)
             {
