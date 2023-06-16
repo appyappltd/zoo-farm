@@ -35,7 +35,6 @@ namespace Logic.Spawners
             for (var index = 0; index < agent.SubTranslatables.Count; index++)
             {
                 ITranslatable translatable = agent.SubTranslatables[index];
-                translatable.Disable();
             }
         }
 
@@ -55,7 +54,6 @@ namespace Logic.Spawners
             {
                 ITranslatable translatable = agent.SubTranslatables[index];
                 translatable.Init();
-                translatable.Enable();
             }
         }
 

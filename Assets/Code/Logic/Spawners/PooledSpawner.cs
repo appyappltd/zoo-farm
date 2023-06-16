@@ -58,13 +58,13 @@ namespace Logic.Spawners
 
         private void ReturnAction(T obj)
         {
-            obj.Disable();
+            obj.gameObject.Disable();
             OnReturn(obj);
         }
 
         private void GetAction(T obj)
         {
-            obj.Enable();
+            obj.gameObject.Enable();
             OnGet(obj);
         }
     }

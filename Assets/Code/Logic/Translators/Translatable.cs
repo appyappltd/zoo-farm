@@ -84,7 +84,15 @@ namespace Logic.Translators
             float delta = UpdateDelta();
             delta = _deltaModifiers.Invoke(delta);
             T value = _valueLerp.Invoke(_from, _to, delta);
-            value = _valueModifiers.Invoke(value, delta);
+            // value = _valueModifiers.Invoke(value, delta);
+
+            for (int index = 0; index < _valueModifiers.GetInvocationList().Length; index++)
+            {
+                Delegate @delegate = _valueModifiers.GetInvocationList()[index];
+                Func<T, float, T> variable = (Func<T, float, T>) @delegate;
+                value = variable.Invoke(value, delta);
+            }
+
             ApplyTranslation(value);
             return true;
         }
