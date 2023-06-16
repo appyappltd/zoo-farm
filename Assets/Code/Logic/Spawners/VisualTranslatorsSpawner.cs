@@ -12,34 +12,29 @@ namespace Logic.Spawners
 
         public VisualTranslatorsSpawner(Func<GameObject> poolPreloadFunc,
             int preloadCount, ITranslator translator, Transform fromTransform, Transform toTransform)
-            : base(poolPreloadFunc, preloadCount)
+            : base(poolPreloadFunc, preloadCount, OnReturnToPool)
         {
             _translator = translator;
             _fromTransform = fromTransform;
             _toTransform = toTransform;
-
-            SetOnReturnToPool((Action));
-        }
-
-        private Action Action(Action<TranslatableAgent> arg)
-        {
-            throw new NotImplementedException();
         }
 
         protected override void OnSpawn(TranslatableAgent spawned)
         {
             _translator.AddTranslatable(spawned.MainTranslatable);
 
-            foreach (ITranslatable translatable in spawned.SubTranslatables)
+            for (var index = 0; index < spawned.SubTranslatables.Count; index++)
             {
+                ITranslatable translatable = spawned.SubTranslatables[index];
                 _translator.AddTranslatable(translatable);
             }
         }
 
         protected override void OnReturn(TranslatableAgent agent)
         {
-            foreach (ITranslatable translatable in agent.SubTranslatables)
+            for (var index = 0; index < agent.SubTranslatables.Count; index++)
             {
+                ITranslatable translatable = agent.SubTranslatables[index];
                 translatable.Disable();
             }
         }
@@ -56,11 +51,20 @@ namespace Logic.Spawners
                 mainTranslatable.Init(_fromTransform.position, _toTransform.position);
             }
 
-            foreach (ITranslatable translatable in agent.SubTranslatables)
+            for (var index = 0; index < agent.SubTranslatables.Count; index++)
             {
+                ITranslatable translatable = agent.SubTranslatables[index];
                 translatable.Init();
                 translatable.Enable();
             }
+        }
+
+        private static Action OnReturnToPool(Action returnAction, TranslatableAgent agent)
+        {
+            void OnEndTranslatable(ITranslatable translatable) => returnAction.Invoke();
+            
+            agent.MainTranslatable.End += OnEndTranslatable;
+            return () => agent.MainTranslatable.End -= OnEndTranslatable;
         }
     }
 }
