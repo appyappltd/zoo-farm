@@ -15,7 +15,6 @@ namespace Ui.Elements.Buttons
             _wallet = wallet;
             UpdateButtonText();
             Subscribe();
-            Debug.Log("construct");
         }
 
         private void OnValidate()
