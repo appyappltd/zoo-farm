@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -932,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1283,7 +1283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1400,7 +1400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1634,7 +1634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1751,7 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1868,7 +1868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -1985,7 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -2219,7 +2219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -2336,7 +2336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -2453,7 +2453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -2570,7 +2570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -2687,7 +2687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -2804,7 +2804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -2921,7 +2921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3038,7 +3038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3155,7 +3155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3272,7 +3272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3389,7 +3389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3506,7 +3506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3623,7 +3623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3740,7 +3740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3857,7 +3857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -3974,7 +3974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -4091,7 +4091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -4208,7 +4208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -4325,7 +4325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -4442,7 +4442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -4559,7 +4559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -4676,7 +4676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -4793,7 +4793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -4910,7 +4910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5027,7 +5027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5144,7 +5144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5261,7 +5261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5378,7 +5378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5495,7 +5495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5612,7 +5612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5729,7 +5729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5846,7 +5846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -5963,7 +5963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -6080,7 +6080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -6197,7 +6197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -6314,7 +6314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -6431,7 +6431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -6548,7 +6548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -6665,7 +6665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -6782,7 +6782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -6899,7 +6899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7016,7 +7016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7133,7 +7133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7250,7 +7250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7367,7 +7367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7484,7 +7484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7601,7 +7601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7718,7 +7718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7835,7 +7835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -7952,7 +7952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -8069,7 +8069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -8186,7 +8186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -8303,7 +8303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -8420,7 +8420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -8537,7 +8537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -8654,7 +8654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -8771,7 +8771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -8888,7 +8888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9005,7 +9005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9122,7 +9122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9239,7 +9239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9356,7 +9356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9473,7 +9473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9590,7 +9590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9707,7 +9707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9824,7 +9824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -9842,6 +9842,7 @@ GameObject:
   - component: {fileID: 5527770393490682786}
   - component: {fileID: 8562163523480550037}
   - component: {fileID: 3678765922617787239}
+  - component: {fileID: 1689738716304472222}
   m_Layer: 7
   m_Name: PetHouse
   m_TagString: Untagged
@@ -10124,7 +10125,21 @@ MonoBehaviour:
   - {fileID: 4825773898172444593}
   _offset: {x: -7, y: 7}
   _sine: {fileID: 7720190921005863759}
-  _time: 0.2
+  _time: 0.05
+--- !u!114 &1689738716304472222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911757622663513713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95058d2f759bb844b75ac0f5f2a1f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: 10
+  _time: 0.1
 --- !u!1 &8170563270854755955
 GameObject:
   m_ObjectHideFlags: 0
@@ -10238,7 +10253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -10355,7 +10370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -10472,7 +10487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -10589,7 +10604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -10706,7 +10721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -10823,7 +10838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -10940,7 +10955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -11057,7 +11072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
@@ -11174,7 +11189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48670360a964deb8d30a821bd4cac52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.8
   _isPreload: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}

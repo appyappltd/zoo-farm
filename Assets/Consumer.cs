@@ -1,5 +1,6 @@
 using Infrastructure.Factory;
 using Logic.Interactions;
+using Logic.Spawners;
 using Logic.Translators;
 using Player;
 using Pool;
@@ -38,10 +39,10 @@ public class Consumer : MonoBehaviour
 
     private void Init(GameObject player)
     {
-        new VisualTranslatorsSpawner(() => AllServices.Container.Single<IGameFactory>().CreateVisual(VisualType.Money,
+        spawner = new VisualTranslatorsSpawner(() => AllServices.Container.Single<IGameFactory>().CreateVisual(VisualType.Money,
                                                                                                        Quaternion.identity,
                                                                                                        new GameObject("Coins").transform),
-                                                                                                       translator, "", 10, transform, player.transform,
+                                                                                                       10, translator, player.transform,
                                                                                                        transform);
         trigger.Enter -= Init;
     }

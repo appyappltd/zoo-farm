@@ -7,7 +7,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Delay))]
-[RequireComponent(typeof(RunTranslator))]
+[RequireComponent(typeof(RunTranslator))] 
+[RequireComponent(typeof(Consumer))] 
+
 public class Builder : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _components;
