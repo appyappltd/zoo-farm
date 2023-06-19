@@ -1,5 +1,6 @@
 ﻿using Logic.AnimalsBehaviour;
 using Logic.AnimalsBehaviour.Movement;
+using Tools.Extension;
 using UnityEngine;
 
 namespace Logic.AnimalsStateMachine.States
@@ -16,9 +17,6 @@ namespace Logic.AnimalsStateMachine.States
         }
 
         protected override Vector3 GetMovePosition() =>
-            _mover.transform.position + new Vector3(
-                Random.Range(-_maxDistance, _maxDistance),
-                0,
-                Random.Range(-_maxDistance, _maxDistance));
+            _mover.transform.position.GetRandomAroundPosition(new Vector3(_maxDistance, 0, _maxDistance));
     }
 }

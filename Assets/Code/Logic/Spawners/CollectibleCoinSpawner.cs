@@ -1,0 +1,92 @@
+using System;
+using Infrastructure.Factory;
+using Logic.Translators;
+using Services;
+using Tools.Extension;
+using UnityEngine;
+
+namespace Logic.Spawners
+{
+    [RequireComponent(typeof(TimerOperator))]
+    [RequireComponent(typeof(RunTranslator))]
+    public class CollectibleCoinSpawner : MonoBehaviour
+    {
+        [SerializeField] private Transform _coinsSpawnZone;
+        [SerializeField] private Vector2 _zoneOffset;
+        [SerializeField] private float _spawnDelay;
+
+        private PooledSpawner<TranslatableAgent> _pooledSpawner;
+        private ITranslator _translator;
+        private TimerOperator _timerOperator;
+        private int _remainingCountCoins;
+
+        private void Awake()
+        {
+            _translator = GetComponent<ITranslator>();
+            _timerOperator = GetComponent<TimerOperator>();
+            _timerOperator.SetUp(_spawnDelay, SpawnCoin);
+            Transform container = new GameObject("Collectible Coins Container").transform;
+
+            _pooledSpawner = new PooledSpawner<TranslatableAgent>(
+                () => AllServices.Container.Single<IGameFactory>()
+                    .CreateCollectibleCoin(container),
+                10, OnReturnToPool);
+        }
+
+        private void SpawnCoin()
+        {
+            TranslatableAgent agent = _pooledSpawner.Spawn();
+            InitTranslatables(agent);
+            AddToTranslator(agent);
+            _remainingCountCoins--;
+
+            if (_remainingCountCoins > 0)
+            {
+                _timerOperator.Restart();
+            }
+        }
+
+        public void OnDestroy() =>
+            _pooledSpawner.Dispose();
+
+        private Action OnReturnToPool(Action returnAction, TranslatableAgent coin)
+        {
+            void OnEndMove() => returnAction.Invoke();
+
+            TowardsMover towardsMover = coin.GetComponent<TowardsMover>();
+            towardsMover.GotToPlace += OnEndMove;
+            return () => towardsMover.GotToPlace -= OnEndMove;
+        }
+
+        public void Spawn(int amountCoins)
+        {
+            _remainingCountCoins = amountCoins;
+            _timerOperator.Restart();
+        }
+
+        private void InitTranslatables(TranslatableAgent agent)
+        {
+            ITranslatableInit<Vector3> mainTranslatable = (ITranslatableInit<Vector3>) agent.MainTranslatable;
+            mainTranslatable.Init(transform.position, GetRandomAroundPosition());
+
+            for (var index = 0; index < agent.SubTranslatables.Count; index++)
+            {
+                ITranslatable translatable = agent.SubTranslatables[index];
+                translatable.Init();
+            }
+        }
+
+        private Vector3 GetRandomAroundPosition() =>
+            _coinsSpawnZone.position.GetRandomAroundPosition(new Vector3(_zoneOffset.x, 0, _zoneOffset.y));
+
+        private void AddToTranslator(TranslatableAgent agent)
+        {
+            _translator.AddTranslatable(agent.MainTranslatable);
+
+            foreach (ITranslatable translatable in agent.SubTranslatables)
+            {
+                _translator.AddTranslatable(translatable);
+            }
+        }
+    }
+}

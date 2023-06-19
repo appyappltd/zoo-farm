@@ -2,9 +2,12 @@
 using Logic;
 using Logic.AnimalsBehaviour;
 using Logic.AnimalsStateMachine;
+using Logic.Wallet;
 using Player;
 using Services.Input;
 using Services.PersistentProgress;
+using Ui.Elements;
+using Ui.Elements.Buttons;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -45,7 +48,7 @@ namespace Infrastructure.States
             InitialGameWorld();
             GameObject hero = InitHero();
             FollowCamera(hero.transform);
-            InitialHud();
+            InitialHud(hero);
             _stateMachine.Enter<GameLoopState>();
             InformProgressReaders();
         }
@@ -68,13 +71,17 @@ namespace Infrastructure.States
             return hero;
         }
 
-        private void InitialHud()
+        private void InitialHud(GameObject hero)
         {
             var hud = _gameFactory.CreateHud();
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
 
             var inputReader = hud.GetComponentInChildren<IInputReader>();
             _inputService.RegisterInputReader(inputReader);
+
+            Wallet wallet = hero.GetComponent<HeroWallet>().Wallet;
+            hud.GetComponentInChildren<MoneyView>().Construct(wallet.Account);
+            hud.GetComponentInChildren<AddCoinsButton>().Construct(wallet);
         }
 
         private void InitialGameWorld()

@@ -1,12 +1,12 @@
+using System;
 using Logic.Interactions;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
+[RequireComponent(typeof(TriggerObserver))]
 public class Delay : MonoBehaviour
 {
-    public event UnityAction<GameObject> Complete;
+    public event Action<GameObject> Complete = c => { };
 
     [SerializeField, Min(.0f)] private float _delay = 1f;
 
@@ -20,6 +20,6 @@ public class Delay : MonoBehaviour
     private IEnumerator Wait(GameObject obj)
     {
         yield return new WaitForSeconds(_delay);
-        Complete?.Invoke(obj);
+        Complete.Invoke(obj);
     }
 }

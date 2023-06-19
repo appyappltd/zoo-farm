@@ -1,4 +1,4 @@
-namespace Pool
+namespace Logic.Spawners
 {
     public enum VisualType
     {

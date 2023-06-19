@@ -1,7 +1,7 @@
 using Infrastructure.Factory;
+using Logic.Spawners;
 using NaughtyAttributes;
 using NTC.Global.Cache;
-using Pool;
 using Services;
 using Tools;
 using UnityEngine;
@@ -24,13 +24,18 @@ namespace Logic.Translators
         {
             _spawner = new VisualTranslatorsSpawner(
                 (() => AllServices.Container.Single<IGameFactory>()
-                    .CreateVisual(VisualType.Money, Quaternion.identity, transform)),
+                    .CreateVisual(VisualType.Money, Quaternion.identity, new GameObject("Pooled Coins").transform)),
+                4,
                 Translator,
-                "Translatables",
-                4, 
-                transform,
                 _from,
                 _to);
+        }
+
+        private void OnDestroy()
+        {
+            Debug.Log(_spawner);
+            
+            _spawner.Dispose();
         }
 
         [Button("Translate")]

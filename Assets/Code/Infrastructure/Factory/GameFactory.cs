@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Infrastructure.AssetManagement;
-using Pool;
+using Logic.Spawners;
 using Services.PersistentProgress;
 using Services.Randomizer;
 using UnityEngine;
@@ -63,6 +63,11 @@ namespace Infrastructure.Factory
 
         public GameObject CreateVisual(VisualType visual, Quaternion identity, Transform container) =>
             _assets.Instantiate($"{AssetPath.VisualsPath}/{visual}", container);
+
+        public GameObject CreateCollectibleCoin(Transform container)
+        {
+            return _assets.Instantiate(AssetPath.CollectableCoinPath, container);
+        }
 
         private GameObject InstantiateRegistered(string prefabPath)
         {
