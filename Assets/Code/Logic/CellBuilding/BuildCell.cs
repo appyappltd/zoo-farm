@@ -1,30 +1,22 @@
 using System;
-using Logic.Interactions;
 using Tools.Extension;
 using UnityEngine;
 
-namespace Logic.Houses
+namespace Logic.CellBuilding
 {
-    [RequireComponent(typeof(TriggerObserver))]
-    public class HouseCell : MonoBehaviour
+    public class BuildCell : MonoBehaviour
     {
-        private Consumer _consumer;
+        [SerializeField] private Consumer _consumer;
 
-        public event Action BuildHouse = () => { };
+        public int BuildCost { get; private set; }
 
-        private void Awake() =>
-            _consumer = GetComponent<Consumer>();
+        public event Action Build = () => { };
 
         private void OnEnable() =>
             _consumer.Bought += OnEnter;
 
         private void OnDisable() =>
             _consumer.Bought -= OnEnter;
-
-        private void OnEnter()
-        {
-            BuildHouse.Invoke();
-        }
 
         private void OnDrawGizmos()
         {
@@ -34,6 +26,17 @@ namespace Logic.Houses
         public void Reposition(Vector3 nextPosition)
         {
             transform.position = nextPosition;
+        }
+
+        public void SetBuildCost(int buildCost)
+        {
+            BuildCost = buildCost;
+            _consumer.SetCost(buildCost);
+        }
+
+        private void OnEnter()
+        {
+            Build.Invoke();
         }
     }
 }

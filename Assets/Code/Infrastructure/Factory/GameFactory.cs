@@ -58,16 +58,17 @@ namespace Infrastructure.Factory
         public GameObject CreateAnimalHouse(Vector3 at) =>
             InstantiateRegistered(AssetPath.AnimalHousePath, at);
 
-        public GameObject CreateHouseCell(Vector3 at) =>
-            _assets.Instantiate(AssetPath.HouseCellPath, at);
+        public GameObject CreateBuildCell(Vector3 at) =>
+            _assets.Instantiate(AssetPath.BuildCellPath, at);
 
-        public GameObject CreateVisual(VisualType visual, Quaternion identity, Transform container) =>
+        public GameObject CreateVisual(VisualType visual, Quaternion quaternion, Transform container) =>
             _assets.Instantiate($"{AssetPath.VisualsPath}/{visual}", container);
 
-        public GameObject CreateCollectibleCoin(Transform container)
-        {
-            return _assets.Instantiate(AssetPath.CollectableCoinPath, container);
-        }
+        public GameObject CreateCollectibleCoin(Transform container) =>
+            _assets.Instantiate(AssetPath.CollectableCoinPath, container);
+
+        public GameObject CreateGardenBad(Vector3 at) =>
+            _assets.Instantiate(AssetPath.GardenBad, at);
 
         private GameObject InstantiateRegistered(string prefabPath)
         {

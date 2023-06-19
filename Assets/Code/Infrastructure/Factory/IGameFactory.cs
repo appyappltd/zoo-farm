@@ -18,8 +18,9 @@ namespace Infrastructure.Factory
         GameObject CreateHero(Vector3 vector3);
         GameObject CreateAnimal(AnimalType animalType, Vector3 at);
         GameObject CreateAnimalHouse(Vector3 at);
-        GameObject CreateHouseCell(Vector3 peek);
-        GameObject CreateVisual(VisualType visual, Quaternion identity, Transform container);
+        GameObject CreateBuildCell(Vector3 at);
+        GameObject CreateVisual(VisualType visual, Quaternion quaternion, Transform container);
         GameObject CreateCollectibleCoin(Transform container);
+        GameObject CreateGardenBad(Vector3 at);
     }
 }

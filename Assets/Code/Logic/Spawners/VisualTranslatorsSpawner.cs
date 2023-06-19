@@ -6,6 +6,8 @@ namespace Logic.Spawners
 {
     public class VisualTranslatorsSpawner : PooledSpawner<TranslatableAgent>
     {
+        private readonly Vector3 _fromPositionOffset = new Vector3(0, 1, 0); 
+        
         private readonly ITranslator _translator;
         private readonly Transform _fromTransform;
         private readonly Transform _toTransform;
@@ -30,14 +32,6 @@ namespace Logic.Spawners
             }
         }
 
-        // protected override void OnReturn(TranslatableAgent agent)
-        // {
-        //     for (var index = 0; index < agent.SubTranslatables.Count; index++)
-        //     {
-        //         ITranslatable translatable = agent.SubTranslatables[index];
-        //     }
-        // }
-
         protected override void OnGet(TranslatableAgent agent)
         {
             if (agent.MainTranslatable.IsPreload)
@@ -47,7 +41,7 @@ namespace Logic.Spawners
             else
             {
                 ITranslatableParametric<Vector3> mainTranslatable = (ITranslatableParametric<Vector3>) agent.MainTranslatable;
-                mainTranslatable.Play(_fromTransform.position, _toTransform.position);
+                mainTranslatable.Play(_fromTransform.position + _fromPositionOffset, _toTransform.position);
             }
 
             for (var index = 0; index < agent.SubTranslatables.Count; index++)

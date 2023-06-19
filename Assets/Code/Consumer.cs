@@ -37,6 +37,9 @@ public class Consumer : MonoBehaviour
         GetComponent<Delay>().Complete += _ => StartCoroutine(TakeCoins());
     }
 
+    public void SetCost(int buildCost) =>
+        _cost = buildCost;
+
     private void Init(GameObject player)
     {
         spawner = new VisualTranslatorsSpawner(() =>
