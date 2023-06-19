@@ -1,7 +1,5 @@
 ﻿using Infrastructure.Factory;
 using Logic;
-using Logic.AnimalsBehaviour;
-using Logic.AnimalsStateMachine;
 using Logic.Wallet;
 using Player;
 using Services.Input;
