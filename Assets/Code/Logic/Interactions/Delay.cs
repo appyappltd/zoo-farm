@@ -3,6 +3,7 @@ using Logic.Interactions;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(TriggerObserver))]
 public class Delay : MonoBehaviour
 {
     public event Action<GameObject> Complete = c => { };
