@@ -29,21 +29,9 @@ namespace Logic.Spawners
 
             _pooledSpawner = new PooledSpawner<TranslatableAgent>(
                 () =>
-                {
-                    GameObject collectibleCoin = AllServices.Container.Single<IGameFactory>()
-                        .CreateCollectibleCoin(container);
-                    TranslatableAgent translatableAgent = collectibleCoin.GetComponent<TranslatableAgent>();
-                    translatableAgent.MainTranslatable.Init();
-
-                    for (var index = 0; index < translatableAgent.SubTranslatables.Count; index++)
-                    {
-                        ITranslatable translatable = translatableAgent.SubTranslatables[index];
-                        translatable.Init();
-                    }
-
-                    return collectibleCoin;
-                },
-                10, OnReturnToPool);
+                    AllServices.Container.Single<IGameFactory>()
+                        .CreateCollectibleCoin(container),
+            10, OnReturnToPool);
         }
 
         private void SpawnCoin()

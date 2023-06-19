@@ -131,8 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 551acab530e74d2f8e50015d4b23f23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.35
+  _speed: 1
   _isPreload: 0
+  _looped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
   _timeCurve:
@@ -189,20 +190,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0.87641233
-      outSlope: 0.87641233
-      tangentMode: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.027268264
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.780702
-      outSlope: 0.780702
-      tangentMode: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0.041241467
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -243,9 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a451537fa5e4f7f9e2309c944c594bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.35
+  _speed: 1
   _isPreload: 1
-  _from: {x: 1, y: 1, z: 1}
+  _looped: 0
+  _from: {x: 0.5, y: 0.5, z: 0.5}
   _to: {x: 0, y: 0, z: 0}
   _timeCurve:
     serializedVersion: 2
@@ -277,47 +279,47 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 11.528037
-      outSlope: 11.528037
-      tangentMode: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.018546168
-    - serializedVersion: 3
-      time: 0.25
-      value: 1
-      inSlope: 11.069514
-      outSlope: 11.069514
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.024899423
       outWeight: 0
-    m_PreInfinity: 1
-    m_PostInfinity: 1
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
     m_RotationOrder: 4
   _deltaYCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: -10.373628
-      outSlope: -10.373628
-      tangentMode: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.02417919
-    - serializedVersion: 3
-      time: 0.25
-      value: 0
-      inSlope: -10.320622
-      outSlope: -10.320622
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.019702554
       outWeight: 0
-    m_PreInfinity: 1
-    m_PostInfinity: 1
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
     m_RotationOrder: 4
   _deltaZCurve:
     serializedVersion: 2
@@ -325,23 +327,23 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 12.84143
-      outSlope: 12.84143
-      tangentMode: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.017297793
-    - serializedVersion: 3
-      time: 0.25
-      value: 1
-      inSlope: 11.47797
-      outSlope: 11.47797
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.050043106
       outWeight: 0
-    m_PreInfinity: 1
-    m_PostInfinity: 1
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
     m_RotationOrder: 4
 --- !u!114 &837636314664997954
 MonoBehaviour:
@@ -355,8 +357,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2834a0bdd814ea0ba6f686cf408ebb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.35
+  _speed: 1
   _isPreload: 1
+  _looped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 360, z: 0}
   _timeCurve:

@@ -30,13 +30,13 @@ namespace Logic.Spawners
             }
         }
 
-        protected override void OnReturn(TranslatableAgent agent)
-        {
-            for (var index = 0; index < agent.SubTranslatables.Count; index++)
-            {
-                ITranslatable translatable = agent.SubTranslatables[index];
-            }
-        }
+        // protected override void OnReturn(TranslatableAgent agent)
+        // {
+        //     for (var index = 0; index < agent.SubTranslatables.Count; index++)
+        //     {
+        //         ITranslatable translatable = agent.SubTranslatables[index];
+        //     }
+        // }
 
         protected override void OnGet(TranslatableAgent agent)
         {

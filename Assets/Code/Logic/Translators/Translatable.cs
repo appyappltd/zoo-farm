@@ -1,5 +1,4 @@
 using System;
-using Logic.AnimalsStateMachine.States;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using NTC.Global.System;
@@ -36,10 +35,12 @@ namespace Logic.Translators
         protected abstract void ApplyTranslation(T value);
         protected abstract void SetValueLerp(ref Func<T, T, float, T> valueLerp);
         
-        private void Awake() =>
-            enabled = false;
+        private void Awake()
+        {
+            Init();
+        }
 
-        public void Init()
+        private void Init()
         {
             SetValueLerp(ref _valueLerp);
             ApplyModifiers();

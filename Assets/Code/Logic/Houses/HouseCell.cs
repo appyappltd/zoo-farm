@@ -1,6 +1,5 @@
 using System;
 using Logic.Interactions;
-using Player;
 using Tools.Extension;
 using UnityEngine;
 
@@ -9,7 +8,6 @@ namespace Logic.Houses
     [RequireComponent(typeof(TriggerObserver))]
     public class HouseCell : MonoBehaviour
     {
-        [SerializeField] private int _buildCost = 10;
         private Consumer _consumer;
 
         public event Action BuildHouse = () => { };

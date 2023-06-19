@@ -17,7 +17,6 @@ namespace Logic.Translators
             AddPositionModifier((vector, delta) => vector.ChangeX(vector.x * _deltaXCurve.Evaluate(delta)));
             AddPositionModifier((vector, delta) => vector.ChangeY(vector.y * _deltaYCurve.Evaluate(delta)));
             AddPositionModifier((vector, delta) => vector.ChangeZ(vector.z * _deltaZCurve.Evaluate(delta)));
-            enabled = true;
         }
         
         protected override void SetValueLerp(ref Func<Vector3, Vector3, float, Vector3> valueLerp)

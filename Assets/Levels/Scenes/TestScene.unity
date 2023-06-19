@@ -3335,6 +3335,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8101718673406365527, guid: 709401a58d62add4bae70a6e858fc4d3, type: 3}
+      propertyPath: m_Name
+      value: Stats
+      objectReference: {fileID: 0}
     - target: {fileID: 8136296871626173811, guid: 709401a58d62add4bae70a6e858fc4d3, type: 3}
       propertyPath: _eatPlace
       value: 
