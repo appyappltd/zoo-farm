@@ -58,8 +58,8 @@ public class Builder : MonoBehaviour
             var position = _components[i].GetComponent<LinearPositionTranslatable>();
             var scale = _components[i].GetComponent<LinearScaleTranslatable>();
 
-            position.Init(_components[i].transform.position, defPositions[i]);
-            scale.Init(_components[i].transform.localScale, defSizes[i]);
+            position.Play(_components[i].transform.position, defPositions[i]);
+            scale.Play(_components[i].transform.localScale, defSizes[i]);
 
             translator.AddTranslatable(position);
             translator.AddTranslatable(scale);
@@ -75,11 +75,11 @@ public class Builder : MonoBehaviour
             var position = _components[i].GetComponent<LinearPositionTranslatable>();
             var scale = _components[i].GetComponent<LinearScaleTranslatable>();
 
-            position.Init(_components[i].transform.position, defPositions[i]
+            position.Play(_components[i].transform.position, defPositions[i]
                                  + new Vector3(Random.Range(_offset.x, _offset.y),
                                                 Random.Range(0, _offset.y),
                                                 Random.Range(_offset.x, _offset.y)));
-            scale.Init(_components[i].transform.localScale, Vector3.zero);
+            scale.Play(_components[i].transform.localScale, Vector3.zero);
 
             translator.AddTranslatable(position);
             translator.AddTranslatable(scale);

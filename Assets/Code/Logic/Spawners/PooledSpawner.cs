@@ -8,6 +8,7 @@ namespace Logic.Spawners
     public class PooledSpawner<T> : ISpawner<T> where T : Component
     {
         private readonly int _preloadCount;
+        private readonly Vector3 _disabledPosition = new Vector3(0, -10, 0);
         
         private Pool<T> _pool;
         private Action _disposeAction = () => { };
@@ -59,13 +60,14 @@ namespace Logic.Spawners
         private void ReturnAction(T obj)
         {
             obj.gameObject.Disable();
+            obj.transform.position = _disabledPosition;
             OnReturn(obj);
         }
 
         private void GetAction(T obj)
         {
-            obj.gameObject.Enable();
             OnGet(obj);
+            obj.gameObject.Enable();
         }
     }
 }

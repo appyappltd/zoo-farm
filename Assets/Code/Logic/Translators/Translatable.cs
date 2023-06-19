@@ -1,4 +1,5 @@
 using System;
+using Logic.AnimalsStateMachine.States;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using NTC.Global.System;
@@ -6,12 +7,13 @@ using UnityEngine;
 
 namespace Logic.Translators
 {
-    public abstract class Translatable<T> : MonoCache, ITranslatableInit<T>
+    public abstract class Translatable<T> : MonoCache, ITranslatableParametric<T>
     {
         private const float FinalTranslateValue = 1;
 
         [SerializeField] private float _speed;
         [SerializeField] private bool _isPreload;
+        [SerializeField] private bool _looped;
 
         [ShowIf("_isPreload")]
         [SerializeField] private T _from;
@@ -30,41 +32,36 @@ namespace Logic.Translators
         public event Action<ITranslatable> Begin = t => {};
         public event Action<ITranslatable> End = t => {};
         
-        protected abstract void OnInit();
+        protected abstract void ApplyModifiers();
         protected abstract void ApplyTranslation(T value);
         protected abstract void SetValueLerp(ref Func<T, T, float, T> valueLerp);
         
-        private void Awake()
-        {
+        private void Awake() =>
             enabled = false;
-        }
 
         public void Init()
         {
-            if (_isPreload == false)
-            {
-                throw new Exception("Preload is not enabled");
-            }
-            
-            _delta = 0;
             SetValueLerp(ref _valueLerp);
-            OnInit();
-            Begin.Invoke(this);
+            ApplyModifiers();
+        }
+
+        public void Play()
+        {
+            if (_isPreload == false)
+                throw new Exception("Preload is not enabled");
+            
+            Restart();
         }
         
-        public void Init(T from, T to)
+        public void Play(T from, T to)
         {
             if (_isPreload)
-            {
                 throw new Exception("You are trying to set the settings that are predefined");
-            }
-            
-            _delta = 0;
+
             _from = from;
             _to = to;
-            SetValueLerp(ref _valueLerp);
-            OnInit();
-            Begin.Invoke(this);
+            
+            Restart();
         }
 
         public void Enable() =>
@@ -75,16 +72,23 @@ namespace Logic.Translators
 
         public bool TryUpdate()
         {
+            if (gameObject.activeSelf == false)
+                return false;
+
             if (IsComplete)
             {
                 End.Invoke(this);
-                return false;
+
+                if (_looped == false)
+                    return false;
+                
+                Restart();
+                return true;
             }
 
             float delta = UpdateDelta();
             delta = _deltaModifiers.Invoke(delta);
             T value = _valueLerp.Invoke(_from, _to, delta);
-            // value = _valueModifiers.Invoke(value, delta);
 
             for (int index = 0; index < _valueModifiers.GetInvocationList().Length; index++)
             {
@@ -107,6 +111,12 @@ namespace Logic.Translators
         {
             _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.smoothDeltaTime);
             return _delta;
+        }
+
+        private void Restart()
+        {
+            _delta = 0;
+            Begin.Invoke(this);
         }
     }
 }

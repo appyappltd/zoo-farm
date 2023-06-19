@@ -6,7 +6,6 @@ namespace Logic.Translators
     {
         protected override void ApplyTranslation(Vector3 value)
         {
-            Debug.Log(value);
             transform.position = value;
         }
     }

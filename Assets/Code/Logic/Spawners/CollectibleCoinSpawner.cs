@@ -28,22 +28,33 @@ namespace Logic.Spawners
             Transform container = new GameObject("Collectible Coins Container").transform;
 
             _pooledSpawner = new PooledSpawner<TranslatableAgent>(
-                () => AllServices.Container.Single<IGameFactory>()
-                    .CreateCollectibleCoin(container),
+                () =>
+                {
+                    GameObject collectibleCoin = AllServices.Container.Single<IGameFactory>()
+                        .CreateCollectibleCoin(container);
+                    TranslatableAgent translatableAgent = collectibleCoin.GetComponent<TranslatableAgent>();
+                    translatableAgent.MainTranslatable.Init();
+
+                    for (var index = 0; index < translatableAgent.SubTranslatables.Count; index++)
+                    {
+                        ITranslatable translatable = translatableAgent.SubTranslatables[index];
+                        translatable.Init();
+                    }
+
+                    return collectibleCoin;
+                },
                 10, OnReturnToPool);
         }
 
         private void SpawnCoin()
         {
             TranslatableAgent agent = _pooledSpawner.Spawn();
-            InitTranslatables(agent);
+            PlayTranslatables(agent);
             AddToTranslator(agent);
             _remainingCountCoins--;
 
             if (_remainingCountCoins > 0)
-            {
                 _timerOperator.Restart();
-            }
         }
 
         public void OnDestroy() =>
@@ -64,15 +75,15 @@ namespace Logic.Spawners
             _timerOperator.Restart();
         }
 
-        private void InitTranslatables(TranslatableAgent agent)
+        private void PlayTranslatables(TranslatableAgent agent)
         {
-            ITranslatableInit<Vector3> mainTranslatable = (ITranslatableInit<Vector3>) agent.MainTranslatable;
-            mainTranslatable.Init(transform.position, GetRandomAroundPosition());
+            ITranslatableParametric<Vector3> mainTranslatable = (ITranslatableParametric<Vector3>) agent.MainTranslatable;
+            mainTranslatable.Play(transform.position, GetRandomAroundPosition());
 
             for (var index = 0; index < agent.SubTranslatables.Count; index++)
             {
                 ITranslatable translatable = agent.SubTranslatables[index];
-                translatable.Init();
+                translatable.Play();
             }
         }
 

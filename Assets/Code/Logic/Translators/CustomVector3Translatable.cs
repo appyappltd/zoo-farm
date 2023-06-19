@@ -11,7 +11,7 @@ namespace Logic.Translators
         [SerializeField] private AnimationCurve _deltaYCurve;
         [SerializeField] private AnimationCurve _deltaZCurve;
 
-        protected override void OnInit()
+        protected override void ApplyModifiers()
         {
             AddDeltaModifier(_timeCurve.Evaluate);
             AddPositionModifier((vector, delta) => vector.ChangeX(vector.x * _deltaXCurve.Evaluate(delta)));

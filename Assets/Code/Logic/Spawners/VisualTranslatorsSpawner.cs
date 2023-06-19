@@ -42,18 +42,18 @@ namespace Logic.Spawners
         {
             if (agent.MainTranslatable.IsPreload)
             {
-                agent.MainTranslatable.Init();
+                agent.MainTranslatable.Play();
             }
             else
             {
-                ITranslatableInit<Vector3> mainTranslatable = (ITranslatableInit<Vector3>) agent.MainTranslatable;
-                mainTranslatable.Init(_fromTransform.position, _toTransform.position);
+                ITranslatableParametric<Vector3> mainTranslatable = (ITranslatableParametric<Vector3>) agent.MainTranslatable;
+                mainTranslatable.Play(_fromTransform.position, _toTransform.position);
             }
 
             for (var index = 0; index < agent.SubTranslatables.Count; index++)
             {
                 ITranslatable translatable = agent.SubTranslatables[index];
-                translatable.Init();
+                translatable.Play();
             }
         }
 
