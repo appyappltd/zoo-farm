@@ -8,6 +8,7 @@ using static UnityEditor.Timeline.Actions.MenuPriority;
 public class Delay : MonoBehaviour
 {
     public event Action<GameObject> Complete = c => { };
+    public event Action<float, float> TimeChanged;
 
     [SerializeField, Min(.0f)] private float _delay = 1f;
 
@@ -38,17 +39,19 @@ public class Delay : MonoBehaviour
             var addTime = Time.deltaTime;
             time += addTime;
             yield return new WaitForSeconds(addTime);
+            TimeChanged?.Invoke(_delay,time);
         }
         Complete.Invoke(obj);
     }
 
     private IEnumerator Reverse()
     {
-        while (time > 0) 
+        while (time > 0)
         {
             var addTime = Time.deltaTime;
             time -= addTime;
             yield return new WaitForSeconds(addTime);
+            TimeChanged?.Invoke(_delay, time);
         }
     }
 }
