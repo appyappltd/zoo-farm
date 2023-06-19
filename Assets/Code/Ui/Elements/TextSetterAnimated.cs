@@ -13,7 +13,7 @@ namespace Ui.Elements
         private int _targetNumber;
         private int _prevNumber;
 
-        private void Awake() =>
+        protected override void OnAwake() =>
             enabled = false;
 
         protected override void Run()

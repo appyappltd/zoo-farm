@@ -35,7 +35,7 @@ RectTransform:
   - {fileID: 2897505351751551611}
   - {fileID: 8967825230557902589}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -391,7 +391,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc9f3ed3389e70438d5758b4ba41c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 7143413778168848353}
+  _isUi: 1
+  _textSprite: {fileID: 0}
+  _textUi: {fileID: 7143413778168848353}
   _curveAnimation:
     serializedVersion: 2
     m_Curve:
@@ -779,7 +781,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e304f8745515034448856c17649da82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 1938276652500883343}
+  _isUi: 1
+  _textSprite: {fileID: 0}
+  _textUi: {fileID: 1938276652500883343}
 --- !u!1001 &2066409660888822273
 PrefabInstance:
   m_ObjectHideFlags: 0
