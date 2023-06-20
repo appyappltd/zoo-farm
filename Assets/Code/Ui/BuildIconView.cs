@@ -1,7 +1,8 @@
 using Logic.CellBuilding;
+using Ui.Elements;
 using UnityEngine;
 
-namespace Ui.Elements
+namespace Ui
 {
     public class BuildIconView : MonoBehaviour
     {

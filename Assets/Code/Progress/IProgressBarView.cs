@@ -1,4 +1,5 @@
 using System;
+using Observables;
 
 namespace Progress
 {
@@ -7,7 +8,7 @@ namespace Progress
         event Action Full;
         event Action Empty;
         float Max { get; }
-        float Current { get; }
+        Observable<float> Current { get; }
         float CurrentNormalized { get; }
         bool IsEmpty { get; }
         bool IsFull { get; }
