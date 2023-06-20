@@ -13,11 +13,11 @@ namespace Progress
 
             if (isNegativeSpeed)
             {
-                _onUpdate = (deltaTime) => bar.Spend(changingSpeed * deltaTime);
+                _onUpdate = (deltaTime) => bar.Spend(changingSpeed * deltaTime * bar.Max);
             }
             else
             {
-                _onUpdate = (deltaTime) => bar.Replenish(changingSpeed * deltaTime);
+                _onUpdate = (deltaTime) => bar.Replenish(changingSpeed * deltaTime * bar.Max);
             }
         }
 

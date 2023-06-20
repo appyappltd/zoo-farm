@@ -12,7 +12,7 @@ namespace Logic
 
         private ProgressBar _food;
 
-        public IProgressBarView ProgressBarView => _food;
+        public IProgressBar ProgressBarView => _food;
 
         private void Awake()
         {
@@ -21,13 +21,19 @@ namespace Logic
         }
 
         public void Construct(int maxFoodLevel) =>
-            _food = new ProgressBar(maxFoodLevel, 0);
+            _food = new ProgressBar(maxFoodLevel, 0f);
         
-        public void Replenish(int amount) =>
+        public void Replenish(int amount)
+        {
             _food.Replenish(amount);
-        
-        public void Spend(int amount) =>
+            Debug.Log("Replenish" + _food.Current.Value);
+        }
+
+        public void Spend(int amount)
+        {
             _food.Spend(amount);
+            Debug.Log("Spend" + _food.Current.Value);
+        }
 
         [Button("Replenish", EButtonEnableMode.Playmode)] [Conditional("UNITY_EDITOR")]
         public void Replenish1() =>

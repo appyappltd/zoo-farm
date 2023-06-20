@@ -47,10 +47,10 @@ namespace Logic.AnimalsStateMachine
         {
             Bowl bowl = _eatPlace.GetComponent<Bowl>();
 
-            State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed);
+            State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, bowl.ProgressBarView);
             State rest = new Rest(_animator, _peppiness, _peppinessReplanishSpeed);
             State idle = new Idle(_animator);
-            State waitForFood = new Idle(_animator);
+            State waitForFood = new Wait(_animator);
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
             State moveToEat = new MoveTo(_animator, _mover, _eatPlace);
@@ -70,8 +70,8 @@ namespace Logic.AnimalsStateMachine
                 {
                     idle, new Dictionary<Transition, State>
                     {
-                        {emptyPeppiness, moveToRest},
                         {emptySatiety, moveToEat},
+                        {emptyPeppiness, moveToRest},
                         {randomDelay, wander},
                     }
                 },

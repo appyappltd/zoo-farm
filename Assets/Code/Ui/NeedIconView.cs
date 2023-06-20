@@ -34,6 +34,6 @@ namespace Ui
         }
 
         private void UpdateText(float value, float max) =>
-            _needText.SetText($"{value}/{max}");
+            _needText.SetText($"{Mathf.Round(value)}/{max}");
     }
 } 

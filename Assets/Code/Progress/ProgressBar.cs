@@ -14,8 +14,8 @@ namespace Progress
         public float Max { get; }
         public Observable<float> Current { get; }
         public float CurrentNormalized => Current.Value / Max;
-        public bool IsEmpty => Current.Value <= 0;
-        public bool IsFull => Current.Value >= Max;
+        public bool IsEmpty => Current.Value <= float.Epsilon;
+        public bool IsFull => Current.Value >= Max - 0.001f;
         public ProgressBar(float max, float current)
         {
             Max = max;
@@ -24,7 +24,7 @@ namespace Progress
 
         public void Replenish(float amount)
         {
-            if (Validate(amount, ReplenishErrorMessage, () => Current.Value + amount >= Max))
+            if (Validate(amount, ReplenishErrorMessage, () => Current.Value + amount >= Max - 0.001f))
             {
                 Current.Value = Max;
                 Full.Invoke();
@@ -36,7 +36,7 @@ namespace Progress
 
         public void Spend(float amount)
         {
-            if (Validate(amount, SpendErrorMessage, () => Current.Value - amount <= 0))
+            if (Validate(amount, SpendErrorMessage, () => Current.Value - amount <= float.Epsilon))
             {
                 Current.Value = 0;
                 Empty.Invoke();

@@ -9,7 +9,7 @@ namespace Logic.AnimalsBehaviour.AnimalStats
     public class ProgressBarIndicator : MonoCache
     {
         [SerializeField] [Range(0, 100f)] private float _maxValue;
-        [SerializeField] [Range(0, 10f)] private float _reduceSpeed;
+        [SerializeField] [Range(0, 1f)] private float _reduceSpeed;
 
         private ProgressBar _progressBar;
         private ProgressBarOperator _progressBarOperator;

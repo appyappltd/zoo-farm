@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NTC.Global.Cache;
+using UnityEngine;
 
 namespace StateMachineBase
 {
@@ -13,6 +14,7 @@ namespace StateMachineBase
             _currentState?.Exit();
             _currentState = newState;
             _currentState.Enter();
+            Debug.Log($"Enter State {newState}");
         }
 
         public void Stop() =>

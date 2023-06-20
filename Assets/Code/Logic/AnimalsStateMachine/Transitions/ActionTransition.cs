@@ -1,5 +1,6 @@
 ﻿using System;
 using StateMachineBase;
+using UnityEngine;
 
 namespace Logic.AnimalsStateMachine.Transitions
 {
@@ -12,11 +13,16 @@ namespace Logic.AnimalsStateMachine.Transitions
         public override bool CheckCondition() =>
             IsCondition;
 
-        public override void Exit() =>
+        public override void Exit()
+        {
             IsCondition = false;
+        }
 
-        public void SetConditionTrue() =>
+        public void SetConditionTrue()
+        {
             IsCondition = true;
+            Debug.Log($"set true {GetType()}");
+        }
 
         public void SetUnsubscribeAction(Action action) =>
             _unsubscribe = action;
