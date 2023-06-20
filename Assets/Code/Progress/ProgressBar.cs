@@ -24,7 +24,7 @@ namespace Progress
 
         public void Replenish(float amount)
         {
-            if (Validate(amount, ReplenishErrorMessage, () => Current.Value + amount > Max))
+            if (Validate(amount, ReplenishErrorMessage, () => Current.Value + amount >= Max))
             {
                 Current.Value = Max;
                 Full.Invoke();
@@ -36,7 +36,7 @@ namespace Progress
 
         public void Spend(float amount)
         {
-            if (Validate(amount, SpendErrorMessage, () => Current.Value - amount < 0))
+            if (Validate(amount, SpendErrorMessage, () => Current.Value - amount <= 0))
             {
                 Current.Value = 0;
                 Empty.Invoke();
