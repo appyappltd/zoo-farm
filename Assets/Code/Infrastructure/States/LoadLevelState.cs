@@ -3,6 +3,7 @@ using Infrastructure.Factory;
 using Logic;
 using Logic.Wallet;
 using Player;
+using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
 using Ui.Elements;
@@ -19,9 +20,10 @@ namespace Infrastructure.States
         private readonly IPlayerInputService _inputService;
         private readonly IPersistentProgressService _progressService;
         private readonly LoadingCurtain _curtain;
+        private readonly ICameraOperatorService _cameraService;
 
         public LoadLevelState(GameStateMachine gameStateMachine, LoadingCurtain curtain, SceneLoader sceneLoader,
-            IGameFactory gameFactory, IPlayerInputService inputService, IPersistentProgressService progressService)
+            IGameFactory gameFactory, IPlayerInputService inputService, IPersistentProgressService progressService, ICameraOperatorService cameraService)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -29,6 +31,7 @@ namespace Infrastructure.States
             _inputService = inputService;
             _progressService = progressService;
             _curtain = curtain;
+            _cameraService = cameraService;
         }
 
         public void Enter(string payload)
@@ -58,9 +61,12 @@ namespace Infrastructure.States
                 progressReader.LoadProgress(_progressService.Progress);
         }
         
-        private void FollowCamera(Transform transform)
+        private void FollowCamera(Transform heroTransform)
         {
-            Camera.main.GetComponent<CameraMovement>().Follow(transform);
+            CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
+            cameraMovement.Follow(heroTransform);
+            _cameraService.RegisterCamera(cameraMovement);
+            _cameraService.SetAsDefault(heroTransform);
         }
 
         private GameObject InitHero()

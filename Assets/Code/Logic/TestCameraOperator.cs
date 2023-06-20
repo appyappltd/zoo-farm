@@ -31,5 +31,11 @@ namespace Logic
         {
             _cameraService.Focus(_position);
         }
+        
+        [Button("Default", EButtonEnableMode.Playmode)]
+        private void Default()
+        {
+            _cameraService.FocusOnDefault();
+        }
     }
 }

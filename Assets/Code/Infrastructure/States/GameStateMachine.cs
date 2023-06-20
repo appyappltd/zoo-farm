@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Infrastructure.Factory;
 using Logic;
 using Services;
+using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
 using Services.SaveLoad;
@@ -25,7 +26,7 @@ namespace Infrastructure.States
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services, coroutineRunner),
                 [typeof(LoadLevelState)] = new LoadLevelState(this,
                     curtain, sceneLoader, services.Single<IGameFactory>(), services.Single<IPlayerInputService>(),
-                    services.Single<IPersistentProgressService>()),
+                    services.Single<IPersistentProgressService>(), services.Single<ICameraOperatorService>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),

@@ -8,5 +8,7 @@ namespace Services.Camera
         void Focus(Transform followTarget);
         void Focus(Vector3 onPosition);
         void RegisterCamera(CameraMovement cameraMovement);
+        void FocusOnDefault();
+        void SetAsDefault(Transform target);
     }
 }
