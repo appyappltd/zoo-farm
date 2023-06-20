@@ -1,6 +1,4 @@
 using Data.ItemsData;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IndicatorMaxItems : MonoBehaviour
@@ -21,9 +19,7 @@ public class IndicatorMaxItems : MonoBehaviour
     private void UpdateIndicator(HandItem item = null)
     {
         if (item && _inventory.IsMax)
-        {
             _bubble.gameObject.SetActive(true);
-        }
         else
             _bubble.gameObject.SetActive(false);
     }

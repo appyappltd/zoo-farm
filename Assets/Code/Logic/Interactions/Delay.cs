@@ -12,7 +12,7 @@ public class Delay : MonoBehaviour
 
     [SerializeField, Min(.0f)] private float _delay = 1f;
 
-    [SerializeField] private float time = .0f;
+    private float time = .0f;
     private Coroutine coroutine;
 
     private void Awake()
