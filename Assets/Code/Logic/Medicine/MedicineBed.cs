@@ -60,7 +60,6 @@ public class MedicineBed : MonoBehaviour
         mover.Move(inventory.DefItemPlace);
         mover.GotToPlace += () =>
         {
-            Debug.Log("A");
             houseService.TakeQueueToHouse(() =>
             {
                 var animalItemData = (AnimalItemData)handAnimal.ItemData;

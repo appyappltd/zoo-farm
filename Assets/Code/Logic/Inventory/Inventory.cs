@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
     public event UnityAction<HandItem> AddItem;
     public event UnityAction RemoveItem;
 
+    public bool IsMax => maxCount == items.Count;
     public int GetCount => items.Count;
     public Transform GetItemPlace => itemPlace;
     public CreatureType Type => currType;
