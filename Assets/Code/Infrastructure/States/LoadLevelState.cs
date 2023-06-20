@@ -1,4 +1,5 @@
-﻿using Infrastructure.Factory;
+﻿using Cameras;
+using Infrastructure.Factory;
 using Logic;
 using Logic.Wallet;
 using Player;
@@ -59,7 +60,7 @@ namespace Infrastructure.States
         
         private void FollowCamera(Transform transform)
         {
-            Camera.main.GetComponent<CameraMovement>().Construct(transform);
+            Camera.main.GetComponent<CameraMovement>().Follow(transform);
         }
 
         private GameObject InitHero()

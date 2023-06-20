@@ -2,6 +2,7 @@
 using Infrastructure.Factory;
 using Services;
 using Services.AnimalHouse;
+using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
 using Services.Randomizer;
@@ -53,6 +54,7 @@ namespace Infrastructure.States
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IGameFactory>()));
+            _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
         }
 
         private void RegisterStaticDataService()

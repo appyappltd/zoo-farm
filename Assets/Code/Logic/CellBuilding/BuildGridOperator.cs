@@ -23,18 +23,12 @@ namespace Logic.CellBuilding
 
         private void Awake()
         {
-            OnAwake();
             FillPositions();
             GameFactory = AllServices.Container.Single<IGameFactory>();
             _activeBuildCell = GameFactory.CreateBuildCell(_housePositions.Dequeue()).GetComponent<BuildCell>();
             _activeBuildCell.SetBuildCost(_buildCost);
             _activeBuildCell.Build += ActivateNext;
-        }
-
-        protected abstract void BuildCell(Vector3 position);
-
-        protected virtual void OnAwake()
-        {
+            OnAwake();
         }
 
         private void OnDestroy() =>
@@ -46,6 +40,12 @@ namespace Logic.CellBuilding
             {
                 Gizmos.DrawCube(position.ChangeY(position.y + 0.5f), Vector3.one);
             }
+        }
+
+        protected abstract void BuildCell(Vector3 position);
+
+        protected virtual void OnAwake()
+        {
         }
 
         private void FillPositions()
