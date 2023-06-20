@@ -6,13 +6,13 @@ using Debug = UnityEngine.Debug;
 
 namespace Logic
 {
-    public class Bowl : MonoBehaviour
+    public class Bowl : MonoBehaviour, IProgressBarHolder
     {
         [SerializeField] private int _maxFoodCount;
 
         private ProgressBar _food;
 
-        public IProgressBarView FoodBar => _food;
+        public IProgressBarView ProgressBarView => _food;
 
         private void Awake()
         {

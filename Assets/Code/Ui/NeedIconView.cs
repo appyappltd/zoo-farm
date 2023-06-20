@@ -1,4 +1,6 @@
 using Observables;
+using Progress;
+using Tools;
 using Ui.Elements;
 using UnityEngine;
 
@@ -8,11 +10,15 @@ namespace Ui
     {
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
-        [SerializeField] private TextSetter _textSetter;
+        [SerializeField] [RequireInterface(typeof(IProgressBarHolder))] private MonoBehaviour _barHolder;
+        [SerializeField] private TextSetter _needText;
+
+        private IProgressBarHolder BarHolder => (IProgressBarHolder) _barHolder; 
 
         private void Start()
         {
             transform.forward = Camera.main.transform.forward;
+            Construct(BarHolder.ProgressBarView.Current, BarHolder.ProgressBarView.Max);
         }
 
         private void OnDisable() =>
@@ -28,6 +34,6 @@ namespace Ui
         }
 
         private void UpdateText(float value, float max) =>
-            _textSetter.SetText($"{value}/{max}");
+            _needText.SetText($"{value}/{max}");
     }
 } 

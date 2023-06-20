@@ -44,7 +44,6 @@ namespace Services.AnimalHouse
         {
             GameObject houseObject = _gameFactory.CreateAnimalHouse(at);
             Logic.AnimalHouse builtHouse = houseObject.GetComponent<Logic.AnimalHouse>();
-            _houseBuilder.Build(builtHouse);
             _animalHouses.Add(builtHouse);
 
             if (_queueInHouse.TryDequeue(out Func<Animal> callback))
