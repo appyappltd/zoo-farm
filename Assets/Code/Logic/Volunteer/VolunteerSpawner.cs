@@ -1,5 +1,6 @@
 using Infrastructure;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +13,8 @@ public class VolunteerSpawner : MonoBehaviour
     [SerializeField] private Transform _spawnPlace;
     [SerializeField] private GameObject _volunteer;
     [SerializeField] private AnimalSpawner _animalSpawner;
+
+    private bool _IsReady = true;
 
     private void Awake()
     {

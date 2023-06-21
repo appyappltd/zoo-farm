@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
     [SerializeField, Min(0)] private int _maxMedical = 1;
     [SerializeField, Min(0)] private int _maxOther = 3;
 
-    [SerializeField] private List<HandItem> items = new();
+    [SerializeField] private List<HandItem> items = new(); //Debag SerializeField
     private int maxCount = 1;
     private CreatureType currType = CreatureType.None;
     private Transform itemPlace = null;
