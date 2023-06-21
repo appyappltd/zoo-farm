@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &1214065779351364844
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &285463082085942619
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2686578070459119770
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &289994521203209629
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6699942107056478989
@@ -354,7 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &342589420754374533
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3220004968539074678
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &367498455728954630
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6957961797193611956
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &447568272156719840
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2104433581526162589
@@ -711,7 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &581839672404749942
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8004591707823092716
@@ -830,7 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &651676751132376591
@@ -932,7 +932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7991682083342548537
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &783109589826349819
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2073285214087304287
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &838459656671501699
@@ -1170,7 +1170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &9222273007510554518
@@ -1187,7 +1187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &870879117266214814
@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7851604189734214399
@@ -1306,7 +1306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1026763058141536241
@@ -1408,7 +1408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &403513393777025234
@@ -1425,7 +1425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1068062437742669987
@@ -1527,7 +1527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3224698115171970996
@@ -1544,7 +1544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1097984951240242462
@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3945719826818142157
@@ -1663,7 +1663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1300759324933387183
@@ -1765,7 +1765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &5195481557515785608
@@ -1782,7 +1782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1356948237241154361
@@ -1884,7 +1884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &919643607255218384
@@ -1901,7 +1901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1479405764618527823
@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3308894899119405158
@@ -2020,7 +2020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1692349487704553273
@@ -2122,7 +2122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2930871675035600307
@@ -2139,7 +2139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1923194373223198101
@@ -2241,7 +2241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &76050886265413020
@@ -2258,7 +2258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &1999341083094888750
@@ -2360,7 +2360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6025957972102077796
@@ -2377,7 +2377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2023186177587358781
@@ -2479,7 +2479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &5189055363214325543
@@ -2496,7 +2496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2157774036578068337
@@ -2598,7 +2598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3991481010134122488
@@ -2615,7 +2615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2169096885199802718
@@ -2717,7 +2717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8733643124302506433
@@ -2734,7 +2734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2190153877768976442
@@ -2836,7 +2836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8819686893477996723
@@ -2853,7 +2853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2343884434451398419
@@ -2955,7 +2955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8639137499958525274
@@ -2972,7 +2972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2437040383492514288
@@ -3074,7 +3074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &1493153407412141204
@@ -3091,7 +3091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2452789909585954644
@@ -3193,7 +3193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2594426248696748554
@@ -3210,7 +3210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2537660012908497891
@@ -3312,7 +3312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &937652684149598685
@@ -3329,7 +3329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2595158097364677325
@@ -3431,7 +3431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &4832681307972660174
@@ -3448,7 +3448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2660568646822045236
@@ -3550,7 +3550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2780417812646874285
@@ -3567,7 +3567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2674635560593294718
@@ -3669,7 +3669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2512486067835122616
@@ -3686,7 +3686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2809856114659665626
@@ -3788,7 +3788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &712251246766304664
@@ -3805,7 +3805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2833097938794237660
@@ -3907,7 +3907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6627289957412394815
@@ -3924,7 +3924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2911549618034621071
@@ -4026,7 +4026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8847809766637000769
@@ -4043,7 +4043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &2974781173094846254
@@ -4145,7 +4145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3203379988461267787
@@ -4162,7 +4162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3043334504003514371
@@ -4309,7 +4309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7330756797559846380
@@ -4326,7 +4326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3182938251623620540
@@ -4428,7 +4428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &4267503280364796960
@@ -4445,7 +4445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3254270545234950178
@@ -4547,7 +4547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &1197721676907641899
@@ -4564,7 +4564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3261852865012170066
@@ -4697,7 +4697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2662779086183651201
@@ -4714,7 +4714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3628009269922774984
@@ -4816,7 +4816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7385696459709968019
@@ -4833,7 +4833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3772278662705525321
@@ -4935,7 +4935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2648137932127119081
@@ -4952,7 +4952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3817066151339802586
@@ -5054,7 +5054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6977445086139076834
@@ -5071,7 +5071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3910983082325891005
@@ -5173,7 +5173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &5982132963304001252
@@ -5190,7 +5190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &3957467808513576548
@@ -5292,7 +5292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3748220347455567953
@@ -5309,7 +5309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4172626289251689754
@@ -5411,7 +5411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3451588195927590202
@@ -5428,7 +5428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4240444958369611923
@@ -5530,7 +5530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3253011675582894266
@@ -5547,7 +5547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4318202305511179722
@@ -5649,7 +5649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &1384561263268471894
@@ -5666,7 +5666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4370700310503013085
@@ -5768,7 +5768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &5552117676744890364
@@ -5785,7 +5785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4413824260947876251
@@ -5887,7 +5887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7629802570082645072
@@ -5904,7 +5904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4458400632411392125
@@ -6006,7 +6006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2639684495124952690
@@ -6023,7 +6023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4513746070133906135
@@ -6125,7 +6125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3223912331595707679
@@ -6142,7 +6142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4559384554274280967
@@ -6244,7 +6244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6836008179878777017
@@ -6261,7 +6261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4629449027988476094
@@ -6363,7 +6363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &4944647731741351406
@@ -6380,7 +6380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4701904387703950823
@@ -6482,7 +6482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6160224593790232472
@@ -6499,7 +6499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &4825773898172444593
@@ -6601,7 +6601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &5453560954111872260
@@ -6618,7 +6618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &5017170095676998937
@@ -6720,7 +6720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3304032780527310307
@@ -6737,7 +6737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &5155345193240599009
@@ -6839,7 +6839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7144316394899566134
@@ -6856,7 +6856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &5194483259507743253
@@ -6958,7 +6958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &728371980522796236
@@ -6975,7 +6975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &5282452290350534528
@@ -7201,7 +7201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3076855854648253555
@@ -7218,7 +7218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &5450950172558424407
@@ -7320,7 +7320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8425170064618223854
@@ -7337,7 +7337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &5453140962585637466
@@ -7439,7 +7439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8339937307559558833
@@ -7456,7 +7456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &5509615050916128333
@@ -7558,7 +7558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &1876646396644320089
@@ -7575,7 +7575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &5689199505156141125
@@ -7677,7 +7677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &434537064503420574
@@ -7694,7 +7694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6033431688031442607
@@ -7796,7 +7796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &9079939476380142017
@@ -7813,7 +7813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6042519272252370300
@@ -7915,7 +7915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &4460970721942891736
@@ -7932,7 +7932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6122131154661561959
@@ -8034,7 +8034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &3175829655334912804
@@ -8051,7 +8051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6124369328276062084
@@ -8153,7 +8153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7888516584979832093
@@ -8170,7 +8170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6181415828829840013
@@ -8272,7 +8272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8019727339259754531
@@ -8289,7 +8289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6282297199036667591
@@ -8391,7 +8391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &5726322581664736575
@@ -8408,7 +8408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6394501366502017571
@@ -8510,7 +8510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8949308486709568443
@@ -8527,7 +8527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6564606271879095913
@@ -8629,7 +8629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &1036703352065041639
@@ -8646,7 +8646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6657549846124779538
@@ -8748,7 +8748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2110322468472267782
@@ -8765,7 +8765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6701083203195840566
@@ -8867,7 +8867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2777065691141445394
@@ -8884,7 +8884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6724237508899554189
@@ -8986,7 +8986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6560565681473091296
@@ -9003,7 +9003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6808529801744241435
@@ -9105,7 +9105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2432026229078381479
@@ -9122,7 +9122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6837123814172677309
@@ -9224,7 +9224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8553930918732863351
@@ -9241,7 +9241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6867031959339794371
@@ -9343,7 +9343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2379367653518335453
@@ -9360,7 +9360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6932285278853938764
@@ -9462,7 +9462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &9079994218261135728
@@ -9479,7 +9479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &6972828348057108922
@@ -9581,7 +9581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &439885480630725039
@@ -9598,7 +9598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &7238501785590699075
@@ -9700,7 +9700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7647940456263487622
@@ -9717,7 +9717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &7414812576902828440
@@ -9819,7 +9819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &618027418692921145
@@ -9836,7 +9836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &7544301488757274526
@@ -9938,7 +9938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &560553995822253903
@@ -9955,7 +9955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &7639215624843206808
@@ -10057,7 +10057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &5663285599658664492
@@ -10074,7 +10074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &7698820313980077475
@@ -10176,7 +10176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &8470741319814818401
@@ -10193,7 +10193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &7911757622663513713
@@ -10468,7 +10468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &1259412520157757403
@@ -10485,7 +10485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &8550437590431259882
@@ -10587,7 +10587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6122682809977922226
@@ -10604,7 +10604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &8620468294215459786
@@ -10706,7 +10706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &4436366044683568536
@@ -10723,7 +10723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &8622816394726488456
@@ -10825,7 +10825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &1079391758155983589
@@ -10842,7 +10842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &8875999367394772153
@@ -10944,7 +10944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &2268664570242939834
@@ -10961,7 +10961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &8943620718850787525
@@ -11063,7 +11063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &6999608738373474732
@@ -11080,7 +11080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &8984844198508721916
@@ -11182,7 +11182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7244687617213806923
@@ -11199,7 +11199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &9157849014815452068
@@ -11301,7 +11301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &9174149432883977854
@@ -11318,7 +11318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1 &9207339053078380591
@@ -11420,7 +11420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.9
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!114 &7121762486684060598
@@ -11437,7 +11437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.8
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
 --- !u!1001 &8016200215826975740
