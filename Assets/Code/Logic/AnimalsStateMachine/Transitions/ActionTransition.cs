@@ -21,7 +21,6 @@ namespace Logic.AnimalsStateMachine.Transitions
         public void SetConditionTrue()
         {
             IsCondition = true;
-            Debug.Log($"set true {GetType()}");
         }
 
         public void SetUnsubscribeAction(Action action) =>

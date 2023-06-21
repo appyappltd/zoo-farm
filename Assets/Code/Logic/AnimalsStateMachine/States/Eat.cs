@@ -17,15 +17,15 @@ namespace Logic.AnimalsStateMachine.States
         protected override void PlayAnimation(AnimalAnimator animator) =>
             animator.SetEat();
 
-        // protected override void OnExit()
-        // {
-        //     _
-        // }
-
         protected override void OnUpdate()
         {
             base.OnUpdate();
             _bowlBarOperator.Update(Time.deltaTime);
+        }
+
+        protected override void OnExit()
+        {
+            base.OnExit();
         }
     }
 }

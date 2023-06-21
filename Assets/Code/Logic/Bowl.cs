@@ -26,13 +26,11 @@ namespace Logic
         public void Replenish(int amount)
         {
             _food.Replenish(amount);
-            Debug.Log("Replenish" + _food.Current.Value);
         }
 
         public void Spend(int amount)
         {
             _food.Spend(amount);
-            Debug.Log("Spend" + _food.Current.Value);
         }
 
         [Button("Replenish", EButtonEnableMode.Playmode)] [Conditional("UNITY_EDITOR")]

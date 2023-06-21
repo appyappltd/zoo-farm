@@ -1,5 +1,6 @@
 using System;
 using Observables;
+using UnityEngine;
 
 namespace Progress
 {
@@ -15,7 +16,7 @@ namespace Progress
         public Observable<float> Current { get; }
         public float CurrentNormalized => Current.Value / Max;
         public bool IsEmpty => Current.Value <= float.Epsilon;
-        public bool IsFull => Current.Value >= Max - 0.001f;
+        public bool IsFull => Current.Value >= Max - float.Epsilon;
         public ProgressBar(float max, float current)
         {
             Max = max;
@@ -24,7 +25,10 @@ namespace Progress
 
         public void Replenish(float amount)
         {
-            if (Validate(amount, ReplenishErrorMessage, () => Current.Value + amount >= Max - 0.001f))
+            if (IsFull)
+                return;
+
+            if (Validate(amount, ReplenishErrorMessage, () => Current.Value + amount >= Max - float.Epsilon))
             {
                 Current.Value = Max;
                 Full.Invoke();
@@ -36,6 +40,9 @@ namespace Progress
 
         public void Spend(float amount)
         {
+            if (IsEmpty)
+                return;
+
             if (Validate(amount, SpendErrorMessage, () => Current.Value - amount <= float.Epsilon))
             {
                 Current.Value = 0;
