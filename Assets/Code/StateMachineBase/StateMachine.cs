@@ -1,14 +1,18 @@
+using System;
 using System.Collections.Generic;
+using Logic.AnimalsStateMachine.States;
 using NTC.Global.Cache;
-using UnityEngine;
+using Observables;
 
 namespace StateMachineBase
 {
     public abstract class StateMachine : MonoCache
     {
+        public readonly Observable<Type> CurrentStateType = new Observable<Type>(typeof(Idle));
+        
         private State _currentState;
         private State _initialState;
-
+        
         public void Stop() =>
             enabled = false;
 
@@ -45,6 +49,7 @@ namespace StateMachineBase
             _currentState?.Exit();
             _currentState = newState;
             _currentState.Enter();
+            CurrentStateType.Value = _currentState.GetType();
         }
     }
 }
