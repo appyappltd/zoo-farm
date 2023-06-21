@@ -1,6 +1,6 @@
 namespace Logic.AnimalsBehaviour.Emotions
 {
-    public enum Emotions : byte
+    public enum EmotionId : byte
     {
         None,
         Healthy,

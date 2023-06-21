@@ -1,5 +1,6 @@
 using Logic.AnimalsBehaviour.Emotions;
 using Logic.AnimalsStateMachine;
+using Services.StaticData;
 using UnityEngine;
 
 namespace Logic.AnimalsBehaviour
@@ -13,6 +14,7 @@ namespace Logic.AnimalsBehaviour
         private PersonalEmotionService _emotionService;
         private AnimalStateMachineObserver _stateMachineObserver;
         private AnimalId _animalId;
+        private IStaticDataService _staticDataService;
 
         public AnimalId AnimalId => _animalId;
 
@@ -22,15 +24,16 @@ namespace Logic.AnimalsBehaviour
             _emotionService.Unregister(_stateMachineObserver);
         }
 
-        public void Construct(AnimalId animalId)
+        public void Construct(AnimalId animalId, IStaticDataService staticDataService)
         {
+            _staticDataService = staticDataService;
             _animalId = animalId;
         }
 
         public void AttachHouse(AnimalHouse house)
         {
             _stateMachine.Construct(house.RestPlace, house.EatPlace);
-            _emotionService = new PersonalEmotionService(_emotionBubble);
+            _emotionService = new PersonalEmotionService(_staticDataService, _emotionBubble);
             _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine);
             _emotionService.Register(_stateMachineObserver);
             Activate();

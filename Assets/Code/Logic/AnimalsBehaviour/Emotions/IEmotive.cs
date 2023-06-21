@@ -4,7 +4,7 @@ namespace Logic.AnimalsBehaviour.Emotions
 {
     public interface IEmotive
     {
-        event Action<Emotions> ShowEmotion;
-        event Action<Emotions> SuppressEmotion;
+        event Action<EmotionId> ShowEmotion;
+        event Action<EmotionId> SuppressEmotion;
     }
 }

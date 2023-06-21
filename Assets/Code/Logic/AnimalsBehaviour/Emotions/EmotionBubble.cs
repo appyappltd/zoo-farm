@@ -8,7 +8,7 @@ namespace Logic.AnimalsBehaviour.Emotions
 
         public void UpdateEmotion(Emotion emotion)
         {
-            // _spriteRenderer.sprite = emotion.Sprite;
+            _icon.sprite = emotion.Sprite;
             Debug.Log($"Update emotion to {emotion.Name}");
         }
     }

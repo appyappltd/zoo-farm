@@ -9,16 +9,16 @@ namespace Logic.AnimalsStateMachine
     public class AnimalStateMachineObserver : IEmotive, IDisposable
     {
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
-        private readonly Dictionary<Type, Emotions> _emotionsPerState = new Dictionary<Type, Emotions>
+        private readonly Dictionary<Type, EmotionId> _emotionsPerState = new Dictionary<Type, EmotionId>
         {
-            [typeof(Eat)] = Emotions.Eating,
-            [typeof(Rest)] = Emotions.Sleeping,
-            [typeof(Idle)] = Emotions.Healthy,
+            [typeof(Eat)] = EmotionId.Eating,
+            [typeof(Rest)] = EmotionId.Sleeping,
+            [typeof(Idle)] = EmotionId.Healthy,
         };
 
-        public event Action<Emotions> ShowEmotion = e => { };
+        public event Action<EmotionId> ShowEmotion = e => { };
 
-        public event Action<Emotions> SuppressEmotion = e => { };
+        public event Action<EmotionId> SuppressEmotion = e => { };
 
         public AnimalStateMachineObserver(AnimalStateMachine stateMachine) =>
             _compositeDisposable.Add(stateMachine.CurrentStateType.Then(OnStateChanged));
@@ -28,7 +28,7 @@ namespace Logic.AnimalsStateMachine
 
         private void OnStateChanged(Type prev, Type curr)
         {
-            if (_emotionsPerState.TryGetValue(prev, out Emotions emotion))
+            if (_emotionsPerState.TryGetValue(prev, out EmotionId emotion))
             {
                 SuppressEmotion.Invoke(emotion);
             }

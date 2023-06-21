@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Services.StaticData;
+using UnityEngine;
 
 namespace Logic.AnimalsBehaviour.Emotions
 {
@@ -6,17 +8,20 @@ namespace Logic.AnimalsBehaviour.Emotions
     {
         private readonly List<IEmotive> _emotivs = new List<IEmotive>();
         private readonly Stack<Emotion> _emotionsStack = new Stack<Emotion>();
-        private readonly List<Emotions> _suppressEmotionsOrder = new List<Emotions>();
+        private readonly List<EmotionId> _suppressEmotionsOrder = new List<EmotionId>();
+        private readonly Dictionary<EmotionId, Emotion> _allEmotions = new Dictionary<EmotionId, Emotion>();
 
+        private readonly IStaticDataService _staticDataService;
         private readonly EmotionBubble _emotionBubble;
 
-        public PersonalEmotionService(EmotionBubble emotionBubble)
+        public PersonalEmotionService(IStaticDataService staticDataService, EmotionBubble emotionBubble)
         {
+            _staticDataService = staticDataService;
             _emotionBubble = emotionBubble;
-            _emotionsStack.Push(new Emotion(Emotions.None, null));
+            _emotionsStack.Push(new Emotion(EmotionId.None, null));
         }
 
-        private Emotions ActiveEmotion => _emotionsStack.Peek().Name;
+        private EmotionId ActiveEmotionId => _emotionsStack.Peek().Name;
         
         public void Register(IEmotive emotive)
         {
@@ -48,33 +53,32 @@ namespace Logic.AnimalsBehaviour.Emotions
             emotive.SuppressEmotion -= OnSuppressEmotion;
         }
 
-        private void OnSuppressEmotion(Emotions emotion)
+        private void OnSuppressEmotion(EmotionId emotionId)
         {
-            if (ActiveEmotion == emotion)
+            if (ActiveEmotionId == emotionId)
             {
                 SuppressEmotions();
             }
             else
             {
-                _suppressEmotionsOrder.Add(emotion);
+                _suppressEmotionsOrder.Add(emotionId);
             }
         }
 
-        private void OnShowEmotion(Emotions emotionType)
+        private void OnShowEmotion(EmotionId emotionIdType)
         {
-            Emotion emotion = new Emotion(emotionType, null);
+            Emotion emotion = _staticDataService.EmotionById(emotionIdType);
             _emotionsStack.Push(emotion);
             _emotionBubble.UpdateEmotion(emotion);
-            
         }
 
         private void SuppressEmotions()
         {
             SuppressActiveEmotion();
 
-            while (_suppressEmotionsOrder.Contains(ActiveEmotion))
+            while (_suppressEmotionsOrder.Contains(ActiveEmotionId))
             {
-                _suppressEmotionsOrder.Remove(ActiveEmotion);
+                _suppressEmotionsOrder.Remove(ActiveEmotionId);
                 SuppressActiveEmotion();
             }
         }
