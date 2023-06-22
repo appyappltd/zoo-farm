@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using Builders;
 using Infrastructure.AssetManagement;
+using Logic.AnimalsBehaviour;
 using Logic.Spawners;
 using Services.PersistentProgress;
 using Services.Randomizer;
+using Services.StaticData;
 using UnityEngine;
 
 namespace Infrastructure.Factory
@@ -16,12 +19,15 @@ namespace Infrastructure.Factory
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
+        private AnimalBuilder _animalBuilder;
+        
         public GameFactory(IAssetProvider assets, IRandomService randomService,
-            IPersistentProgressService persistentProgressService)
+            IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
         {
             _assets = assets;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
+            _animalBuilder = new AnimalBuilder(staticDataService);
         }
 
         public void Cleanup()
@@ -52,6 +58,7 @@ namespace Infrastructure.Factory
         public GameObject CreateAnimal(AnimalType animalType, Vector3 at)
         {
             GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalType}", at);
+            _animalBuilder.Build(animal.GetComponent<Animal>());
             return animal;
         }
 

@@ -9,7 +9,9 @@ namespace Logic.AnimalsStateMachine.States
     {
         private readonly ProgressBarOperator _bowlBarOperator;
 
-        public Eat(AnimalAnimator animator, ProgressBarIndicator barIndicator, float changingSpeed, IProgressBar bowlBar) : base(animator, barIndicator, changingSpeed)
+        public Eat(AnimalAnimator animator, ProgressBarIndicator barIndicator, float changingSpeed,
+            IProgressBar bowlBar)
+            : base(animator, barIndicator, changingSpeed)
         {
             _bowlBarOperator = new ProgressBarOperator(bowlBar, changingSpeed, true);
         }
@@ -21,11 +23,6 @@ namespace Logic.AnimalsStateMachine.States
         {
             base.OnUpdate();
             _bowlBarOperator.Update(Time.deltaTime);
-        }
-
-        protected override void OnExit()
-        {
-            base.OnExit();
         }
     }
 }

@@ -1,13 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Logic.AnimalsBehaviour.Emotions;
+using StaticData;
 using UnityEngine;
 
 namespace Services.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        public void Load() { }
+        private const string EmotionConfigPath = "StaticData/EmotionConfigs";
+        
+        private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
+
+        public void Load()
+        {
+            _emotionConfigs = LoadFor<EmotionConfig, EmotionId>(EmotionConfigPath, x => x.Name);
+        }
+
+        public Emotion EmotionById(EmotionId emotionId)
+        {
+            EmotionConfig emotionConfig = GetDataFor(emotionId, _emotionConfigs);
+            return new Emotion(emotionId, emotionConfig.Sprite);
+        }
 
         private TData GetDataFor<TData, TKey>(TKey key, IReadOnlyDictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)

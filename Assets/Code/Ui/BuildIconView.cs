@@ -1,3 +1,4 @@
+using Logic.Wallet;
 using Observables;
 using Ui.Elements;
 using UnityEngine;

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Logic.AnimalsBehaviour;
 using Logic.AnimalsBehaviour.AnimalStats;
+using Logic.AnimalsBehaviour.Emotions;
 using Logic.AnimalsBehaviour.Movement;
 using Logic.AnimalsStateMachine.States;
 using Logic.AnimalsStateMachine.Transitions;
