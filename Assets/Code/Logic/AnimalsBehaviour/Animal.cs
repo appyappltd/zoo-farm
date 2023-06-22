@@ -28,17 +28,14 @@ namespace Logic.AnimalsBehaviour
         {
             _staticDataService = staticDataService;
             _animalId = animalId;
-            // _emotionService = new PersonalEmotionService(_emotionProvider);
-            // _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine);
-            // _emotionService.Register(_stateMachineObserver);
+            _emotionService = new PersonalEmotionService(_emotionProvider);
+            _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine);
+            _emotionService.Register(_stateMachineObserver);
         }
 
         public void AttachHouse(AnimalHouse house)
         {
             _stateMachine.Construct(house.RestPlace, house.EatPlace);
-            _emotionService = new PersonalEmotionService(_emotionProvider);
-            _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine);
-            _emotionService.Register(_stateMachineObserver);
             Activate();
         }
         
