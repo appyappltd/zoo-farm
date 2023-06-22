@@ -1,16 +1,10 @@
 using System.Collections.Generic;
-using Logic.AnimalsBehaviour;
 
 namespace StateMachineBase
 {
     public abstract class State
     {
         private readonly List<Transition> _transitions = new List<Transition>();
-
-        protected readonly AnimalAnimator Animator;
-
-        protected State(AnimalAnimator animator) =>
-            Animator = animator;
 
         protected virtual void OnEnter() { }
         protected virtual void OnExit() { }

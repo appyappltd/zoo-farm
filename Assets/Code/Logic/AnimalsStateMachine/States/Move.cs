@@ -1,11 +1,10 @@
 ﻿using Logic.AnimalsBehaviour;
 using Logic.AnimalsBehaviour.Movement;
-using StateMachineBase;
 using UnityEngine;
 
 namespace Logic.AnimalsStateMachine.States
 {
-    public abstract class Move : State
+    public abstract class Move : AnimalState
     {
         private readonly AnimalAnimator _animator;
         private readonly AnimalMover _mover;
