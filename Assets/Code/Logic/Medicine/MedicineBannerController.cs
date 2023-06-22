@@ -12,6 +12,6 @@ public class MedicineBannerController : MonoBehaviour
 
         var inventory = GetComponent<Inventory>();
         inventory.AddItem += _ => _banner.SetActive(true);
-        inventory.RemoveItem += () => _banner.SetActive(false);
+        inventory.RemoveItem += _ => _banner.SetActive(false);
     }
 }

@@ -6,16 +6,18 @@ using Data.ItemsData;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Storage))]
 public class Inventory : MonoBehaviour
 {
     public event UnityAction<HandItem> AddItem;
-    public event UnityAction RemoveItem;
+    public event UnityAction<HandItem> RemoveItem;
 
-    public bool IsMax => maxCount == items.Count;
+    public HandItem GetLast => items.Last();
+    public HandItem GetPreLast => items[^1];
     public int GetCount => items.Count;
     public Transform GetItemPlace => itemPlace;
     public CreatureType Type => currType;
-    public ItemData GetDataFirstElement => items.First().ItemData;
+    public ItemData GetData => items.First().ItemData;
 
     [field: SerializeField] public Transform DefItemPlace { get; private set; }
     [SerializeField] private CreatureType _inventoryType = CreatureType.None;
@@ -53,12 +55,6 @@ public class Inventory : MonoBehaviour
         if (currType == CreatureType.None)
             ChangeType(item.ItemData.Creature);
         items.Add(item);
-
-        var mover = item.GetComponent<IMover>();
-        mover.Move(itemPlace);
-        mover.GotToPlace += () => item.transform.SetParent(DefItemPlace);
-
-        itemPlace = item.NextPlace;
         AddItem?.Invoke(item);
     }
 
@@ -78,7 +74,7 @@ public class Inventory : MonoBehaviour
             itemPlace = DefItemPlace;
             currType = _inventoryType;
         }
-        RemoveItem?.Invoke();
+        RemoveItem?.Invoke(item);
 
         return item;
     }

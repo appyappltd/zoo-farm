@@ -49,7 +49,7 @@ public class MedicineBed : MonoBehaviour
             return;
         if (!playerInventory.CanGiveItem(_data[index].Creature))
             return;
-        if (playerInventory.GetDataFirstElement.Hand.GetComponent<Medicine>().Type !=
+        if (playerInventory.GetData.Hand.GetComponent<Medicine>().Type !=
                   _data[index].Hand.GetComponent<Medicine>().Type)
             return;
 

@@ -6422,9 +6422,10 @@ GameObject:
   - component: {fileID: 935274389}
   - component: {fileID: 935274388}
   - component: {fileID: 935274387}
-  - component: {fileID: 935274385}
   - component: {fileID: 935274386}
   - component: {fileID: 935274391}
+  - component: {fileID: 935274393}
+  - component: {fileID: 935274392}
   m_Layer: 7
   m_Name: Gate
   m_TagString: Untagged
@@ -6432,20 +6433,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &935274385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935274384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af733fc54e070af4a8eeb2f1d8deb9a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <ClosePlace>k__BackingField: {x: 0, y: 0, z: 0}
-  <OpenPlace>k__BackingField: {x: -0.5, y: 0, z: 0}
 --- !u!114 &935274386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6559,6 +6546,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 262c3e2d60effb34486a59af6aa7d6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 0
+  _isPreload: 0
+  _isLooped: 0
+  _from: {x: 0, y: 0, z: 0}
+  _to: {x: 0, y: 0, z: 0}
+--- !u!114 &935274392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935274384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985a86319577d5141be6fa150ea84fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ClosePlace>k__BackingField: {x: -0.5, y: 0.8, z: 0}
+  <OpenPlace>k__BackingField: {x: -1, y: 0.8, z: 0}
+--- !u!114 &935274393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935274384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff6b4a66917a3a46bd890e93be22400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0
@@ -9568,8 +9586,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gates:
-  - {fileID: 935274385}
-  - {fileID: 1792549045}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1322224254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11764,9 +11782,10 @@ GameObject:
   - component: {fileID: 1792549049}
   - component: {fileID: 1792549048}
   - component: {fileID: 1792549047}
-  - component: {fileID: 1792549045}
   - component: {fileID: 1792549046}
   - component: {fileID: 1792549051}
+  - component: {fileID: 1792549053}
+  - component: {fileID: 1792549052}
   m_Layer: 7
   m_Name: Gate (1)
   m_TagString: Untagged
@@ -11774,20 +11793,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1792549045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792549044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af733fc54e070af4a8eeb2f1d8deb9a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <ClosePlace>k__BackingField: {x: 0, y: 0, z: 0}
-  <OpenPlace>k__BackingField: {x: 0.5, y: 0, z: 0}
 --- !u!114 &1792549046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11901,6 +11906,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 262c3e2d60effb34486a59af6aa7d6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 0
+  _isPreload: 0
+  _isLooped: 0
+  _from: {x: 0, y: 0, z: 0}
+  _to: {x: 0, y: 0, z: 0}
+--- !u!114 &1792549052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792549044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985a86319577d5141be6fa150ea84fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ClosePlace>k__BackingField: {x: 0.5, y: 0.8, z: 0}
+  <OpenPlace>k__BackingField: {x: 1, y: 0.8, z: 0}
+--- !u!114 &1792549053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792549044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff6b4a66917a3a46bd890e93be22400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0

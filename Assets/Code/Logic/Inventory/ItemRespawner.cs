@@ -12,7 +12,7 @@ public class ItemRespawner : MonoBehaviour
     private void Awake()
     {
         inventory = GetComponent<Inventory>();
-        inventory.RemoveItem += () =>
+        inventory.RemoveItem += _ =>
         {
             StartCoroutine(RespawnItem());
 
