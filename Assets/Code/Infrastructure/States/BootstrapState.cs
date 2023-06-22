@@ -48,8 +48,10 @@ namespace Infrastructure.States
                 new GameFactory(
                     _services.Single<IAssetProvider>(),
                     _services.Single<IRandomService>(),
-                    _services.Single<IPersistentProgressService>()));
-            _services.RegisterSingle<IAnimalHouseService>(new AnimalHouseService(_services.Single<IGameFactory>()));
+                    _services.Single<IPersistentProgressService>(),
+                    _services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IAnimalHouseService>(
+                new AnimalHouseService(_services.Single<IGameFactory>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
