@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(RunTranslator))]
+[RequireComponent(typeof(TriggerObserver))]
 public class Gates : MonoBehaviour
 {
     [SerializeField] private List<Gate> gates = new();
@@ -18,15 +20,15 @@ public class Gates : MonoBehaviour
         var trigger = GetComponent<TriggerObserver>();
         trigger.Enter += _ => Open();
         trigger.Exit += _ => Close();
-
     }
+
     [Button("Open", enabledMode: EButtonEnableMode.Playmode)]
     private void Open()
     {
         foreach (var gate in gates)
         {
-            var positionTranslatable = gate.GetComponent<LinearPositionTranslatable>();
-            positionTranslatable.Play(gate.transform.position, gate.OpenPlace);
+            var positionTranslatable = gate.GetComponent<LocalLinearPositionTranslatable>();
+            positionTranslatable.Play(gate.transform.localPosition, gate.OpenPlace);
             translator.AddTranslatable(positionTranslatable);
         }
     }
@@ -36,8 +38,8 @@ public class Gates : MonoBehaviour
     {
         foreach (var gate in gates)
         {
-            var positionTranslatable = gate.GetComponent<LinearPositionTranslatable>();
-            positionTranslatable.Play(gate.transform.position, gate.ClosePlace);
+            var positionTranslatable = gate.GetComponent<LocalLinearPositionTranslatable>();
+            positionTranslatable.Play(gate.transform.localPosition, gate.ClosePlace);
             translator.AddTranslatable(positionTranslatable);
         }
     }
