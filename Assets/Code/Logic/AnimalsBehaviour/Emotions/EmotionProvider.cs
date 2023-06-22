@@ -1,20 +1,24 @@
-using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 namespace Logic.AnimalsBehaviour.Emotions
 {
     public class EmotionProvider : MonoBehaviour
     {
-        private GameObject _currentEmotion;
+        private EmotionView _currentEmotion;
 
-        // Заменить на сериализуемый словарь
-        private Dictionary<EmotionId, GameObject> _emotions = new Dictionary<EmotionId, GameObject>();
+        [SerializeField] private SerializedDictionary<EmotionId, EmotionView> _emotions;
+
+        private void Awake()
+        {
+            _currentEmotion = _emotions[EmotionId.Healthy];
+        }
 
         public void ChangeEmotion(EmotionId id)
         {
-            _currentEmotion.SetActive(false);
+            _currentEmotion.Hide();
             _currentEmotion = _emotions[id];
-            _currentEmotion.SetActive(true);
+            _currentEmotion.Show();
         }
     }
 }

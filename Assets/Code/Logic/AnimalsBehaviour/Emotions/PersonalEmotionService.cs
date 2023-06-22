@@ -7,21 +7,18 @@ namespace Logic.AnimalsBehaviour.Emotions
     public class PersonalEmotionService : IPersonalEmotionService
     {
         private readonly List<IEmotive> _emotivs = new List<IEmotive>();
-        private readonly Stack<Emotion> _emotionsStack = new Stack<Emotion>();
+        private readonly Stack<EmotionId> _emotionsStack = new Stack<EmotionId>();
         private readonly List<EmotionId> _suppressEmotionsOrder = new List<EmotionId>();
-        private readonly Dictionary<EmotionId, Emotion> _allEmotions = new Dictionary<EmotionId, Emotion>();
+        
+        private readonly EmotionProvider _emotionProvider;
 
-        private readonly IStaticDataService _staticDataService;
-        private readonly EmotionBubble _emotionBubble;
-
-        public PersonalEmotionService(IStaticDataService staticDataService, EmotionBubble emotionBubble)
+        public PersonalEmotionService(EmotionProvider emotionProvider)
         {
-            _staticDataService = staticDataService;
-            _emotionBubble = emotionBubble;
-            _emotionsStack.Push(new Emotion(EmotionId.None, null));
+            _emotionProvider = emotionProvider;
+            _emotionsStack.Push(EmotionId.None);
         }
 
-        private EmotionId ActiveEmotionId => _emotionsStack.Peek().Name;
+        private EmotionId ActiveEmotionId => _emotionsStack.Peek();
         
         public void Register(IEmotive emotive)
         {
@@ -65,11 +62,10 @@ namespace Logic.AnimalsBehaviour.Emotions
             }
         }
 
-        private void OnShowEmotion(EmotionId emotionIdType)
+        private void OnShowEmotion(EmotionId emotionId)
         {
-            Emotion emotion = _staticDataService.EmotionById(emotionIdType);
-            _emotionsStack.Push(emotion);
-            _emotionBubble.UpdateEmotion(emotion);
+            _emotionsStack.Push(emotionId);
+            _emotionProvider.ChangeEmotion(emotionId);
         }
 
         private void SuppressEmotions()
@@ -85,7 +81,7 @@ namespace Logic.AnimalsBehaviour.Emotions
 
         private void SuppressActiveEmotion()
         {
-            _emotionBubble.UpdateEmotion(_emotionsStack.Pop());
+            _emotionProvider.ChangeEmotion(_emotionsStack.Pop());
         }
     }
 }

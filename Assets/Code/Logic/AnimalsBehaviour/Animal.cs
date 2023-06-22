@@ -9,7 +9,7 @@ namespace Logic.AnimalsBehaviour
     {
         [SerializeField] private AnimalStateMachine _stateMachine;
         [SerializeField] private Jumper _jumper;
-        [SerializeField] private EmotionBubble _emotionBubble;
+        [SerializeField] private EmotionProvider _emotionProvider;
 
         private PersonalEmotionService _emotionService;
         private AnimalStateMachineObserver _stateMachineObserver;
@@ -28,12 +28,15 @@ namespace Logic.AnimalsBehaviour
         {
             _staticDataService = staticDataService;
             _animalId = animalId;
+            // _emotionService = new PersonalEmotionService(_emotionProvider);
+            // _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine);
+            // _emotionService.Register(_stateMachineObserver);
         }
 
         public void AttachHouse(AnimalHouse house)
         {
             _stateMachine.Construct(house.RestPlace, house.EatPlace);
-            _emotionService = new PersonalEmotionService(_staticDataService, _emotionBubble);
+            _emotionService = new PersonalEmotionService(_emotionProvider);
             _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine);
             _emotionService.Register(_stateMachineObserver);
             Activate();
