@@ -14,7 +14,6 @@ namespace Logic
 
         private IEnumerator Test()
         {
-            Debug.Log("run");
             yield return null;
         }
     }

@@ -7,6 +7,7 @@ using Services;
 using System;
 using System.Collections;
 using Logic.Wallet;
+using Observables;
 using UnityEngine;
 
 [RequireComponent(typeof(RunTranslator))]
@@ -15,18 +16,20 @@ public class Consumer : MonoBehaviour
 {
     public event Action Bought = () => { };
 
-    [SerializeField, Min(1)] private int _cost = 10;
     [SerializeField, Min(0f)] private float _time = .1f;
 
+    private int _defaultCost;
     private VisualTranslatorsSpawner spawner;
     private RunTranslator translator;
     private TriggerObserver trigger;
-    private int leftCoinsToPay;
     private Wallet wallet;
+    private Observable<int> leftCoinsToPay;
+
+    public Observables.IObservable<int> LeftCoinsToPay => leftCoinsToPay;
 
     private void Awake()
     {
-        leftCoinsToPay = _cost;
+        leftCoinsToPay = new Observable<int>();
 
         translator = GetComponent<RunTranslator>();
         trigger = GetComponent<TriggerObserver>();
@@ -37,8 +40,11 @@ public class Consumer : MonoBehaviour
         GetComponent<Delay>().Complete += _ => StartCoroutine(TakeCoins());
     }
 
-    public void SetCost(int buildCost) =>
-        _cost = buildCost;
+    public void SetCost(int buildCost)
+    {
+        _defaultCost = buildCost;
+        leftCoinsToPay.Value = buildCost;
+    }
 
     private void Init(GameObject player)
     {
@@ -56,19 +62,18 @@ public class Consumer : MonoBehaviour
 
     private IEnumerator TakeCoins()
     {
-        leftCoinsToPay = _cost;
-
-        while (leftCoinsToPay > 0)
+        while (leftCoinsToPay.Value > 0)
         {
             if (!wallet.TrySpend(1))
                 break;
-            leftCoinsToPay--;
+
+            leftCoinsToPay.Value--;
 
             var translatable = spawner.Spawn().MainTranslatable;
-            
-            if (leftCoinsToPay == 0)
-                translatable.End += Buy;
 
+            if (leftCoinsToPay.Value == 0)
+                translatable.End += Buy;
+            
             yield return new WaitForSeconds(_time);
         }
     }
@@ -77,5 +82,6 @@ public class Consumer : MonoBehaviour
     {
         Bought.Invoke();
         translatable.End -= Buy;
+        leftCoinsToPay.Value = _defaultCost;
     }
 }

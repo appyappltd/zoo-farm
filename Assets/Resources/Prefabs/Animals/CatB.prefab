@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _reduceSpeed: 5.17
+  _reduceSpeed: 0.1
 --- !u!1 &2662996136815657581
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,8 +191,8 @@ MonoBehaviour:
   _vitality: {fileID: 6708439799499972674}
   _satiety: {fileID: 7394784145383802163}
   _peppiness: {fileID: 6058482536156151028}
-  _satietyReplanishSpeed: 15
-  _peppinessReplanishSpeed: 15
+  _satietyReplanishSpeed: 0.15
+  _peppinessReplanishSpeed: 0.15
   _maxWanderDistance: 3
   _restPlace: {fileID: 0}
   _eatPlace: {fileID: 0}
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _reduceSpeed: 5.04
+  _reduceSpeed: 0.1
 --- !u!1 &3517778643612403819
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +877,7 @@ Transform:
   - {fileID: 6141999466103048871}
   - {fileID: 8546131362293066920}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -45.2, z: 0}
 --- !u!195 &8923622328995443917
 NavMeshAgent:
@@ -1382,7 +1382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _reduceSpeed: 0.02
+  _reduceSpeed: 0.01
 --- !u!1 &8101718673406365527
 GameObject:
   m_ObjectHideFlags: 0

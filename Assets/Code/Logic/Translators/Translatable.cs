@@ -3,6 +3,7 @@ using NaughtyAttributes;
 using NTC.Global.Cache;
 using NTC.Global.System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Logic.Translators
 {
@@ -12,7 +13,7 @@ namespace Logic.Translators
 
         [SerializeField] private float _speed;
         [SerializeField] private bool _isPreload;
-        [SerializeField] private bool _looped;
+        [FormerlySerializedAs("_looped")] [SerializeField] private bool _isLooped;
 
         [ShowIf("_isPreload")]
         [SerializeField] private T _from;
@@ -35,10 +36,8 @@ namespace Logic.Translators
         protected abstract void ApplyTranslation(T value);
         protected abstract void SetValueLerp(ref Func<T, T, float, T> valueLerp);
         
-        private void Awake()
-        {
+        private void Awake() =>
             Init();
-        }
 
         private void Init()
         {
@@ -80,13 +79,14 @@ namespace Logic.Translators
             {
                 End.Invoke(this);
 
-                if (_looped == false)
+                if (_isLooped == false)
                     return false;
                 
                 Restart();
                 return true;
             }
 
+            
             float delta = UpdateDelta();
             delta = _deltaModifiers.Invoke(delta);
             T value = _valueLerp.Invoke(_from, _to, delta);

@@ -6,6 +6,7 @@ using Player;
 using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
+using Ui;
 using Ui.Elements;
 using Ui.Elements.Buttons;
 using UnityEngine;

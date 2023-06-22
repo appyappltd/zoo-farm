@@ -1,8 +1,9 @@
 using System;
 using Observables;
+using Ui.Elements;
 using UnityEngine;
 
-namespace Ui.Elements
+namespace Ui
 {
     public class MoneyView : MonoBehaviour
     {

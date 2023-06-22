@@ -1,5 +1,4 @@
 using Logic;
-
 namespace Builders
 {
     public class AnimalHouseBuilder

@@ -29,7 +29,6 @@ namespace Pool
         public T Get()
         {
             T item = _pool.Count > 0 ? _pool.Dequeue() : _preloadFunc();
-            Debug.Log(_pool.Count);
             _getAction(item);
             _active.Add(item);
 

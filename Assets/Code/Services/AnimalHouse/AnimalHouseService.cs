@@ -42,7 +42,7 @@ namespace Services.AnimalHouse
 
         public void BuildHouse(Vector3 at)
         {
-            var houseObject = _gameFactory.CreateAnimalHouse(at);
+            GameObject houseObject = _gameFactory.CreateAnimalHouse(at);
             Logic.AnimalHouse builtHouse = houseObject.GetComponent<Logic.AnimalHouse>();
             _animalHouses.Add(builtHouse);
 

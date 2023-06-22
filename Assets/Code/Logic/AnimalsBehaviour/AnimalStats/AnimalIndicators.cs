@@ -28,9 +28,9 @@ namespace Logic.AnimalsBehaviour.AnimalStats
 #if UNITY_EDITOR
         protected override void Run()
         {
-            _vitalityValue = _vitality.ProgressBar.Current;
-            _satietyValue = _satiety.ProgressBar.Current;
-            _peppinessValue = _peppiness.ProgressBar.Current;
+            _vitalityValue = _vitality.ProgressBar.Current.Value;
+            _satietyValue = _satiety.ProgressBar.Current.Value;
+            _peppinessValue = _peppiness.ProgressBar.Current.Value;
         }
 #endif
     }

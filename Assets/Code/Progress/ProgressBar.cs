@@ -1,4 +1,6 @@
 using System;
+using Observables;
+using UnityEngine;
 
 namespace Progress
 {
@@ -6,43 +8,49 @@ namespace Progress
     {
         private const string ReplenishErrorMessage = "Replenish amount must be positive value";
         private const string SpendErrorMessage = "Spend amount must be positive value";
-
+        
         public event Action Full = () => { };
         public event Action Empty = () => { };
 
         public float Max { get; }
-        public float Current { get; private set; }
-        public float CurrentNormalized => Current / Max;
-        public bool IsEmpty => Current <= 0;
-        public bool IsFull => Current >= Max;
+        public Observable<float> Current { get; }
+        public float CurrentNormalized => Current.Value / Max;
+        public bool IsEmpty => Current.Value <= float.Epsilon;
+        public bool IsFull => Current.Value >= Max - float.Epsilon;
         public ProgressBar(float max, float current)
         {
             Max = max;
-            Current = current;
+            Current = new Observable<float>(current);
         }
 
         public void Replenish(float amount)
         {
-            if (Validate(amount, ReplenishErrorMessage, () => Current + amount > Max))
+            if (IsFull)
+                return;
+
+            if (Validate(amount, ReplenishErrorMessage, () => Current.Value + amount >= Max - float.Epsilon))
             {
-                Current = Max;
+                Current.Value = Max;
                 Full.Invoke();
                 return;
             }
 
-            Current += amount;
+            Current.Value += amount;
         }
 
         public void Spend(float amount)
         {
-            if (Validate(amount, SpendErrorMessage, () => Current - amount < 0))
+            if (IsEmpty)
+                return;
+
+            if (Validate(amount, SpendErrorMessage, () => Current.Value - amount <= float.Epsilon))
             {
-                Current = 0;
+                Current.Value = 0;
                 Empty.Invoke();
                 return;
             }
 
-            Current -= amount;
+            Current.Value -= amount;
         }
 
         private bool Validate(float amount, string errorMessage, Func<bool> validateFunc)
