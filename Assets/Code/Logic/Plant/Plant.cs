@@ -49,7 +49,7 @@ namespace Logic.Plant
                 drop.PickUp += _ =>
                 {
                     canGrow = true;
-                    _sine.SetActive(true);
+                    StartGrow();
                 };
             }
         }

@@ -5,6 +5,7 @@ using Logic.Inventory;
 using Logic.Movement;
 using Tools.Extension;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Logic.Volunteer
 {
@@ -19,30 +20,42 @@ namespace Logic.Volunteer
         [SerializeField] private TransmittingAnimals _transmitting;
 
         private List<VolunteerMovement> volunteers = new();
+        private Rotater rotater;
+        private AnimationMover mover;
 
         private void Awake()
         {
             _target.position = _defTarget.position;
-            _spawner.SpawnV += AddVolunteers;
+            _spawner.SpawnV += AddVolunteer;
         }
 
-        public void AddVolunteers(VolunteerMovement volunteer)
+        public void AddVolunteer(VolunteerMovement volunteer)
         {
             volunteers.Add(volunteer);
-            var mover = volunteer.GetComponent<AnimationMover>();
-            var rotater = volunteer.GetComponent<Rotater>();
+            mover = volunteer.GetComponent<AnimationMover>();
+            rotater = volunteer.GetComponent<Rotater>();
             volunteer.GetComponent<PathMover>().SetPoints(new Transform[] { _defTargetOut1, _defTargetOut2 });
 
             rotater.Rotate(_target);
             mover.Move(_target);
-            mover.GotToPlace += () => rotater.Rotate(_defTarget);
+            mover.GotToPlace += RotateVolunteer;
+            mover.GotToPlace += Wait;
 
             UpdateTarget();
         }
+        private void Wait()
+        {
+            mover.GotToPlace -= Wait;
+            _spawner.isReady = true;
+            _spawner.TrySpawn();
+        }
 
-        public bool CanGiveAnimal()
-            => volunteers.Count > 0
-               && !volunteers.First().GetComponent<AnimationMover>().IsMoving;
+        private void RotateVolunteer()
+        {
+            rotater.Rotate(_defTarget);
+        }
+
+        public bool CanGiveAnimal() => volunteers.Count > 0 && !volunteers.First().GetComponent<AnimationMover>().IsMoving;
 
         public HandItem GetAnimal()
         {
@@ -59,6 +72,8 @@ namespace Logic.Volunteer
         {
             var volunteer = volunteers.First();
             volunteer.GetComponent<PathMover>().StartWalk();
+            rotater = volunteer.GetComponent<Rotater>();
+            volunteer.GetComponent<AnimationMover>().GotToPlace -= RotateVolunteer;
 
             volunteers.Remove(volunteer);
             MoveQueue();
@@ -74,7 +89,7 @@ namespace Logic.Volunteer
             _target.position = _defTarget.position;
 
             foreach (var v in newVs)
-                AddVolunteers(v);
+                AddVolunteer(v);
         }
     }
 }
