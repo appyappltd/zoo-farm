@@ -15,26 +15,41 @@ namespace Logic.Volunteer
         [SerializeField] private GameObject _volunteer;
         [SerializeField] private AnimalSpawner _animalSpawner;
 
-        private void Awake()
+        public bool isReady = true;
+        private bool canSpawn = true;
+
+        public void Awake()
         {
-            StartCoroutine(CreateVolunteer());
+            TrySpawn();
         }
 
-        private IEnumerator CreateVolunteer()
+        public void TrySpawn()
         {
-            yield return new WaitForSeconds(3);
+            if (!canSpawn || !isReady)
+                return;
+            Spawn();
+        }
 
-            while (true)
-            {
-                var volunteer = Instantiate(_volunteer,_spawnPlace.localPosition,_spawnPlace.rotation);
-                volunteer.transform.SetParent(transform);
-                SpawnV?.Invoke(volunteer.GetComponent<VolunteerMovement>());
-                var storage = volunteer.GetComponent<Storage>();
-                var animal = _animalSpawner.InstantiateAnimal(storage.GetItemPlace);
-                volunteer.GetComponent<Inventory.Inventory>().Add(animal);
+        private void Spawn()
+        {
+            var volunteer = Instantiate(_volunteer, _spawnPlace.position, _spawnPlace.rotation);
+            volunteer.transform.SetParent(transform);
+            SpawnV?.Invoke(volunteer.GetComponent<VolunteerMovement>());
+            var storage = volunteer.GetComponent<Storage>();
+            var animal = _animalSpawner.InstantiateAnimal(storage.GetItemPlace);
+            volunteer.GetComponent<Inventory.Inventory>().Add(animal);
 
-                yield return new WaitForSeconds(Random.Range(_time.x, _time.y));
-            }
+            isReady = false;
+            canSpawn = false;
+
+            StartCoroutine(ReloadSpawn());
+        }
+
+        private IEnumerator ReloadSpawn()
+        {
+            yield return new WaitForSeconds(Random.Range(_time.x, _time.y));
+            canSpawn = true;
+            TrySpawn();
         }
     }
 }
