@@ -8,12 +8,16 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Delay))]
+[RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(Storage))]
+[RequireComponent(typeof(ProductReceiver))]
 public class MedicineBed : MonoBehaviour
 {
     [SerializeField] private List<ItemData> _data = new();
     [SerializeField] private List<Sprite> _sprites = new();
 
     private Inventory inventory;
+    private Storage storage;
     private ProductReceiver receiver;
     private int index = 0;
     private bool canTreat = false;
@@ -28,6 +32,8 @@ public class MedicineBed : MonoBehaviour
 
         inventory = GetComponent<Inventory>();
         receiver = GetComponent<ProductReceiver>();
+        storage = GetComponent<Storage>();
+
         GetComponent<Delay>().Complete += player => Treat(player.GetComponent<Inventory>());
 
         inventory.AddItem += item => item.GetComponent<IMover>().GotToPlace += () =>
@@ -57,7 +63,7 @@ public class MedicineBed : MonoBehaviour
         var mover = item.GetComponent<IMover>();
         var handAnimal = inventory.Remove();
 
-        mover.Move(inventory.DefItemPlace);
+        mover.Move(storage.GetItemPlace);
         mover.GotToPlace += () =>
         {
             houseService.TakeQueueToHouse(() =>

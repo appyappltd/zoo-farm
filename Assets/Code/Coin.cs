@@ -5,6 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(TowardsMover))]
+[RequireComponent(typeof(Storage))]
 public class Coin : MonoBehaviour
 {
     [SerializeField, Min(0)] private int _amount = 1;
@@ -47,9 +48,7 @@ public class Coin : MonoBehaviour
             player.GetComponent<HeroWallet>().Wallet.TryAdd(_amount);
             mover.GotToPlace -= OnCollected;
         }
-
         mover.GotToPlace += OnCollected;
-
-        mover.Move(player.GetComponent<Inventory>().DefItemPlace);
+        mover.Move(player.GetComponent<Storage>().GetItemPlace);
     }
 }

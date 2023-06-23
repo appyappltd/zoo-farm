@@ -6690,10 +6690,10 @@ GameObject:
   - component: {fileID: 4943368622742371110}
   - component: {fileID: 6386952338648535645}
   - component: {fileID: 9080955615377825703}
+  - component: {fileID: 4534267659011596571}
   - component: {fileID: 7803516307033350702}
   - component: {fileID: 5676314901566846583}
   - component: {fileID: 3994947432083371087}
-  - component: {fileID: 7319878189980716396}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Untagged
@@ -6807,6 +6807,20 @@ MonoBehaviour:
   _maxMedical: 1
   _maxOther: 3
   items: []
+--- !u!114 &4534267659011596571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438565683717128180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688b5c76923200049a031ee171dd9d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _places:
+  - {fileID: 5664976398145126870}
 --- !u!114 &7803516307033350702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6844,19 +6858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf4657d46a54114591461a9c91a9689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7319878189980716396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4438565683717128180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1951334a236433e4cb0881fcb75f2199, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bubble: {fileID: 6873257588887230519}
 --- !u!1 &4552098527280804861
 GameObject:
   m_ObjectHideFlags: 0

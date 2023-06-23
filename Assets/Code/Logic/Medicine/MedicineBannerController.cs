@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Inventory))]
 public class MedicineBannerController : MonoBehaviour
 {
     [SerializeField] private GameObject _banner;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(Animator))]
 public class HandsAnimator : MonoBehaviour
 {
     private Inventory inventory;
@@ -14,7 +16,7 @@ public class HandsAnimator : MonoBehaviour
         animC = GetComponent<Animator>();
 
         inventory.AddItem += _ => ChangeHandsState();
-        inventory.RemoveItem += ChangeHandsState;
+        inventory.RemoveItem += _ => ChangeHandsState();
     }
 
     private void ChangeHandsState()
