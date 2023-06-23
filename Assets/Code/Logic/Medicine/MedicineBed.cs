@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Cutscene;
 using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.AnimalsBehaviour;
@@ -8,7 +10,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Delay))]
-public class MedicineBed : MonoBehaviour
+public class MedicineBed : MonoBehaviour , ICutsceneTrigger
 {
     [SerializeField] private List<ItemData> _data = new();
     [SerializeField] private List<Sprite> _sprites = new();
@@ -20,6 +22,11 @@ public class MedicineBed : MonoBehaviour
 
     private IGameFactory gameFactory;
     private IAnimalHouseService houseService;
+    private ICutsceneTrigger _cutsceneTriggerImplementation;
+
+    public event Action<Animal> AnimalHealed = animal => { }; 
+
+    public event Action Triggered = () => { };
 
     private void Awake()
     {
@@ -40,6 +47,7 @@ public class MedicineBed : MonoBehaviour
     }
 
     private void GetRandomIndex() => index = Random.Range(0, _data.Count);
+
 
     private void Treat(Inventory playerInventory)
     {
@@ -65,10 +73,12 @@ public class MedicineBed : MonoBehaviour
                 var animalItemData = (AnimalItemData)handAnimal.ItemData;
                 canTreat = false;
                 receiver.canTake = true;
-
                 Destroy(handAnimal.gameObject);
-                return gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
+                Triggered.Invoke();
+                var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
                     .GetComponent<Animal>();
+                AnimalHealed.Invoke(animal);
+                return animal;
             });
 
             Destroy(handAnimal.GetComponent<BubbleHolder>().GetBubble.gameObject);
