@@ -1,27 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Inventory))]
-[RequireComponent(typeof(Animator))]
-public class HandsAnimator : MonoBehaviour
+namespace Logic
 {
-    private Inventory inventory;
-    private Animator animC;
-    public  bool Debug;
-
-    private void Awake()
+    [RequireComponent(typeof(Inventory.Inventory))]
+    [RequireComponent(typeof(Animator))]
+    public class HandsAnimator : MonoBehaviour
     {
-        inventory = GetComponent<Inventory>();
-        animC = GetComponent<Animator>();
+        private Inventory.Inventory inventory;
+        private Animator animC;
+        public  bool Debug;
 
-        inventory.AddItem += _ => ChangeHandsState();
-        inventory.RemoveItem += _ => ChangeHandsState();
-    }
+        private void Awake()
+        {
+            inventory = GetComponent<Inventory.Inventory>();
+            animC = GetComponent<Animator>();
 
-    private void ChangeHandsState()
-    {
-        Debug = inventory.GetCount > 0;
-        animC.SetBool("IsHold", Debug);
+            inventory.AddItem += _ => ChangeHandsState();
+            inventory.RemoveItem += _ => ChangeHandsState();
+        }
+
+        private void ChangeHandsState()
+        {
+            Debug = inventory.GetCount > 0;
+            animC.SetBool("IsHold", Debug);
+        }
     }
 }

@@ -1,4 +1,6 @@
 using Logic.Interactions;
+using Logic.Inventory;
+using Logic.Movement;
 using Logic.Translators;
 using Player;
 using UnityEngine;

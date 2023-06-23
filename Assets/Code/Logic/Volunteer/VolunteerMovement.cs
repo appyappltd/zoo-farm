@@ -1,19 +1,23 @@
+using Logic.Movement;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AnimationMover))]
-public class VolunteerMovement : MonoBehaviour
+namespace Logic.Volunteer
 {
-    private Animator animC;
-    private AnimationMover mover;
-
-    private void Awake()
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AnimationMover))]
+    public class VolunteerMovement : MonoBehaviour
     {
-        animC = GetComponent<Animator>();
-        mover = GetComponent<AnimationMover>();
-        mover.StartMove += OnMove;
-        mover.GotToPlace += OnMove;
-    }
+        private Animator animC;
+        private AnimationMover mover;
 
-    private void OnMove() => animC.SetBool("IsMoving", mover.IsMoving);
+        private void Awake()
+        {
+            animC = GetComponent<Animator>();
+            mover = GetComponent<AnimationMover>();
+            mover.StartMove += OnMove;
+            mover.GotToPlace += OnMove;
+        }
+
+        private void OnMove() => animC.SetBool("IsMoving", mover.IsMoving);
+    }
 }

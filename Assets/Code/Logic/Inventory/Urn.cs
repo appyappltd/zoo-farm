@@ -1,31 +1,34 @@
-using Logic.Interactions;
 using System.Collections;
-using System.Collections.Generic;
+using Logic.Interactions;
+using Logic.Movement;
 using UnityEngine;
 
-public class Urn : MonoBehaviour
+namespace Logic.Inventory
 {
-    [SerializeField, Min(.0f)] private float _time = .2f;
-    [SerializeField] private Transform _target;
-
-    private void Awake()
+    public class Urn : MonoBehaviour
     {
-        GetComponent<TriggerObserver>().Enter += player => StartCoroutine(TryTakeItem(player));
-        GetComponent<TriggerObserver>().Exit += _ => StopAllCoroutines();
-    }
+        [SerializeField, Min(.0f)] private float _time = .2f;
+        [SerializeField] private Transform _target;
 
-    private IEnumerator TryTakeItem(GameObject player)
-    {
-        var playerInventory = player.GetComponent<Inventory>();
-        while (playerInventory.CanGiveItem())
+        private void Awake()
         {
-            var item = playerInventory.Remove();
-            var mover = item.GetComponent<IMover>();
+            GetComponent<TriggerObserver>().Enter += player => StartCoroutine(TryTakeItem(player));
+            GetComponent<TriggerObserver>().Exit += _ => StopAllCoroutines();
+        }
 
-            mover.Move(_target);
-            mover.GotToPlace += () => Destroy(item.gameObject);
+        private IEnumerator TryTakeItem(GameObject player)
+        {
+            var playerInventory = player.GetComponent<Inventory>();
+            while (playerInventory.CanGiveItem())
+            {
+                var item = playerInventory.Remove();
+                var mover = item.GetComponent<IMover>();
 
-            yield return new WaitForSeconds(_time);
+                mover.Move(_target);
+                mover.GotToPlace += () => Destroy(item.gameObject);
+
+                yield return new WaitForSeconds(_time);
+            }
         }
     }
 }

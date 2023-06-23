@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class Rotater : MonoBehaviour
+namespace Logic.Movement
 {
-    public void Rotate(Transform target)
+    public class Rotater : MonoBehaviour
     {
-        //var vectorToTarget = target.position - transform.position;
-        //var angle = Mathf.Atan2(vectorToTarget.z, vectorToTarget.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(0, angle, 0);
-        transform.rotation = Quaternion.Euler(0,0,0);
-        var vectorToTarget = target.position - transform.position;
-        var angle = Mathf.Atan2(vectorToTarget.z, vectorToTarget.x) * Mathf.Rad2Deg - 90;
-        transform.rotation = Quaternion.AngleAxis(-angle, Vector3.up);
+        public void Rotate(Transform target)
+        {
+            //var vectorToTarget = target.position - transform.position;
+            //var angle = Mathf.Atan2(vectorToTarget.z, vectorToTarget.x) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.Euler(0, angle, 0);
+            transform.rotation = Quaternion.Euler(0,0,0);
+            var vectorToTarget = target.position - transform.position;
+            var angle = Mathf.Atan2(vectorToTarget.z, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+            transform.rotation = Quaternion.AngleAxis(-angle, Vector3.up);
+        }
     }
 }

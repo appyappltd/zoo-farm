@@ -1,52 +1,53 @@
+using System.Collections;
 using Logic.Interactions;
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class StaticSine : MonoBehaviour
+namespace Logic
 {
-    [SerializeField] private Vector3 _targetSize;
-    [SerializeField, Min(.0f)] private float _speed =.1f;
-    [SerializeField, Min(.0f)] private float _offset = .1f;
-    [SerializeField] private TriggerObserver _trigger;
-
-    private Vector3 defSize;
-    private Coroutine coroutine;
-    private Vector3 lastSc = new(121,432,543);
-
-    private void Awake()
+    public class StaticSine : MonoBehaviour
     {
-        defSize = transform.localScale;
+        [SerializeField] private Vector3 _targetSize;
+        [SerializeField, Min(.0f)] private float _speed =.1f;
+        [SerializeField, Min(.0f)] private float _offset = .1f;
+        [SerializeField] private TriggerObserver _trigger;
 
-        _trigger.Enter += _ => OnInteractable(_targetSize);
-        _trigger.Exit += _ => OnInteractable(defSize);
-    }
+        private Vector3 defSize;
+        private Coroutine coroutine;
+        private Vector3 lastSc = new(121,432,543);
 
-    [Button("ðàñòè", enabledMode: EButtonEnableMode.Playmode)]
-    public void A() => OnInteractable(_targetSize);
-
-    [Button("Óìåíüøàéñÿ", enabledMode: EButtonEnableMode.Playmode)]
-    public void B() => OnInteractable(defSize);
-
-    public void OnInteractable(Vector3 size)
-    {
-        if (coroutine != null)
-            StopCoroutine(coroutine);
-        coroutine = StartCoroutine(ChangeSize(size));
-    }
-
-    private IEnumerator ChangeSize(Vector3 targetSize)
-    {
-        while ((transform.localScale - targetSize).magnitude > _offset 
-            && lastSc != transform.localScale)
+        private void Awake()
         {
-            lastSc = transform.localScale;
-            transform.localScale = Vector3.MoveTowards(transform.localScale,
-                                                     targetSize,
-                                                     _speed * Time.fixedDeltaTime);
-            yield return new WaitForFixedUpdate();
+            defSize = transform.localScale;
+
+            _trigger.Enter += _ => OnInteractable(_targetSize);
+            _trigger.Exit += _ => OnInteractable(defSize);
+        }
+
+        [Button("Ñ€Ð°ÑÑ‚Ð¸", enabledMode: EButtonEnableMode.Playmode)]
+        public void A() => OnInteractable(_targetSize);
+
+        [Button("Ð£Ð¼ÐµÐ½ÑŒÑˆÐ°Ð¹ÑÑ", enabledMode: EButtonEnableMode.Playmode)]
+        public void B() => OnInteractable(defSize);
+
+        public void OnInteractable(Vector3 size)
+        {
+            if (coroutine != null)
+                StopCoroutine(coroutine);
+            coroutine = StartCoroutine(ChangeSize(size));
+        }
+
+        private IEnumerator ChangeSize(Vector3 targetSize)
+        {
+            while ((transform.localScale - targetSize).magnitude > _offset 
+                   && lastSc != transform.localScale)
+            {
+                lastSc = transform.localScale;
+                transform.localScale = Vector3.MoveTowards(transform.localScale,
+                    targetSize,
+                    _speed * Time.fixedDeltaTime);
+                yield return new WaitForFixedUpdate();
+            }
         }
     }
 }

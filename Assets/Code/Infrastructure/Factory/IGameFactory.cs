@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Logic.Animals;
 using Logic.Spawners;
 using Pool;
 using Services;

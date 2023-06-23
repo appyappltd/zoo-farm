@@ -1,44 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PathMover : MonoBehaviour
+namespace Logic.Movement
 {
-    [SerializeField] private Transform[] _points;
-
-    private int index = 0;
-    private IMover mover;
-    private Rotater rotater;
-    private bool IsPath = false;
-
-    private void Awake()
+    public class PathMover : MonoBehaviour
     {
-        rotater = GetComponent<Rotater>();
-        mover = GetComponent<IMover>();
-        mover.GotToPlace += SetPoint;
-    }
+        [SerializeField] private Transform[] _points;
 
-    public void StartWalk()
-    {
-        IsPath = true;
-        Walk();
-    }
+        private int index = 0;
+        private IMover mover;
+        private Rotater rotater;
+        private bool IsPath = false;
 
-    public void SetPoints(Transform[] points) => _points = points;
-
-    public void Walk()
-    {
-        var point = _points[index];
-        rotater.Rotate(point);
-        mover.Move(point);
-    }
-
-    private void SetPoint()
-    {
-        if (IsPath && index + 1 < _points.Length)
+        private void Awake()
         {
-            index++;
+            rotater = GetComponent<Rotater>();
+            mover = GetComponent<IMover>();
+            mover.GotToPlace += SetPoint;
+        }
+
+        public void StartWalk()
+        {
+            IsPath = true;
             Walk();
+        }
+
+        public void SetPoints(Transform[] points) => _points = points;
+
+        public void Walk()
+        {
+            var point = _points[index];
+            rotater.Rotate(point);
+            mover.Move(point);
+        }
+
+        private void SetPoint()
+        {
+            if (IsPath && index + 1 < _points.Length)
+            {
+                index++;
+                Walk();
+            }
         }
     }
 }

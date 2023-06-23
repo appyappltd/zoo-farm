@@ -1,57 +1,58 @@
 using System;
-using Logic.Interactions;
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.Timeline.Actions.MenuPriority;
 
-[RequireComponent(typeof(TriggerObserver))]
-public class Delay : MonoBehaviour
+namespace Logic.Interactions
 {
-    public event Action<GameObject> Complete = c => { };
-    public event Action<float, float> TimeChanged;
-
-    [SerializeField, Min(.0f)] private float _delay = 1f;
-
-    private float time = .0f;
-    private Coroutine coroutine;
-
-    private void Awake()
+    [RequireComponent(typeof(TriggerObserver))]
+    public class Delay : MonoBehaviour
     {
-        var trigger = GetComponent<TriggerObserver>();
-        trigger.Enter += obj =>
-        {
-            if (coroutine != null)
-                StopCoroutine(coroutine);
-            coroutine = StartCoroutine(Wait(obj));
-        };
-        trigger.Exit += _ =>
-        {
-            if (coroutine != null)
-                StopCoroutine(coroutine);
-            coroutine = StartCoroutine(Reverse());
-        };
-    }
+        public event Action<GameObject> Complete = c => { };
+        public event Action<float, float> TimeChanged;
 
-    private IEnumerator Wait(GameObject obj)
-    {
-        while (_delay > time)
+        [SerializeField, Min(.0f)] private float _delay = 1f;
+
+        private float time = .0f;
+        private Coroutine coroutine;
+
+        private void Awake()
         {
-            var addTime = Time.deltaTime;
-            time += addTime;
-            yield return new WaitForSeconds(addTime);
-            TimeChanged?.Invoke(_delay,time);
+            var trigger = GetComponent<TriggerObserver>();
+            trigger.Enter += obj =>
+            {
+                if (coroutine != null)
+                    StopCoroutine(coroutine);
+                coroutine = StartCoroutine(Wait(obj));
+            };
+            trigger.Exit += _ =>
+            {
+                if (coroutine != null)
+                    StopCoroutine(coroutine);
+                coroutine = StartCoroutine(Reverse());
+            };
         }
-        Complete.Invoke(obj);
-    }
 
-    private IEnumerator Reverse()
-    {
-        while (time > 0)
+        private IEnumerator Wait(GameObject obj)
         {
-            var addTime = Time.deltaTime;
-            time -= addTime;
-            yield return new WaitForSeconds(addTime);
-            TimeChanged?.Invoke(_delay, time);
+            while (_delay > time)
+            {
+                var addTime = Time.deltaTime;
+                time += addTime;
+                yield return new WaitForSeconds(addTime);
+                TimeChanged?.Invoke(_delay,time);
+            }
+            Complete.Invoke(obj);
+        }
+
+        private IEnumerator Reverse()
+        {
+            while (time > 0)
+            {
+                var addTime = Time.deltaTime;
+                time -= addTime;
+                yield return new WaitForSeconds(addTime);
+                TimeChanged?.Invoke(_delay, time);
+            }
         }
     }
 }

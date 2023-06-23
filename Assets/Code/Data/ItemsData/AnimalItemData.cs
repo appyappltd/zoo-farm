@@ -1,3 +1,4 @@
+using Logic.Animals;
 using UnityEngine;
 
 namespace Data.ItemsData

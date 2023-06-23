@@ -1,4 +1,5 @@
 using Logic.Interactions;
+using Logic.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
 

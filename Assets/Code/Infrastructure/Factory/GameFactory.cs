@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Builders;
 using Infrastructure.AssetManagement;
+using Logic.Animals;
 using Logic.AnimalsBehaviour;
 using Logic.Spawners;
 using Services.PersistentProgress;

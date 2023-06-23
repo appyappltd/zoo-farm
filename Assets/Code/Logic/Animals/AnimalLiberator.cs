@@ -1,36 +1,41 @@
 using Data.ItemsData;
+using Logic.Interactions;
+using Logic.Movement;
 using Logic.Spawners;
 using Logic.Translators;
 using UnityEngine;
 
-[RequireComponent(typeof(RunTranslator))]
-[RequireComponent(typeof(Delay))]
-public class AnimalLiberator : MonoBehaviour
+namespace Logic.Animals
 {
-    private CollectibleCoinSpawner spawner;
-
-    private void Awake()
+    [RequireComponent(typeof(RunTranslator))]
+    [RequireComponent(typeof(Delay))]
+    public class AnimalLiberator : MonoBehaviour
     {
-        spawner = GetComponent<CollectibleCoinSpawner>();
+        private CollectibleCoinSpawner spawner;
 
-        GetComponent<Delay>().Complete += OnComplete;
-    }
-
-    private void OnComplete(GameObject player)
-    {
-        var inventory = player.GetComponent<Inventory>();
-
-        if (inventory.CanGiveItem(CreatureType.Animal))
+        private void Awake()
         {
-            var item = inventory.Remove();
-            var mover = item.GetComponent<IMover>();
+            spawner = GetComponent<CollectibleCoinSpawner>();
 
-            mover.Move(transform);
-            mover.GotToPlace += () =>
+            GetComponent<Delay>().Complete += OnComplete;
+        }
+
+        private void OnComplete(GameObject player)
+        {
+            var inventory = player.GetComponent<Inventory.Inventory>();
+
+            if (inventory.CanGiveItem(CreatureType.Animal))
             {
-                spawner.Spawn(10);
-                Destroy(item.gameObject);
-            };
+                var item = inventory.Remove();
+                var mover = item.GetComponent<IMover>();
+
+                mover.Move(transform);
+                mover.GotToPlace += () =>
+                {
+                    spawner.Spawn(10);
+                    Destroy(item.gameObject);
+                };
+            }
         }
     }
 }

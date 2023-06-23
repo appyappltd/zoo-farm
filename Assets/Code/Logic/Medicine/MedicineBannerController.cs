@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Inventory))]
-public class MedicineBannerController : MonoBehaviour
+namespace Logic.Medicine
 {
-    [SerializeField] private GameObject _banner;
-
-    private void Awake()
+    [RequireComponent(typeof(Inventory.Inventory))]
+    public class MedicineBannerController : MonoBehaviour
     {
-        _banner.SetActive(false);
+        [SerializeField] private GameObject _banner;
 
-        var inventory = GetComponent<Inventory>();
-        inventory.AddItem += _ => _banner.SetActive(true);
-        inventory.RemoveItem += _ => _banner.SetActive(false);
+        private void Awake()
+        {
+            _banner.SetActive(false);
+
+            var inventory = GetComponent<Inventory.Inventory>();
+            inventory.AddItem += _ => _banner.SetActive(true);
+            inventory.RemoveItem += _ => _banner.SetActive(false);
+        }
     }
 }

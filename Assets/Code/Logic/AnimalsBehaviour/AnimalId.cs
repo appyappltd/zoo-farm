@@ -1,3 +1,5 @@
+using Logic.Animals;
+
 namespace Logic.AnimalsBehaviour
 {
     public sealed class AnimalId

@@ -1,4 +1,7 @@
-public enum AnimalType : byte
+namespace Logic.Animals
 {
-    CatB
+    public enum AnimalType : byte
+    {
+        CatB
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Logic.Interactions;
 using Tools.Extension;
 using Unity.VisualScripting;
 using UnityEditor.Search;

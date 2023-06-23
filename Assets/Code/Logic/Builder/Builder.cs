@@ -1,90 +1,93 @@
-using Logic.Translators;
-using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using Logic.Translators;
+using NaughtyAttributes;
 using UnityEngine;
 
-public class Builder : MonoBehaviour
+namespace Logic.Builder
 {
-    [SerializeField] private List<GameObject> _components;
-    [SerializeField] private Vector2 _offset;
-    [SerializeField, Min(.0f)] private float _time = .1f;
-
-    private List<Vector3> defSizes = new();
-    private List<Vector3> defPositions = new();
-    private RunTranslator translator;
-
-    private bool isBuild = false;
-
-    private void Awake()
+    public class Builder : MonoBehaviour
     {
-        translator = GetComponent<RunTranslator>();
+        [SerializeField] private List<GameObject> _components;
+        [SerializeField] private Vector2 _offset;
+        [SerializeField, Min(.0f)] private float _time = .1f;
 
-        foreach (var c in _components)
+        private List<Vector3> defSizes = new();
+        private List<Vector3> defPositions = new();
+        private RunTranslator translator;
+
+        private bool isBuild = false;
+
+        private void Awake()
         {
-            defSizes.Add(c.transform.localScale);
-            defPositions.Add(c.transform.position);
+            translator = GetComponent<RunTranslator>();
 
-            c.transform.localScale = Vector3.zero;
-            c.transform.position += new Vector3(Random.Range(_offset.x, _offset.y),
-                                                Random.Range(0, _offset.y),
-                                                Random.Range(_offset.x, _offset.y));
+            foreach (var c in _components)
+            {
+                defSizes.Add(c.transform.localScale);
+                defPositions.Add(c.transform.position);
+
+                c.transform.localScale = Vector3.zero;
+                c.transform.position += new Vector3(Random.Range(_offset.x, _offset.y),
+                    Random.Range(0, _offset.y),
+                    Random.Range(_offset.x, _offset.y));
+            }
         }
-    }
-    private void Start() => StartBuild();
+        private void Start() => StartBuild();
 
-    [Button("Delete", enabledMode: EButtonEnableMode.Playmode)]
-    private void StartDelete()
-    {
-        if (!isBuild)
-            return;
-
-        StartCoroutine(Delete());
-    }
-
-    [Button("Build", enabledMode: EButtonEnableMode.Playmode)]
-    private void StartBuild()
-    {
-        if (isBuild)
-            return;
-
-        StartCoroutine(Build());
-    }
-
-    private IEnumerator Build()
-    {
-        for (int i = 0; i < _components.Count; i++)
+        [Button("Delete", enabledMode: EButtonEnableMode.Playmode)]
+        private void StartDelete()
         {
-            var position = _components[i].GetComponent<LinearPositionTranslatable>();
-            var scale = _components[i].GetComponent<LinearScaleTranslatable>();
+            if (!isBuild)
+                return;
 
-            position.Play(_components[i].transform.position, defPositions[i]);
-            scale.Play(_components[i].transform.localScale, defSizes[i]);
-
-            translator.AddTranslatable(position);
-            translator.AddTranslatable(scale);
-            yield return new WaitForSeconds(_time);
+            StartCoroutine(Delete());
         }
-        isBuild = true;
-    }
 
-    private IEnumerator Delete()
-    {
-        for (int i = _components.Count - 1; i >= 0; i--)
+        [Button("Build", enabledMode: EButtonEnableMode.Playmode)]
+        private void StartBuild()
         {
-            var position = _components[i].GetComponent<LinearPositionTranslatable>();
-            var scale = _components[i].GetComponent<LinearScaleTranslatable>();
+            if (isBuild)
+                return;
 
-            position.Play(_components[i].transform.position, defPositions[i]
-                                 + new Vector3(Random.Range(_offset.x, _offset.y),
-                                                Random.Range(0, _offset.y),
-                                                Random.Range(_offset.x, _offset.y)));
-            scale.Play(_components[i].transform.localScale, Vector3.zero);
-
-            translator.AddTranslatable(position);
-            translator.AddTranslatable(scale);
-            yield return new WaitForSeconds(_time);
+            StartCoroutine(Build());
         }
-        isBuild = false;
+
+        private IEnumerator Build()
+        {
+            for (int i = 0; i < _components.Count; i++)
+            {
+                var position = _components[i].GetComponent<LinearPositionTranslatable>();
+                var scale = _components[i].GetComponent<LinearScaleTranslatable>();
+
+                position.Play(_components[i].transform.position, defPositions[i]);
+                scale.Play(_components[i].transform.localScale, defSizes[i]);
+
+                translator.AddTranslatable(position);
+                translator.AddTranslatable(scale);
+                yield return new WaitForSeconds(_time);
+            }
+            isBuild = true;
+        }
+
+        private IEnumerator Delete()
+        {
+            for (int i = _components.Count - 1; i >= 0; i--)
+            {
+                var position = _components[i].GetComponent<LinearPositionTranslatable>();
+                var scale = _components[i].GetComponent<LinearScaleTranslatable>();
+
+                position.Play(_components[i].transform.position, defPositions[i]
+                                                                 + new Vector3(Random.Range(_offset.x, _offset.y),
+                                                                     Random.Range(0, _offset.y),
+                                                                     Random.Range(_offset.x, _offset.y)));
+                scale.Play(_components[i].transform.localScale, Vector3.zero);
+
+                translator.AddTranslatable(position);
+                translator.AddTranslatable(scale);
+                yield return new WaitForSeconds(_time);
+            }
+            isBuild = false;
+        }
     }
 }

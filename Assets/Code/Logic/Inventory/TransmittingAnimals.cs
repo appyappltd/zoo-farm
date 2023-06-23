@@ -1,23 +1,27 @@
 using Logic.Interactions;
+using Logic.Volunteer;
 using UnityEngine;
 
-[RequireComponent(typeof(Delay))]
-
-public class TransmittingAnimals : MonoBehaviour
+namespace Logic.Inventory
 {
-    [SerializeField] private VolunteerBand _band;
+    [RequireComponent(typeof(Delay))]
 
-    private void Awake() => GetComponent<Delay>().Complete += TryTakeItem;
-
-    private void TryTakeItem(GameObject player)
+    public class TransmittingAnimals : MonoBehaviour
     {
-        if (!_band.CanGiveAnimal())
-            return;
+        [SerializeField] private VolunteerBand _band;
 
-        var inventory = player.GetComponent<Inventory>();
-        if (inventory.GetCount > 0)
-            return;
+        private void Awake() => GetComponent<Delay>().Complete += TryTakeItem;
 
-        inventory.Add(_band.GetAnimal());
+        private void TryTakeItem(GameObject player)
+        {
+            if (!_band.CanGiveAnimal())
+                return;
+
+            var inventory = player.GetComponent<Inventory>();
+            if (inventory.GetCount > 0)
+                return;
+
+            inventory.Add(_band.GetAnimal());
+        }
     }
 }

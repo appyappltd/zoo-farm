@@ -4,89 +4,96 @@ using Cutscene;
 using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.AnimalsBehaviour;
+using Logic.Bubble;
+using Logic.Interactions;
+using Logic.Inventory;
+using Logic.Movement;
 using Services;
 using Services.AnimalHouse;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(Delay))]
-[RequireComponent(typeof(Inventory))]
-[RequireComponent(typeof(Storage))]
-[RequireComponent(typeof(ProductReceiver))]
-public class MedicineBed : MonoBehaviour, ICutsceneTrigger
+namespace Logic.Medicine
 {
-    [SerializeField] private List<ItemData> _data = new();
-    [SerializeField] private List<Sprite> _sprites = new();
-
-    private Inventory inventory;
-    private Storage storage;
-    private ProductReceiver receiver;
-    private int index = 0;
-    private bool canTreat = false;
-
-    private IGameFactory gameFactory;
-    private IAnimalHouseService houseService;
-
-    public event Action<Animal> AnimalHealed = animal => { };
-    public event Action Triggered = () => { };
-
-    private void Awake()
+    [RequireComponent(typeof(Delay))]
+    [RequireComponent(typeof(Inventory.Inventory))]
+    [RequireComponent(typeof(Storage))]
+    [RequireComponent(typeof(ProductReceiver))]
+    public class MedicineBed : MonoBehaviour, ICutsceneTrigger
     {
-        gameFactory = AllServices.Container.Single<IGameFactory>();
-        houseService = AllServices.Container.Single<IAnimalHouseService>();
+        [SerializeField] private List<ItemData> _data = new();
+        [SerializeField] private List<Sprite> _sprites = new();
 
-        inventory = GetComponent<Inventory>();
-        receiver = GetComponent<ProductReceiver>();
-        storage = GetComponent<Storage>();
+        private Inventory.Inventory inventory;
+        private Storage storage;
+        private ProductReceiver receiver;
+        private int index = 0;
+        private bool canTreat = false;
 
-        GetComponent<Delay>().Complete += player => Treat(player.GetComponent<Inventory>());
+        private IGameFactory gameFactory;
+        private IAnimalHouseService houseService;
 
-        inventory.AddItem += item => item.GetComponent<IMover>().GotToPlace += () =>
+        public event Action<Animal> AnimalHealed = animal => { };
+        public event Action Triggered = () => { };
+
+        private void Awake()
         {
-            canTreat = true;
-            receiver.canTake = false;
-            GetRandomIndex();
-            item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
-        };
-    }
+            gameFactory = AllServices.Container.Single<IGameFactory>();
+            houseService = AllServices.Container.Single<IAnimalHouseService>();
 
-    private void GetRandomIndex() => index = Random.Range(0, _data.Count);
+            inventory = GetComponent<Inventory.Inventory>();
+            receiver = GetComponent<ProductReceiver>();
+            storage = GetComponent<Storage>();
 
-    private void Treat(Inventory playerInventory)
-    {
-        if (!canTreat)
-            return;
-        if (!inventory.CanGiveItem())
-            return;
-        if (!playerInventory.CanGiveItem(_data[index].Creature))
-            return;
-        if (playerInventory.GetData.Hand.GetComponent<Medicine>().Type !=
-                  _data[index].Hand.GetComponent<Medicine>().Type)
-            return;
+            GetComponent<Delay>().Complete += player => Treat(player.GetComponent<Inventory.Inventory>());
 
-        var item = playerInventory.Remove();
-        var mover = item.GetComponent<IMover>();
-        var handAnimal = inventory.Remove();
-
-        mover.Move(storage.GetItemPlace);
-        mover.GotToPlace += () =>
-        {
-            houseService.TakeQueueToHouse(() =>
+            inventory.AddItem += item => item.GetComponent<IMover>().GotToPlace += () =>
             {
-                var animalItemData = (AnimalItemData)handAnimal.ItemData;
-                canTreat = false;
-                receiver.canTake = true;
+                canTreat = true;
+                receiver.canTake = false;
+                GetRandomIndex();
+                item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
+            };
+        }
 
-                Destroy(handAnimal.gameObject);
-                var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
-                    .GetComponent<Animal>();
-                AnimalHealed.Invoke(animal);
-                return animal;
-            });
+        private void GetRandomIndex() => index = Random.Range(0, _data.Count);
 
-            Triggered.Invoke();
-            Destroy(handAnimal.GetComponent<BubbleHolder>().GetBubble.gameObject);
-            Destroy(item.gameObject);
-        };
+        private void Treat(Inventory.Inventory playerInventory)
+        {
+            if (!canTreat)
+                return;
+            if (!inventory.CanGiveItem())
+                return;
+            if (!playerInventory.CanGiveItem(_data[index].Creature))
+                return;
+            if (playerInventory.GetData.Hand.GetComponent<Medicine>().Type !=
+                _data[index].Hand.GetComponent<Medicine>().Type)
+                return;
+
+            var item = playerInventory.Remove();
+            var mover = item.GetComponent<IMover>();
+            var handAnimal = inventory.Remove();
+
+            mover.Move(storage.GetItemPlace);
+            mover.GotToPlace += () =>
+            {
+                houseService.TakeQueueToHouse(() =>
+                {
+                    var animalItemData = (AnimalItemData)handAnimal.ItemData;
+                    canTreat = false;
+                    receiver.canTake = true;
+
+                    Destroy(handAnimal.gameObject);
+                    var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
+                        .GetComponent<Animal>();
+                    AnimalHealed.Invoke(animal);
+                    return animal;
+                });
+
+                Triggered.Invoke();
+                Destroy(handAnimal.GetComponent<BubbleHolder>().GetBubble.gameObject);
+                Destroy(item.gameObject);
+            };
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Logic.Animals;
 using Logic.AnimalsBehaviour;
 using Services.StaticData;
 
