@@ -18,6 +18,8 @@ namespace Logic.Inventory
         public int GetCount => items.Count;
         public CreatureType Type => currType;
         public ItemData GetData => items.Last().ItemData;
+        public int MaxWeight => _maxWeight;
+        public int Weight => weight;
 
         [SerializeField] private CreatureType _type = CreatureType.None;
         [SerializeField, Min(0)] private int _maxWeight = 3;

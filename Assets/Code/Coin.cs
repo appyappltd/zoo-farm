@@ -7,7 +7,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(TowardsMover))]
-[RequireComponent(typeof(Storage))]
 public class Coin : MonoBehaviour
 {
     [SerializeField, Min(0)] private int _amount = 1;

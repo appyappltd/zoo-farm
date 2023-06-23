@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Logic.Inventory
 {
-    [RequireComponent(typeof(Inventory))]
     public class Storage : MonoBehaviour
     {
         public Transform GetItemPlace => _places.Length < inventory.GetCount

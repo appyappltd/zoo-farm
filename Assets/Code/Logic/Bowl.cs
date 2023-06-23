@@ -1,44 +1,53 @@
-using System.Diagnostics;
-using NaughtyAttributes;
+using Data.ItemsData;
+using Observables;
 using Progress;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Logic
 {
     public class Bowl : MonoBehaviour, IProgressBarHolder
     {
-        [SerializeField] private int _maxFoodCount;
+        [SerializeField] private Inventory.Inventory _inventory;
 
+        private CompositeDisposable _compositeDisposable = new CompositeDisposable();
         private ProgressBar _food;
 
         public IProgressBar ProgressBarView => _food;
 
         private void Awake()
         {
-            Construct(_maxFoodCount);
-            Debug.LogWarning("Remove constructor from awake method");
+            _food = new ProgressBar(_inventory.MaxWeight, 0);
         }
 
-        public void Construct(int maxFoodLevel) =>
-            _food = new ProgressBar(maxFoodLevel, 0f);
-        
-        public void Replenish(int amount)
+        private void OnEnable()
+        {
+            _inventory.AddItem += ReplenishFromInventory;
+            _compositeDisposable.Add(_food.Current.Then(OnSpend));
+        }
+
+        private void OnDisable()
+        {
+            _inventory.AddItem -= ReplenishFromInventory;
+            _compositeDisposable.Dispose();
+        }
+
+        private void ReplenishFromInventory(HandItem item)
+        {
+            Replenish(item.Weight);
+        }
+
+        private void Replenish(int amount)
         {
             _food.Replenish(amount);
         }
 
-        public void Spend(int amount)
+        private void OnSpend()
         {
-            _food.Spend(amount);
+            if (Mathf.RoundToInt(_food.Current.Value) < _inventory.Weight)
+            {
+                HandItem item = _inventory.Remove();
+                Destroy(item.gameObject);
+            }
         }
-
-        [Button("Replenish", EButtonEnableMode.Playmode)] [Conditional("UNITY_EDITOR")]
-        public void Replenish1() =>
-            Replenish(1);
-
-        [Button("Spend", EButtonEnableMode.Playmode)] [Conditional("UNITY_EDITOR")]
-        public void Spend1() =>
-            Spend(1);
     }
 }
