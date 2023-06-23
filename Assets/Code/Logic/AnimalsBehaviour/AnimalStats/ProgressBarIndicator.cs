@@ -10,6 +10,8 @@ namespace Logic.AnimalsBehaviour.AnimalStats
     {
         [SerializeField] [Range(0, 100f)] private float _maxValue;
         [SerializeField] [Range(0, 1f)] private float _reduceSpeed;
+        [SerializeField] [Range(0, 100f)] private float _startValue;
+        
 
         private ProgressBar _progressBar;
         private ProgressBarOperator _progressBarOperator;
@@ -18,7 +20,7 @@ namespace Logic.AnimalsBehaviour.AnimalStats
 
         private void Awake()
         {
-            _progressBar = new ProgressBar(_maxValue, _maxValue);
+            _progressBar = new ProgressBar(_maxValue, _startValue);
             _progressBarOperator = new ProgressBarOperator(_progressBar, _reduceSpeed, true);
         }
 

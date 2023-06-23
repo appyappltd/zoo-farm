@@ -43,6 +43,7 @@ namespace Cutscene.Directors
             CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.Focus(_plant)));
             CutsceneModules.Add(new CutsceneTimeAwaiter(3f, GlobalUpdate.Instance));
             CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.FocusOnDefault()));
+            CutsceneModules.Add(new CutsceneAction(() => Destroy(gameObject)));
         }
     }
 }
