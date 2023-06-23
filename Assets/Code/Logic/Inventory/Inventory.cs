@@ -13,30 +13,24 @@ public class Inventory : MonoBehaviour
     public event UnityAction<HandItem> RemoveItem = c => { };
 
     public HandItem GetLast => items.Last();
-    public HandItem GetPreLast => items[^1];
+    public HandItem GetPreLast => items[^2];
     public int GetCount => items.Count;
     public CreatureType Type => currType;
-    public ItemData GetData => items.First().ItemData;
+    public ItemData GetData => items.Last().ItemData;
 
-    [SerializeField] private CreatureType _inventoryType = CreatureType.None;
-    [SerializeField, Min(0)] private int _maxAnimals = 1;
-    [SerializeField, Min(0)] private int _maxMedical = 1;
-    [SerializeField, Min(0)] private int _maxOther = 3;
+    [SerializeField] private CreatureType _type = CreatureType.None;
+    [SerializeField, Min(0)] private int _maxWeight = 3;
 
     private List<HandItem> items = new();
-    private int maxCount = 1;
+    private int weight = 0;
     private CreatureType currType = CreatureType.None;
 
     private void Awake()
     {
-        if (_inventoryType != CreatureType.None)
-        {
-            SwitchMax(_inventoryType);
-            currType = _inventoryType;
-        }
+        currType = _type;
     }
 
-    public bool CanAddItem(CreatureType type) => maxCount > items.Count
+    public bool CanAddItem(CreatureType type, int weight) => _maxWeight >= this.weight + weight
                                               && (currType == CreatureType.None
                                               || currType == type);
     public bool CanGiveItem(CreatureType type) => items.Count > 0
@@ -49,7 +43,9 @@ public class Inventory : MonoBehaviour
             throw new ArgumentException();
         if (currType == CreatureType.None)
             ChangeType(item.ItemData.Creature);
+
         items.Add(item);
+        ChangeWeight(item.Weight);
 
         AddItem.Invoke(item);
     }
@@ -58,34 +54,25 @@ public class Inventory : MonoBehaviour
     {
         if (items.Count < 1)
             throw new ArgumentNullException();
-
         var item = items.Last();
+
         items.Remove(item);
+        ChangeWeight(-item.Weight);
 
         RemoveItem.Invoke(item);
 
+        if (items.Count == 0)
+            ChangeType(_type);
         return item;
-    }
-
-    private void SwitchMax(CreatureType type)
-    {
-        switch (type)
-        {
-            case CreatureType.Animal:
-                maxCount = _maxAnimals;
-                break;
-            case CreatureType.Medical:
-                maxCount = _maxMedical;
-                break;
-            case CreatureType.Other:
-                maxCount = _maxOther;
-                break;
-        }
     }
 
     private void ChangeType(CreatureType type)
     {
         currType = type;
-        SwitchMax(currType);
+    }
+
+    private void ChangeWeight(int amount)
+    {
+        weight += amount;
     }
 }

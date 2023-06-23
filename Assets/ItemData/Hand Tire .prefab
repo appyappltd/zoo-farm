@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: a154fc248a27c6342b99be713dcaeda7, type: 2}
   <NextPlace>k__BackingField: {fileID: 2974799634259821984}
+  <Weight>k__BackingField: 3
 --- !u!114 &5837903861970345006
 MonoBehaviour:
   m_ObjectHideFlags: 0

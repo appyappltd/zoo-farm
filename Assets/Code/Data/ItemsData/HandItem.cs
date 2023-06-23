@@ -6,5 +6,7 @@ namespace Data.ItemsData
     {
         [field: SerializeField] public ItemData ItemData { get; private set; }
         [field: SerializeField] public Transform NextPlace { get; private set; }
+        [field: SerializeField] public int Weight { get; private set; } = 1;
+
     }
 }

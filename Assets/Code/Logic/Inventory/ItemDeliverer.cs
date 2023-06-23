@@ -16,7 +16,7 @@ public class ItemDeliverer : MonoBehaviour
         if (!inventory.CanGiveItem())
             return;
         var playerInventory = player.GetComponent<Inventory>();
-        if (playerInventory.CanAddItem(inventory.Type))
+        if (playerInventory.CanAddItem(inventory.Type, inventory.GetData.Hand.Weight))
             playerInventory.Add(inventory.Remove());
     }
 }

@@ -26,7 +26,7 @@ public class ProductReceiver : MonoBehaviour
         if (canTake)
         {
             var playerInventory = player.GetComponent<Inventory>();
-            while (_type == CreatureType.None || playerInventory.CanGiveItem(_type) && inventory.CanAddItem(_type))
+            while (_type == CreatureType.None || playerInventory.CanGiveItem(_type) && inventory.CanAddItem(_type,playerInventory.GetData.Hand.Weight))
             {
                 inventory.Add(playerInventory.Remove());
                 yield return new WaitForSeconds(_time);
