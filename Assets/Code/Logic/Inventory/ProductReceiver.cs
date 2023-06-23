@@ -11,7 +11,6 @@ namespace Logic.Inventory
     {
         public bool canTake = true;
 
-        [SerializeField] private CreatureType _type;
         [SerializeField, Min(.0f)] private float _time = .2f;
 
         private Inventory inventory;
@@ -28,7 +27,7 @@ namespace Logic.Inventory
             if (canTake)
             {
                 var playerInventory = player.GetComponent<Inventory>();
-                while (_type == CreatureType.None || playerInventory.CanGiveItem(_type) && inventory.CanAddItem(_type,playerInventory.GetData.Hand.Weight))
+                while (inventory.Type == CreatureType.None || playerInventory.CanGiveItem(inventory.Type) && inventory.CanAddItem(inventory.Type, playerInventory.GetData.Hand.Weight))
                 {
                     inventory.Add(playerInventory.Remove());
                     yield return new WaitForSeconds(_time);
