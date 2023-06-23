@@ -19,7 +19,7 @@ namespace Data.ItemsData
             {
                 var inventory = player.GetComponent<Inventory>();
 
-                if (inventory.CanAddItem(ItemData.Creature))
+                if (inventory.CanAddItem(ItemData.Creature, ItemData.Hand.Weight))
                 {
                     var item = Instantiate(ItemData.Hand, transform.position,
                                                           transform.rotation);

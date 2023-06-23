@@ -6,101 +6,73 @@ using Data.ItemsData;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Storage))]
 public class Inventory : MonoBehaviour
 {
-    public event UnityAction<HandItem> AddItem;
-    public event UnityAction RemoveItem;
+    public event UnityAction<HandItem> AddItem = c => { };
+    public event UnityAction<HandItem> RemoveItem = c => { };
 
+    public HandItem GetLast => items.Last();
+    public HandItem GetPreLast => items[^2];
     public int GetCount => items.Count;
-    public Transform GetItemPlace => itemPlace;
     public CreatureType Type => currType;
-    public ItemData GetDataFirstElement => items.First().ItemData;
+    public ItemData GetData => items.Last().ItemData;
 
-    [field: SerializeField] public Transform DefItemPlace { get; private set; }
-    [SerializeField] private CreatureType _inventoryType = CreatureType.None;
-    [SerializeField, Min(0)] private int _maxAnimals = 1;
-    [SerializeField, Min(0)] private int _maxMedical = 1;
-    [SerializeField, Min(0)] private int _maxOther = 3;
+    [SerializeField] private CreatureType _type = CreatureType.None;
+    [SerializeField, Min(0)] private int _maxWeight = 3;
 
-    [SerializeField] private List<HandItem> items = new();
-    private int maxCount = 1;
+    private List<HandItem> items = new();
+    private int weight = 0;
     private CreatureType currType = CreatureType.None;
-    private Transform itemPlace = null;
 
     private void Awake()
     {
-        itemPlace = DefItemPlace;
-
-        if (_inventoryType != CreatureType.None)
-        {
-            SwitchMax(_inventoryType);
-            currType = _inventoryType;
-        }
+        currType = _type;
     }
 
-    public bool CanAddItem(CreatureType type) => maxCount > items.Count
+    public bool CanAddItem(CreatureType type, int weight) => _maxWeight >= this.weight + weight
                                               && (currType == CreatureType.None
                                               || currType == type);
-    public bool CanGiveItem(CreatureType type) => items.Count > 0 
+    public bool CanGiveItem(CreatureType type) => items.Count > 0
                                                && currType == type;
     public bool CanGiveItem() => items.Count > 0;
 
     public void Add(HandItem item)
     {
-        if (items.Contains(item)) 
+        if (items.Contains(item))
             throw new ArgumentException();
         if (currType == CreatureType.None)
             ChangeType(item.ItemData.Creature);
+
         items.Add(item);
+        ChangeWeight(item.Weight);
 
-        var mover = item.GetComponent<IMover>();
-        mover.Move(itemPlace);
-        mover.GotToPlace += () => item.transform.SetParent(DefItemPlace);
-
-        itemPlace = item.NextPlace;
-        AddItem?.Invoke(item);
+        AddItem.Invoke(item);
     }
 
     public HandItem Remove()
     {
         if (items.Count < 1)
             throw new ArgumentNullException();
-
         var item = items.Last();
+
         items.Remove(item);
-        item.transform.SetParent(null);
+        ChangeWeight(-item.Weight);
 
-        if (items.Count > 0)
-            itemPlace = items.Last().NextPlace;
-        else
-        {
-            itemPlace = DefItemPlace;
-            currType = _inventoryType;
-        }
-        RemoveItem?.Invoke();
+        RemoveItem.Invoke(item);
 
+        if (items.Count == 0)
+            ChangeType(_type);
         return item;
-    }
-
-    private void SwitchMax(CreatureType type)
-    {
-        switch (type)
-        {
-            case CreatureType.Animal:
-                maxCount = _maxAnimals;
-                break;
-            case CreatureType.Medical:
-                maxCount = _maxMedical;
-                break;
-            case CreatureType.Other:
-                maxCount = _maxOther;
-                break;
-        }
     }
 
     private void ChangeType(CreatureType type)
     {
         currType = type;
-        SwitchMax(currType);
+    }
+
+    private void ChangeWeight(int amount)
+    {
+        weight += amount;
     }
 }

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Hand>k__BackingField: {fileID: 2559468788857932141, guid: 915319a31b6ffd44c9e71d07c010bb9a, type: 3}
   <Drop>k__BackingField: {fileID: 6040048251457820978, guid: f0d6809a073b18545a72ba4e0f169e1b, type: 3}
-  <Creature>k__BackingField: 0
+  <Creature>k__BackingField: 2

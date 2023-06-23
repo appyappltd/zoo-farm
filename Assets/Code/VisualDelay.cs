@@ -9,12 +9,11 @@ using UnityEngine;
 public class VisualDelay : MonoBehaviour
 {
     [SerializeField] private GameObject _fill;
-
-    [SerializeField] private float endPoint = 0;
     [SerializeField] private float startPoint = -4.9f;
-    [SerializeField] private float currY = 0;
 
-    [SerializeField] private float distance;
+    private float endPoint = 0;
+    private float currY = 0;
+    private float distance;
 
     private void Awake()
     {

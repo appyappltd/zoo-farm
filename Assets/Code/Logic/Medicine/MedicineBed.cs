@@ -10,22 +10,24 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Delay))]
-public class MedicineBed : MonoBehaviour , ICutsceneTrigger
+[RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(Storage))]
+[RequireComponent(typeof(ProductReceiver))]
+public class MedicineBed : MonoBehaviour, ICutsceneTrigger
 {
     [SerializeField] private List<ItemData> _data = new();
     [SerializeField] private List<Sprite> _sprites = new();
 
     private Inventory inventory;
+    private Storage storage;
     private ProductReceiver receiver;
     private int index = 0;
     private bool canTreat = false;
 
     private IGameFactory gameFactory;
     private IAnimalHouseService houseService;
-    private ICutsceneTrigger _cutsceneTriggerImplementation;
 
-    public event Action<Animal> AnimalHealed = animal => { }; 
-
+    public event Action<Animal> AnimalHealed = animal => { };
     public event Action Triggered = () => { };
 
     private void Awake()
@@ -35,6 +37,8 @@ public class MedicineBed : MonoBehaviour , ICutsceneTrigger
 
         inventory = GetComponent<Inventory>();
         receiver = GetComponent<ProductReceiver>();
+        storage = GetComponent<Storage>();
+
         GetComponent<Delay>().Complete += player => Treat(player.GetComponent<Inventory>());
 
         inventory.AddItem += item => item.GetComponent<IMover>().GotToPlace += () =>
@@ -48,7 +52,6 @@ public class MedicineBed : MonoBehaviour , ICutsceneTrigger
 
     private void GetRandomIndex() => index = Random.Range(0, _data.Count);
 
-
     private void Treat(Inventory playerInventory)
     {
         if (!canTreat)
@@ -57,7 +60,7 @@ public class MedicineBed : MonoBehaviour , ICutsceneTrigger
             return;
         if (!playerInventory.CanGiveItem(_data[index].Creature))
             return;
-        if (playerInventory.GetDataFirstElement.Hand.GetComponent<Medicine>().Type !=
+        if (playerInventory.GetData.Hand.GetComponent<Medicine>().Type !=
                   _data[index].Hand.GetComponent<Medicine>().Type)
             return;
 
@@ -65,7 +68,7 @@ public class MedicineBed : MonoBehaviour , ICutsceneTrigger
         var mover = item.GetComponent<IMover>();
         var handAnimal = inventory.Remove();
 
-        mover.Move(inventory.DefItemPlace);
+        mover.Move(storage.GetItemPlace);
         mover.GotToPlace += () =>
         {
             houseService.TakeQueueToHouse(() =>
@@ -73,6 +76,7 @@ public class MedicineBed : MonoBehaviour , ICutsceneTrigger
                 var animalItemData = (AnimalItemData)handAnimal.ItemData;
                 canTreat = false;
                 receiver.canTake = true;
+
                 Destroy(handAnimal.gameObject);
                 var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
                     .GetComponent<Animal>();

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Inventory))]
 public class MedicineBannerController : MonoBehaviour
 {
     [SerializeField] private GameObject _banner;
@@ -12,6 +13,6 @@ public class MedicineBannerController : MonoBehaviour
 
         var inventory = GetComponent<Inventory>();
         inventory.AddItem += _ => _banner.SetActive(true);
-        inventory.RemoveItem += () => _banner.SetActive(false);
+        inventory.RemoveItem += _ => _banner.SetActive(false);
     }
 }

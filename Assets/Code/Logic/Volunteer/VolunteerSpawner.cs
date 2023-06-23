@@ -1,5 +1,6 @@
 using Infrastructure;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.Events;
@@ -27,8 +28,8 @@ public class VolunteerSpawner : MonoBehaviour
             var v = Instantiate(_volunteer,_spawnPlace.localPosition,_spawnPlace.rotation);
 
             SpawnV?.Invoke(v.GetComponent<VolunteerMovement>());
-            var inventory = v.GetComponent<Inventory>();
-            var animal = _animalSpawner.InstantiateAnimal(inventory.GetItemPlace);
+            var storage = v.GetComponent<Storage>();
+            var animal = _animalSpawner.InstantiateAnimal(storage.GetItemPlace);
             v.GetComponent<Inventory>().Add(animal);
 
             yield return new WaitForSeconds(Random.Range(_time.x, _time.y));

@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 8426896991394957316}
   - component: {fileID: -3324673149187756082}
   - component: {fileID: 4664039552938874061}
+  - component: {fileID: 8807170195777574434}
   - component: {fileID: 659235615957181102}
   - component: {fileID: 2562806900512505300}
   - component: {fileID: -310732374932598855}
@@ -486,6 +487,20 @@ MonoBehaviour:
   _maxMedical: 1
   _maxOther: 3
   items: []
+--- !u!114 &8807170195777574434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229401633726274375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688b5c76923200049a031ee171dd9d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _places:
+  - {fileID: 3872162317092103650}
 --- !u!136 &659235615957181102
 CapsuleCollider:
   m_ObjectHideFlags: 0
