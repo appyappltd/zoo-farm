@@ -74,13 +74,13 @@ public class MedicineBed : MonoBehaviour , ICutsceneTrigger
                 canTreat = false;
                 receiver.canTake = true;
                 Destroy(handAnimal.gameObject);
-                Triggered.Invoke();
                 var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
                     .GetComponent<Animal>();
                 AnimalHealed.Invoke(animal);
                 return animal;
             });
 
+            Triggered.Invoke();
             Destroy(handAnimal.GetComponent<BubbleHolder>().GetBubble.gameObject);
             Destroy(item.gameObject);
         };

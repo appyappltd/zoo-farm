@@ -15,7 +15,12 @@ namespace Cutscene
         {
             ((ICutsceneTrigger) _beginTrigger).Triggered -= Play;
         }
-        
+
+        private void Awake()
+        {
+            ((ICutsceneTrigger) _beginTrigger).Triggered += Play;
+        }
+
         protected abstract void CollectModules();
         
         [Button("Play")]
@@ -27,9 +32,7 @@ namespace Cutscene
             {
                 CutsceneModules[i].AttachNext(CutsceneModules[i + 1]);
             }
-            
-            ((ICutsceneTrigger) _beginTrigger).Triggered += Play;
-            
+
             CutsceneModules[0].Play();
         }
     }

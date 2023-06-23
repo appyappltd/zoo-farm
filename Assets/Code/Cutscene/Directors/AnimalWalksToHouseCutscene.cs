@@ -18,14 +18,14 @@ namespace Cutscene.Directors
 
         private void Start()
         {
-            Construct(AllServices.Container.Single<ICameraOperatorService>());
-
             _medicineBed.AnimalHealed += GetAnimal;
+            Construct(AllServices.Container.Single<ICameraOperatorService>());
         }
 
         private void GetAnimal(Animal animal)
         {
-            _animal = animal.transform;
+            _animal.SetParent(animal.transform);
+            _animal.localPosition = Vector3.zero;
             _medicineBed.AnimalHealed -= GetAnimal;
         }
 
@@ -36,6 +36,7 @@ namespace Cutscene.Directors
         
         protected override void CollectModules()
         {
+            CutsceneModules.Add(new CutsceneTimeAwaiter(0.2f, GlobalUpdate.Instance));
             CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.Focus(_animal)));
             CutsceneModules.Add(new CutsceneTriggerAwaiter((ICutsceneTrigger) _animalIsHomeTrigger));
             CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.Focus(_plant)));
