@@ -14,7 +14,7 @@ namespace Services.AnimalHouse
         private readonly AnimalHouseBuilder _houseBuilder;
 
         private readonly List<Logic.AnimalHouse> _animalHouses = new List<Logic.AnimalHouse>();
-        private readonly Queue<Func<Animal>> _queueInHouse = new Queue<Func<Animal>>();
+        private readonly Queue<Func<IAnimal>> _queueInHouse = new Queue<Func<IAnimal>>();
 
         public AnimalHouseService(IGameFactory gameFactory)
         {
@@ -22,7 +22,7 @@ namespace Services.AnimalHouse
             _houseBuilder = new AnimalHouseBuilder();
         }
 
-        public void TakeQueueToHouse(Func<Animal> callback)
+        public void TakeQueueToHouse(Func<IAnimal> callback)
         {
             Logic.AnimalHouse animalHouse = GetFreeHouse();
 
@@ -32,7 +32,7 @@ namespace Services.AnimalHouse
             }
             else
             {
-                Animal animal = callback.Invoke();
+                IAnimal animal = callback.Invoke();
                 TakeHouse(animalHouse, animal);
             }
         }
@@ -46,14 +46,14 @@ namespace Services.AnimalHouse
             Logic.AnimalHouse builtHouse = houseObject.GetComponent<Logic.AnimalHouse>();
             _animalHouses.Add(builtHouse);
 
-            if (_queueInHouse.TryDequeue(out Func<Animal> callback))
+            if (_queueInHouse.TryDequeue(out Func<IAnimal> callback))
             {
-                Animal animal = callback.Invoke();
+                IAnimal animal = callback.Invoke();
                 TakeHouse(builtHouse, animal);
             }
         }
 
-        private void TakeHouse(Logic.AnimalHouse builtHouse, Animal animal)
+        private void TakeHouse(Logic.AnimalHouse builtHouse, IAnimal animal)
         {
             builtHouse.AttachAnimal(animal.AnimalId);
             animal.AttachHouse(builtHouse);

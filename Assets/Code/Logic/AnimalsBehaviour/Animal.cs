@@ -1,3 +1,4 @@
+using Logic.AnimalsBehaviour.AnimalStats;
 using Logic.AnimalsBehaviour.Emotions;
 using Logic.AnimalsStateMachine;
 using Services.StaticData;
@@ -5,11 +6,12 @@ using UnityEngine;
 
 namespace Logic.AnimalsBehaviour
 {
-    public class Animal : MonoBehaviour
+    public class Animal : MonoBehaviour, IAnimal
     {
         [SerializeField] private AnimalStateMachine _stateMachine;
         [SerializeField] private Jumper _jumper;
         [SerializeField] private EmotionProvider _emotionProvider;
+        [SerializeField] private StatsProvider _statProvider;
 
         private PersonalEmotionService _emotionService;
         private AnimalStateMachineObserver _stateMachineObserver;
@@ -17,6 +19,7 @@ namespace Logic.AnimalsBehaviour
         private IStaticDataService _staticDataService;
 
         public AnimalId AnimalId => _animalId;
+        public StatsProvider Stats => _statProvider;
 
         private void OnDisable()
         {

@@ -6,7 +6,7 @@ namespace Services.AnimalHouse
 {
     public interface IAnimalHouseService : IService
     {
-        void TakeQueueToHouse(Func<Animal> callback);
+        void TakeQueueToHouse(Func<IAnimal> callback);
         void BuildHouse(Vector3 position);
     }
 }
