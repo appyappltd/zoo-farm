@@ -2,7 +2,7 @@
 using Ui.Services;
 using Ui.Windows;
 
-namespace CodeBase.StaticData.Windows
+namespace StaticData.Windows
 {
   [Serializable]
   public class WindowConfig

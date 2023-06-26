@@ -59,17 +59,18 @@ namespace Ui.Factory
     //     window.Construct(_rankedService, this);
     // }
     //
-    // public void CreateUIRoot()
-    // {
-    //     GameObject root = _assets.Instantiate(AssetPath.UIRootPath);
-    //     _uiRoot = root.transform;
-    //     root.GetComponent<Canvas>().worldCamera = Camera.main;
-    // }
 
     public void CreateReleaseAnimalWindow()
     {
-        AnimalRelease window = CreateWindow<AnimalRelease>(WindowId.AnimalRelease);
+        AnimalReleaseWindow window = CreateWindow<AnimalReleaseWindow>(WindowId.AnimalRelease);
         window.Construct(_animalsService);
+    }
+
+    public void CreateUIRoot()
+    {
+        GameObject root = _assets.Instantiate(AssetPath.UIRootPath);
+        _uiRoot = root.transform;
+        root.GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
     private TWindow CreateWindow<TWindow>(WindowId windowId) where TWindow : WindowBase

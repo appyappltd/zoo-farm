@@ -7,6 +7,7 @@ using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
 using Services.SaveLoad;
+using Ui.Factory;
 
 namespace Infrastructure.States
 {
@@ -17,22 +18,28 @@ namespace Infrastructure.States
 #endif
 
         private readonly Dictionary<Type, IExitableState> _states;
+        
         private IExitableState _activeState;
 
         public GameStateMachine(SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner,
-            LoadingCurtain curtain) =>
+            LoadingCurtain curtain)
+        {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services, coroutineRunner),
                 [typeof(LoadLevelState)] = new LoadLevelState(this,
-                    curtain, sceneLoader, services.Single<IGameFactory>(), services.Single<IPlayerInputService>(),
-                    services.Single<IPersistentProgressService>(), services.Single<ICameraOperatorService>()),
+                    curtain, sceneLoader, services.Single<IGameFactory>(),
+                    services.Single<IPlayerInputService>(),
+                    services.Single<IPersistentProgressService>(),
+                    services.Single<ICameraOperatorService>(),
+                    services.Single<IUIFactory>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),
                 [typeof(GameLoopState)] = new GameLoopState(),
                 [typeof(FinishState)] = new FinishState()
             };
+        }
 
         public void Enter<TState>() where TState : class, IState
         {
@@ -42,7 +49,7 @@ namespace Infrastructure.States
 
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
-            TState state = ChangeState<TState>();
+            var state = ChangeState<TState>();
             state.Enter(payload);
         }
 

@@ -2,7 +2,7 @@ using Services.Animals;
 
 namespace Ui.Windows
 {
-    public class AnimalRelease : WindowBase
+    public class AnimalReleaseWindow : WindowBase
     {
         private IAnimalsService _animalsService;
 

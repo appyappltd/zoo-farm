@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.StaticData.Windows;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using StaticData;
+using StaticData.Windows;
 using Ui.Services;
 using Ui.Windows;
 using UnityEngine;

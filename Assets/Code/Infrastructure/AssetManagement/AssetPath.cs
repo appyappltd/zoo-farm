@@ -10,5 +10,6 @@ namespace Infrastructure.AssetManagement
         public const string VisualsPath = "Prefabs/Visuals";
         public const string CollectableCoinPath = "Prefabs/Coin";
         public const string GardenBad = "Prefabs/GardenBed";
+        public const string UIRootPath = "Prefabs/UI/UIRoot";
     }
 }
