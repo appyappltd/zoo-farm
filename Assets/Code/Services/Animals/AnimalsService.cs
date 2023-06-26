@@ -32,6 +32,7 @@ namespace Services.Animals
         {
             Unregister(animal);
             _houseService.VacateHouse(animal.AnimalId);
+            animal.Destroy();
             
             Debug.Log($"Animal {animal.AnimalId.Type} (id: {animal.AnimalId.ID}) released");
         }

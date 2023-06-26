@@ -4,6 +4,7 @@ using Logic.Movement;
 using Logic.Translators;
 using Services;
 using Tools.Extension;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Logic.Spawners
@@ -35,6 +36,26 @@ namespace Logic.Spawners
             10, OnReturnToPool);
         }
 
+        private void OnDestroy() =>
+            _pooledSpawner.Dispose();
+
+        private void OnDrawGizmos()
+        {
+            if (_coinsSpawnZone.IsUnityNull())
+            {
+                return;
+            }
+            
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireCube(_coinsSpawnZone.position, _zoneOffset.AddY(0.1f) * 2);
+        }
+
+        public void Spawn(int amountCoins)
+        {
+            _remainingCountCoins = amountCoins;
+            _timerOperator.Restart();
+        }
+
         private void SpawnCoin()
         {
             TranslatableAgent agent = _pooledSpawner.Spawn();
@@ -46,9 +67,6 @@ namespace Logic.Spawners
                 _timerOperator.Restart();
         }
 
-        public void OnDestroy() =>
-            _pooledSpawner.Dispose();
-
         private Action OnReturnToPool(Action returnAction, TranslatableAgent coin)
         {
             void OnEndMove() => returnAction.Invoke();
@@ -56,12 +74,6 @@ namespace Logic.Spawners
             TowardsMover towardsMover = coin.GetComponent<TowardsMover>();
             towardsMover.GotToPlace += OnEndMove;
             return () => towardsMover.GotToPlace -= OnEndMove;
-        }
-
-        public void Spawn(int amountCoins)
-        {
-            _remainingCountCoins = amountCoins;
-            _timerOperator.Restart();
         }
 
         private void PlayTranslatables(TranslatableAgent agent)

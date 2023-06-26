@@ -31,7 +31,6 @@ namespace Logic
         {
             IAnimal animal = _animalService.Animals[_releaseIndexAnimal];
             _animalService.Release(animal);
-            animal.Destroy();
         }
     }
 }

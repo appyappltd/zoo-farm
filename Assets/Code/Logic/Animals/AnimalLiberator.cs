@@ -1,41 +1,31 @@
-using Data.ItemsData;
-using Logic.Interactions;
-using Logic.Movement;
 using Logic.Spawners;
 using Logic.Translators;
+using NaughtyAttributes;
+using Services;
+using Services.Animals;
 using UnityEngine;
 
 namespace Logic.Animals
 {
     [RequireComponent(typeof(RunTranslator))]
-    [RequireComponent(typeof(Delay))]
     public class AnimalLiberator : MonoBehaviour
     {
-        private CollectibleCoinSpawner spawner;
+        [SerializeField] private int _coinsToSpawn;
+
+        private CollectibleCoinSpawner _spawner;
+        private IAnimalsService _animalService;
 
         private void Awake()
         {
-            spawner = GetComponent<CollectibleCoinSpawner>();
-
-            GetComponent<Delay>().Complete += OnComplete;
+            _spawner = GetComponent<CollectibleCoinSpawner>();
+            _animalService = AllServices.Container.Single<IAnimalsService>();
         }
 
-        private void OnComplete(GameObject player)
+        [Button("Release")]
+        private void Release()
         {
-            var inventory = player.GetComponent<Inventory.Inventory>();
-
-            if (inventory.CanGiveItem(CreatureType.Animal))
-            {
-                var item = inventory.Remove();
-                var mover = item.GetComponent<IMover>();
-
-                mover.Move(transform);
-                mover.GotToPlace += () =>
-                {
-                    spawner.Spawn(10);
-                    Destroy(item.gameObject);
-                };
-            }
+            _animalService.Release(_animalService.Animals[0]);
+            _spawner.Spawn(_coinsToSpawn);
         }
     }
 }
