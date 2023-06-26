@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using Cutscene;
 using Data.ItemsData;
 using Infrastructure.Factory;
-using Logic.AnimalsBehaviour;
+using Logic.Animals.AnimalsBehaviour;
 using Logic.Bubble;
 using Logic.Interactions;
 using Logic.Inventory;
 using Logic.Movement;
 using Services;
-using Services.AnimalHouse;
+using Services.AnimalHouses;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -50,7 +50,7 @@ namespace Logic.Medicine
             inventory.AddItem += item => item.GetComponent<IMover>().GotToPlace += () =>
             {
                 canTreat = true;
-                receiver.canTake = false;
+                receiver.CanTake = false;
                 GetRandomIndex();
                 item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
             };
@@ -81,7 +81,7 @@ namespace Logic.Medicine
                 {
                     var animalItemData = (AnimalItemData)handAnimal.ItemData;
                     canTreat = false;
-                    receiver.canTake = true;
+                    receiver.CanTake = true;
 
                     Destroy(handAnimal.gameObject);
                     var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)

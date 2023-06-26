@@ -1,7 +1,8 @@
 ﻿using Infrastructure.AssetManagement;
 using Infrastructure.Factory;
 using Services;
-using Services.AnimalHouse;
+using Services.AnimalHouses;
+using Services.Animals;
 using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
@@ -44,19 +45,21 @@ namespace Infrastructure.States
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            _services.RegisterSingle<IAnimalHouseService>(new AnimalHouseService());
+            _services.RegisterSingle<IAnimalsService>(
+                new AnimalsService(_services.Single<IAnimalHouseService>()));
+            _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(
                     _services.Single<IAssetProvider>(),
                     _services.Single<IRandomService>(),
                     _services.Single<IPersistentProgressService>(),
-                    _services.Single<IStaticDataService>()));
-            _services.RegisterSingle<IAnimalHouseService>(
-                new AnimalHouseService(_services.Single<IGameFactory>()));
+                    _services.Single<IStaticDataService>(),
+                    _services.Single<IAnimalsService>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IGameFactory>()));
-            _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
         }
 
         private void RegisterStaticDataService()

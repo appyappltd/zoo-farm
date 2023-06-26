@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using Builders;
 using Infrastructure.AssetManagement;
 using Logic.Animals;
-using Logic.AnimalsBehaviour;
+using Logic.Animals.AnimalsBehaviour;
 using Logic.Spawners;
+using Services.Animals;
 using Services.PersistentProgress;
 using Services.Randomizer;
 using Services.StaticData;
@@ -23,12 +24,12 @@ namespace Infrastructure.Factory
         private AnimalBuilder _animalBuilder;
         
         public GameFactory(IAssetProvider assets, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
+            IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, IAnimalsService animalsService)
         {
             _assets = assets;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
-            _animalBuilder = new AnimalBuilder(staticDataService);
+            _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
         }
 
         public void Cleanup()
