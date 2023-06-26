@@ -19,7 +19,7 @@ namespace Builders
         public void Build(Animal animal)
         {
             //TODO: заменить реализацию хеш кода на уникальный id и добавить статик дату для животного
-            AnimalId animalId = new AnimalId(AnimalType.ECatB, animal.GetHashCode());
+            AnimalId animalId = new AnimalId(AnimalType.CatB, animal.GetHashCode());
             animal.Construct(animalId, _staticDataService);
             _animalsService.Register(animal);
         }

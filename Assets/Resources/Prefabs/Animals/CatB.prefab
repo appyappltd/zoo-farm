@@ -1065,6 +1065,7 @@ MonoBehaviour:
   _stateMachine: {fileID: 8136296871626173811}
   _jumper: {fileID: 7170451200634432961}
   _emotionProvider: {fileID: 7740161014391255540}
+  _statProvider: {fileID: 3091621735409208563}
 --- !u!1 &6108457902604890809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,6 +1398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8546131362293066920}
+  - component: {fileID: 3091621735409208563}
   m_Layer: 8
   m_Name: Indicators
   m_TagString: Untagged
@@ -1422,6 +1424,21 @@ Transform:
   m_Father: {fileID: 6024936477913870918}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3091621735409208563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8101718673406365527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8028d46337da499786781d90aaf06112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vitality: {fileID: 6708439799499972674}
+  _satiety: {fileID: 7394784145383802163}
+  _peppiness: {fileID: 6058482536156151028}
 --- !u!1 &8282754256815209665
 GameObject:
   m_ObjectHideFlags: 0

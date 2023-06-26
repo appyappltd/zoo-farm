@@ -22,14 +22,16 @@ namespace Logic
         {
             foreach (IAnimal animal in _animalService.Animals)
             {
-                Debug.Log(animal.ToString());
+                Debug.Log(animal);
             }
         }
 
         [Button("Release")]
         private void Release()
         {
-            _animalService.Release(_animalService.Animals[_releaseIndexAnimal]);
+            IAnimal animal = _animalService.Animals[_releaseIndexAnimal];
+            _animalService.Release(animal);
+            animal.Destroy();
         }
     }
 }

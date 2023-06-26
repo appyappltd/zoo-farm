@@ -42,13 +42,21 @@ namespace Logic.Animals.AnimalsBehaviour
             Activate();
         }
 
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
         private void Activate() =>
             _jumper.Jump();
 
         public override string ToString()
         {
             return
-                $"Animal {AnimalId.Type} (id: {_animalId.ID}\nStats:\n  Vitality - {Stats.Vitality},\n  Satiety - {Stats.Satiety},\n  Peppiness - {Stats.Peppiness},\n)";
+                $"Animal {_animalId.Type} (id: {_animalId.ID}\nStats:\n" +
+                $"  Vitality - {_statProvider.Vitality.CurrentNormalized}/1,\n" +
+                $"  Satiety - {_statProvider.Satiety.CurrentNormalized}/1,\n " +
+                $" Peppiness - {_statProvider.Peppiness.CurrentNormalized}/1,\n)";
         }
     }
 }
