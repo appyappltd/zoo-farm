@@ -1,0 +1,43 @@
+﻿using UnityEngine;
+
+namespace Ui.Windows
+{
+    public class LoseWindow : WindowBase
+    {
+        // [SerializeField] private MenuButton _menuButton;
+        // [SerializeField] private RestartButton _restartButton;
+        // [SerializeField] private TextSetterAnimated _scoreText;
+        //
+        // private IScoreService _scoreService;
+        // private IPersistentProgressService _progressService;
+        //
+        // private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
+        //
+        // public void Construct(IPersistentProgressService progressService, IScoreService scoreService,
+        //     GameStateMachine stateMachine)
+        // {
+        //     _progressService = progressService;
+        //     _scoreService = scoreService;
+        //     _menuButton.Construct(stateMachine);
+        //     _restartButton.Construct(stateMachine, LevelId);
+        // }
+        //
+        // protected override void Initialize() =>
+        //     SetScore();
+        //
+        // protected override void SubscribeUpdates()
+        // {
+        //     _menuButton.Subscribe();
+        //     _restartButton.Subscribe();
+        // }
+        //
+        // protected override void Cleanup()
+        // {
+        //     _menuButton.Cleanup();
+        //     _restartButton.Cleanup();
+        // }
+        //
+        // private void SetScore() =>
+        //     _scoreText.SetTextAnimated(_scoreService.CalculateScore());
+    }
+}
