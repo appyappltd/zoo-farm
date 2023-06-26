@@ -1,4 +1,4 @@
-using Logic.AnimalsBehaviour;
+using Logic.Animals.AnimalsBehaviour;
 using Logic.Medicine;
 using NTC.Global.Cache;
 using Services;

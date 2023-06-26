@@ -9,7 +9,7 @@ namespace Logic.Inventory
     [RequireComponent(typeof(Delay))]
     public class ProductReceiver : MonoBehaviour
     {
-        public bool canTake = true;
+        public bool CanTake = true;
 
         [SerializeField, Min(.0f)] private float _time = .2f;
 
@@ -24,7 +24,7 @@ namespace Logic.Inventory
 
         private IEnumerator TryTakeItem(GameObject player)
         {
-            if (canTake)
+            if (CanTake)
             {
                 var playerInventory = player.GetComponent<Inventory>();
                 while (inventory.Type == CreatureType.None || playerInventory.CanGiveItem(inventory.Type) && inventory.CanAddItem(inventory.Type, playerInventory.GetData.Hand.Weight))

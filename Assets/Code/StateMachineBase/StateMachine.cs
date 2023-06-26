@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Logic.AnimalsStateMachine.States;
+using Logic.Animals.AnimalsStateMachine.States;
 using NTC.Global.Cache;
 using Observables;
 

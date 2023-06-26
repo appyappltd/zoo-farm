@@ -1,4 +1,4 @@
-using Logic.AnimalsBehaviour.Emotions;
+using Logic.Animals.AnimalsBehaviour.Emotions;
 using UnityEngine;
 
 namespace StaticData

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Logic.AnimalsBehaviour.Emotions;
+using Logic.Animals.AnimalsBehaviour.Emotions;
 using StaticData;
 using UnityEngine;
 
