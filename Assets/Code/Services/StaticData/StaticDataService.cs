@@ -13,7 +13,7 @@ namespace Services.StaticData
     public class StaticDataService : IStaticDataService
     {
         private const string EmotionConfigPath = "StaticData/EmotionConfigs";
-        private const string WindowPath = "StaticData/WindowConfig/WindowConfigs";
+        private const string WindowPath = "StaticData/WindowConfigs";
         
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;

@@ -10,6 +10,7 @@ using Services.Randomizer;
 using Services.SaveLoad;
 using Services.StaticData;
 using Ui.Factory;
+using Ui.Services;
 
 namespace Infrastructure.States
 {
@@ -64,6 +65,9 @@ namespace Infrastructure.States
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IAnimalsService>()
                 ));
+            _services.RegisterSingle<IWindowService>(
+                new WindowService(
+                    _services.Single<IUIFactory>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),

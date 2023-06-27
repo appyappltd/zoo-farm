@@ -56,6 +56,7 @@ namespace Infrastructure.States
             GameObject hero = InitHero();
             FollowCamera(hero.transform);
             InitialHud(hero);
+            InitUIRoot();
             _stateMachine.Enter<GameLoopState>();
             InformProgressReaders();
         }

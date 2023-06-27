@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc4be4e23384f8f8f7f326d4ec444d2, type: 3}
   m_Name: WindowConfigs
   m_EditorClassIdentifier: 
-  Configs: []
+  Configs:
+  - WindowId: 1
+    Template: {fileID: 8265833864221994856, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}

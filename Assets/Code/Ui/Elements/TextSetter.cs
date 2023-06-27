@@ -28,7 +28,7 @@ namespace Ui.Elements
             {
                 _setTextAction = (text) => _textSprite.SetText(text);
             }
-            
+
             OnAwake();
         }
 

@@ -1,6 +1,5 @@
 using Logic.Spawners;
 using Logic.Translators;
-using NaughtyAttributes;
 using Services;
 using Services.Animals;
 using UnityEngine;
@@ -8,8 +7,9 @@ using UnityEngine;
 namespace Logic.Animals
 {
     [RequireComponent(typeof(RunTranslator))]
-    public class AnimalLiberator : MonoBehaviour
+    public class AnimalReleaser : MonoBehaviour
     {
+        //TODO: В дальнейшем за каждое животное разное количество денег
         [SerializeField] private int _coinsToSpawn;
 
         private CollectibleCoinSpawner _spawner;
@@ -19,13 +19,15 @@ namespace Logic.Animals
         {
             _spawner = GetComponent<CollectibleCoinSpawner>();
             _animalService = AllServices.Container.Single<IAnimalsService>();
+            _animalService.Released += OnReleased;
         }
 
-        [Button("Release")]
-        private void Release()
+        private void OnDestroy()
         {
-            _animalService.Release(_animalService.Animals[0]);
-            _spawner.Spawn(_coinsToSpawn);
+            _animalService.Released -= OnReleased;
         }
+
+        private void OnReleased(AnimalType type) =>
+            _spawner.Spawn(_coinsToSpawn);
     }
 }
