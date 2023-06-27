@@ -8,7 +8,7 @@ namespace Logic.AnimalsStateMachine.States
     {
         private readonly Transform _target;
 
-        public MoveTo(AnimalAnimator animator, AnimalMover mover, Transform target) : base(animator, mover) =>
+        public MoveTo(IPrimeAnimator animator, NavMeshMover mover, Transform target) : base(animator, mover) =>
             _target = target;
 
         protected override Vector3 GetMovePosition() =>

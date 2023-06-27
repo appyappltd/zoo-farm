@@ -6,10 +6,10 @@ namespace Logic.AnimalsStateMachine.States
 {
     public abstract class Move : AnimalState
     {
-        private readonly AnimalAnimator _animator;
-        private readonly AnimalMover _mover;
+        private readonly IPrimeAnimator _animator;
+        private readonly NavMeshMover _mover;
 
-        public Move(AnimalAnimator animator, AnimalMover mover) : base(animator)
+        public Move(IPrimeAnimator animator, NavMeshMover mover) : base(animator)
         {
             _animator = animator;
             _mover = mover;

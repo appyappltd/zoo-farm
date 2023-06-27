@@ -10,7 +10,7 @@ namespace Logic.AnimalsBehaviour
         [SerializeField] private Jumper _jumper;
         [SerializeField] private StateMachine _stateMachine;
         [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private AnimalMover _mover;
+        [SerializeField] private NavMeshMover _mover;
 
         private bool _isMoverEnabled;
         

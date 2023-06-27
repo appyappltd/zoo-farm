@@ -7,10 +7,10 @@ namespace Logic.AnimalsStateMachine.States
 {
     public class Wander : Move
     {
-        private readonly AnimalMover _mover;
+        private readonly NavMeshMover _mover;
         private readonly float _maxDistance;
 
-        public Wander(AnimalAnimator animator, AnimalMover mover, float maxDistance) : base(animator, mover)
+        public Wander(IPrimeAnimator animator, NavMeshMover mover, float maxDistance) : base(animator, mover)
         {
             _mover = mover;
             _maxDistance = maxDistance;

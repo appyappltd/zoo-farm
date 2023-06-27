@@ -16,7 +16,7 @@ namespace Logic.AnimalsStateMachine
     {
         [Header("Controls")]
         [SerializeField] private AnimalAnimator _animator;
-        [SerializeField] private AnimalMover _mover;
+        [SerializeField] private NavMeshMover _mover;
 
         [Header("Stats")] [Space]
         [SerializeField] private ProgressBarIndicator _vitality;

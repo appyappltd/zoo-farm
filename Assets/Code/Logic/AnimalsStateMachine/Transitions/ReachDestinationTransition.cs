@@ -5,9 +5,9 @@ namespace Logic.AnimalsStateMachine.Transitions
 {
     public class ReachDestinationTransition : Transition
     {
-        private readonly AnimalMover _mover;
+        private readonly NavMeshMover _mover;
 
-        public ReachDestinationTransition( AnimalMover mover) =>
+        public ReachDestinationTransition( NavMeshMover mover) =>
             _mover = mover;
 
         public override bool CheckCondition() =>

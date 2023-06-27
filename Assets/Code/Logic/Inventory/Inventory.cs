@@ -24,7 +24,7 @@ namespace Logic.Inventory
         [SerializeField] private CreatureType _type = CreatureType.None;
         [SerializeField, Min(0)] private int _maxWeight = 3;
 
-        private List<HandItem> items = new();
+        [SerializeField] private List<HandItem> items = new();//Debag  [SerializeField] 
         private int weight = 0;
         private CreatureType currType = CreatureType.None;
 

@@ -1,0 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Logic.Volunteer
+{
+    public class Volunteer : MonoBehaviour
+    {
+        public bool CanGiveAnimal = false;
+    }
+}
