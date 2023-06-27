@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animalType: 1
   _animalsCount: {fileID: 4440792692489667226}
+  _toReleaseCount: {fileID: 3602536321252275569}
   _increaseCounterButton: {fileID: 7493705775412199431}
   _testTotal: 0
   _testReady: 0
@@ -209,7 +210,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1/1
+  m_text: 0/0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -439,6 +440,7 @@ GameObject:
   - component: {fileID: 2787260034144202960}
   - component: {fileID: 7959270673084055211}
   - component: {fileID: 139701127773746338}
+  - component: {fileID: 3602536321252275569}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -494,7 +496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -563,6 +565,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3602536321252275569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5646605663257737765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e304f8745515034448856c17649da82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isUi: 1
+  _textSprite: {fileID: 0}
+  _textUi: {fileID: 139701127773746338}
 --- !u!1 &6155808278647553550
 GameObject:
   m_ObjectHideFlags: 0

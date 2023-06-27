@@ -8153,14 +8153,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1953837103}
     m_Modifications:
-    - target: {fileID: 199172974599244116, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
-      propertyPath: m_fontSize
-      value: 49.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 261184076314610492, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
-      propertyPath: m_fontSize
-      value: 19.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1832704610125994878, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -8184,14 +8176,6 @@ PrefabInstance:
     - target: {fileID: 1832704610125994878, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -97.63192
-      objectReference: {fileID: 0}
-    - target: {fileID: 3046430902026525958, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
-      propertyPath: m_fontSize
-      value: 49.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106194602050215790, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
-      propertyPath: m_fontSize
-      value: 19.5
       objectReference: {fileID: 0}
     - target: {fileID: 3532373288378483365, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
       propertyPath: m_Pivot.x
@@ -8301,21 +8285,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -97.63192
       objectReference: {fileID: 0}
-    - target: {fileID: 4987658347532411752, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
-      propertyPath: m_fontSize
-      value: 19.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5483817141064079209, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
-      propertyPath: m_fontSize
-      value: 25.65
+      propertyPath: m_text
+      value: "\u041E\u0442\u043F\u0443\u0441\u0442\u0438\u0442\u044C 0 \u0436\u0438\u0432\u043E\u0442\u043D\u044B\u0445(-\u043E\u0435)?"
       objectReference: {fileID: 0}
     - target: {fileID: 7799814507542153455, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
       propertyPath: m_Name
       value: ReveaseWindow
-      objectReference: {fileID: 0}
-    - target: {fileID: 7849573610900862290, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
-      propertyPath: m_fontSize
-      value: 49.6
       objectReference: {fileID: 0}
     - target: {fileID: 8593924160866609016, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
       propertyPath: m_AnchorMax.y

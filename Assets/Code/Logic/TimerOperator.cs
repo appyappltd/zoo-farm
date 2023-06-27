@@ -22,6 +22,7 @@ namespace Logic
         {
             _timer = new Timer(duration, OnTimeIsOn);
             _callBack = action;
+            Reset();
         }
 
         public void Pause() =>

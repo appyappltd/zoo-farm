@@ -9,7 +9,8 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
     public class ProgressBarIndicator : MonoCache
     {
         [SerializeField] [Range(0, 100f)] private float _maxValue;
-        [SerializeField] [Range(0, 1f)] private float _reduceSpeed;
+        [SerializeField] [Range(0, 1f)] private float _changeSpeed;
+        [SerializeField] private bool _isSpend;
         [SerializeField] [Range(0, 100f)] private float _startValue;
         
 
@@ -21,7 +22,7 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         private void Awake()
         {
             _progressBar = new ProgressBar(_maxValue, _startValue);
-            _progressBarOperator = new ProgressBarOperator(_progressBar, _reduceSpeed, true);
+            _progressBarOperator = new ProgressBarOperator(_progressBar, _changeSpeed, _isSpend);
         }
 
         protected override void OnEnabled() =>
@@ -31,7 +32,7 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
             _progressBar.Empty -= Disable;
 
         private void OnValidate() =>
-            enabled = _reduceSpeed > 0;
+            enabled = _changeSpeed > 0;
 
         private void Disable() =>
             enabled = false;

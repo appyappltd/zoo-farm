@@ -27,7 +27,10 @@ namespace Logic.Animals
             _animalService.Released -= OnReleased;
         }
 
-        private void OnReleased(AnimalType type) =>
+        private void OnReleased(AnimalType type)
+        {
+            Debug.Log("Spawn coins");
             _spawner.Spawn(_coinsToSpawn);
+        }
     }
 }

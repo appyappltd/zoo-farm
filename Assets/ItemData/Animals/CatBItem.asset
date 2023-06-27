@@ -15,4 +15,4 @@ MonoBehaviour:
   <Hand>k__BackingField: {fileID: 6539579365009526868, guid: 95c9c69412539f64cae170bed248e06a, type: 3}
   <Drop>k__BackingField: {fileID: 8860459717152203080, guid: c995f546bdc58d345acdc8c8c459765f, type: 3}
   <Creature>k__BackingField: 1
-  <AnimalType>k__BackingField: 0
+  <AnimalType>k__BackingField: 1

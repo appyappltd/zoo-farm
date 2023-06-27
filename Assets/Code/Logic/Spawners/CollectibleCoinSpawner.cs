@@ -52,8 +52,8 @@ namespace Logic.Spawners
 
         public void Spawn(int amountCoins)
         {
-            _remainingCountCoins = amountCoins;
-            _timerOperator.Restart();
+            _remainingCountCoins += amountCoins;
+            _timerOperator.Play();
         }
 
         private void SpawnCoin()

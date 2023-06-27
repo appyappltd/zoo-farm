@@ -33,5 +33,8 @@ namespace Ui.Windows
         protected virtual void Cleanup()
         {
         }
+
+        protected void CloseWindow() =>
+            _closeButton.onClick.Invoke();
     }
 }

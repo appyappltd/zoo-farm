@@ -11,8 +11,11 @@ namespace Ui
 {
     public class ReleaseAnimalPanel : MonoBehaviour
     {
+        private readonly Observable<int> _releaseAnimalCount = new Observable<int>();
+        
         [SerializeField] private AnimalType _animalType;
         [SerializeField] private TextSetter _animalsCount;
+        [SerializeField] private TextSetter _toReleaseCount;
         [SerializeField] private Button _increaseCounterButton;
         
 #if UNITY_EDITOR
@@ -21,7 +24,6 @@ namespace Ui
 #endif
 
         private AnimalCountData _countData;
-        private Observable<int> _releaseAnimalCount;
 
         public IObservable<int> ReleaseAnimalCount => _releaseAnimalCount;
 
@@ -30,21 +32,26 @@ namespace Ui
         public void Construct(AnimalCountData countData)
         {
             _countData = countData;
-            _releaseAnimalCount = new Observable<int>();
             _animalsCount.SetText($"{countData.ReleaseReady}/{countData.Total}");
             _increaseCounterButton.onClick.AddListener(IncreaseReleaseCounter);
+
+            if (countData.ReleaseReady == 0)
+            {
+                _increaseCounterButton.interactable = false;
+            }
+            
             gameObject.SetActive(true);
         }
 
         private void IncreaseReleaseCounter()
         {
-            if (_releaseAnimalCount.Value < _countData.Total)
-            {
-                _releaseAnimalCount.Value++;
-            }
-            else
+            _releaseAnimalCount.Value++;
+            _toReleaseCount.SetText(_releaseAnimalCount.Value);
+            
+            if (_releaseAnimalCount.Value >= _countData.ReleaseReady)
             {
                 _increaseCounterButton.interactable = false;
+                _increaseCounterButton.onClick.RemoveListener(IncreaseReleaseCounter);
             }
         }
 

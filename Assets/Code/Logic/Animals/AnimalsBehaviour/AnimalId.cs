@@ -25,5 +25,10 @@ namespace Logic.Animals.AnimalsBehaviour
 
         public override int GetHashCode() =>
             HashCode.Combine((int) Type, ID);
+
+        public override string ToString()
+        {
+            return $"{Type} {ID}, {GetHashCode()}";
+        }
     }
 }

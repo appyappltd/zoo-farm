@@ -19,12 +19,13 @@ namespace Ui.Windows
         private IAnimalsService _animalsService;
         private int _totalReleaseAnimal;
 
-        private void OnDestroy() =>
+        protected override void Cleanup() =>
             _compositeDisposable.Dispose();
 
         public void Construct(IAnimalsService animalsService)
         {
             _animalsService = animalsService;
+            Debug.Log(_animalsService);
         }
 
         protected override void Initialize()
@@ -41,17 +42,18 @@ namespace Ui.Windows
 
         private void OnClickRelease()
         {
-            foreach (var panel in _releasePanels)
+            foreach (ReleaseAnimalPanel panel in _releasePanels)
                 for (int animalIndex = 0; animalIndex < panel.ReleaseAnimalCount.Value; animalIndex++)
                     _animalsService.Release(panel.AnimalType);
+            
+            CloseWindow();
         }
 
         private void InitPanel(ReleaseAnimalPanel panel)
         {
             AnimalCountData countData = _animalsService.GetAnimalsCount(panel.AnimalType);
+            _releaseButton.interactable = false;
 
-            Debug.Log(countData);
-            
             if (countData.Total <= 0)
             {
                 panel.gameObject.SetActive(false);
@@ -61,13 +63,14 @@ namespace Ui.Windows
             panel.Construct(countData);
             _compositeDisposable.Add(
                 panel.ReleaseAnimalCount
-                    .Then((UpdateTotalReleaseCount)));
+                    .Then(OnUpdateTotalReleaseCount));
         }
 
-        private void UpdateTotalReleaseCount(int prev, int curr)
+        private void OnUpdateTotalReleaseCount(int prev, int curr)
         {
             _totalReleaseAnimal += curr - prev;
             _releaseButtonText.SetText(ReleaseAnimalsText, _totalReleaseAnimal);
+            _releaseButton.interactable = _totalReleaseAnimal > 0;
         }
     }
 }

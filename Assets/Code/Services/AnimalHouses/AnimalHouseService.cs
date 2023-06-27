@@ -5,6 +5,7 @@ using Infrastructure.Factory;
 using JetBrains.Annotations;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using UnityEngine;
 
 namespace Services.AnimalHouses
 {
@@ -33,7 +34,10 @@ namespace Services.AnimalHouses
 
         public void VacateHouse(AnimalId withAnimalId)
         {
-            AnimalHouse attachedHouse = _animalHouses.FirstOrDefault(house => house.AnimalId.Equals(withAnimalId));
+            Debug.Log(withAnimalId);
+
+            AnimalHouse attachedHouse =
+                _animalHouses.FirstOrDefault(house => house.IsTaken && house.AnimalId.Equals(withAnimalId));
 
             if (attachedHouse is null)
                 throw new NullReferenceException(HouseNotFoundException);
