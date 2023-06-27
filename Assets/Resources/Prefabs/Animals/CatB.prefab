@@ -141,7 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _reduceSpeed: 0.1
+  _reduceSpeed: 0.01
+  _startValue: 0
 --- !u!1 &2662996136815657581
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +198,7 @@ MonoBehaviour:
   _restPlace: {fileID: 0}
   _eatPlace: {fileID: 0}
   _idleDelayRange: {x: 2, y: 5}
-  _placeOffset: 0.2
+  _placeOffset: 0.8
 --- !u!1 &3136995584478055676
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _reduceSpeed: 0.1
+  _reduceSpeed: 0.005
+  _startValue: 32.7
 --- !u!1 &3517778643612403819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _reduceSpeed: 0.01
+  _startValue: 12.5
 --- !u!1 &8101718673406365527
 GameObject:
   m_ObjectHideFlags: 0

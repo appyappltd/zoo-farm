@@ -27,6 +27,7 @@ namespace Cutscene.Directors
             CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.Focus(_firstHouse)));
             CutsceneModules.Add(new CutsceneTimeAwaiter(3f, GlobalUpdate.Instance));
             CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.FocusOnDefault()));
+            CutsceneModules.Add(new CutsceneAction(() => Destroy(gameObject)));
         }
     }
 }

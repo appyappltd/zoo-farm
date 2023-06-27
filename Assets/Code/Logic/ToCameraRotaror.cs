@@ -7,8 +7,11 @@ namespace Logic
     {
         private Transform _cameraTransform;
 
-        private void Awake() =>
+        private void Awake()
+        {
             _cameraTransform = Camera.main.transform;
+            LateRun();
+        }
 
         protected override void LateRun() =>
             transform.forward = _cameraTransform.forward;
