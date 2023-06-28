@@ -27,7 +27,6 @@ namespace Logic.Inventory
         {
             currItem = item;
             var mover = currItem.GetComponent<IMover>();
-
             mover.Move(_places.Length < inventory.GetCount
                 ? inventory.GetPreLast.NextPlace
                 : _places[inventory.GetCount - 1]);

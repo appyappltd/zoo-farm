@@ -21,8 +21,7 @@ namespace Logic
 
         private void ChangeHandsState()
         {
-            Debug = inventory.GetCount > 0;
-            animC.SetBool("IsHold", Debug);
+            animC.SetBool("Hold", inventory.GetCount > 0);
         }
     }
 }

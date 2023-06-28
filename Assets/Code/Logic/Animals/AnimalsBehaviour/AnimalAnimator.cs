@@ -1,8 +1,9 @@
+using Logic.AnimatorStateMachine;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour
 {
-    public class AnimalAnimator : MonoBehaviour
+    public class AnimalAnimator : MonoBehaviour, IPrimeAnimator
     {
         private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int Move = Animator.StringToHash("Move");

@@ -7,6 +7,7 @@ using Logic.Animals.AnimalsStateMachine.Transitions;
 using NaughtyAttributes;
 using Progress;
 using StateMachineBase;
+using StateMachineBase.States;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine
@@ -15,7 +16,7 @@ namespace Logic.Animals.AnimalsStateMachine
     {
         [Header("Controls")]
         [SerializeField] private AnimalAnimator _animator;
-        [SerializeField] private AnimalMover _mover;
+        [SerializeField] private NavMeshMover _mover;
 
         [Header("Stats")] [Space]
         [SerializeField] private ProgressBarIndicator _vitality;

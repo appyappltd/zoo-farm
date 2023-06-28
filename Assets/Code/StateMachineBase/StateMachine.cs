@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Logic.Animals.AnimalsStateMachine.States;
 using NTC.Global.Cache;
 using Observables;
+using StateMachineBase.States;
 
 namespace StateMachineBase
 {
