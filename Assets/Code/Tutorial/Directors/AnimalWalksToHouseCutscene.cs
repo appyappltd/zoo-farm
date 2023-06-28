@@ -1,3 +1,4 @@
+using Logic;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Medicine;
 using NTC.Global.Cache;
@@ -6,14 +7,15 @@ using Services.Camera;
 using Tools;
 using UnityEngine;
 
-namespace Cutscene.Directors
+namespace Tutorial.Directors
 {
     public class AnimalWalksToHouseCutscene : CutsceneDirector
     {
         [SerializeField] private MedicineBed _medicineBed;
         [SerializeField] private Transform _animal;
         [SerializeField] private Transform _plant;
-        [SerializeField] [RequireInterface(typeof(ICutsceneTrigger))] private MonoBehaviour _animalIsHomeTrigger;
+        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _animalIsHomeTrigger;
+        [SerializeField] private TutorialArrow _arrow;
 
         private ICameraOperatorService _cameraOperatorService;
 
@@ -39,10 +41,17 @@ namespace Cutscene.Directors
         {
             CutsceneModules.Add(new CutsceneTimeAwaiter(0.2f, GlobalUpdate.Instance));
             CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.Focus(_animal)));
-            CutsceneModules.Add(new CutsceneTriggerAwaiter((ICutsceneTrigger) _animalIsHomeTrigger));
-            CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.Focus(_plant)));
+            CutsceneModules.Add(new CutsceneTriggerAwaiter((ITutorialTrigger) _animalIsHomeTrigger));
+            CutsceneModules.Add(new CutsceneAction(() =>
+            {
+                _arrow.Move(_plant.position);
+                _cameraOperatorService.Focus(_plant);
+            }));
             CutsceneModules.Add(new CutsceneTimeAwaiter(3f, GlobalUpdate.Instance));
             CutsceneModules.Add(new CutsceneAction(() => _cameraOperatorService.FocusOnDefault()));
+            CutsceneModules.Add(new CutsceneTriggerAwaiter(_arrow));
+            CutsceneModules.Add(new CutsceneTimeAwaiter(2f, GlobalUpdate.Instance));
+            CutsceneModules.Add(new CutsceneAction(() => _arrow.Hide()));
             CutsceneModules.Add(new CutsceneAction(() => Destroy(gameObject)));
         }
     }

@@ -2,7 +2,7 @@ using NTC.Global.Cache;
 using Tools;
 using UnityEngine;
 
-namespace Cutscene
+namespace Tutorial
 {
     public class CutsceneTimeAwaiter : CutsceneModule
     {

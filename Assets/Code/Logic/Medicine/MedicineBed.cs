@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Cutscene;
 using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour;
@@ -10,6 +9,7 @@ using Logic.Inventory;
 using Logic.Movement;
 using Services;
 using Services.AnimalHouses;
+using Tutorial;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,7 +19,7 @@ namespace Logic.Medicine
     [RequireComponent(typeof(Inventory.Inventory))]
     [RequireComponent(typeof(Storage))]
     [RequireComponent(typeof(ProductReceiver))]
-    public class MedicineBed : MonoBehaviour, ICutsceneTrigger
+    public class MedicineBed : MonoBehaviour, ITutorialTrigger
     {
         [SerializeField] private List<ItemData> _data = new();
         [SerializeField] private List<Sprite> _sprites = new();

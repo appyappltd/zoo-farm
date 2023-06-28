@@ -3,22 +3,22 @@ using NaughtyAttributes;
 using Tools;
 using UnityEngine;
 
-namespace Cutscene
+namespace Tutorial
 {
     public abstract class CutsceneDirector : MonoBehaviour
     {
-        [SerializeField] [RequireInterface(typeof(ICutsceneTrigger))] private MonoBehaviour _beginTrigger;
+        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _beginTrigger;
         
         protected readonly List<ICutsceneModule> CutsceneModules = new List<ICutsceneModule>();
 
         private void OnDestroy()
         {
-            ((ICutsceneTrigger) _beginTrigger).Triggered -= Play;
+            ((ITutorialTrigger) _beginTrigger).Triggered -= Play;
         }
 
         private void Awake()
         {
-            ((ICutsceneTrigger) _beginTrigger).Triggered += Play;
+            ((ITutorialTrigger) _beginTrigger).Triggered += Play;
         }
 
         protected abstract void CollectModules();

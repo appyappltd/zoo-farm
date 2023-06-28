@@ -1,8 +1,8 @@
 using System;
 
-namespace Cutscene
+namespace Tutorial
 {
-    public interface ICutsceneTrigger
+    public interface ITutorialTrigger
     {
         public event Action Triggered;
     }

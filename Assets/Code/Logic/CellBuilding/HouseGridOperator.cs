@@ -1,14 +1,14 @@
 using System;
-using Cutscene;
 using Infrastructure.Factory;
 using Logic.Animals;
 using Services;
 using Services.AnimalHouses;
+using Tutorial;
 using UnityEngine;
 
 namespace Logic.CellBuilding
 {
-    public class HouseGridOperator : BuildGridOperator , ICutsceneTrigger
+    public class HouseGridOperator : BuildGridOperator , ITutorialTrigger
     {
         private IAnimalHouseService _houseService;
         private IGameFactory _gameFactory;

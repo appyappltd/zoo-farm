@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Cutscene;
+using Tutorial;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;

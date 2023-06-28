@@ -225,6 +225,8 @@ GameObject:
   - component: {fileID: 725687752256662014}
   - component: {fileID: 5876356354120000562}
   - component: {fileID: 5284028656086663599}
+  - component: {fileID: 3066754098659389321}
+  - component: {fileID: 8983895352702742480}
   m_Layer: 0
   m_Name: TutorialArrow
   m_TagString: Untagged
@@ -246,7 +248,7 @@ Transform:
   m_Children:
   - {fileID: 3749342778946625694}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &725687752256662014
 MonoBehaviour:
@@ -286,3 +288,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _translator: {fileID: 5876356354120000562}
   _translatableAgent: {fileID: 7993582039744617308}
+--- !u!65 &3066754098659389321
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8390170312364042213}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: -2.98, z: 0}
+--- !u!114 &8983895352702742480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8390170312364042213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775fed50cb6c1504e99a2833e73c5985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

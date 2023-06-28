@@ -1,6 +1,6 @@
 using System;
 
-namespace Cutscene
+namespace Tutorial
 {
     public class CutsceneAction : CutsceneModule
     {

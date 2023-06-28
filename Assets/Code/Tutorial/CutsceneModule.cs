@@ -1,6 +1,6 @@
 using NTC.Global.Cache.Interfaces;
 
-namespace Cutscene
+namespace Tutorial
 {
     public abstract class CutsceneModule : ICutsceneModule, IRunSystem
     {

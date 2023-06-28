@@ -1,4 +1,4 @@
-namespace Cutscene
+namespace Tutorial
 {
     public interface ICutsceneModule
     {

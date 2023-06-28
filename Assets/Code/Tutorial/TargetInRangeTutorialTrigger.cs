@@ -2,10 +2,10 @@ using System;
 using NTC.Global.Cache;
 using UnityEngine;
 
-namespace Cutscene
+namespace Tutorial
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class TargetInRangeCutsceneTrigger : MonoCache, ICutsceneTrigger
+    public class TargetInRangeTutorialTrigger : MonoCache, ITutorialTrigger
     {
         public event Action Triggered = () => { };
 

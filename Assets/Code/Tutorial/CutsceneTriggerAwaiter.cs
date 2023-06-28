@@ -1,10 +1,10 @@
-namespace Cutscene
+namespace Tutorial
 {
     public class CutsceneTriggerAwaiter : CutsceneModule
     {
-        private readonly ICutsceneTrigger _trigger;
+        private readonly ITutorialTrigger _trigger;
 
-        public CutsceneTriggerAwaiter(ICutsceneTrigger trigger)
+        public CutsceneTriggerAwaiter(ITutorialTrigger trigger)
         {
             _trigger = trigger;
         }
