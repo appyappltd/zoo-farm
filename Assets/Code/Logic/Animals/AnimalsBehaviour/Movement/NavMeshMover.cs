@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NTC.Global.Cache;
 using Tools.Extension;
 using UnityEngine;
@@ -55,9 +56,12 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
             transform.rotation = targetRotation;
         }
 
+        private Vector3[] v = new Vector3[1];
+
         private Quaternion GetLookRotation()
         {
-            return Quaternion.LookRotation(_agent.velocity.ChangeY(_agent.transform.position.y));
+            _agent.path.GetCornersNonAlloc(v);
+            return Quaternion.LookRotation(v.First());
         }
     }
 }
