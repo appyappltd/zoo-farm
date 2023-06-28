@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8002016443741701784}
-  _mover: {fileID: 0}
+  _mover: {fileID: 9015111894272762944}
   _vitality: {fileID: 6708439799499972674}
   _satiety: {fileID: 7394784145383802163}
   _peppiness: {fileID: 6058482536156151028}
@@ -199,7 +199,7 @@ MonoBehaviour:
   _restPlace: {fileID: 0}
   _eatPlace: {fileID: 0}
   _idleDelayRange: {x: 2, y: 5}
-  _placeOffset: 0.8
+  _placeOffset: 0.1
 --- !u!1 &3136995584478055676
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +901,7 @@ GameObject:
   - component: {fileID: 8923622328995443917}
   - component: {fileID: 775306757472877770}
   - component: {fileID: 8002016443741701784}
+  - component: {fileID: 9015111894272762944}
   - component: {fileID: 7170451200634432961}
   - component: {fileID: 1866505731373940454}
   - component: {fileID: 5980456202578973364}
@@ -986,6 +987,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6660806581032851096}
+--- !u!114 &9015111894272762944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050562250835130449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d29dd8afe50a641b379a8f61c22907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSpeed: 1
+  _agent: {fileID: 8923622328995443917}
+  _rotateSpeed: 5
 --- !u!114 &7170451200634432961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,7 +1080,7 @@ MonoBehaviour:
   _jumper: {fileID: 7170451200634432961}
   _stateMachine: {fileID: 8136296871626173811}
   _agent: {fileID: 8923622328995443917}
-  _mover: {fileID: 0}
+  _mover: {fileID: 9015111894272762944}
 --- !u!114 &5980456202578973364
 MonoBehaviour:
   m_ObjectHideFlags: 0
