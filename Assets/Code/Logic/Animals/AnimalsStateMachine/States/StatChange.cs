@@ -9,10 +9,10 @@ namespace Logic.Animals.AnimalsStateMachine.States
     public abstract class StatChange : PrimeAnimatorState
     {
         private readonly AnimalAnimator _animator;
-        private readonly ProgressBarIndicator _barIndicator;
+        private readonly StatIndicator _barIndicator;
         private readonly ProgressBarOperator _barOperator;
 
-        public StatChange(AnimalAnimator animator, ProgressBarIndicator barIndicator, float changingSpeed) : base(animator)
+        public StatChange(AnimalAnimator animator, StatIndicator barIndicator, float changingSpeed) : base(animator)
         {
             _animator = animator;
             _barIndicator = barIndicator;
