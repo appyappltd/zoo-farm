@@ -13,10 +13,8 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private float _rotateSpeed;
 
-        private Vector3 _destinationPoint;
-        private Vector3 _currentCorner;
-        private Queue<Vector3> _corners = new Queue<Vector3>();
-
+        private NavMeshPath _path;
+        
         public Vector3 DestinationPoint => _agent.destination;
         public float Distance => _agent.remainingDistance;
         public float StoppingDistance => _agent.stoppingDistance;
@@ -43,9 +41,7 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
                 }
             }
 
-            foreach (Vector3 corner in path.corners)
-                _corners.Enqueue(corner);
-
+            _path = path;
             _agent.SetPath(path);
         }
 
@@ -56,12 +52,9 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
             transform.rotation = targetRotation;
         }
 
-        private Vector3[] v = new Vector3[1];
-
         private Quaternion GetLookRotation()
         {
-            _agent.path.GetCornersNonAlloc(v);
-            return Quaternion.LookRotation(v.First());
+            return Quaternion.LookRotation(_agent.steeringTarget);
         }
     }
 }
