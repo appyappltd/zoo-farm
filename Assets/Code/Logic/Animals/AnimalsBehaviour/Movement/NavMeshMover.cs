@@ -54,7 +54,7 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
 
         private Quaternion GetLookRotation()
         {
-            return Quaternion.LookRotation(_agent.steeringTarget);
+            return Quaternion.LookRotation(_agent.steeringTarget - transform.position);
         }
     }
 }
