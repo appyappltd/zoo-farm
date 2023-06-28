@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using Progress;
@@ -11,6 +12,8 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         [SerializeField] private StatIndicator _satiety;
         [SerializeField] private StatIndicator _peppiness;
         [SerializeField] private StatIndicator _age;
+
+        private List<IStatOperateRule> _operateRules = new List<IStatOperateRule>();
 
 #if UNITY_EDITOR
         [SerializeField] [ProgressBar("Vitality", 100f, EColor.Green)]
@@ -40,9 +43,13 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
             _peppinessValue = _peppiness.ProgressBar.Current.Value;
             _ageValue = _age.ProgressBar.Current.Value;
 #endif
-            
-            
+
+            InitStatOperateRules();
         }
 
+        private void InitStatOperateRules()
+        {
+            _operateRules.Add(new VitalityOperateRule(_vitality, _satiety, _peppiness));
+        }
     }
 }
