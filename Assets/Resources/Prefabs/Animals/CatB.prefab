@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _changeSpeed: 0.039
-  _isSpend: 1
+  _turn: 1
   _startValue: 0
 --- !u!1 &2662996136815657581
 GameObject:
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _changeSpeed: 0.055
-  _isSpend: 1
+  _turn: 1
   _startValue: 32.7
 --- !u!1 &3517778643612403819
 GameObject:
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _changeSpeed: 0.1
-  _isSpend: 0
+  _turn: 0
   _startValue: 0
 --- !u!1 &8101718673406365527
 GameObject:
