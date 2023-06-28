@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 5784925136484477936}
   - component: {fileID: 6078166372410386944}
   - component: {fileID: 2923387916400846363}
+  - component: {fileID: 7833769303533341629}
   m_Layer: 0
   m_Name: Volunteer
   m_TagString: Untagged
@@ -443,8 +444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e84bfcba897fa4ca92599a7ebc38f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MaxWeight>k__BackingField: 3
   _type: 0
-  _maxWeight: 3
+  items: []
 --- !u!114 &8807170195777574434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,6 +563,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7833769303533341629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229401633726274375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c9bd4e4f98a9b4d812103e29de7b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Debug: 0
 --- !u!1 &1296423078286401506
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public class PlayerMovement : MonoCache
 
     private void SetAnimatorMove(bool isMoving)
     {
-        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("Moving", isMoving);
     }
 
     private Quaternion CameraRotation() =>
