@@ -525,7 +525,7 @@ MonoBehaviour:
   _mover: {fileID: 6078166372410386944}
   _transmittingPlace: {fileID: 0}
   _outPlace: {fileID: 0}
-  _placeOffset: 1
+  _placeOffset: 0.2
 --- !u!114 &6078166372410386944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +555,7 @@ NavMeshAgent:
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 0
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
