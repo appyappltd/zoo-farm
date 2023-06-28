@@ -23,6 +23,12 @@ namespace Logic.Inventory
             inventory.RemoveItem += RevertItem;
         }
 
+        private void OnDestroy()
+        {
+            inventory.AddItem -= PlaceItem;
+            inventory.RemoveItem -= RevertItem;
+        }
+
         private void PlaceItem(HandItem item)
         {
             currItem = item;
