@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour.AnimalStats
 {
-    public class ProgressBarIndicator : MonoCache
+    public class StatIndicator : MonoCache
     {
         private readonly float _speedModifier = 0.1f;
         
@@ -36,8 +36,11 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         private void OnValidate() =>
             enabled = _changeSpeed > 0;
 
-        private void Disable() =>
+        public void Disable() =>
             enabled = false;
+        
+        public void Enable() =>
+            enabled = true;
 
         protected override void Run() =>
             _progressBarOperator.Update(Time.deltaTime);

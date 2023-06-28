@@ -7,10 +7,10 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
 {
     public class StatsProvider : MonoCache, IStatsProvider
     {
-        [SerializeField] private ProgressBarIndicator _vitality;
-        [SerializeField] private ProgressBarIndicator _satiety;
-        [SerializeField] private ProgressBarIndicator _peppiness;
-        [SerializeField] private ProgressBarIndicator _age;
+        [SerializeField] private StatIndicator _vitality;
+        [SerializeField] private StatIndicator _satiety;
+        [SerializeField] private StatIndicator _peppiness;
+        [SerializeField] private StatIndicator _age;
 
 #if UNITY_EDITOR
         [SerializeField] [ProgressBar("Vitality", 100f, EColor.Green)]
@@ -31,14 +31,18 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         public IProgressBarView Peppiness => _peppiness.ProgressBar;
         public IProgressBarView Age => _age.ProgressBar;
         
-#if UNITY_EDITOR
+
         protected override void Run()
         {
+#if UNITY_EDITOR
             _vitalityValue = _vitality.ProgressBar.Current.Value;
             _satietyValue = _satiety.ProgressBar.Current.Value;
             _peppinessValue = _peppiness.ProgressBar.Current.Value;
             _ageValue = _age.ProgressBar.Current.Value;
-        }
 #endif
+            
+            
+        }
+
     }
 }

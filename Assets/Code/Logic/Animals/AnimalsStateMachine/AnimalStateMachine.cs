@@ -19,9 +19,9 @@ namespace Logic.Animals.AnimalsStateMachine
         [SerializeField] private NavMeshMover _mover;
 
         [Header("Stats")] [Space]
-        [SerializeField] private ProgressBarIndicator _vitality;
-        [SerializeField] private ProgressBarIndicator _satiety;
-        [SerializeField] private ProgressBarIndicator _peppiness;
+        [SerializeField] private StatIndicator _vitality;
+        [SerializeField] private StatIndicator _satiety;
+        [SerializeField] private StatIndicator _peppiness;
 
         [Header("Stats Changing Speed")] [Space]
         [SerializeField] private float _satietyReplanishSpeed;
