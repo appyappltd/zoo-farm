@@ -18,14 +18,12 @@ namespace Logic.Inventory
         public int GetCount => items.Count;
         public CreatureType Type => currType;
         public ItemData GetData => items.Last().ItemData;
-        public int MaxWeight => _maxWeight;
-        public int Weight => weight;
+        [field: SerializeField, Min(0)] public int MaxWeight { get; private set; } = 3;
+        public int Weight { get; private set; } = 0;
 
         [SerializeField] private CreatureType _type = CreatureType.None;
-        [SerializeField, Min(0)] private int _maxWeight = 3;
+        [SerializeField] private List<HandItem> items = new();//Debag  [SerializeField] 
 
-        private List<HandItem> items = new();
-        private int weight = 0;
         private CreatureType currType = CreatureType.None;
 
         private void Awake()
@@ -33,7 +31,7 @@ namespace Logic.Inventory
             currType = _type;
         }
 
-        public bool CanAddItem(CreatureType type, int weight) => _maxWeight >= this.weight + weight
+        public bool CanAddItem(CreatureType type, int weight) => MaxWeight >= Weight + weight
                                                                  && (currType == CreatureType.None
                                                                      || currType == type);
         public bool CanGiveItem(CreatureType type) => items.Count > 0
@@ -45,10 +43,10 @@ namespace Logic.Inventory
             if (items.Contains(item))
                 throw new ArgumentException();
             if (currType == CreatureType.None)
-                ChangeType(item.ItemData.Creature);
+                currType=item.ItemData.Creature;
 
             items.Add(item);
-            ChangeWeight(item.Weight);
+            Weight += item.Weight;
 
             AddItem.Invoke(item);
         }
@@ -60,23 +58,13 @@ namespace Logic.Inventory
             var item = items.Last();
 
             items.Remove(item);
-            ChangeWeight(-item.Weight);
+            Weight -= item.Weight;
 
             RemoveItem.Invoke(item);
 
             if (items.Count == 0)
-                ChangeType(_type);
+                currType=_type;
             return item;
-        }
-
-        private void ChangeType(CreatureType type)
-        {
-            currType = type;
-        }
-
-        private void ChangeWeight(int amount)
-        {
-            weight += amount;
         }
     }
 }

@@ -7,6 +7,8 @@ namespace Logic.Volunteer
     [RequireComponent(typeof(AnimationMover))]
     public class VolunteerMovement : MonoBehaviour
     {
+        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+        
         private Animator animC;
         private AnimationMover mover;
 
@@ -18,6 +20,13 @@ namespace Logic.Volunteer
             mover.GotToPlace += OnMove;
         }
 
-        private void OnMove() => animC.SetBool("IsMoving", mover.IsMoving);
+        private void OnDestroy()
+        {
+            mover.StartMove -= OnMove;
+            mover.GotToPlace -= OnMove;
+        }
+
+        private void OnMove() =>
+            animC.SetBool(IsMoving, mover.IsMoving);
     }
 }

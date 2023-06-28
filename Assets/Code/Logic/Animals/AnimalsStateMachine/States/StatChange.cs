@@ -1,11 +1,12 @@
 ﻿using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Progress;
+using StateMachineBase.States;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine.States
 {
-    public abstract class StatChange : AnimalState
+    public abstract class StatChange : PrimeAnimatorState
     {
         private readonly AnimalAnimator _animator;
         private readonly ProgressBarIndicator _barIndicator;

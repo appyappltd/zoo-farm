@@ -14,7 +14,7 @@ namespace Logic.Movement
         [SerializeField, Min(.0f)] private float _offset = 0.1f;
 
         private Transform target = null;
-        private Vector3 lastPos = Vector3.zero;
+        private Vector3 lastPos = new(121331,123,-123);
 
         public void Move(Transform target)
         {
@@ -37,7 +37,7 @@ namespace Logic.Movement
             }
             IsMoving = false;
             GotToPlace?.Invoke();
-        }
 
+        }
     }
 }

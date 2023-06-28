@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace Logic.Animals.AnimalsBehaviour.Movement
 {
-    public class AnimalMover : MonoCache
+    public class NavMeshMover : MonoCache
     {
         [SerializeField] private float _maxSpeed;
         [SerializeField] private NavMeshAgent _agent;

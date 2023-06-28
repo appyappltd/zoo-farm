@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Animals.AnimalsStateMachine.States;
 using Observables;
+using StateMachineBase.States;
 
 namespace Logic.Animals.AnimalsStateMachine
 {

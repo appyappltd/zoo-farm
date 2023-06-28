@@ -269,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _reduceSpeed: 5.04
+  _startValue: 0
 --- !u!1 &2380645879261275920
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _reduceSpeed: 0.02
+  _startValue: 0
 --- !u!1 &3740540716388131223
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _reduceSpeed: 5.17
+  _startValue: 0
 --- !u!1 &7176760477993941025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 629898614373972373}
-  _mover: {fileID: 8249731130064112577}
+  _mover: {fileID: 0}
   _vitality: {fileID: 5265016625165429896}
   _satiety: {fileID: 8180644921476620029}
   _peppiness: {fileID: 1751600241399913347}
@@ -1237,8 +1240,8 @@ GameObject:
   - component: {fileID: 3348115462435384565}
   - component: {fileID: 5232543587414386838}
   - component: {fileID: 629898614373972373}
-  - component: {fileID: 8249731130064112577}
   - component: {fileID: 8340549931066777750}
+  - component: {fileID: 1982211001970176705}
   m_Layer: 0
   m_Name: CatAgent
   m_TagString: Untagged
@@ -1262,7 +1265,7 @@ Transform:
   - {fileID: 2402107165200489297}
   - {fileID: 846225267839882560}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &3348115462435384565
 NavMeshAgent:
@@ -1320,21 +1323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6114409343277649920}
---- !u!114 &8249731130064112577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8638945880296227321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01ea55a82b04c2f85986a31c3e269e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxSpeed: 1
-  _agent: {fileID: 3348115462435384565}
-  _rotateSpeed: 10
 --- !u!114 &8340549931066777750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,6 +1341,21 @@ MonoBehaviour:
   _vitalityValue: 0
   _satietyValue: 0
   _peppinessValue: 0
+--- !u!114 &1982211001970176705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638945880296227321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d29dd8afe50a641b379a8f61c22907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSpeed: 1
+  _agent: {fileID: 3348115462435384565}
+  _rotateSpeed: 8
 --- !u!1 &8810731817396934044
 GameObject:
   m_ObjectHideFlags: 0

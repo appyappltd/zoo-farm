@@ -1,15 +1,15 @@
-﻿using Logic.Animals.AnimalsBehaviour;
-using Logic.Animals.AnimalsBehaviour.Movement;
+﻿using Logic.Animals.AnimalsBehaviour.Movement;
+using Logic.AnimatorStateMachine;
 using UnityEngine;
 
-namespace Logic.Animals.AnimalsStateMachine.States
+namespace StateMachineBase.States
 {
-    public abstract class Move : AnimalState
+    public abstract class Move : PrimeAnimatorState
     {
-        private readonly AnimalAnimator _animator;
-        private readonly AnimalMover _mover;
+        private readonly IPrimeAnimator _animator;
+        private readonly NavMeshMover _mover;
 
-        public Move(AnimalAnimator animator, AnimalMover mover) : base(animator)
+        public Move(IPrimeAnimator animator, NavMeshMover mover) : base(animator)
         {
             _animator = animator;
             _mover = mover;

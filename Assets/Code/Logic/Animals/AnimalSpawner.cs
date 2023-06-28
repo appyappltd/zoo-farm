@@ -7,6 +7,6 @@ namespace Logic.Animals
     {
         [SerializeField] private HandItem _animal;
 
-        public HandItem InstantiateAnimal(Transform parent) => Instantiate(_animal, parent);
+        public HandItem InstantiateAnimal(Transform parent = null) => Instantiate(_animal, parent);
     }
 }
