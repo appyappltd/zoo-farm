@@ -45,6 +45,11 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
             _agent.SetPath(path);
         }
 
+        public void RotateTo(Vector3 target) 
+        {
+            transform.rotation = Quaternion.LookRotation(target-_agent.steeringTarget);
+        }
+
         private void Rotate()
         {
             Quaternion lookRotation = GetLookRotation();

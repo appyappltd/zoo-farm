@@ -49,7 +49,7 @@ namespace Logic.Volunteer
             SetVolunteer(volunteer, t.transform);
 
             var machine = volunteer.GetComponent<VolunteersStateMachine.VolunteerStateMachine>();
-            machine.Construct(t.transform, _outPlace);
+            machine.Construct(t.transform, _outPlace, _transmittingPlace);
             machine.Play();
         }
 

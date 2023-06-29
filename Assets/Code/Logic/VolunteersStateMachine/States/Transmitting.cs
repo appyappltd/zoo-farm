@@ -18,6 +18,7 @@ namespace Logic.VolunteersStateMachine.States
         {
             this.volunteer = volunteer;
         }
+
         protected override void OnExit()
         {
             base.OnExit();

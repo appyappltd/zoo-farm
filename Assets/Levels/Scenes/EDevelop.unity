@@ -10205,7 +10205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1733976375}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.82, y: 0, z: -2.07}
+  m_LocalPosition: {x: 2.53, y: 0, z: -2.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12447,7 +12447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87eaef9b94576a44a31318beca260af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 1, y: 0, z: 0}
+  _offset: {x: 1.5, y: 0, z: 0}
   _spawner: {fileID: 2026293262}
   _animalSpawner: {fileID: 2026293261}
   _transmitting: {fileID: 5904597758824408867}
