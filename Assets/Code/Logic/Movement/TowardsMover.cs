@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Logic.Movement
 {
     public class TowardsMover : MonoBehaviour, IMover
     {
-        public event UnityAction StartMove;
-        public event UnityAction GotToPlace;
+        public event Action StartMove;
+        public event Action GotToPlace;
+        
         [HideInInspector] public bool IsMoving = false;
 
         [SerializeField, Min(.0f)] private float _speed = 5.0f;
@@ -35,9 +36,9 @@ namespace Logic.Movement
                     _speed * Time.fixedDeltaTime);
                 yield return new WaitForFixedUpdate();
             }
+            
             IsMoving = false;
             GotToPlace?.Invoke();
-
         }
     }
 }

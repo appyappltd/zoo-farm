@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Logic.Movement
 {
     public class AnimationMover : MonoBehaviour, IMover
     {
-        public event UnityAction StartMove;
-        public event UnityAction GotToPlace;
+        public event Action StartMove;
+        public event Action GotToPlace;
         [HideInInspector] public bool IsMoving = false;
 
         [SerializeField, Min(.0f)] private float _offset = 0.1f;

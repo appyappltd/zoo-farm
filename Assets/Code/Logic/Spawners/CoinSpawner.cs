@@ -1,3 +1,5 @@
+using Logic.Coins;
+
 namespace Logic.Spawners
 {
     public class CoinSpawner : ISpawner<Coin>

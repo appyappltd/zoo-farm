@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _isPreload: 1
-  _looped: 1
+  _isLooped: 1
   _from: {x: -90, y: 0, z: 0}
   _to: {x: -90, y: 360, z: 0}
   _timeCurve:
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.5
   _isPreload: 1
-  _looped: 1
+  _isLooped: 1
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0.25, z: 0}
   _timeCurve:
@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 4585058494033204477}
   - component: {fileID: 5776562122047921006}
   - component: {fileID: 5854569965670003998}
+  - component: {fileID: 6043177268543803744}
   m_Layer: 7
   m_Name: Coin
   m_TagString: Untagged
@@ -410,8 +411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _amount: 10
-  _translatableAgent: {fileID: 5854569965670003998}
-  _collider: {fileID: 1223078379757464958}
 --- !u!114 &5776562122047921006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _isPreload: 0
-  _looped: 0
+  _isLooped: 0
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 0, y: 0, z: 0}
   _timeCurve:
@@ -550,3 +549,46 @@ MonoBehaviour:
   _subTranslatables:
   - {fileID: 653173496003361275}
   - {fileID: 3195618454277392935}
+--- !u!114 &6043177268543803744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4278132869636202768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403a5dc1ebb0b254f8c17201e7c87888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _translatableAgent: {fileID: 5854569965670003998}
+  _onBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1223078379757464958}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1223078379757464958}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
