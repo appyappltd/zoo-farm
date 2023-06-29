@@ -12,8 +12,7 @@ public class Reload : Idle
     {
         this.volunteer = volunteer;
     }
-
-    public void OnEnter() 
+    protected override void OnEnter()
     {
         base.OnEnter();
         volunteer.Reload();

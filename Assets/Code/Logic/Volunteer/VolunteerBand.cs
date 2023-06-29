@@ -68,7 +68,7 @@ namespace Logic.Volunteer
             volunteer.GetComponent<Inventory.Inventory>().Add(_animalSpawner.InstantiateAnimal());
             _queue.Add(t.transform);
             _volunteers.Add(volunteer);
-            volunteer.CanGiveAnimal = true;
+            volunteer.CanGiveAnimal = false;
             volunteer.CanTakeAnimal = false;
         }
 
