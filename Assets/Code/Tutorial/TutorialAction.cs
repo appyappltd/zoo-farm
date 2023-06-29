@@ -2,11 +2,11 @@ using System;
 
 namespace Tutorial
 {
-    public class CutsceneAction : CutsceneModule
+    public class TutorialAction : TutorialModule
     {
         private readonly Action _action;
 
-        public CutsceneAction(Action action)
+        public TutorialAction(Action action)
         {
             _action = action;
         }

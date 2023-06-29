@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Tutorial.Directors
 {
-    public class FirstHouseCutscene : CutsceneDirector
+    public class FirstHouseTutorial : TutorialDirector
     {
         [SerializeField] private Transform _firstHouse;
         [SerializeField] private TutorialArrow _arrow;
@@ -25,21 +25,21 @@ namespace Tutorial.Directors
 
         protected override void CollectModules()
         {
-            CutsceneModules.Add(new CutsceneAction(() => Debug.Log("Begin tutorial")));
-            CutsceneModules.Add(new CutsceneAction(() =>
+            TutorialModules.Add(new TutorialAction(() => Debug.Log("Begin tutorial")));
+            TutorialModules.Add(new TutorialAction(() =>
             {
                 _arrow.Move(_firstHouse.position);
                 _cameraOperatorService.Focus(_firstHouse);
             }));
-            CutsceneModules.Add(new CutsceneTimeAwaiter(3f, GlobalUpdate.Instance));
-            CutsceneModules.Add(new CutsceneAction(() =>
+            TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() =>
             {
                 _cameraOperatorService.FocusOnDefault();
             }));
-            CutsceneModules.Add(new CutsceneTriggerAwaiter(_arrow));
-            CutsceneModules.Add(new CutsceneTimeAwaiter(2f, GlobalUpdate.Instance));
-            CutsceneModules.Add(new CutsceneAction(() => _arrow.Hide()));
-            CutsceneModules.Add(new CutsceneAction(() => Destroy(gameObject)));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_arrow));
+            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
+            TutorialModules.Add(new TutorialAction(() => Destroy(gameObject)));
         }
     }
 }

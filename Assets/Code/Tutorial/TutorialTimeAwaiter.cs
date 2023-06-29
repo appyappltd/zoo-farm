@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Tutorial
 {
-    public class CutsceneTimeAwaiter : CutsceneModule
+    public class TutorialTimeAwaiter : TutorialModule
     {
         private readonly GlobalUpdate _globalUpdate;
         private readonly Timer _timer;
 
-        public CutsceneTimeAwaiter(float waitTime, GlobalUpdate globalUpdate)
+        public TutorialTimeAwaiter(float waitTime, GlobalUpdate globalUpdate)
         {
             _globalUpdate = globalUpdate;
 

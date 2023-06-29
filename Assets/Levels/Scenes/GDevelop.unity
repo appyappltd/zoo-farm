@@ -8667,6 +8667,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 510137520}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _firstHouse
+      value: 
+      objectReference: {fileID: 1805474026}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _medicineBed
       value: 
       objectReference: {fileID: 77532841}
@@ -8675,21 +8679,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 331471153}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _healingOptions
+      value: 
+      objectReference: {fileID: 1988734409}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _animalIsHomeTrigger
       value: 
       objectReference: {fileID: 1805474023}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _animalTransmittingZone
+      value: 
+      objectReference: {fileID: 5220531147585589504}
     - target: {fileID: 2481798144574170378, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: m_Name
       value: Cutscenes
       objectReference: {fileID: 0}
-    - target: {fileID: 5245128219129907859, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
-      propertyPath: _firstHouse
-      value: 
-      objectReference: {fileID: 1805474026}
-    - target: {fileID: 5245128219129907859, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
-      propertyPath: _beginTrigger
-      value: 
-      objectReference: {fileID: 77532841}
     - target: {fileID: 5319161966910484852, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: m_RootOrder
       value: 18

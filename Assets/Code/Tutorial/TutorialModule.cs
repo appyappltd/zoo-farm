@@ -2,9 +2,9 @@ using NTC.Global.Cache.Interfaces;
 
 namespace Tutorial
 {
-    public abstract class CutsceneModule : ICutsceneModule, IRunSystem
+    public abstract class TutorialModule : ITutorialModule, IRunSystem
     {
-        private ICutsceneModule _nextModule = default;
+        private ITutorialModule _nextModule = default;
 
         public virtual void OnRun() { }
 
@@ -15,7 +15,7 @@ namespace Tutorial
             _nextModule?.Play();
         }
 
-        public void AttachNext(ICutsceneModule next)
+        public void AttachNext(ITutorialModule next)
         {
             _nextModule = next;
         }

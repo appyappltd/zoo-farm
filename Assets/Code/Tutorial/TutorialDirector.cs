@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Tutorial
 {
-    public abstract class CutsceneDirector : MonoBehaviour
+    public abstract class TutorialDirector : MonoBehaviour
     {
         [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _beginTrigger;
         
-        protected readonly List<ICutsceneModule> CutsceneModules = new List<ICutsceneModule>();
+        protected readonly List<ITutorialModule> TutorialModules = new List<ITutorialModule>();
 
         private void OnDestroy()
         {
@@ -28,12 +28,12 @@ namespace Tutorial
         {
             CollectModules();
             
-            for (int i = 0; i < CutsceneModules.Count - 1; i++)
+            for (int i = 0; i < TutorialModules.Count - 1; i++)
             {
-                CutsceneModules[i].AttachNext(CutsceneModules[i + 1]);
+                TutorialModules[i].AttachNext(TutorialModules[i + 1]);
             }
 
-            CutsceneModules[0].Play();
+            TutorialModules[0].Play();
         }
     }
 }
