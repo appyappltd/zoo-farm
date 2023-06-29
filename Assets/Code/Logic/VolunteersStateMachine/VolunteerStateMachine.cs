@@ -13,17 +13,18 @@ namespace Logic.VolunteersStateMachine
         [Header("Controls")]
         [SerializeField] private VolunteerAnimator _animator;
         [SerializeField] private NavMeshMover _mover;
-
-        [Header("Move Settings")]
-        [Space]
-        [SerializeField] private Transform _transmittingPlace;
-        [SerializeField] private Transform _outPlace;
+        
         [SerializeField, Range(.0f, 10f)] private float _placeOffset;
 
-        public void Construct(Transform transmittingPlace, Transform outPlace)
+        private Transform transmittingPlace;
+        private Transform outPlace;
+        private Transform rotateTo;
+
+        public void Construct(Transform transmittingPlace, Transform outPlace, Transform rotateTo)
         {
-            _transmittingPlace = transmittingPlace;
-            _outPlace = outPlace;
+            this.transmittingPlace = transmittingPlace;
+            this.outPlace = outPlace;
+            this.rotateTo = rotateTo;
 
             SetUp();
         }
@@ -34,14 +35,15 @@ namespace Logic.VolunteersStateMachine
             var volunteer = GetComponent<Volunteer.Volunteer>();
 
             State idle = new Idle(_animator);
-            State moveToTransmitting = new MoveTo(_animator, _mover, _transmittingPlace);
+            State moveToTransmitting = new MoveTo(_animator, _mover, transmittingPlace);
             State transmitting = new Transmitting(_animator, volunteer);
-            State moveToOutPlace = new MoveTo(_animator, _mover, _outPlace);
+            State moveToOutPlace = new MoveTo(_animator, _mover, outPlace);
             State reload = new Reload(_animator, volunteer);
 
-            Transition haveAnimal = new HaveAnimal(_mover.transform, _transmittingPlace, _placeOffset, inventory);
-            Transition inTransmittingPlace = new TargetInRange(_mover.transform, _transmittingPlace, _placeOffset);
-            Transition inOutPlace = new TargetInRange(_mover.transform, _outPlace, _placeOffset);
+            Transition queueMove = new TargetOutOfRange(_mover.transform, transmittingPlace, _placeOffset);
+            Transition haveAnimal = new HaveAnimal(inventory);
+            Transition inTransmittingPlace = new TargetInRange(_mover.transform, transmittingPlace, _placeOffset);
+            Transition inOutPlace = new TargetInRange(_mover.transform, outPlace, _placeOffset);
             Transition emptyAnimal = new EmptyAnimal(inventory);
 
             Init(idle, new Dictionary<State, Dictionary<Transition, State>>
@@ -62,7 +64,7 @@ namespace Logic.VolunteersStateMachine
                     transmitting, new Dictionary<Transition, State>
                     {
                         { emptyAnimal, moveToOutPlace},
-                        { haveAnimal, moveToTransmitting},
+                        { queueMove, moveToTransmitting},
                     }
                 },
                 {

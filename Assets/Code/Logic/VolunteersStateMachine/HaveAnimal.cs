@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace Logic.VolunteersStateMachine
 {
-    public class HaveAnimal : TargetInRange
+    public class HaveAnimal : Transition
     {
         private Inventory.Inventory inventory;
-        public HaveAnimal(Transform origin, Transform target, float range,
-                          Inventory.Inventory inventory) : base(origin, target, range) =>
+        public HaveAnimal(Inventory.Inventory inventory) =>
             this.inventory = inventory;
 
         public override bool CheckCondition() =>
-            !base.CheckCondition() && inventory.Weight > 0;
+            inventory.Weight > 0;
     }
 }
