@@ -49,14 +49,6 @@ namespace Infrastructure.Factory
         public GameObject CreateHud() =>
             _assets.Instantiate(AssetPath.HudPath);
 
-        private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
-        {
-            GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
-            RegisterProgressWatchers(gameObject);
-
-            return gameObject;
-        }
-
         public GameObject CreateAnimal(AnimalType animalType, Vector3 at)
         {
             GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalType}", at);
@@ -64,8 +56,8 @@ namespace Infrastructure.Factory
             return animal;
         }
 
-        public GameObject CreateAnimalHouse(Vector3 at) =>
-            InstantiateRegistered(AssetPath.AnimalHousePath, at);
+        public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation) =>
+            InstantiateRegistered(AssetPath.AnimalHousePath, at, rotation);
 
         public GameObject CreateBuildCell(Vector3 at) =>
             _assets.Instantiate(AssetPath.BuildCellPath, at);
@@ -76,8 +68,11 @@ namespace Infrastructure.Factory
         public GameObject CreateCollectibleCoin(Transform container) =>
             _assets.Instantiate(AssetPath.CollectableCoinPath, container);
 
-        public GameObject CreateGardenBad(Vector3 at) =>
-            _assets.Instantiate(AssetPath.GardenBad, at);
+        public GameObject CreateGardenBad(Vector3 at, Quaternion rotation) =>
+            _assets.Instantiate(AssetPath.GardenBed, at, rotation);
+
+        public GameObject CreateMedBed(Vector3 at, Quaternion rotation) =>
+            _assets.Instantiate(AssetPath.MedBed, at, rotation);
 
         private GameObject InstantiateRegistered(string prefabPath)
         {
@@ -100,6 +95,22 @@ namespace Infrastructure.Factory
         {
             foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
                 Register(progressReader);
+        }
+
+        private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
+        {
+            GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
+            RegisterProgressWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        private GameObject InstantiateRegistered(string prefabPath, Vector3 at, Quaternion rotation)
+        {
+            GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at, rotation);
+            RegisterProgressWatchers(gameObject);
+
+            return gameObject;
         }
 
         #endregion

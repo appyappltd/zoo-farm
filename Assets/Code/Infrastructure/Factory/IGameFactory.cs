@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Logic;
 using Logic.Animals;
 using Logic.Spawners;
 using Pool;
@@ -18,10 +19,11 @@ namespace Infrastructure.Factory
         GameObject CreateHud();
         GameObject CreateHero(Vector3 vector3);
         GameObject CreateAnimal(AnimalType animalType, Vector3 at);
-        GameObject CreateAnimalHouse(Vector3 at);
+        GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation);
         GameObject CreateBuildCell(Vector3 at);
         GameObject CreateVisual(VisualType visual, Quaternion quaternion, Transform container);
         GameObject CreateCollectibleCoin(Transform container);
-        GameObject CreateGardenBad(Vector3 at);
+        GameObject CreateGardenBad(Vector3 at, Quaternion rotation);
+        GameObject CreateMedBed(Vector3 at, Quaternion rotation);
     }
 }

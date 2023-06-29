@@ -12,9 +12,9 @@ namespace Logic.CellBuilding
 {
     public abstract class BuildGridOperator : MonoBehaviour, ITutorialTrigger
     {
-        private const string MaxHouseCountException = "Trying to build more than the maximum number of buildings";
+        private const string MaxCountException = "Trying to build more than the maximum number of buildings";
 
-        private readonly Queue<Vector3> _housePositions = new Queue<Vector3>();
+        private readonly Queue<Location> _positions = new Queue<Location>();
 
         [SerializeField] private List<Transform> _buildPlaces;
         [SerializeField] private int _buildCost;
@@ -29,7 +29,7 @@ namespace Logic.CellBuilding
         {
             FillPositions();
             GameFactory = AllServices.Container.Single<IGameFactory>();
-            _activeBuildCell = GameFactory.CreateBuildCell(_housePositions.Dequeue()).GetComponent<BuildCell>();
+            _activeBuildCell = GameFactory.CreateBuildCell(_positions.Dequeue().Position).GetComponent<BuildCell>();
             _activeBuildCell.SetBuildCost(_buildCost);
             _activeBuildCell.Build += ActivateNext;
             OnAwake();
@@ -40,14 +40,15 @@ namespace Logic.CellBuilding
 
         private void OnDrawGizmos()
         {
-            foreach (Vector3 position in _housePositions)
+            foreach (Transform place in _buildPlaces)
             {
-                Gizmos.DrawCube(position.ChangeY(position.y + 0.5f), Vector3.one);
+                Gizmos.DrawCube( place.position.ChangeY(place.position.y + 0.5f), Vector3.one);
+                Vector3 forwardMarkedPosition = place.position + place.forward * 2f;
+                Gizmos.DrawSphere( forwardMarkedPosition.ChangeY(forwardMarkedPosition.y + 0.5f), 0.25f);
             }
         }
 
-        protected abstract void BuildCell(Vector3 position);
-
+        protected abstract void BuildCell(Vector3 position, Quaternion rotation);
 
         protected virtual void OnAwake()
         {
@@ -57,20 +58,21 @@ namespace Logic.CellBuilding
         {
             for (var index = 0; index < _buildPlaces.Count; index++)
             {
-                var place = _buildPlaces[index];
-                _housePositions.Enqueue(place.position);
+                Transform place = _buildPlaces[index];
+                _positions.Enqueue(new Location(place.position, place.rotation));
             }
         }
 
         [Button("Activate Next")]
         private void ActivateNext()
         {
-            BuildCell(_activeBuildCell.transform.position);
+            Transform cellTransform = _activeBuildCell.transform;
+            BuildCell(cellTransform.position, cellTransform.rotation);
             Triggered.Invoke();
             
-            if (_housePositions.TryDequeue(out Vector3 nextPosition))
+            if (_positions.TryDequeue(out Location location))
             {
-                _activeBuildCell.Reposition(nextPosition);
+                _activeBuildCell.Reposition(location);
                 return;
             }
             

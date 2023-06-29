@@ -1,4 +1,3 @@
-using Infrastructure.Factory;
 using Logic.Animals;
 using Services;
 using Services.AnimalHouses;
@@ -9,18 +8,16 @@ namespace Logic.CellBuilding
     public class HouseGridOperator : BuildGridOperator
     {
         private IAnimalHouseService _houseService;
-        private IGameFactory _gameFactory;
 
-        protected override void BuildCell(Vector3 at)
+        protected override void BuildCell(Vector3 at, Quaternion rotation)
         {
-            AnimalHouse house = _gameFactory.CreateAnimalHouse(at).GetComponent<AnimalHouse>();
+            AnimalHouse house = GameFactory.CreateAnimalHouse(at, rotation).GetComponent<AnimalHouse>();
             _houseService.RegisterHouse(house);
         }
 
         protected override void OnAwake()
         {
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
         }
     }
 }

@@ -24,9 +24,10 @@ namespace Logic.CellBuilding
             Gizmos.DrawWireCube(transform.position.ChangeY(transform.position.y + 0.5f), Vector3.one);
         }
 
-        public void Reposition(Vector3 nextPosition)
+        public void Reposition(Location toLocation)
         {
-            transform.position = nextPosition;
+            transform.position = toLocation.Position;
+            transform.rotation = toLocation.Rotation;
         }
 
         public void SetBuildCost(int buildCost)
