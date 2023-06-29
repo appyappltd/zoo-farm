@@ -29,7 +29,8 @@ namespace Logic.CellBuilding
         {
             FillPositions();
             GameFactory = AllServices.Container.Single<IGameFactory>();
-            _activeBuildCell = GameFactory.CreateBuildCell(_positions.Dequeue().Position).GetComponent<BuildCell>();
+            Location location = _positions.Dequeue();
+            _activeBuildCell = GameFactory.CreateBuildCell(location.Position, location.Rotation).GetComponent<BuildCell>();
             _activeBuildCell.SetBuildCost(_buildCost);
             _activeBuildCell.Build += ActivateNext;
             OnAwake();
@@ -43,7 +44,7 @@ namespace Logic.CellBuilding
             foreach (Transform place in _buildPlaces)
             {
                 Gizmos.DrawCube( place.position.ChangeY(place.position.y + 0.5f), Vector3.one);
-                Vector3 forwardMarkedPosition = place.position + place.forward * 2f;
+                Vector3 forwardMarkedPosition = place.position + place.forward * 0.8f;
                 Gizmos.DrawSphere( forwardMarkedPosition.ChangeY(forwardMarkedPosition.y + 0.5f), 0.25f);
             }
         }

@@ -26,8 +26,10 @@ namespace Logic.CellBuilding
 
         public void Reposition(Location toLocation)
         {
+            gameObject.SetActive(false);
             transform.position = toLocation.Position;
             transform.rotation = toLocation.Rotation;
+            gameObject.SetActive(true);
         }
 
         public void SetBuildCost(int buildCost)

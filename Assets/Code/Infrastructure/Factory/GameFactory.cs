@@ -59,8 +59,8 @@ namespace Infrastructure.Factory
         public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation) =>
             InstantiateRegistered(AssetPath.AnimalHousePath, at, rotation);
 
-        public GameObject CreateBuildCell(Vector3 at) =>
-            _assets.Instantiate(AssetPath.BuildCellPath, at);
+        public GameObject CreateBuildCell(Vector3 at, Quaternion rotation) =>
+            _assets.Instantiate(AssetPath.BuildCellPath, at, rotation);
 
         public GameObject CreateVisual(VisualType visual, Quaternion quaternion, Transform container) =>
             _assets.Instantiate($"{AssetPath.VisualsPath}/{visual}", container);

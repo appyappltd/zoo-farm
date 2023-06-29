@@ -12,6 +12,12 @@ namespace Logic
             _cameraTransform = Camera.main.transform;
             LateRun();
         }
+        
+        protected override void OnEnabled()
+        {
+            _cameraTransform = Camera.main.transform;
+            LateRun();
+        }
 
         protected override void LateRun() =>
             transform.forward = _cameraTransform.forward;
