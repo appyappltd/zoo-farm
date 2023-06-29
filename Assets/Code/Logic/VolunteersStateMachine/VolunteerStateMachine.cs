@@ -35,10 +35,11 @@ namespace Logic.VolunteersStateMachine
 
             State idle = new Idle(_animator);
             State moveToTransmitting = new MoveTo(_animator, _mover, _transmittingPlace);
-            State moveToOutPlace = new MoveToOut(_animator, _mover, _outPlace, volunteer);
             State transmitting = new Transmitting(_animator, volunteer);
+            State moveToOutPlace = new MoveTo(_animator, _mover, _outPlace);
+            State reload = new Reload(_animator, volunteer);
 
-            Transition haveAnimal = new HaveAnimal(inventory);
+            Transition haveAnimal = new HaveAnimal(_mover.transform, _transmittingPlace, _placeOffset, inventory);
             Transition inTransmittingPlace = new TargetInRange(_mover.transform, _transmittingPlace, _placeOffset);
             Transition inOutPlace = new TargetInRange(_mover.transform, _outPlace, _placeOffset);
             Transition emptyAnimal = new EmptyAnimal(inventory);
@@ -61,12 +62,19 @@ namespace Logic.VolunteersStateMachine
                     transmitting, new Dictionary<Transition, State>
                     {
                         { emptyAnimal, moveToOutPlace},
+                        { haveAnimal, moveToTransmitting},
                     }
                 },
                 {
                     moveToOutPlace, new Dictionary<Transition, State>
                     {
-                        {inOutPlace, idle},
+                        {inOutPlace, reload},
+                    }
+                },
+                {
+                    reload, new Dictionary<Transition, State>
+                    {
+                        {haveAnimal, moveToTransmitting},
                     }
                 },
             });
