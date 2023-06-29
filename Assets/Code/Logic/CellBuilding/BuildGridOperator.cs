@@ -1,14 +1,16 @@
+using System;
 using System.Collections.Generic;
 using Infrastructure.Factory;
 using NaughtyAttributes;
 using NTC.Global.System;
 using Services;
 using Tools.Extension;
+using Tutorial;
 using UnityEngine;
 
 namespace Logic.CellBuilding
 {
-    public abstract class BuildGridOperator : MonoBehaviour
+    public abstract class BuildGridOperator : MonoBehaviour, ITutorialTrigger
     {
         private const string MaxHouseCountException = "Trying to build more than the maximum number of buildings";
 
@@ -20,6 +22,8 @@ namespace Logic.CellBuilding
         protected IGameFactory GameFactory;
 
         private BuildCell _activeBuildCell;
+
+        public event Action Triggered = () => { };
 
         private void Awake()
         {
@@ -44,6 +48,7 @@ namespace Logic.CellBuilding
 
         protected abstract void BuildCell(Vector3 position);
 
+
         protected virtual void OnAwake()
         {
         }
@@ -61,6 +66,7 @@ namespace Logic.CellBuilding
         private void ActivateNext()
         {
             BuildCell(_activeBuildCell.transform.position);
+            Triggered.Invoke();
             
             if (_housePositions.TryDequeue(out Vector3 nextPosition))
             {

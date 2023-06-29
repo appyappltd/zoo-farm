@@ -18,10 +18,12 @@ namespace Tutorial.Directors
         [SerializeField] private Transform _animalTransmittingZone;
         [SerializeField] private Transform _healingOptions;
         [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _animalIsHomeTrigger;
-        // [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _animalTaken;
-        // [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _animalOnBed;
-        // [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _healingOptionTaken;
-        // [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _animalHealed;
+        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _animalTaken;
+        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _animalOnBed;
+        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _healingOptionTaken;
+        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _animalHealed;
+        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _houseBuilt;
+        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _plantBuilt;
         [SerializeField] private TutorialArrow _arrow;
 
         private ICameraOperatorService _cameraOperatorService;
@@ -47,30 +49,20 @@ namespace Tutorial.Directors
         protected override void CollectModules()
         {
             TutorialModules.Add(new TutorialAction(() => Debug.Log("Begin tutorial")));
-            TutorialModules.Add(new TutorialAction(() =>
-            {
-                _arrow.Move(_animalTransmittingZone.position);
-                _cameraOperatorService.Focus(_animalTransmittingZone.position);
-            }));
-            TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
-            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_arrow));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_animalTransmittingZone.position)));
+            TutorialModules.Add(new TutorialTriggerAwaiter((ITutorialTrigger) _animalTaken));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _arrow.Move(_medicineBed.transform.position);
                 _cameraOperatorService.Focus(_medicineBed.transform.position);
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_arrow));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTriggerAwaiter((ITutorialTrigger) _animalOnBed));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_healingOptions.position)));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_arrow));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTriggerAwaiter((ITutorialTrigger) _healingOptionTaken));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_medicineBed.transform.position)));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_arrow));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTriggerAwaiter((ITutorialTrigger) _animalHealed));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _arrow.Move(_firstHouse.position);
@@ -78,8 +70,7 @@ namespace Tutorial.Directors
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_arrow));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTriggerAwaiter((ITutorialTrigger) _houseBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialTimeAwaiter(0.2f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_animal)));
@@ -91,8 +82,7 @@ namespace Tutorial.Directors
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_arrow));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTriggerAwaiter((ITutorialTrigger) _plantBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialAction(() => Destroy(gameObject)));
         }

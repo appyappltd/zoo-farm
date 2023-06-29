@@ -51,12 +51,11 @@ namespace Logic.Medicine
             {
                 canTreat = true;
                 receiver.CanTake = false;
-                GetRandomIndex();
                 item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
             };
         }
 
-        private void GetRandomIndex() => index = Random.Range(0, _data.Count);
+        private void SetNewRandomIndex() => index = (index + Random.Range(0, _data.Count)) % _data.Count;
 
         private void Treat(Inventory.Inventory playerInventory)
         {
@@ -87,6 +86,7 @@ namespace Logic.Medicine
                     var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
                         .GetComponent<Animal>();
                     AnimalHealed.Invoke(animal);
+                    SetNewRandomIndex();
                     return animal;
                 });
 
