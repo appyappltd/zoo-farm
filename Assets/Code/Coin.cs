@@ -50,6 +50,6 @@ public class Coin : MonoBehaviour
             mover.GotToPlace -= OnCollected;
         }
         mover.GotToPlace += OnCollected;
-        mover.Move(player.GetComponent<Storage>().GetItemPlace);
+        mover.Move(player.GetComponent<Storage>().GetDefPlace);
     }
 }
