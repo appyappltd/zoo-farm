@@ -7,7 +7,6 @@ namespace Logic.Animals.AnimalsStateMachine.Transitions
     {
         private readonly Transform _origin;
         private readonly Transform _target;
-
         protected float Distance => Vector3.Distance(_origin.position, _target.position);
 
         protected DistanceTo(Transform origin, Transform target)
