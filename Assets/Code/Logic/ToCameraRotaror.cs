@@ -12,10 +12,9 @@ namespace Logic
             _cameraTransform = Camera.main.transform;
             LateRun();
         }
-        
-        protected override void OnEnabled()
+
+        public void UpdateRotation()
         {
-            _cameraTransform = Camera.main.transform;
             LateRun();
         }
 

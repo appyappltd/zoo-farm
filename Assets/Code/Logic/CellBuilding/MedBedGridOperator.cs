@@ -1,12 +1,10 @@
-using UnityEngine;
-
 namespace Logic.CellBuilding
 {
     public class MedBedGridOperator : BuildGridOperator
     {
-        protected override void BuildCell(Vector3 at, Quaternion rotation)
+        protected override void BuildCell(BuildPlaceMarker marker)
         {
-            GameFactory.CreateMedBed(at, rotation);
+            GameFactory.CreateMedBed(marker.Location.Position, marker.Location.Rotation);
         }
     }
 }

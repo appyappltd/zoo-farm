@@ -1,7 +1,6 @@
 using Logic.Animals;
 using Services;
 using Services.AnimalHouses;
-using UnityEngine;
 
 namespace Logic.CellBuilding
 {
@@ -9,9 +8,9 @@ namespace Logic.CellBuilding
     {
         private IAnimalHouseService _houseService;
 
-        protected override void BuildCell(Vector3 at, Quaternion rotation)
+        protected override void BuildCell(BuildPlaceMarker marker)
         {
-            AnimalHouse house = GameFactory.CreateAnimalHouse(at, rotation).GetComponent<AnimalHouse>();
+            AnimalHouse house = GameFactory.CreateAnimalHouse(marker.Location.Position, marker.Location.Rotation).GetComponent<AnimalHouse>();
             _houseService.RegisterHouse(house);
         }
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Logic.Animals;
+using Logic.Medicine;
 using Logic.Spawners;
 using Services;
 using Services.PersistentProgress;
@@ -22,5 +23,6 @@ namespace Infrastructure.Factory
         GameObject CreateCollectibleCoin(Transform container);
         GameObject CreateGardenBad(Vector3 at, Quaternion rotation);
         GameObject CreateMedBed(Vector3 at, Quaternion rotation);
+        GameObject CreateMedTool(Vector3 at, Quaternion rotation, MedicineType toolType);
     }
 }

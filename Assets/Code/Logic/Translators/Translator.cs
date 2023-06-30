@@ -9,10 +9,8 @@ namespace Logic.Translators
 
         private ITranslatable _translatable;
 
-        private void Awake()
-        {
+        private void OnValidate() =>
             enabled = false;
-        }
 
         public void AddTranslatable(ITranslatable translatable)
         {

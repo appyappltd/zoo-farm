@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using NaughtyAttributes;
 using Tools;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ namespace Logic.Translators
 {
     public class TranslatableAgent : MonoBehaviour
     {
+        [SerializeField] private bool _isAutoPlay;
+        
+        [ShowIf("_isAutoPlay")]
+        [SerializeField] [RequireInterface(typeof(ITranslator))] private MonoBehaviour _translator;
         [SerializeField] [RequireInterface(typeof(ITranslatable))] private MonoBehaviour _mainTranslatable;
         [SerializeField] [RequireInterface(typeof(List<ITranslatable>))] private List<MonoBehaviour> _subTranslatables;
 
@@ -19,6 +24,17 @@ namespace Logic.Translators
         private void Awake()
         {
             _translatables = new ReadOnlyCollection<ITranslatable>(_subTranslatables.Cast<ITranslatable>().ToList());
+
+            if (_isAutoPlay)
+            {
+                ITranslator translator = (ITranslator) _translator;
+                translator.AddTranslatable(MainTranslatable);
+
+                foreach (ITranslatable translatable in SubTranslatables)
+                {
+                    translator.AddTranslatable(translatable);
+                }
+            }
         }
     }
 }

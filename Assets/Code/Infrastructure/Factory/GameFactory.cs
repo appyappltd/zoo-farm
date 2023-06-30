@@ -3,6 +3,7 @@ using Builders;
 using Infrastructure.AssetManagement;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using Logic.Medicine;
 using Logic.Spawners;
 using Services.Animals;
 using Services.PersistentProgress;
@@ -73,6 +74,9 @@ namespace Infrastructure.Factory
 
         public GameObject CreateMedBed(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.MedBed, at, rotation);
+
+        public GameObject CreateMedTool(Vector3 at, Quaternion rotation, MedicineType toolType) =>
+            _assets.Instantiate($"{AssetPath.MedToolPath}{toolType}", at, rotation);
 
         private GameObject InstantiateRegistered(string prefabPath)
         {
