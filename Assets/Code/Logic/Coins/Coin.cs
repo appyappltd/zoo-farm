@@ -13,11 +13,11 @@ namespace Logic.Coins
         [SerializeField, Min(0)] private int _amount = 1;
 
         private TriggerObserver trigger;
-        private TowardsMover mover;
+        private IMover mover;
 
         private void Awake()
         {
-            mover = GetComponent<TowardsMover>();
+            mover = GetComponent<IMover>();
             trigger = GetComponent<TriggerObserver>();
 
             trigger.Enter += OnEnter;
@@ -36,7 +36,7 @@ namespace Logic.Coins
                 mover.GotToPlace -= OnCollected;
             }
             mover.GotToPlace += OnCollected;
-            mover.Move(player.GetComponent<Storage>().GetItemPlace);
+            mover.Move(player.GetComponent<Storage>().GetDefPlace);
         }
     }
 }
