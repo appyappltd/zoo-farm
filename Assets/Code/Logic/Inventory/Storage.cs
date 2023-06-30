@@ -9,7 +9,7 @@ namespace Logic.Inventory
         public Transform GetItemPlace => _places.Length < inventory.GetCount
             ? inventory.GetLast.NextPlace
             : _places[inventory.GetCount];
-
+        public Transform GetDefPlace => _places[0];
         [SerializeField] private Transform[] _places;
 
         private Inventory inventory;
