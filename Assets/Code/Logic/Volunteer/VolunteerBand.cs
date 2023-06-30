@@ -65,9 +65,12 @@ namespace Logic.Volunteer
 
         private void SetVolunteer(Volunteer volunteer,Transform t)
         {
-            volunteer.GetComponent<Inventory.Inventory>().Add(_animalSpawner.InstantiateAnimal());
+            HandItem animal = _animalSpawner.InstantiateAnimal();
+            volunteer.GetComponent<Inventory.Inventory>().Add(animal);
             _queue.Add(t.transform);
             _volunteers.Add(volunteer);
+            animal.transform.position = volunteer.transform.position;
+            
             volunteer.CanGiveAnimal = false;
             volunteer.CanTakeAnimal = false;
         }
