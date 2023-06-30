@@ -11,6 +11,12 @@ namespace Infrastructure.AssetManagement
             return Object.Instantiate(prefab, at, Quaternion.identity);
         }
 
+        public GameObject Instantiate(string path, Vector3 at, Quaternion rotation)
+        {
+            var prefab = Resources.Load<GameObject>(path);
+            return Object.Instantiate(prefab, at, rotation);
+        }
+        
         public GameObject Instantiate(string path, Transform inside)
         {
             var prefab = Resources.Load<GameObject>(path);

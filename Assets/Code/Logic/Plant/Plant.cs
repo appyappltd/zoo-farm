@@ -8,25 +8,23 @@ using UnityEngine.Events;
 
 namespace Logic.Plant
 {
-    [RequireComponent(typeof(Delay))]
     public class Plant : MonoBehaviour
     {
-        public event UnityAction<GameObject> GrowUp;
+        public event UnityAction<GameObject> GrowUp = _ => { };
 
         [SerializeField] private List<GameObject> _stages;
         [SerializeField, Min(.0f)] private float _time;
-        [SerializeField] private GameObject _sine;
 
         private bool canGrow = true;
+        private Coroutine _growCoroutine;
 
-        private void Awake()
-            => GetComponent<Delay>().Complete += _ => StartGrow();
+        private void Start() =>
+            StartGrow();
 
         [Button("Grow", enabledMode: EButtonEnableMode.Playmode)]
         private void StartGrow()
         {
-            StartCoroutine(Grow());
-            _sine.SetActive(false);
+            _growCoroutine ??= StartCoroutine(Grow());
         }
 
         private IEnumerator Grow()
@@ -37,21 +35,25 @@ namespace Logic.Plant
                 yield return new WaitForSeconds(_time);
 
                 var currStage = Instantiate(_stages[0], transform);
+                
                 for (int i = 1; i < _stages.Count; i++)
                 {
                     yield return new WaitForSeconds(_time);
                     Destroy(currStage);
                     currStage = Instantiate(_stages[i], transform);
                 }
-                GrowUp?.Invoke(currStage);
+                GrowUp.Invoke(currStage);
 
                 var drop = currStage.GetComponent<DropItem>();
-                drop.PickUp += _ =>
-                {
-                    canGrow = true;
-                    StartGrow();
-                };
+                drop.PickUp += OnPickUp;
             }
+        }
+
+        private void OnPickUp(HandItem _)
+        {
+            canGrow = true;
+            _growCoroutine = null;
+            StartGrow();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
     {
         private readonly ProgressBarOperator _bowlBarOperator;
 
-        public Eat(AnimalAnimator animator, ProgressBarIndicator barIndicator, float changingSpeed,
+        public Eat(AnimalAnimator animator, StatIndicator barIndicator, float changingSpeed,
             IProgressBar bowlBar)
             : base(animator, barIndicator, changingSpeed)
         {

@@ -1,48 +1,47 @@
+using System;
 using System.Collections.Generic;
 using Infrastructure.Factory;
 using NaughtyAttributes;
 using NTC.Global.System;
 using Services;
-using Tools.Extension;
+using Tutorial;
 using UnityEngine;
 
 namespace Logic.CellBuilding
 {
-    public abstract class BuildGridOperator : MonoBehaviour
+    public abstract class BuildGridOperator : MonoBehaviour, ITutorialTrigger
     {
-        private const string MaxHouseCountException = "Trying to build more than the maximum number of buildings";
+        private const string MaxCountException = "Trying to build more than the maximum number of buildings";
 
-        private readonly Queue<Vector3> _housePositions = new Queue<Vector3>();
+        private readonly Queue<BuildPlaceMarker> _positions = new Queue<BuildPlaceMarker>();
 
-        [SerializeField] private List<Transform> _buildPlaces;
+        [SerializeField] private List<BuildPlaceMarker> _buildPlaces;
         [SerializeField] private int _buildCost;
 
         protected IGameFactory GameFactory;
+        protected BuildCell ActiveBuildCell;
+        
+        private BuildPlaceMarker _currentMarker;
 
-        private BuildCell _activeBuildCell;
+        public event Action Triggered = () => { };
 
         private void Awake()
         {
             FillPositions();
             GameFactory = AllServices.Container.Single<IGameFactory>();
-            _activeBuildCell = GameFactory.CreateBuildCell(_housePositions.Dequeue()).GetComponent<BuildCell>();
-            _activeBuildCell.SetBuildCost(_buildCost);
-            _activeBuildCell.Build += ActivateNext;
+            _currentMarker = _positions.Dequeue();
+            ActiveBuildCell = GameFactory.CreateBuildCell(_currentMarker.Location.Position, _currentMarker.Location.Rotation)
+                .GetComponent<BuildCell>();
+            ActiveBuildCell.SetBuildCost(_buildCost);
+            ActiveBuildCell.SetIcon(_currentMarker.Icon);
+            ActiveBuildCell.Build += ActivateNext;
             OnAwake();
         }
 
         private void OnDestroy() =>
-            _activeBuildCell.Build -= ActivateNext;
+            ActiveBuildCell.Build -= ActivateNext;
 
-        private void OnDrawGizmos()
-        {
-            foreach (Vector3 position in _housePositions)
-            {
-                Gizmos.DrawCube(position.ChangeY(position.y + 0.5f), Vector3.one);
-            }
-        }
-
-        protected abstract void BuildCell(Vector3 position);
+        protected abstract void BuildCell(BuildPlaceMarker marker);
 
         protected virtual void OnAwake()
         {
@@ -52,23 +51,27 @@ namespace Logic.CellBuilding
         {
             for (var index = 0; index < _buildPlaces.Count; index++)
             {
-                var place = _buildPlaces[index];
-                _housePositions.Enqueue(place.position);
+                BuildPlaceMarker marker = _buildPlaces[index];
+                marker.Init();
+                _positions.Enqueue(marker);
             }
         }
 
         [Button("Activate Next")]
         private void ActivateNext()
         {
-            BuildCell(_activeBuildCell.transform.position);
+            BuildCell(_currentMarker);
+            Triggered.Invoke();
             
-            if (_housePositions.TryDequeue(out Vector3 nextPosition))
+            if (_positions.TryDequeue(out BuildPlaceMarker marker))
             {
-                _activeBuildCell.Reposition(nextPosition);
+                ActiveBuildCell.Reposition(marker.Location);
+                ActiveBuildCell.SetIcon(marker.Icon);
+                _currentMarker = marker;
                 return;
             }
             
-            _activeBuildCell.gameObject.Disable();
+            ActiveBuildCell.gameObject.Disable();
         }
     }
 }

@@ -15,15 +15,6 @@ namespace Player
         private void Awake()
         {
             _wallet = new Wallet();
-             // LogMoneyChange();
-             _wallet.TryAdd(100);
-        }
-
-        private void LogMoneyChange()
-        {
-            _disposables
-                .Add(_wallet.Account
-                    .Then((coins => print($"Current amount of coins: {coins}"))));
         }
 
         private void OnDestroy()

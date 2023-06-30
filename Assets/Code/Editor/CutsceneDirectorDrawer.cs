@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
-using Cutscene;
+using Tutorial;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Code.Editor
 {
-    [CustomEditor(typeof(CutsceneDirector))]
+    [CustomEditor(typeof(TutorialDirector))]
     public class CutsceneDirectorDrawer : UnityEditor.Editor
     {
         private const string CutsceneModules = "_cutsceneModules";
 
         private SerializedProperty _modules;
-        private CutsceneDirector _target;
+        private TutorialDirector _target;
         private SerializedProperty _events;
 
         private void OnEnable()

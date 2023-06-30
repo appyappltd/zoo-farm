@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Cutscene;
 using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour;
@@ -10,6 +9,7 @@ using Logic.Inventory;
 using Logic.Movement;
 using Services;
 using Services.AnimalHouses;
+using Tutorial;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,7 +19,7 @@ namespace Logic.Medicine
     [RequireComponent(typeof(Inventory.Inventory))]
     [RequireComponent(typeof(Storage))]
     [RequireComponent(typeof(ProductReceiver))]
-    public class MedicineBed : MonoBehaviour, ICutsceneTrigger
+    public class MedicineBed : MonoBehaviour, ITutorialTrigger
     {
         [SerializeField] private List<ItemData> _data = new();
         [SerializeField] private List<Sprite> _sprites = new();
@@ -51,12 +51,11 @@ namespace Logic.Medicine
             {
                 canTreat = true;
                 receiver.CanTake = false;
-                GetRandomIndex();
                 item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
             };
         }
 
-        private void GetRandomIndex() => index = Random.Range(0, _data.Count);
+        private void SetNewRandomIndex() => index = (index + Random.Range(0, _data.Count)) % _data.Count;
 
         private void Treat(Inventory.Inventory playerInventory)
         {
@@ -87,6 +86,7 @@ namespace Logic.Medicine
                     var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
                         .GetComponent<Animal>();
                     AnimalHealed.Invoke(animal);
+                    SetNewRandomIndex();
                     return animal;
                 });
 

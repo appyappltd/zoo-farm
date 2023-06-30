@@ -13,6 +13,11 @@ namespace Logic
             LateRun();
         }
 
+        public void UpdateRotation()
+        {
+            LateRun();
+        }
+
         protected override void LateRun() =>
             transform.forward = _cameraTransform.forward;
     }

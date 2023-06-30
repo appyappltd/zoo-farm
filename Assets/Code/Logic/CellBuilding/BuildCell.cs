@@ -8,34 +8,36 @@ namespace Logic.CellBuilding
     public class BuildCell : MonoBehaviour
     {
         [SerializeField] private Consumer _consumer;
-
-        public int BuildCost { get; private set; }
-
+        [SerializeField] private SpriteRenderer _icon;
+        [SerializeField] private ToCameraRotator _toCameraRotator;
+        
         public event Action Build = () => { };
 
-        private void OnEnable() =>
-            _consumer.Bought += OnEnter;
+        private void Awake() =>
+            _consumer.Bought += OnBought;
 
-        private void OnDisable() =>
-            _consumer.Bought -= OnEnter;
+        private void OnDestroy() =>
+            _consumer.Bought -= OnBought;
 
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(transform.position.ChangeY(transform.position.y + 0.5f), Vector3.one);
         }
 
-        public void Reposition(Vector3 nextPosition)
-        {
-            transform.position = nextPosition;
-        }
-
-        public void SetBuildCost(int buildCost)
-        {
-            BuildCost = buildCost;
+        public void SetBuildCost(int buildCost) =>
             _consumer.SetCost(buildCost);
+
+        public void SetIcon(Sprite icon) =>
+            _icon.sprite = icon;
+
+        public void Reposition(Location toLocation)
+        {
+            transform.position = toLocation.Position;
+            transform.rotation = toLocation.Rotation;
+            _toCameraRotator.UpdateRotation();
         }
 
-        private void OnEnter()
+        private void OnBought()
         {
             Build.Invoke();
         }

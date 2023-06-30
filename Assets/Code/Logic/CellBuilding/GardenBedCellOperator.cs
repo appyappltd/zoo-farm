@@ -1,12 +1,10 @@
-using UnityEngine;
-
 namespace Logic.CellBuilding
 {
     public class GardenBedCellOperator : BuildGridOperator
     {
-        protected override void BuildCell(Vector3 position)
+        protected override void BuildCell(BuildPlaceMarker marker)
         {
-            GameFactory.CreateGardenBad(position);
+            GameFactory.CreateGardenBad(marker.Location.Position, marker.Location.Rotation);
         }
     }
 }
