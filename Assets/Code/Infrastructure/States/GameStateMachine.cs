@@ -7,6 +7,7 @@ using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
 using Services.SaveLoad;
+using Services.StaticData;
 using Ui.Factory;
 
 namespace Infrastructure.States
@@ -32,7 +33,8 @@ namespace Infrastructure.States
                     services.Single<IPlayerInputService>(),
                     services.Single<IPersistentProgressService>(),
                     services.Single<ICameraOperatorService>(),
-                    services.Single<IUIFactory>()),
+                    services.Single<IUIFactory>(),
+                    services.Single<IStaticDataService>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),

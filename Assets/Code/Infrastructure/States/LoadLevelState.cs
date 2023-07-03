@@ -1,11 +1,13 @@
 ﻿using Cameras;
 using Infrastructure.Factory;
 using Logic;
+using Logic.SpawnPlaces;
 using Logic.Wallet;
 using Player;
 using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
+using Services.StaticData;
 using Ui;
 using Ui.Elements;
 using Ui.Elements.Buttons;
@@ -24,10 +26,11 @@ namespace Infrastructure.States
         private readonly LoadingCurtain _curtain;
         private readonly ICameraOperatorService _cameraService;
         private readonly IUIFactory _uiFactory;
+        private readonly IStaticDataService _staticData;
 
         public LoadLevelState(GameStateMachine gameStateMachine, LoadingCurtain curtain, SceneLoader sceneLoader,
             IGameFactory gameFactory, IPlayerInputService inputService, IPersistentProgressService progressService,
-            ICameraOperatorService cameraService, IUIFactory uiFactory)
+            ICameraOperatorService cameraService, IUIFactory uiFactory, IStaticDataService staticData)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -37,6 +40,7 @@ namespace Infrastructure.States
             _curtain = curtain;
             _cameraService = cameraService;
             _uiFactory = uiFactory;
+            _staticData = staticData;
         }
 
         public void Enter(string payload)
@@ -71,6 +75,7 @@ namespace Infrastructure.States
         {
             CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
             cameraMovement.Follow(heroTransform);
+            cameraMovement.transform.parent.position = heroTransform.position;
             _cameraService.RegisterCamera(cameraMovement);
             _cameraService.SetAsDefault(heroTransform);
         }
@@ -80,7 +85,8 @@ namespace Infrastructure.States
 
         private GameObject InitHero()
         {
-            GameObject hero = _gameFactory.CreateHero(Vector3.zero);
+            Transform heroSpawnPlace = _staticData.SpawnPlaceById(SpawnPlaceId.Player);
+            GameObject hero = _gameFactory.CreateHero(heroSpawnPlace.position);
             hero.GetComponent<PlayerMovement>().Construct(_inputService);
             return hero;
         }
