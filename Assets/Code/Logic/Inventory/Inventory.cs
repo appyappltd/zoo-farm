@@ -13,6 +13,7 @@ namespace Logic.Inventory
         public event UnityAction<HandItem> AddItem = c => { };
         public event UnityAction<HandItem> RemoveItem = c => { };
 
+        public bool IsMax => Weight == MaxWeight;
         public HandItem GetLast => items.Last();
         public HandItem GetPreLast => items[^2];
         public int GetCount => items.Count;

@@ -933,13 +933,14 @@ GameObject:
   - component: {fileID: 8458958772868156414}
   - component: {fileID: 9122414787574173584}
   - component: {fileID: 6873257588887230519}
+  - component: {fileID: 5148840811639945247}
   m_Layer: 6
   m_Name: Bubble Indicator Max Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8458958772868156414
 Transform:
   m_ObjectHideFlags: 0
@@ -947,14 +948,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2264037046204864007}
-  m_LocalRotation: {x: 0.25000006, y: -0.24999997, z: 0.066987306, w: 0.9330127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.057, y: 2.407, z: -0.318}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1945266962045834236}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 30, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9122414787574173584
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1022,6 +1023,18 @@ MonoBehaviour:
   _parent: {fileID: 1945266962045834236}
   _state: {fileID: 9122414787574173584}
   offset: {x: 0, y: 0, z: 0}
+--- !u!114 &5148840811639945247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2264037046204864007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2428162248566037645
 GameObject:
   m_ObjectHideFlags: 0
@@ -6694,6 +6707,7 @@ GameObject:
   - component: {fileID: 7803516307033350702}
   - component: {fileID: 5676314901566846583}
   - component: {fileID: 3994947432083371087}
+  - component: {fileID: 2453116752958184982}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Untagged
@@ -6801,8 +6815,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e84bfcba897fa4ca92599a7ebc38f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MaxWeight>k__BackingField: 3
   _type: 0
-  _maxWeight: 3
+  items: []
 --- !u!114 &4534267659011596571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6854,6 +6869,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf4657d46a54114591461a9c91a9689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2453116752958184982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438565683717128180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23a9ea29e3e3184cb4928a474be2b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubble: {fileID: 6873257588887230519}
 --- !u!1 &4552098527280804861
 GameObject:
   m_ObjectHideFlags: 0
