@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Data.ItemsData;
-using Logic.Interactions;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Data.ItemsData;
 using Infrastructure.Factory;
@@ -9,7 +8,6 @@ using Logic.Inventory;
 using Logic.Movement;
 using Services;
 using Services.AnimalHouses;
-using Tutorial;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,7 +17,7 @@ namespace Logic.Medicine
     [RequireComponent(typeof(Inventory.Inventory))]
     [RequireComponent(typeof(Storage))]
     [RequireComponent(typeof(ProductReceiver))]
-    public class MedicineBed : MonoBehaviour, ITutorialTrigger
+    public class MedicineBed : MonoBehaviour
     {
         [SerializeField] private List<ItemData> _data = new();
         [SerializeField] private List<Sprite> _sprites = new();
@@ -32,9 +30,6 @@ namespace Logic.Medicine
 
         private IGameFactory gameFactory;
         private IAnimalHouseService houseService;
-
-        public event Action<Animal> AnimalHealed = animal => { };
-        public event Action Triggered = () => { };
 
         private void Awake()
         {
@@ -85,12 +80,11 @@ namespace Logic.Medicine
                     Destroy(handAnimal.gameObject);
                     var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
                         .GetComponent<Animal>();
-                    AnimalHealed.Invoke(animal);
+
                     SetNewRandomIndex();
                     return animal;
                 });
-
-                Triggered.Invoke();
+                
                 Destroy(handAnimal.GetComponent<BubbleHolder>().GetBubble.gameObject);
                 Destroy(item.gameObject);
             };

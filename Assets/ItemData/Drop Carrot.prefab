@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5003576737598637773}
   - component: {fileID: -7694584224328904196}
   - component: {fileID: 9216882279177989319}
+  - component: {fileID: 7018979183650380612}
   m_Layer: 7
   m_Name: Drop Carrot
   m_TagString: Untagged
@@ -146,3 +147,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: f4d91619feece4646a7743f4d69c8c87, type: 2}
+--- !u!114 &7018979183650380612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854074298446373423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446b6559d9094bd3a3ab5b6b32ef42a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropItem: {fileID: 9216882279177989319}
+  _triggerStatic: {fileID: 11400000, guid: 67411d56389732a4c932415e5ff870f3, type: 2}

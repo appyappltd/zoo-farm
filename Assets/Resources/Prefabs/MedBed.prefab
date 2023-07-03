@@ -132,6 +132,8 @@ GameObject:
   - component: {fileID: 5715711865320631563}
   - component: {fileID: 2380999859386510404}
   - component: {fileID: 8571788848278621971}
+  - component: {fileID: 5191996932801900539}
+  - component: {fileID: 5140390250929892895}
   m_Layer: 7
   m_Name: MedBed
   m_TagString: Untagged
@@ -258,13 +260,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-  - {fileID: 11400000, guid: 0c89a5387495b0f458b7747ddec523f2, type: 2}
   - {fileID: 11400000, guid: 94ed44938530343449404e70daf38b84, type: 2}
+  - {fileID: 11400000, guid: 0c89a5387495b0f458b7747ddec523f2, type: 2}
   - {fileID: 11400000, guid: 333a4da56d6dca24fafe6bd6a5db5e89, type: 2}
   - {fileID: 11400000, guid: a154fc248a27c6342b99be713dcaeda7, type: 2}
   _sprites:
-  - {fileID: 21300000, guid: b212e4dcdaf5b264dae2d42dae0f0580, type: 3}
   - {fileID: 21300000, guid: 8bcbda62b6418bf428785b6d4682efc3, type: 3}
+  - {fileID: 21300000, guid: b212e4dcdaf5b264dae2d42dae0f0580, type: 3}
   - {fileID: 21300000, guid: 5a7d17443091ddd43b384eb516a22485, type: 3}
   - {fileID: 21300000, guid: fd25a4e0782652140ab83c1a7ef9a0d6, type: 3}
 --- !u!114 &8571788848278621971
@@ -281,6 +283,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _places:
   - {fileID: 3424525604650532449}
+--- !u!114 &5191996932801900539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849568306241908757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6587e1c10a14308820357213e533404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trigger: {fileID: 11400000, guid: 7ab25859dc525684a9ba219047c7b4fa, type: 2}
+  _IsTriggerOnEnable: 1
+  _IsTriggerOnDisable: 0
+--- !u!114 &5140390250929892895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849568306241908757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d92f5894c94a2fa6eb414a6751c821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: {fileID: 9134425033689763442}
+  _staticTrigger: {fileID: 11400000, guid: 105a1cb453a230d4091df3094faaa2e5, type: 2}
 --- !u!1 &6280941463389774997
 GameObject:
   m_ObjectHideFlags: 0

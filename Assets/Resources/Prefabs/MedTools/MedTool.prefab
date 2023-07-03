@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2181217113628499078}
   - component: {fileID: 5479911085439700653}
   - component: {fileID: 4867225681255900138}
+  - component: {fileID: 7734164964601568911}
   m_Layer: 7
   m_Name: MedTool
   m_TagString: Untagged
@@ -171,6 +172,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fill: {fileID: 3769224806914549941}
   startPoint: -4.9
+--- !u!114 &7734164964601568911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306403883730262677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d92f5894c94a2fa6eb414a6751c821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: {fileID: 2181217113628499078}
+  _staticTrigger: {fileID: 11400000, guid: 2a035c91a1fcb844cb8c87fb02884f2e, type: 2}
 --- !u!1 &961455800664860892
 GameObject:
   m_ObjectHideFlags: 0

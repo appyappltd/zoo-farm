@@ -905,6 +905,7 @@ GameObject:
   - component: {fileID: 7170451200634432961}
   - component: {fileID: 1866505731373940454}
   - component: {fileID: 5980456202578973364}
+  - component: {fileID: 1130305718901886171}
   m_Layer: 8
   m_Name: CatB
   m_TagString: Untagged
@@ -1097,6 +1098,21 @@ MonoBehaviour:
   _jumper: {fileID: 7170451200634432961}
   _emotionProvider: {fileID: 7740161014391255540}
   _statProvider: {fileID: 3091621735409208563}
+--- !u!114 &1130305718901886171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050562250835130449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6587e1c10a14308820357213e533404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trigger: {fileID: 11400000, guid: b7d91cec2845b014c8509d180fd4d4de, type: 2}
+  _IsTriggerOnEnable: 1
+  _IsTriggerOnDisable: 0
 --- !u!1 &6108457902604890809
 GameObject:
   m_ObjectHideFlags: 0

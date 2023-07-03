@@ -11,11 +11,6 @@ namespace Tutorial
         
         protected readonly List<ITutorialModule> TutorialModules = new List<ITutorialModule>();
 
-        private void OnDestroy()
-        {
-            ((ITutorialTrigger) _beginTrigger).Triggered -= Play;
-        }
-
         private void Awake()
         {
             ((ITutorialTrigger) _beginTrigger).Triggered += Play;
@@ -33,6 +28,7 @@ namespace Tutorial
                 TutorialModules[i].AttachNext(TutorialModules[i + 1]);
             }
 
+            ((ITutorialTrigger) _beginTrigger).Triggered -= Play;
             TutorialModules[0].Play();
         }
     }
