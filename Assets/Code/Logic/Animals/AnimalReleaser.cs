@@ -13,7 +13,7 @@ namespace Logic.Animals
     {
         //TODO: В дальнейшем за каждое животное разное количество денег
         [SerializeField] private int _coinsToSpawn;
-        [SerializeField] private Delay _delay;
+        [SerializeField] private PlayerInteraction _playerInteraction;
 
         private CollectibleCoinSpawner _spawner;
         private IAnimalsService _animalService;
@@ -25,10 +25,10 @@ namespace Logic.Animals
             _animalService = AllServices.Container.Single<IAnimalsService>();
             _windowService = AllServices.Container.Single<IWindowService>();
             _animalService.Released += OnReleased;
-            _delay.Complete += OnCompleteDelay;
+            _playerInteraction.Interacted += OnCompleteDelay;
         }
 
-        private void OnCompleteDelay(GameObject _)
+        private void OnCompleteDelay(HeroProvider _)
         {
             _windowService.Open(WindowId.AnimalRelease);
         }
@@ -36,7 +36,7 @@ namespace Logic.Animals
         private void OnDestroy()
         {
             _animalService.Released -= OnReleased;
-            _delay.Complete -= OnCompleteDelay;
+            _playerInteraction.Interacted -= OnCompleteDelay;
         }
 
         private void OnReleased(AnimalType type)

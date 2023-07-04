@@ -1,4 +1,6 @@
 using Data.ItemsData;
+using Logic.Storages;
+using Logic.Storages.Items;
 using Observables;
 using Progress;
 using UnityEngine;
@@ -7,7 +9,7 @@ namespace Logic
 {
     public class Bowl : MonoBehaviour, IProgressBarHolder
     {
-        [SerializeField] private Inventory.Inventory _inventory;
+        [SerializeField] private Inventory _inventory;
 
         private CompositeDisposable _compositeDisposable = new CompositeDisposable();
         private ProgressBar _food;
@@ -21,17 +23,17 @@ namespace Logic
 
         private void OnEnable()
         {
-            _inventory.AddItem += ReplenishFromInventory;
+            _inventory.Added += ReplenishFromInventory;
             _compositeDisposable.Add(_food.Current.Then(OnSpend));
         }
 
         private void OnDisable()
         {
-            _inventory.AddItem -= ReplenishFromInventory;
+            _inventory.Added -= ReplenishFromInventory;
             _compositeDisposable.Dispose();
         }
 
-        private void ReplenishFromInventory(HandItem item)
+        private void ReplenishFromInventory(IItem item)
         {
             Replenish(item.Weight);
         }
@@ -45,8 +47,8 @@ namespace Logic
         {
             if (Mathf.RoundToInt(_food.Current.Value) < _inventory.Weight)
             {
-                HandItem item = _inventory.Remove();
-                Destroy(item.gameObject);
+                IItem item = _inventory.Get();
+                item.Destroy();
             }
         }
     }

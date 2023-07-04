@@ -1,8 +1,8 @@
 ﻿using Cameras;
 using Infrastructure.Factory;
 using Logic;
+using Logic.Payment;
 using Logic.SpawnPlaces;
-using Logic.Wallet;
 using Player;
 using Services.Camera;
 using Services.Input;

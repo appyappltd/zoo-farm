@@ -44,11 +44,11 @@ namespace Logic.Plant
                 GrowUp.Invoke(currStage);
 
                 var drop = currStage.GetComponent<DropItem>();
-                drop.PickUp += OnPickUp;
+                drop.PickedUp += OnPickedUp;
             }
         }
 
-        private void OnPickUp(HandItem _)
+        private void OnPickedUp(HandItem _)
         {
             canGrow = true;
             _growCoroutine = null;

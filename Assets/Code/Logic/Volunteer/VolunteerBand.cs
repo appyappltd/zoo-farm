@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Data.ItemsData;
 using Logic.Animals;
-using Logic.Inventory;
+using Logic.Storages;
+using Logic.Storages.Items;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Logic.Volunteer
         [SerializeField] private VolunteerSpawner _spawner;
         [SerializeField] private AnimalSpawner _animalSpawner;
 
-        [SerializeField] private TransmittingAnimals _transmitting;
+        [SerializeField] private ProductReceiver _receiver;
 
         [SerializeField] private Transform _transmittingPlace;
         [SerializeField] private Transform _outPlace;
@@ -28,14 +29,14 @@ namespace Logic.Volunteer
         public bool CanGiveAnimal() =>
             _volunteers.Count > 0 && _volunteers.First().CanGiveAnimal;
 
-        public HandItem GetAnimal()
+        public IItem GetAnimal()
         {
             var v = _volunteers.First();
             v.CanGiveAnimal = false;
             _volunteers.Remove(v);
             _emptyVolunteers.Add(v);
 
-            var item = v.GetComponent<Inventory.Inventory>().Remove();
+            var item = v.GetComponent<Inventory>().Get();
             MoveQueue();
             return item;
         }
@@ -66,7 +67,7 @@ namespace Logic.Volunteer
         private void SetVolunteer(Volunteer volunteer,Transform t)
         {
             HandItem animal = _animalSpawner.InstantiateAnimal();
-            volunteer.GetComponent<Inventory.Inventory>().Add(animal);
+            volunteer.GetComponent<Inventory>().Add(animal);
             _queue.Add(t.transform);
             _volunteers.Add(volunteer);
             animal.transform.position = volunteer.transform.position;

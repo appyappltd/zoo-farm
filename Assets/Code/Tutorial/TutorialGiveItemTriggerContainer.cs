@@ -6,16 +6,18 @@ namespace Tutorial
 {
     public class TutorialGiveItemTriggerContainer : MonoBehaviour
     {
-        [SerializeField] private DropItem _dropItem;
+        [SerializeField] private HandItem _item;
         [SerializeField] private TutorialTriggerStatic _triggerStatic;
 
+        //TODO: Заменить подписку на ивент взятия в классе грядки
+        
         private void OnEnable() =>
-            _dropItem.PickUp += OnPickUp;
+            _item.Mover.Ended += OnPickUp;
 
         private void OnDisable() =>
-            _dropItem.PickUp -= OnPickUp;
+            _item.Mover.Ended -= OnPickUp;
 
-        private void OnPickUp(HandItem item) =>
+        private void OnPickUp() =>
             _triggerStatic.Trigger(gameObject);
     }
 }

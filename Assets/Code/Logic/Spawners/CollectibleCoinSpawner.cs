@@ -71,9 +71,9 @@ namespace Logic.Spawners
         {
             void OnEndMove() => returnAction.Invoke();
 
-            TowardsMover towardsMover = coin.GetComponent<TowardsMover>();
-            towardsMover.GotToPlace += OnEndMove;
-            return () => towardsMover.GotToPlace -= OnEndMove;
+            ItemMover itemMover = coin.GetComponent<ItemMover>();
+            itemMover.Ended += OnEndMove;
+            return () => itemMover.Ended -= OnEndMove;
         }
 
         private void PlayTranslatables(TranslatableAgent agent)

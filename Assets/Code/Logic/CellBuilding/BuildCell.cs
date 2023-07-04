@@ -1,5 +1,5 @@
 using System;
-using Logic.Wallet;
+using Logic.Payment;
 using Tools.Extension;
 using UnityEngine;
 

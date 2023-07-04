@@ -7,29 +7,25 @@ using UnityEngine;
 
 namespace Logic
 {
-    [RequireComponent(typeof(TriggerObserver))]
     [RequireComponent(typeof(RunTranslator))]
     public class TutorialArrow : MonoBehaviour, ITutorialTrigger
     {
         [SerializeField] private RunTranslator _translator;
         [SerializeField] private TranslatableAgent _translatableAgent;
-
-        private TriggerObserver _triggerObserver;
+        [SerializeField] private PlayerInteraction _playerInteraction;
 
         public event Action Triggered = () => { };
-
-        private void Awake()
-        {
-            _triggerObserver = GetComponent<TriggerObserver>();
-        }
 
         private void Start()
         {
             _translator.AddTranslatable(_translatableAgent.MainTranslatable);
-            _triggerObserver.Enter += OnEnter;
+            _playerInteraction.Interacted += OnEnter;
         }
 
-        private void OnEnter(GameObject _) =>
+        private void OnDestroy() =>
+            _playerInteraction.Interacted -= OnEnter;
+
+        private void OnEnter(HeroProvider _) =>
             Triggered.Invoke();
 
         public void Move(Vector3 to)

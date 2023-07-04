@@ -1,23 +1,25 @@
-using Data.ItemsData;
-using Logic.Bubble;
-using Logic.Inventory;
+using Logic.Storages;
+using Logic.Storages.Items;
 using UnityEngine;
 
-public class MaxIndicator : MonoBehaviour
+namespace Logic.Bubble
 {
-    [SerializeField] private Bubble bubble;
-
-    private Inventory inventory;
-
-    private void Start()
+    public class MaxIndicator : MonoBehaviour
     {
-        inventory = GetComponent<Inventory>();
+        [SerializeField] private Bubble bubble;
 
-        inventory.AddItem += ChangeBubbleState;
-        inventory.RemoveItem += ChangeBubbleState;
-        bubble.gameObject.SetActive(false);
+        private Inventory inventory;
+
+        private void Start()
+        {
+            inventory = GetComponent<Inventory>();
+
+            inventory.Added += ChangeBubbleState;
+            inventory.Removed += ChangeBubbleState;
+            bubble.gameObject.SetActive(false);
+        }
+
+        private void ChangeBubbleState(IItem _) =>
+            bubble.gameObject.SetActive(inventory.IsFull);
     }
-
-    private void ChangeBubbleState(HandItem _) =>
-        bubble.gameObject.SetActive(inventory.IsMax);
 }

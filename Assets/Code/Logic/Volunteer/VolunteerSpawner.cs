@@ -1,6 +1,5 @@
 using System.Collections;
 using Logic.Animals;
-using Logic.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
 

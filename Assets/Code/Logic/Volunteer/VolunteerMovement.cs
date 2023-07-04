@@ -4,29 +4,29 @@ using UnityEngine;
 namespace Logic.Volunteer
 {
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(AnimationMover))]
+    [RequireComponent(typeof(AnimationItemMover))]
     public class VolunteerMovement : MonoBehaviour
     {
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         
         private Animator animC;
-        private AnimationMover mover;
+        private AnimationItemMover _itemMover;
 
         private void Awake()
         {
             animC = GetComponent<Animator>();
-            mover = GetComponent<AnimationMover>();
-            mover.StartMove += OnMove;
-            mover.GotToPlace += OnMove;
+            _itemMover = GetComponent<AnimationItemMover>();
+            _itemMover.Started += OnMove;
+            _itemMover.Ended += OnMove;
         }
 
         private void OnDestroy()
         {
-            mover.StartMove -= OnMove;
-            mover.GotToPlace -= OnMove;
+            _itemMover.Started -= OnMove;
+            _itemMover.Ended -= OnMove;
         }
 
         private void OnMove() =>
-            animC.SetBool(IsMoving, mover.IsMoving);
+            animC.SetBool(IsMoving, _itemMover.IsMoving);
     }
 }

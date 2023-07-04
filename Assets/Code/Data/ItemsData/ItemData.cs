@@ -7,6 +7,6 @@ namespace Data.ItemsData
     {
         [field: SerializeField] public HandItem Hand { get; private set; }
         [field: SerializeField] public DropItem Drop { get; private set; }
-        [field: SerializeField] public CreatureType Creature { get; private set; }
+        [field: SerializeField] public ItemId Creature { get; private set; }
     }
 }

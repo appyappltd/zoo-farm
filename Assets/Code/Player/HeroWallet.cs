@@ -1,4 +1,4 @@
-using Logic.Wallet;
+using Logic.Payment;
 using NaughtyAttributes;
 using Observables;
 using UnityEngine;

@@ -1,12 +1,25 @@
+using Logic.Movement;
+using Logic.Storages.Items;
 using UnityEngine;
 
 namespace Data.ItemsData
 {
-    public class HandItem : MonoBehaviour
+    [RequireComponent(typeof(ItemMover))]
+    public class HandItem : MonoBehaviour, IItem
     {
-        [field: SerializeField] public ItemData ItemData { get; private set; }
-        [field: SerializeField] public Transform NextPlace { get; private set; }
-        [field: SerializeField] public int Weight { get; private set; } = 1;
+        [SerializeField] private int _weight;
+        [SerializeField] private ItemId _itemId;
+        
+        private IItemMover _mover;
 
+        public int Weight => _weight;
+        public ItemId ItemId => _itemId;
+        public IItemMover Mover => _mover;
+        
+        private void Awake() =>
+            _mover = GetComponent<IItemMover>();
+        
+        public void Destroy() =>
+            Destroy(gameObject);
     }
 }

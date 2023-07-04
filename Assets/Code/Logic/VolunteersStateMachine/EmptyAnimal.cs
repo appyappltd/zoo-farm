@@ -1,11 +1,12 @@
+using Logic.Storages;
 using StateMachineBase;
 
 namespace Logic.VolunteersStateMachine
 {
     public class EmptyAnimal : Transition
     {
-        private Inventory.Inventory inventory;
-        public EmptyAnimal(Inventory.Inventory inventory) =>
+        private Inventory inventory;
+        public EmptyAnimal(Inventory inventory) =>
             this.inventory = inventory;
     
         public override bool CheckCondition() =>

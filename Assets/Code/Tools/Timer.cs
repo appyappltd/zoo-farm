@@ -11,7 +11,7 @@ namespace Tools
 
         private float _elapsedTime;
 
-        public bool IsActive => _elapsedTime > 0;
+        public bool IsActive => _elapsedTime >= 0;
 
         public Timer(float duration, Action onTimeIsOn)
         {

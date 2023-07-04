@@ -1,6 +1,7 @@
 using System.Collections;
 using Logic.Interactions;
 using NaughtyAttributes;
+using Observer;
 using UnityEngine;
 
 namespace Logic
@@ -10,7 +11,7 @@ namespace Logic
         [SerializeField] private Vector3 _targetSize;
         [SerializeField, Min(.0f)] private float _speed =.1f;
         [SerializeField, Min(.0f)] private float _offset = .1f;
-        [SerializeField] private TriggerObserver _trigger;
+        [SerializeField] private PlayerInteraction _playerInteraction;
 
         private Vector3 defSize;
         private Coroutine coroutine;
@@ -20,8 +21,8 @@ namespace Logic
         {
             defSize = transform.localScale;
 
-            _trigger.Enter += _ => OnInteractable(_targetSize);
-            _trigger.Exit += _ => OnInteractable(defSize);
+            _playerInteraction.Interacted += _ => OnInteractable(_targetSize);
+            _playerInteraction.Canceled += () => OnInteractable(defSize);
         }
 
         [Button("расти", enabledMode: EButtonEnableMode.Playmode)]

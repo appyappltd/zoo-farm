@@ -1,4 +1,4 @@
-using Logic.Wallet;
+using Logic.Payment;
 using Ui.Elements;
 using UnityEngine;
 

@@ -4,8 +4,8 @@ using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Bubble;
 using Logic.Interactions;
-using Logic.Inventory;
 using Logic.Movement;
+using Logic.Storages;
 using Services;
 using Services.AnimalHouses;
 using UnityEngine;
@@ -13,16 +13,16 @@ using Random = UnityEngine.Random;
 
 namespace Logic.Medicine
 {
-    [RequireComponent(typeof(Delay))]
-    [RequireComponent(typeof(Inventory.Inventory))]
+    [RequireComponent(typeof(Inventory))]
     [RequireComponent(typeof(Storage))]
     [RequireComponent(typeof(ProductReceiver))]
     public class MedicineBed : MonoBehaviour
     {
         [SerializeField] private List<ItemData> _data = new();
         [SerializeField] private List<Sprite> _sprites = new();
+        [SerializeField] private PlayerInteraction _playerInteraction;
 
-        private Inventory.Inventory inventory;
+        private Inventory inventory;
         private Storage storage;
         private ProductReceiver receiver;
         private int index = 0;
@@ -36,23 +36,22 @@ namespace Logic.Medicine
             gameFactory = AllServices.Container.Single<IGameFactory>();
             houseService = AllServices.Container.Single<IAnimalHouseService>();
 
-            inventory = GetComponent<Inventory.Inventory>();
+            inventory = GetComponent<Inventory>();
             receiver = GetComponent<ProductReceiver>();
             storage = GetComponent<Storage>();
 
-            GetComponent<Delay>().Complete += player => Treat(player.GetComponent<Inventory.Inventory>());
+            _playerInteraction.Interacted += player => Treat(player.Inventory);
 
-            inventory.AddItem += item => item.GetComponent<IMover>().GotToPlace += () =>
+            inventory.Added += item => item.Mover.Ended += () =>
             {
                 canTreat = true;
-                receiver.CanTake = false;
                 item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
             };
         }
 
         private void SetNewRandomIndex() => index = (index + Random.Range(0, _data.Count)) % _data.Count;
 
-        private void Treat(Inventory.Inventory playerInventory)
+        private void Treat(Inventory playerInventory)
         {
             if (!canTreat)
                 return;
@@ -64,12 +63,12 @@ namespace Logic.Medicine
                 _data[index].Hand.GetComponent<Medicine>().Type)
                 return;
 
-            var item = playerInventory.Remove();
-            var mover = item.GetComponent<IMover>();
-            var handAnimal = inventory.Remove();
+            var item = playerInventory.Get();
+            var mover = item.GetComponent<IItemMover>();
+            var handAnimal = inventory.Get();
 
             mover.Move(storage.GetItemPlace);
-            mover.GotToPlace += () =>
+            mover.Ended += () =>
             {
                 houseService.TakeQueueToHouse(() =>
                 {

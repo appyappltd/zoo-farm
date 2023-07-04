@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Logic.Animals.AnimalsBehaviour.Movement;
 using Logic.Animals.AnimalsStateMachine.Transitions;
+using Logic.Storages;
 using Logic.VolunteersStateMachine.States;
 using StateMachineBase;
 using StateMachineBase.States;
@@ -31,7 +32,7 @@ namespace Logic.VolunteersStateMachine
 
         private void SetUp()
         {
-            var inventory = GetComponent<Inventory.Inventory>();
+            var inventory = GetComponent<Inventory>();
             var volunteer = GetComponent<Volunteer.Volunteer>();
 
             State moveToTransmitting = new MoveTo(_animator, _mover, transmittingPlace);

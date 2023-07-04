@@ -1,42 +1,44 @@
 using Logic.Interactions;
-using Logic.Inventory;
 using Logic.Movement;
-using Player;
+using Logic.Payment;
 using UnityEngine;
 
 namespace Logic.Coins
 {
-    [RequireComponent(typeof(TriggerObserver))]
-    [RequireComponent(typeof(TowardsMover))]
+    [RequireComponent(typeof(PlayerInteraction))]
+    [RequireComponent(typeof(ItemMover))]
     public class Coin : MonoBehaviour
     {
         [SerializeField, Min(0)] private int _amount = 1;
-
-        private TriggerObserver trigger;
-        private IMover mover;
+        [SerializeField] private PlayerInteraction _playerInteraction;
+        
+        private IItemMover _itemMover;
+        private IWallet _wallet;
 
         private void Awake()
         {
-            mover = GetComponent<IMover>();
-            trigger = GetComponent<TriggerObserver>();
+            _itemMover = GetComponent<IItemMover>();
+            _playerInteraction ??= GetComponent<PlayerInteraction>();
 
-            trigger.Enter += OnEnter;
+            _playerInteraction.Interacted += OnEnter;
         }
 
         private void OnDestroy()
         {
-            trigger.Enter -= OnEnter;
+            _playerInteraction.Interacted -= OnEnter;
         }
 
-        private void OnEnter(GameObject player)
+        private void OnEnter(HeroProvider heroProvider)
         {
-            void OnCollected()
-            {
-                player.GetComponent<HeroWallet>().Wallet.TryAdd(_amount);
-                mover.GotToPlace -= OnCollected;
-            }
-            mover.GotToPlace += OnCollected;
-            mover.Move(player.GetComponent<Storage>().GetDefPlace);
+            _wallet = heroProvider.Wallet;
+            _itemMover.Ended += OnCollected;
+            _itemMover.Move(heroProvider.transform);
+        }
+        
+        private void OnCollected()
+        {
+            _wallet.TryAdd(_amount);
+            _itemMover.Ended -= OnCollected;
         }
     }
 }

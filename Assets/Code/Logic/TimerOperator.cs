@@ -38,7 +38,7 @@ namespace Logic
             enabled = true;
         }
 
-        private void Reset() =>
+        public void Reset() =>
             _timer.Reset();
 
         private void OnTimeIsOn()

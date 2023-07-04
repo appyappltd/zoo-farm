@@ -7,20 +7,20 @@ namespace Logic.Movement
         [SerializeField] private Transform[] _points;
 
         private int index = 0;
-        private IMover mover;
-        private Rotater rotater;
-        private bool IsPath = false;
+        private IItemMover _itemMover;
+        private Rotator _rotator;
+        private bool _isPath = false;
 
         private void Awake()
         {
-            rotater = GetComponent<Rotater>();
-            mover = GetComponent<IMover>();
-            mover.GotToPlace += SetPoint;
+            _rotator = GetComponent<Rotator>();
+            _itemMover = GetComponent<IItemMover>();
+            _itemMover.Ended += SetPoint;
         }
 
         public void StartWalk()
         {
-            IsPath = true;
+            _isPath = true;
             Walk();
         }
 
@@ -29,13 +29,13 @@ namespace Logic.Movement
         public void Walk()
         {
             var point = _points[index];
-            rotater.Rotate(point);
-            mover.Move(point);
+            _rotator.Rotate(point);
+            _itemMover.Move(point);
         }
 
         private void SetPoint()
         {
-            if (IsPath && index + 1 < _points.Length)
+            if (_isPath && index + 1 < _points.Length)
             {
                 index++;
                 Walk();

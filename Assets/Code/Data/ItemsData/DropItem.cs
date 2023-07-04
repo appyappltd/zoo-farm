@@ -1,34 +1,43 @@
+using System;
+using Logic;
 using Logic.Interactions;
-using Logic.Inventory;
+using Logic.Storages;
+using Logic.Storages.Items;
+using Observer;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Data.ItemsData
 {
     [RequireComponent(typeof(TriggerObserver))]
-    [RequireComponent(typeof(Delay))]
-
     public class DropItem : MonoBehaviour
     {
-        public event UnityAction<HandItem> PickUp;
+        public event Action<HandItem> PickedUp;
 
-        [field: SerializeField] public ItemData ItemData { get; private set; }
+        private PlayerInteraction _playerInteraction;
 
-        private void Awake()
+        private IItem _itemData;
+
+        private void OnEnable()
         {
-            GetComponent<Delay>().Complete += player =>
-            {
-                var inventory = player.GetComponent<Inventory>();
+            _playerInteraction.Interacted += OnInteracted;
+        }
 
-                if (inventory.CanAddItem(ItemData.Creature, ItemData.Hand.Weight))
-                {
-                    var item = Instantiate(ItemData.Hand, transform.position,
-                                                          transform.rotation);
-                    inventory.Add(item);
-                    PickUp?.Invoke(item);
-                    Destroy(gameObject, .01f);
-                }
-            };
+        private void OnDisable()
+        {
+            _playerInteraction.Interacted -= OnInteracted;
+        }
+
+        private void OnInteracted(HeroProvider heroProvider)
+        {
+            Inventory inventory = heroProvider.Inventory;
+
+            if (inventory.TryAdd())
+            {
+                var item = Instantiate(_itemData.Hand, transform.position, transform.rotation);
+                inventory.Add(item);
+                PickedUp?.Invoke(item);
+                Destroy(gameObject, .01f);
+            }
         }
     }
 }
