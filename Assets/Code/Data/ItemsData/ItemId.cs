@@ -1,10 +1,14 @@
+using System;
+
 namespace Data.ItemsData
 {
-    public enum ItemId : byte
+    [Flags]
+    public enum ItemId
     {
         None = 0,
-        Animal,
-        Medical,
-        All
+        Animal = 1 << 1,
+        Medical = 1 << 2,
+        Food = 1 << 3,
+        All = ~None
     }
 }

@@ -42,9 +42,6 @@ namespace Logic.Plant
                     currStage = Instantiate(_stages[i], transform);
                 }
                 GrowUp.Invoke(currStage);
-
-                var drop = currStage.GetComponent<DropItem>();
-                drop.PickedUp += OnPickedUp;
             }
         }
 

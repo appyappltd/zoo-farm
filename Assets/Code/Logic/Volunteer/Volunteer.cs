@@ -1,23 +1,19 @@
-using System.Collections;
+using Logic.Storages;
 using UnityEngine;
 
 namespace Logic.Volunteer
 {
     public class Volunteer : MonoBehaviour
     {
-        [HideInInspector] public bool CanGiveAnimal = false;
-        [HideInInspector] public bool CanTakeAnimal = false;
+        private IInventory _inventory;
+        public IInventory Inventory => _inventory;
 
-        [SerializeField] private Vector2 _reloadTime = new(5, 45);
-
-        public void Reload() =>
-            StartCoroutine(ReloadCor());
-
-        public IEnumerator ReloadCor()
+        public bool IsFree => _inventory.Weight <= 0;
+        public bool WithAnimal => _inventory.Weight > 0;
+        
+        private void Awake()
         {
-            var time = Random.Range(_reloadTime.x, _reloadTime.y);
-            yield return new WaitForSeconds(time);
-            CanTakeAnimal = true;
+            _inventory = new Inventory(3);
         }
     }
 }

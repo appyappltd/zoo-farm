@@ -15,13 +15,13 @@ namespace Logic.Payment
     {
         private readonly Observable<int> _leftCoinsToPay = new Observable<int>();
         
+        [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField, Min(0f)] private float _paymentRate = 0.05f;
         [SerializeField, Min(0)] private int _currencyPerTick = 1;
 
         private int _defaultCost;
         private VisualTranslatorsSpawner _spawner;
         private RunTranslator _translator;
-        private PlayerInteraction _playerInteraction;
         private IWallet _wallet;
         private TimerOperator _timerOperator;
 
@@ -30,15 +30,27 @@ namespace Logic.Payment
 
         private void Awake()
         {
+            _translator = GetComponent<RunTranslator>();
             _timerOperator = GetComponent<TimerOperator>();
             _timerOperator.SetUp(_paymentRate, OnPay);
+            _playerInteraction.Interacted += Init;
         }
 
         private void OnEnable()
         {
-            _translator = GetComponent<RunTranslator>();
             _playerInteraction.Interacted += BeginTransaction;
-            _playerInteraction.Interacted += Init;
+            _playerInteraction.Canceled += CancelTransaction;
+        }
+
+        private void OnDisable()
+        {
+            _playerInteraction.Interacted -= BeginTransaction;
+            _playerInteraction.Canceled -= CancelTransaction;
+        }
+
+        private void CancelTransaction()
+        {
+            _timerOperator.Pause();
         }
 
         public void SetCost(int buildCost)
@@ -55,6 +67,8 @@ namespace Logic.Payment
                         new GameObject("Coins").transform),
                 10, _translator, heroProvider.transform, transform);
             _wallet = heroProvider.Wallet;
+            
+            _playerInteraction.Interacted -= Init;
         }
 
         private void OnPay()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data.ItemsData;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace Logic.Volunteer
 {
-    public class VolunteerBand : MonoBehaviour
+    public class VolunteerBand : MonoBehaviour, IGetItem
     {
         [SerializeField, Min(.0f)] private Vector3 _offset = new(1f, .0f, .0f);
         [SerializeField] private VolunteerSpawner _spawner;
@@ -26,19 +27,34 @@ namespace Logic.Volunteer
         [SerializeField] private List<Transform> _emptyQueue = new();
         [SerializeField] private List<Volunteer> _emptyVolunteers = new();
 
-        public bool CanGiveAnimal() =>
-            _volunteers.Count > 0 && _volunteers.First().CanGiveAnimal;
-
-        public IItem GetAnimal()
+        public event Action<IItem> Removed;
+        
+        public IItem Get()
         {
-            var v = _volunteers.First();
-            v.CanGiveAnimal = false;
-            _volunteers.Remove(v);
-            _emptyVolunteers.Add(v);
+            Volunteer volunteer = _volunteers.First();
+            _volunteers.Remove(volunteer);
+            _emptyVolunteers.Add(volunteer);
 
-            var item = v.GetComponent<Inventory>().Get();
+            IItem item = volunteer.Inventory.Get();
             MoveQueue();
             return item;
+        }
+
+        public bool TryPeek(ItemId byId, out IItem item)
+        {
+            item = null;
+            return _volunteers.Count > 0 && _volunteers.First().Inventory.TryPeek(ItemId.Animal, out item);
+        }
+
+        public bool TryGet(ItemId byId, out IItem result)
+        {
+            if (TryPeek(byId, out result))
+            {
+                result = Get();
+                return true;
+            }
+
+            return false;
         }
 
         public void AddNewVolunteer(Volunteer volunteer)
@@ -64,33 +80,31 @@ namespace Logic.Volunteer
             SetVolunteer(volunteer,t);
         }
 
-        private void SetVolunteer(Volunteer volunteer,Transform t)
-        {
-            HandItem animal = _animalSpawner.InstantiateAnimal();
-            volunteer.GetComponent<Inventory>().Add(animal);
-            _queue.Add(t.transform);
-            _volunteers.Add(volunteer);
-            animal.transform.position = volunteer.transform.position;
-            
-            volunteer.CanGiveAnimal = false;
-            volunteer.CanTakeAnimal = false;
-        }
-
         [Button("New Volunteer", enabledMode: EButtonEnableMode.Playmode)]
         public void CreateNewVolunteer()
         {
             for (int i = 0; i < _emptyVolunteers.Count; i++)
             {
-                var v = _emptyVolunteers[i];
-                if (v.CanTakeAnimal)
+                Volunteer volunteer = _emptyVolunteers[i];
+                
+                if (volunteer.IsFree)
                 {
-                    _emptyVolunteers.Remove(v);
-                    AddVolunteer(v);
+                    _emptyVolunteers.Remove(volunteer);
+                    AddVolunteer(volunteer);
                     return;
                 }
             }
-            var newV = _spawner.Spawn();
-            AddNewVolunteer(newV);
+            
+            Volunteer newVolunteer = _spawner.Spawn();
+            AddNewVolunteer(newVolunteer);
+        }
+
+        private void SetVolunteer(Volunteer volunteer, Transform t)
+        {
+            HandItem animal = _animalSpawner.InstantiateAnimal(volunteer.transform.position);
+            volunteer.Inventory.Add(animal);
+            _queue.Add(t.transform);
+            _volunteers.Add(volunteer);
         }
 
         private void MoveQueue()

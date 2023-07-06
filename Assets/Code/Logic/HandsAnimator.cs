@@ -1,27 +1,37 @@
 using Logic.Storages;
+using Logic.Storages.Items;
 using UnityEngine;
 
 namespace Logic
 {
-    [RequireComponent(typeof(Inventory))]
     [RequireComponent(typeof(Animator))]
     public class HandsAnimator : MonoBehaviour
     {
-        private Inventory inventory;
+        private IInventory _inventory; 
         private Animator animC;
 
-        private void Awake()
+        public void Construct(IInventory inventory)
         {
-            inventory = GetComponent<Inventory>();
+            _inventory = inventory;
+            
+            _inventory.Added += OnInventoryUpdated;
+            _inventory.Removed += OnInventoryUpdated;
+            
             animC = GetComponent<Animator>();
+        }
 
-            inventory.Added += _ => ChangeHandsState();
-            inventory.Removed += _ => ChangeHandsState();
+        private void OnInventoryUpdated(IItem _) =>
+            ChangeHandsState();
+
+        private void OnDestroy()
+        {
+            _inventory.Added -= OnInventoryUpdated;
+            _inventory.Removed -= OnInventoryUpdated;
         }
 
         private void ChangeHandsState()
         {
-            animC.SetBool("Hold", inventory.Weight > 0);
+            animC.SetBool("Hold", _inventory.Weight > 0);
         }
     }
 }

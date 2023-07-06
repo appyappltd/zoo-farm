@@ -1,16 +1,23 @@
 using Logic.Payment;
 using Logic.Storages;
-using Player;
 using UnityEngine;
 
 namespace Logic
 {
     public class HeroProvider : MonoBehaviour
     {
-        [SerializeField] private HeroWallet _heroWallet;
-        [SerializeField] private Inventory _heroInventory;
+        [SerializeField] private int  _maxInventoryWeight;
 
-        public IWallet Wallet => _heroWallet.Wallet;
-        public Inventory Inventory => _heroInventory;
+        private IWallet _wallet;
+        private IInventory _inventory;
+        
+        public IWallet Wallet => _wallet;
+        public IInventory Inventory => _inventory;
+
+        private void Awake()
+        {
+            _wallet = new Wallet();
+            _inventory = new Inventory(_maxInventoryWeight);
+        }
     }
 }

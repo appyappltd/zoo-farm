@@ -1,17 +1,16 @@
-using Logic.Animals.AnimalsStateMachine.Transitions;
 using Logic.Storages;
 using StateMachineBase;
-using UnityEngine;
 
 namespace Logic.VolunteersStateMachine
 {
     public class HaveAnimal : Transition
     {
-        private Inventory inventory;
-        public HaveAnimal(Inventory inventory) =>
-            this.inventory = inventory;
+        private readonly IInventory _inventory;
+        
+        public HaveAnimal(IInventory inventory) =>
+            _inventory = inventory;
 
         public override bool CheckCondition() =>
-            inventory.Weight > 0;
+            _inventory.Weight > 0;
     }
 }

@@ -1,7 +1,11 @@
+using UnityEngine;
+
 namespace Tools
 {
-    public class ITransformReadonly
+    public interface ITransformReadonly
     {
-        
+        Vector3 Position { get; }
+        Quaternion Rotation { get; }
+        Vector3 Scale { get; }
     }
 }

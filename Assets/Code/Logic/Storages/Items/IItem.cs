@@ -8,6 +8,7 @@ namespace Logic.Storages.Items
         int Weight { get; }
         ItemId ItemId { get; }
         IItemMover Mover { get; }
+        IItemData ItemData { get; }
         public void Destroy();
     }
 }

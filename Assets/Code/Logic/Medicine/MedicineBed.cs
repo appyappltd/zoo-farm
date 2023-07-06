@@ -1,92 +1,147 @@
-using System.Collections.Generic;
+using System;
 using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour;
-using Logic.Bubble;
 using Logic.Interactions;
-using Logic.Movement;
 using Logic.Storages;
+using Logic.Storages.Items;
+using NTC.Global.Cache;
 using Services;
 using Services.AnimalHouses;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Logic.Medicine
 {
-    [RequireComponent(typeof(Inventory))]
-    [RequireComponent(typeof(Storage))]
-    [RequireComponent(typeof(ProductReceiver))]
-    public class MedicineBed : MonoBehaviour
+    [RequireComponent(typeof(TimerOperator))]
+    public class MedicineBed : MonoCache, IAddItem
     {
-        [SerializeField] private List<ItemData> _data = new();
-        [SerializeField] private List<Sprite> _sprites = new();
+        [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private TimerOperator _timerOperator;
+        [SerializeField] [Range(1f, 5f)] private float _healingTime = 2.5f;
 
-        private Inventory inventory;
-        private Storage storage;
-        private ProductReceiver receiver;
-        private int index = 0;
-        private bool canTreat = false;
+        private AnimalItemData _animalItem;
+        private MedToolItemData _medToolItem;
 
-        private IGameFactory gameFactory;
-        private IAnimalHouseService houseService;
+        private IGameFactory _gameFactory;
+        private IAnimalHouseService _houseService;
 
+        private bool _isHealing;
+        
+        public event Action<IItem> Added = i => { };
+        public event Action Healed = () => { };
+        
         private void Awake()
         {
-            gameFactory = AllServices.Container.Single<IGameFactory>();
-            houseService = AllServices.Container.Single<IAnimalHouseService>();
-
-            inventory = GetComponent<Inventory>();
-            receiver = GetComponent<ProductReceiver>();
-            storage = GetComponent<Storage>();
-
-            _playerInteraction.Interacted += player => Treat(player.Inventory);
-
-            inventory.Added += item => item.Mover.Ended += () =>
-            {
-                canTreat = true;
-                item.GetComponent<BubbleHolder>().GetBubble.ChangeState(_sprites[index]);
-            };
+            _timerOperator ??= GetComponent<TimerOperator>();
+            _timerOperator.SetUp(_healingTime, OnHealed);
+            
+            _gameFactory = AllServices.Container.Single<IGameFactory>();
+            _houseService = AllServices.Container.Single<IAnimalHouseService>();
         }
 
-        private void SetNewRandomIndex() => index = (index + Random.Range(0, _data.Count)) % _data.Count;
-
-        private void Treat(Inventory playerInventory)
+        protected override void OnEnabled()
         {
-            if (!canTreat)
-                return;
-            if (!inventory.CanGiveItem())
-                return;
-            if (!playerInventory.CanGiveItem(_data[index].Creature))
-                return;
-            if (playerInventory.GetData.Hand.GetComponent<Medicine>().Type !=
-                _data[index].Hand.GetComponent<Medicine>().Type)
-                return;
-
-            var item = playerInventory.Get();
-            var mover = item.GetComponent<IItemMover>();
-            var handAnimal = inventory.Get();
-
-            mover.Move(storage.GetItemPlace);
-            mover.Ended += () =>
-            {
-                houseService.TakeQueueToHouse(() =>
-                {
-                    var animalItemData = (AnimalItemData)handAnimal.ItemData;
-                    canTreat = false;
-                    receiver.CanTake = true;
-
-                    Destroy(handAnimal.gameObject);
-                    var animal = gameFactory.CreateAnimal(animalItemData.AnimalType, handAnimal.transform.position)
-                        .GetComponent<Animal>();
-
-                    SetNewRandomIndex();
-                    return animal;
-                });
-                
-                Destroy(handAnimal.GetComponent<BubbleHolder>().GetBubble.gameObject);
-                Destroy(item.gameObject);
-            };
+            _playerInteraction.Entered += OnEntered;
+            _playerInteraction.Canceled += OnCanceled;
         }
+
+        protected override void OnDisabled()
+        {
+            _playerInteraction.Entered -= OnEntered;
+            _playerInteraction.Canceled -= OnCanceled;
+        }
+
+        public void Add(IItem item)
+        {
+            if (ItemIsAnimal(item))
+                _animalItem = item.ItemData as AnimalItemData;
+
+            if (ItemIsMedTool(item))
+            {
+                _medToolItem = item.ItemData as MedToolItemData;
+                BeginHeal();
+            }
+            
+            Added.Invoke(item);
+        }
+
+        public bool CanAdd(IItem item) =>
+            CanPlaceAnimal(item) || CanPlaceMedTool(item);
+
+        public bool TryAdd(IItem item)
+        {
+            if (CanAdd(item) == false)
+                return false;
+            
+            Add(item);
+            return true;
+        }
+
+        private void OnHealed()
+        {
+            Debug.Log("Healed");
+            Healed.Invoke();
+            _isHealing = false;
+            
+            _houseService.TakeQueueToHouse(() =>
+            {
+                Animal animal = _gameFactory.CreateAnimal(_animalItem.AnimalId.Type, _spawnPlace.position)
+                    .GetComponent<Animal>();
+
+                FreeTheBad();
+                return animal;
+            });
+        }
+
+        private void OnCanceled()
+        {
+            _timerOperator.Pause();
+        }
+
+        private void OnEntered(HeroProvider _)
+        {
+            if (_isHealing)
+                _timerOperator.Play();
+        }
+
+        private void FreeTheBad()
+        {
+            _animalItem = null;
+            _medToolItem = null;
+        }
+
+        private void BeginHeal()
+        {
+            _timerOperator.Restart();
+            _isHealing = true;
+            Debug.Log("Begin heal");
+        }
+
+        private bool CanPlaceAnimal(IItem item) =>
+            ItemIsAnimal(item) && HasAnimal() == false;
+
+        private bool CanPlaceMedTool(IItem item)
+        {
+            return ItemIsMedTool(item)
+                   && HasAnimal()
+                   && IsSuitableTool(item)
+                   && HasMedTool();
+        }
+
+        private bool HasMedTool() =>
+            _medToolItem is null;
+
+        private bool IsSuitableTool(IItem item) =>
+            _animalItem.TreatTool == (item as MedToolItemData).MedicineTool;
+
+        private bool HasAnimal() =>
+            _animalItem is not null;
+
+        private bool ItemIsMedTool(IItem item) =>
+            (item.ItemId & ItemId.Medical) != 0;
+
+        private bool ItemIsAnimal(IItem item) =>
+            (item.ItemId & ItemId.Animal) != 0;
     }
 }

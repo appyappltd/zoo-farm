@@ -5,11 +5,12 @@ namespace Logic.VolunteersStateMachine
 {
     public class EmptyAnimal : Transition
     {
-        private Inventory inventory;
-        public EmptyAnimal(Inventory inventory) =>
-            this.inventory = inventory;
+        private readonly IInventory _inventory;
+        
+        public EmptyAnimal(IInventory inventory) =>
+            _inventory = inventory;
     
         public override bool CheckCondition() =>
-            inventory.Weight == 0;
+            _inventory.Weight == 0;
     }
 }

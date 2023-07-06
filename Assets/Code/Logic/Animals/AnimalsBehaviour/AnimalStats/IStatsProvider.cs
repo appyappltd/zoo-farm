@@ -7,5 +7,6 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         IProgressBarView Vitality { get; }
         IProgressBarView Satiety { get; }
         IProgressBarView Peppiness { get; }
+        IProgressBarView Age { get; }
     }
 }

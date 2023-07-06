@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Observer
@@ -11,7 +12,7 @@ namespace Observer
         {
             Collider collider = GetComponent<Collider>();
 
-            if (collider is null)
+            if (collider.IsUnityNull())
                 throw new NullReferenceException("Collider for Trigger Observer is not set");
 
             collider.isTrigger = true;

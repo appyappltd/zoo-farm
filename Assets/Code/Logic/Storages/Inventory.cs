@@ -51,14 +51,14 @@ namespace Logic.Storages
             return result;
         }
 
-        public bool CanGet(ItemId byId, out IItem item)
+        public bool TryPeek(ItemId byId, out IItem item)
         {
             item = null;
             
             if (_weight <= 0)
                 return false;
             
-            _cashedGetItem = _items.Find(found => found.ItemId == byId);
+            _cashedGetItem = _items.Find(found => (found.ItemId & byId) > 0);
 
             if (_cashedGetItem is null)
                 return false;
@@ -82,7 +82,7 @@ namespace Logic.Storages
         {
             result = null;
 
-            if (CanGet(byId, out _))
+            if (TryPeek(byId, out _))
             {
                 result = Get();
                 return true;

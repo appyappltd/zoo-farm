@@ -13,8 +13,8 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         
         [SerializeField] [Range(0, 100f)] private float _maxValue;
         [SerializeField] [Range(0, 1f)] private float _changeSpeed;
-        [SerializeField] private Turn _turn;
         [SerializeField] [Range(0, 100f)] private float _startValue;
+        [SerializeField] private Turn _turn;
 
         private ProgressBar _progressBar;
         private ProgressBarOperator _progressBarOperator;

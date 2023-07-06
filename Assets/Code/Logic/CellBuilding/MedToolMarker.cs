@@ -5,8 +5,8 @@ namespace Logic.CellBuilding
 {
     public class MedToolMarker : BuildPlaceMarker
     {
-        [SerializeField] private MedicineType _toolType;
+        [SerializeField] private MedicineTool _toolType;
 
-        public MedicineType ToolType => _toolType;
+        public MedicineTool ToolType => _toolType;
     }
 }

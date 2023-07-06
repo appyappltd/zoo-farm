@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4211089568150190098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.786, y: 1.054, z: 0}
+  m_LocalPosition: {x: 0.774, y: 1.045, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -330,9 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14dc3c7271688246a8f12ec4ff20de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemData>k__BackingField: {fileID: 11400000, guid: 7ad160b7fc6fb8c48b9bf476bbe220ed, type: 2}
-  <NextPlace>k__BackingField: {fileID: 7287795094581436811}
-  <Weight>k__BackingField: 3
+  _preloadAnimalData: {fileID: 11400000, guid: 7ad160b7fc6fb8c48b9bf476bbe220ed, type: 2}
 --- !u!114 &4509498779742199813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,9 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMoving: 0
   _speed: 5
-  _offset: 0.1
+  _errorOffset: 0.1
 --- !u!1 &5471990362769862164
 GameObject:
   m_ObjectHideFlags: 0

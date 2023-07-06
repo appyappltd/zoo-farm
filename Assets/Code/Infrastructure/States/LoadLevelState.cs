@@ -99,7 +99,7 @@ namespace Infrastructure.States
             var inputReader = hud.GetComponentInChildren<IInputReader>();
             _inputService.RegisterInputReader(inputReader);
 
-            Wallet wallet = hero.GetComponent<HeroWallet>().Wallet;
+            IWallet wallet = hero.GetComponent<HeroProvider>().Wallet;
             hud.GetComponentInChildren<MoneyView>().Construct(wallet.Account);
             hud.GetComponentInChildren<AddCoinsButton>().Construct(wallet);
         }

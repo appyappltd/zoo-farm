@@ -8,18 +8,26 @@ namespace Logic.Bubble
     {
         [SerializeField] private Bubble bubble;
 
-        private Inventory inventory;
+        private IInventory _inventory;
 
-        private void Start()
+        private void OnDestroy()
         {
-            inventory = GetComponent<Inventory>();
+            if (_inventory is null)
+                return;
 
-            inventory.Added += ChangeBubbleState;
-            inventory.Removed += ChangeBubbleState;
-            bubble.gameObject.SetActive(false);
+            _inventory.Added -= ChangeBubbleState;
+            _inventory.Removed -= ChangeBubbleState;
         }
 
+        public void Construct(IInventory inventory)
+        {
+            _inventory = inventory;
+            _inventory.Added += ChangeBubbleState;
+            _inventory.Removed += ChangeBubbleState;
+            bubble.gameObject.SetActive(false);
+        }
+        
         private void ChangeBubbleState(IItem _) =>
-            bubble.gameObject.SetActive(inventory.IsFull);
+            bubble.gameObject.SetActive(_inventory.IsFull);
     }
 }

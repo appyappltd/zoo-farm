@@ -9,8 +9,6 @@ namespace Logic.Movement
         [SerializeField, Min(.0f)] private float _speed = 5.0f;
         [SerializeField, Min(.0f)] private float _errorOffset = 0.1f;
 
-        private bool _isUpdateParent;
-
         private Transform _target;
         private Transform _finalParent;
 
@@ -31,7 +29,7 @@ namespace Logic.Movement
         public void Move(Transform target, Transform finishParent = null)
         {
             _target = target;
-            _isUpdateParent = finishParent == null;
+            _finalParent = finishParent;
             transform.SetParent(null);
             enabled = true;
             Started.Invoke();
@@ -48,10 +46,7 @@ namespace Logic.Movement
         private void FinishTranslation()
         {
             enabled = false;
-
-            if (_isUpdateParent)
-                transform.SetParent(_finalParent, false);
-            
+            transform.SetParent(_finalParent, true);
             Ended.Invoke();
         }
 
@@ -62,7 +57,7 @@ namespace Logic.Movement
         {
             Vector3 translateDirection = (_target.position - transform.position).normalized;
             Vector3 deltaTranslation = translateDirection * _speed * Time.deltaTime;
-            transform.Translate(deltaTranslation);
+            transform.Translate(deltaTranslation, Space.World);
         }
     }
 }

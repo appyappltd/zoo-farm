@@ -15,6 +15,5 @@ public class Reload : Idle
     protected override void OnEnter()
     {
         base.OnEnter();
-        volunteer.Reload();
     }
 }

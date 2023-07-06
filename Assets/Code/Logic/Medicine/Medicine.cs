@@ -4,6 +4,6 @@ namespace Logic.Medicine
 {
     public class Medicine : MonoBehaviour
     {
-        [SerializeField] private MedicineType Type;
+        [SerializeField] private MedicineTool Type;
     }
 }

@@ -1,6 +1,8 @@
 using Data.ItemsData;
 using Logic.Interactions;
 using Logic.Storages.Items;
+using NaughtyAttributes;
+using Tools;
 using UnityEngine;
 
 namespace Logic.Storages
@@ -10,24 +12,32 @@ namespace Logic.Storages
     {
         [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField] private TimerOperator _timerOperator;
-        [SerializeField] private ItemId _itemIdReceiving;
+        [SerializeField] private ItemId _itemIdFilter;
         [SerializeField, Min(.0f)] private float _receiveRate = .2f;
         [SerializeField] private ReceiverMode _mode;
-
+        
+        [ShowIf("IsCollector")]
+        [SerializeField] [RequireInterface(typeof(IAddItem))] private MonoBehaviour _adder;
+        
+        [HideIf("IsCollector")]
+        [SerializeField] [RequireInterface(typeof(IGetItem))] private MonoBehaviour _remover;
+        
         private IAddItem _receiver;
         private IGetItem _sender;
 
+        private bool IsCollector => _mode == ReceiverMode.Collector;
+        
         private void Awake()
         {
             _timerOperator ??= GetComponent<TimerOperator>();
 
             if (_mode == ReceiverMode.Collector)
             {
-                _receiver = GetComponent<IAddItem>();
+                _receiver = (IAddItem) _adder;
             }
             else
             {
-                _sender = GetComponent<IGetItem>();
+                _sender = (IGetItem) _remover;
             }
             
             _timerOperator.SetUp(_receiveRate, OnReceive);
@@ -47,7 +57,7 @@ namespace Logic.Storages
 
         private void OnReceive()
         {
-            if (_sender.CanGet(_itemIdReceiving, out IItem item))
+            if (_sender.TryPeek(_itemIdFilter, out IItem item))
             {
                 if (_receiver.CanAdd(item))
                 {

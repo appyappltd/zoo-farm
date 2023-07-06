@@ -32,8 +32,8 @@ namespace Logic.VolunteersStateMachine
 
         private void SetUp()
         {
-            var inventory = GetComponent<Inventory>();
-            var volunteer = GetComponent<Volunteer.Volunteer>();
+            Volunteer.Volunteer volunteer = GetComponent<Volunteer.Volunteer>();
+            IInventory inventory = volunteer.Inventory;
 
             State moveToTransmitting = new MoveTo(_animator, _mover, transmittingPlace);
             State transmitting = new Transmitting(_animator, volunteer);

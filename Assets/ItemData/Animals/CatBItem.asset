@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5250873f8232406dbe84697ced10ddf6, type: 3}
   m_Name: CatBItem
   m_EditorClassIdentifier: 
-  <Hand>k__BackingField: {fileID: 6539579365009526868, guid: 95c9c69412539f64cae170bed248e06a, type: 3}
-  <Drop>k__BackingField: {fileID: 8860459717152203080, guid: c995f546bdc58d345acdc8c8c459765f, type: 3}
-  <Creature>k__BackingField: 1
-  <AnimalType>k__BackingField: 1
+  TreatTool: 2
+  BeginStats:
+    VitalityRange: {x: 3.0252097, y: 23.193274}
+    SatietyRange: {x: 0, y: 0}
+    PeppinessRange: {x: 19.663864, y: 54.453777}
+    AgeRange: {x: 1.0588233, y: 13.008401}

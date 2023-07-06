@@ -1,7 +1,4 @@
-using System.Collections;
-using Logic.Animals;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Logic.Volunteer
 {

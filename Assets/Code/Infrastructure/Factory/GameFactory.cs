@@ -75,7 +75,7 @@ namespace Infrastructure.Factory
         public GameObject CreateMedBed(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.MedBed, at, rotation);
 
-        public GameObject CreateMedTool(Vector3 at, Quaternion rotation, MedicineType toolType) =>
+        public GameObject CreateMedTool(Vector3 at, Quaternion rotation, MedicineTool toolType) =>
             _assets.Instantiate($"{AssetPath.MedToolPath}{toolType}", at, rotation);
 
         private GameObject InstantiateRegistered(string prefabPath)

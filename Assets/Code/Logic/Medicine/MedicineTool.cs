@@ -1,9 +1,9 @@
 namespace Logic.Medicine
 {
-    public enum MedicineType
+    public enum MedicineTool : byte
     {
         Pill = 0,
-        Soap = 1,
+        Soap,
         Syringe,
         Tire
     }
