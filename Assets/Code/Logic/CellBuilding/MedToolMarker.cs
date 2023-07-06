@@ -1,12 +1,13 @@
 using Logic.Medicine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Logic.CellBuilding
 {
     public class MedToolMarker : BuildPlaceMarker
     {
-        [SerializeField] private MedicineTool _toolType;
+        [FormerlySerializedAs("_toolType")] [SerializeField] private MedicineToolId _toolIdType;
 
-        public MedicineTool ToolType => _toolType;
+        public MedicineToolId ToolIdType => _toolIdType;
     }
 }

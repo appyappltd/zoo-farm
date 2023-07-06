@@ -40,7 +40,7 @@ namespace Logic.Storages
                 _sender = (IGetItem) _remover;
             }
             
-            _timerOperator.SetUp(_receiveRate, OnReceive);
+            _timerOperator.SetUp(_receiveRate, OnBeginReceive);
         }
 
         private void OnEnable()
@@ -55,7 +55,7 @@ namespace Logic.Storages
             _playerInteraction.Canceled -= OnCanceled;
         }
 
-        private void OnReceive()
+        private void OnBeginReceive()
         {
             if (_sender.TryPeek(_itemIdFilter, out IItem item))
             {

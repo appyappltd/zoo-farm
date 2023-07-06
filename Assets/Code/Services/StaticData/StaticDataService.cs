@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Builders;
 using Logic.Animals.AnimalsBehaviour.Emotions;
+using Logic.Medicine;
 using Logic.SpawnPlaces;
 using StaticData;
 using StaticData.Windows;
@@ -15,11 +17,12 @@ namespace Services.StaticData
     {
         private const string EmotionConfigPath = "StaticData/EmotionConfigs";
         private const string WindowPath = "StaticData/WindowConfigs";
-        private const string DefaultSpawnPlacePath = "StaticData/DefaultSpawnPlaces";
+        private const string MedStandConfigPath = "StaticData/MedStandConfigs";
         private const string SpawnPlaceConfigPath = "StaticData/SpawnPlaceConfig";
         
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
+        private Dictionary<MedicineToolId, MedToolStandConfig> _medStandConfigs;
         
         private SpawnPlaceConfig _spawnPlaceConfig;
 
@@ -27,6 +30,7 @@ namespace Services.StaticData
         {
             _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
             _emotionConfigs = LoadFor<EmotionId, EmotionConfig>(EmotionConfigPath, x => x.Name);
+            _medStandConfigs = LoadFor<MedicineToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
             _windows = Resources
                 .Load<WindowStaticData>(WindowPath)
                 .Configs
@@ -43,7 +47,10 @@ namespace Services.StaticData
         {
             return _spawnPlaceConfig.SpawnPlaces[placeId].SpawnPlaceByDefault;
         }
-        
+
+        public MedToolStandConfig MedStandConfigById(MedicineToolId toolIdId) =>
+            _medStandConfigs[toolIdId];
+
         public WindowBase WindowById(WindowId windowId) =>
             GetDataFor(windowId, _windows).Template;
 

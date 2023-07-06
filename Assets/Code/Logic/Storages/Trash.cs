@@ -6,14 +6,17 @@ using UnityEngine;
 
 namespace Logic.Storages
 {
-    public class Trash : MonoBehaviour, IAddItemObserver, IGetItemObserver
+    public class Trash : MonoBehaviour, IAddItemObserver, IGetItemObserver, IInventoryProvider
     {
         [SerializeField] private Storage _storage;
         [SerializeField] private PlayerInteraction _playerInteraction;
 
         public event Action<IItem> Added = i => { };
         public event Action<IItem> Removed = i => { };
-        
+
+        public IGetItemObserver GetItemObserver => this;
+        public IAddItemObserver AddItemObserver => this;
+
         private void OnEnable()
         {
             _playerInteraction.Interacted += OnInteracted;
@@ -24,7 +27,6 @@ namespace Logic.Storages
         {
             if (provider.Inventory.TryGet(ItemId.All, out IItem item))
             {
-                Debug.Log("Trash add");
                 Added.Invoke(item);
             }
         }
@@ -40,6 +42,5 @@ namespace Logic.Storages
                 item.Destroy();
             }
         }
-
     }
 }

@@ -1,4 +1,3 @@
-using Data.ItemsData;
 using Logic.Storages;
 using Logic.Storages.Items;
 using Observables;
@@ -7,17 +6,23 @@ using UnityEngine;
 
 namespace Logic
 {
-    public class Bowl : MonoBehaviour, IProgressBarHolder
+    public class Bowl : MonoBehaviour, IProgressBarHolder, IInventoryProvider
     {
-        [SerializeField] private Inventory _inventory;
+        private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
+        
+        [SerializeField] private int _maxInventoryWeight;
 
-        private CompositeDisposable _compositeDisposable = new CompositeDisposable();
+        private IInventory _inventory;
         private ProgressBar _food;
 
         public IProgressBar ProgressBarView => _food;
 
+        public IGetItemObserver GetItemObserver => _inventory;
+        public IAddItemObserver AddItemObserver => _inventory;
+
         private void Awake()
         {
+            _inventory = new Inventory(_maxInventoryWeight);
             _food = new ProgressBar(_inventory.MaxWeight, 0);
         }
 
@@ -51,5 +56,6 @@ namespace Logic
                 item.Destroy();
             }
         }
+
     }
 }

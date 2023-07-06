@@ -1,6 +1,4 @@
-using Logic;
 using Logic.Animals;
-
 namespace Builders
 {
     public class AnimalHouseBuilder

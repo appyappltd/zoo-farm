@@ -33,7 +33,7 @@ namespace Logic.Payment
             _translator = GetComponent<RunTranslator>();
             _timerOperator = GetComponent<TimerOperator>();
             _timerOperator.SetUp(_paymentRate, OnPay);
-            _playerInteraction.Interacted += Init;
+            _playerInteraction.Entered += Init;
         }
 
         private void OnEnable()
@@ -68,7 +68,7 @@ namespace Logic.Payment
                 10, _translator, heroProvider.transform, transform);
             _wallet = heroProvider.Wallet;
             
-            _playerInteraction.Interacted -= Init;
+            _playerInteraction.Entered -= Init;
         }
 
         private void OnPay()

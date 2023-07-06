@@ -12,6 +12,7 @@ namespace Infrastructure.AssetManagement
         public const string GardenBed = "Prefabs/GardenBed";
         public const string UIRootPath = "Prefabs/UI/UIRoot";
         public const string MedBed = "Prefabs/MedBed";
-        public const string MedToolPath = "Prefabs/MedTools/MedTool";
+        public const string MedToolStandPath = "Prefabs/MedStand";
+        public const string MedToolItemPath = "Prefabs/MedTools";
     }
 }

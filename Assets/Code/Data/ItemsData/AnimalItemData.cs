@@ -3,6 +3,7 @@ using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Medicine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Data.ItemsData
 {
@@ -12,7 +13,7 @@ namespace Data.ItemsData
         [field: SerializeField] public ItemId ItemId { get; set; }
         [field: SerializeField] public int Weight { get; set; }
         public AnimalId AnimalId;
-        public MedicineTool TreatTool;
+        public MedicineToolId TreatToolId;
         public BeginStats BeginStats;
 
         private void Awake()

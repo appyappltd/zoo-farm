@@ -197,7 +197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _places:
   - {fileID: 6813431846381959724}
-  _isRemovable: 1
   _adderMono: {fileID: 3612458854345647706}
   _removerMono: {fileID: 3612458854345647706}
 --- !u!1 &8639234903260074893

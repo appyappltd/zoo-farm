@@ -5,6 +5,7 @@ using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Medicine;
 using Logic.Spawners;
+using Logic.Storages;
 using Services.Animals;
 using Services.PersistentProgress;
 using Services.Randomizer;
@@ -18,12 +19,14 @@ namespace Infrastructure.Factory
         private readonly IAssetProvider _assets;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
+        
+        private readonly AnimalBuilder _animalBuilder;
+        private readonly MedStandBuilder _medStandBuilder;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
-        private AnimalBuilder _animalBuilder;
-        
+
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, IAnimalsService animalsService)
         {
@@ -31,6 +34,7 @@ namespace Infrastructure.Factory
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
+            _medStandBuilder = new MedStandBuilder(staticDataService);
         }
 
         public void Cleanup()
@@ -73,10 +77,21 @@ namespace Infrastructure.Factory
             _assets.Instantiate(AssetPath.GardenBed, at, rotation);
 
         public GameObject CreateMedBed(Vector3 at, Quaternion rotation) =>
-            _assets.Instantiate(AssetPath.MedBed, at, rotation);
+            InstantiateRegistered(AssetPath.MedBed, at, rotation);
 
-        public GameObject CreateMedTool(Vector3 at, Quaternion rotation, MedicineTool toolType) =>
-            _assets.Instantiate($"{AssetPath.MedToolPath}{toolType}", at, rotation);
+        public GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicineToolId toolIdType)
+        {
+            GameObject medToolStandObject = _assets.Instantiate(AssetPath.MedToolStandPath, at, rotation);
+            MedToolStand medToolStand = medToolStandObject.GetComponent<MedToolStand>();
+            _medStandBuilder.Build(medToolStand, toolIdType);
+            return medToolStandObject;
+        }
+
+        public GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicineToolId toolIdType)
+        {
+            
+            return _assets.Instantiate($"{AssetPath.MedToolItemPath}/{toolIdType}", at, rotation);
+        }
 
         private GameObject InstantiateRegistered(string prefabPath)
         {

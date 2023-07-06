@@ -23,6 +23,7 @@ namespace Infrastructure.Factory
         GameObject CreateCollectibleCoin(Transform container);
         GameObject CreateGardenBad(Vector3 at, Quaternion rotation);
         GameObject CreateMedBed(Vector3 at, Quaternion rotation);
-        GameObject CreateMedTool(Vector3 at, Quaternion rotation, MedicineTool toolType);
+        GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicineToolId toolIdType);
+        GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicineToolId toolIdType);
     }
 }

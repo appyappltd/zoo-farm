@@ -1,7 +1,6 @@
 using System.Collections;
 using Logic.Interactions;
 using NaughtyAttributes;
-using Observer;
 using UnityEngine;
 
 namespace Logic

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5724121691355932840}
   - component: {fileID: 2559468788857932141}
-  - component: {fileID: -4782517099304456306}
   - component: {fileID: 1467411174788870988}
+  - component: {fileID: -5996906202040440878}
   m_Layer: 7
-  m_Name: Hand Soap
+  m_Name: Soap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,22 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14dc3c7271688246a8f12ec4ff20de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemData>k__BackingField: {fileID: 11400000, guid: 333a4da56d6dca24fafe6bd6a5db5e89, type: 2}
-  <NextPlace>k__BackingField: {fileID: 3973993928804200048}
-  <Weight>k__BackingField: 3
---- !u!114 &-4782517099304456306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475779372720190815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1dd5f538c9fef4fb718cd16ec67f22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 1
 --- !u!114 &1467411174788870988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,9 +60,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee77e8586dfcfa74eba3010bd9e0e005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMoving: 0
   _speed: 5
-  _offset: 0.1
+  _errorOffset: 0.1
+--- !u!114 &-5996906202040440878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475779372720190815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947fbcd09e240269e2dde57bd0ceb0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handItem: {fileID: 2559468788857932141}
+  _medToolItemData: {fileID: 11400000, guid: 8f97357637530384ab05e1bd973d8a87, type: 2}
 --- !u!1 &538634257851519345
 GameObject:
   m_ObjectHideFlags: 0

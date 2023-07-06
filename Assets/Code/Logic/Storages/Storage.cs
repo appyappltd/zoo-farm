@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Logic.Storages.Items;
-using NaughtyAttributes;
 using Tools;
 using UnityEngine;
 
@@ -12,15 +11,9 @@ namespace Logic.Storages
         private readonly List<IItem> _items = new List<IItem>(10);
         
         [SerializeField] private Transform[] _places;
-
-#if UNITY_EDITOR
-        [SerializeField] private bool _isRemovable;
-#endif
-
-        [SerializeField] [RequireInterface(typeof(IAddItemObserver))] private MonoBehaviour _adderMono;
         
-        [ShowIf("_isRemovable")]
-        [SerializeField] [RequireInterface(typeof(IGetItemObserver))] private MonoBehaviour _removerMono;
+        [SerializeField] [RequireInterface(typeof(IAddItemProvider))] private MonoBehaviour _adderMono;
+        [SerializeField] [RequireInterface(typeof(IGetItemProvider))] private MonoBehaviour _removerMono;
 
         private IAddItemObserver _adder;
         private IGetItemObserver _remover;
@@ -56,7 +49,7 @@ namespace Logic.Storages
 
         private void OnEnable()
         {
-            Construct(_adderMono as IAddItemObserver, _removerMono as IGetItemObserver);
+            Construct((_adderMono as IAddItemProvider)?.AddItemObserver, (_removerMono as IGetItemProvider)?.GetItemObserver);
         }
 
         public void Construct(IAddItemObserver adder, IGetItemObserver remover)

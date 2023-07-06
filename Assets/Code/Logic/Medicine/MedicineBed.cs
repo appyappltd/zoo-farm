@@ -126,14 +126,14 @@ namespace Logic.Medicine
             return ItemIsMedTool(item)
                    && HasAnimal()
                    && IsSuitableTool(item)
-                   && HasMedTool();
+                   && HasMedTool() == false;
         }
 
         private bool HasMedTool() =>
-            _medToolItem is null;
+            _medToolItem is not null;
 
         private bool IsSuitableTool(IItem item) =>
-            _animalItem.TreatTool == (item as MedToolItemData).MedicineTool;
+            _animalItem.TreatToolId == ((MedToolItemData) item.ItemData).MedicineToolId;
 
         private bool HasAnimal() =>
             _animalItem is not null;

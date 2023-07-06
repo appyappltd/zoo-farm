@@ -49,9 +49,6 @@ namespace Infrastructure.States
                     LevelData = levelData
                 };
 
-                Debug.Log(globalData);
-                Debug.Log(levelData.PlayerLocationData);
-                
                 return;
             }
 

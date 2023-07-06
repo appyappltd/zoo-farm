@@ -40,13 +40,13 @@ namespace Logic.Interactions
         protected override void OnTargetEntered(HeroProvider heroProvider)
         {
             _cashedHeroProvider = heroProvider;
-            _timerOperator.Play();
+            _timerOperator.Restart();
             Entered.Invoke(heroProvider);
         }
 
         protected override void OnTargetExited(HeroProvider heroProvider)
         {
-            _timerOperator.Reset();
+            _timerOperator.Pause();
             Canceled.Invoke();
         }
     }
