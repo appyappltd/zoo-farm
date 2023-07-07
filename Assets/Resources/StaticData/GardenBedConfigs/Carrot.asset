@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f757b63667ca4d5e8906ed22dedc35fc, type: 3}
+  m_Name: Carrot
+  m_EditorClassIdentifier: 
+  PlantId: 0
+  HandItemData: {fileID: 11400000, guid: 49385c961d57c2e4e88ac3fa82700407, type: 2}
+  _growStages:
+  - _mesh: {fileID: 4850891567153937327, guid: 0ebe1766283375040904ccb297466d51, type: 3}
+    _growTime: 2
+  - _mesh: {fileID: -2095541893529966001, guid: 8cf81000fa268c047a0845bf8b00ee87, type: 3}
+    _growTime: 4

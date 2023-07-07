@@ -1,4 +1,3 @@
-using System;
 using Logic.Storages.Items;
 
 namespace Logic.Storages
@@ -8,10 +7,5 @@ namespace Logic.Storages
         public void Add(IItem item);
         public bool CanAdd(IItem item);
         bool TryAdd(IItem item);
-    }
-
-    public interface IAddItemObserver
-    {
-        public event Action<IItem> Added;
     }
 }

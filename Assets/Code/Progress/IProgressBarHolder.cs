@@ -1,6 +1,6 @@
 namespace Progress
 {
-    public interface IProgressBarHolder
+    public interface IProgressBarProvider
     {
         IProgressBar ProgressBarView { get; }
     }

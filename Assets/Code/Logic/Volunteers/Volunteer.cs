@@ -2,7 +2,7 @@ using Logic.Storages;
 using Logic.VolunteersStateMachine;
 using UnityEngine;
 
-namespace Logic.Volunteer
+namespace Logic.Volunteers
 {
     public class Volunteer : MonoBehaviour
     {

@@ -14,7 +14,7 @@ using UnityEngine;
 namespace Logic.Medicine
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicineBed : MonoCache, IAddItem, IGetItemObserver, IAddItemProvider, IGetItemProvider
+    public class MedicineBed : MonoCache, IAddItem, IGetItemObserver, IAddItemProvider, IGetItemObserverProvider
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
@@ -37,7 +37,7 @@ namespace Logic.Medicine
         public event Action<IItem> Removed = i => { };
         public event Action Healed = () => { };
 
-        public IAddItemObserver AddItemObserver => this;
+        public IAddItem ItemAdder => this;
         public IGetItemObserver GetItemObserver => this;
 
         private void Awake()

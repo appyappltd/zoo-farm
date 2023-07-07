@@ -1,5 +1,6 @@
 ﻿using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Medicine;
+using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
 using StaticData;
 using Ui.Services;
@@ -15,5 +16,6 @@ namespace Services.StaticData
         WindowBase WindowById(WindowId windowId);
         Transform SpawnPlaceById(SpawnPlaceId placeId);
         MedToolStandConfig MedStandConfigById(MedicineToolId toolIdId);
+        GardenBedConfig GardenBedConfigById(PlantId plantId);
     }
 }

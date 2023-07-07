@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Logic
 {
-    public class Trash : MonoBehaviour, IAddItemObserver, IGetItemObserver, IAddItemProvider, IGetItemProvider
+    public class Trash : MonoBehaviour, IAddItemObserver, IGetItemObserver, IAddItemObserverProvider, IGetItemObserverProvider
     {
         [SerializeField] private Storage _storage;
         [SerializeField] private PlayerInteraction _playerInteraction;

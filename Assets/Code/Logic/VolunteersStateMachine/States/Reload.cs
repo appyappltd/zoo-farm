@@ -1,8 +1,8 @@
 using Logic.AnimatorStateMachine;
-using Logic.Volunteer;
 using StateMachineBase.States;
 using System.Collections;
 using System.Collections.Generic;
+using Logic.Volunteers;
 using UnityEngine;
 
 public class Reload : Idle

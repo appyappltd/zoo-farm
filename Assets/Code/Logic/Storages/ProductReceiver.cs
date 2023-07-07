@@ -16,11 +16,13 @@ namespace Logic.Storages
         [SerializeField] private ItemId _itemIdFilter;
         [SerializeField, Min(.0f)] private float _receiveRate = .2f;
         [SerializeField] private ReceiverMode _mode;
-        
-        [ShowIf("IsCollector")]
+
+        [SerializeField] private bool _isRemoteInit;
+
+        [ShowIf("IsCollector")] [DisableIf("_isRemoteInit")]
         [SerializeField] [RequireInterface(typeof(IAddItem))] private MonoBehaviour _adder;
         
-        [HideIf("IsCollector")]
+        [HideIf("IsCollector")] [DisableIf("_isRemoteInit")]
         [SerializeField] [RequireInterface(typeof(IGetItem))] private MonoBehaviour _remover;
         
         private IAddItem _receiver;
@@ -30,7 +32,11 @@ namespace Logic.Storages
         
         private void Awake()
         {
+            _timerOperator.SetUp(_receiveRate, OnBeginReceive);
             _timerOperator ??= GetComponent<TimerOperator>();
+
+            if (_isRemoteInit)
+                return;
 
             if (_mode == ReceiverMode.Collector)
             {
@@ -40,22 +46,45 @@ namespace Logic.Storages
             {
                 _sender = (IGetItem) _remover;
             }
-            
-            _timerOperator.SetUp(_receiveRate, OnBeginReceive);
         }
 
         private void OnEnable()
         {
+            if(_isRemoteInit == false)
+                Subscribe();
+        }
+
+        private void OnDisable()
+        {
+            Unsubscribe();
+        }
+
+        private void Subscribe()
+        {   
             _playerInteraction.Interacted += OnInteracted;
             _playerInteraction.Canceled += OnCanceled;
         }
 
-        private void OnDisable()
+        private void Unsubscribe()
         {
             _playerInteraction.Interacted -= OnInteracted;
             _playerInteraction.Canceled -= OnCanceled;
         }
 
+        public void Construct(IInventory inventory)
+        {
+            if (_mode == ReceiverMode.Collector)
+            {
+                _receiver = inventory;
+            }
+            else
+            {
+                _sender = inventory;
+            }
+            
+            Subscribe();
+        }
+        
         private void OnBeginReceive()
         {
             if (_sender.TryPeek(_itemIdFilter, out IItem item))

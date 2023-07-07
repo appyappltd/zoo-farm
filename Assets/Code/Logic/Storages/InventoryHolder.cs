@@ -7,10 +7,11 @@ namespace Logic.Storages
         [SerializeField] private int _maxWeight;
 
         private IInventory _inventory;
-
-        public IGetItemObserver GetItemObserver => _inventory;
-        public IAddItemObserver AddItemObserver => _inventory;
+        
         public IInventory Inventory => _inventory;
+
+        public IGetItem ItemGetter => _inventory;
+        public IAddItem ItemAdder => _inventory;
 
         public void Construct()
         {

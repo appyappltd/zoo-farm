@@ -1,13 +1,13 @@
 using System;
 using Data.ItemsData;
 using Infrastructure.Factory;
-using Logic.Medicine;
+using Logic.Storages;
 using Logic.Storages.Items;
 using Services;
 using StaticData;
 using UnityEngine;
 
-namespace Logic.Storages
+namespace Logic.Medicine
 {
     [RequireComponent(typeof(TimerOperator))]
     public class MedToolStand : MonoBehaviour, IGetItem, IGetItemProvider
@@ -23,8 +23,8 @@ namespace Logic.Storages
 
         public event Action<IItem> Removed = i => { };
 
-        public IGetItemObserver GetItemObserver => this;
-        
+        public IGetItem ItemGetter => this;
+
         private void Awake()
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();

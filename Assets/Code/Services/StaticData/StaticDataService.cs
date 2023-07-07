@@ -4,6 +4,7 @@ using System.Linq;
 using Builders;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Medicine;
+using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
 using StaticData;
 using StaticData.Windows;
@@ -19,18 +20,22 @@ namespace Services.StaticData
         private const string WindowPath = "StaticData/WindowConfigs";
         private const string MedStandConfigPath = "StaticData/MedStandConfigs";
         private const string SpawnPlaceConfigPath = "StaticData/SpawnPlaceConfig";
+        private const string GardenBedConfigPath = "StaticData/GardenBedConfigs";
         
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
         private Dictionary<MedicineToolId, MedToolStandConfig> _medStandConfigs;
+        private Dictionary<PlantId, GardenBedConfig> _gardenBedConfigs;
         
         private SpawnPlaceConfig _spawnPlaceConfig;
 
         public void Load()
         {
-            _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
             _emotionConfigs = LoadFor<EmotionId, EmotionConfig>(EmotionConfigPath, x => x.Name);
             _medStandConfigs = LoadFor<MedicineToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
+            _gardenBedConfigs = LoadFor<PlantId, GardenBedConfig>(GardenBedConfigPath, x => x.PlantId);
+            
+            _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
             _windows = Resources
                 .Load<WindowStaticData>(WindowPath)
                 .Configs
@@ -43,13 +48,14 @@ namespace Services.StaticData
             return new Emotion(emotionId, emotionConfig.Sprite);
         }
 
-        public Transform SpawnPlaceById(SpawnPlaceId placeId)
-        {
-            return _spawnPlaceConfig.SpawnPlaces[placeId].SpawnPlaceByDefault;
-        }
+        public Transform SpawnPlaceById(SpawnPlaceId placeId) =>
+            _spawnPlaceConfig.SpawnPlaces[placeId].SpawnPlaceByDefault;
 
         public MedToolStandConfig MedStandConfigById(MedicineToolId toolIdId) =>
-            _medStandConfigs[toolIdId];
+            GetDataFor(toolIdId, _medStandConfigs);
+
+        public GardenBedConfig GardenBedConfigById(PlantId plantId) =>
+            GetDataFor(plantId, _gardenBedConfigs);
 
         public WindowBase WindowById(WindowId windowId) =>
             GetDataFor(windowId, _windows).Template;

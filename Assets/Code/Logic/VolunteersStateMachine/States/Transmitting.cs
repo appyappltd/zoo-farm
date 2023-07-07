@@ -5,9 +5,9 @@ namespace Logic.VolunteersStateMachine.States
 {
     public class Transmitting : Idle
     {
-        private Volunteer.Volunteer volunteer;
+        private Volunteers.Volunteer volunteer;
 
-        public Transmitting(IPrimeAnimator animator, Volunteer.Volunteer volunteer) : base(animator)
+        public Transmitting(IPrimeAnimator animator, Volunteers.Volunteer volunteer) : base(animator)
         {
             this.volunteer = volunteer;
         }

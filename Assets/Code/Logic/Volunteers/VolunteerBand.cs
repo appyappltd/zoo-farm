@@ -11,9 +11,9 @@ using NaughtyAttributes;
 using Services;
 using UnityEngine;
 
-namespace Logic.Volunteer
+namespace Logic.Volunteers
 {
-    public class VolunteerBand : MonoBehaviour, IGetItem
+    public class VolunteerBand : MonoBehaviour, IGetItem, IGetItemProvider
     {
         [SerializeField, Min(.0f)] private Vector3 _offset = new(1f, .0f, .0f);
         [SerializeField] private AnimalSpawner _animalSpawner;
@@ -24,23 +24,25 @@ namespace Logic.Volunteer
         [SerializeField] private Transform _outPlace;
 
         [SerializeField] private List<Transform> _queue = new();
-        [SerializeField] private List<Volunteer> _volunteers = new();
+        [SerializeField] private List<Volunteers.Volunteer> _volunteers = new();
 
         [SerializeField] private List<Transform> _emptyQueue = new();
-        [SerializeField] private List<Volunteer> _emptyVolunteers = new();
-        
+        [SerializeField] private List<Volunteers.Volunteer> _emptyVolunteers = new();
+
         private IGameFactory _gameFactory;
 
         public event Action<IItem> Removed;
-        
+
+        public IGetItem ItemGetter => this;
+
         private void Awake()
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
         }
-        
+
         public IItem Get()
         {
-            Volunteer volunteer = _volunteers.First();
+            Volunteers.Volunteer volunteer = _volunteers.First();
             _volunteers.Remove(volunteer);
             _emptyVolunteers.Add(volunteer);
 
@@ -66,7 +68,7 @@ namespace Logic.Volunteer
             return false;
         }
 
-        public void AddNewVolunteer(Volunteer volunteer)
+        public void AddNewVolunteer(Volunteers.Volunteer volunteer)
         {
             var pos = _transmittingPlace.position + _offset * _queue.Count;
             var t = new GameObject("Queue" + _queue.Count);
@@ -79,7 +81,7 @@ namespace Logic.Volunteer
             machine.Play();
         }
 
-        public void AddVolunteer(Volunteer volunteer)
+        public void AddVolunteer(Volunteers.Volunteer volunteer)
         {
             var pos = _transmittingPlace.position + _offset * _queue.Count;
             var t = _emptyQueue.First();
@@ -94,7 +96,7 @@ namespace Logic.Volunteer
         {
             for (int i = 0; i < _emptyVolunteers.Count; i++)
             {
-                Volunteer volunteer = _emptyVolunteers[i];
+                Volunteers.Volunteer volunteer = _emptyVolunteers[i];
                 
                 if (volunteer.IsFree)
                 {
@@ -105,10 +107,10 @@ namespace Logic.Volunteer
             }
             
             GameObject newVolunteer = _gameFactory.CreateVolunteer(_spawnPlace.position, _container);
-            AddNewVolunteer(newVolunteer.GetComponent<Volunteer>());
+            AddNewVolunteer(newVolunteer.GetComponent<Volunteers.Volunteer>());
         }
 
-        private void SetVolunteer(Volunteer volunteer, Transform t)
+        private void SetVolunteer(Volunteers.Volunteer volunteer, Transform t)
         {
             HandItem animal = _animalSpawner.InstantiateAnimal(volunteer.transform.position);
             volunteer.Inventory.Add(animal);

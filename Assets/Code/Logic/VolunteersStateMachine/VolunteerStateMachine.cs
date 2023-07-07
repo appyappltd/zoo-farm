@@ -32,7 +32,7 @@ namespace Logic.VolunteersStateMachine
 
         private void SetUp()
         {
-            Volunteer.Volunteer volunteer = GetComponent<Volunteer.Volunteer>();
+            Volunteers.Volunteer volunteer = GetComponent<Volunteers.Volunteer>();
             IInventory inventory = volunteer.Inventory;
 
             State moveToTransmitting = new MoveTo(_animator, _mover, transmittingPlace);

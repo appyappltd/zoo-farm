@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Logic.Volunteer
+namespace Logic.Volunteers
 {
     [RequireComponent(typeof(TimerOperator))]
     public class TestVolunteerCreator : MonoBehaviour

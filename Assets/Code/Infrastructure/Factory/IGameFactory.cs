@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Data.ItemsData;
 using Logic.Animals;
 using Logic.Medicine;
+using Logic.Plants.PlantSettings;
 using Logic.Spawners;
-using Logic.Volunteer;
 using Services;
 using Services.PersistentProgress;
 using UnityEngine;
@@ -22,10 +23,11 @@ namespace Infrastructure.Factory
         GameObject CreateBuildCell(Vector3 at, Quaternion rotation);
         GameObject CreateVisual(VisualType visual, Quaternion quaternion, Transform container);
         GameObject CreateCollectibleCoin(Transform container);
-        GameObject CreateGardenBad(Vector3 at, Quaternion rotation);
+        GameObject CreateGardenBad(Vector3 at, Quaternion rotation, PlantId plantId);
         GameObject CreateMedBed(Vector3 at, Quaternion rotation);
         GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicineToolId toolIdType);
         GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicineToolId toolIdType);
         GameObject CreateVolunteer(Vector3 at, Transform parent);
+        GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId);
     }
 }

@@ -11,28 +11,28 @@ namespace Ui
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
         [Header("Component References")]
-        [SerializeField] [RequireInterface(typeof(IProgressBarHolder))] private MonoBehaviour _barHolder;
+        [SerializeField] [RequireInterface(typeof(IProgressBarProvider))] private MonoBehaviour _barHolder;
         [SerializeField] private TextSetter _needText;
 
-        private IProgressBarHolder BarHolder => (IProgressBarHolder) _barHolder;
+        private IProgressBarProvider BarProvider => (IProgressBarProvider) _barHolder;
 
         private void Start()
         {
             Transform selfTransform = transform;
             selfTransform.forward = Camera.main.transform.forward;
 
-            Construct(BarHolder.ProgressBarView.Current, BarHolder.ProgressBarView.Max);
+            Construct(BarProvider.ProgressBarView.Current, BarProvider.ProgressBarView.Max);
 
-            BarHolder.ProgressBarView.Empty += ActivateView;
-            BarHolder.ProgressBarView.Full += DeactivateView;
+            BarProvider.ProgressBarView.Empty += ActivateView;
+            BarProvider.ProgressBarView.Full += DeactivateView;
         }
 
         private void OnDestroy()
         {
             _compositeDisposable.Dispose();
             
-            BarHolder.ProgressBarView.Empty -= ActivateView;
-            BarHolder.ProgressBarView.Full -= DeactivateView;
+            BarProvider.ProgressBarView.Empty -= ActivateView;
+            BarProvider.ProgressBarView.Full -= DeactivateView;
         }
 
         public void Construct(IObservable<float> variable, float max)

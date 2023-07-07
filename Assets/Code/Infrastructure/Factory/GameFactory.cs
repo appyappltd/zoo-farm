@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using Builders;
+using Data.ItemsData;
 using Infrastructure.AssetManagement;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Medicine;
+using Logic.Plants.PlantSettings;
 using Logic.Spawners;
-using Logic.Storages;
 using Services.Animals;
 using Services.PersistentProgress;
 using Services.Randomizer;
@@ -22,6 +23,7 @@ namespace Infrastructure.Factory
         
         private readonly AnimalBuilder _animalBuilder;
         private readonly MedStandBuilder _medStandBuilder;
+        private readonly GardenBadBuilder _gardenBedBuilder;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -35,6 +37,7 @@ namespace Infrastructure.Factory
             _persistentProgressService = persistentProgressService;
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
             _medStandBuilder = new MedStandBuilder(staticDataService);
+            _gardenBedBuilder = new GardenBadBuilder(staticDataService);
         }
 
         public void Cleanup()
@@ -73,8 +76,12 @@ namespace Infrastructure.Factory
         public GameObject CreateCollectibleCoin(Transform container) =>
             _assets.Instantiate(AssetPath.CollectableCoinPath, container);
 
-        public GameObject CreateGardenBad(Vector3 at, Quaternion rotation) =>
-            _assets.Instantiate(AssetPath.GardenBed, at, rotation);
+        public GameObject CreateGardenBad(Vector3 at, Quaternion rotation, PlantId plantId)
+        {
+            GameObject gardenBedObject = _assets.Instantiate(AssetPath.GardenBed, at, rotation);
+            _gardenBedBuilder.Build(gardenBedObject, plantId);
+            return gardenBedObject;
+        }
 
         public GameObject CreateMedBed(Vector3 at, Quaternion rotation) =>
             InstantiateRegistered(AssetPath.MedBed, at, rotation);
@@ -89,7 +96,6 @@ namespace Infrastructure.Factory
 
         public GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicineToolId toolIdType)
         {
-            
             return _assets.Instantiate($"{AssetPath.MedToolItemPath}/{toolIdType}", at, rotation);
         }
 
@@ -98,6 +104,11 @@ namespace Infrastructure.Factory
             GameObject volunteerObject = _assets.Instantiate(AssetPath.VolunteerPath, at);
             volunteerObject.transform.SetParent(parent);
             return volunteerObject;
+        }
+
+        public GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId)
+        {
+            return _assets.Instantiate($"{AssetPath.HandItemPath}/{itemId}", at, rotation);
         }
 
         private GameObject InstantiateRegistered(string prefabPath)

@@ -17,9 +17,9 @@ namespace Logic.Storages
         [SerializeField] private bool _isRemoteInit;
         
         [HideIf("_isRemoteInit")]
-        [SerializeField] [RequireInterface(typeof(IAddItemProvider))] private MonoBehaviour _adderMono;
+        [SerializeField] [RequireInterface(typeof(IAddItemObserver))] private MonoBehaviour _adderMono;
         [HideIf("_isRemoteInit")]
-        [SerializeField] [RequireInterface(typeof(IGetItemProvider))] private MonoBehaviour _removerMono;
+        [SerializeField] [RequireInterface(typeof(IGetItemObserver))] private MonoBehaviour _removerMono;
 
         private IAddItemObserver _adder;
         private IGetItemObserver _remover;
@@ -64,7 +64,7 @@ namespace Logic.Storages
                 return;
             }
             
-            Construct((_adderMono as IAddItemProvider)?.AddItemObserver, (_removerMono as IGetItemProvider)?.GetItemObserver);
+            Construct(_adderMono as IAddItemObserver, _removerMono as IGetItemObserver);
         }
 
         public void Construct(IAddItemObserver adder, IGetItemObserver remover)

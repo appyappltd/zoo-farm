@@ -1,7 +1,7 @@
 using Logic.Movement;
 using UnityEngine;
 
-namespace Logic.Volunteer
+namespace Logic.Volunteers
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(AnimationItemMover))]
