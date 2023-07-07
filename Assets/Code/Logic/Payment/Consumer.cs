@@ -1,6 +1,7 @@
 using System;
 using Infrastructure.Factory;
 using Logic.Interactions;
+using Logic.Player;
 using Logic.Spawners;
 using Logic.Translators;
 using Observables;
@@ -59,14 +60,14 @@ namespace Logic.Payment
             _leftCoinsToPay.Value = buildCost;
         }
 
-        private void Init(HeroProvider heroProvider)
+        private void Init(Hero hero)
         {
             _spawner = new VisualTranslatorsSpawner(() =>
                     AllServices.Container.Single<IGameFactory>().CreateVisual(VisualType.Money,
                         Quaternion.identity,
                         new GameObject("Coins").transform),
-                10, _translator, heroProvider.transform, transform);
-            _wallet = heroProvider.Wallet;
+                10, _translator, hero.transform, transform);
+            _wallet = hero.Wallet;
             
             _playerInteraction.Entered -= Init;
         }
@@ -88,7 +89,7 @@ namespace Logic.Payment
             _timerOperator.Restart();
         }
 
-        private void BeginTransaction(HeroProvider heroProvider)
+        private void BeginTransaction(Hero hero)
         {
             if (_leftCoinsToPay.Value <= 0)
                 return;

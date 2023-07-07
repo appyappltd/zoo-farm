@@ -1,19 +1,25 @@
 using Logic.Storages;
+using Logic.VolunteersStateMachine;
 using UnityEngine;
 
 namespace Logic.Volunteer
 {
     public class Volunteer : MonoBehaviour
     {
-        private IInventory _inventory;
-        public IInventory Inventory => _inventory;
+        [SerializeField] private InventoryHolder _inventoryHolder;
+        [SerializeField] private VolunteerStateMachine _stateMachine;
+        [SerializeField] private HandsAnimator _handsAnimator;
+        [SerializeField] private Storage _storage;
 
-        public bool IsFree => _inventory.Weight <= 0;
-        public bool WithAnimal => _inventory.Weight > 0;
-        
-        private void Awake()
+        public IInventory Inventory => _inventoryHolder.Inventory;
+        public VolunteerStateMachine StateMachine => _stateMachine;
+        public bool IsFree => _inventoryHolder.Inventory.Weight <= 0;
+
+        public void Awake()
         {
-            _inventory = new Inventory(3);
+            _inventoryHolder.Construct();
+            _handsAnimator.Construct(_inventoryHolder.Inventory);
+            _storage.Construct(_inventoryHolder.Inventory);
         }
     }
 }

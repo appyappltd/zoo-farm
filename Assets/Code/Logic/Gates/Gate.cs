@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Logic.Interactions;
+using Logic.Player;
 using Logic.Translators;
 using NaughtyAttributes;
 using UnityEngine;
@@ -39,7 +40,7 @@ namespace Logic.Gates
             _playerInteraction.Canceled -= OnCanceled;
         }
 
-        private void OnInteracted(HeroProvider _) =>
+        private void OnInteracted(Hero _) =>
             Open();
 
         private void OnCanceled() =>

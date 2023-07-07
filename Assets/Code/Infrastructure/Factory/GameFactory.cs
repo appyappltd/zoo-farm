@@ -93,6 +93,13 @@ namespace Infrastructure.Factory
             return _assets.Instantiate($"{AssetPath.MedToolItemPath}/{toolIdType}", at, rotation);
         }
 
+        public GameObject CreateVolunteer(Vector3 at, Transform parent)
+        {
+            GameObject volunteerObject = _assets.Instantiate(AssetPath.VolunteerPath, at);
+            volunteerObject.transform.SetParent(parent);
+            return volunteerObject;
+        }
+
         private GameObject InstantiateRegistered(string prefabPath)
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath);

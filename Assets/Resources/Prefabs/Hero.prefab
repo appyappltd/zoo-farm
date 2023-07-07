@@ -6774,7 +6774,8 @@ GameObject:
   - component: {fileID: 3994947432083371087}
   - component: {fileID: 2453116752958184982}
   - component: {fileID: -298529338356943641}
-  - component: {fileID: 2802975607479370888}
+  - component: {fileID: 3209468561728551432}
+  - component: {fileID: 4233403076897180460}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Untagged
@@ -6877,7 +6878,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4438565683717128180}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 688b5c76923200049a031ee171dd9d7b, type: 3}
   m_Name: 
@@ -6888,9 +6889,10 @@ MonoBehaviour:
   - {fileID: 3957261564549509820}
   - {fileID: 8137868852453055081}
   - {fileID: 5936875780444958822}
-  _isRemovable: 1
-  _adderMono: {fileID: 0}
-  _removerMono: {fileID: 0}
+  _isSortable: 1
+  _isRemoteInit: 1
+  _adderMono: {fileID: 3209468561728551432}
+  _removerMono: {fileID: 3209468561728551432}
 --- !u!114 &7803516307033350702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6940,8 +6942,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614a6a3f31634c59b9242971846a7b82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxInventoryWeight: 5
---- !u!114 &2802975607479370888
+  _inventoryHolder: {fileID: 3209468561728551432}
+  _walletHolder: {fileID: 4233403076897180460}
+  _maxIndicator: {fileID: 2453116752958184982}
+  _handsAnimator: {fileID: 7803516307033350702}
+  _storage: {fileID: 4534267659011596571}
+  _playerMovement: {fileID: 4943368622742371110}
+--- !u!114 &3209468561728551432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6950,13 +6957,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 4438565683717128180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a443b6d7a05b4bc0b83b4ad17a5f4ff5, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ac4445639b4649a5998ee9a6566e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _provider: {fileID: -298529338356943641}
-  _storage: {fileID: 4534267659011596571}
-  _handsAnimator: {fileID: 7803516307033350702}
-  _maxIndicator: {fileID: 2453116752958184982}
+  _maxWeight: 5
+--- !u!114 &4233403076897180460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438565683717128180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ad718ba54c4de99c233e49581d5f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4552098527280804861
 GameObject:
   m_ObjectHideFlags: 0

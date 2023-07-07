@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Logic
 {
-    public class Bowl : MonoBehaviour, IProgressBarHolder, IInventoryProvider
+    public class Bowl : MonoBehaviour, IProgressBarHolder, IGetItemProvider, IAddItemProvider
     {
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
         

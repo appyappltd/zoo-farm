@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Logic.Storages.Items;
+using NaughtyAttributes;
 using Tools;
 using UnityEngine;
 
@@ -11,8 +12,13 @@ namespace Logic.Storages
         private readonly List<IItem> _items = new List<IItem>(10);
         
         [SerializeField] private Transform[] _places;
+
+        [SerializeField] private bool _isSortable;
+        [SerializeField] private bool _isRemoteInit;
         
+        [HideIf("_isRemoteInit")]
         [SerializeField] [RequireInterface(typeof(IAddItemProvider))] private MonoBehaviour _adderMono;
+        [HideIf("_isRemoteInit")]
         [SerializeField] [RequireInterface(typeof(IGetItemProvider))] private MonoBehaviour _removerMono;
 
         private IAddItemObserver _adder;
@@ -34,6 +40,9 @@ namespace Logic.Storages
             set => _items.Add(value);
         }
 
+        private void Awake() =>
+            enabled = !_isRemoteInit;
+
         private void OnDestroy()
         {
             if (Adder is not null)
@@ -49,6 +58,12 @@ namespace Logic.Storages
 
         private void OnEnable()
         {
+            if (_isRemoteInit)
+            {
+                enabled = false;
+                return;
+            }
+            
             Construct((_adderMono as IAddItemProvider)?.AddItemObserver, (_removerMono as IGetItemProvider)?.GetItemObserver);
         }
 
@@ -56,6 +71,14 @@ namespace Logic.Storages
         {
             _adder = adder;
             _remover = remover;
+
+            Subscribe();
+        }
+        
+        public void Construct(IInventory inventory)
+        {
+            _adder = inventory;
+            _remover = inventory;
 
             Subscribe();
         }
@@ -77,12 +100,14 @@ namespace Logic.Storages
         {
             item.Mover.Move(TopPlace, TopPlace);
             TopItem = item;
+            Debug.Log("plase" + " " + gameObject.name);
             _topIndex++;
             Replenished.Invoke(item);
         }
 
         private void RevertItem(IItem item)
         {
+            Debug.Log("revert" + " " + gameObject.name);
             int revertItemIndex = _items.IndexOf(item);
             Sort(revertItemIndex);
             _topIndex--;
@@ -90,6 +115,9 @@ namespace Logic.Storages
 
         private void Sort(int fromIndex)
         {
+            if (_isSortable == false)
+                return;
+
             for (int i = fromIndex; i < _items.Count - 1; i++)
             {
                 _items[i] = _items[i + 1];

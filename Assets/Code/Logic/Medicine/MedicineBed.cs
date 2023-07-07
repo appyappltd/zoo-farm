@@ -3,6 +3,7 @@ using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Interactions;
+using Logic.Player;
 using Logic.Storages;
 using Logic.Storages.Items;
 using NTC.Global.Cache;
@@ -13,15 +14,18 @@ using UnityEngine;
 namespace Logic.Medicine
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicineBed : MonoCache, IAddItem
+    public class MedicineBed : MonoCache, IAddItem, IGetItemObserver, IAddItemProvider, IGetItemProvider
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] [Range(1f, 5f)] private float _healingTime = 2.5f;
 
-        private AnimalItemData _animalItem;
-        private MedToolItemData _medToolItem;
+        private AnimalItemData _animalData;
+        private MedToolItemData _medToolData;
+
+        private IItem _animalItem;
+        private IItem _medToolItem;
 
         private IGameFactory _gameFactory;
         private IAnimalHouseService _houseService;
@@ -29,8 +33,13 @@ namespace Logic.Medicine
         private bool _isHealing;
         
         public event Action<IItem> Added = i => { };
-        public event Action Healed = () => { };
         
+        public event Action<IItem> Removed = i => { };
+        public event Action Healed = () => { };
+
+        public IAddItemObserver AddItemObserver => this;
+        public IGetItemObserver GetItemObserver => this;
+
         private void Awake()
         {
             _timerOperator ??= GetComponent<TimerOperator>();
@@ -54,16 +63,21 @@ namespace Logic.Medicine
 
         public void Add(IItem item)
         {
+            Added.Invoke(item);
+            
             if (ItemIsAnimal(item))
-                _animalItem = item.ItemData as AnimalItemData;
+            {
+                _animalData = item.ItemData as AnimalItemData;
+                _animalItem = item;
+            }
+                
 
             if (ItemIsMedTool(item))
             {
-                _medToolItem = item.ItemData as MedToolItemData;
+                _medToolData = item.ItemData as MedToolItemData;
+                _medToolItem = item;
                 BeginHeal();
             }
-            
-            Added.Invoke(item);
         }
 
         public bool CanAdd(IItem item) =>
@@ -84,11 +98,11 @@ namespace Logic.Medicine
             Healed.Invoke();
             _isHealing = false;
             
+            Animal animal = _gameFactory.CreateAnimal(_animalData.AnimalId.Type, _spawnPlace.position)
+                .GetComponent<Animal>();
+            
             _houseService.TakeQueueToHouse(() =>
             {
-                Animal animal = _gameFactory.CreateAnimal(_animalItem.AnimalId.Type, _spawnPlace.position)
-                    .GetComponent<Animal>();
-
                 FreeTheBad();
                 return animal;
             });
@@ -99,7 +113,7 @@ namespace Logic.Medicine
             _timerOperator.Pause();
         }
 
-        private void OnEntered(HeroProvider _)
+        private void OnEntered(Hero _)
         {
             if (_isHealing)
                 _timerOperator.Play();
@@ -108,14 +122,27 @@ namespace Logic.Medicine
         private void FreeTheBad()
         {
             _animalItem = null;
+            _animalData = null;
+            
             _medToolItem = null;
+            _medToolData = null;
         }
 
         private void BeginHeal()
         {
             _timerOperator.Restart();
             _isHealing = true;
+
+            RemoveItem(_animalItem);
+            RemoveItem(_medToolItem);
+
             Debug.Log("Begin heal");
+        }
+
+        private void RemoveItem(IItem item)
+        {
+            Removed.Invoke(item);
+            item.Destroy();
         }
 
         private bool CanPlaceAnimal(IItem item) =>
@@ -130,13 +157,13 @@ namespace Logic.Medicine
         }
 
         private bool HasMedTool() =>
-            _medToolItem is not null;
+            _medToolData is not null;
 
         private bool IsSuitableTool(IItem item) =>
-            _animalItem.TreatToolId == ((MedToolItemData) item.ItemData).MedicineToolId;
+            _animalData.TreatToolId == ((MedToolItemData) item.ItemData).MedicineToolId;
 
         private bool HasAnimal() =>
-            _animalItem is not null;
+            _animalData is not null;
 
         private bool ItemIsMedTool(IItem item) =>
             (item.ItemId & ItemId.Medical) != 0;

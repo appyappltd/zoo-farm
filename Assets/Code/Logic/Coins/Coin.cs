@@ -1,6 +1,7 @@
 using Logic.Interactions;
 using Logic.Movement;
 using Logic.Payment;
+using Logic.Player;
 using UnityEngine;
 
 namespace Logic.Coins
@@ -28,11 +29,11 @@ namespace Logic.Coins
             _playerInteraction.Interacted -= OnEnter;
         }
 
-        private void OnEnter(HeroProvider heroProvider)
+        private void OnEnter(Hero hero)
         {
-            _wallet = heroProvider.Wallet;
+            _wallet = hero.Wallet;
             _itemMover.Ended += OnCollected;
-            _itemMover.Move(heroProvider.transform);
+            _itemMover.Move(hero.transform);
         }
         
         private void OnCollected()

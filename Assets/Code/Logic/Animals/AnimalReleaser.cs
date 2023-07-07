@@ -1,4 +1,5 @@
 using Logic.Interactions;
+using Logic.Player;
 using Logic.Spawners;
 using Logic.Translators;
 using Services;
@@ -28,7 +29,7 @@ namespace Logic.Animals
             _playerInteraction.Interacted += OnCompleteDelay;
         }
 
-        private void OnCompleteDelay(HeroProvider _)
+        private void OnCompleteDelay(Hero _)
         {
             _windowService.Open(WindowId.AnimalRelease);
         }

@@ -1,11 +1,12 @@
 using System;
+using Logic;
 using Logic.Interactions;
+using Logic.Player;
 using Logic.Translators;
 using Tools.Extension;
-using Tutorial;
 using UnityEngine;
 
-namespace Logic
+namespace Tutorial
 {
     [RequireComponent(typeof(RunTranslator))]
     public class TutorialArrow : MonoBehaviour, ITutorialTrigger
@@ -25,7 +26,7 @@ namespace Logic
         private void OnDestroy() =>
             _playerInteraction.Interacted -= OnEnter;
 
-        private void OnEnter(HeroProvider _) =>
+        private void OnEnter(Hero _) =>
             Triggered.Invoke();
 
         public void Move(Vector3 to)

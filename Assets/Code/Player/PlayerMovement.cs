@@ -22,7 +22,7 @@ namespace Player
         public void Construct(IPlayerInputService inputService) =>
             _inputService = inputService;
 
-        protected override void FixedRun()
+        protected override void Run()
         {
             if (_inputService.Direction.Equals(Vector2.zero))
             {

@@ -1,5 +1,6 @@
 using Logic;
 using Logic.Interactions;
+using Logic.Player;
 using Tutorial.StaticTriggers;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Tutorial
         private void OnDisable() =>
             _playerInteraction.Interacted -= OnComplete;
 
-        private void OnComplete(HeroProvider sender) =>
+        private void OnComplete(Hero sender) =>
             _staticTrigger.Trigger(sender.gameObject);
     }
 }

@@ -1,12 +1,14 @@
 using System;
 using Data.ItemsData;
 using Logic.Interactions;
+using Logic.Player;
+using Logic.Storages;
 using Logic.Storages.Items;
 using UnityEngine;
 
-namespace Logic.Storages
+namespace Logic
 {
-    public class Trash : MonoBehaviour, IAddItemObserver, IGetItemObserver, IInventoryProvider
+    public class Trash : MonoBehaviour, IAddItemObserver, IGetItemObserver, IAddItemProvider, IGetItemProvider
     {
         [SerializeField] private Storage _storage;
         [SerializeField] private PlayerInteraction _playerInteraction;
@@ -23,7 +25,7 @@ namespace Logic.Storages
             _storage.Replenished += OnReplenished;
         }
 
-        private void OnInteracted(HeroProvider provider)
+        private void OnInteracted(Hero provider)
         {
             if (provider.Inventory.TryGet(ItemId.All, out IItem item))
             {

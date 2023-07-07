@@ -1,5 +1,6 @@
 using Data.ItemsData;
 using Logic.Interactions;
+using Logic.Player;
 using Logic.Storages.Items;
 using NaughtyAttributes;
 using Tools;
@@ -76,15 +77,15 @@ namespace Logic.Storages
         private void OnCanceled() =>
             _timerOperator.Pause();
 
-        private void OnInteracted(HeroProvider heroProvider)
+        private void OnInteracted(Hero hero)
         {
             if (_mode == ReceiverMode.Collector)
             {
-                _sender = heroProvider.Inventory;
+                _sender = hero.Inventory;
             }
             else
             {
-                _receiver = heroProvider.Inventory;
+                _receiver = hero.Inventory;
             }
 
             _timerOperator.Restart();

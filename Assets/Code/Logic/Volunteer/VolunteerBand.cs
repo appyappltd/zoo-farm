@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data.ItemsData;
+using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Storages;
 using Logic.Storages.Items;
+using Logic.VolunteersStateMachine;
 using NaughtyAttributes;
+using Services;
 using UnityEngine;
 
 namespace Logic.Volunteer
@@ -13,11 +16,10 @@ namespace Logic.Volunteer
     public class VolunteerBand : MonoBehaviour, IGetItem
     {
         [SerializeField, Min(.0f)] private Vector3 _offset = new(1f, .0f, .0f);
-        [SerializeField] private VolunteerSpawner _spawner;
         [SerializeField] private AnimalSpawner _animalSpawner;
 
-        [SerializeField] private ProductReceiver _receiver;
-
+        [SerializeField] private Transform _container;
+        [SerializeField] private Transform _spawnPlace;
         [SerializeField] private Transform _transmittingPlace;
         [SerializeField] private Transform _outPlace;
 
@@ -26,8 +28,15 @@ namespace Logic.Volunteer
 
         [SerializeField] private List<Transform> _emptyQueue = new();
         [SerializeField] private List<Volunteer> _emptyVolunteers = new();
+        
+        private IGameFactory _gameFactory;
 
         public event Action<IItem> Removed;
+        
+        private void Awake()
+        {
+            _gameFactory = AllServices.Container.Single<IGameFactory>();
+        }
         
         public IItem Get()
         {
@@ -65,7 +74,7 @@ namespace Logic.Volunteer
 
             SetVolunteer(volunteer, t.transform);
 
-            var machine = volunteer.GetComponent<VolunteersStateMachine.VolunteerStateMachine>();
+            VolunteerStateMachine machine = volunteer.StateMachine;
             machine.Construct(t.transform, _outPlace, _transmittingPlace);
             machine.Play();
         }
@@ -95,8 +104,8 @@ namespace Logic.Volunteer
                 }
             }
             
-            Volunteer newVolunteer = _spawner.Spawn();
-            AddNewVolunteer(newVolunteer);
+            GameObject newVolunteer = _gameFactory.CreateVolunteer(_spawnPlace.position, _container);
+            AddNewVolunteer(newVolunteer.GetComponent<Volunteer>());
         }
 
         private void SetVolunteer(Volunteer volunteer, Transform t)

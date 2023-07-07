@@ -1,11 +1,12 @@
 using System;
+using Logic.Player;
 using Observer;
 using UnityEngine;
 
 namespace Logic.Interactions
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class PlayerInteraction : ObserverTargetExit<HeroProvider, TriggerObserverExit>
+    public class PlayerInteraction : ObserverTargetExit<Hero, TriggerObserverExit>
     {
         [SerializeField] private float _interactionDelay;
 
@@ -14,10 +15,10 @@ namespace Logic.Interactions
 #endif
         
         [SerializeField] private TimerOperator _timerOperator;
-        private HeroProvider _cashedHeroProvider;
+        private Hero _cashedHero;
         
-        public event Action<HeroProvider> Interacted = c => { };
-        public event Action<HeroProvider> Entered = c => { };
+        public event Action<Hero> Interacted = c => { };
+        public event Action<Hero> Entered = c => { };
         public event Action Canceled = () => { };
 
         protected override void OnAwake()
@@ -35,16 +36,16 @@ namespace Logic.Interactions
         }
 
         private void OnDelayPassed() =>
-            Interacted.Invoke(_cashedHeroProvider);
+            Interacted.Invoke(_cashedHero);
 
-        protected override void OnTargetEntered(HeroProvider heroProvider)
+        protected override void OnTargetEntered(Hero hero)
         {
-            _cashedHeroProvider = heroProvider;
+            _cashedHero = hero;
             _timerOperator.Restart();
-            Entered.Invoke(heroProvider);
+            Entered.Invoke(hero);
         }
 
-        protected override void OnTargetExited(HeroProvider heroProvider)
+        protected override void OnTargetExited(Hero hero)
         {
             _timerOperator.Pause();
             Canceled.Invoke();

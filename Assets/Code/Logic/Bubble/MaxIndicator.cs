@@ -18,7 +18,7 @@ namespace Logic.Bubble
             _inventory.Added -= ChangeBubbleState;
             _inventory.Removed -= ChangeBubbleState;
         }
-
+        
         public void Construct(IInventory inventory)
         {
             _inventory = inventory;

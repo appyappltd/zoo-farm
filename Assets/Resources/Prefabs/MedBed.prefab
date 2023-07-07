@@ -266,9 +266,9 @@ MonoBehaviour:
   _places:
   - {fileID: 3424525604650532449}
   - {fileID: 3424525604650532449}
-  _isRemovable: 0
+  _isRemoteInit: 0
   _adderMono: {fileID: 2380999859386510404}
-  _removerMono: {fileID: 0}
+  _removerMono: {fileID: 2380999859386510404}
 --- !u!114 &5191996932801900539
 MonoBehaviour:
   m_ObjectHideFlags: 0

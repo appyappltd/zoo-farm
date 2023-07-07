@@ -2,6 +2,7 @@
 using Infrastructure.Factory;
 using Logic;
 using Logic.Payment;
+using Logic.Player;
 using Logic.SpawnPlaces;
 using Player;
 using Services.Camera;
@@ -9,7 +10,6 @@ using Services.Input;
 using Services.PersistentProgress;
 using Services.StaticData;
 using Ui;
-using Ui.Elements;
 using Ui.Elements.Buttons;
 using Ui.Factory;
 using UnityEngine;
@@ -87,7 +87,7 @@ namespace Infrastructure.States
         {
             Transform heroSpawnPlace = _staticData.SpawnPlaceById(SpawnPlaceId.Player);
             GameObject hero = _gameFactory.CreateHero(heroSpawnPlace.position);
-            hero.GetComponent<PlayerMovement>().Construct(_inputService);
+            hero.GetComponent<Hero>().Construct(_inputService);
             return hero;
         }
 
@@ -99,7 +99,7 @@ namespace Infrastructure.States
             var inputReader = hud.GetComponentInChildren<IInputReader>();
             _inputService.RegisterInputReader(inputReader);
 
-            IWallet wallet = hero.GetComponent<HeroProvider>().Wallet;
+            IWallet wallet = hero.GetComponent<Hero>().Wallet;
             hud.GetComponentInChildren<MoneyView>().Construct(wallet.Account);
             hud.GetComponentInChildren<AddCoinsButton>().Construct(wallet);
         }
