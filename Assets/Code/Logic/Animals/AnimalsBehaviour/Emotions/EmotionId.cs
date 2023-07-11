@@ -5,6 +5,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
         None,
         Healthy,
         Eating,
-        Sleeping
+        Sleeping,
+        Homeless,
     }
 }

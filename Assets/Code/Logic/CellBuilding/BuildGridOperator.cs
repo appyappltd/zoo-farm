@@ -17,11 +17,13 @@ namespace Logic.CellBuilding
 
         [SerializeField] private List<BuildPlaceMarker> _buildPlaces;
         [SerializeField] private int _buildCost;
+        [SerializeField] private bool _isAutoBuild = true;
 
         protected IGameFactory GameFactory;
         protected BuildCell ActiveBuildCell;
         
         private BuildPlaceMarker _currentMarker;
+        private bool _cellBuilt;
 
         public event Action Triggered = () => { };
 
@@ -34,17 +36,53 @@ namespace Logic.CellBuilding
                 .GetComponent<BuildCell>();
             ActiveBuildCell.SetBuildCost(_buildCost);
             ActiveBuildCell.SetIcon(_currentMarker.Icon);
-            ActiveBuildCell.Build += ActivateNext;
+            ActiveBuildCell.Build += BuildAndActivate;
             OnAwake();
         }
 
         private void OnDestroy() =>
-            ActiveBuildCell.Build -= ActivateNext;
+            ActiveBuildCell.Build -= BuildAndActivate;
 
         protected abstract void BuildCell(BuildPlaceMarker marker);
 
         protected virtual void OnAwake()
         {
+        }
+
+        public void Enable()
+        {
+            enabled = true;
+            
+            if (_isAutoBuild)
+            {
+               BuildAndActivate();
+            }
+        }
+
+        public void Disable()
+        {
+            enabled = false;
+        }
+
+        public void SetAutoNext(bool isAuto)
+        {
+            _isAutoBuild = isAuto;
+        }
+
+        [Button("Show Next")]
+        public void ShowNextBuildCell()
+        {
+            if (_cellBuilt == false)
+                return;
+
+            if (_positions.TryDequeue(out BuildPlaceMarker marker))
+            {
+                ActiveBuildCell.Reposition(marker.Location);
+                ActiveBuildCell.SetIcon(marker.Icon);
+                _currentMarker = marker;
+                _cellBuilt = false;
+                ActiveBuildCell.gameObject.Enable();
+            }
         }
 
         private void FillPositions()
@@ -56,21 +94,22 @@ namespace Logic.CellBuilding
                 _positions.Enqueue(marker);
             }
         }
+        
+        private void BuildAndActivate()
+        {
+            BuildCell();
+            
+            if (_isAutoBuild)
+            {
+                ShowNextBuildCell();
+            }
+        }
 
-        [Button("Activate Next")]
-        private void ActivateNext()
+        private void BuildCell()
         {
             BuildCell(_currentMarker);
             Triggered.Invoke();
-            
-            if (_positions.TryDequeue(out BuildPlaceMarker marker))
-            {
-                ActiveBuildCell.Reposition(marker.Location);
-                ActiveBuildCell.SetIcon(marker.Icon);
-                _currentMarker = marker;
-                return;
-            }
-            
+            _cellBuilt = true;
             ActiveBuildCell.gameObject.Disable();
         }
     }

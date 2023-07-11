@@ -4,5 +4,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
     {
         void Register(IEmotive emotive);
         void Unregister(IEmotive emotive);
+        void Suppress(EmotionId emotion);
+        void Show(EmotionId emotion);
     }
 }

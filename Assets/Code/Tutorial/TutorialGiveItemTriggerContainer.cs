@@ -1,4 +1,6 @@
-using Data.ItemsData;
+using Logic.Storages;
+using Logic.Storages.Items;
+using Tools;
 using Tutorial.StaticTriggers;
 using UnityEngine;
 
@@ -6,18 +8,16 @@ namespace Tutorial
 {
     public class TutorialGiveItemTriggerContainer : MonoBehaviour
     {
-        [SerializeField] private HandItem _item;
+        [SerializeField] [RequireInterface(typeof(IGetItemObserver))] private MonoBehaviour _getter;
         [SerializeField] private TutorialTriggerStatic _triggerStatic;
 
-        //TODO: Заменить подписку на ивент взятия в классе грядки
-        
         private void OnEnable() =>
-            _item.Mover.Ended += OnPickUp;
+            ((IGetItemObserver) _getter).Removed += OnGet;
 
         private void OnDisable() =>
-            _item.Mover.Ended -= OnPickUp;
+            ((IGetItemObserver) _getter).Removed -= OnGet;
 
-        private void OnPickUp() =>
+        private void OnGet(IItem obj) =>
             _triggerStatic.Trigger(gameObject);
     }
 }

@@ -2590,7 +2590,7 @@ MonoBehaviour:
   _playerInteraction: {fileID: 904906482781603858}
   _timerOperator: {fileID: 7283165390207017577}
   _itemIdFilter: 8
-  _receiveRate: 0.2
+  _receiveRate: 1
   _mode: 0
   _isRemoteInit: 1
   _adder: {fileID: 0}
@@ -10451,6 +10451,7 @@ GameObject:
   - component: {fileID: 3678765922617787239}
   - component: {fileID: -5705781342691244813}
   - component: {fileID: 1955128774267357731}
+  - component: {fileID: 1983315395829370375}
   m_Layer: 7
   m_Name: AnimalHouse
   m_TagString: Untagged
@@ -10618,6 +10619,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65cd91c87cf643fd826caa5ce174ff02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &1983315395829370375
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911757622663513713}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 6.405, y: 1.625, z: 2.02}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.09, y: 0, z: -3.25}
+  m_TimeToStationary: 0.5
 --- !u!1 &8170563270854755955
 GameObject:
   m_ObjectHideFlags: 0
@@ -11706,16 +11723,28 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 14.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 14.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 14.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.57
+      value: 1.19
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalRotation.w

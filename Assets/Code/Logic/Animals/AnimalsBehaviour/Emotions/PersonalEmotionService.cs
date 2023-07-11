@@ -36,6 +36,16 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
             Unsubscribe(emotive);
         }
 
+        public void Suppress(EmotionId emotion)
+        {
+            OnSuppressEmotion(emotion);
+        }
+
+        public void Show(EmotionId emotion)
+        {
+            OnShowEmotion(emotion);
+        }
+
         private void Subscribe(IEmotive emotive)
         {
             emotive.ShowEmotion += OnShowEmotion;

@@ -16,5 +16,6 @@ namespace Infrastructure.AssetManagement
         public const string MedToolItemPath = "Prefabs/MedTools";
         public const string VolunteerPath = "Prefabs/Volunteer";
         public const string HandItemPath = "Prefabs/HandItems";
+        public const string PlantPath = "Prefabs/Plants";
     }
 }

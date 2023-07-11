@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: -8857455697853345208}
   - component: {fileID: 5114288513236749752}
   - component: {fileID: 6965783225314063670}
+  - component: {fileID: 6255864972526751715}
   m_Layer: 10
   m_Name: Volunteer
   m_TagString: Untagged
@@ -447,6 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _places:
   - {fileID: 3872162317092103650}
+  _isSortable: 0
   _isRemoteInit: 1
   _adderMono: {fileID: 6965783225314063670}
   _removerMono: {fileID: 6965783225314063670}
@@ -549,6 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c9bd4e4f98a9b4d812103e29de7b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 8160872385395587745}
 --- !u!114 &-8857455697853345208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,6 +594,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxWeight: 3
+--- !u!114 &6255864972526751715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229401633726274375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6646ed846de4eebaf0577fe6e24b7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 8160872385395587745}
 --- !u!1 &1296423078286401506
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ namespace Logic.Volunteers
 
         public IItem Get()
         {
-            Volunteers.Volunteer volunteer = _volunteers.First();
+            Volunteer volunteer = _volunteers.First();
             _volunteers.Remove(volunteer);
             _emptyVolunteers.Add(volunteer);
 

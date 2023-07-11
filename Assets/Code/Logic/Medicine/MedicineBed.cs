@@ -14,7 +14,7 @@ using UnityEngine;
 namespace Logic.Medicine
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicineBed : MonoCache, IAddItem, IGetItemObserver, IAddItemProvider, IGetItemObserverProvider
+    public class MedicineBed : MonoCache, IAddItem, IGetItemObserver
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
@@ -31,14 +31,11 @@ namespace Logic.Medicine
         private IAnimalHouseService _houseService;
 
         private bool _isHealing;
-        
+        private Animal _healingAnimal;
+
         public event Action<IItem> Added = i => { };
-        
         public event Action<IItem> Removed = i => { };
         public event Action Healed = () => { };
-
-        public IAddItem ItemAdder => this;
-        public IGetItemObserver GetItemObserver => this;
 
         private void Awake()
         {
@@ -97,14 +94,17 @@ namespace Logic.Medicine
             Debug.Log("Healed");
             Healed.Invoke();
             _isHealing = false;
-            
-            Animal animal = _gameFactory.CreateAnimal(_animalData.AnimalId.Type, _spawnPlace.position)
+
+            _healingAnimal = _gameFactory.CreateAnimal(_animalData.AnimalId.Type, _spawnPlace.position)
                 .GetComponent<Animal>();
+            
+            RemoveItem(_animalItem);
+            RemoveItem(_medToolItem);
             
             _houseService.TakeQueueToHouse(() =>
             {
                 FreeTheBad();
-                return animal;
+                return _healingAnimal;
             });
         }
 
@@ -132,9 +132,6 @@ namespace Logic.Medicine
         {
             _timerOperator.Restart();
             _isHealing = true;
-
-            RemoveItem(_animalItem);
-            RemoveItem(_medToolItem);
 
             Debug.Log("Begin heal");
         }

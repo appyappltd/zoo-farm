@@ -7,4 +7,11 @@ namespace StateMachineBase.States
         public Idle(IPrimeAnimator animator) : base(animator) { } 
         protected override void OnEnter() => Animator.SetIdle();
     }
+
+    public class Waiting : Idle
+    {
+        public Waiting(IPrimeAnimator animator) : base(animator)
+        {
+        }
+    }
 }

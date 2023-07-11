@@ -5,24 +5,30 @@ using UnityEngine;
 namespace Logic
 {
     [RequireComponent(typeof(Animator))]
-    public class HandsAnimator : MonoBehaviour
+    public class InventoryAnimatorObserver : MonoBehaviour
     {
+        [SerializeField] private Animator _animator;
+        
         private IInventory _inventory; 
-        private Animator animC;
+        private int _handsLayer;
 
         public void Construct(IInventory inventory)
         {
             _inventory = inventory;
+            _handsLayer = _animator.GetLayerIndex("Hands");
             
             _inventory.Added += OnInventoryUpdated;
             _inventory.Removed += OnInventoryUpdated;
-            
-            animC = GetComponent<Animator>();
         }
 
         private void OnInventoryUpdated(IItem _) =>
             ChangeHandsState();
 
+        private void Awake()
+        {
+            _handsLayer = _animator.GetLayerIndex("Hands");
+        }
+        
         private void OnDestroy()
         {
             _inventory.Added -= OnInventoryUpdated;
@@ -31,7 +37,7 @@ namespace Logic
 
         private void ChangeHandsState()
         {
-            animC.SetBool("Hold", _inventory.Weight > 0);
+            _animator.SetLayerWeight(_handsLayer, _inventory.Weight > 0 ? 1 : 0);
         }
     }
 }

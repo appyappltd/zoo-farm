@@ -32,7 +32,7 @@ namespace Logic.Animals.AnimalsBehaviour
             _staticDataService = staticDataService;
             _animalId = animalId;
             _emotionService = new PersonalEmotionService(_emotionProvider);
-            _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine);
+            _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine, _emotionService);
             _emotionService.Register(_stateMachineObserver);
         }
 

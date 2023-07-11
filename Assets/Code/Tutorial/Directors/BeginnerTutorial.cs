@@ -1,4 +1,5 @@
-using Logic;
+using Logic.CellBuilding;
+using Logic.Gates;
 using NTC.Global.Cache;
 using Services;
 using Services.Camera;
@@ -21,11 +22,16 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialTriggerStatic _medBedInteracted;
         [SerializeField] private TutorialTriggerStatic _medToolInteracted;
         [SerializeField] private TutorialTriggerStatic _animalTakenInteracted;
+        [SerializeField] private TutorialTriggerStatic _animalHealed;
         [SerializeField] private TutorialTriggerStatic _foodTaken;
         [SerializeField] private TutorialTriggerStatic _animalHouseInteracted;
         [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _houseBuilt;
         [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _plantBuilt;
         [SerializeField] private TutorialArrow _arrow;
+        [SerializeField] private MedBedGridOperator _medBedGridOperator;
+        [SerializeField] private MedToolGridOperator _medToolGridOperator;
+        [SerializeField] private Gate _toVolunteerGate;
+        [SerializeField] private Gate _toYardGate;
 
         private ICameraOperatorService _cameraOperatorService;
         private TutorialInteractedTriggerContainer _healingOption;
@@ -46,8 +52,9 @@ namespace Tutorial.Directors
 
         private void OnDestroy()
          {
-             // _firstMedBadSpawned.TriggeredPayload -= OnMedBadSpawned;
-             // _firstHealingOptionSpawned.TriggeredPayload -= OnMedToolSpawned;
+             _firstMedBadSpawned.TriggeredPayload -= OnMedBadSpawned;
+             _firstHealingOptionSpawned.TriggeredPayload -= OnMedToolSpawned;
+             _firstAnimalSpawned.TriggeredPayload -= OnAnimalSpawned;
          }
 
         private void OnMedToolSpawned(GameObject toolObject) =>
@@ -67,7 +74,11 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstMedBadSpawned));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstHealingOption.position)));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
-            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_animalTransmittingZone.position)));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
+                _toVolunteerGate.Open();
+                _arrow.Move(_animalTransmittingZone.position);
+            }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalTakenInteracted));
             TutorialModules.Add(new TutorialAction(() =>
             {
@@ -80,9 +91,10 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_healingOption.transform.position)));
             TutorialModules.Add(new TutorialTriggerAwaiter(_medToolInteracted));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_medBed.transform.position)));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_medBedInteracted));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalHealed));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                _toYardGate.Open();
                 _arrow.Move(_firstHouse.position);
                 _cameraOperatorService.Focus(_firstHouse);
             }));
@@ -108,6 +120,13 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstHouse.position)));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalHouseInteracted));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
+            TutorialModules.Add(new TutorialAction((() =>
+            {
+                _medBedGridOperator.SetAutoNext(true);
+                _medBedGridOperator.ShowNextBuildCell();
+                _medToolGridOperator.SetAutoNext(true);
+                _medToolGridOperator.ShowNextBuildCell();
+            })));
             TutorialModules.Add(new TutorialAction(() => Destroy(gameObject)));
         }
     }

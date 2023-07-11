@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f757b63667ca4d5e8906ed22dedc35fc, type: 3}
   m_Name: Carrot
   m_EditorClassIdentifier: 
-  PlantId: 0
-  HandItemData: {fileID: 11400000, guid: 49385c961d57c2e4e88ac3fa82700407, type: 2}
+  _plantId: 0
+  _handItemData: {fileID: 11400000, guid: 49385c961d57c2e4e88ac3fa82700407, type: 2}
   _growStages:
-  - _mesh: {fileID: 4850891567153937327, guid: 0ebe1766283375040904ccb297466d51, type: 3}
-    _growTime: 2
-  - _mesh: {fileID: -2095541893529966001, guid: 8cf81000fa268c047a0845bf8b00ee87, type: 3}
-    _growTime: 4
+  - _growTime: {x: 0.8555877, y: 1.6651459}
+    _stageId: 0

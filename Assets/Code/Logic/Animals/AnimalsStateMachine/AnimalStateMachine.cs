@@ -51,7 +51,7 @@ namespace Logic.Animals.AnimalsStateMachine
             State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, bowl.ProgressBarView);
             State rest = new Rest(_animator, _peppiness, _peppinessReplanishSpeed);
             State idle = new Idle(_animator);
-            State waitForFood = new Idle(_animator);
+            State waitForFood = new Waiting(_animator);
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
             State moveToEat = new MoveTo(_animator, _mover, _eatPlace);
@@ -117,7 +117,7 @@ namespace Logic.Animals.AnimalsStateMachine
 
         private ActionTransition GetOnFullActionTransition(IProgressBarView barView)
         {
-            ActionTransition transition = new ActionTransition();
+            ActionTransition transition = new ActionPreCheckTransition(() => barView.IsFull);
             barView.Full += transition.SetConditionTrue;
             transition.SetUnsubscribeAction(() => barView.Full -= transition.SetConditionTrue);
             return transition;

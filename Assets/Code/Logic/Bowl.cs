@@ -1,3 +1,4 @@
+using Data.ItemsData;
 using Logic.Storages;
 using Logic.Storages.Items;
 using Observables;
@@ -44,7 +45,8 @@ namespace Logic
         {
             if (Mathf.RoundToInt(_food.Current.Value) < _inventory.Weight)
             {
-                IItem item = _inventory.Get();
+                _inventory.TryGet(ItemId.Food, out IItem item);
+                
                 item.Destroy();
             }
         }

@@ -8,7 +8,7 @@ namespace Logic.Volunteers
     {
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private VolunteerStateMachine _stateMachine;
-        [SerializeField] private HandsAnimator _handsAnimator;
+        [SerializeField] private InventoryAnimatorObserver _handsAnimator;
         [SerializeField] private Storage _storage;
 
         public IInventory Inventory => _inventoryHolder.Inventory;

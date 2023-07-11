@@ -58,7 +58,7 @@ namespace Logic.Storages
             if (_weight <= 0)
                 return false;
             
-            _cashedGetItem = _items.Find(found => (found.ItemId & byId) > 0);
+            _cashedGetItem = _items.FindLast(found => (found.ItemId & byId) > 0);
 
             if (_cashedGetItem is null)
                 return false;

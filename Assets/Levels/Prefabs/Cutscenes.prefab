@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 2802226902126316852}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5233479744422050132
 GameObject:
@@ -109,14 +109,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6fca108d3643c48f4bdfa862bccdbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _beginTrigger: {fileID: 0}
+  _beginTrigger: {fileID: 194688275876741893}
   _firstHouse: {fileID: 0}
-  _medicineBed: {fileID: 0}
   _animal: {fileID: 601386070069414713}
   _plant: {fileID: 0}
   _animalTransmittingZone: {fileID: 0}
-  _healingOptions: {fileID: 0}
-  _animalIsHomeTrigger: {fileID: 0}
+  _firstHealingOption: {fileID: 0}
+  _firstMedBadSpawned: {fileID: 11400000, guid: 7ab25859dc525684a9ba219047c7b4fa, type: 2}
+  _firstHealingOptionSpawned: {fileID: 11400000, guid: fd852b03ab82e3e41bc97870dd0786d5, type: 2}
+  _firstAnimalSpawned: {fileID: 11400000, guid: b7d91cec2845b014c8509d180fd4d4de, type: 2}
+  _medBedInteracted: {fileID: 11400000, guid: 105a1cb453a230d4091df3094faaa2e5, type: 2}
+  _medToolInteracted: {fileID: 11400000, guid: 2a035c91a1fcb844cb8c87fb02884f2e, type: 2}
+  _animalTakenInteracted: {fileID: 11400000, guid: ccb1957ad03979945b3ac1cfa4b3759a, type: 2}
+  _animalHealed: {fileID: 0}
+  _foodTaken: {fileID: 11400000, guid: 67411d56389732a4c932415e5ff870f3, type: 2}
+  _animalHouseInteracted: {fileID: 11400000, guid: e7c35ae65949e6345b72a7baec7e61e3, type: 2}
+  _houseBuilt: {fileID: 0}
+  _plantBuilt: {fileID: 0}
   _arrow: {fileID: 194688275876741893}
 --- !u!1001 &5469357750844048042
 PrefabInstance:
@@ -132,15 +141,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1958194717119288185, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -9.981
       objectReference: {fileID: 0}
     - target: {fileID: 1958194717119288185, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.7
+      value: 3.02
       objectReference: {fileID: 0}
     - target: {fileID: 1958194717119288185, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.774
       objectReference: {fileID: 0}
     - target: {fileID: 1958194717119288185, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalRotation.w
@@ -176,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8390170312364042213, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

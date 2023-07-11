@@ -12,7 +12,7 @@ namespace Logic.Player
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private WalletHolder _walletHolder;
         [SerializeField] private MaxIndicator _maxIndicator;
-        [SerializeField] private HandsAnimator _handsAnimator;
+        [SerializeField] private InventoryAnimatorObserver _handsAnimator;
         [SerializeField] private Storage _storage;
         
         [SerializeField] private PlayerMovement _playerMovement;

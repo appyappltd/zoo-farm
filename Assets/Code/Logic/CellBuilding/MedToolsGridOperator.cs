@@ -2,7 +2,7 @@ using System;
 
 namespace Logic.CellBuilding
 {
-    public class MedToolsGridOperator : BuildGridOperator
+    public class MedToolGridOperator : BuildGridOperator
     {
         protected override void BuildCell(BuildPlaceMarker marker)
         {

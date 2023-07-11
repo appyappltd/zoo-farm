@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Builders;
 using Data.ItemsData;
 using Infrastructure.AssetManagement;
+using Infrastructure.Builders;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Medicine;
@@ -20,13 +20,15 @@ namespace Infrastructure.Factory
         private readonly IAssetProvider _assets;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
-        
+
         private readonly AnimalBuilder _animalBuilder;
         private readonly MedStandBuilder _medStandBuilder;
         private readonly GardenBadBuilder _gardenBedBuilder;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
+
+        public IPlantFactory PlantFactory { get; }
 
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
@@ -35,9 +37,12 @@ namespace Infrastructure.Factory
             _assets = assets;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
+
+            PlantFactory = new PlantFactory(assets);
+            
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
             _medStandBuilder = new MedStandBuilder(staticDataService);
-            _gardenBedBuilder = new GardenBadBuilder(staticDataService);
+            _gardenBedBuilder = new GardenBadBuilder(staticDataService, PlantFactory);
         }
 
         public void Cleanup()

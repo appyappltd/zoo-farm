@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Logic.Storages.Items;
 using NaughtyAttributes;
 using Tools;
@@ -9,7 +8,7 @@ namespace Logic.Storages
 {
     public class Storage : MonoBehaviour
     {
-        private readonly List<IItem> _items = new List<IItem>(10);
+        private readonly IItem[] _items = new IItem[10];
         
         [SerializeField] private Transform[] _places;
 
@@ -33,12 +32,6 @@ namespace Logic.Storages
         private IGetItemObserver Remover => _remover;
         
         public Transform TopPlace => _places[_topIndex];
-
-        private IItem TopItem
-        {
-            get => _items[_topIndex];
-            set => _items.Add(value);
-        }
 
         private void Awake() =>
             enabled = !_isRemoteInit;
@@ -99,16 +92,16 @@ namespace Logic.Storages
         private void PlaceItem(IItem item)
         {
             item.Mover.Move(TopPlace, TopPlace);
-            TopItem = item;
-            Debug.Log("plase" + " " + gameObject.name);
+            _items[_topIndex] = item;
+            Debug.Log("place" + " " + gameObject.name + " index " + _topIndex);
             _topIndex++;
             Replenished.Invoke(item);
         }
 
         private void RevertItem(IItem item)
         {
-            Debug.Log("revert" + " " + gameObject.name);
-            int revertItemIndex = _items.IndexOf(item);
+            int revertItemIndex = Array.IndexOf(_items, item);
+            Debug.Log("revert" + " " + gameObject.name + " index " + revertItemIndex);
             Sort(revertItemIndex);
             _topIndex--;
         }
@@ -118,11 +111,12 @@ namespace Logic.Storages
             if (_isSortable == false)
                 return;
 
-            for (int i = fromIndex; i < _items.Count - 1; i++)
+            for (int i = fromIndex; i < _topIndex - 1; i++)
             {
                 _items[i] = _items[i + 1];
                 Transform finishParent = _places[i];
                 _items[i].Mover.Move(finishParent, finishParent);
+                Debug.Log($"Sort {i}");
             }
         }
     }

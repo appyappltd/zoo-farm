@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4867225681255900138}
   - component: {fileID: 7734164964601568911}
   - component: {fileID: 8542956120895057635}
+  - component: {fileID: 8172162948918961711}
   m_Layer: 7
   m_Name: MedStand
   m_TagString: Untagged
@@ -97,6 +98,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7453362d9c4da71498f26f48391cc381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8172162948918961711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306403883730262677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6587e1c10a14308820357213e533404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trigger: {fileID: 11400000, guid: fd852b03ab82e3e41bc97870dd0786d5, type: 2}
+  _IsTriggerOnEnable: 1
+  _IsTriggerOnDisable: 0
 --- !u!1 &961455800664860892
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +364,7 @@ MonoBehaviour:
   _itemIdFilter: 4
   _receiveRate: 1
   _mode: 1
+  _isRemoteInit: 0
   _adder: {fileID: 0}
   _remover: {fileID: 6399095299985549395}
 --- !u!1 &3191357332089566999
