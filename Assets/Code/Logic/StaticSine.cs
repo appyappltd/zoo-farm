@@ -15,7 +15,7 @@ namespace Logic
         [SerializeField] private float _maxSize;
         [SerializeField] private float _decreaseTime = 0.25f;
 
-        private float _deltaSize = 1;
+        private float _deltaSize;
         private float _velocity;
         private float _targetSize;
         private float _smoothTime;
@@ -24,6 +24,8 @@ namespace Logic
         {
             _playerInteraction.Entered += OnEnter;
             _playerInteraction.Canceled += OnCancel;
+
+            _deltaSize = _defaultSize;
         }
 
         private void OnDestroy()
@@ -48,12 +50,11 @@ namespace Logic
             {
                 enabled = false;
             }
-
-            _deltaSize = Mathf.SmoothDamp(_deltaSize, _targetSize, ref _velocity, _smoothTime);
+            
+            _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime);
             _sine.localScale = Vector3.one * _deltaSize;
         }
 
-        [Button("Invrease")]
         private void BeginIncrease()
         {
             _targetSize = _maxSize;
@@ -61,7 +62,6 @@ namespace Logic
             enabled = true;
         }
 
-        [Button("Cancel")]
         private void Cancel()
         {
             _targetSize = _defaultSize;
