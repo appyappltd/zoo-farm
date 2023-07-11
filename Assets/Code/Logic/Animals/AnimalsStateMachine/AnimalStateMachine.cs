@@ -3,11 +3,11 @@ using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Animals.AnimalsBehaviour.Movement;
 using Logic.Animals.AnimalsStateMachine.States;
-using Logic.Animals.AnimalsStateMachine.Transitions;
 using NaughtyAttributes;
 using Progress;
 using StateMachineBase;
 using StateMachineBase.States;
+using StateMachineBase.Transitions;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Logic.Volunteers
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class TestVolunteerCreator : MonoBehaviour
+    public class VolunteerCreator : MonoBehaviour
     {
         [SerializeField] private float _spawnDelay = 10f;
         [SerializeField] private int _maxCount = 3;
@@ -25,10 +25,9 @@ namespace Logic.Volunteers
 
         private void OnSpawn()
         {
-            if (_activeCount <= _maxCount)
+            if (_volunteerBand.VolunteersCount <= _maxCount)
             {
                 _volunteerBand.CreateNewVolunteer();
-                _activeCount++;
             }
 
             _timer.Restart();

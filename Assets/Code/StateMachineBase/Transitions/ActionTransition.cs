@@ -1,7 +1,6 @@
 ﻿using System;
-using StateMachineBase;
 
-namespace Logic.Animals.AnimalsStateMachine.Transitions
+namespace StateMachineBase.Transitions
 {
     public class ActionTransition : Transition, IDisposable
     {

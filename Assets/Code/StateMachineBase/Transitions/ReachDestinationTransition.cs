@@ -1,7 +1,6 @@
 ﻿using Logic.Animals.AnimalsBehaviour.Movement;
-using StateMachineBase;
 
-namespace Logic.Animals.AnimalsStateMachine.Transitions
+namespace StateMachineBase.Transitions
 {
     public class ReachDestinationTransition : Transition
     {

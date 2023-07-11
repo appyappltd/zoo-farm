@@ -1,19 +1,21 @@
 using Logic.AnimatorStateMachine;
-using StateMachineBase.States;
-using System.Collections;
-using System.Collections.Generic;
 using Logic.Volunteers;
-using UnityEngine;
+using StateMachineBase.States;
 
-public class Reload : Idle
+namespace Logic.VolunteersStateMachine.States
 {
-    private Volunteer volunteer;
-    public Reload(IPrimeAnimator animator, Volunteer volunteer) : base(animator)
+    public class Reload : Idle
     {
-        this.volunteer = volunteer;
-    }
-    protected override void OnEnter()
-    {
-        base.OnEnter();
+        private readonly Volunteer _volunteer;
+        
+        public Reload(IPrimeAnimator animator, Volunteer volunteer) : base(animator)
+        {
+            _volunteer = volunteer;
+        }
+        protected override void OnEnter()
+        {
+            base.OnEnter();
+            _volunteer.Reload();
+        }
     }
 }

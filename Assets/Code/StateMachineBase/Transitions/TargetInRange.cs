@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-namespace Logic.Animals.AnimalsStateMachine.Transitions
+namespace StateMachineBase.Transitions
 {
     public class TargetInRange : DistanceTo
     {
         private readonly float _range;
-        private Vector3 targetPos;
         private readonly Transform _origin;
         private readonly Transform _target;
+        
+        private Vector3 _targetPos;
 
         public TargetInRange(Transform origin, Transform target, float range) : base(origin, target)
         {
@@ -20,9 +20,13 @@ namespace Logic.Animals.AnimalsStateMachine.Transitions
         public override void Enter()
         {
             base.Enter();
-            targetPos = _target.position;
+            _targetPos = _target.position;
         }
         
-        public override bool CheckCondition() => Vector3.Distance(_origin.position, targetPos) < _range;
+        public override bool CheckCondition()
+        {
+            Debug.Log(Vector3.Distance(_origin.position, _targetPos));
+            return Vector3.Distance(_origin.position, _targetPos) < _range;
+        }
     }
 }

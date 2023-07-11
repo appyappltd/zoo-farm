@@ -1,7 +1,6 @@
-﻿using StateMachineBase;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Logic.Animals.AnimalsStateMachine.Transitions
+namespace StateMachineBase.Transitions
 {
     public class TimerTransition : Transition
     {

@@ -1,4 +1,4 @@
-﻿namespace Logic.Animals.AnimalsStateMachine.Transitions
+﻿namespace StateMachineBase.Transitions
 {
     public class RandomTimerTransition : TimerTransition
     {
