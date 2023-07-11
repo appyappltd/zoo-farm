@@ -1,53 +1,73 @@
-using System.Collections;
 using Logic.Interactions;
+using Logic.Player;
 using NaughtyAttributes;
+using NTC.Global.Cache;
 using UnityEngine;
 
 namespace Logic
 {
-    public class StaticSine : MonoBehaviour
+    public class InteractionSine : MonoCache
     {
-        [SerializeField] private Vector3 _targetSize;
-        [SerializeField, Min(.0f)] private float _speed =.1f;
-        [SerializeField, Min(.0f)] private float _offset = .1f;
         [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private Transform _sine;
 
-        private Vector3 defSize;
-        private Coroutine coroutine;
-        private Vector3 lastSc = new(121,432,543);
+        [SerializeField] private float _defaultSize;
+        [SerializeField] private float _maxSize;
+        [SerializeField] private float _decreaseTime = 0.25f;
 
+        private float _deltaSize = 1;
+        private float _velocity;
+        private float _targetSize;
+        private float _smoothTime;
+        
         private void Awake()
         {
-            defSize = transform.localScale;
-
-            _playerInteraction.Interacted += _ => OnInteractable(_targetSize);
-            _playerInteraction.Canceled += () => OnInteractable(defSize);
+            _playerInteraction.Entered += OnEnter;
+            _playerInteraction.Canceled += OnCancel;
         }
 
-        [Button("расти", enabledMode: EButtonEnableMode.Playmode)]
-        public void A() => OnInteractable(_targetSize);
-
-        [Button("Уменьшайся", enabledMode: EButtonEnableMode.Playmode)]
-        public void B() => OnInteractable(defSize);
-
-        public void OnInteractable(Vector3 size)
+        private void OnDestroy()
         {
-            if (coroutine != null)
-                StopCoroutine(coroutine);
-            coroutine = StartCoroutine(ChangeSize(size));
+            _playerInteraction.Entered -= OnEnter;
+            _playerInteraction.Canceled -= OnCancel;
+        }
+        
+        private void OnCancel()
+        {
+            Cancel();
         }
 
-        private IEnumerator ChangeSize(Vector3 targetSize)
+        private void OnEnter(Hero hero)
         {
-            while ((transform.localScale - targetSize).magnitude > _offset 
-                   && lastSc != transform.localScale)
+            BeginIncrease();
+        }
+
+        protected override void Run()
+        {
+            if (Mathf.Approximately(_deltaSize, _targetSize))
             {
-                lastSc = transform.localScale;
-                transform.localScale = Vector3.MoveTowards(transform.localScale,
-                    targetSize,
-                    _speed * Time.fixedDeltaTime);
-                yield return new WaitForFixedUpdate();
+                enabled = false;
             }
+
+            _deltaSize = Mathf.SmoothDamp(_deltaSize, _targetSize, ref _velocity, _smoothTime);
+            _sine.localScale = Vector3.one * _deltaSize;
+        }
+
+        [Button("Invrease")]
+        private void BeginIncrease()
+        {
+            _targetSize = _maxSize;
+            _smoothTime = _playerInteraction.InteractionDelay;
+            enabled = true;
+        }
+
+        [Button("Cancel")]
+        private void Cancel()
+        {
+            _targetSize = _defaultSize;
+            _smoothTime = _decreaseTime;
+            enabled = true;
         }
     }
 }
+    

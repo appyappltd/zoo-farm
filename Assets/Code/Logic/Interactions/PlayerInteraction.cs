@@ -15,11 +15,14 @@ namespace Logic.Interactions
 #endif
         
         [SerializeField] private TimerOperator _timerOperator;
-        private Hero _cashedHero;
         
+        private Hero _cashedHero;
+
         public event Action<Hero> Interacted = c => { };
         public event Action<Hero> Entered = c => { };
         public event Action Canceled = () => { };
+
+        public float InteractionDelay => _interactionDelay;
 
         protected override void OnAwake()
         {
