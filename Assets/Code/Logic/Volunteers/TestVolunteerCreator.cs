@@ -20,7 +20,7 @@ namespace Logic.Volunteers
         private void Start()
         {
             _timer.SetUp(_spawnDelay, OnSpawn);
-            _timer.Restart();
+            OnSpawn();
         }
 
         private void OnSpawn()

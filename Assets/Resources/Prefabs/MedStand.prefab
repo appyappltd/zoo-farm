@@ -56,7 +56,7 @@ MonoBehaviour:
   _timerOperator: {fileID: 8542956120895057635}
   _spawnPlace: {fileID: 4189009866992665005}
   _icon: {fileID: 1947041233199756826}
-  _respawnTime: 5
+  _respawnTime: 1
 --- !u!114 &7734164964601568911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.42
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalScale.y
@@ -511,7 +511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2.03
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.x
@@ -519,11 +519,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.544
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.01
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalRotation.w
