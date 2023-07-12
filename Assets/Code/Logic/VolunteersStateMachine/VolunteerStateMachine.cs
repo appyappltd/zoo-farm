@@ -19,15 +19,13 @@ namespace Logic.VolunteersStateMachine
         [SerializeField, Range(.0f, 1f)] private float _placeOffset;
 
         private Volunteer _volunteer;
-        private Transform _transmittingPlace;
         private Transform _outPlace;
-        private Transform _rotateTo;
+        private Queue _queue;
 
-        public void Construct(Transform transmittingPlace, Transform outPlace, Transform rotateTo, Volunteer volunteer)
+        public void Construct(Queue queue, Transform outPlace, Volunteer volunteer)
         {
-            _transmittingPlace = transmittingPlace;
+            _queue = queue;
             _outPlace = outPlace;
-            _rotateTo = rotateTo;
             _volunteer = volunteer;
 
             SetUp();
@@ -37,30 +35,46 @@ namespace Logic.VolunteersStateMachine
         {
             IInventory inventory = _volunteer.Inventory;
 
-            State moveToTransmitting = new MoveToAndRotate(_animator, _mover, _transmittingPlace, _rotateTo);
+            State waiting = new Idle(_animator);
+            State moveInQueue = new MoveToQueuePlace(_animator, _mover, null, _volunteer);
+            State moveToQueueEnd = new MoveToPosition(_animator, _mover, _queue.Tail);
             State transmitting = new Transmitting(_animator, _volunteer);
-            State moveToOutPlace = new MoveTo(_animator, _mover, _outPlace);
+            State moveToOutPlace = new MoveToPosition(_animator, _mover, _outPlace);
             State reload = new Reload(_animator, _volunteer);
 
-            Transition inTransmittingPlace = new PositionInRange(_mover.transform, _transmittingPlace, _placeOffset);
+            Transition inTransmittingPlace = new PositionInRange(_mover.transform, _queue.Head, _placeOffset);
+            Transition inQueueEndPlace = new PositionInRange(_mover.transform, _queue.Tail, _placeOffset);
+            Transition inQueuePlace = new InQueuePlace(_mover.transform, null , _volunteer, _placeOffset);
             Transition emptyAnimal = new EmptyAnimal(inventory);
-            Transition queueMove = new TargetOutOfRange(_mover.transform, _transmittingPlace, _placeOffset);
-            Transition inOutPlace = new PositionInRange(_mover.transform, _outPlace, _placeOffset);
+            Transition queueMoved = new OutOfQueuePlace(_mover.transform, null, _volunteer, _placeOffset);
+            Transition inOutPlace = new TargetInRange(_mover.transform, _outPlace, _placeOffset);
             Transition haveAnimal = new HaveAnimal(inventory);
 
-            Init(moveToTransmitting, new Dictionary<State, Dictionary<Transition, State>>
+            Init(moveToQueueEnd, new Dictionary<State, Dictionary<Transition, State>>
             {
                 {
-                    moveToTransmitting, new Dictionary<Transition, State>
+                    moveToQueueEnd, new Dictionary<Transition, State>
                     {
+                        {inQueueEndPlace, moveInQueue},
+                    }
+                },
+                {
+                    moveInQueue, new Dictionary<Transition, State>
+                    {
+                        {inQueuePlace, waiting},
+                    }
+                },
+                {
+                    waiting, new Dictionary<Transition, State>
+                    {
+                        {queueMoved, moveInQueue},
                         {inTransmittingPlace, transmitting},
                     }
                 },
                 {
                     transmitting, new Dictionary<Transition, State>
                     {
-                        { emptyAnimal, moveToOutPlace},
-                        { queueMove, moveToTransmitting},
+                        {emptyAnimal, moveToOutPlace},
                     }
                 },
                 {
@@ -72,7 +86,7 @@ namespace Logic.VolunteersStateMachine
                 {
                     reload, new Dictionary<Transition, State>
                     {
-                        {haveAnimal, moveToTransmitting},
+                        {haveAnimal, moveToQueueEnd},
                     }
                 },
             });

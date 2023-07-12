@@ -8,7 +8,7 @@ namespace Logic.Animals
         [SerializeField] private HandItem _animal;
         [SerializeField] private AnimalItemData _preloadAnimalData;
 
-        public HandItem InstantiateAnimal(Vector3 at)
+        public HandItem SpawnAnimal(Vector3 at)
         {
             HandItem instantiateAnimal = Instantiate(_animal, at, Quaternion.identity);
             instantiateAnimal.Construct(_preloadAnimalData);

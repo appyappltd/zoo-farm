@@ -6,10 +6,8 @@ namespace Logic.Volunteers
     public class VolunteerCreator : MonoBehaviour
     {
         [SerializeField] private float _spawnDelay = 10f;
-        [SerializeField] private int _maxCount = 3;
         [SerializeField] private VolunteerBand _volunteerBand;
-
-        private int _activeCount;
+        
         private TimerOperator _timer;
 
         private void Awake()
@@ -25,7 +23,7 @@ namespace Logic.Volunteers
 
         private void OnSpawn()
         {
-            if (_volunteerBand.VolunteersCount <= _maxCount)
+            if (_volunteerBand.VolunteersCount <= _volunteerBand.MaxVolunteers)
             {
                 _volunteerBand.CreateNewVolunteer();
             }

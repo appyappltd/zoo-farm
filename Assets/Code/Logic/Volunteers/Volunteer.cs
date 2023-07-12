@@ -14,11 +14,13 @@ namespace Logic.Volunteers
 
         private bool _isFree;
         private bool _isReadyTransmitting;
+        private Transform _queuePlace;
 
         public IInventory Inventory => _inventoryHolder.Inventory;
         public VolunteerStateMachine StateMachine => _stateMachine;
         public bool IsFree => _isFree;
         public bool IsReadyTransmitting => _isReadyTransmitting;
+        public Vector3 QueuePosition => _queuePlace.position;
 
         public void Awake()
         {
@@ -30,6 +32,11 @@ namespace Logic.Volunteers
             Inventory.Removed += OnRemove;
         }
 
+        public void UpdateQueuePlace(Transform place)
+        {
+            _queuePlace = place;
+        }
+        
         private void OnRemove(IItem _)
         {
             _isReadyTransmitting = false;
