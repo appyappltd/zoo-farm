@@ -10669,6 +10669,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5484098361386591395, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+      propertyPath: _spawnDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6471376086031602452, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
       propertyPath: m_Name
       value: Volunters Settings
