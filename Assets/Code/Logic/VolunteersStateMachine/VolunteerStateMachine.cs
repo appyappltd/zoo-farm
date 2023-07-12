@@ -21,13 +21,13 @@ namespace Logic.VolunteersStateMachine
         private Volunteer _volunteer;
         private Transform _transmittingPlace;
         private Transform _outPlace;
-        private Transform rotateTo;
+        private Transform _rotateTo;
 
         public void Construct(Transform transmittingPlace, Transform outPlace, Transform rotateTo, Volunteer volunteer)
         {
             _transmittingPlace = transmittingPlace;
             _outPlace = outPlace;
-            this.rotateTo = rotateTo;
+            _rotateTo = rotateTo;
             _volunteer = volunteer;
 
             SetUp();
@@ -37,7 +37,7 @@ namespace Logic.VolunteersStateMachine
         {
             IInventory inventory = _volunteer.Inventory;
 
-            State moveToTransmitting = new MoveTo(_animator, _mover, _transmittingPlace);
+            State moveToTransmitting = new MoveToAndRotate(_animator, _mover, _transmittingPlace, _rotateTo);
             State transmitting = new Transmitting(_animator, _volunteer);
             State moveToOutPlace = new MoveTo(_animator, _mover, _outPlace);
             State reload = new Reload(_animator, _volunteer);

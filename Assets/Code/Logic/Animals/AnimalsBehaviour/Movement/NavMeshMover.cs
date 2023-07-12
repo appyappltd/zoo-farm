@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using NTC.Global.Cache;
-using Tools.Extension;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,8 +10,6 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private float _rotateSpeed;
 
-        private NavMeshPath _path;
-        
         public Vector3 DestinationPoint => _agent.destination;
         public float Distance => _agent.remainingDistance;
         public float StoppingDistance => _agent.stoppingDistance;
@@ -40,15 +35,12 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
                     Debug.DrawLine(cornerFrom, cornerTo, Color.blue, 10f);
                 }
             }
-
-            _path = path;
+            
             _agent.SetPath(path);
         }
 
-        public void RotateTo(Vector3 target) 
-        {
-            transform.rotation = Quaternion.LookRotation(target-_agent.steeringTarget);
-        }
+        public void RotateTo(Vector3 target) =>
+            transform.rotation = Quaternion.LookRotation(target - _agent.steeringTarget);
 
         private void Rotate()
         {

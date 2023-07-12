@@ -15,13 +15,14 @@ namespace Logic.Volunteers
 {
     public class VolunteerBand : MonoBehaviour, IGetItem
     {
-        [SerializeField, Min(.0f)] private Vector3 _offset = new(1f, .0f, .0f);
+        [SerializeField] private Vector3 _offset = new(1f, .0f, .0f);
         [SerializeField] private AnimalSpawner _animalSpawner;
 
         [SerializeField] private Transform _container;
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private Transform _transmittingPlace;
         [SerializeField] private Transform _outPlace;
+        [SerializeField] private Transform _lookAtPlace;
 
         [SerializeField] private List<Transform> _queue = new();
         [SerializeField] private List<Volunteer> _volunteers = new();

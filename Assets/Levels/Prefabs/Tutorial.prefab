@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5319161966910484852}
   m_Layer: 0
-  m_Name: Cutscenes
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,12 +121,16 @@ MonoBehaviour:
   _medBedInteracted: {fileID: 11400000, guid: 105a1cb453a230d4091df3094faaa2e5, type: 2}
   _medToolInteracted: {fileID: 11400000, guid: 2a035c91a1fcb844cb8c87fb02884f2e, type: 2}
   _animalTakenInteracted: {fileID: 11400000, guid: ccb1957ad03979945b3ac1cfa4b3759a, type: 2}
-  _animalHealed: {fileID: 0}
+  _animalHealed: {fileID: 11400000, guid: 840349fadbd6b864ba0a2cbc1fc12cb8, type: 2}
   _foodTaken: {fileID: 11400000, guid: 67411d56389732a4c932415e5ff870f3, type: 2}
   _animalHouseInteracted: {fileID: 11400000, guid: e7c35ae65949e6345b72a7baec7e61e3, type: 2}
   _houseBuilt: {fileID: 0}
   _plantBuilt: {fileID: 0}
   _arrow: {fileID: 194688275876741893}
+  _medBedGridOperator: {fileID: 0}
+  _medToolGridOperator: {fileID: 0}
+  _toVolunteerGate: {fileID: 0}
+  _toYardGate: {fileID: 0}
 --- !u!1001 &5469357750844048042
 PrefabInstance:
   m_ObjectHideFlags: 0
