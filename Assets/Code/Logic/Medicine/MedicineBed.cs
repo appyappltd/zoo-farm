@@ -95,6 +95,21 @@ namespace Logic.Medicine
             Healed.Invoke();
             _isHealing = false;
 
+            if (_animalData is null)
+            {
+                throw new NullReferenceException("Animal Data null");
+            }
+            
+            if (_gameFactory is null)
+            {
+                throw new NullReferenceException("Game Factory null");
+            }
+            
+            if (_spawnPlace is null)
+            {
+                throw new NullReferenceException("Spawn place null");
+            }
+            
             _healingAnimal = _gameFactory.CreateAnimal(_animalData.AnimalId.Type, _spawnPlace.position)
                 .GetComponent<Animal>();
             

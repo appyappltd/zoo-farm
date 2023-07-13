@@ -4,6 +4,7 @@ using System.Linq;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services.AnimalHouses;
+using TMPro;
 using UnityEngine;
 
 namespace Services.Animals
@@ -13,13 +14,13 @@ namespace Services.Animals
         private readonly IAnimalHouseService _houseService;
         private readonly List<IAnimal> _animals = new List<IAnimal>();
 
-        public AnimalsService(IAnimalHouseService houseService)
-        {
+        public AnimalsService(IAnimalHouseService houseService) =>
             _houseService = houseService;
-        }
 
         public event Action<AnimalType> Released = t => { };
-        
+
+        public int TotalAnimalCount => _animals.Count;
+        public int ReleaseReadyAnimalCount => _animals.Count(animal => animal.Stats.Vitality.IsFull);
         public IReadOnlyList<IAnimal> Animals => _animals;
 
         public void Register(IAnimal animal)

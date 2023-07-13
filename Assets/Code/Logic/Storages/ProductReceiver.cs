@@ -117,7 +117,7 @@ namespace Logic.Storages
                 _receiver = hero.Inventory;
             }
 
-            _timerOperator.Restart();
+            OnBeginReceive();
         }
     }
 }

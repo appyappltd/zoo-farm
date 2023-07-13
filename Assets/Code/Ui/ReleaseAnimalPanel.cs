@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using Logic.Animals;
 using NaughtyAttributes;
 using Observables;
 using Services.Animals;
+using Tools;
 using Ui.Elements;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +19,8 @@ namespace Ui
         [SerializeField] private TextSetter _animalsCount;
         [SerializeField] private TextSetter _toReleaseCount;
         [SerializeField] private Button _increaseCounterButton;
+        [SerializeField] private List<UiGrayScaleFilter> _grayScaleFilters;
+        
         
 #if UNITY_EDITOR
         [SerializeField] private int _testTotal;
@@ -38,6 +42,12 @@ namespace Ui
             if (countData.ReleaseReady == 0)
             {
                 _increaseCounterButton.interactable = false;
+
+                for (var index = 0; index < _grayScaleFilters.Count; index++)
+                {
+                    UiGrayScaleFilter filter = _grayScaleFilters[index];
+                    filter.SetEffectAmount(1);
+                }
             }
             
             gameObject.SetActive(true);

@@ -1,5 +1,6 @@
 using Logic.CellBuilding;
 using Logic.Gates;
+using Logic.Volunteers;
 using NTC.Global.Cache;
 using Services;
 using Services.Camera;
@@ -15,7 +16,9 @@ namespace Tutorial.Directors
         [SerializeField] private Transform _animal;
         [SerializeField] private Transform _plant;
         [SerializeField] private Transform _animalTransmittingZone;
-        [SerializeField] private Transform _firstHealingOption;
+        [SerializeField] private Transform _firstMedToolSpawnPoint;
+        [SerializeField] private Transform _firstMedBedSpawnPoint;
+        [SerializeField] private TutorialTriggerStatic _beginnerCoinsCollected;
         [SerializeField] private TutorialTriggerStatic _firstMedBadSpawned;
         [SerializeField] private TutorialTriggerStatic _firstHealingOptionSpawned;
         [SerializeField] private TutorialTriggerStatic _firstAnimalSpawned;
@@ -30,6 +33,9 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialArrow _arrow;
         [SerializeField] private MedBedGridOperator _medBedGridOperator;
         [SerializeField] private MedToolGridOperator _medToolGridOperator;
+        [SerializeField] private HouseGridOperator _houseGridOperator;
+        [SerializeField] private GardenBedGridOperator _gardenBedGridOperator;
+        [SerializeField] private VolunteerSpawner _volunteerSpawner;
         [SerializeField] private Gate _toVolunteerGate;
         [SerializeField] private Gate _toYardGate;
 
@@ -71,13 +77,30 @@ namespace Tutorial.Directors
         protected override void CollectModules()
         {
             TutorialModules.Add(new TutorialAction(() => Debug.Log("Begin tutorial")));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_beginnerCoinsCollected));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
+                _medBedGridOperator.ShowNextBuildCell();
+                _arrow.Move(_firstMedBedSpawnPoint.position);
+            }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstMedBadSpawned));
-            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstHealingOption.position)));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
+                _medToolGridOperator.ShowNextBuildCell();
+                _arrow.Move(_firstMedToolSpawnPoint.position);
+                _volunteerSpawner.Spawn();
+            }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _toVolunteerGate.Open();
                 _arrow.Move(_animalTransmittingZone.position);
+                _cameraOperatorService.Focus(_animalTransmittingZone);
+            }));
+            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
+                _cameraOperatorService.FocusOnDefault();
             }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalTakenInteracted));
             TutorialModules.Add(new TutorialAction(() =>
@@ -94,6 +117,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalHealed));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                _houseGridOperator.ShowNextBuildCell();
                 _toYardGate.Open();
                 _arrow.Move(_firstHouse.position);
                 _cameraOperatorService.Focus(_firstHouse);
@@ -104,9 +128,10 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialTimeAwaiter(0.2f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_animal)));
-            TutorialModules.Add(new TutorialTimeAwaiter(15f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(1.5f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                _gardenBedGridOperator.ShowNextBuildCell();
                 _arrow.Move(_plant.position);
                 _cameraOperatorService.Focus(_plant);
             }));
@@ -126,6 +151,10 @@ namespace Tutorial.Directors
                 _medBedGridOperator.ShowNextBuildCell();
                 _medToolGridOperator.SetAutoNext(true);
                 _medToolGridOperator.ShowNextBuildCell();
+                _houseGridOperator.SetAutoNext(true);
+                _houseGridOperator.ShowNextBuildCell();
+                _gardenBedGridOperator.SetAutoNext(true);
+                _gardenBedGridOperator.ShowNextBuildCell();
             })));
             TutorialModules.Add(new TutorialAction(() => Destroy(gameObject)));
         }

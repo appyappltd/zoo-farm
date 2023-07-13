@@ -28,7 +28,7 @@ namespace Logic.Volunteers
         private Volunteer _volunteerCashed;
         private int _volunteersInQueue;
         
-        public event Action<IItem> Removed;
+        public event Action<IItem> Removed = i => { };
         
         public int VolunteersCount => _volunteersInQueue;
         public int MaxVolunteers => _queueTransforms.Length - 2;
@@ -69,7 +69,7 @@ namespace Logic.Volunteers
             return false;
         }
 
-        public void AddVolunteer(Volunteer volunteer)
+        private void AddVolunteer(Volunteer volunteer)
         {
             volunteer.UpdateQueuePlace(_queue.TakeQueue());
             _volunteersInQueue++;
@@ -104,8 +104,7 @@ namespace Logic.Volunteers
             volunteer.Inventory.Add(animal);
             _volunteers.Add(volunteer);
         }
-
-        [Button("Move Queue")]
+        
         private void MoveQueue()
         {
             _queue.Move();

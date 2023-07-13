@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1913218221286351545}
   - component: {fileID: 7881458201899488790}
   - component: {fileID: 7493705775412199431}
+  - component: {fileID: 6669598361750432233}
   m_Layer: 5
   m_Name: Animal panel 1
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: d672d92fbc408ff43b587050a833325b, type: 2}
   m_Color: {r: 0.6627451, g: 0.80392164, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -97,6 +98,9 @@ MonoBehaviour:
   _animalsCount: {fileID: 4440792692489667226}
   _toReleaseCount: {fileID: 3602536321252275569}
   _increaseCounterButton: {fileID: 7493705775412199431}
+  _grayScaleFilters:
+  - {fileID: 6669598361750432233}
+  - {fileID: 252696366147633819}
   _testTotal: 0
   _testReady: 0
 --- !u!114 &7493705775412199431
@@ -143,6 +147,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6669598361750432233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988346866923098706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43af6d1cf6047df80d48415ed2ff85a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 1913218221286351545}
 --- !u!1 &4109899729703900504
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +254,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.45
+  m_fontSize: 18
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -387,7 +404,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.75
+  m_fontSize: 18
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -523,7 +540,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.6
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -715,6 +732,7 @@ GameObject:
   - component: {fileID: 8988144998560587798}
   - component: {fileID: 3275390367600875341}
   - component: {fileID: 2172612446553710035}
+  - component: {fileID: 252696366147633819}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -780,3 +798,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &252696366147633819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7989630382705061154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43af6d1cf6047df80d48415ed2ff85a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 2172612446553710035}

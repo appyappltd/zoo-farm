@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Logic.CellBuilding
 {
-    public class GardenBedCellOperator : BuildGridOperator
+    public class GardenBedGridOperator : BuildGridOperator
     {
         [SerializeField] private PlantId _plantId;
 

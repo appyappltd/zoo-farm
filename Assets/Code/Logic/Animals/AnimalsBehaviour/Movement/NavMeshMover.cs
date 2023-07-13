@@ -21,6 +21,12 @@ namespace Logic.Animals.AnimalsBehaviour.Movement
         protected override void FixedRun() =>
             Rotate();
 
+        public void SetNormalizedSpeed(float normalizedSpeed)
+        {
+            normalizedSpeed = Mathf.Clamp01(normalizedSpeed);
+            _agent.speed = normalizedSpeed * _maxSpeed;
+        }
+        
         public void SetDestination(Vector3 position)
         {
             NavMeshPath path = new NavMeshPath();

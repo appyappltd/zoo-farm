@@ -1,6 +1,7 @@
 using Observables;
 using Services.Animals;
 using TMPro;
+using Tools;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
 
@@ -8,13 +9,16 @@ namespace Ui.Windows
 {
     public class AnimalReleaseWindow : WindowBase
     {
-        private const string ReleaseAnimalsText = "Отпустить {0} животных(-ое)?";
+        private const string ReleaseAnimalsText = "Отпустить животных: {0}?";
+        private const string NoReleaseAnimalsText = "Сейчас некого отпустить";
+        private const string AnimalNotSelectedText = "Животное не выбрано";
 
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
         
         [SerializeField] private ReleaseAnimalPanel[] _releasePanels;
         [SerializeField] private Button _releaseButton;
         [SerializeField] private TextMeshProUGUI _releaseButtonText;
+        [SerializeField] private UiGrayScaleFilter _releaseButtonFilter;
 
         private IAnimalsService _animalsService;
         private int _totalReleaseAnimal;
@@ -25,18 +29,20 @@ namespace Ui.Windows
         public void Construct(IAnimalsService animalsService)
         {
             _animalsService = animalsService;
-            Debug.Log(_animalsService);
         }
 
         protected override void Initialize()
         {
-            _releasePanels = GetComponentsInChildren<ReleaseAnimalPanel>();
-            
             foreach (ReleaseAnimalPanel panel in _releasePanels)
             {
                 InitPanel(panel);
             }
-            
+
+            _releaseButtonFilter.SetEffectAmount(1);
+            _releaseButtonText.SetText(_animalsService.ReleaseReadyAnimalCount > 0
+                ? AnimalNotSelectedText
+                : NoReleaseAnimalsText);
+
             _releaseButton.onClick.AddListener(OnClickRelease);
         }
 
@@ -69,6 +75,14 @@ namespace Ui.Windows
         private void OnUpdateTotalReleaseCount(int prev, int curr)
         {
             _totalReleaseAnimal += curr - prev;
+
+            if (_totalReleaseAnimal == 0)
+            {
+                _releaseButtonText.SetText(AnimalNotSelectedText);
+                _releaseButtonFilter.SetEffectAmount(1);
+            }
+
+            _releaseButtonFilter.SetEffectAmount(0);
             _releaseButtonText.SetText(ReleaseAnimalsText, _totalReleaseAnimal);
             _releaseButton.interactable = _totalReleaseAnimal > 0;
         }

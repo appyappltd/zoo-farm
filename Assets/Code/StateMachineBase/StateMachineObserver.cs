@@ -1,17 +1,17 @@
-using StateMachineBase;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachineObserver : MonoBehaviour
+namespace StateMachineBase
 {
-    [SerializeField] private string _state;
-
-    private StateMachine machine;
-
-    private void Awake()
+    public class StateMachineObserver : MonoBehaviour
     {
-        machine= GetComponent<StateMachine>();
-        machine.CurrentStateType.Then(type => _state = type.Name);
+        [SerializeField] private string _state;
+
+        private StateMachine machine;
+
+        private void Awake()
+        {
+            machine= GetComponent<StateMachine>();
+            machine.CurrentStateType.Then(type => _state = type.Name);
+        }
     }
 }

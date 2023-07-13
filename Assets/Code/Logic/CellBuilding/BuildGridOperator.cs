@@ -11,8 +11,6 @@ namespace Logic.CellBuilding
 {
     public abstract class BuildGridOperator : MonoBehaviour, ITutorialTrigger
     {
-        private const string MaxCountException = "Trying to build more than the maximum number of buildings";
-
         private readonly Queue<BuildPlaceMarker> _positions = new Queue<BuildPlaceMarker>();
 
         [SerializeField] private List<BuildPlaceMarker> _buildPlaces;
@@ -23,7 +21,7 @@ namespace Logic.CellBuilding
         protected BuildCell ActiveBuildCell;
         
         private BuildPlaceMarker _currentMarker;
-        private bool _cellBuilt;
+        private bool _isCellBuilt = true;
 
         public event Action Triggered = () => { };
 
@@ -31,9 +29,11 @@ namespace Logic.CellBuilding
         {
             FillPositions();
             GameFactory = AllServices.Container.Single<IGameFactory>();
-            _currentMarker = _positions.Dequeue();
+            _currentMarker = _positions.Peek();
             ActiveBuildCell = GameFactory.CreateBuildCell(_currentMarker.Location.Position, _currentMarker.Location.Rotation)
                 .GetComponent<BuildCell>();
+            ActiveBuildCell.transform.SetParent(transform, true);
+            ActiveBuildCell.gameObject.SetActive(false);
             ActiveBuildCell.SetBuildCost(_buildCost);
             ActiveBuildCell.SetIcon(_currentMarker.Icon);
             ActiveBuildCell.Build += BuildAndActivate;
@@ -51,7 +51,7 @@ namespace Logic.CellBuilding
 
         public void Enable()
         {
-            enabled = true;
+            gameObject.SetActive(true);
             
             if (_isAutoBuild)
             {
@@ -61,7 +61,7 @@ namespace Logic.CellBuilding
 
         public void Disable()
         {
-            enabled = false;
+            gameObject.SetActive(false);
         }
 
         public void SetAutoNext(bool isAuto)
@@ -72,7 +72,7 @@ namespace Logic.CellBuilding
         [Button("Show Next")]
         public void ShowNextBuildCell()
         {
-            if (_cellBuilt == false)
+            if (_isCellBuilt == false)
                 return;
 
             if (_positions.TryDequeue(out BuildPlaceMarker marker))
@@ -80,7 +80,7 @@ namespace Logic.CellBuilding
                 ActiveBuildCell.Reposition(marker.Location);
                 ActiveBuildCell.SetIcon(marker.Icon);
                 _currentMarker = marker;
-                _cellBuilt = false;
+                _isCellBuilt = false;
                 ActiveBuildCell.gameObject.Enable();
             }
         }
@@ -109,7 +109,7 @@ namespace Logic.CellBuilding
         {
             BuildCell(_currentMarker);
             Triggered.Invoke();
-            _cellBuilt = true;
+            _isCellBuilt = true;
             ActiveBuildCell.gameObject.Disable();
         }
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Logic.Volunteers
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class VolunteerCreator : MonoBehaviour
+    public class VolunteerSpawner : MonoBehaviour
     {
         [SerializeField] private float _spawnDelay = 10f;
         [SerializeField] private VolunteerBand _volunteerBand;
@@ -13,14 +13,19 @@ namespace Logic.Volunteers
         private void Awake()
         {
             _timer = GetComponent<TimerOperator>();
+            _timer.SetUp(_spawnDelay, OnSpawn);
         }
 
-        private void Start()
+        public void Spawn()
         {
-            _timer.SetUp(_spawnDelay, OnSpawn);
+            _volunteerBand.CreateNewVolunteer();
+        }
+        
+        public void StartAutoSpawning()
+        {
             OnSpawn();
         }
-
+        
         private void OnSpawn()
         {
             if (_volunteerBand.VolunteersCount <= _volunteerBand.MaxVolunteers)
