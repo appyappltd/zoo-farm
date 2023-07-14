@@ -13,7 +13,6 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         
         [SerializeField] [Range(0, 100f)] private float _maxValue;
         [SerializeField] [Range(0, 1f)] private float _changeSpeed;
-        [SerializeField] [Range(0, 100f)] private float _startValue;
         [SerializeField] private Turn _turn;
 
         private ProgressBar _progressBar;
@@ -21,20 +20,20 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
 
         public IProgressBar ProgressBar => _progressBar;
 
-        private void Awake()
+        private void OnDestroy()
         {
-            _progressBar = new ProgressBar(_maxValue, _startValue);
-            _progressBarOperator = new ProgressBarOperator(_progressBar, _changeSpeed * _speedModifier, Convert.ToBoolean(_turn));
+            _progressBar.Empty -= Disable;
         }
 
-        protected override void OnEnabled() =>
+        public void Construct(float startValue)
+        {
+            enabled = false;
+            
+            _progressBar = new ProgressBar(_maxValue, startValue);
+            _progressBarOperator = new ProgressBarOperator(_progressBar, _changeSpeed * _speedModifier, Convert.ToBoolean(_turn));
+            
             _progressBar.Empty += Disable;
-
-        protected override void OnDisabled() =>
-            _progressBar.Empty -= Disable;
-
-        private void OnValidate() =>
-            enabled = _changeSpeed > 0;
+        }
 
         public void Disable() =>
             enabled = false;

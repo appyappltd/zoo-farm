@@ -142,7 +142,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _changeSpeed: 0.4
-  _startValue: 0
   _turn: 1
 --- !u!1 &2662996136815657581
 GameObject:
@@ -193,6 +192,7 @@ MonoBehaviour:
   _vitality: {fileID: 6708439799499972674}
   _satiety: {fileID: 7394784145383802163}
   _peppiness: {fileID: 6058482536156151028}
+  _age: {fileID: 5697992905838907410}
   _satietyReplanishSpeed: 0.5
   _peppinessReplanishSpeed: 0.5
   _maxWanderDistance: 3
@@ -452,7 +452,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _changeSpeed: 0.5
-  _startValue: 32.7
   _turn: 1
 --- !u!1 &3517778643612403819
 GameObject:
@@ -887,7 +886,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 20
   _changeSpeed: 0.005
-  _startValue: 6
   _turn: 0
 --- !u!1 &6050562250835130449
 GameObject:
@@ -1452,7 +1450,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _changeSpeed: 0.2
-  _startValue: 0
   _turn: 0
 --- !u!1 &8101718673406365527
 GameObject:

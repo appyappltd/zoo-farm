@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tutorial
 {
-    public class TutorialTriggerContainer : MonoBehaviour
+    public class TutorialTriggerStaticContainer : MonoBehaviour
     {
         [SerializeField] private TutorialTriggerStatic _trigger;
         [SerializeField] private bool _IsTriggerOnEnable;

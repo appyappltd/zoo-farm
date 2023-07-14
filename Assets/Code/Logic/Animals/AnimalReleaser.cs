@@ -1,9 +1,11 @@
+using Logic.Animals.AnimalsBehaviour;
 using Logic.Interactions;
 using Logic.Player;
 using Logic.Spawners;
 using Logic.Translators;
 using Services;
 using Services.Animals;
+using Tutorial.StaticTriggers;
 using Ui.Services;
 using UnityEngine;
 
@@ -15,6 +17,7 @@ namespace Logic.Animals
         //TODO: В дальнейшем за каждое животное разное количество денег
         [SerializeField] private int _coinsToSpawn;
         [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private TutorialTriggerStatic _animalReleasedTrigger;
 
         private CollectibleCoinSpawner _spawner;
         private IAnimalsService _animalService;
@@ -40,9 +43,10 @@ namespace Logic.Animals
             _playerInteraction.Interacted -= OnCompleteDelay;
         }
 
-        private void OnReleased(AnimalType type)
+        private void OnReleased(AnimalId type)
         {
             Debug.Log("Spawn coins");
+            _animalReleasedTrigger.Trigger(gameObject);
             _spawner.Spawn(_coinsToSpawn);
         }
     }

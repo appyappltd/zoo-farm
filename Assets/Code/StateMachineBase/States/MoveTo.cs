@@ -1,5 +1,5 @@
-﻿using Logic.Animals.AnimalsBehaviour.Movement;
-using Logic.AnimatorStateMachine;
+﻿using Logic.AnimatorStateMachine;
+using Logic.Movement;
 using UnityEngine;
 
 namespace StateMachineBase.States

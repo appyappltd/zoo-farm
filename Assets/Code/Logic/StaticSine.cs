@@ -56,8 +56,6 @@ namespace Logic
 
         private void BeginIncrease()
         {
-            Debug.Log("BeginIncrease");
-            
             _targetSize = _maxSize;
             _smoothTime = _playerInteraction.InteractionDelay;
             enabled = true;

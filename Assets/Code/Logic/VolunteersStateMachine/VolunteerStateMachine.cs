@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Logic.Animals.AnimalsBehaviour.Movement;
+using Logic.Movement;
 using Logic.Storages;
 using Logic.Volunteers;
 using Logic.VolunteersStateMachine.States;
@@ -20,9 +20,9 @@ namespace Logic.VolunteersStateMachine
 
         private Volunteer _volunteer;
         private Transform _outPlace;
-        private Queue _queue;
+        private TransformQueue _queue;
 
-        public void Construct(Queue queue, Transform outPlace, Volunteer volunteer)
+        public void Construct(TransformQueue queue, Transform outPlace, Volunteer volunteer)
         {
             _queue = queue;
             _outPlace = outPlace;

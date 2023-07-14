@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Logic.Volunteers
 {
-    public class Queue
+    public class TransformQueue
     {
         private readonly Transform[] _places;
 
@@ -12,7 +12,7 @@ namespace Logic.Volunteers
         public Transform Head => _places[0];
         public Transform Tail => _places[^1];
 
-        public Queue(Transform[] places)
+        public TransformQueue(Transform[] places)
         {
             _places = places;
 

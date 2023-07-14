@@ -1,8 +1,10 @@
+using Logic.Animals;
 using Logic.CellBuilding;
 using Logic.Gates;
 using Logic.Volunteers;
 using NTC.Global.Cache;
 using Services;
+using Services.Animals;
 using Services.Camera;
 using Tools;
 using Tutorial.StaticTriggers;
@@ -28,6 +30,7 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialTriggerStatic _animalHealed;
         [SerializeField] private TutorialTriggerStatic _foodTaken;
         [SerializeField] private TutorialTriggerStatic _animalHouseInteracted;
+        [SerializeField] private TutorialTriggerStatic _animalReleased;
         [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _houseBuilt;
         [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _plantBuilt;
         [SerializeField] private TutorialArrow _arrow;
@@ -38,7 +41,7 @@ namespace Tutorial.Directors
         [SerializeField] private VolunteerSpawner _volunteerSpawner;
         [SerializeField] private Gate _toVolunteerGate;
         [SerializeField] private Gate _toYardGate;
-
+        
         private ICameraOperatorService _cameraOperatorService;
         private TutorialInteractedTriggerContainer _healingOption;
         private TutorialInteractedTriggerContainer _medBed;
@@ -51,11 +54,6 @@ namespace Tutorial.Directors
             Construct(AllServices.Container.Single<ICameraOperatorService>());
         }
 
-        private void OnAnimalSpawned(GameObject animalObj)
-        {
-            _animal.SetParent(animalObj.transform, false);
-        }
-
         private void OnDestroy()
          {
              _firstMedBadSpawned.TriggeredPayload -= OnMedBadSpawned;
@@ -63,17 +61,11 @@ namespace Tutorial.Directors
              _firstAnimalSpawned.TriggeredPayload -= OnAnimalSpawned;
          }
 
-        private void OnMedToolSpawned(GameObject toolObject) =>
-             _healingOption = toolObject.GetComponent<TutorialInteractedTriggerContainer>();
-        
-        private void OnMedBadSpawned(GameObject bedObject) =>
-            _medBed = bedObject.GetComponent<TutorialInteractedTriggerContainer>();
-
         public void Construct(ICameraOperatorService cameraOperatorService)
         {
             _cameraOperatorService = cameraOperatorService;
         }
-        
+
         protected override void CollectModules()
         {
             TutorialModules.Add(new TutorialAction(() => Debug.Log("Begin tutorial")));
@@ -145,18 +137,30 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstHouse.position)));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalHouseInteracted));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
-            TutorialModules.Add(new TutorialAction((() =>
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialAction(() =>
             {
-                _medBedGridOperator.SetAutoNext(true);
-                _medBedGridOperator.ShowNextBuildCell();
-                _medToolGridOperator.SetAutoNext(true);
-                _medToolGridOperator.ShowNextBuildCell();
-                _houseGridOperator.SetAutoNext(true);
-                _houseGridOperator.ShowNextBuildCell();
-                _gardenBedGridOperator.SetAutoNext(true);
-                _gardenBedGridOperator.ShowNextBuildCell();
-            })));
+                _volunteerSpawner.StartAutoSpawning();
+                ActivateAutoBuild(_medBedGridOperator);
+                ActivateAutoBuild(_medToolGridOperator);
+                ActivateAutoBuild(_houseGridOperator);
+            }));
             TutorialModules.Add(new TutorialAction(() => Destroy(gameObject)));
         }
+
+        private void ActivateAutoBuild(BuildGridOperator buildGrid)
+        {
+            buildGrid.SetAutoNext(true);
+            buildGrid.ShowNextBuildCell();
+        }
+
+        private void OnAnimalSpawned(GameObject animalObj) =>
+            _animal.SetParent(animalObj.transform, false);
+
+        private void OnMedToolSpawned(GameObject toolObject) =>
+            _healingOption = toolObject.GetComponent<TutorialInteractedTriggerContainer>();
+
+        private void OnMedBadSpawned(GameObject bedObject) =>
+            _medBed = bedObject.GetComponent<TutorialInteractedTriggerContainer>();
     }
 }

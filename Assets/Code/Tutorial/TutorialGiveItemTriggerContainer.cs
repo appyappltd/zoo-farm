@@ -9,7 +9,7 @@ namespace Tutorial
     public class TutorialGiveItemTriggerContainer : MonoBehaviour
     {
         [SerializeField] [RequireInterface(typeof(IGetItemObserver))] private MonoBehaviour _getter;
-        [SerializeField] private TutorialTriggerStatic _triggerStatic;
+        [SerializeField] private StaticTriggers.TutorialTriggerStatic _triggerStatic;
 
         private void OnEnable() =>
             ((IGetItemObserver) _getter).Removed += OnGet;

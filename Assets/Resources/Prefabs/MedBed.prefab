@@ -239,7 +239,7 @@ MonoBehaviour:
   _spawnPlace: {fileID: 3424525604650532449}
   _playerInteraction: {fileID: 5436332981189037272}
   _timerOperator: {fileID: 4392389649313021502}
-  _healingTime: 2.5
+  _healingTime: 1
 --- !u!114 &8571788848278621971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4431564547bb4d4eb831e337bb283801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _medicineBed: {fileID: 2380999859386510404}
+  _medicalBed: {fileID: 2380999859386510404}
   _animalHealed: {fileID: 11400000, guid: 840349fadbd6b864ba0a2cbc1fc12cb8, type: 2}
 --- !u!208 &7134068636906600033
 NavMeshObstacle:
@@ -628,7 +628,7 @@ MonoBehaviour:
   _background: {fileID: 4310592037876106275}
   _toolIndicator: {fileID: 4679609245505398776}
   _healingIndicator: {fileID: 9037565044821224252}
-  _medicineBed: {fileID: 2380999859386510404}
+  _medicalBed: {fileID: 2380999859386510404}
   _medTools:
   - {fileID: 11400000, guid: bdce117ce4e686948bbc3c9e397ebe18, type: 2}
   - {fileID: 11400000, guid: be5b09628ab48ea4595ae3f31de4f986, type: 2}

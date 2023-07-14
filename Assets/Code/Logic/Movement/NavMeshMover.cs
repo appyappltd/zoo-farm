@@ -2,7 +2,7 @@ using NTC.Global.Cache;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Logic.Animals.AnimalsBehaviour.Movement
+namespace Logic.Movement
 {
     public class NavMeshMover : MonoCache
     {

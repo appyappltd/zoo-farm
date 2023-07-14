@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemId>k__BackingField: 2
   <Weight>k__BackingField: 3
-  TreatToolId: 2
+  AnimalType: 1
   BeginStats:
     VitalityRange: {x: 3.0252097, y: 23.193274}
     SatietyRange: {x: 0, y: 0}

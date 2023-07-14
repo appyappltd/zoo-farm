@@ -38,7 +38,7 @@ namespace Ui.Windows
                 InitPanel(panel);
             }
 
-            _releaseButtonFilter.SetEffectAmount(1);
+            SetButtonGrey();
             _releaseButtonText.SetText(_animalsService.ReleaseReadyAnimalCount > 0
                 ? AnimalNotSelectedText
                 : NoReleaseAnimalsText);
@@ -79,12 +79,18 @@ namespace Ui.Windows
             if (_totalReleaseAnimal == 0)
             {
                 _releaseButtonText.SetText(AnimalNotSelectedText);
-                _releaseButtonFilter.SetEffectAmount(1);
+                SetButtonGrey();
             }
 
-            _releaseButtonFilter.SetEffectAmount(0);
+            SetButtonColorful();
             _releaseButtonText.SetText(ReleaseAnimalsText, _totalReleaseAnimal);
             _releaseButton.interactable = _totalReleaseAnimal > 0;
         }
+
+        private void SetButtonColorful() =>
+            _releaseButtonFilter.SetEffectAmount(0);
+
+        private void SetButtonGrey() =>
+            _releaseButtonFilter.SetEffectAmount(1);
     }
 }

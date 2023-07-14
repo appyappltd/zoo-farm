@@ -24,12 +24,11 @@ namespace Infrastructure.Factory
         private readonly AnimalBuilder _animalBuilder;
         private readonly MedStandBuilder _medStandBuilder;
         private readonly GardenBadBuilder _gardenBedBuilder;
+        private readonly MedBedBuilder _medBedBuilder;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
-
         public IPlantFactory PlantFactory { get; }
-
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, IAnimalsService animalsService)
@@ -39,9 +38,12 @@ namespace Infrastructure.Factory
             _persistentProgressService = persistentProgressService;
 
             PlantFactory = new PlantFactory(assets);
+
+            MedicalToolNeedsReporter medicineToolReporter = new MedicalToolNeedsReporter();
             
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _medStandBuilder = new MedStandBuilder(staticDataService);
+            _medStandBuilder = new MedStandBuilder(staticDataService, medicineToolReporter);
+            _medBedBuilder = new MedBedBuilder(medicineToolReporter);
             _gardenBedBuilder = new GardenBadBuilder(staticDataService, PlantFactory);
         }
 
@@ -62,10 +64,10 @@ namespace Infrastructure.Factory
         public GameObject CreateHud() =>
             _assets.Instantiate(AssetPath.HudPath);
 
-        public GameObject CreateAnimal(AnimalType animalType, Vector3 at)
+        public GameObject CreateAnimal(AnimalItemData animalData, Vector3 at)
         {
-            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalType}", at);
-            _animalBuilder.Build(animal.GetComponent<Animal>());
+            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalData.Type}", at);
+            _animalBuilder.Build(animal.GetComponent<Animal>(), animalData);
             return animal;
         }
 
@@ -88,8 +90,13 @@ namespace Infrastructure.Factory
             return gardenBedObject;
         }
 
-        public GameObject CreateMedBed(Vector3 at, Quaternion rotation) =>
-            InstantiateRegistered(AssetPath.MedBed, at, rotation);
+        public GameObject CreateMedBed(Vector3 at, Quaternion rotation)
+        {
+            MedicalBed medicalBed = InstantiateRegistered(AssetPath.MedBed, at, rotation)
+                .GetComponent<MedicalBed>();
+            _medBedBuilder.Build(medicalBed);
+            return medicalBed.gameObject;
+        }
 
         public GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicineToolId toolIdType)
         {
@@ -99,10 +106,8 @@ namespace Infrastructure.Factory
             return medToolStandObject;
         }
 
-        public GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicineToolId toolIdType)
-        {
-            return _assets.Instantiate($"{AssetPath.MedToolItemPath}/{toolIdType}", at, rotation);
-        }
+        public GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicineToolId toolIdType) =>
+            _assets.Instantiate($"{AssetPath.MedToolItemPath}/{toolIdType}", at, rotation);
 
         public GameObject CreateVolunteer(Vector3 at, Transform parent)
         {
@@ -111,10 +116,8 @@ namespace Infrastructure.Factory
             return volunteerObject;
         }
 
-        public GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId)
-        {
-            return _assets.Instantiate($"{AssetPath.HandItemPath}/{itemId}", at, rotation);
-        }
+        public GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId) =>
+            _assets.Instantiate($"{AssetPath.HandItemPath}/{itemId}", at, rotation);
 
         private GameObject InstantiateRegistered(string prefabPath)
         {

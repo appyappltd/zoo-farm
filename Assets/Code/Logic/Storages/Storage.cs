@@ -93,7 +93,6 @@ namespace Logic.Storages
         {
             item.Mover.Move(TopPlace, TopPlace);
             _items[_topIndex] = item;
-            Debug.Log("place" + " " + gameObject.name + " index " + _topIndex);
             _topIndex++;
             Replenished.Invoke(item);
         }
@@ -101,7 +100,6 @@ namespace Logic.Storages
         private void RevertItem(IItem item)
         {
             int revertItemIndex = Array.IndexOf(_items, item);
-            Debug.Log("revert" + " " + gameObject.name + " index " + revertItemIndex);
             Sort(revertItemIndex);
             _topIndex--;
         }

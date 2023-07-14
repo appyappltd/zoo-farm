@@ -24,7 +24,7 @@ namespace Logic.Volunteers
         [SerializeField] private List<Volunteer> _volunteers = new();
 
         private IGameFactory _gameFactory;
-        private Queue _queue;
+        private TransformQueue _queue;
         private Volunteer _volunteerCashed;
         private int _volunteersInQueue;
         
@@ -36,7 +36,7 @@ namespace Logic.Volunteers
         private void Awake()
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
-            _queue = new Queue(_queueTransforms);
+            _queue = new TransformQueue(_queueTransforms);
         }
 
         public IItem Get()

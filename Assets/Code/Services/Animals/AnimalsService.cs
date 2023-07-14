@@ -17,7 +17,7 @@ namespace Services.Animals
         public AnimalsService(IAnimalHouseService houseService) =>
             _houseService = houseService;
 
-        public event Action<AnimalType> Released = t => { };
+        public event Action<AnimalId> Released = t => { };
 
         public int TotalAnimalCount => _animals.Count;
         public int ReleaseReadyAnimalCount => _animals.Count(animal => animal.Stats.Vitality.IsFull);
@@ -62,7 +62,7 @@ namespace Services.Animals
             Unregister(releasedAnimal);
             _houseService.VacateHouse(releasedAnimal.AnimalId);
             releasedAnimal.Destroy();
-            Released.Invoke(releasedAnimal.AnimalId.Type);
+            Released.Invoke(releasedAnimal.AnimalId);
 
             Debug.Log($"Animal {releasedAnimal.AnimalId.Type} (id: {releasedAnimal.AnimalId.ID}) released");
         }

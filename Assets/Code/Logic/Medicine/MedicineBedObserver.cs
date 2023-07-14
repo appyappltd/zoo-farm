@@ -1,21 +1,22 @@
 using Tutorial.StaticTriggers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Logic.Medicine
 {
     public class MedicineBedTutorialObserver : MonoBehaviour
     {
-        [SerializeField] private MedicineBed _medicineBed;
+        [FormerlySerializedAs("_medicineBed")] [SerializeField] private MedicalBed _medicalBed;
         [SerializeField] private TutorialTriggerStatic _animalHealed;
         
         private void OnEnable()
         {
-            _medicineBed.Healed += OnHealed;
+            _medicalBed.Healed += OnHealed;
         }
 
         private void OnDisable()
         {
-            _medicineBed.Healed -= OnHealed;
+            _medicalBed.Healed -= OnHealed;
         }
 
         private void OnHealed()

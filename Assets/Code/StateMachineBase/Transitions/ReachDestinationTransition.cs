@@ -1,4 +1,4 @@
-﻿using Logic.Animals.AnimalsBehaviour.Movement;
+﻿using Logic.Movement;
 
 namespace StateMachineBase.Transitions
 {

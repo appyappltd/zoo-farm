@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
-using Logic.Animals.AnimalsBehaviour.Movement;
 using Logic.Animals.AnimalsStateMachine.States;
+using Logic.Movement;
 using NaughtyAttributes;
 using Progress;
 using StateMachineBase;
@@ -22,6 +22,7 @@ namespace Logic.Animals.AnimalsStateMachine
         [SerializeField] private StatIndicator _vitality;
         [SerializeField] private StatIndicator _satiety;
         [SerializeField] private StatIndicator _peppiness;
+        [SerializeField] private StatIndicator _age;
 
         [Header("Stats Changing Speed")] [Space]
         [SerializeField] private float _satietyReplanishSpeed;
@@ -29,12 +30,14 @@ namespace Logic.Animals.AnimalsStateMachine
 
         [Header("Move Settings")] [Space]
         [SerializeField] private float _maxWanderDistance;
-        [SerializeField] private Transform _restPlace;
-        [SerializeField] private Transform _eatPlace;
 
         [MinMaxSlider(1f, 20f)]
         [SerializeField] private Vector2 _idleDelayRange;
+
         [SerializeField] private float _placeOffset;
+
+        private Transform _restPlace;
+        private Transform _eatPlace;
 
         public void Construct(Transform houseRestPlace, Transform houseEatPlace)
         {
@@ -42,6 +45,7 @@ namespace Logic.Animals.AnimalsStateMachine
             _eatPlace = houseEatPlace;
 
             SetUp();
+            EnableStatIndicators();
         }
 
         private void SetUp()
@@ -113,6 +117,14 @@ namespace Logic.Animals.AnimalsStateMachine
                     }
                 },
             });
+        }
+
+        private void EnableStatIndicators()
+        {
+            _vitality.Enable();
+            _satiety.Enable();
+            _peppiness.Enable();
+            _age.Enable();
         }
 
         private ActionTransition GetOnFullActionTransition(IProgressBarView barView)

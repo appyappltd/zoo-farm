@@ -1,5 +1,5 @@
 using System;
-using Logic.Animals.AnimalsBehaviour.Movement;
+using Logic.Movement;
 using Observables;
 using StateMachineBase;
 using StateMachineBase.States;

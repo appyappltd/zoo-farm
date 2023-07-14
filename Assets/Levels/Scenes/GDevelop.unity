@@ -6476,6 +6476,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 840349fadbd6b864ba0a2cbc1fc12cb8, type: 2}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _animalReleased
+      value: 
+      objectReference: {fileID: 11400000, guid: 96f580ebf4425f845b82d88379736969, type: 2}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _toVolunteerGate
       value: 
       objectReference: {fileID: 435966395}
@@ -6573,11 +6577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822002433234555347, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.557
+      value: -7.498
       objectReference: {fileID: 0}
     - target: {fileID: 5822002433234555347, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.419
+      value: -5.13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10406,7 +10410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _isAutoBuild
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _buildPlaces.Array.size
@@ -11107,6 +11111,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4724598109352393965, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+      propertyPath: _sequenceConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b165dced6200844bbed8824bbbd533c, type: 2}
     - target: {fileID: 5484098361386591395, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
       propertyPath: _spawnDelay
       value: 1
@@ -11293,6 +11301,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4185388342728400461, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: _animalReleasedTrigger
+      value: 
+      objectReference: {fileID: 11400000, guid: 96f580ebf4425f845b82d88379736969, type: 2}
     - target: {fileID: 5348634046191187572, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

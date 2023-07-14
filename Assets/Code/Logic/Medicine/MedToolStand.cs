@@ -18,8 +18,10 @@ namespace Logic.Medicine
         [SerializeField, Min(.0f)] private float _respawnTime = 2f;
 
         private IGameFactory _gameFactory;
-        private MedicineToolId _toolIdType;
+        private MedicalToolNeedsReporter _needsReporter;
         private IItem _toolItem;
+        private MedicineToolId _toolId;
+        private bool _isNeeded;
 
         public event Action<IItem> Removed = i => { };
 
@@ -32,10 +34,16 @@ namespace Logic.Medicine
             _timerOperator.SetUp(_respawnTime, OnRespawn);
         }
 
-        public void Construct(MedToolStandConfig config)
+        private void OnDestroy() =>
+            _needsReporter.ToolNeeds -= OnToolNeeds;
+
+        public void Construct(MedToolStandConfig config, MedicalToolNeedsReporter needsReporter)
         {
-            _toolIdType = config.Type;
+            _needsReporter = needsReporter;
+            _toolId = config.Type;
             _icon.sprite = config.Icon;
+            _needsReporter.ToolNeeds += OnToolNeeds;
+            _isNeeded = _needsReporter.IsNeeds(_toolId);
             
             PlayRespawnDelay();
         }
@@ -45,6 +53,7 @@ namespace Logic.Medicine
             PlayRespawnDelay();
             IItem toolItem = _toolItem;
             _toolItem = null;
+            _isNeeded = false;
             Removed.Invoke(toolItem);
             return toolItem;
         }
@@ -52,14 +61,16 @@ namespace Logic.Medicine
         public bool TryPeek(ItemId byId, out IItem item)
         {
             item = null;
+            
+            if (_isNeeded == false)
+                return false;
 
-            if (_toolItem is not null && (_toolItem.ItemId & ItemId.Medical) > 0)
-            {
-                item = _toolItem;
-                return true;
-            }
+            if (_toolItem is null || (_toolItem.ItemId & ItemId.Medical) <= 0)
+                return false;
+            
+            item = _toolItem;
+            return true;
 
-            return false;
         }
 
         public bool TryGet(ItemId byId, out IItem result)
@@ -74,9 +85,12 @@ namespace Logic.Medicine
             return false;
         }
 
+        private void OnToolNeeds(MedicineToolId toolId) =>
+            _isNeeded = toolId == _toolId;
+
         private void OnRespawn()
         {
-            _toolItem = _gameFactory.CreateMedToolItem(_spawnPlace.position, Quaternion.identity, _toolIdType)
+            _toolItem = _gameFactory.CreateMedToolItem(_spawnPlace.position, Quaternion.identity, _toolId)
                 .GetComponent<IItem>();
         }
 

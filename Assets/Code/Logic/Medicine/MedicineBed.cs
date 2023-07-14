@@ -14,12 +14,12 @@ using UnityEngine;
 namespace Logic.Medicine
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicineBed : MonoCache, IAddItem, IGetItemObserver
+    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField] private TimerOperator _timerOperator;
-        [SerializeField] [Range(1f, 5f)] private float _healingTime = 2.5f;
+        [SerializeField] [Range(0f, 5f)] private float _healingTime = 2.5f;
 
         private AnimalItemData _animalData;
         private MedToolItemData _medToolData;
@@ -67,9 +67,7 @@ namespace Logic.Medicine
                 _animalData = item.ItemData as AnimalItemData;
                 _animalItem = item;
             }
-                
-
-            if (ItemIsMedTool(item))
+            else if (ItemIsMedTool(item))
             {
                 _medToolData = item.ItemData as MedToolItemData;
                 _medToolItem = item;
@@ -95,24 +93,9 @@ namespace Logic.Medicine
             Healed.Invoke();
             _isHealing = false;
 
-            if (_animalData is null)
-            {
-                throw new NullReferenceException("Animal Data null");
-            }
-            
-            if (_gameFactory is null)
-            {
-                throw new NullReferenceException("Game Factory null");
-            }
-            
-            if (_spawnPlace is null)
-            {
-                throw new NullReferenceException("Spawn place null");
-            }
-            
-            _healingAnimal = _gameFactory.CreateAnimal(_animalData.AnimalId.Type, _spawnPlace.position)
+            _healingAnimal = _gameFactory.CreateAnimal(_animalData, _spawnPlace.position)
                 .GetComponent<Animal>();
-            
+
             RemoveItem(_animalItem);
             RemoveItem(_medToolItem);
             

@@ -1,24 +1,24 @@
 using Logic.Animals;
-using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Medicine;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Data.ItemsData
 {
-    [CreateAssetMenu(menuName = "Item Data/Animal Item Data", fileName = "NewAnimalItemData", order = 0)]
-    public class AnimalItemData : ScriptableObject, IItemData
+    public class AnimalItemData : IItemData
     {
-        [field: SerializeField] public ItemId ItemId { get; set; }
-        [field: SerializeField] public int Weight { get; set; }
-        public AnimalId AnimalId;
-        public MedicineToolId TreatToolId;
-        public BeginStats BeginStats;
+        private readonly AnimalItemStaticData _data;
+        private readonly MedicineToolId _treatToolId;
 
-        private void Awake()
+        public ItemId ItemId => _data.ItemId;
+        public int Weight => _data.Weight;
+        public AnimalType Type => _data.AnimalType;
+        public MedicineToolId TreatToolId => _treatToolId;
+        public BeginStats BeginStats => _data.BeginStats;
+        
+        public AnimalItemData(AnimalItemStaticData data, MedicineToolId treatToolId)
         {
-            AnimalId = new AnimalId(AnimalType.CatB, GetInstanceID());
+            _data = data;
+            _treatToolId = treatToolId;
         }
     }
 }

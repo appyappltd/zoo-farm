@@ -5,6 +5,7 @@ using Logic.Medicine;
 using Logic.Storages.Items;
 using StaticData;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Ui
 {
@@ -13,7 +14,7 @@ namespace Ui
         [SerializeField] private SpriteRenderer _background;
         [SerializeField] private SpriteRenderer _toolIndicator;
         [SerializeField] private HealingIndicator _healingIndicator;
-        [SerializeField] private MedicineBed _medicineBed;
+        [FormerlySerializedAs("_medicineBed")] [SerializeField] private MedicalBed _medicalBed;
         [SerializeField] private MedToolStandConfig[] _medTools;
 
         private Dictionary<MedicineToolId, Sprite> _toolSprites;
@@ -28,14 +29,14 @@ namespace Ui
 
         private void OnEnable()
         {
-            _medicineBed.Added += OnAdded;
-            _medicineBed.Healed += OnHealed;
+            _medicalBed.Added += OnAdded;
+            _medicalBed.Healed += OnHealed;
         }
         
         private void OnDisable()
         {
-            _medicineBed.Added -= OnAdded;
-            _medicineBed.Healed -= OnHealed;
+            _medicalBed.Added -= OnAdded;
+            _medicalBed.Healed -= OnHealed;
         }
 
         private void OnHealed()
