@@ -15,3 +15,5 @@ MonoBehaviour:
   Configs:
   - WindowId: 1
     Template: {fileID: 8265833864221994856, guid: f25c4c20db90c2c47a0714869e18b9c9, type: 3}
+  - WindowId: 2
+    Template: {fileID: 8452867978458585085, guid: 014ac8e7f40a15d49969615240672f72, type: 3}

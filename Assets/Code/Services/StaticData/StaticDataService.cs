@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Medicine;
 using Logic.Plants.PlantSettings;
@@ -16,10 +17,11 @@ namespace Services.StaticData
     public class StaticDataService : IStaticDataService
     {
         private const string EmotionConfigPath = "StaticData/EmotionConfigs";
-        private const string WindowPath = "StaticData/WindowConfigs";
+        private const string WindowConfigPath = "StaticData/WindowConfigs";
         private const string MedStandConfigPath = "StaticData/MedStandConfigs";
         private const string SpawnPlaceConfigPath = "StaticData/SpawnPlaceConfig";
         private const string GardenBedConfigPath = "StaticData/GardenBedConfigs";
+        private const string AnimalIconConfigPath = "StaticData/AnimalIconConfigs";
         
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
@@ -27,16 +29,18 @@ namespace Services.StaticData
         private Dictionary<PlantId, GardenBedConfig> _gardenBedConfigs;
         
         private SpawnPlaceConfig _spawnPlaceConfig;
+        private AnimalIconConfig _animalIcons;
 
         public void Load()
         {
             _emotionConfigs = LoadFor<EmotionId, EmotionConfig>(EmotionConfigPath, x => x.Name);
             _medStandConfigs = LoadFor<MedicineToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
             _gardenBedConfigs = LoadFor<PlantId, GardenBedConfig>(GardenBedConfigPath, x => x.PlantId);
-            
+
+            _animalIcons = Resources.Load<AnimalIconConfig>(AnimalIconConfigPath);
             _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
             _windows = Resources
-                .Load<WindowStaticData>(WindowPath)
+                .Load<WindowStaticData>(WindowConfigPath)
                 .Configs
                 .ToDictionary(x => x.WindowId, x => x);
         }
@@ -49,6 +53,9 @@ namespace Services.StaticData
 
         public Transform SpawnPlaceById(SpawnPlaceId placeId) =>
             _spawnPlaceConfig.SpawnPlaces[placeId].SpawnPlaceByDefault;
+
+        public Sprite IconByAnimalType(AnimalType animalIdType) =>
+            _animalIcons.AnimalIcons[animalIdType];
 
         public MedToolStandConfig MedStandConfigById(MedicineToolId toolIdId) =>
             GetDataFor(toolIdId, _medStandConfigs);

@@ -3,6 +3,7 @@
   public enum WindowId : byte
   {
     None = 0,
-    AnimalRelease
+    AnimalRelease = 1,
+    BuildHouse = 2,
   }
 }

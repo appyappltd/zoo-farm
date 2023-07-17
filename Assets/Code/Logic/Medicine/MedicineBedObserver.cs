@@ -1,3 +1,5 @@
+using Logic.Animals;
+using Logic.Animals.AnimalsBehaviour;
 using Tutorial.StaticTriggers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -19,7 +21,7 @@ namespace Logic.Medicine
             _medicalBed.Healed -= OnHealed;
         }
 
-        private void OnHealed()
+        private void OnHealed(AnimalId _)
         {
             _animalHealed.Trigger(gameObject);
         }

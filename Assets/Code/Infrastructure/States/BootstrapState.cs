@@ -63,7 +63,8 @@ namespace Infrastructure.States
                     _services.Single<IAssetProvider>(),
                     _services.Single<IStaticDataService>(),
                     _services.Single<IPersistentProgressService>(),
-                    _services.Single<IAnimalsService>()
+                    _services.Single<IAnimalsService>(),
+                    _services.Single<IAnimalHouseService>()
                 ));
             _services.RegisterSingle<IWindowService>(
                 new WindowService(

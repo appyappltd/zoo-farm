@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
 using Infrastructure.Factory;
 using NaughtyAttributes;
 using NTC.Global.System;
 using Services;
-using Tutorial;
 using UnityEngine;
 
 namespace Logic.CellBuilding
 {
-    public abstract class BuildGridOperator : MonoBehaviour, ITutorialTrigger
+    public abstract class BuildGridOperator : MonoBehaviour
     {
         private readonly Queue<BuildPlaceMarker> _positions = new Queue<BuildPlaceMarker>();
 
@@ -22,8 +20,6 @@ namespace Logic.CellBuilding
         
         private BuildPlaceMarker _currentMarker;
         private bool _isCellBuilt = true;
-
-        public event Action Triggered = () => { };
 
         private void Awake()
         {
@@ -108,7 +104,6 @@ namespace Logic.CellBuilding
         private void BuildCell()
         {
             BuildCell(_currentMarker);
-            Triggered.Invoke();
             _isCellBuilt = true;
             ActiveBuildCell.gameObject.Disable();
         }

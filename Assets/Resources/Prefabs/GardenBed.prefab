@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 2946471688155417992}
   - component: {fileID: 7933672959643137799}
   - component: {fileID: 7385303102356367107}
+  - component: {fileID: 8860913446579008965}
   m_Layer: 7
   m_Name: GardenBed
   m_TagString: Untagged
@@ -203,6 +204,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _getter: {fileID: 7933672959643137799}
   _triggerStatic: {fileID: 11400000, guid: 67411d56389732a4c932415e5ff870f3, type: 2}
+--- !u!114 &8860913446579008965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7515118753703320428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6587e1c10a14308820357213e533404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trigger: {fileID: 11400000, guid: 8e2a395fa87dba54eb30e96ad61473e8, type: 2}
+  _IsTriggerOnEnable: 1
+  _IsTriggerOnDisable: 0
 --- !u!1 &7647510445884541044
 GameObject:
   m_ObjectHideFlags: 0

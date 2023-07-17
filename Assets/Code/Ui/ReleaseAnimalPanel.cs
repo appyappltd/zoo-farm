@@ -20,8 +20,7 @@ namespace Ui
         [SerializeField] private TextSetter _toReleaseCount;
         [SerializeField] private Button _increaseCounterButton;
         [SerializeField] private List<UiGrayScaleFilter> _grayScaleFilters;
-        
-        
+
 #if UNITY_EDITOR
         [SerializeField] private int _testTotal;
         [SerializeField] private int _testReady;

@@ -5,25 +5,29 @@ using Infrastructure.Factory;
 using JetBrains.Annotations;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
-using UnityEngine;
 
 namespace Services.AnimalHouses
 {
     public class AnimalHouseService : IAnimalHouseService
     {
         private const string HouseNotFoundException = "An animal with this Id has not been assigned a home";
+        
         private readonly IGameFactory _gameFactory;
-
+        
         private readonly List<AnimalHouse> _animalHouses = new List<AnimalHouse>();
         private readonly Queue<Func<IAnimal>> _queueInHouse = new Queue<Func<IAnimal>>();
+        private readonly List<AnimalId> _animalsInQueue = new List<AnimalId>();
 
-        public void TakeQueueToHouse(Func<IAnimal> callback)
+        public IReadOnlyList<AnimalId> AnimalsInQueue => _animalsInQueue;
+
+        public void TakeQueueToHouse(AnimalId animalId, Func<IAnimal> callback)
         {
             AnimalHouse freeHouse = GetFreeHouse();
 
             if (freeHouse is null)
             {
                 _queueInHouse.Enqueue(callback);
+                _animalsInQueue.Add(animalId);
             }
             else
             {
@@ -34,8 +38,6 @@ namespace Services.AnimalHouses
 
         public void VacateHouse(AnimalId withAnimalId)
         {
-            Debug.Log(withAnimalId);
-
             AnimalHouse attachedHouse =
                 _animalHouses.FirstOrDefault(house => house.IsTaken && house.AnimalId.Equals(withAnimalId));
 
@@ -52,6 +54,7 @@ namespace Services.AnimalHouses
             if (_queueInHouse.TryDequeue(out Func<IAnimal> callback))
             {
                 IAnimal animal = callback.Invoke();
+                _animalsInQueue.Remove(animal.AnimalId);
                 TakeHouse(house, animal);
             }
         }

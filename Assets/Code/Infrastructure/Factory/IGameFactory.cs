@@ -19,7 +19,7 @@ namespace Infrastructure.Factory
         GameObject CreateHud();
         GameObject CreateHero(Vector3 vector3);
         GameObject CreateAnimal(AnimalItemData animalData, Vector3 at);
-        GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation);
+        GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType);
         GameObject CreateBuildCell(Vector3 at, Quaternion rotation);
         GameObject CreateVisual(VisualType visual, Quaternion quaternion, Transform container);
         GameObject CreateCollectibleCoin(Transform container);

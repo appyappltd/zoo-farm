@@ -1,4 +1,5 @@
-﻿using Logic.Animals.AnimalsBehaviour.Emotions;
+﻿using Logic.Animals;
+using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Medicine;
 using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
@@ -17,5 +18,6 @@ namespace Services.StaticData
         Transform SpawnPlaceById(SpawnPlaceId placeId);
         MedToolStandConfig MedStandConfigById(MedicineToolId toolIdId);
         GardenBedConfig GardenBedConfigById(PlantId plantId);
+        Sprite IconByAnimalType(AnimalType animalIdType);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using Data.ItemsData;
 using Infrastructure.Factory;
+using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Interactions;
 using Logic.Player;
@@ -14,7 +15,7 @@ using UnityEngine;
 namespace Logic.Medicine
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver
+    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IMedBedReporter
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
@@ -31,11 +32,13 @@ namespace Logic.Medicine
         private IAnimalHouseService _houseService;
 
         private bool _isHealing;
-        private Animal _healingAnimal;
-
+        private IAnimal _healingAnimal;
+        private byte Id;
+        
         public event Action<IItem> Added = i => { };
         public event Action<IItem> Removed = i => { };
-        public event Action Healed = () => { };
+        public event Action<AnimalId> Healed = i => { };
+        public event Action<AnimalId> HouseFound = i => { };
 
         private void Awake()
         {
@@ -90,18 +93,20 @@ namespace Logic.Medicine
         private void OnHealed()
         {
             Debug.Log("Healed");
-            Healed.Invoke();
             _isHealing = false;
 
             _healingAnimal = _gameFactory.CreateAnimal(_animalData, _spawnPlace.position)
                 .GetComponent<Animal>();
 
+            Healed.Invoke(_healingAnimal.AnimalId);
+            
             RemoveItem(_animalItem);
             RemoveItem(_medToolItem);
             
-            _houseService.TakeQueueToHouse(() =>
+            _houseService.TakeQueueToHouse( _healingAnimal.AnimalId,() =>
             {
                 FreeTheBad();
+                HouseFound.Invoke(_healingAnimal.AnimalId);
                 return _healingAnimal;
             });
         }

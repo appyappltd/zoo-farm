@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5250873f8232406dbe84697ced10ddf6, type: 3}
-  m_Name: CatBItem
+  m_Name: CatItem
   m_EditorClassIdentifier: 
   <ItemId>k__BackingField: 2
   <Weight>k__BackingField: 3

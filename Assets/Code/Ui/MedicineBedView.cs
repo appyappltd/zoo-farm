@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data.ItemsData;
+using Logic.Animals;
+using Logic.Animals.AnimalsBehaviour;
 using Logic.Medicine;
 using Logic.Storages.Items;
 using StaticData;
@@ -14,7 +16,8 @@ namespace Ui
         [SerializeField] private SpriteRenderer _background;
         [SerializeField] private SpriteRenderer _toolIndicator;
         [SerializeField] private HealingIndicator _healingIndicator;
-        [FormerlySerializedAs("_medicineBed")] [SerializeField] private MedicalBed _medicalBed;
+        [FormerlySerializedAs("_medicineBed")]
+        [SerializeField] private MedicalBed _medicalBed;
         [SerializeField] private MedToolStandConfig[] _medTools;
 
         private Dictionary<MedicineToolId, Sprite> _toolSprites;
@@ -39,7 +42,7 @@ namespace Ui
             _medicalBed.Healed -= OnHealed;
         }
 
-        private void OnHealed()
+        private void OnHealed(AnimalId _)
         {
             _healingIndicator.Hide();
             _background.enabled = false;

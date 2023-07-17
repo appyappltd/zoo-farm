@@ -1,4 +1,5 @@
 using Data.ItemsData;
+using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services.Animals;
 using Services.StaticData;

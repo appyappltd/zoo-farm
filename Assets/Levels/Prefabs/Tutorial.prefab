@@ -114,7 +114,9 @@ MonoBehaviour:
   _animal: {fileID: 601386070069414713}
   _plant: {fileID: 0}
   _animalTransmittingZone: {fileID: 0}
-  _firstHealingOption: {fileID: 0}
+  _firstMedToolSpawnPoint: {fileID: 0}
+  _firstMedBedSpawnPoint: {fileID: 0}
+  _beginnerCoinsCollected: {fileID: 11400000, guid: a213dadf85cf67b4c88cf1ad40bb42bd, type: 2}
   _firstMedBadSpawned: {fileID: 11400000, guid: 7ab25859dc525684a9ba219047c7b4fa, type: 2}
   _firstHealingOptionSpawned: {fileID: 11400000, guid: fd852b03ab82e3e41bc97870dd0786d5, type: 2}
   _firstAnimalSpawned: {fileID: 11400000, guid: b7d91cec2845b014c8509d180fd4d4de, type: 2}
@@ -124,11 +126,15 @@ MonoBehaviour:
   _animalHealed: {fileID: 11400000, guid: 840349fadbd6b864ba0a2cbc1fc12cb8, type: 2}
   _foodTaken: {fileID: 11400000, guid: 67411d56389732a4c932415e5ff870f3, type: 2}
   _animalHouseInteracted: {fileID: 11400000, guid: e7c35ae65949e6345b72a7baec7e61e3, type: 2}
-  _houseBuilt: {fileID: 0}
-  _plantBuilt: {fileID: 0}
+  _animalReleased: {fileID: 11400000, guid: 96f580ebf4425f845b82d88379736969, type: 2}
+  _houseBuilt: {fileID: 11400000, guid: e732381ca729594488badb8a3cb35c7c, type: 2}
+  _plantBuilt: {fileID: 11400000, guid: 8e2a395fa87dba54eb30e96ad61473e8, type: 2}
   _arrow: {fileID: 194688275876741893}
   _medBedGridOperator: {fileID: 0}
   _medToolGridOperator: {fileID: 0}
+  _houseGridOperator: {fileID: 0}
+  _gardenBedGridOperator: {fileID: 0}
+  _volunteerSpawner: {fileID: 0}
   _toVolunteerGate: {fileID: 0}
   _toYardGate: {fileID: 0}
 --- !u!1001 &5469357750844048042
@@ -145,7 +151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1958194717119288185, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.981
+      value: -7.498
       objectReference: {fileID: 0}
     - target: {fileID: 1958194717119288185, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalPosition.y
@@ -153,7 +159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1958194717119288185, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.774
+      value: -5.13
       objectReference: {fileID: 0}
     - target: {fileID: 1958194717119288185, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalRotation.w

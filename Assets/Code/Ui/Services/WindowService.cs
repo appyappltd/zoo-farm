@@ -1,29 +1,27 @@
 ﻿using System;
 using Ui.Factory;
+using UnityEngine;
 
 namespace Ui.Services
 {
-  public class WindowService : IWindowService
-  {
-    private readonly IUIFactory _uiFactory;
-
-    public WindowService(IUIFactory uiFactory)
+    public class WindowService : IWindowService
     {
-      _uiFactory = uiFactory;
-    }
+        private readonly IUIFactory _uiFactory;
 
-    public void Open(WindowId windowId)
-    {
-      switch (windowId)
-      {
-        case WindowId.None:
-          break;
-        case WindowId.AnimalRelease:
-          _uiFactory.CreateReleaseAnimalWindow();
-          break;
-        default:
-          throw new ArgumentOutOfRangeException(nameof(windowId), windowId, null);
-      }
+        public WindowService(IUIFactory uiFactory)
+        {
+            _uiFactory = uiFactory;
+        }
+
+        public GameObject Open(WindowId windowId)
+        {
+            return windowId switch
+            {
+                WindowId.None => null,
+                WindowId.AnimalRelease => _uiFactory.CreateReleaseAnimalWindow(),
+                WindowId.BuildHouse => _uiFactory.CreateBuildHouseWindow(),
+                _ => throw new ArgumentOutOfRangeException(nameof(windowId), windowId, null)
+            };
+        }
     }
-  }
 }

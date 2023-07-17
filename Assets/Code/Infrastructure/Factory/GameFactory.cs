@@ -25,6 +25,7 @@ namespace Infrastructure.Factory
         private readonly MedStandBuilder _medStandBuilder;
         private readonly GardenBadBuilder _gardenBedBuilder;
         private readonly MedBedBuilder _medBedBuilder;
+        private readonly AnimalHouseBuilder _animalHouseBuilder;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -40,7 +41,9 @@ namespace Infrastructure.Factory
             PlantFactory = new PlantFactory(assets);
 
             MedicalToolNeedsReporter medicineToolReporter = new MedicalToolNeedsReporter();
-            
+            TreatedAnimalsReporter treatedAnimalsObserver = new TreatedAnimalsReporter();
+
+            _animalHouseBuilder = new AnimalHouseBuilder();
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
             _medStandBuilder = new MedStandBuilder(staticDataService, medicineToolReporter);
             _medBedBuilder = new MedBedBuilder(medicineToolReporter);
@@ -71,8 +74,8 @@ namespace Infrastructure.Factory
             return animal;
         }
 
-        public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation) =>
-            InstantiateRegistered(AssetPath.AnimalHousePath, at, rotation);
+        public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType) =>
+            InstantiateRegistered($"{AssetPath.AnimalHousePath}/{animalType}", at, rotation);
 
         public GameObject CreateBuildCell(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.BuildCellPath, at, rotation);

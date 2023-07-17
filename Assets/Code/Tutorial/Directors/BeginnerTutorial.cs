@@ -31,8 +31,8 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialTriggerStatic _foodTaken;
         [SerializeField] private TutorialTriggerStatic _animalHouseInteracted;
         [SerializeField] private TutorialTriggerStatic _animalReleased;
-        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _houseBuilt;
-        [SerializeField] [RequireInterface(typeof(ITutorialTrigger))] private MonoBehaviour _plantBuilt;
+        [SerializeField] private TutorialTriggerStatic _houseBuilt;
+        [SerializeField] private TutorialTriggerStatic _plantBuilt;
         [SerializeField] private TutorialArrow _arrow;
         [SerializeField] private MedBedGridOperator _medBedGridOperator;
         [SerializeField] private MedToolGridOperator _medToolGridOperator;
@@ -116,7 +116,7 @@ namespace Tutorial.Directors
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialTriggerAwaiter((ITutorialTrigger) _houseBuilt));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_houseBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialTimeAwaiter(0.2f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_animal)));
@@ -129,7 +129,7 @@ namespace Tutorial.Directors
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialTriggerAwaiter((ITutorialTrigger) _plantBuilt));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_plantBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_plant.position)));
