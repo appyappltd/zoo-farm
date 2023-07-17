@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-namespace Pool
+namespace Services.Pools
 {
-    public class Pool<T>
+    public class Pool<T> : IPool<T>
     {
         private readonly Func<T> _preloadFunc;
         private readonly Action<T> _getAction;
@@ -47,5 +46,8 @@ namespace Pool
             for (int i = 0; i < _active.Count; i++)
                 Return(_active[i]);
         }
+
+        public Pool<TPool> GetGeneric<TPool>() =>
+            this as Pool<TPool>;
     }
 }
