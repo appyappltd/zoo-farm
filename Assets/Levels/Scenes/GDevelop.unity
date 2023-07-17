@@ -1397,11 +1397,6 @@ PrefabInstance:
       addedObject: {fileID: 7927386572682349001}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e23f2238807985045876b8d86f8508c6, type: 3}
---- !u!4 &397082610 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8136116175465445211, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-  m_PrefabInstance: {fileID: 5407715211302104929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &400734445
 GameObject:
   m_ObjectHideFlags: 0
@@ -6491,13 +6486,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1315502340}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _firstVolunteerSpawned
+      value: 
+      objectReference: {fileID: 11400000, guid: 401bb94112b73af4c80859d08e881d65, type: 2}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _gardenBedGridOperator
       value: 
       objectReference: {fileID: 130561617}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _animalTransmittingView
+      value: 
+      objectReference: {fileID: 1975562702}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _animalTransmittingZone
       value: 
-      objectReference: {fileID: 1853194457}
+      objectReference: {fileID: 1975562702}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _firstMedToolSpawnPoint
       value: 
@@ -8568,11 +8571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142d565504e3e3d448c733bb8f3581cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1853194457 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1848435915004033579, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-  m_PrefabInstance: {fileID: 5407715211302104929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1883452523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9229,6 +9227,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 1d84a52b2420fcd42a94d15439ac051b, type: 3}
+--- !u!4 &1975562702 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5115247033543485390, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+  m_PrefabInstance: {fileID: 5407715211302104929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1985555375
 GameObject:
   m_ObjectHideFlags: 0
@@ -11296,68 +11299,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3572847748728861025, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724598109352393965, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: _sequenceConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 1b165dced6200844bbed8824bbbd533c, type: 2}
-    - target: {fileID: 5484098361386591395, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: _spawnDelay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6377468030634239951, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: _queueTransforms.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6377468030634239951, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: _queueTransforms.Array.data[2]
-      value: 
-      objectReference: {fileID: 397082610}
-    - target: {fileID: 6377468030634239951, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: _queueTransforms.Array.data[3]
-      value: 
-      objectReference: {fileID: 397082610}
-    - target: {fileID: 6377468030634239951, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: _queueTransforms.Array.data[4]
-      value: 
-      objectReference: {fileID: 397082610}
-    - target: {fileID: 6377468030634239951, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: _queueTransforms.Array.data[5]
-      value: 
-      objectReference: {fileID: 397082610}
-    - target: {fileID: 6471376086031602452, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 6471376086031602452, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
       propertyPath: m_Name
       value: Volunters Settings
       objectReference: {fileID: 0}
-    - target: {fileID: 7697849592899592353, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7697849592899592353, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 8136116175465445211, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 8136116175465445211, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.36
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5076577055282954202, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-    - {fileID: 347209531563230200, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-    - {fileID: 4664584625051561108, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-    - {fileID: 603213854515407521, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}

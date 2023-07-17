@@ -1,12 +1,9 @@
-using Logic.Animals;
 using Logic.CellBuilding;
 using Logic.Gates;
 using Logic.Volunteers;
 using NTC.Global.Cache;
 using Services;
-using Services.Animals;
 using Services.Camera;
-using Tools;
 using Tutorial.StaticTriggers;
 using UnityEngine;
 
@@ -15,9 +12,8 @@ namespace Tutorial.Directors
     public class BeginnerTutorial : TutorialDirector
     {
         [SerializeField] private Transform _firstHouse;
-        [SerializeField] private Transform _animal;
         [SerializeField] private Transform _plant;
-        [SerializeField] private Transform _animalTransmittingZone;
+        [SerializeField] private Transform _animalTransmittingView;
         [SerializeField] private Transform _firstMedToolSpawnPoint;
         [SerializeField] private Transform _firstMedBedSpawnPoint;
         [SerializeField] private TutorialTriggerStatic _beginnerCoinsCollected;
@@ -33,6 +29,7 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialTriggerStatic _animalReleased;
         [SerializeField] private TutorialTriggerStatic _houseBuilt;
         [SerializeField] private TutorialTriggerStatic _plantBuilt;
+        [SerializeField] private TutorialTriggerStatic _firstVolunteerSpawned;
         [SerializeField] private TutorialArrow _arrow;
         [SerializeField] private MedBedGridOperator _medBedGridOperator;
         [SerializeField] private MedToolGridOperator _medToolGridOperator;
@@ -41,16 +38,20 @@ namespace Tutorial.Directors
         [SerializeField] private VolunteerSpawner _volunteerSpawner;
         [SerializeField] private Gate _toVolunteerGate;
         [SerializeField] private Gate _toYardGate;
-        
+
         private ICameraOperatorService _cameraOperatorService;
         private TutorialInteractedTriggerContainer _healingOption;
         private TutorialInteractedTriggerContainer _medBed;
+        private Transform _volunteerTransform;
+        private Transform _animalTransform;
 
         private void Start()
         {
             _firstMedBadSpawned.TriggeredPayload += OnMedBadSpawned;
             _firstHealingOptionSpawned.TriggeredPayload += OnMedToolSpawned;
             _firstAnimalSpawned.TriggeredPayload += OnAnimalSpawned;
+            _firstVolunteerSpawned.TriggeredPayload += OnVolunteerSpawned;
+            
             Construct(AllServices.Container.Single<ICameraOperatorService>());
         }
 
@@ -59,6 +60,7 @@ namespace Tutorial.Directors
              _firstMedBadSpawned.TriggeredPayload -= OnMedBadSpawned;
              _firstHealingOptionSpawned.TriggeredPayload -= OnMedToolSpawned;
              _firstAnimalSpawned.TriggeredPayload -= OnAnimalSpawned;
+             _firstVolunteerSpawned.TriggeredPayload -= OnVolunteerSpawned;
          }
 
         public void Construct(ICameraOperatorService cameraOperatorService)
@@ -80,25 +82,29 @@ namespace Tutorial.Directors
             {
                 _medToolGridOperator.ShowNextBuildCell();
                 _arrow.Move(_firstMedToolSpawnPoint.position);
-                _volunteerSpawner.Spawn();
             }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                _volunteerSpawner.Spawn();
                 _toVolunteerGate.Open();
-                _arrow.Move(_animalTransmittingZone.position);
-                _cameraOperatorService.Focus(_animalTransmittingZone);
+                _arrow.Hide();
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_volunteerTransform)));
+            TutorialModules.Add(new TutorialTimeAwaiter(6.5f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
-                _cameraOperatorService.FocusOnDefault();
+                _animalTransmittingView.gameObject.SetActive(true);
+                _arrow.Move(_animalTransmittingView.position);
             }));
+            TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalTakenInteracted));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _arrow.Move(_medBed.transform.position);
-                _cameraOperatorService.Focus(_medBed.transform.position);
+                _cameraOperatorService.Focus(_medBed.transform);
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
@@ -119,7 +125,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_houseBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialTimeAwaiter(0.2f, GlobalUpdate.Instance));
-            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_animal)));
+            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_animalTransform)));
             TutorialModules.Add(new TutorialTimeAwaiter(1.5f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
@@ -154,13 +160,16 @@ namespace Tutorial.Directors
             buildGrid.ShowNextBuildCell();
         }
 
-        private void OnAnimalSpawned(GameObject animalObj) =>
-            _animal.SetParent(animalObj.transform, false);
+        private void OnAnimalSpawned(GameObject animalObject) =>
+            _animalTransform = animalObject.transform;
 
         private void OnMedToolSpawned(GameObject toolObject) =>
             _healingOption = toolObject.GetComponent<TutorialInteractedTriggerContainer>();
 
         private void OnMedBadSpawned(GameObject bedObject) =>
             _medBed = bedObject.GetComponent<TutorialInteractedTriggerContainer>();
+
+        private void OnVolunteerSpawned(GameObject volunteerObject) =>
+            _volunteerTransform = volunteerObject.transform;
     }
 }

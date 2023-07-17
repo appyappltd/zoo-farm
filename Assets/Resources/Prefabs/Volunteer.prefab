@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: -8857455697853345208}
   - component: {fileID: 5114288513236749752}
   - component: {fileID: 6965783225314063670}
+  - component: {fileID: 553782194707196285}
   m_Layer: 10
   m_Name: Volunteer
   m_TagString: Untagged
@@ -593,6 +594,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxWeight: 3
+--- !u!114 &553782194707196285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229401633726274375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6587e1c10a14308820357213e533404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trigger: {fileID: 11400000, guid: 401bb94112b73af4c80859d08e881d65, type: 2}
+  _IsTriggerOnEnable: 1
+  _IsTriggerOnDisable: 0
 --- !u!1 &1296423078286401506
 GameObject:
   m_ObjectHideFlags: 0
