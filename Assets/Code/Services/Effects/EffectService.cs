@@ -5,16 +5,16 @@ using Services.Pools;
 using Services.StaticData;
 using UnityEngine;
 
-namespace Services.Particles
+namespace Services.Effects
 {
-    public class ParticlesService
+    public class EffectService
     {
         private readonly IPoolService _poolService;
         private readonly IEffectFactory _effectFactory;
 
         private Transform _parent;
 
-        public ParticlesService(IPoolService poolService, IStaticDataService staticDataService, IEffectFactory effectFactory)
+        public EffectService(IPoolService poolService, IStaticDataService staticDataService, IEffectFactory effectFactory)
         {
             _poolService = poolService;
             _effectFactory = effectFactory;
@@ -22,17 +22,17 @@ namespace Services.Particles
             InitPools(staticDataService.ParticlesConfig().Particles);
         }
 
-        private void InitPools(SerializedDictionary<ParticleId, ParticleSystem> particles)
+        private void InitPools(SerializedDictionary<EffectId, ParticleSystem> particles)
         {
             foreach (var pair in particles)
             {
-                _poolService.InstallPool(_effectFactory.CreateParticle(pair.Key), , );
+                // _poolService.InstallPool(_effectFactory.CreateParticle(pair.Key), , );
             }
         }
 
-        public void SpawnParticle(ParticleId id, Location location)
+        public void SpawnParticle(EffectId id, Location location)
         {
-            if(_poolService.G)
+            // if(_poolService.G)
         }
     }
 }

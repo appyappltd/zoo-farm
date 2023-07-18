@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Infrastructure.AssetManagement;
-using Services.Particles;
+using Services.Effects;
 using UnityEngine;
 
 namespace Infrastructure.Factory
@@ -9,14 +9,14 @@ namespace Infrastructure.Factory
     {
         private readonly IAssetProvider _assetProvider;
 
-        private Dictionary<ParticleId, GameObject> _cache;
+        private Dictionary<EffectId, GameObject> _cache;
 
         public EffectFactory(IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
         }
 
-        public ParticleSystem CreateParticle(ParticleId id)
+        public ParticleSystem CreateParticle(EffectId id)
         {
             if (_cache.TryGetValue(id, out GameObject effect))
             {

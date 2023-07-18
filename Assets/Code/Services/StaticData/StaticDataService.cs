@@ -6,7 +6,7 @@ using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Medicine;
 using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
-using Services.Particles;
+using Services.Effects;
 using StaticData;
 using StaticData.Windows;
 using Ui.Services;
@@ -61,7 +61,7 @@ namespace Services.StaticData
         public Sprite IconByAnimalType(AnimalType animalIdType) =>
             _animalIcons.AnimalIcons[animalIdType];
 
-        public ParticleSystem ParticlesById(ParticleId id) =>
+        public ParticleSystem ParticlesById(EffectId id) =>
             _particlesConfig.Particles[id];
 
         public ParticleConfig ParticlesConfig() =>

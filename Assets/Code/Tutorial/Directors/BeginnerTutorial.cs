@@ -36,8 +36,8 @@ namespace Tutorial.Directors
         [SerializeField] private HouseGridOperator _houseGridOperator;
         [SerializeField] private GardenBedGridOperator _gardenBedGridOperator;
         [SerializeField] private VolunteerSpawner _volunteerSpawner;
-        [SerializeField] private Gate _toVolunteerGate;
-        [SerializeField] private Gate _toYardGate;
+        // [SerializeField] private Gate _toVolunteerGate;
+        // [SerializeField] private Gate _toYardGate;
 
         private ICameraOperatorService _cameraOperatorService;
         private TutorialInteractedTriggerContainer _healingOption;
@@ -87,12 +87,12 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _volunteerSpawner.Spawn();
-                _toVolunteerGate.Open();
+                // _toVolunteerGate.Open();
                 _arrow.Hide();
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_volunteerTransform)));
-            TutorialModules.Add(new TutorialTimeAwaiter(6.5f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(4.5f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _animalTransmittingView.gameObject.SetActive(true);
@@ -116,7 +116,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _houseGridOperator.ShowNextBuildCell();
-                _toYardGate.Open();
+                // _toYardGate.Open();
                 _arrow.Move(_firstHouse.position);
                 _cameraOperatorService.Focus(_firstHouse);
             }));

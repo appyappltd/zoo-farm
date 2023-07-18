@@ -1,10 +1,10 @@
-using Services.Particles;
+using Services.Effects;
 using UnityEngine;
 
 namespace Infrastructure.Factory
 {
     public interface IEffectFactory
     {
-        ParticleSystem CreateParticle(ParticleId id);
+        ParticleSystem CreateParticle(EffectId id);
     }
 }
