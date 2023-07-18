@@ -24,9 +24,9 @@ namespace Services.Particles
 
         private void InitPools(SerializedDictionary<ParticleId, ParticleSystem> particles)
         {
-            foreach (var particleSystem in particles)
+            foreach (var pair in particles)
             {
-                _poolService.InstallPool(_effectFactory);
+                _poolService.InstallPool(_effectFactory.CreateParticle(pair.Key), , );
             }
         }
 
