@@ -7,12 +7,16 @@ namespace Services.Pools
 {
     public class PoolService : IPoolService
     {
-        private readonly Dictionary<Type, IPool> _allPools = new Dictionary<Type, IPool>(16);
+        private readonly Dictionary<PoolKey, IPool> _allPools = new Dictionary<PoolKey, IPool>(16);
 
-        public void InstallPool<TPooled>(Func<TPooled> preloadFunc, Action<TPooled> getAction,
+        public void InstallPool<TPooled>(PoolKey key, Func<TPooled> preloadFunc, Action<TPooled> getAction,
             Action<TPooled> returnAction, int preloadCount) where TPooled : IPoolable
         {
-            if (_allPools.ContainsKey(typeof(TPooled)))
+#if DEBUG
+            Debug.Log($"Pool key hashCode {key.ToString()} ");
+#endif
+            
+            if (_allPools.ContainsKey(key))
             {
 #if DEBUG
                 Debug.LogWarning($"Pool with type {nameof(TPooled)} already exists");
@@ -21,19 +25,19 @@ namespace Services.Pools
             }
 
             Pool<TPooled> newPool = new Pool<TPooled>(preloadFunc, getAction, returnAction, preloadCount);
-            _allPools.Add(typeof(TPooled), newPool);
+            _allPools.Add(key, newPool);
         }
 
-        public TPooled Get<TPooled>() where TPooled : IPoolable
+        public TPooled Get<TPooled>(PoolKey key) where TPooled : IPoolable
         {
-            Pool<TPooled> pool = FindPool<TPooled>();
+            Pool<TPooled> pool = FindPool<TPooled>(key);
             IPoolable spawned = pool.Get();
             return (TPooled) spawned;
         }
 
-        public void Return<TPooled>(TPooled pooled) where TPooled : IPoolable
+        public void Return<TPooled>(TPooled pooled, PoolKey key) where TPooled : IPoolable
         {
-            Pool<TPooled> pool = FindPool<TPooled>();
+            Pool<TPooled> pool = FindPool<TPooled>(key);
             pool.Return(pooled);
         }
 
@@ -50,7 +54,7 @@ namespace Services.Pools
             _allPools.Clear();
         }
 
-        public void DestroyPool(Type poolKey)
+        public void DestroyPool(PoolKey poolKey)
         {
             if (_allPools.ContainsKey(poolKey))
             {
@@ -63,14 +67,10 @@ namespace Services.Pools
 #endif
         }
 
-        private Pool<TPooled> FindPool<TPooled>() where TPooled : IPoolable
+        private Pool<TPooled> FindPool<TPooled>(PoolKey key) where TPooled : IPoolable
         {
-            IPool findPool = _allPools[typeof(TPooled)];
+            IPool findPool = _allPools[key];
             return (Pool<TPooled>) findPool;
         }
-    }
-
-    internal interface IPoolKey
-    {
     }
 }

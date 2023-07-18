@@ -3,6 +3,7 @@ using Infrastructure.Factory;
 using Logic.Coins;
 using Logic.Movement;
 using Logic.Translators;
+using NaughtyAttributes;
 using Services;
 using Services.Pools;
 using Tools.Extension;
@@ -55,9 +56,15 @@ namespace Logic.Spawners
         public void Spawn(int amountCoins)
         {
             _remainingCountCoins += amountCoins;
-            _timerOperator.Play();
+            _timerOperator.Restart();
         }
 
+        [Button]
+        private void TestSpawnCoins()
+        {
+            Spawn(10);
+        }
+        
         private void SpawnCoin()
         {
             TranslatableAgent agent = _pooledSpawner.Spawn().TranslatableAgent;
