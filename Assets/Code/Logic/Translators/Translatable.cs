@@ -86,7 +86,6 @@ namespace Logic.Translators
                 return true;
             }
 
-            
             float delta = UpdateDelta();
             delta = _deltaModifiers.Invoke(delta);
             T value = _valueLerp.Invoke(_from, _to, delta);

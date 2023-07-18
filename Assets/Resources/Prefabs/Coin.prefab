@@ -400,7 +400,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _amount: 10
-  _playerInteraction: {fileID: 0}
+  _playerInteraction: {fileID: 2449251018541802280}
+  _translatableAgent: {fileID: 5854569965670003998}
 --- !u!114 &5776562122047921006
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using Services.Animals;
 using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
+using Services.Pools;
 using Services.Randomizer;
 using Services.SaveLoad;
 using Services.StaticData;
@@ -45,6 +46,7 @@ namespace Infrastructure.States
             _services.RegisterSingle<ICoroutineRunner>(_coroutineRunner);
             _services.RegisterSingle<IPlayerInputService>(new PlayerInputService());
             _services.RegisterSingle<IRandomService>(new RandomService());
+            _services.RegisterSingle<IPoolService>(new PoolService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<IAnimalHouseService>(new AnimalHouseService());

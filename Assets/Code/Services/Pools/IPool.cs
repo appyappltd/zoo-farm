@@ -1,8 +1,6 @@
 namespace Services.Pools
 {
-    public interface IPool<T>
+    public interface IPool
     {
-        T Get();
-        void Return(T item);
     }
 }

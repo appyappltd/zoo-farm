@@ -2,23 +2,30 @@ using Logic.Interactions;
 using Logic.Movement;
 using Logic.Payment;
 using Logic.Player;
+using Logic.Translators;
+using Services.Pools;
 using UnityEngine;
 
 namespace Logic.Coins
 {
     [RequireComponent(typeof(PlayerInteraction))]
     [RequireComponent(typeof(ItemMover))]
-    public class Coin : MonoBehaviour
+    public class CollectibleCoin : MonoBehaviour, IPoolable
     {
-        [SerializeField, Min(0)] private int _amount = 1;
         [SerializeField] private PlayerInteraction _playerInteraction;
-        
-        private IItemMover _itemMover;
+        [SerializeField] private TranslatableAgent _translatableAgent;
+        [SerializeField] private IItemMover _itemMover;
+        [SerializeField, Min(0)] private int _amount = 1;
+
         private IWallet _wallet;
+
+        public TranslatableAgent TranslatableAgent => _translatableAgent;
+        public GameObject GameObject => gameObject;
+        public IItemMover ItemMover => _itemMover;
 
         private void Awake()
         {
-            _itemMover = GetComponent<IItemMover>();
+            _itemMover = _itemMover ?? GetComponent<IItemMover>();
             _playerInteraction ??= GetComponent<PlayerInteraction>();
 
             _playerInteraction.Interacted += OnEnter;
@@ -41,5 +48,6 @@ namespace Logic.Coins
             _wallet.TryAdd(_amount);
             _itemMover.Ended -= OnCollected;
         }
+
     }
 }

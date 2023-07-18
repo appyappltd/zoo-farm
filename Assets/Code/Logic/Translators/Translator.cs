@@ -17,8 +17,8 @@ namespace Logic.Translators
             if (_translatables.Contains(translatable))
                 return;
 
-            enabled = true;
             _translatables.Add(translatable);
+            enabled = true;
         }
 
         protected void UpdateTranslatable()

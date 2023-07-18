@@ -8,6 +8,7 @@ using Player;
 using Services.Camera;
 using Services.Input;
 using Services.PersistentProgress;
+using Services.Pools;
 using Services.StaticData;
 using Ui;
 using Ui.Elements.Buttons;
@@ -27,10 +28,11 @@ namespace Infrastructure.States
         private readonly ICameraOperatorService _cameraService;
         private readonly IUIFactory _uiFactory;
         private readonly IStaticDataService _staticData;
+        private readonly IPoolService _poolService;
 
         public LoadLevelState(GameStateMachine gameStateMachine, LoadingCurtain curtain, SceneLoader sceneLoader,
             IGameFactory gameFactory, IPlayerInputService inputService, IPersistentProgressService progressService,
-            ICameraOperatorService cameraService, IUIFactory uiFactory, IStaticDataService staticData)
+            ICameraOperatorService cameraService, IUIFactory uiFactory, IStaticDataService staticData, IPoolService poolService)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -41,6 +43,7 @@ namespace Infrastructure.States
             _cameraService = cameraService;
             _uiFactory = uiFactory;
             _staticData = staticData;
+            _poolService = poolService;
         }
 
         public void Enter(string payload)
@@ -48,6 +51,7 @@ namespace Infrastructure.States
             _curtain.Show();
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();
+            _poolService.DestroyAllPools();
             _sceneLoader.Load(payload, OnLoaded);
         }
 

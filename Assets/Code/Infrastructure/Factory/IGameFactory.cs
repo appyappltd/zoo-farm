@@ -21,8 +21,8 @@ namespace Infrastructure.Factory
         GameObject CreateAnimal(AnimalItemData animalData, Vector3 at);
         GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType);
         GameObject CreateBuildCell(Vector3 at, Quaternion rotation);
-        GameObject CreateVisual(VisualType visual, Quaternion quaternion, Transform container);
-        GameObject CreateCollectibleCoin(Transform container);
+        GameObject CreateVisual(VisualType visual, Quaternion quaternion);
+        GameObject CreateCollectibleCoin();
         GameObject CreateGardenBad(Vector3 at, Quaternion rotation, PlantId plantId);
         GameObject CreateMedBed(Vector3 at, Quaternion rotation);
         GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicineToolId toolIdType);

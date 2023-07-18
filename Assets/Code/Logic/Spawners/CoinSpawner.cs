@@ -2,9 +2,9 @@ using Logic.Coins;
 
 namespace Logic.Spawners
 {
-    public class CoinSpawner : ISpawner<Coin>
+    public class CoinSpawner : ISpawner<CollectibleCoin>
     {
-        public Coin Spawn()
+        public CollectibleCoin Spawn()
         {
             throw new System.NotImplementedException();
         }

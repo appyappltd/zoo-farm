@@ -80,11 +80,11 @@ namespace Infrastructure.Factory
         public GameObject CreateBuildCell(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.BuildCellPath, at, rotation);
 
-        public GameObject CreateVisual(VisualType visual, Quaternion quaternion, Transform container) =>
-            _assets.Instantiate($"{AssetPath.VisualsPath}/{visual}", container);
+        public GameObject CreateVisual(VisualType visual, Quaternion quaternion) =>
+            _assets.Instantiate($"{AssetPath.VisualsPath}/{visual}");
 
-        public GameObject CreateCollectibleCoin(Transform container) =>
-            _assets.Instantiate(AssetPath.CollectableCoinPath, container);
+        public GameObject CreateCollectibleCoin() =>
+            _assets.Instantiate(AssetPath.CollectableCoinPath);
 
         public GameObject CreateGardenBad(Vector3 at, Quaternion rotation, PlantId plantId)
         {

@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using NaughtyAttributes;
+using Services.Pools;
 using Tools;
 using UnityEngine;
 
 namespace Logic.Translators
 {
-    public class TranslatableAgent : MonoBehaviour
+    public class TranslatableAgent : MonoBehaviour , IPoolable
     {
         [SerializeField] private bool _isAutoPlay;
         
@@ -21,6 +22,8 @@ namespace Logic.Translators
         public ReadOnlyCollection<ITranslatable> SubTranslatables => _translatables;
         public ITranslatable MainTranslatable => (ITranslatable) _mainTranslatable;
         
+        GameObject IPoolable.GameObject => gameObject;
+
         private void Awake()
         {
             _translatables = new ReadOnlyCollection<ITranslatable>(_subTranslatables.Cast<ITranslatable>().ToList());

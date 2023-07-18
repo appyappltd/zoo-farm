@@ -6,6 +6,7 @@ using Logic.Spawners;
 using Logic.Translators;
 using Observables;
 using Services;
+using Services.Pools;
 using UnityEngine;
 
 namespace Logic.Payment
@@ -20,6 +21,7 @@ namespace Logic.Payment
         [SerializeField, Min(0f)] private float _paymentRate = 0.05f;
         [SerializeField, Min(0)] private int _currencyPerTick = 1;
 
+        private IPoolService _poolService;
         private int _defaultCost;
         private VisualTranslatorsSpawner _spawner;
         private RunTranslator _translator;
@@ -27,10 +29,12 @@ namespace Logic.Payment
         private TimerOperator _timerOperator;
 
         public event Action Bought = () => { };
+        
         public Observables.IObservable<int> LeftCoinsToPay => _leftCoinsToPay;
 
         private void Awake()
         {
+            _poolService = AllServices.Container.Single<IPoolService>();
             _translator = GetComponent<RunTranslator>();
             _timerOperator = GetComponent<TimerOperator>();
             _timerOperator.SetUp(_paymentRate, OnPay);
@@ -64,11 +68,10 @@ namespace Logic.Payment
         {
             _spawner = new VisualTranslatorsSpawner(() =>
                     AllServices.Container.Single<IGameFactory>().CreateVisual(VisualType.Money,
-                        Quaternion.identity,
-                        new GameObject("Coins").transform),
-                10, _translator, hero.transform, transform);
-            _wallet = hero.Wallet;
+                        Quaternion.identity),
+                10, _translator, hero.transform, transform, _poolService);
             
+            _wallet = hero.Wallet;
             _playerInteraction.Entered -= Init;
         }
 

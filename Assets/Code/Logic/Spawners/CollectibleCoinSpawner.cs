@@ -1,8 +1,10 @@
 using System;
 using Infrastructure.Factory;
+using Logic.Coins;
 using Logic.Movement;
 using Logic.Translators;
 using Services;
+using Services.Pools;
 using Tools.Extension;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,23 +19,23 @@ namespace Logic.Spawners
         [SerializeField] private Vector2 _zoneOffset;
         [SerializeField] private float _spawnDelay;
 
-        private PooledSpawner<TranslatableAgent> _pooledSpawner;
+        private IPoolService _poolService;
+        private PooledSpawner<CollectibleCoin> _pooledSpawner;
         private ITranslator _translator;
         private TimerOperator _timerOperator;
         private int _remainingCountCoins;
 
         private void Awake()
         {
+            _poolService = AllServices.Container.Single<IPoolService>();
             _translator = GetComponent<ITranslator>();
             _timerOperator = GetComponent<TimerOperator>();
             _timerOperator.SetUp(_spawnDelay, SpawnCoin);
-            Transform container = new GameObject("Collectible Coins Container").transform;
 
-            _pooledSpawner = new PooledSpawner<TranslatableAgent>(
+            _pooledSpawner = new PooledSpawner<CollectibleCoin>(
                 () =>
-                    AllServices.Container.Single<IGameFactory>()
-                        .CreateCollectibleCoin(container),
-            10, OnReturnToPool);
+                    AllServices.Container.Single<IGameFactory>().CreateCollectibleCoin(), 10, OnReturnToPool,
+                _poolService);
         }
 
         private void OnDestroy() =>
@@ -45,7 +47,7 @@ namespace Logic.Spawners
             {
                 return;
             }
-            
+
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireCube(_coinsSpawnZone.position, _zoneOffset.AddY(0.1f) * 2);
         }
@@ -58,7 +60,7 @@ namespace Logic.Spawners
 
         private void SpawnCoin()
         {
-            TranslatableAgent agent = _pooledSpawner.Spawn();
+            TranslatableAgent agent = _pooledSpawner.Spawn().TranslatableAgent;
             PlayTranslatables(agent);
             AddToTranslator(agent);
             _remainingCountCoins--;
@@ -67,18 +69,19 @@ namespace Logic.Spawners
                 _timerOperator.Restart();
         }
 
-        private Action OnReturnToPool(Action returnAction, TranslatableAgent coin)
+        private Action OnReturnToPool(Action returnAction, CollectibleCoin coin)
         {
             void OnEndMove() => returnAction.Invoke();
 
-            ItemMover itemMover = coin.GetComponent<ItemMover>();
+            IItemMover itemMover = coin.ItemMover;
             itemMover.Ended += OnEndMove;
             return () => itemMover.Ended -= OnEndMove;
         }
 
         private void PlayTranslatables(TranslatableAgent agent)
         {
-            ITranslatableParametric<Vector3> mainTranslatable = (ITranslatableParametric<Vector3>) agent.MainTranslatable;
+            ITranslatableParametric<Vector3> mainTranslatable =
+                (ITranslatableParametric<Vector3>) agent.MainTranslatable;
             mainTranslatable.Play(transform.position, GetRandomAroundPosition());
 
             for (var index = 0; index < agent.SubTranslatables.Count; index++)
