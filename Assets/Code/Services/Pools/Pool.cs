@@ -15,7 +15,7 @@ namespace Services.Pools
         private readonly Queue<T> _pool = new Queue<T>();
         private readonly List<T> _active = new List<T>();
 
-        public Pool(Func<T> preloadFunc, Action<T> getAction, Action<T> returnAction, int preloadCount)
+        public Pool(Func<T> preloadFunc, Action<T> getAction, Action<T> returnAction, int preloadCount, Transform parent = null)
         {
             _preloadFunc = preloadFunc;
             _getAction = getAction;
@@ -24,7 +24,7 @@ namespace Services.Pools
             if (preloadFunc is null)
                 throw new Exception("Preload function cannot be null");
 
-            _parent = new GameObject($"Pool {typeof(T).Name}").transform;
+            _parent = parent ? parent : new GameObject($"Pool {typeof(T).Name}").transform;
 
             for (int i = 0; i < preloadCount; i++)
             {

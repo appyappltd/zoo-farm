@@ -6,6 +6,7 @@ using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Medicine;
 using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
+using Services.Particles;
 using StaticData;
 using StaticData.Windows;
 using Ui.Services;
@@ -22,6 +23,7 @@ namespace Services.StaticData
         private const string SpawnPlaceConfigPath = "StaticData/SpawnPlaceConfig";
         private const string GardenBedConfigPath = "StaticData/GardenBedConfigs";
         private const string AnimalIconConfigPath = "StaticData/AnimalIconConfigs";
+        private const string ParticleConfigPath = "StaticData/ParticleConfigs";
         
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
@@ -30,6 +32,7 @@ namespace Services.StaticData
         
         private SpawnPlaceConfig _spawnPlaceConfig;
         private AnimalIconConfig _animalIcons;
+        private ParticleConfig _particlesConfig;
 
         public void Load()
         {
@@ -39,6 +42,7 @@ namespace Services.StaticData
 
             _animalIcons = Resources.Load<AnimalIconConfig>(AnimalIconConfigPath);
             _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
+            _particlesConfig = Resources.Load<ParticleConfig>(ParticleConfigPath);
             _windows = Resources
                 .Load<WindowStaticData>(WindowConfigPath)
                 .Configs
@@ -56,6 +60,12 @@ namespace Services.StaticData
 
         public Sprite IconByAnimalType(AnimalType animalIdType) =>
             _animalIcons.AnimalIcons[animalIdType];
+
+        public ParticleSystem ParticlesById(ParticleId id) =>
+            _particlesConfig.Particles[id];
+
+        public ParticleConfig ParticlesConfig() =>
+            _particlesConfig;
 
         public MedToolStandConfig MedStandConfigById(MedicineToolId toolIdId) =>
             GetDataFor(toolIdId, _medStandConfigs);

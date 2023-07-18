@@ -30,6 +30,7 @@ namespace Infrastructure.Factory
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
         public IPlantFactory PlantFactory { get; }
+        public IEffectFactory EffectFactory { get; }
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, IAnimalsService animalsService)
@@ -39,9 +40,9 @@ namespace Infrastructure.Factory
             _persistentProgressService = persistentProgressService;
 
             PlantFactory = new PlantFactory(assets);
+            EffectFactory = new EffectFactory(assets);
 
             MedicalToolNeedsReporter medicineToolReporter = new MedicalToolNeedsReporter();
-            TreatedAnimalsReporter treatedAnimalsObserver = new TreatedAnimalsReporter();
 
             _animalHouseBuilder = new AnimalHouseBuilder();
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);

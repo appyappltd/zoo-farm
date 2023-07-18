@@ -10,7 +10,7 @@ namespace Services.Pools
         private readonly Dictionary<PoolKey, IPool> _allPools = new Dictionary<PoolKey, IPool>(16);
 
         public void InstallPool<TPooled>(PoolKey key, Func<TPooled> preloadFunc, Action<TPooled> getAction,
-            Action<TPooled> returnAction, int preloadCount) where TPooled : IPoolable
+            Action<TPooled> returnAction, int preloadCount, Transform parent = null) where TPooled : IPoolable
         {
 #if DEBUG
             Debug.Log($"Pool key hashCode {key.ToString()} ");
@@ -24,7 +24,7 @@ namespace Services.Pools
                 return;
             }
 
-            Pool<TPooled> newPool = new Pool<TPooled>(preloadFunc, getAction, returnAction, preloadCount);
+            Pool<TPooled> newPool = new Pool<TPooled>(preloadFunc, getAction, returnAction, preloadCount, parent);
             _allPools.Add(key, newPool);
         }
 

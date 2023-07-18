@@ -3,6 +3,7 @@ using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Medicine;
 using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
+using Services.Particles;
 using StaticData;
 using Ui.Services;
 using Ui.Windows;
@@ -19,5 +20,7 @@ namespace Services.StaticData
         MedToolStandConfig MedStandConfigById(MedicineToolId toolIdId);
         GardenBedConfig GardenBedConfigById(PlantId plantId);
         Sprite IconByAnimalType(AnimalType animalIdType);
+        ParticleSystem ParticlesById(ParticleId id);
+        ParticleConfig ParticlesConfig();
     }
 }
