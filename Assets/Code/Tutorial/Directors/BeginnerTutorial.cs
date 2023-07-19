@@ -95,7 +95,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTimeAwaiter(4.5f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
-                _animalTransmittingView.gameObject.SetActive(true);
+                // _animalTransmittingView.gameObject.SetActive(true);
                 _arrow.Move(_animalTransmittingView.position);
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));

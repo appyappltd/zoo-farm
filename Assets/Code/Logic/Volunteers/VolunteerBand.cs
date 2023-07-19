@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.Animals;
-using Logic.Storages;
-using Logic.Storages.Items;
+using Logic.Volunteers.Queue;
 using Logic.VolunteersStateMachine;
 using NaughtyAttributes;
 using Services;
@@ -12,7 +10,7 @@ using UnityEngine;
 
 namespace Logic.Volunteers
 {
-    public class VolunteerBand : MonoBehaviour, IGetItem
+    public class VolunteerBand : MonoBehaviour
     {
         [SerializeField] private AnimalSpawner _animalSpawner;
 
@@ -20,60 +18,28 @@ namespace Logic.Volunteers
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private Transform _outPlace;
 
-        [SerializeField] private Transform[] _queueTransforms;
+        [SerializeField] private QueuePlace[] _queuePlaces;
         [SerializeField] private List<Volunteer> _volunteers = new();
 
         private IGameFactory _gameFactory;
-        private TransformQueue _queue;
+        private QueueOperator _queueOperator;
         private Volunteer _volunteerCashed;
-        private int _volunteersInQueue;
-        
-        public event Action<IItem> Removed = i => { };
-        
-        public int VolunteersCount => _volunteersInQueue;
-        public int MaxVolunteers => _queueTransforms.Length - 2;
+
+        public int VolunteersCount => _queueOperator.QueueCount;
+        public int MaxVolunteers => _queuePlaces.Length - 2;
 
         private void Awake()
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
-            _queue = new TransformQueue(_queueTransforms);
+            _queueOperator = new QueueOperator(_queuePlaces);
         }
 
-        public IItem Get()
+        private void SetVolunteer(Volunteer volunteer)
         {
-            IItem item = _volunteerCashed.Inventory.Get();
-            MoveQueue();
-            _volunteersInQueue--;
-            return item;
-        }
-
-        public bool TryPeek(ItemId byId, out IItem item)
-        {
-            item = null;
-
-            if (_volunteers.Count <= 0) 
-                return false;
-
-            _volunteerCashed = _volunteers.Find(volunteer => volunteer.IsReadyTransmitting);
-            return _volunteerCashed is not null && _volunteerCashed.Inventory.TryPeek(ItemId.Animal, out item);
-        }
-
-        public bool TryGet(ItemId byId, out IItem result)
-        {
-            if (TryPeek(byId, out result))
-            {
-                result = Get();
-                return true;
-            }
-
-            return false;
-        }
-
-        private void AddVolunteer(Volunteer volunteer)
-        {
-            volunteer.UpdateQueuePlace(_queue.TakeQueue());
-            _volunteersInQueue++;
-            SetVolunteer(volunteer);
+            volunteer.UpdateQueuePlace(_queueOperator.TakeQueue(volunteer));
+            HandItem animal = _animalSpawner.SpawnAnimal(volunteer.transform.position);
+            volunteer.Inventory.Add(animal);
+            _volunteers.Add(volunteer);
         }
 
         [Button("New Volunteer", enabledMode: EButtonEnableMode.Playmode)]
@@ -85,30 +51,17 @@ namespace Logic.Volunteers
                 
                 if (volunteer.IsFree)
                 {
-                    AddVolunteer(volunteer);
+                    SetVolunteer(volunteer);
                     return;
                 }
             }
             
             Volunteer newVolunteer = _gameFactory.CreateVolunteer(_spawnPlace.position, _container)
                 .GetComponent<Volunteer>();
-            AddVolunteer(newVolunteer);
+            SetVolunteer(newVolunteer);
             VolunteerStateMachine machine = newVolunteer.StateMachine;
-            machine.Construct(_queue, _outPlace, newVolunteer);
+            machine.Construct(_queueOperator, _outPlace, newVolunteer);
             machine.Play();
-        }
-
-        private void SetVolunteer(Volunteer volunteer)
-        {
-            HandItem animal = _animalSpawner.SpawnAnimal(volunteer.transform.position);
-            volunteer.Inventory.Add(animal);
-            _volunteers.Add(volunteer);
-        }
-        
-        private void MoveQueue()
-        {
-            _queue.Move();
-            _queue.FreeQueue();
         }
     }
 }

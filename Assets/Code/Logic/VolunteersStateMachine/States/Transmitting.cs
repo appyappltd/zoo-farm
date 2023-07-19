@@ -15,7 +15,12 @@ namespace Logic.VolunteersStateMachine.States
         protected override void OnEnter()
         {
             base.OnEnter();
-            _volunteer.ReadyTransmitting();
+            _volunteer.ActivateTransmitting();
+        }
+
+        protected override void OnExit()
+        {
+            _volunteer.DeactivateTransmitting();
         }
     }
 }
