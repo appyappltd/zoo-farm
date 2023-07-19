@@ -1,10 +1,9 @@
 using System;
 using Logic.Animals;
-using Logic.Animals.AnimalsBehaviour;
 
-namespace Logic.Medicine
+namespace Logic.Medical
 {
-    public interface IMedBedReporter
+    public interface IMedicalBedReporter
     {
         event Action<AnimalId> Healed;
         event Action<AnimalId> HouseFound;

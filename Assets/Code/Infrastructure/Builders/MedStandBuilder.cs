@@ -1,4 +1,4 @@
-using Logic.Medicine;
+using Logic.Medical;
 using Services.StaticData;
 
 namespace Infrastructure.Builders
@@ -14,7 +14,7 @@ namespace Infrastructure.Builders
             _reporter = reporter;
         }
 
-        public void Build(MedToolStand medStand, MedicineToolId toolId) =>
-            medStand.Construct(_staticDataService.MedStandConfigById(toolId), _reporter);
+        public void Build(MedicalToolStand medicalStand, MedicalToolId toolId) =>
+            medicalStand.Construct(_staticDataService.MedStandConfigById(toolId), _reporter);
     }
 }

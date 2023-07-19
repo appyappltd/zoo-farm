@@ -1,4 +1,4 @@
-using Logic.Medicine;
+using Logic.Medical;
 
 namespace Infrastructure.Builders
 {

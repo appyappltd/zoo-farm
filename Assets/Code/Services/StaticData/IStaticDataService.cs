@@ -1,6 +1,6 @@
 ﻿using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
-using Logic.Medicine;
+using Logic.Medical;
 using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
 using Services.Effects;
@@ -17,7 +17,7 @@ namespace Services.StaticData
         Emotion EmotionById(EmotionId emotionId);
         WindowBase WindowById(WindowId windowId);
         Transform SpawnPlaceById(SpawnPlaceId placeId);
-        MedToolStandConfig MedStandConfigById(MedicineToolId toolIdId);
+        MedToolStandConfig MedStandConfigById(MedicalToolId toolIdId);
         GardenBedConfig GardenBedConfigById(PlantId plantId);
         Sprite IconByAnimalType(AnimalType animalIdType);
         ParticleSystem ParticlesById(EffectId id);

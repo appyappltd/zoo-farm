@@ -1,12 +1,11 @@
 using Logic.Animals;
-using Logic.Animals.AnimalsBehaviour;
 using Tutorial.StaticTriggers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Logic.Medicine
+namespace Logic.Medical
 {
-    public class MedicineBedTutorialObserver : MonoBehaviour
+    public class MedicalBedTutorialObserver : MonoBehaviour
     {
         [FormerlySerializedAs("_medicineBed")] [SerializeField] private MedicalBed _medicalBed;
         [SerializeField] private TutorialTriggerStatic _animalHealed;

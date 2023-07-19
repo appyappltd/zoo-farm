@@ -3,7 +3,7 @@ using System.Linq;
 using Data.ItemsData;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
-using Logic.Medicine;
+using Logic.Medical;
 using Logic.Storages.Items;
 using StaticData;
 using UnityEngine;
@@ -20,7 +20,7 @@ namespace Ui
         [SerializeField] private MedicalBed _medicalBed;
         [SerializeField] private MedToolStandConfig[] _medTools;
 
-        private Dictionary<MedicineToolId, Sprite> _toolSprites;
+        private Dictionary<MedicalToolId, Sprite> _toolSprites;
 
         private void Awake()
         {

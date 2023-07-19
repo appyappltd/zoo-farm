@@ -1,6 +1,6 @@
 using System;
 using Data.ItemsData;
-using Logic.Medicine;
+using Logic.Medical;
 using UnityEngine;
 
 namespace Data
@@ -9,9 +9,9 @@ namespace Data
     public struct AnimalAndTreatToolPair
     {
         [SerializeField] private AnimalItemStaticData _animalStaticData;
-        [SerializeField] private MedicineToolId _treatTool;
+        [SerializeField] private MedicalToolId _treatTool;
 
         public AnimalItemStaticData AnimalStaticData => _animalStaticData;
-        public MedicineToolId TreatTool => _treatTool;
+        public MedicalToolId TreatTool => _treatTool;
     }
 }

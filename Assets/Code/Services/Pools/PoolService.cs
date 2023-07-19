@@ -69,8 +69,14 @@ namespace Services.Pools
 
         private Pool<TPooled> FindPool<TPooled>(PoolKey key) where TPooled : IPoolable
         {
-            IPool findPool = _allPools[key];
-            return (Pool<TPooled>) findPool;
+            IPool found = _allPools[key];
+
+            if (found is Pool<TPooled> pool)
+            {
+                return pool;
+            }
+
+            throw new InvalidCastException(nameof(pool));
         }
     }
 }

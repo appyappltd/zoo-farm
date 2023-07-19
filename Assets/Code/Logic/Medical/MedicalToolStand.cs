@@ -7,10 +7,10 @@ using Services;
 using StaticData;
 using UnityEngine;
 
-namespace Logic.Medicine
+namespace Logic.Medical
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedToolStand : MonoBehaviour, IGetItem, IGetItemProvider
+    public class MedicalToolStand : MonoBehaviour, IGetItem, IGetItemProvider
     {
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] private Transform _spawnPlace;
@@ -20,7 +20,7 @@ namespace Logic.Medicine
         private IGameFactory _gameFactory;
         private MedicalToolNeedsReporter _needsReporter;
         private IItem _toolItem;
-        private MedicineToolId _toolId;
+        private MedicalToolId _toolId;
         private bool _isNeeded;
 
         public event Action<IItem> Removed = i => { };
@@ -85,7 +85,7 @@ namespace Logic.Medicine
             return false;
         }
 
-        private void OnToolNeeds(MedicineToolId toolId) =>
+        private void OnToolNeeds(MedicalToolId toolId) =>
             _isNeeded = toolId == _toolId;
 
         private void OnRespawn()

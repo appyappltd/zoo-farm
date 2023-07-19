@@ -1,5 +1,5 @@
 using Logic.Animals;
-using Logic.Medicine;
+using Logic.Medical;
 using Services;
 using Ui.Services;
 using UnityEngine;
@@ -29,9 +29,9 @@ namespace Logic.CellBuilding
 
         protected override void BuildCell(BuildPlaceMarker marker)
         {
-            IMedBedReporter medBedReporter = GameFactory.CreateMedBed(marker.Location.Position, marker.Location.Rotation)
-                .GetComponent<IMedBedReporter>();
-            _healedAnimalsReporter.RegisterReporter(medBedReporter);
+            IMedicalBedReporter medicalBedReporter = GameFactory.CreateMedBed(marker.Location.Position, marker.Location.Rotation)
+                .GetComponent<IMedicalBedReporter>();
+            _healedAnimalsReporter.RegisterReporter(medicalBedReporter);
         }
     }
 }

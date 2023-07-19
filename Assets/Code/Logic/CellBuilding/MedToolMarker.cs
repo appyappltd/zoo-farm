@@ -1,4 +1,4 @@
-using Logic.Medicine;
+using Logic.Medical;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,8 +6,8 @@ namespace Logic.CellBuilding
 {
     public class MedToolMarker : BuildPlaceMarker
     {
-        [FormerlySerializedAs("_toolType")] [SerializeField] private MedicineToolId _toolId;
+        [FormerlySerializedAs("_toolType")] [SerializeField] private MedicalToolId _toolId;
 
-        public MedicineToolId ToolId => _toolId;
+        public MedicalToolId ToolId => _toolId;
     }
 }

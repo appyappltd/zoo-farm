@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Data.ItemsData;
 using Logic.Animals;
-using Logic.Medicine;
+using Logic.Medical;
 using Logic.Plants.PlantSettings;
 using Logic.Spawners;
 using Services;
@@ -14,6 +14,8 @@ namespace Infrastructure.Factory
     {
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
+        IPlantFactory PlantFactory { get; }
+        IEffectFactory EffectFactory { get; }
         void Cleanup();
         void WarmUp();
         GameObject CreateHud();
@@ -25,8 +27,8 @@ namespace Infrastructure.Factory
         GameObject CreateCollectibleCoin();
         GameObject CreateGardenBad(Vector3 at, Quaternion rotation, PlantId plantId);
         GameObject CreateMedBed(Vector3 at, Quaternion rotation);
-        GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicineToolId toolIdType);
-        GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicineToolId toolIdType);
+        GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
+        GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
         GameObject CreateVolunteer(Vector3 at, Transform parent);
         GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId);
     }

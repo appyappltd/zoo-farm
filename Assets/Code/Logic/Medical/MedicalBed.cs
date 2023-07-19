@@ -10,12 +10,13 @@ using Logic.Storages.Items;
 using NTC.Global.Cache;
 using Services;
 using Services.AnimalHouses;
+using Services.Effects;
 using UnityEngine;
 
-namespace Logic.Medicine
+namespace Logic.Medical
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IMedBedReporter
+    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IMedicalBedReporter
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
@@ -34,7 +35,7 @@ namespace Logic.Medicine
         private bool _isHealing;
         private IAnimal _healingAnimal;
         private byte Id;
-        
+
         public event Action<IItem> Added = i => { };
         public event Action<IItem> Removed = i => { };
         public event Action<AnimalId> Healed = i => { };
@@ -97,7 +98,7 @@ namespace Logic.Medicine
 
             _healingAnimal = _gameFactory.CreateAnimal(_animalData, _spawnPlace.position)
                 .GetComponent<Animal>();
-
+            
             Healed.Invoke(_healingAnimal.AnimalId);
             
             RemoveItem(_animalItem);
@@ -160,7 +161,7 @@ namespace Logic.Medicine
             _medToolData is not null;
 
         private bool IsSuitableTool(IItem item) =>
-            _animalData.TreatToolId == ((MedToolItemData) item.ItemData).MedicineToolId;
+            _animalData.TreatToolId == ((MedToolItemData) item.ItemData)._medicalToolId;
 
         private bool HasAnimal() =>
             _animalData is not null;

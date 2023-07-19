@@ -4,6 +4,7 @@ using Services;
 using Services.AnimalHouses;
 using Services.Animals;
 using Services.Camera;
+using Services.Effects;
 using Services.Input;
 using Services.PersistentProgress;
 using Services.Pools;
@@ -43,45 +44,53 @@ namespace Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticDataService();
-            _services.RegisterSingle<ICoroutineRunner>(_coroutineRunner);
-            _services.RegisterSingle<IPlayerInputService>(new PlayerInputService());
-            _services.RegisterSingle<IRandomService>(new RandomService());
-            _services.RegisterSingle<IPoolService>(new PoolService());
-            _services.RegisterSingle<IAssetProvider>(new AssetProvider());
-            _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _services.RegisterSingle<IAnimalHouseService>(new AnimalHouseService());
-            _services.RegisterSingle<IAnimalsService>(
-                new AnimalsService(_services.Single<IAnimalHouseService>()));
-            _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
-            _services.RegisterSingle<IGameFactory>(
+            Register<ICoroutineRunner>(_coroutineRunner);
+            Register<IPlayerInputService>(new PlayerInputService());
+            Register<IRandomService>(new RandomService());
+            Register<IPoolService>(new PoolService());
+            Register<IAssetProvider>(new AssetProvider());
+            Register<IPersistentProgressService>(new PersistentProgressService());
+            Register<IAnimalHouseService>(new AnimalHouseService());
+            Register<IAnimalsService>(
+                new AnimalsService(Get<IAnimalHouseService>()));
+            Register<ICameraOperatorService>(new CameraOperatorService());
+            Register<IGameFactory>(
                 new GameFactory(
-                    _services.Single<IAssetProvider>(),
-                    _services.Single<IRandomService>(),
-                    _services.Single<IPersistentProgressService>(),
-                    _services.Single<IStaticDataService>(),
-                    _services.Single<IAnimalsService>()));
-            _services.RegisterSingle<IUIFactory>(
+                    Get<IAssetProvider>(),
+                    Get<IRandomService>(),
+                    Get<IPersistentProgressService>(),
+                    Get<IStaticDataService>(),
+                    Get<IAnimalsService>()));
+            Register<IUIFactory>(
                 new UIFactory(
-                    _services.Single<IAssetProvider>(),
-                    _services.Single<IStaticDataService>(),
-                    _services.Single<IPersistentProgressService>(),
-                    _services.Single<IAnimalsService>(),
-                    _services.Single<IAnimalHouseService>()
+                    Get<IAssetProvider>(),
+                    Get<IStaticDataService>(),
+                    Get<IPersistentProgressService>(),
+                    Get<IAnimalsService>(),
+                    Get<IAnimalHouseService>()
                 ));
-            _services.RegisterSingle<IWindowService>(
+            Register<IEffectService>(new EffectService(Get<IPoolService>(),
+                Get<IStaticDataService>(), Get<IGameFactory>().EffectFactory));
+            Register<IWindowService>(
                 new WindowService(
-                    _services.Single<IUIFactory>()));
-            _services.RegisterSingle<ISaveLoadService>(
+                    Get<IUIFactory>()));
+            Register<ISaveLoadService>(
                 new SaveLoadService(
-                    _services.Single<IPersistentProgressService>(),
-                    _services.Single<IGameFactory>()));
+                    Get<IPersistentProgressService>(),
+                    Get<IGameFactory>()));
         }
+
+        private void Register<TService>(TService newService) where TService : IService =>
+            _services.RegisterSingle(newService);
+
+        private TService Get<TService>() where TService : IService =>
+            _services.Single<TService>();
 
         private void RegisterStaticDataService()
         {
             IStaticDataService staticData = new StaticDataService();
             staticData.Load();
-            _services.RegisterSingle(staticData);
+            Register(staticData);
         }
 
         private void EnterLoadLevel() =>

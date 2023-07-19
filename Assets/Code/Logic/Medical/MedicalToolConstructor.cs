@@ -1,7 +1,7 @@
 using Data.ItemsData;
 using UnityEngine;
 
-namespace Logic.Medicine
+namespace Logic.Medical
 {
     public class MedicineToolConstructor : MonoBehaviour
     {

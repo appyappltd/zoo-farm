@@ -4,7 +4,7 @@ using Infrastructure.AssetManagement;
 using Infrastructure.Builders;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
-using Logic.Medicine;
+using Logic.Medical;
 using Logic.Plants.PlantSettings;
 using Logic.Spawners;
 using Services.Animals;
@@ -102,15 +102,15 @@ namespace Infrastructure.Factory
             return medicalBed.gameObject;
         }
 
-        public GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicineToolId toolIdType)
+        public GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType)
         {
             GameObject medToolStandObject = _assets.Instantiate(AssetPath.MedToolStandPath, at, rotation);
-            MedToolStand medToolStand = medToolStandObject.GetComponent<MedToolStand>();
-            _medStandBuilder.Build(medToolStand, toolIdType);
+            MedicalToolStand medicalToolStand = medToolStandObject.GetComponent<MedicalToolStand>();
+            _medStandBuilder.Build(medicalToolStand, toolIdType);
             return medToolStandObject;
         }
 
-        public GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicineToolId toolIdType) =>
+        public GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicalToolId toolIdType) =>
             _assets.Instantiate($"{AssetPath.MedToolItemPath}/{toolIdType}", at, rotation);
 
         public GameObject CreateVolunteer(Vector3 at, Transform parent)

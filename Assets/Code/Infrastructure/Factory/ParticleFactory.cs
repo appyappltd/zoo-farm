@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Infrastructure.AssetManagement;
+using Logic.Effects;
 using Services.Effects;
 using UnityEngine;
 
@@ -16,17 +17,17 @@ namespace Infrastructure.Factory
             _assetProvider = assetProvider;
         }
 
-        public ParticleSystem CreateParticle(EffectId id)
+        public Effect CreateParticle(EffectId id)
         {
             if (_cache.TryGetValue(id, out GameObject effect))
             {
-                return _assetProvider.Instantiate(effect).GetComponent<ParticleSystem>();
+                return _assetProvider.Instantiate(effect).GetComponent<Effect>();
             }
             
             GameObject newEffect = _assetProvider.Instantiate($"{AssetPath.EffectsPath}/{id}");
             _cache.Add(id, newEffect);
 
-            return newEffect.GetComponent<ParticleSystem>();
+            return newEffect.GetComponent<Effect>();
         }
     }
 }

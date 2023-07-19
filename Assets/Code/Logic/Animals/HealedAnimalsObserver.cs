@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Logic.Medicine;
+using Logic.Medical;
 using Ui.Services;
 using Ui.Windows;
 
@@ -8,7 +8,7 @@ namespace Logic.Animals
 {
     public class HealedAnimalsReporter
     {
-        private readonly List<IMedBedReporter> _bedReporters = new List<IMedBedReporter>();
+        private readonly List<IMedicalBedReporter> _bedReporters = new List<IMedicalBedReporter>();
         private readonly List<AnimalId> _houseWaitingAnimals = new List<AnimalId>();
 
 #if UNITY_EDITOR
@@ -40,14 +40,14 @@ namespace Logic.Animals
             }
         }
 
-        public void RegisterReporter(IMedBedReporter medBedReporter)
+        public void RegisterReporter(IMedicalBedReporter medicalBedReporter)
         {
-            if (_bedReporters.Contains(medBedReporter))
+            if (_bedReporters.Contains(medicalBedReporter))
                 return;
             
-            _bedReporters.Add(medBedReporter);
-            medBedReporter.Healed += OnHealed;
-            medBedReporter.HouseFound += OnHouseFound;
+            _bedReporters.Add(medicalBedReporter);
+            medicalBedReporter.Healed += OnHealed;
+            medicalBedReporter.HouseFound += OnHouseFound;
         }
 
         public void GetHealedAnimalType(Action<AnimalId> callback)

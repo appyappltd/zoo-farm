@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Data.ItemsData;
 using Logic.Storages.Items;
 
-namespace Logic.Medicine
+namespace Logic.Medical
 {
     public class MedicalToolNeedsReporter
     {
         private readonly List<MedicalBed> _medicalBeds = new List<MedicalBed>();
-        private readonly List<MedicineToolId> _neededTools = new List<MedicineToolId>();
+        private readonly List<MedicalToolId> _neededTools = new List<MedicalToolId>();
 
-        public event Action<MedicineToolId> ToolNeeds = i => { };
+        public event Action<MedicalToolId> ToolNeeds = i => { };
         
         ~MedicalToolNeedsReporter()
         {
@@ -28,7 +28,7 @@ namespace Logic.Medicine
             bed.Removed += OnItemRemoved;
         }
 
-        public bool IsNeeds(MedicineToolId toolId) =>
+        public bool IsNeeds(MedicalToolId toolId) =>
             _neededTools.Contains(toolId);
 
         private void OnItemRemoved(IItem item)

@@ -1,6 +1,6 @@
-namespace Logic.Medicine
+namespace Logic.Medical
 {
-    public enum MedicineToolId : byte
+    public enum MedicalToolId : byte
     {
         Pill = 0,
         Soap,

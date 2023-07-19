@@ -1,5 +1,6 @@
-using Logic.Medicine;
+using Logic.Medical;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Data.ItemsData
 {
@@ -8,6 +9,6 @@ namespace Data.ItemsData
     {
         [field: SerializeField] public ItemId ItemId { get; set; }
         [field: SerializeField] public int Weight { get; set; }
-        public MedicineToolId MedicineToolId;
+        [FormerlySerializedAs("MedicineToolId")] public MedicalToolId _medicalToolId;
     }
 }
