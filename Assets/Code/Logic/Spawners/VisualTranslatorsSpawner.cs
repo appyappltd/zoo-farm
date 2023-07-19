@@ -20,8 +20,6 @@ namespace Logic.Spawners
             _translator = translator;
             _fromTransform = fromTransform;
             _toTransform = toTransform;
-
-            Debug.Log(_toTransform.position);
         }
 
         protected override void OnSpawn(TranslatableAgent spawned)

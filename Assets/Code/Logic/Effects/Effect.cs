@@ -17,7 +17,7 @@ namespace Logic.Effects
             _particleSystem.Play();
         }
 
-        private void OnDisable() =>
+        private void OnParticleSystemStopped() =>
             Disabled.Invoke(this);
     }
 }

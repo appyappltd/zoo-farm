@@ -32,7 +32,10 @@ namespace Logic.Spawners
             _translator = GetComponent<ITranslator>();
             _timerOperator = GetComponent<TimerOperator>();
             _timerOperator.SetUp(_spawnDelay, SpawnCoin);
+        }
 
+        private void Start()
+        {
             _pooledSpawner = new PooledSpawner<CollectibleCoin>(
                 () =>
                     AllServices.Container.Single<IGameFactory>().CreateCollectibleCoin(), 10, OnReturnToPool,
@@ -40,7 +43,7 @@ namespace Logic.Spawners
         }
 
         private void OnDestroy() =>
-            _pooledSpawner.Dispose();
+            _pooledSpawner?.Dispose();
 
         private void OnDrawGizmos()
         {

@@ -24,7 +24,7 @@ namespace Services.Pools
             if (preloadFunc is null)
                 throw new Exception("Preload function cannot be null");
 
-            _parent = parent ? parent : new GameObject($"Pool {typeof(T).Name}").transform;
+            _parent = parent is not null ? parent : new GameObject($"Pool {typeof(T).Name}").transform;
 
             for (int i = 0; i < preloadCount; i++)
             {

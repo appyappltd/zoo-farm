@@ -4,6 +4,7 @@ using Infrastructure.Factory;
 using Logic;
 using Services;
 using Services.Camera;
+using Services.Effects;
 using Services.Input;
 using Services.PersistentProgress;
 using Services.Pools;

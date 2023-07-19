@@ -5,7 +5,14 @@ namespace Services.Pools
         public readonly int Key;
         public PoolKey(object key)
         {
-            Key = key.GetHashCode();
+            if (key.GetType().IsClass)
+            {
+                Key = key.GetHashCode();
+            }
+            else
+            {
+                Key = key.ToString().GetHashCode();
+            }
         }
 
         public override string ToString()

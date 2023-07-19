@@ -60,7 +60,8 @@ namespace Infrastructure.States
                     Get<IRandomService>(),
                     Get<IPersistentProgressService>(),
                     Get<IStaticDataService>(),
-                    Get<IAnimalsService>()));
+                    Get<IAnimalsService>(),
+                    Get<IPoolService>()));
             Register<IUIFactory>(
                 new UIFactory(
                     Get<IAssetProvider>(),
@@ -69,8 +70,7 @@ namespace Infrastructure.States
                     Get<IAnimalsService>(),
                     Get<IAnimalHouseService>()
                 ));
-            Register<IEffectService>(new EffectService(Get<IPoolService>(),
-                Get<IStaticDataService>(), Get<IGameFactory>().EffectFactory));
+            Register<IEffectService>(new EffectService(Get<IPoolService>()));
             Register<IWindowService>(
                 new WindowService(
                     Get<IUIFactory>()));

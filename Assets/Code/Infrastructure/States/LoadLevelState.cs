@@ -6,6 +6,7 @@ using Logic.Player;
 using Logic.SpawnPlaces;
 using Player;
 using Services.Camera;
+using Services.Effects;
 using Services.Input;
 using Services.PersistentProgress;
 using Services.Pools;
@@ -32,7 +33,8 @@ namespace Infrastructure.States
 
         public LoadLevelState(GameStateMachine gameStateMachine, LoadingCurtain curtain, SceneLoader sceneLoader,
             IGameFactory gameFactory, IPlayerInputService inputService, IPersistentProgressService progressService,
-            ICameraOperatorService cameraService, IUIFactory uiFactory, IStaticDataService staticData, IPoolService poolService)
+            ICameraOperatorService cameraService, IUIFactory uiFactory, IStaticDataService staticData,
+            IPoolService poolService)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -49,9 +51,8 @@ namespace Infrastructure.States
         public void Enter(string payload)
         {
             _curtain.Show();
-            _gameFactory.Cleanup();
-            _gameFactory.WarmUp();
             _poolService.DestroyAllPools();
+            _gameFactory.Cleanup();
             _sceneLoader.Load(payload, OnLoaded);
         }
 
@@ -60,13 +61,14 @@ namespace Infrastructure.States
 
         private void OnLoaded()
         {
+            _gameFactory.WarmUp();
             InitialGameWorld();
             GameObject hero = InitHero();
             FollowCamera(hero.transform);
             InitialHud(hero);
             InitUIRoot();
-            _stateMachine.Enter<GameLoopState>();
             InformProgressReaders();
+            _stateMachine.Enter<GameLoopState>();
         }
 
         private void InformProgressReaders()

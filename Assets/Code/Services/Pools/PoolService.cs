@@ -13,7 +13,7 @@ namespace Services.Pools
             Action<TPooled> returnAction, int preloadCount, Transform parent = null) where TPooled : IPoolable
         {
 #if DEBUG
-            Debug.Log($"Pool key hashCode {key.ToString()} ");
+            Debug.Log($"Pool key {typeof(TPooled).Name} hashCode {key.ToString()} ");
 #endif
             
             if (_allPools.ContainsKey(key))

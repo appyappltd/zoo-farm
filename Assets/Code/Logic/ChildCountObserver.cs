@@ -12,7 +12,6 @@ namespace Logic
             if (transform.childCount <= 0)
             {
                 _hasNoChild.Trigger(gameObject);
-                Debug.Log("child zero");
             }
         }
     }

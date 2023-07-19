@@ -9,6 +9,7 @@ using Logic.Plants.PlantSettings;
 using Logic.Spawners;
 using Services.Animals;
 using Services.PersistentProgress;
+using Services.Pools;
 using Services.Randomizer;
 using Services.StaticData;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace Infrastructure.Factory
         private readonly IAssetProvider _assets;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IPoolService _poolService;
 
         private readonly AnimalBuilder _animalBuilder;
         private readonly MedStandBuilder _medStandBuilder;
@@ -33,14 +35,15 @@ namespace Infrastructure.Factory
         public IEffectFactory EffectFactory { get; }
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, IAnimalsService animalsService)
+            IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, IAnimalsService animalsService, IPoolService poolService)
         {
             _assets = assets;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
+            _poolService = poolService;
 
             PlantFactory = new PlantFactory(assets);
-            EffectFactory = new EffectFactory(assets);
+            EffectFactory = new EffectFactory(assets, staticDataService, poolService);
 
             MedicalToolNeedsReporter medicineToolReporter = new MedicalToolNeedsReporter();
 
@@ -55,9 +58,14 @@ namespace Infrastructure.Factory
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+            _poolService.DestroyAllPools();
+            EffectFactory.Cleanup();
         }
 
-        public void WarmUp() { }
+        public void WarmUp()
+        {
+            EffectFactory.WarmUp();
+        }
 
         public GameObject CreateHero(Vector3 at)
         {

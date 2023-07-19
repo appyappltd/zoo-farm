@@ -3,6 +3,7 @@ using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using Logic.Effects;
 using Logic.Interactions;
 using Logic.Player;
 using Logic.Storages;
@@ -16,7 +17,7 @@ using UnityEngine;
 namespace Logic.Medical
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IMedicalBedReporter
+    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IMedicalBedReporter, IEffectTrigger
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
@@ -36,6 +37,7 @@ namespace Logic.Medical
         private IAnimal _healingAnimal;
         private byte Id;
 
+        public event Action EffectTriggered = () => { };
         public event Action<IItem> Added = i => { };
         public event Action<IItem> Removed = i => { };
         public event Action<AnimalId> Healed = i => { };
@@ -96,6 +98,8 @@ namespace Logic.Medical
             Debug.Log("Healed");
             _isHealing = false;
 
+            EffectTriggered.Invoke();
+            
             _healingAnimal = _gameFactory.CreateAnimal(_animalData, _spawnPlace.position)
                 .GetComponent<Animal>();
             

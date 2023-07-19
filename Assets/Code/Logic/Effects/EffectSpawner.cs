@@ -1,3 +1,4 @@
+using AYellowpaper;
 using Services;
 using Services.Effects;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Logic.Effects
 {
     public class EffectSpawner : MonoBehaviour
     {
-        [SerializeField] private IEffectTrigger _effectTrigger;
+        [SerializeField] private InterfaceReference<IEffectTrigger, MonoBehaviour> _effectTrigger;
         [SerializeField] private EffectId _healedEffect;
 
         private IEffectService _effectService;
@@ -18,7 +19,7 @@ namespace Logic.Effects
 
         private void OnEnable()
         {
-            _effectTrigger.EffectTriggered += OnPlayEffect;
+            _effectTrigger.Value.EffectTriggered += OnPlayEffect;
         }
 
         private void OnPlayEffect()

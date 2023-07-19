@@ -6,5 +6,7 @@ namespace Infrastructure.Factory
     public interface IEffectFactory
     {
         Effect CreateParticle(EffectId id);
+        void Cleanup();
+        void WarmUp();
     }
 }
