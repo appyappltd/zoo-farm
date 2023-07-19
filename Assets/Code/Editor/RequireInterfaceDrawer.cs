@@ -4,7 +4,7 @@ using Tools;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace Code.Editor
 {
     [CustomPropertyDrawer(typeof(RequireInterface))]
     public class RequireInterfaceDrawer : PropertyDrawer
