@@ -4,6 +4,7 @@ using Infrastructure.Factory;
 using Logic.Storages;
 using Logic.Storages.Items;
 using Services;
+using Services.MedicalBeds;
 using StaticData;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace Logic.Medical
         [SerializeField, Min(.0f)] private float _respawnTime = 2f;
 
         private IGameFactory _gameFactory;
-        private MedicalToolNeedsReporter _needsReporter;
+        private IMedicalBedsReporter _needsReporter;
         private IItem _toolItem;
         private MedicalToolId _toolId;
         private bool _isNeeded;
@@ -37,7 +38,7 @@ namespace Logic.Medical
         private void OnDestroy() =>
             _needsReporter.ToolNeeds -= OnToolNeeds;
 
-        public void Construct(MedToolStandConfig config, MedicalToolNeedsReporter needsReporter)
+        public void Construct(MedToolStandConfig config, IMedicalBedsReporter needsReporter)
         {
             _needsReporter = needsReporter;
             _toolId = config.Type;

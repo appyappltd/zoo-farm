@@ -76,10 +76,10 @@ namespace Logic.Volunteers.Queue
         {
             _freeIndex--;
             
-            if (_freeIndex < 0)
-            {
-                throw new IndexOutOfRangeException();
-            }
+            // if (_freeIndex < 0)
+            // {
+            //     throw new IndexOutOfRangeException();
+            // }
         }
     }
 }

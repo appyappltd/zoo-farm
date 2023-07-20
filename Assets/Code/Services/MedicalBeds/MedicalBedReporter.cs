@@ -1,31 +1,53 @@
 using System;
 using System.Collections.Generic;
 using Data.ItemsData;
+using Logic.Medical;
 using Logic.Storages.Items;
+using UnityEngine;
 
-namespace Logic.Medical
+namespace Services.MedicalBeds
 {
-    public class MedicalToolNeedsReporter
+    public class MedicalBedsReporter : IMedicalBedsReporter
     {
         private readonly List<MedicalBed> _medicalBeds = new List<MedicalBed>();
         private readonly List<MedicalToolId> _neededTools = new List<MedicalToolId>();
 
         public event Action<MedicalToolId> ToolNeeds = i => { };
-        
-        ~MedicalToolNeedsReporter()
+
+        public bool HasFreeBeds()
+        {
+            bool hasFree = true;
+
+            Debug.Log(hasFree);
+            
+            for (var index = 0; index < _medicalBeds.Count; index++)
+            {
+                MedicalBed medicalBed = _medicalBeds[index];
+                hasFree = hasFree && medicalBed.IsFree;
+            }
+
+            return hasFree;
+        }
+
+        public void Cleanup()
         {
             foreach (MedicalBed medicalBed in _medicalBeds)
             {
                 medicalBed.Added -= OnItemAdd;
                 medicalBed.Removed -= OnItemRemoved;
             }
+            
+            _medicalBeds.Clear();
         }
 
-        public void RegisterMedicineBed(MedicalBed bed)
+        public void Register(MedicalBed medicalBed)
         {
-            _medicalBeds.Add(bed);
-            bed.Added += OnItemAdd;
-            bed.Removed += OnItemRemoved;
+            if (_medicalBeds.Contains(medicalBed))
+                return;
+            
+            _medicalBeds.Add(medicalBed);
+            medicalBed.Added += OnItemAdd;
+            medicalBed.Removed += OnItemRemoved;
         }
 
         public bool IsNeeds(MedicalToolId toolId) =>

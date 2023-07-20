@@ -1,15 +1,20 @@
 using Logic.Medical;
+using Services.MedicalBeds;
 
 namespace Infrastructure.Builders
 {
     public class MedBedBuilder
     {
-        private readonly MedicalToolNeedsReporter _reporter;
+        private readonly IMedicalBedsReporter _reporter;
 
-        public MedBedBuilder(MedicalToolNeedsReporter reporter) =>
-            _reporter = reporter;
+        public MedBedBuilder(IMedicalBedsReporter medicalBedsReporter)
+        {
+            _reporter = medicalBedsReporter;
+        }
 
-        public void Build(MedicalBed medicalBed) =>
-            _reporter.RegisterMedicineBed(medicalBed);
+        public void Build(MedicalBed medicalBed)
+        {
+            _reporter.Register(medicalBed);
+        }
     }
 }

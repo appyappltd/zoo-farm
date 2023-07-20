@@ -10,6 +10,7 @@ namespace Logic.Volunteers.Queue
     {
         [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField] private GameObject _interactionView;
+        [SerializeField] private InteractionSine _interactionSine;
         [SerializeField] private ProductReceiver _productReceiver;
 
         public event Action<QueuePlace> Vacated = q => { };
@@ -27,6 +28,7 @@ namespace Logic.Volunteers.Queue
         {
             _playerInteraction.gameObject.SetActive(true);
             _interactionView.SetActive(true);
+            _interactionSine.SetDefault();
         }
 
         public void Hide()

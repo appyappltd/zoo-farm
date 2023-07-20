@@ -1,4 +1,5 @@
 using Logic.Medical;
+using Services.MedicalBeds;
 using Services.StaticData;
 
 namespace Infrastructure.Builders
@@ -6,9 +7,9 @@ namespace Infrastructure.Builders
     public class MedStandBuilder
     {
         private readonly IStaticDataService _staticDataService;
-        private readonly MedicalToolNeedsReporter _reporter;
+        private readonly IMedicalBedsReporter _reporter;
 
-        public MedStandBuilder(IStaticDataService staticDataService, MedicalToolNeedsReporter reporter)
+        public MedStandBuilder(IStaticDataService staticDataService, IMedicalBedsReporter reporter)
         {
             _staticDataService = staticDataService;
             _reporter = reporter;

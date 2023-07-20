@@ -36,12 +36,15 @@ namespace Logic.Medical
         private bool _isHealing;
         private IAnimal _healingAnimal;
         private byte Id;
+        private bool _isFree;
 
         public event Action EffectTriggered = () => { };
         public event Action<IItem> Added = i => { };
         public event Action<IItem> Removed = i => { };
         public event Action<AnimalId> Healed = i => { };
         public event Action<AnimalId> HouseFound = i => { };
+
+        public bool IsFree => _isFree;
 
         private void Awake()
         {
@@ -72,6 +75,7 @@ namespace Logic.Medical
             {
                 _animalData = item.ItemData as AnimalItemData;
                 _animalItem = item;
+                _isFree = false;
             }
             else if (ItemIsMedTool(item))
             {
@@ -134,6 +138,8 @@ namespace Logic.Medical
             
             _medToolItem = null;
             _medToolData = null;
+
+            _isFree = true;
         }
 
         private void BeginHeal()

@@ -8,6 +8,7 @@ using Logic.Medical;
 using Logic.Plants.PlantSettings;
 using Logic.Spawners;
 using Services.Animals;
+using Services.MedicalBeds;
 using Services.PersistentProgress;
 using Services.Pools;
 using Services.Randomizer;
@@ -35,7 +36,8 @@ namespace Infrastructure.Factory
         public IEffectFactory EffectFactory { get; }
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, IAnimalsService animalsService, IPoolService poolService)
+            IPersistentProgressService persistentProgressService, IStaticDataService staticDataService,
+            IAnimalsService animalsService, IPoolService poolService, IMedicalBedsReporter medicalBedsReporter)
         {
             _assets = assets;
             _randomService = randomService;
@@ -45,12 +47,10 @@ namespace Infrastructure.Factory
             PlantFactory = new PlantFactory(assets);
             EffectFactory = new EffectFactory(assets, staticDataService, poolService);
 
-            MedicalToolNeedsReporter medicineToolReporter = new MedicalToolNeedsReporter();
-
             _animalHouseBuilder = new AnimalHouseBuilder();
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _medStandBuilder = new MedStandBuilder(staticDataService, medicineToolReporter);
-            _medBedBuilder = new MedBedBuilder(medicineToolReporter);
+            _medStandBuilder = new MedStandBuilder(staticDataService, medicalBedsReporter);
+            _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _gardenBedBuilder = new GardenBadBuilder(staticDataService, PlantFactory);
         }
 

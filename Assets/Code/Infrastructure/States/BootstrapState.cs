@@ -6,6 +6,7 @@ using Services.Animals;
 using Services.Camera;
 using Services.Effects;
 using Services.Input;
+using Services.MedicalBeds;
 using Services.PersistentProgress;
 using Services.Pools;
 using Services.Randomizer;
@@ -51,6 +52,7 @@ namespace Infrastructure.States
             Register<IAssetProvider>(new AssetProvider());
             Register<IPersistentProgressService>(new PersistentProgressService());
             Register<IAnimalHouseService>(new AnimalHouseService());
+            Register<IMedicalBedsReporter>(new MedicalBedsReporter());
             Register<IAnimalsService>(
                 new AnimalsService(Get<IAnimalHouseService>()));
             Register<ICameraOperatorService>(new CameraOperatorService());
@@ -61,7 +63,8 @@ namespace Infrastructure.States
                     Get<IPersistentProgressService>(),
                     Get<IStaticDataService>(),
                     Get<IAnimalsService>(),
-                    Get<IPoolService>()));
+                    Get<IPoolService>(),
+                    Get<IMedicalBedsReporter>()));
             Register<IUIFactory>(
                 new UIFactory(
                     Get<IAssetProvider>(),

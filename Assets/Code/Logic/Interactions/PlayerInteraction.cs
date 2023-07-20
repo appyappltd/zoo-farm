@@ -1,5 +1,8 @@
 using System;
+using AYellowpaper;
+using Logic.Interactions.Validators;
 using Logic.Player;
+using NaughtyAttributes;
 using Observer;
 using UnityEngine;
 
@@ -9,18 +12,23 @@ namespace Logic.Interactions
     public class PlayerInteraction : ObserverTargetExit<Hero, TriggerObserverExit>
     {
         [SerializeField] private float _interactionDelay;
+        [SerializeField] private bool _isValidate;
+
+        [SerializeField] [ShowIf("_isValidate")]
+        private InterfaceReference<IInteractionValidator, MonoBehaviour> _interactionValidator;
 
 #if UNITY_EDITOR
         private float _prevDelayValue;
 #endif
-        
+
         [SerializeField] private TimerOperator _timerOperator;
-        
+
         private Hero _cashedHero;
 
         public event Action<Hero> Interacted = c => { };
         public event Action<Hero> Entered = c => { };
         public event Action Canceled = () => { };
+        public event Action Rejected = () => { };
 
         public float InteractionDelay => _interactionDelay;
 
@@ -34,7 +42,7 @@ namespace Logic.Interactions
         {
             if (Mathf.Approximately(_interactionDelay, _prevDelayValue))
                 return;
-            
+
             OnAwake();
         }
 
@@ -48,6 +56,23 @@ namespace Logic.Interactions
             Interacted.Invoke(_cashedHero);
 
         protected override void OnTargetEntered(Hero hero)
+        {
+            if (_isValidate)
+            {
+                if (_interactionValidator.Value.IsValid())
+                {
+                    InvokeEntered(hero);
+                    return;
+                }
+                
+                Rejected.Invoke();
+                Debug.Log("Rejected");
+            }
+            else
+                InvokeEntered(hero);
+        }
+
+        private void InvokeEntered(Hero hero)
         {
             _cashedHero = hero;
             _timerOperator.Restart();

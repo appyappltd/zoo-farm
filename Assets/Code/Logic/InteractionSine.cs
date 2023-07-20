@@ -33,9 +33,11 @@ namespace Logic
             _playerInteraction.Canceled -= OnCancel;
         }
 
-        protected override void OnDisabled()
+        public void SetDefault()
         {
-            SetDefaultSize();
+            enabled = false;
+            _sine.localScale = Vector3.one * _defaultSize;
+            _deltaSize = _defaultSize;
         }
 
         private void OnCancel()
@@ -50,20 +52,13 @@ namespace Logic
 
         protected override void Run()
         {
+            _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime);
+            _sine.localScale = Vector3.one * _deltaSize;
+            
             if (Mathf.Approximately(_deltaSize, _targetSize))
             {
                 enabled = false;
             }
-            
-            _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime);
-            _sine.localScale = Vector3.one * _deltaSize;
-        }
-
-        private void SetDefaultSize()
-        {
-            _targetSize = _defaultSize;
-            _deltaSize = _defaultSize;
-            _sine.localScale = Vector3.one * _defaultSize;
         }
 
         private void BeginIncrease()
