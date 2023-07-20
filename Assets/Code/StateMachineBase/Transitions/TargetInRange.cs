@@ -10,6 +10,6 @@ namespace StateMachineBase.Transitions
             _range = range;
 
         public override bool CheckCondition() =>
-            Distance < _range;
+            Distance < _range - DistanceError;
     }
 }

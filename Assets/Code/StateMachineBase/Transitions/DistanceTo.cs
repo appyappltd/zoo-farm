@@ -4,6 +4,8 @@ namespace StateMachineBase.Transitions
 {
     public abstract class DistanceTo : Transition
     {
+        protected const float DistanceError = 0.1f;
+        
         private readonly Transform _origin;
         private readonly Transform _target;
         protected virtual float Distance => Vector3.Distance(_origin.position, _target.position);

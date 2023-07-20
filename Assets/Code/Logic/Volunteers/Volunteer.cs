@@ -23,6 +23,8 @@ namespace Logic.Volunteers
         public VolunteerStateMachine StateMachine => _stateMachine;
         public bool IsFree => _isFree;
         public Vector3 QueuePosition => _queuePlace.transform.position;
+        public Quaternion QueueRotation => _queuePlace.transform.rotation;
+        public Transform QueueTransform => _queuePlace.transform;
 
         public event Action<IItem> Removed;
         
@@ -59,10 +61,8 @@ namespace Logic.Volunteers
             return false;
         }
 
-        public void UpdateQueuePlace(QueuePlace place)
-        {
+        public void UpdateQueuePlace(QueuePlace place) =>
             _queuePlace = place;
-        }
 
         public void Reload() =>
             _isFree = true;
@@ -79,10 +79,8 @@ namespace Logic.Volunteers
             _queuePlace.Hide();
         }
 
-        private void OnRemove(IItem _)
-        {
+        private void OnRemove(IItem _) =>
             _isReadyTransmitting = false;
-        }
 
         private void OnDestroy() =>
             Inventory.Added -= OnAdd;

@@ -32,7 +32,12 @@ namespace Logic
             _playerInteraction.Entered -= OnEnter;
             _playerInteraction.Canceled -= OnCancel;
         }
-        
+
+        protected override void OnDisabled()
+        {
+            SetDefaultSize();
+        }
+
         private void OnCancel()
         {
             Cancel();
@@ -52,6 +57,13 @@ namespace Logic
             
             _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime);
             _sine.localScale = Vector3.one * _deltaSize;
+        }
+
+        private void SetDefaultSize()
+        {
+            _targetSize = _defaultSize;
+            _deltaSize = _defaultSize;
+            _sine.localScale = Vector3.one * _defaultSize;
         }
 
         private void BeginIncrease()

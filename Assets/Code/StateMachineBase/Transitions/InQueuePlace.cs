@@ -7,10 +7,10 @@ namespace StateMachineBase.Transitions
     {
         private readonly Transform _origin;
         private readonly Volunteer _volunteer;
-        private readonly float _range;
-        private Vector3 _place;
 
-        protected override float Distance => Vector3.Distance(_origin.position, _place);
+        private Vector3 _queuePosition;
+
+        protected override float Distance => Vector3.Distance(_origin.position, _queuePosition);
 
         public InQueuePlace(Transform origin, Transform target, Volunteer volunteer, float range) : base(origin, target, range)
         {
@@ -20,8 +20,8 @@ namespace StateMachineBase.Transitions
 
         public override void Enter()
         {
-            _place = _volunteer.QueuePosition;
             base.Enter();
+            _queuePosition = _volunteer.QueuePosition;
         }
     }
 }

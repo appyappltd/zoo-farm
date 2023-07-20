@@ -21,7 +21,7 @@ namespace NTC.Global.System
         {
             if (component is MonoBehaviour monoBehaviour)
             {
-                monoBehaviour.enabled = false;
+                monoBehaviour.enabled = true;
             }
             else
             {
@@ -38,7 +38,7 @@ namespace NTC.Global.System
         {
             if (component is MonoBehaviour monoBehaviour)
             {
-                monoBehaviour.enabled = true;
+                monoBehaviour.enabled = false;
             }
             else
             {

@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 5114288513236749752}
   - component: {fileID: 6965783225314063670}
   - component: {fileID: 553782194707196285}
+  - component: {fileID: 1220950354792851166}
   m_Layer: 10
   m_Name: Volunteer
   m_TagString: Untagged
@@ -501,6 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1970963315827194203}
   _mover: {fileID: 6078166372410386944}
+  _aligner: {fileID: 1220950354792851166}
   _placeOffset: 0.2
 --- !u!114 &6078166372410386944
 MonoBehaviour:
@@ -514,9 +516,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d29dd8afe50a641b379a8f61c22907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 0
   _agent: {fileID: 2923387916400846363}
+  _maxSpeed: 0
   _rotateSpeed: 5
+  _isAlignAtEnd: 0
+  _aligner: {fileID: 0}
 --- !u!195 &2923387916400846363
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -609,6 +613,19 @@ MonoBehaviour:
   _trigger: {fileID: 11400000, guid: 401bb94112b73af4c80859d08e881d65, type: 2}
   _IsTriggerOnEnable: 1
   _IsTriggerOnDisable: 0
+--- !u!114 &1220950354792851166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229401633726274375}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea54b987ba1de0a498ed6fe2905da0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotateSpeed: 5
 --- !u!1 &1296423078286401506
 GameObject:
   m_ObjectHideFlags: 0

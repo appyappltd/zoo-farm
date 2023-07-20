@@ -38,6 +38,12 @@ namespace Logic.Interactions
             OnAwake();
         }
 
+        protected override void OnDisabled()
+        {
+            base.OnDisabled();
+            _timerOperator.Pause();
+        }
+
         private void OnDelayPassed() =>
             Interacted.Invoke(_cashedHero);
 

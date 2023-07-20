@@ -12,6 +12,7 @@ namespace Logic.Volunteers
 {
     public class VolunteerBand : MonoBehaviour
     {
+        
         [SerializeField] private AnimalSpawner _animalSpawner;
 
         [SerializeField] private Transform _container;
@@ -19,11 +20,11 @@ namespace Logic.Volunteers
         [SerializeField] private Transform _outPlace;
 
         [SerializeField] private QueuePlace[] _queuePlaces;
-        [SerializeField] private List<Volunteer> _volunteers = new();
-
+        
         private IGameFactory _gameFactory;
         private QueueOperator _queueOperator;
         private Volunteer _volunteerCashed;
+        private List<Volunteer> _volunteers;
 
         public int VolunteersCount => _queueOperator.QueueCount;
         public int MaxVolunteers => _queuePlaces.Length - 2;
@@ -32,6 +33,7 @@ namespace Logic.Volunteers
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _queueOperator = new QueueOperator(_queuePlaces);
+            _volunteers = new List<Volunteer>(_queuePlaces.Length + 1);
         }
 
         private void SetVolunteer(Volunteer volunteer)

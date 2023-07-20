@@ -1,3 +1,5 @@
+using System;
+using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,9 +8,13 @@ namespace Logic.Movement
 {
     public class NavMeshMover : MonoCache
     {
-        [SerializeField] private float _maxSpeed;
         [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private float _maxSpeed;
         [SerializeField] private float _rotateSpeed;
+        [SerializeField] private bool _isAlignAtEnd;
+        [SerializeField] [ShowIf("_isAlignAtEnd")] private Aligner _aligner;
+        
+        private Quaternion _finalRotation;
 
         public Vector3 DestinationPoint => _agent.destination;
         public float Distance => _agent.remainingDistance;
@@ -18,8 +24,20 @@ namespace Logic.Movement
         private void Start() =>
             _agent.speed = _maxSpeed;
 
-        protected override void FixedRun() =>
+        protected override void Run()
+        {
             Rotate();
+            CheckForEndMove();
+        }
+
+        private void CheckForEndMove()
+        {
+            if (_agent.isStopped)
+                enabled = false;
+
+            if (_isAlignAtEnd)
+                _aligner.Aligne(_finalRotation);
+        }
 
         public void SetNormalizedSpeed(float normalizedSpeed)
         {
@@ -27,12 +45,26 @@ namespace Logic.Movement
             _agent.speed = normalizedSpeed * _maxSpeed;
         }
         
-        public void SetDestination(Vector3 position)
+        public void SetLocation(Location location)
+        {
+            SetDestination(location.Position);
+            _finalRotation = location.Rotation;
+
+#if DEBUG
+            if (_isAlignAtEnd == false)
+            {
+                Debug.LogWarning("You set the final rotation, but its application is not enabled");
+            }
+#endif
+        }
+
+        public void SetDestination(Vector3 destination)
         {
             NavMeshPath path = new NavMeshPath();
 
-            if (_agent.CalculatePath(position, path))
+            if (_agent.CalculatePath(destination, path))
             {
+#if DEBUG
                 for (int index = 1; index < path.corners.Length; index++)
                 {
                     Vector3 cornerFrom = path.corners[index - 1];
@@ -40,24 +72,23 @@ namespace Logic.Movement
 
                     Debug.DrawLine(cornerFrom, cornerTo, Color.blue, 10f);
                 }
-            }
-            
-            _agent.SetPath(path);
-        }
+#endif
 
-        public void RotateTo(Vector3 target) =>
-            transform.rotation = Quaternion.LookRotation(target - _agent.steeringTarget);
+                _agent.SetPath(path);
+                return;
+            }
+
+            throw new Exception("Path cannot be found");
+        }
 
         private void Rotate()
         {
             Quaternion lookRotation = GetLookRotation();
-            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, lookRotation, _rotateSpeed * Time.fixedDeltaTime);
+            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, lookRotation, _rotateSpeed * Time.smoothDeltaTime);
             transform.rotation = targetRotation;
         }
 
-        private Quaternion GetLookRotation()
-        {
-            return Quaternion.LookRotation(_agent.steeringTarget - transform.position);
-        }
+        private Quaternion GetLookRotation() =>
+            Quaternion.LookRotation(_agent.steeringTarget - transform.position);
     }
 }

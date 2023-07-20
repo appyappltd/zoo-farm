@@ -6,16 +6,20 @@ namespace StateMachineBase.States
 {
     public class LookAt : PrimeAnimatorState
     {
-        private readonly NavMeshMover _mover;
+        private readonly IPrimeAnimator _animator;
+        private readonly Aligner _aligner;
         private readonly Transform _lookAt;
 
-        protected LookAt(IPrimeAnimator animator, NavMeshMover mover, Transform lookAt) : base(animator)
+        protected LookAt(IPrimeAnimator animator, Aligner aligner, Transform lookAt) : base(animator)
         {
-            _mover = mover;
+            _animator = animator;
+            _aligner = aligner;
             _lookAt = lookAt;
         }
 
-        protected override void OnEnter() =>
-            _mover.RotateTo(_lookAt.position);
+        protected override void OnEnter()
+        {
+            _animator.SetIdle();
+        }
     }
 }

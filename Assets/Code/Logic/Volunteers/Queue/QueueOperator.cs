@@ -22,7 +22,6 @@ namespace Logic.Volunteers.Queue
             for (int i = 1; i < _places.Length; i++)
             {
                 QueuePlace queuePlace = _places[i];
-                queuePlace.transform.LookAt(_places[i - 1].transform);
                 queuePlace.Vacated += OnVacatedPlace;
             }
         }
@@ -51,6 +50,9 @@ namespace Logic.Volunteers.Queue
 
         private void Move(int fromIndex)
         {
+            if (fromIndex == _places.Length - 1)
+                return;
+
             Vector3 lastPosition = _places[^1].transform.position;
 
             for (int i = _places.Length - 1; i > 0; i--)
