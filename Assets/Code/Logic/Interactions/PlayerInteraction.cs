@@ -59,7 +59,7 @@ namespace Logic.Interactions
         {
             if (_isValidate)
             {
-                if (_interactionValidator.Value.IsValid())
+                if (_interactionValidator.Value.IsValid(hero.Inventory))
                 {
                     InvokeEntered(hero);
                     return;

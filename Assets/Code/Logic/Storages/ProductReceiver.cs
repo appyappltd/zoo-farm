@@ -1,3 +1,4 @@
+using System;
 using Data.ItemsData;
 using Logic.Interactions;
 using Logic.Player;
@@ -28,6 +29,8 @@ namespace Logic.Storages
         private IAddItem _receiver;
         private IGetItem _sender;
 
+        public event Action<bool> ReceiveTried = b => { }; 
+        
         private bool IsCollector => _mode == ReceiverMode.Collector;
         
         private void Awake()
@@ -61,12 +64,14 @@ namespace Logic.Storages
 
         private void Subscribe()
         {   
+            _playerInteraction.Entered += OnEntered;
             _playerInteraction.Interacted += OnInteracted;
             _playerInteraction.Canceled += OnCanceled;
         }
 
         private void Unsubscribe()
         {
+            _playerInteraction.Entered += OnEntered;
             _playerInteraction.Interacted -= OnInteracted;
             _playerInteraction.Canceled -= OnCanceled;
         }
@@ -84,7 +89,21 @@ namespace Logic.Storages
             
             Subscribe();
         }
-        
+
+        public bool CanReceive(IInventory inventory)
+        {
+            if (_mode == ReceiverMode.Collector)
+            {
+                _sender = inventory;
+            }
+            else
+            {
+                _receiver = inventory;
+            }
+            
+            return _sender.TryPeek(_itemIdFilter, out IItem item) && _receiver.CanAdd(item);
+        }
+
         private void OnBeginReceive()
         {
             if (_sender.TryPeek(_itemIdFilter, out IItem item))
@@ -97,14 +116,20 @@ namespace Logic.Storages
             }
         }
 
-        private void Receive()
-        {
-            IItem receivedItem = _sender.Get();
-            _receiver.Add(receivedItem);
-        }
-
         private void OnCanceled() =>
             _timerOperator.Pause();
+
+        private void OnEntered(Hero hero)
+        {
+            if (_mode == ReceiverMode.Collector)
+            {
+                _sender = hero.Inventory;
+            }
+            else
+            {
+                _receiver = hero.Inventory;
+            }
+        }
 
         private void OnInteracted(Hero hero)
         {
@@ -118,6 +143,12 @@ namespace Logic.Storages
             }
 
             OnBeginReceive();
+        }
+
+        private void Receive()
+        {
+            IItem receivedItem = _sender.Get();
+            _receiver.Add(receivedItem);
         }
     }
 }
