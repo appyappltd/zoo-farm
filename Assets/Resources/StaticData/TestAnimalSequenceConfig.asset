@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TestAnimalSequenceConfig
   m_EditorClassIdentifier: 
   _pairs:
-  - _animalStaticData: {fileID: 11400000, guid: 7ad160b7fc6fb8c48b9bf476bbe220ed, type: 2}
+  - _animalStaticData: {fileID: 11400000, guid: 14e0be8f307eac8419a5196c273f16eb, type: 2}
     _treatTool: 2
-  - _animalStaticData: {fileID: 11400000, guid: 7ad160b7fc6fb8c48b9bf476bbe220ed, type: 2}
+  - _animalStaticData: {fileID: 11400000, guid: 14e0be8f307eac8419a5196c273f16eb, type: 2}
     _treatTool: 0
-  - _animalStaticData: {fileID: 11400000, guid: 7ad160b7fc6fb8c48b9bf476bbe220ed, type: 2}
+  - _animalStaticData: {fileID: 11400000, guid: 14e0be8f307eac8419a5196c273f16eb, type: 2}
     _treatTool: 1
-  - _animalStaticData: {fileID: 11400000, guid: 7ad160b7fc6fb8c48b9bf476bbe220ed, type: 2}
+  - _animalStaticData: {fileID: 11400000, guid: 14e0be8f307eac8419a5196c273f16eb, type: 2}
     _treatTool: 3

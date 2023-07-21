@@ -21,7 +21,7 @@ namespace Infrastructure.Factory
     {
         private readonly IAssetProvider _assets;
         private readonly IRandomService _randomService;
-        private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IPersistentProgressService _progressService;
         private readonly IPoolService _poolService;
 
         private readonly AnimalBuilder _animalBuilder;
@@ -34,23 +34,25 @@ namespace Infrastructure.Factory
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
         public IPlantFactory PlantFactory { get; }
         public IEffectFactory EffectFactory { get; }
+        public IHandItemFactory HandItemFactory { get; }
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IStaticDataService staticDataService,
+            IPersistentProgressService progressService, IStaticDataService staticDataService,
             IAnimalsService animalsService, IPoolService poolService, IMedicalBedsReporter medicalBedsReporter)
         {
             _assets = assets;
-            _randomService = randomService;
-            _persistentProgressService = persistentProgressService;
             _poolService = poolService;
+            _randomService = randomService;
+            _progressService = progressService;
 
             PlantFactory = new PlantFactory(assets);
+            HandItemFactory = new HandItemFactory(assets);
             EffectFactory = new EffectFactory(assets, staticDataService, poolService);
 
             _animalHouseBuilder = new AnimalHouseBuilder();
-            _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _medStandBuilder = new MedStandBuilder(staticDataService);
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
+            _medStandBuilder = new MedStandBuilder(staticDataService);
+            _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
             _gardenBedBuilder = new GardenBadBuilder(staticDataService, PlantFactory);
         }
 
@@ -67,11 +69,8 @@ namespace Infrastructure.Factory
             EffectFactory.WarmUp();
         }
 
-        public GameObject CreateHero(Vector3 at)
-        {
-            GameObject hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
-            return hero;
-        }
+        public GameObject CreateHero(Vector3 at) =>
+            InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
 
         public GameObject CreateHud() =>
             _assets.Instantiate(AssetPath.HudPath);

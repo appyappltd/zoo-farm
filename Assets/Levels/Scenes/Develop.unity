@@ -4384,6 +4384,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae9f7cee1ba43b9ae2cea637f8faab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1687827298 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4724598109352393965, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+  m_PrefabInstance: {fileID: 5407715211302104929}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6f40c18b9770444be6d3111e21e2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1692968192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6449,6 +6460,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6377468030634239951, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+      propertyPath: _animalItemSpawner
+      value: 
+      objectReference: {fileID: 1687827298}
     - target: {fileID: 6471376086031602452, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
       propertyPath: m_Name
       value: VoluntersSettings

@@ -13,7 +13,7 @@ namespace Logic.Volunteers
     public class VolunteerBand : MonoBehaviour
     {
         
-        [SerializeField] private AnimalSpawner _animalSpawner;
+        [SerializeField] private AnimalItemSpawner _animalItemSpawner;
 
         [SerializeField] private Transform _container;
         [SerializeField] private Transform _spawnPlace;
@@ -39,7 +39,7 @@ namespace Logic.Volunteers
         private void SetVolunteer(Volunteer volunteer)
         {
             volunteer.UpdateQueuePlace(_queueOperator.TakeQueue(volunteer));
-            HandItem animal = _animalSpawner.SpawnAnimal(volunteer.transform.position);
+            HandItem animal = _animalItemSpawner.SpawnAnimal(volunteer.transform.position);
             volunteer.Inventory.Add(animal);
             _volunteers.Add(volunteer);
         }

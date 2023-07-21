@@ -16,6 +16,7 @@ namespace Infrastructure.Factory
         List<ISavedProgress> ProgressWriters { get; }
         IPlantFactory PlantFactory { get; }
         IEffectFactory EffectFactory { get; }
+        IHandItemFactory HandItemFactory { get; }
         void Cleanup();
         void WarmUp();
         GameObject CreateHud();
