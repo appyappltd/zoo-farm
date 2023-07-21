@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 3622459246114047886}
   - component: {fileID: 1054407735569146436}
   - component: {fileID: 8686493322186669537}
+  - component: {fileID: -2238200947339812791}
   m_Layer: 7
   m_Name: Tire
   m_TagString: Untagged
@@ -143,3 +144,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14dc3c7271688246a8f12ec4ff20de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2238200947339812791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100966291594412737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3ca83bd38e440d8781c5f116dfda1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handItem: {fileID: 8686493322186669537}
+  _medToolItemData: {fileID: 11400000, guid: cd84ce8d112b5514a9b0e2d3bfb74b3b, type: 2}

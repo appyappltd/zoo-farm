@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5724121691355932840}
   - component: {fileID: 2559468788857932141}
   - component: {fileID: 1467411174788870988}
+  - component: {fileID: 8476801122448753480}
   m_Layer: 7
   m_Name: Soap
   m_TagString: Untagged
@@ -61,6 +62,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _errorOffset: 0.1
+--- !u!114 &8476801122448753480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475779372720190815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3ca83bd38e440d8781c5f116dfda1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handItem: {fileID: 2559468788857932141}
+  _medToolItemData: {fileID: 11400000, guid: 8f97357637530384ab05e1bd973d8a87, type: 2}
 --- !u!1 &538634257851519345
 GameObject:
   m_ObjectHideFlags: 0

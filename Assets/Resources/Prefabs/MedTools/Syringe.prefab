@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5280757882689774111}
   - component: {fileID: 5950705635725096069}
   - component: {fileID: 4594602905420632528}
+  - component: {fileID: 3645876719633911205}
   m_Layer: 7
   m_Name: Syringe
   m_TagString: Untagged
@@ -92,6 +93,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _errorOffset: 0.1
+--- !u!114 &3645876719633911205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190679380082420259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3ca83bd38e440d8781c5f116dfda1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handItem: {fileID: 5950705635725096069}
+  _medToolItemData: {fileID: 11400000, guid: 4587e338f2ffa38489fad749de0f8bf7, type: 2}
 --- !u!1 &4463195459638407041
 GameObject:
   m_ObjectHideFlags: 0
