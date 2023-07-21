@@ -9,6 +9,6 @@ namespace Services.MedicalBeds
         bool HasFreeBeds();
         bool IsNeeds(MedicalToolId toolId);
         void Cleanup();
-        event Action<MedicalToolId> ToolNeeds;
+        event Action Updated;
     }
 }

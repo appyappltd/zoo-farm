@@ -42,6 +42,7 @@ namespace Logic.Medical
         public event Action<IItem> Added = i => { };
         public event Action<IItem> Removed = i => { };
         public event Action<AnimalId> Healed = i => { };
+        public event Action FeedUp = () => { };
 
         public bool IsFree => _isFree;
         public AnimalType HealingAnimal => _healingAnimal.AnimalId.Type;
@@ -69,8 +70,6 @@ namespace Logic.Medical
 
         public void Add(IItem item)
         {
-            Added.Invoke(item);
-            
             if (ItemIsAnimal(item))
             {
                 _animalData = item.ItemData as AnimalItemData;
@@ -83,6 +82,8 @@ namespace Logic.Medical
                 _medToolItem = item;
                 BeginHeal();
             }
+
+            Added.Invoke(item);
         }
 
         public bool CanAdd(IItem item) =>
@@ -115,6 +116,7 @@ namespace Logic.Medical
             _houseService.TakeQueueToHouse( _healingAnimal.AnimalId,() =>
             {
                 FreeTheBad();
+                FeedUp.Invoke();
                 return _healingAnimal;
             });
         }

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Data.ItemsData;
-using Logic.Animals;
 using Logic.Medical;
 using Logic.Storages.Items;
-using UnityEngine;
 
 namespace Services.MedicalBeds
 {
@@ -12,8 +10,8 @@ namespace Services.MedicalBeds
     {
         private readonly List<MedicalBed> _medicalBeds = new List<MedicalBed>();
         private readonly List<MedicalToolId> _neededTools = new List<MedicalToolId>();
-
-        public event Action<MedicalToolId> ToolNeeds = i => { };
+        
+        public event Action Updated = () => { };
 
         public bool HasFreeBeds()
         {
@@ -34,6 +32,7 @@ namespace Services.MedicalBeds
             {
                 medicalBed.Added -= OnItemAdd;
                 medicalBed.Removed -= OnItemRemoved;
+                medicalBed.FeedUp -= OnFeedUp;
             }
             
             _medicalBeds.Clear();
@@ -47,6 +46,8 @@ namespace Services.MedicalBeds
             _medicalBeds.Add(medicalBed);
             medicalBed.Added += OnItemAdd;
             medicalBed.Removed += OnItemRemoved;
+            medicalBed.FeedUp += OnFeedUp;
+            Updated.Invoke();
         }
 
         public bool IsNeeds(MedicalToolId toolId) =>
@@ -68,7 +69,10 @@ namespace Services.MedicalBeds
             
             AnimalItemData animalData = (AnimalItemData) item.ItemData;
             _neededTools.Add(animalData.TreatToolId);
-            ToolNeeds.Invoke(animalData.TreatToolId);
+            Updated.Invoke();
         }
+
+        private void OnFeedUp() =>
+            Updated.Invoke();
     }
 }
