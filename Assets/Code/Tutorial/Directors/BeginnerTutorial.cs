@@ -16,6 +16,7 @@ namespace Tutorial.Directors
         [SerializeField] private Transform _animalTransmittingView;
         [SerializeField] private Transform _firstMedToolSpawnPoint;
         [SerializeField] private Transform _firstMedBedSpawnPoint;
+        [SerializeField] private Transform _animalReleaser;
         [SerializeField] private TutorialTriggerStatic _beginnerCoinsCollected;
         [SerializeField] private TutorialTriggerStatic _firstMedBadSpawned;
         [SerializeField] private TutorialTriggerStatic _firstHealingOptionSpawned;
@@ -36,8 +37,6 @@ namespace Tutorial.Directors
         [SerializeField] private HouseGridOperator _houseGridOperator;
         [SerializeField] private GardenBedGridOperator _gardenBedGridOperator;
         [SerializeField] private VolunteerSpawner _volunteerSpawner;
-        // [SerializeField] private Gate _toVolunteerGate;
-        // [SerializeField] private Gate _toYardGate;
 
         private ICameraOperatorService _cameraOperatorService;
         private TutorialInteractedTriggerContainer _healingOption;
@@ -142,7 +141,16 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_foodTaken));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstHouse.position)));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalHouseInteracted));
-            TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
+                _cameraOperatorService.Focus(_animalReleaser);
+                _arrow.Move(_animalReleaser.position);
+            }));
+            TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
+                _cameraOperatorService.FocusOnDefault();
+            }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
             TutorialModules.Add(new TutorialAction(() =>
             {

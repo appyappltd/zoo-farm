@@ -78,7 +78,9 @@ namespace Logic.Movement
                 return;
             }
 
+#if DEBUG
             throw new Exception("Path cannot be found");
+#endif
         }
 
         private void Rotate()
