@@ -12,8 +12,10 @@ namespace Ui.Windows
         [SerializeField] private Transform _panelsParent;
 
         private IAnimalHouseService _animalHouseService;
+        private Action<AnimalId> _onChoseCallback;
 
-        public event Action<AnimalId> HouseChosen = i => { };
+        public void SetOnChoseCallback(Action<AnimalId> callback) =>
+            _onChoseCallback = callback;
 
         public void Construct(IAnimalHouseService progressService, IUIFactory uiFactory, IStaticDataService staticData)
         {
@@ -24,7 +26,7 @@ namespace Ui.Windows
                 BuildHousePanel panel = uiFactory.CreateBuildHousePanel(_panelsParent);
                 panel.Construct(staticData.IconByAnimalType(animalId.Type), () =>
                 {
-                    HouseChosen.Invoke(animalId);
+                    _onChoseCallback.Invoke(animalId);
                     CloseWindow();
                 });
             }

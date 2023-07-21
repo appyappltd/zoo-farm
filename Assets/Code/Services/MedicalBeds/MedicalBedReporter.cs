@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Data.ItemsData;
+using Logic.Animals;
 using Logic.Medical;
 using Logic.Storages.Items;
 using UnityEngine;
@@ -16,14 +17,13 @@ namespace Services.MedicalBeds
 
         public bool HasFreeBeds()
         {
-            bool hasFree = true;
+            bool hasFree = false;
 
-            Debug.Log(hasFree);
-            
             for (var index = 0; index < _medicalBeds.Count; index++)
             {
                 MedicalBed medicalBed = _medicalBeds[index];
-                hasFree = hasFree && medicalBed.IsFree;
+                Debug.Log(index + " " + medicalBed.IsFree);
+                hasFree = hasFree || medicalBed.IsFree;
             }
 
             return hasFree;

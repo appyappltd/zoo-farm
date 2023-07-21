@@ -1,4 +1,3 @@
-using System;
 using Services;
 using Services.MedicalBeds;
 using UnityEngine;
@@ -12,17 +11,12 @@ namespace Logic.Interactions.Validators
         private void Awake()
         {
             _medicalBedsReporter = AllServices.Container.Single<IMedicalBedsReporter>();
-            Debug.Log(_medicalBedsReporter);
-        }
-
-        private void Update()
-        {
-            Debug.Log(_medicalBedsReporter);
+            Debug.Log(_medicalBedsReporter + GetInstanceID().ToString());
         }
 
         public bool IsValid()
         {
-            Debug.Log(_medicalBedsReporter);
+            Debug.Log(_medicalBedsReporter + GetInstanceID().ToString());
             return _medicalBedsReporter.HasFreeBeds();
         }
     }

@@ -17,7 +17,7 @@ using UnityEngine;
 namespace Logic.Medical
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IMedicalBedReporter, IEffectTrigger
+    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IEffectTrigger
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private PlayerInteraction _playerInteraction;
@@ -36,15 +36,15 @@ namespace Logic.Medical
         private bool _isHealing;
         private IAnimal _healingAnimal;
         private byte Id;
-        private bool _isFree;
+        private bool _isFree = true;
 
         public event Action EffectTriggered = () => { };
         public event Action<IItem> Added = i => { };
         public event Action<IItem> Removed = i => { };
         public event Action<AnimalId> Healed = i => { };
-        public event Action<AnimalId> HouseFound = i => { };
 
         public bool IsFree => _isFree;
+        public AnimalType HealingAnimal => _healingAnimal.AnimalId.Type;
 
         private void Awake()
         {
@@ -115,7 +115,6 @@ namespace Logic.Medical
             _houseService.TakeQueueToHouse( _healingAnimal.AnimalId,() =>
             {
                 FreeTheBad();
-                HouseFound.Invoke(_healingAnimal.AnimalId);
                 return _healingAnimal;
             });
         }

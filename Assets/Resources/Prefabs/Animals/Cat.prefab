@@ -153,6 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6141999466103048871}
   - component: {fileID: 8136296871626173811}
+  - component: {fileID: 4293563544085491186}
   m_Layer: 8
   m_Name: StateMachine
   m_TagString: Untagged
@@ -196,10 +197,21 @@ MonoBehaviour:
   _satietyReplanishSpeed: 0.5
   _peppinessReplanishSpeed: 0.5
   _maxWanderDistance: 3
-  _restPlace: {fileID: 0}
-  _eatPlace: {fileID: 0}
   _idleDelayRange: {x: 2, y: 5}
   _placeOffset: 0.1
+--- !u!114 &4293563544085491186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2662996136815657581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87f052efb1e0bea42a9f68063dc1f788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 
 --- !u!1 &3136995584478055676
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,9 +1011,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d29dd8afe50a641b379a8f61c22907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 2
   _agent: {fileID: 8923622328995443917}
+  _maxSpeed: 2
   _rotateSpeed: 5
+  _isAlignAtEnd: 0
+  _aligner: {fileID: 0}
 --- !u!114 &7170451200634432961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,7 +1463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _changeSpeed: 0.2
+  _changeSpeed: 1
   _turn: 0
 --- !u!1 &8101718673406365527
 GameObject:

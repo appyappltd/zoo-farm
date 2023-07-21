@@ -64,7 +64,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinsToSpawn: 10
   _playerInteraction: {fileID: 5118558714501419354}
-  _animalReleasedTrigger: {fileID: 0}
+  _animalReleasedTrigger: {fileID: 11400000, guid: 96f580ebf4425f845b82d88379736969, type: 2}
+  _spawner: {fileID: 3150760461251203967}
 --- !u!114 &4889423967771694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5659420684840068069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 0.521, z: 4.57}
+  m_LocalPosition: {x: -0.25, y: 0.52, z: 6.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

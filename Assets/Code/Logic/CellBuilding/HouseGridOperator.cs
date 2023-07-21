@@ -1,24 +1,36 @@
 using Logic.Animals;
 using Services;
 using Services.AnimalHouses;
-using UnityEngine;
+using Ui.Services;
+using Ui.Windows;
 
 namespace Logic.CellBuilding
 {
     public class HouseGridOperator : BuildGridOperator
     {
-        [SerializeField] private MedBedGridOperator _medBedGridOperator;
-
         private BuildPlaceMarker _cashedMarker;
         private IAnimalHouseService _houseService;
+        private IWindowService _windowsService;
 
-        protected override void OnAwake() =>
+        protected override void OnAwake()
+        {
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
+            _windowsService = AllServices.Container.Single<IWindowService>();
+        }
 
         protected override void BuildCell(BuildPlaceMarker marker)
         {
             _cashedMarker = marker;
-            _medBedGridOperator.HealedAnimasReporter.GetHealedAnimalType(OnAnimalChosen);
+
+            if (_houseService.AnimalsInQueue.Count > 1)
+            {
+                HouseBuildWindow window = _windowsService.Open(WindowId.BuildHouse).GetComponent<HouseBuildWindow>();
+                window.SetOnChoseCallback(OnAnimalChosen);
+            }
+            else
+            {
+                OnAnimalChosen(_houseService.AnimalsInQueue[0]);
+            }
         }
 
         private void OnAnimalChosen(AnimalId Id)

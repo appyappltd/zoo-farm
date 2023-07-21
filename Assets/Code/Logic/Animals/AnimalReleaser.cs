@@ -1,4 +1,3 @@
-using Logic.Animals.AnimalsBehaviour;
 using Logic.Interactions;
 using Logic.Player;
 using Logic.Spawners;
@@ -18,14 +17,13 @@ namespace Logic.Animals
         [SerializeField] private int _coinsToSpawn;
         [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField] private TutorialTriggerStatic _animalReleasedTrigger;
-
-        private CollectibleCoinSpawner _spawner;
+        [SerializeField] private CollectibleCoinSpawner _spawner;
+        
         private IAnimalsService _animalService;
         private IWindowService _windowService;
 
         private void Awake()
         {
-            _spawner = GetComponent<CollectibleCoinSpawner>();
             _animalService = AllServices.Container.Single<IAnimalsService>();
             _windowService = AllServices.Container.Single<IWindowService>();
             _animalService.Released += OnReleased;
