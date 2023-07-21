@@ -91,7 +91,7 @@ MonoBehaviour:
   _playerInteraction: {fileID: 6490162861986545206}
   _timerOperator: {fileID: 2498510736733292187}
   _itemIdFilter: 8
-  _receiveRate: 1
+  _receiveRate: 0.1
   _mode: 0
   _isRemoteInit: 1
   _adder: {fileID: 0}

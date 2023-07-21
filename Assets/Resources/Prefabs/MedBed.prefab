@@ -239,9 +239,10 @@ GameObject:
   - component: {fileID: 2380999859386510404}
   - component: {fileID: 8571788848278621971}
   - component: {fileID: 5191996932801900539}
-  - component: {fileID: 5140390250929892895}
   - component: {fileID: 4392389649313021502}
   - component: {fileID: 7134068636906600033}
+  - component: {fileID: 7510943558877482042}
+  - component: {fileID: 5690181520887033975}
   m_Layer: 7
   m_Name: MedBed
   m_TagString: Untagged
@@ -321,20 +322,6 @@ MonoBehaviour:
   _trigger: {fileID: 11400000, guid: 7ab25859dc525684a9ba219047c7b4fa, type: 2}
   _IsTriggerOnEnable: 1
   _IsTriggerOnDisable: 0
---- !u!114 &5140390250929892895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5849568306241908757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d92f5894c94a2fa6eb414a6751c821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerInteraction: {fileID: 5436332981189037272}
-  _staticTrigger: {fileID: 11400000, guid: 105a1cb453a230d4091df3094faaa2e5, type: 2}
 --- !u!114 &4392389649313021502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +350,34 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0.18}
   m_TimeToStationary: 0.5
+--- !u!114 &7510943558877482042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849568306241908757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f5046aab684a26ad1072977cefd6ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _medicalBed: {fileID: 2380999859386510404}
+  _animalHealed: {fileID: 11400000, guid: 840349fadbd6b864ba0a2cbc1fc12cb8, type: 2}
+--- !u!114 &5690181520887033975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849568306241908757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d92f5894c94a2fa6eb414a6751c821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInteraction: {fileID: 5436332981189037272}
+  _staticTrigger: {fileID: 11400000, guid: 105a1cb453a230d4091df3094faaa2e5, type: 2}
 --- !u!1 &6280941463389774997
 GameObject:
   m_ObjectHideFlags: 0

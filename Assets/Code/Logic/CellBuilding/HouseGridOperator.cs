@@ -22,7 +22,7 @@ namespace Logic.CellBuilding
         {
             _cashedMarker = marker;
 
-            if (_houseService.AnimalsInQueue.Count > 1)
+            if (IsOpenChoseHouseWindow())
             {
                 HouseBuildWindow window = _windowsService.Open(WindowId.BuildHouse).GetComponent<HouseBuildWindow>();
                 window.SetOnChoseCallback(OnAnimalChosen);
@@ -31,6 +31,15 @@ namespace Logic.CellBuilding
             {
                 OnAnimalChosen(_houseService.AnimalsInQueue[0]);
             }
+        }
+
+        private bool IsOpenChoseHouseWindow()
+        {
+#if DEBUG
+            return true;
+#else
+            return _houseService.AnimalsInQueue.Count > 1;
+#endif
         }
 
         private void OnAnimalChosen(AnimalId Id)
