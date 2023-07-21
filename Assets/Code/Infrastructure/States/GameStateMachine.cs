@@ -6,6 +6,7 @@ using Services;
 using Services.Camera;
 using Services.Effects;
 using Services.Input;
+using Services.MedicalBeds;
 using Services.PersistentProgress;
 using Services.Pools;
 using Services.SaveLoad;
@@ -37,7 +38,8 @@ namespace Infrastructure.States
                     services.Single<ICameraOperatorService>(),
                     services.Single<IUIFactory>(),
                     services.Single<IStaticDataService>(),
-                    services.Single<IPoolService>()),
+                    services.Single<IPoolService>(),
+                    services.Single<IMedicalBedsReporter>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),

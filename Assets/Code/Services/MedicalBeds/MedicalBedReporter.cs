@@ -22,7 +22,6 @@ namespace Services.MedicalBeds
             for (var index = 0; index < _medicalBeds.Count; index++)
             {
                 MedicalBed medicalBed = _medicalBeds[index];
-                Debug.Log(index + " " + medicalBed.IsFree);
                 hasFree = hasFree || medicalBed.IsFree;
             }
 

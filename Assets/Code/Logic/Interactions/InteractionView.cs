@@ -1,11 +1,10 @@
-using Logic.Interactions;
 using Logic.Player;
 using NTC.Global.Cache;
 using UnityEngine;
 
-namespace Logic
+namespace Logic.Interactions
 {
-    public class InteractionSine : MonoCache
+    public class InteractionView : MonoCache
     {
         [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField] private Transform _sine;
@@ -15,7 +14,6 @@ namespace Logic
         [SerializeField] private float _decreaseTime = 0.25f;
 
         private float _deltaSize;
-        private float _velocity;
         private float _targetSize;
         private float _smoothTime;
         

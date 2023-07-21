@@ -49,7 +49,7 @@ namespace Infrastructure.Factory
 
             _animalHouseBuilder = new AnimalHouseBuilder();
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _medStandBuilder = new MedStandBuilder(staticDataService, medicalBedsReporter);
+            _medStandBuilder = new MedStandBuilder(staticDataService);
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _gardenBedBuilder = new GardenBadBuilder(staticDataService, PlantFactory);
         }

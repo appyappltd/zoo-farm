@@ -8,6 +8,7 @@ using Player;
 using Services.Camera;
 using Services.Effects;
 using Services.Input;
+using Services.MedicalBeds;
 using Services.PersistentProgress;
 using Services.Pools;
 using Services.StaticData;
@@ -30,11 +31,12 @@ namespace Infrastructure.States
         private readonly IUIFactory _uiFactory;
         private readonly IStaticDataService _staticData;
         private readonly IPoolService _poolService;
+        private readonly IMedicalBedsReporter _medicalBedsReporter;
 
         public LoadLevelState(GameStateMachine gameStateMachine, LoadingCurtain curtain, SceneLoader sceneLoader,
             IGameFactory gameFactory, IPlayerInputService inputService, IPersistentProgressService progressService,
             ICameraOperatorService cameraService, IUIFactory uiFactory, IStaticDataService staticData,
-            IPoolService poolService)
+            IPoolService poolService, IMedicalBedsReporter medicalBedsReporter)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -46,6 +48,7 @@ namespace Infrastructure.States
             _uiFactory = uiFactory;
             _staticData = staticData;
             _poolService = poolService;
+            _medicalBedsReporter = medicalBedsReporter;
         }
 
         public void Enter(string payload)
@@ -53,6 +56,7 @@ namespace Infrastructure.States
             _curtain.Show();
             _poolService.DestroyAllPools();
             _gameFactory.Cleanup();
+            _medicalBedsReporter.Cleanup();
             _sceneLoader.Load(payload, OnLoaded);
         }
 

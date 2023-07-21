@@ -66,7 +66,6 @@ namespace Logic.Interactions
                 }
                 
                 Rejected.Invoke();
-                Debug.Log("Rejected");
             }
             else
                 InvokeEntered(hero);

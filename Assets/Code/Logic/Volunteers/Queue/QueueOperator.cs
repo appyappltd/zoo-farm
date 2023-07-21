@@ -43,7 +43,6 @@ namespace Logic.Volunteers.Queue
         private void OnVacatedPlace(QueuePlace vacated)
         {
             int vacateIndex = Array.FindIndex(_places, place => Equals(place, vacated));
-            Debug.Log($"vacateIndex {vacateIndex}");
             Move(vacateIndex);
             FreeQueue();
         }
