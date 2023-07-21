@@ -4,7 +4,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
 {
     public class EmotionView : MonoBehaviour
     {
-        [field: SerializeField] public EmotionId EmotionId { get; private set; }
+        [field: SerializeField] public EmotionId EmotionId { get; set; }
 
         public void Show()
         {

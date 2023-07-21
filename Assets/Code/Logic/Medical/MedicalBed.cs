@@ -5,13 +5,11 @@ using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Effects;
 using Logic.Interactions;
-using Logic.Player;
 using Logic.Storages;
 using Logic.Storages.Items;
 using NTC.Global.Cache;
 using Services;
 using Services.AnimalHouses;
-using Services.Effects;
 using UnityEngine;
 
 namespace Logic.Medical
@@ -32,8 +30,7 @@ namespace Logic.Medical
 
         private IGameFactory _gameFactory;
         private IAnimalHouseService _houseService;
-
-        private bool _isHealing;
+        
         private IAnimal _healingAnimal;
         private byte Id;
         private bool _isFree = true;
@@ -45,7 +42,6 @@ namespace Logic.Medical
         public event Action FeedUp = () => { };
 
         public bool IsFree => _isFree;
-        public AnimalType HealingAnimal => _healingAnimal.AnimalId.Type;
 
         private void Awake()
         {
@@ -54,18 +50,6 @@ namespace Logic.Medical
             
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
-        }
-
-        protected override void OnEnabled()
-        {
-            _playerInteraction.Entered += OnEntered;
-            _playerInteraction.Canceled += OnCanceled;
-        }
-
-        protected override void OnDisabled()
-        {
-            _playerInteraction.Entered -= OnEntered;
-            _playerInteraction.Canceled -= OnCanceled;
         }
 
         public void Add(IItem item)
@@ -101,7 +85,6 @@ namespace Logic.Medical
         private void OnHealed()
         {
             Debug.Log("Healed");
-            _isHealing = false;
 
             EffectTriggered.Invoke();
             
@@ -121,17 +104,6 @@ namespace Logic.Medical
             });
         }
 
-        private void OnCanceled()
-        {
-            _timerOperator.Pause();
-        }
-
-        private void OnEntered(Hero _)
-        {
-            if (_isHealing)
-                _timerOperator.Play();
-        }
-
         private void FreeTheBad()
         {
             _animalItem = null;
@@ -143,13 +115,8 @@ namespace Logic.Medical
             _isFree = true;
         }
 
-        private void BeginHeal()
-        {
+        private void BeginHeal() =>
             _timerOperator.Restart();
-            _isHealing = true;
-
-            Debug.Log("Begin heal");
-        }
 
         private void RemoveItem(IItem item)
         {

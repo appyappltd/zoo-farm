@@ -8,7 +8,7 @@ namespace Progress
 
         public ProgressBarOperator(IProgressBar bar, float changingSpeed, bool isNegativeSpeed)
         {
-            if (changingSpeed <= 0)
+            if (changingSpeed < 0)
                 throw new ArgumentException("Changing speed must be greater than zero");
 
             if (isNegativeSpeed)

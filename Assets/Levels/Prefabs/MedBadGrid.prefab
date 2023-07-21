@@ -139,6 +139,5 @@ MonoBehaviour:
   _buildPlaces:
   - {fileID: 1119144345211055913}
   - {fileID: 2381225749820325370}
-  _buildCost: 50
+  _buildCosts: 32000000c8000000
   _isAutoBuild: 0
-  _forceOpenBuildHouseWindow: 0

@@ -98,9 +98,8 @@ MonoBehaviour:
   - {fileID: 7045240799136398085}
   - {fileID: 3704738918332558445}
   - {fileID: 2307580277253176863}
-  _buildCost: 20
+  _buildCosts: 14000000140000001400000014000000
   _isAutoBuild: 0
-  _medBedGridOperator: {fileID: 0}
 --- !u!1 &6861222676130416198
 GameObject:
   m_ObjectHideFlags: 0

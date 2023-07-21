@@ -395,7 +395,7 @@ MonoBehaviour:
   - {fileID: 8382790513119335253}
   - {fileID: 227702914553122639}
   - {fileID: 8210682377487185358}
-  _buildCost: 10
+  _buildCosts: 14000000320000006400000096000000
   _isAutoBuild: 0
   _plantId: 0
 --- !u!1 &4148098838720035208

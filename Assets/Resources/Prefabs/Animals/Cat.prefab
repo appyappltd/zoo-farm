@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _changeSpeed: 0.4
+  _changeSpeed: 0
   _turn: 1
 --- !u!1 &2662996136815657581
 GameObject:
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _changeSpeed: 0.5
+  _changeSpeed: 0
   _turn: 1
 --- !u!1 &3517778643612403819
 GameObject:
@@ -1637,6 +1637,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1249500771585471598, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: <EmotionId>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2003379001618870065, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: _emotions._serializedList.Array.data[4].Value
       value: 
@@ -1656,6 +1660,14 @@ PrefabInstance:
     - target: {fileID: 5628230160775696358, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660058674653191468, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: <EmotionId>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928609674021979394, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: <EmotionId>k__BackingField
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8574840252358775584, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: m_Enabled
