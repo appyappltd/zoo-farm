@@ -1,17 +1,17 @@
 using Infrastructure.AssetManagement;
-using Logic.Plants.PlantSettings;
+using Logic.Foods.FoodSettings;
 using UnityEngine;
 
 namespace Infrastructure.Factory
 {
-    public class PlantFactory : IPlantFactory
+    public class FoodFactory : IFoodFactory
     {
         private readonly IAssetProvider _assets;
 
-        public PlantFactory(IAssetProvider assets) =>
+        public FoodFactory(IAssetProvider assets) =>
             _assets = assets;
 
-        public GameObject CreatePlant(Vector3 at, Quaternion rotation, PlantId plantId, int growStage) =>
-            _assets.Instantiate($"{AssetPath.PlantPath}/{plantId}/Stage{growStage}", at, rotation);
+        public GameObject CreateFood(Vector3 at, Quaternion rotation, FoodId foodId, int growStage) =>
+            _assets.Instantiate($"{AssetPath.PlantPath}/{foodId}/Stage{growStage}", at, rotation);
     }
 }

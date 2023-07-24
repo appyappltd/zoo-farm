@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 8369247241134201329}
   - component: {fileID: 7246917226978682809}
   - component: {fileID: 2469829682761127621}
-  - component: {fileID: 2946471688155417992}
   - component: {fileID: 7933672959643137799}
   - component: {fileID: 7385303102356367107}
   - component: {fileID: 8860913446579008965}
@@ -163,19 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7453362d9c4da71498f26f48391cc381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2946471688155417992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7515118753703320428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90495abc02974a738816f7a1ce4f9145, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnPlace: {fileID: 6989696427243302371}
 --- !u!114 &7933672959643137799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gardenBed: {fileID: 7246917226978682809}
-  _handItemSpawner: {fileID: 2946471688155417992}
+  _spawnPlace: {fileID: 6989696427243302371}
 --- !u!114 &7385303102356367107
 MonoBehaviour:
   m_ObjectHideFlags: 0

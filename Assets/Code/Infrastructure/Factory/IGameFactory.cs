@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Data.ItemsData;
 using Logic.Animals;
+using Logic.Foods.FoodSettings;
 using Logic.Medical;
-using Logic.Plants.PlantSettings;
 using Logic.Spawners;
 using Services;
 using Services.PersistentProgress;
@@ -14,7 +14,7 @@ namespace Infrastructure.Factory
     {
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
-        IPlantFactory PlantFactory { get; }
+        IFoodFactory FoodFactory { get; }
         IEffectFactory EffectFactory { get; }
         IHandItemFactory HandItemFactory { get; }
         void Cleanup();
@@ -26,7 +26,7 @@ namespace Infrastructure.Factory
         GameObject CreateBuildCell(Vector3 at, Quaternion rotation);
         GameObject CreateVisual(VisualType visual, Quaternion quaternion);
         GameObject CreateCollectibleCoin();
-        GameObject CreateGardenBad(Vector3 at, Quaternion rotation, PlantId plantId);
+        GameObject CreateGardenBad(Vector3 at, Quaternion rotation, FoodId foodId);
         GameObject CreateMedBed(Vector3 at, Quaternion rotation);
         GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
         GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);

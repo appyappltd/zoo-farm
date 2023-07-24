@@ -4,5 +4,9 @@ namespace Logic.Animals
     {
         None = 0,
         Zebra = 1,
+        Giraffe = 2,
+        Lion = 3,
+        Crocodile = 4,
+        Rhino = 5,
     }
 }

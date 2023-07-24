@@ -95,13 +95,15 @@ namespace Logic.Medical
             
             RemoveItem(_animalItem);
             RemoveItem(_medToolItem);
-            
-            _houseService.TakeQueueToHouse( _healingAnimal.AnimalId,() =>
+
+            QueueToHouse queueToHouse = new QueueToHouse(_healingAnimal.AnimalId,() =>
             {
                 FreeTheBad();
                 FeedUp.Invoke();
                 return _healingAnimal;
             });
+            
+            _houseService.TakeQueueToHouse(queueToHouse);
         }
 
         private void FreeTheBad()

@@ -1,7 +1,6 @@
 using Logic.Storages;
 using Logic.Storages.Items;
 using Tools;
-using Tutorial.StaticTriggers;
 using UnityEngine;
 
 namespace Tutorial

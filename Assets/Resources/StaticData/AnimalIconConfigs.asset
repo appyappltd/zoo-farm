@@ -15,4 +15,12 @@ MonoBehaviour:
   AnimalIcons:
     _serializedList:
     - Key: 1
+      Value: {fileID: 21300000, guid: eded923f5b72d444b92ece2076e90a91, type: 3}
+    - Key: 2
+      Value: {fileID: 21300000, guid: 864c920eda7245c42a47f63181107dd2, type: 3}
+    - Key: 3
+      Value: {fileID: 21300000, guid: 0a71012e6ce6fdd42bee90d6093eb6b5, type: 3}
+    - Key: 4
+      Value: {fileID: 21300000, guid: 1ec8df8ec6ef732439086307cf9675e3, type: 3}
+    - Key: 5
       Value: {fileID: 21300000, guid: 1ec8df8ec6ef732439086307cf9675e3, type: 3}

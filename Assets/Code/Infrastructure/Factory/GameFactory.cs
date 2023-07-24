@@ -4,8 +4,8 @@ using Infrastructure.AssetManagement;
 using Infrastructure.Builders;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using Logic.Foods.FoodSettings;
 using Logic.Medical;
-using Logic.Plants.PlantSettings;
 using Logic.Spawners;
 using Services.Animals;
 using Services.MedicalBeds;
@@ -32,7 +32,7 @@ namespace Infrastructure.Factory
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
-        public IPlantFactory PlantFactory { get; }
+        public IFoodFactory FoodFactory { get; }
         public IEffectFactory EffectFactory { get; }
         public IHandItemFactory HandItemFactory { get; }
 
@@ -45,7 +45,7 @@ namespace Infrastructure.Factory
             _randomService = randomService;
             _progressService = progressService;
 
-            PlantFactory = new PlantFactory(assets);
+            FoodFactory = new FoodFactory(assets);
             HandItemFactory = new HandItemFactory(assets);
             EffectFactory = new EffectFactory(assets, staticDataService, poolService);
 
@@ -53,7 +53,7 @@ namespace Infrastructure.Factory
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _medStandBuilder = new MedStandBuilder(staticDataService);
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _gardenBedBuilder = new GardenBadBuilder(staticDataService, PlantFactory);
+            _gardenBedBuilder = new GardenBadBuilder(staticDataService, FoodFactory);
         }
 
         public void Cleanup()
@@ -94,10 +94,10 @@ namespace Infrastructure.Factory
         public GameObject CreateCollectibleCoin() =>
             _assets.Instantiate(AssetPath.CollectableCoinPath);
 
-        public GameObject CreateGardenBad(Vector3 at, Quaternion rotation, PlantId plantId)
+        public GameObject CreateGardenBad(Vector3 at, Quaternion rotation, FoodId foodId)
         {
             GameObject gardenBedObject = _assets.Instantiate(AssetPath.GardenBed, at, rotation);
-            _gardenBedBuilder.Build(gardenBedObject, plantId);
+            _gardenBedBuilder.Build(gardenBedObject, foodId);
             return gardenBedObject;
         }
 

@@ -17,6 +17,6 @@ MonoBehaviour:
   AnimalType: 1
   BeginStats:
     VitalityRange: {x: 26.388712, y: 46.556793}
-    SatietyRange: {x: 9.47169, y: 26.520733}
+    SatietyRange: {x: 0, y: 0}
     PeppinessRange: {x: 14.612296, y: 49.402206}
     AgeRange: {x: 2.1954262, y: 6.5676517}

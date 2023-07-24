@@ -24,9 +24,8 @@ namespace Logic.Volunteers
         public bool IsFree => _isFree;
         public Vector3 QueuePosition => _queuePlace.transform.position;
         public Quaternion QueueRotation => _queuePlace.transform.rotation;
-        public Transform QueueTransform => _queuePlace.transform;
 
-        public event Action<IItem> Removed;
+        public event Action<IItem> Removed = i => { };
         
         private void Awake()
         {
@@ -41,6 +40,7 @@ namespace Logic.Volunteers
         public IItem Get()
         {
             IItem item = Inventory.Get();
+            Removed.Invoke(item);
             return item;
         }
 

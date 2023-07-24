@@ -67,7 +67,7 @@ namespace Ui.Factory
     public GameObject CreateReleaseAnimalWindow()
     {
         AnimalReleaseWindow window = CreateWindow<AnimalReleaseWindow>(WindowId.AnimalRelease);
-        window.Construct(_animalsService);
+        window.Construct(_animalsService, this, _staticData);
         return window.gameObject;
     }
 
@@ -78,11 +78,11 @@ namespace Ui.Factory
         root.GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
-    public BuildHousePanel CreateBuildHousePanel(Transform parent)
-    {
-        BuildHousePanel panel = _assets.Instantiate(AssetPath.BuildHousePanel, parent).GetComponent<BuildHousePanel>();
-        return panel;
-    }
+    public BuildHousePanel CreateBuildHousePanel(Transform parent) =>
+        _assets.Instantiate(AssetPath.BuildHousePanel, parent).GetComponent<BuildHousePanel>();
+
+    public ReleaseAnimalPanel CreateReleaseAnimalPanel(Transform parent) =>
+        _assets.Instantiate(AssetPath.ReleaseAnimalPanel, parent).GetComponent<ReleaseAnimalPanel>();
 
     public GameObject CreateBuildHouseWindow()
     {

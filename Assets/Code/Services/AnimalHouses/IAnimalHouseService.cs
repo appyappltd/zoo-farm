@@ -7,9 +7,9 @@ namespace Services.AnimalHouses
 {
     public interface IAnimalHouseService : IService
     {
-        void TakeQueueToHouse(AnimalId animalId, Func<IAnimal> callback);
+        void TakeQueueToHouse(QueueToHouse queueToHouse);
         void RegisterHouse(AnimalHouse position);
         void VacateHouse(AnimalId withAnimalId);
-        IReadOnlyList<AnimalId> AnimalsInQueue { get; }
+        IReadOnlyList<QueueToHouse> AnimalsInQueue { get; }
     }
 }

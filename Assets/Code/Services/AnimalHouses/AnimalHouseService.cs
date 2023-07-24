@@ -5,6 +5,7 @@ using Infrastructure.Factory;
 using JetBrains.Annotations;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using UnityEngine;
 
 namespace Services.AnimalHouses
 {
@@ -15,23 +16,21 @@ namespace Services.AnimalHouses
         private readonly IGameFactory _gameFactory;
         
         private readonly List<AnimalHouse> _animalHouses = new List<AnimalHouse>();
-        private readonly Queue<Func<IAnimal>> _queueInHouse = new Queue<Func<IAnimal>>();
-        private readonly List<AnimalId> _animalsInQueue = new List<AnimalId>();
+        private readonly List<QueueToHouse> _animalsInQueue = new List<QueueToHouse>();
 
-        public IReadOnlyList<AnimalId> AnimalsInQueue => _animalsInQueue;
+        public IReadOnlyList<QueueToHouse> AnimalsInQueue => _animalsInQueue;
 
-        public void TakeQueueToHouse(AnimalId animalId, Func<IAnimal> callback)
+        public void TakeQueueToHouse(QueueToHouse queueToHouse)
         {
-            AnimalHouse freeHouse = GetFreeHouse();
+            AnimalHouse freeHouse = GetFreeHouseFor(queueToHouse.AnimalId.Type);
 
             if (freeHouse is null)
             {
-                _queueInHouse.Enqueue(callback);
-                _animalsInQueue.Add(animalId);
+                _animalsInQueue.Add(queueToHouse);
             }
             else
             {
-                IAnimal animal = callback.Invoke();
+                IAnimal animal = queueToHouse.OnTakeHouse.Invoke();
                 TakeHouse(freeHouse, animal);
             }
         }
@@ -39,7 +38,7 @@ namespace Services.AnimalHouses
         public void VacateHouse(AnimalId withAnimalId)
         {
             AnimalHouse attachedHouse =
-                _animalHouses.FirstOrDefault(house => house.IsTaken && house.AnimalId.Equals(withAnimalId));
+                _animalHouses.FirstOrDefault(house => house.IsTaken && house.AnimalId.Type.Equals(withAnimalId.Type));
 
             if (attachedHouse is null)
                 throw new NullReferenceException(HouseNotFoundException);
@@ -51,17 +50,35 @@ namespace Services.AnimalHouses
         {
             _animalHouses.Add(house);
 
-            if (_queueInHouse.TryDequeue(out Func<IAnimal> callback))
+            if (TryGetAnimalFromQueue(house.ForAnimal, out QueueToHouse animalQueue))
             {
-                IAnimal animal = callback.Invoke();
-                _animalsInQueue.Remove(animal.AnimalId);
+                IAnimal animal = animalQueue.OnTakeHouse.Invoke();
+                _animalsInQueue.Remove(animalQueue);
                 TakeHouse(house, animal);
             }
         }
 
+        private bool TryGetAnimalFromQueue(AnimalType forHouseType, out QueueToHouse queueToHouse)
+        {
+            queueToHouse = new QueueToHouse();
+            
+            for (var index = 0; index < _animalsInQueue.Count; index++)
+            {
+                QueueToHouse queueAnimal = _animalsInQueue[index];
+
+                if (queueAnimal.AnimalId.Type != forHouseType)
+                    continue;
+                
+                queueToHouse = queueAnimal;
+                return true;
+            }
+
+            return false;
+        }
+
         [CanBeNull]
-        private AnimalHouse GetFreeHouse() =>
-            _animalHouses.FirstOrDefault(house => house.IsTaken == false);
+        private AnimalHouse GetFreeHouseFor(AnimalType animalIdType) =>
+            _animalHouses.FirstOrDefault(house => house.IsTaken == false && house.ForAnimal == animalIdType);
 
         private void TakeHouse(AnimalHouse builtHouse, IAnimal animal)
         {

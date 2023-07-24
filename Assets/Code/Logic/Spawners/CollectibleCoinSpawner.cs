@@ -59,6 +59,11 @@ namespace Logic.Spawners
         public void Spawn(int amountCoins)
         {
             _remainingCountCoins += amountCoins;
+            Debug.Log($"Remaining coins: {_remainingCountCoins}");
+
+            if (_timerOperator.enabled)
+                return;
+
             _timerOperator.Restart();
         }
 
@@ -70,6 +75,7 @@ namespace Logic.Spawners
         
         private void SpawnCoin()
         {
+            Debug.Log($"Coin {_remainingCountCoins}");
             TranslatableAgent agent = _pooledSpawner.Spawn().TranslatableAgent;
             PlayTranslatables(agent);
             AddToTranslator(agent);

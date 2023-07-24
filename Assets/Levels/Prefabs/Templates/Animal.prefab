@@ -208,7 +208,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4504083731493459700, guid: dd5e035eb72563340be12d54b8396246, type: 3}
       propertyPath: m_Name
-      value: Animal Variant
+      value: Animal
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504083731493459700, guid: dd5e035eb72563340be12d54b8396246, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7685436483575180233, guid: dd5e035eb72563340be12d54b8396246, type: 3}
       propertyPath: m_RootOrder

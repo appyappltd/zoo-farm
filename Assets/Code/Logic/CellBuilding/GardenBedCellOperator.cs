@@ -1,15 +1,15 @@
-using Logic.Plants.PlantSettings;
+using Logic.Foods.FoodSettings;
 using UnityEngine;
 
 namespace Logic.CellBuilding
 {
     public class GardenBedGridOperator : BuildGridOperator
     {
-        [SerializeField] private PlantId _plantId;
+        [SerializeField] private FoodId _foodId;
 
         protected override void BuildCell(BuildPlaceMarker marker)
         {
-            GameFactory.CreateGardenBad(marker.Location.Position, marker.Location.Rotation, _plantId);
+            GameFactory.CreateGardenBad(marker.Location.Position, marker.Location.Rotation, _foodId);
         }
     }
 }

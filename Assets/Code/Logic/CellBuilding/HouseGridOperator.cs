@@ -29,7 +29,7 @@ namespace Logic.CellBuilding
             }
             else
             {
-                OnAnimalChosen(_houseService.AnimalsInQueue[0]);
+                OnAnimalChosen(_houseService.AnimalsInQueue[0].AnimalId);
             }
         }
 

@@ -125,14 +125,14 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialTimeAwaiter(0.2f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_animalTransform)));
-            TutorialModules.Add(new TutorialTimeAwaiter(1.5f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _gardenBedGridOperator.ShowNextBuildCell();
                 _arrow.Move(_plant.position);
                 _cameraOperatorService.Focus(_plant);
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(1.5f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_plantBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
@@ -154,7 +154,19 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                _medBedGridOperator.ShowNextBuildCell();
+                _arrow.Move(_medBedGridOperator.BuildCellPosition);
+            }));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_firstMedBadSpawned));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
                 _volunteerSpawner.StartAutoSpawning();
+                _medToolGridOperator.ShowNextBuildCell();
+                _arrow.Move(_medToolGridOperator.BuildCellPosition);
+            }));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
                 ActivateAutoBuild(_medBedGridOperator);
                 ActivateAutoBuild(_medToolGridOperator);
                 ActivateAutoBuild(_houseGridOperator);

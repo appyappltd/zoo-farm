@@ -1,24 +1,29 @@
 using System;
 using Data.ItemsData;
-using Logic.Spawners;
+using Infrastructure.Factory;
+using Logic.Foods.FoodSettings;
 using Logic.Storages;
 using Logic.Storages.Items;
+using Services;
 using UnityEngine;
 
-namespace Logic.Plants
+namespace Logic.Foods
 {
     public class GardenBedOperator : MonoBehaviour, IGetItem
     {
         [SerializeField] private GardenBed _gardenBed;
-        [SerializeField] private HandItemSpawner _handItemSpawner;
-        
+        [SerializeField] private Transform _spawnPlace;
+
         private HandItem _spawnedHandItem;
         private bool _isHandItemReady;
-        
+        private IHandItemFactory _handItemFactory;
+        private FoodItemData _foodItemData;
+
         public event Action<IItem> Removed = i => { };
         
         private void Awake()
         {
+            _handItemFactory = AllServices.Container.Single<IGameFactory>().HandItemFactory;
             _gardenBed.GrowUp += OnGrowUp;
         }
 
@@ -27,12 +32,11 @@ namespace Logic.Plants
             _gardenBed.GrowUp -= OnGrowUp;
         }
 
-        private void OnGrowUp()
+        public void Construct(FoodItemData foodItemData)
         {
-            _spawnedHandItem = _handItemSpawner.Spawn();
-            _isHandItemReady = true;
+            _foodItemData = foodItemData;
         }
-
+        
         public IItem Get()
         {
             Removed.Invoke(_spawnedHandItem);
@@ -63,6 +67,13 @@ namespace Logic.Plants
             }
 
             return false;
+        }
+
+        private void OnGrowUp()
+        {
+            _spawnedHandItem = _handItemFactory.CreateFood(_spawnPlace.position, _spawnPlace.rotation, _foodItemData.FoodId);
+            _spawnedHandItem.Construct(_foodItemData);
+            _isHandItemReady = true;
         }
     }
 }

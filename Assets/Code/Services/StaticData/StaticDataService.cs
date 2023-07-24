@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
+using Logic.Foods.FoodSettings;
 using Logic.Medical;
-using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
 using Services.Effects;
 using StaticData;
@@ -28,7 +28,7 @@ namespace Services.StaticData
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
         private Dictionary<MedicalToolId, MedToolStandConfig> _medStandConfigs;
-        private Dictionary<PlantId, GardenBedConfig> _gardenBedConfigs;
+        private Dictionary<FoodId, GardenBedConfig> _gardenBedConfigs;
         
         private SpawnPlaceConfig _spawnPlaceConfig;
         private AnimalIconConfig _animalIcons;
@@ -38,7 +38,7 @@ namespace Services.StaticData
         {
             _emotionConfigs = LoadFor<EmotionId, EmotionConfig>(EmotionConfigPath, x => x.Name);
             _medStandConfigs = LoadFor<MedicalToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
-            _gardenBedConfigs = LoadFor<PlantId, GardenBedConfig>(GardenBedConfigPath, x => x.PlantId);
+            _gardenBedConfigs = LoadFor<FoodId, GardenBedConfig>(GardenBedConfigPath, x => x.FoodId);
 
             _animalIcons = Resources.Load<AnimalIconConfig>(AnimalIconConfigPath);
             _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
@@ -70,8 +70,8 @@ namespace Services.StaticData
         public MedToolStandConfig MedStandConfigById(MedicalToolId toolIdId) =>
             GetDataFor(toolIdId, _medStandConfigs);
 
-        public GardenBedConfig GardenBedConfigById(PlantId plantId) =>
-            GetDataFor(plantId, _gardenBedConfigs);
+        public GardenBedConfig GardenBedConfigById(FoodId foodId) =>
+            GetDataFor(foodId, _gardenBedConfigs);
 
         public WindowBase WindowById(WindowId windowId) =>
             GetDataFor(windowId, _windows).Template;

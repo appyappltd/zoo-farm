@@ -1,10 +1,10 @@
-using Logic.Plants.PlantSettings;
+using Logic.Foods.FoodSettings;
 using UnityEngine;
 
 namespace Infrastructure.Factory
 {
-    public interface IPlantFactory
+    public interface IFoodFactory
     {
-        GameObject CreatePlant(Vector3 spawnPlacePosition, Quaternion spawnPlaceRotation, PlantId configPlantId, int stageId);
+        GameObject CreateFood(Vector3 spawnPlacePosition, Quaternion spawnPlaceRotation, FoodId configFoodId, int stageId);
     }
 }

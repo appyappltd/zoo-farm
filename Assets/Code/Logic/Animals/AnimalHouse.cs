@@ -1,5 +1,4 @@
 using System;
-using Logic.Animals.AnimalsBehaviour;
 using Logic.Storages;
 using UnityEngine;
 
@@ -19,7 +18,10 @@ namespace Logic.Animals
         [Header("Settings")]
         [SerializeField] private Transform _restPlace;
         [SerializeField] private Transform _eatPlace;
+        [SerializeField] private AnimalType _forAnimal;
+        
         [SerializeField] private bool _isTaken;
+        
         
         private AnimalId _animalId;
 
@@ -27,6 +29,7 @@ namespace Logic.Animals
         public Transform RestPlace => _restPlace;
         public Transform EatPlace => _eatPlace;
         public bool IsTaken => _isTaken;
+        public AnimalType ForAnimal => _forAnimal;
 
         private void Awake()
         {

@@ -2,7 +2,7 @@ using Infrastructure.Factory;
 using NTC.Global.System;
 using UnityEngine;
 
-namespace Logic.Plants.PlantSettings
+namespace Logic.Foods.FoodSettings
 {
     public class GrowthPlan
     {
@@ -16,13 +16,13 @@ namespace Logic.Plants.PlantSettings
             _stages = stages;
         }
 
-        public void Init(IPlantFactory plantFactory, PlantId configPlantId, Transform spawnPlace, Transform parent)
+        public void Init(IFoodFactory foodFactory, FoodId configFoodId, Transform spawnPlace, Transform parent)
         {
             _stageObjects = new GameObject[_stages.Length];
             
             for (var index = 0; index < _stages.Length; index++)
             {
-                _stageObjects[index] = plantFactory.CreatePlant(spawnPlace.position, spawnPlace.rotation, configPlantId, _stages[index].StageId);
+                _stageObjects[index] = foodFactory.CreateFood(spawnPlace.position, spawnPlace.rotation, configFoodId, _stages[index].StageId);
                 _stageObjects[index].transform.SetParent(parent,true);
                 _stageObjects[index].Disable();
             }

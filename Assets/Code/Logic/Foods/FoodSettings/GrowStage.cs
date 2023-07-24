@@ -3,7 +3,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Logic.Plants.PlantSettings
+namespace Logic.Foods.FoodSettings
 {
     [Serializable]
     public class GrowStage

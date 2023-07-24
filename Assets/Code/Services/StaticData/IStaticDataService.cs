@@ -1,7 +1,7 @@
 ﻿using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
+using Logic.Foods.FoodSettings;
 using Logic.Medical;
-using Logic.Plants.PlantSettings;
 using Logic.SpawnPlaces;
 using Services.Effects;
 using StaticData;
@@ -18,7 +18,7 @@ namespace Services.StaticData
         WindowBase WindowById(WindowId windowId);
         Transform SpawnPlaceById(SpawnPlaceId placeId);
         MedToolStandConfig MedStandConfigById(MedicalToolId toolIdId);
-        GardenBedConfig GardenBedConfigById(PlantId plantId);
+        GardenBedConfig GardenBedConfigById(FoodId foodId);
         Sprite IconByAnimalType(AnimalType animalIdType);
         ParticleSystem ParticlesById(EffectId id);
         ParticleConfig ParticlesConfig();

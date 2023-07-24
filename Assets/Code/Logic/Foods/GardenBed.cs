@@ -1,11 +1,11 @@
 using System;
 using Infrastructure.Factory;
-using Logic.Plants.PlantSettings;
+using Logic.Foods.FoodSettings;
 using NaughtyAttributes;
 using StaticData;
 using UnityEngine;
 
-namespace Logic.Plants
+namespace Logic.Foods
 {
     [RequireComponent(typeof(TimerOperator))]
     public class GardenBed : MonoBehaviour
@@ -14,8 +14,6 @@ namespace Logic.Plants
         [SerializeField] private Transform _spawnPlace;
         
         private GrowthPlan _growthPlan;
-        
-        private GameObject[] _stageGameObjects; 
 
         public event Action GrowUp = () => { };
 
@@ -24,10 +22,10 @@ namespace Logic.Plants
             _timerOperator ??= GetComponent<TimerOperator>();
         }
 
-        public void Construct(GardenBedConfig config, IPlantFactory plantFactory)
+        public void Construct(GardenBedConfig config, IFoodFactory foodFactory)
         {
             _growthPlan = config.GetGrowthPlan();
-            _growthPlan.Init(plantFactory, config.PlantId, _spawnPlace, transform);
+            _growthPlan.Init(foodFactory, config.FoodId, _spawnPlace, transform);
             PlantNew();
         }
 

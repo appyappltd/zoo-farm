@@ -113,6 +113,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 278578183252406965, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
+      propertyPath: _forAnimal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7904430147291196124, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -159,7 +163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8633194243721409408, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
       propertyPath: m_Name
-      value: ZebraAnimalHouse Variant
+      value: Zebra
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,7 +1,6 @@
 using Infrastructure.Factory;
-using Logic.Plants;
-using Logic.Plants.PlantSettings;
-using Logic.Spawners;
+using Logic.Foods;
+using Logic.Foods.FoodSettings;
 using Services.StaticData;
 using StaticData;
 using UnityEngine;
@@ -11,22 +10,22 @@ namespace Infrastructure.Builders
     public class GardenBadBuilder
     {
         private readonly IStaticDataService _staticDataService;
-        private readonly IPlantFactory _plantFactory;
+        private readonly IFoodFactory _foodFactory;
 
-        public GardenBadBuilder(IStaticDataService staticDataService, IPlantFactory plantFactory)
+        public GardenBadBuilder(IStaticDataService staticDataService, IFoodFactory foodFactory)
         {
             _staticDataService = staticDataService;
-            _plantFactory = plantFactory;
+            _foodFactory = foodFactory;
         }
         
-        public void Build(GameObject gardenBedObject, PlantId plantId)
+        public void Build(GameObject gardenBedObject, FoodId foodId)
         {
             GardenBed gardenBed = gardenBedObject.GetComponent<GardenBed>();
-            HandItemSpawner handItemSpawner = gardenBedObject.GetComponent<HandItemSpawner>();
+            GardenBedOperator gardenGreedOperator = gardenBedObject.GetComponent<GardenBedOperator>();
 
-            GardenBedConfig gardenBedConfig = _staticDataService.GardenBedConfigById(plantId);
-            gardenBed.Construct(gardenBedConfig, _plantFactory);
-            handItemSpawner.Construct(gardenBedConfig.HandItemData);
+            GardenBedConfig gardenBedConfig = _staticDataService.GardenBedConfigById(foodId);
+            gardenGreedOperator.Construct(gardenBedConfig.HandItemData);
+            gardenBed.Construct(gardenBedConfig, _foodFactory);
         }
     }
 }

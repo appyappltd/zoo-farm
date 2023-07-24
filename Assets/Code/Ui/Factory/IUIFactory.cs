@@ -5,9 +5,10 @@ namespace Ui.Factory
 {
     public interface IUIFactory : IService
     {
-        GameObject CreateReleaseAnimalWindow();
         void CreateUIRoot();
-        BuildHousePanel CreateBuildHousePanel(Transform parent);
+        GameObject CreateReleaseAnimalWindow();
         GameObject CreateBuildHouseWindow();
+        BuildHousePanel CreateBuildHousePanel(Transform parent);
+        ReleaseAnimalPanel CreateReleaseAnimalPanel(Transform panelsParent);
     }
 }

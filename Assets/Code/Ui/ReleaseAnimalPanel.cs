@@ -18,6 +18,7 @@ namespace Ui
         [SerializeField] private AnimalType _animalType;
         [SerializeField] private TextSetter _animalsCount;
         [SerializeField] private TextSetter _toReleaseCount;
+        [SerializeField] private Image _imageIcon;
         [SerializeField] private Button _increaseCounterButton;
         [SerializeField] private List<UiGrayScaleFilter> _grayScaleFilters;
 
@@ -32,9 +33,11 @@ namespace Ui
 
         public AnimalType AnimalType => _animalType;
         
-        public void Construct(AnimalCountData countData)
+        public void Construct(AnimalCountData countData, AnimalType animalType, Sprite icon)
         {
             _countData = countData;
+            _animalType = animalType;
+            _imageIcon.sprite = icon;
             _animalsCount.SetText($"{countData.ReleaseReady}/{countData.Total}");
             _increaseCounterButton.onClick.AddListener(IncreaseReleaseCounter);
 
@@ -62,12 +65,6 @@ namespace Ui
                 _increaseCounterButton.interactable = false;
                 _increaseCounterButton.onClick.RemoveListener(IncreaseReleaseCounter);
             }
-        }
-
-        [Button("Set Test Count")] [Conditional("UNITY_EDITOR")]
-        private void SetTestCount()
-        {
-            Construct(new AnimalCountData(_testTotal, _testReady));
         }
     }
 }

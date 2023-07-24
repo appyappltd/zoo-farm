@@ -1,7 +1,14 @@
+using System.Collections.Generic;
+using System.Linq;
+using Logic.Animals;
+using Logic.Animals.AnimalsBehaviour;
 using Observables;
 using Services.Animals;
+using Services.StaticData;
 using TMPro;
 using Tools;
+using Tools.Comparers;
+using Ui.Factory;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
 
@@ -14,8 +21,9 @@ namespace Ui.Windows
         private const string AnimalNotSelectedText = "Животное не выбрано";
 
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
-        
-        [SerializeField] private ReleaseAnimalPanel[] _releasePanels;
+        private readonly List<ReleaseAnimalPanel> _releasePanels = new List<ReleaseAnimalPanel>();
+
+        [SerializeField] private Transform _panelsParent;
         [SerializeField] private Button _releaseButton;
         [SerializeField] private TextMeshProUGUI _releaseButtonText;
         [SerializeField] private UiGrayScaleFilter _releaseButtonFilter;
@@ -26,16 +34,19 @@ namespace Ui.Windows
         protected override void Cleanup() =>
             _compositeDisposable.Dispose();
 
-        public void Construct(IAnimalsService animalsService)
+        public void Construct(IAnimalsService animalsService, IUIFactory uiFactory, IStaticDataService staticData)
         {
             _animalsService = animalsService;
-        }
 
-        protected override void Initialize()
-        {
-            foreach (ReleaseAnimalPanel panel in _releasePanels)
+            IEnumerable<IAnimal> animalTypes = _animalsService.Animals.Where(animal => animal.Stats.Vitality.IsFull)
+                .Distinct(new AnimalByTypeComparer());
+
+            foreach (IAnimal animal in animalTypes)
             {
-                InitPanel(panel);
+                ReleaseAnimalPanel panel = uiFactory.CreateReleaseAnimalPanel(_panelsParent);
+                AnimalType animalIdType = animal.AnimalId.Type;
+                InitPanel(panel, animalIdType, staticData.IconByAnimalType(animalIdType));
+                _releasePanels.Add(panel);
             }
 
             SetButtonGrey();
@@ -51,11 +62,11 @@ namespace Ui.Windows
             foreach (ReleaseAnimalPanel panel in _releasePanels)
                 for (int animalIndex = 0; animalIndex < panel.ReleaseAnimalCount.Value; animalIndex++)
                     _animalsService.Release(panel.AnimalType);
-            
+
             CloseWindow();
         }
 
-        private void InitPanel(ReleaseAnimalPanel panel)
+        private void InitPanel(ReleaseAnimalPanel panel, AnimalType animalType, Sprite icon)
         {
             AnimalCountData countData = _animalsService.GetAnimalsCount(panel.AnimalType);
             _releaseButton.interactable = false;
@@ -65,8 +76,9 @@ namespace Ui.Windows
                 panel.gameObject.SetActive(false);
                 return;
             }
-            
-            panel.Construct(countData);
+
+
+            panel.Construct(countData, animalType, icon);
             _compositeDisposable.Add(
                 panel.ReleaseAnimalCount
                     .Then(OnUpdateTotalReleaseCount));

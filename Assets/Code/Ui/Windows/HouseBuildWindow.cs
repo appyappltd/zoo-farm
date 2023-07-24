@@ -21,12 +21,12 @@ namespace Ui.Windows
         {
             _animalHouseService = progressService;
 
-            foreach (AnimalId animalId in _animalHouseService.AnimalsInQueue)
+            foreach (QueueToHouse animal in _animalHouseService.AnimalsInQueue)
             {
                 BuildHousePanel panel = uiFactory.CreateBuildHousePanel(_panelsParent);
-                panel.Construct(staticData.IconByAnimalType(animalId.Type), () =>
+                panel.Construct(staticData.IconByAnimalType(animal.AnimalId.Type), () =>
                 {
-                    _onChoseCallback.Invoke(animalId);
+                    _onChoseCallback.Invoke(animal.AnimalId);
                     CloseWindow();
                 });
             }

@@ -19,6 +19,8 @@ namespace Logic.CellBuilding
         private BuildPlaceMarker _currentMarker;
         private bool _isCellBuilt = true;
 
+        public Vector3 BuildCellPosition => _activeBuildCell.transform.position;
+        
         private void Awake()
         {
             InitMarkers();
@@ -69,12 +71,13 @@ namespace Logic.CellBuilding
             if (_isCellBuilt == false)
                 return;
 
-            if (_currentIndex > _buildPlaces.Length)
+            if (_currentIndex >= _buildPlaces.Length)
                 return;
 
             _currentMarker = _buildPlaces[_currentIndex];
             _activeBuildCell.Reposition(_currentMarker.Location);
             _activeBuildCell.SetIcon(_currentMarker.Icon);
+            _activeBuildCell.SetBuildCost(_buildCosts[_currentIndex]);
             _isCellBuilt = false;
             _activeBuildCell.gameObject.Enable();
             _currentIndex++;
