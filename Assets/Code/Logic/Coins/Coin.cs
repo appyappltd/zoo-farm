@@ -14,9 +14,9 @@ namespace Logic.Coins
     {
         [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField] private TranslatableAgent _translatableAgent;
-        [SerializeField] private IItemMover _itemMover;
         [SerializeField, Min(0)] private int _amount = 1;
 
+        private IItemMover _itemMover;
         private IWallet _wallet;
 
         public TranslatableAgent TranslatableAgent => _translatableAgent;
@@ -25,16 +25,14 @@ namespace Logic.Coins
 
         private void Awake()
         {
-            _itemMover = _itemMover ?? GetComponent<IItemMover>();
+            _itemMover ??= GetComponent<IItemMover>();
             _playerInteraction ??= GetComponent<PlayerInteraction>();
 
             _playerInteraction.Interacted += OnEnter;
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _playerInteraction.Interacted -= OnEnter;
-        }
 
         private void OnEnter(Hero hero)
         {

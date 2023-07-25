@@ -24,12 +24,12 @@ namespace Services.Pools
             if (preloadFunc is null)
                 throw new Exception("Preload function cannot be null");
 
-            _parent = parent is not null ? parent : new GameObject($"Pool {typeof(T).Name}").transform;
+            _parent = parent ? parent : new GameObject($"Pool {typeof(T).Name}").transform;
 
             for (int i = 0; i < preloadCount; i++)
-            {
-                CreatePooled(preloadFunc);
-            }
+                Return(CreatePooled(preloadFunc));
+
+            
         }
 
         ~Pool()
@@ -75,30 +75,32 @@ namespace Services.Pools
             DefaultReturn((T) item);
         }
 
+        public void ReturnAll()
+        {
+            for (int i = 0; i < _active.Count; i++)
+                Return(_active[i]);
+        }
+
         private T CreatePooled(Func<T> preloadFunc)
         {
             T pooled = preloadFunc();
 
             if (pooled is ISelfPoolable selfPoolable)
                 selfPoolable.Disabled += Return;
-
-            Return(pooled);
+            
+            SetParent(pooled);
             return pooled;
         }
 
         private void DefaultReturn(T item)
         {
-            item.GameObject.transform.SetParent(_parent, true);
-            
+            SetParent(item);
             _returnAction(item);
             _pool.Enqueue(item);
             _active.Remove(item);
         }
 
-        public void ReturnAll()
-        {
-            for (int i = 0; i < _active.Count; i++)
-                Return(_active[i]);
-        }
+        private void SetParent(T item) =>
+            item.GameObject.transform.SetParent(_parent, true);
     }
 }
