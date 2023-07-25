@@ -392,7 +392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6f40c18b9770444be6d3111e21e2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animal: {fileID: 6539579365009526868, guid: 95c9c69412539f64cae170bed248e06a, type: 3}
   _sequenceConfig: {fileID: 11400000, guid: 1b165dced6200844bbed8824bbbd533c, type: 2}
 --- !u!114 &6377468030634239951
 MonoBehaviour:
@@ -406,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87eaef9b94576a44a31318beca260af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animalSpawner: {fileID: 4724598109352393965}
+  _animalItemSpawner: {fileID: 4724598109352393965}
   _container: {fileID: 6997381264777996997}
   _spawnPlace: {fileID: 7697849592899592353}
   _outPlace: {fileID: 4046421855962926409}
@@ -438,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae9f7cee1ba43b9ae2cea637f8faab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnDelay: 1
+  _spawnDelay: 10
   _volunteerBand: {fileID: 6377468030634239951}
 --- !u!1 &7355457493222560494
 GameObject:
@@ -464,7 +463,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7355457493222560494}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 9.4, y: 0.1, z: -2.26}
+  m_LocalPosition: {x: 6.66, y: 0.1, z: -2.26}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -600,9 +599,21 @@ PrefabInstance:
       value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: _interactionValidator._underlyingValue
       value: 
       objectReference: {fileID: 449778346109444140}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.data[0]._underlyingValue
+      value: 
+      objectReference: {fileID: 449778346109444140}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.data[1]._underlyingValue
+      value: 
+      objectReference: {fileID: 2109782511421618817}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -666,6 +677,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 44025918950904125, guid: 59497999b22ec9347b03e84896037938, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8223112172290930833}
+    - targetCorrespondingSourceObject: {fileID: 44025918950904125, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2109782511421618817}
   m_SourcePrefab: {fileID: 100100000, guid: 59497999b22ec9347b03e84896037938, type: 3}
 --- !u!114 &1946264583370706086 stripped
 MonoBehaviour:
@@ -760,6 +774,19 @@ MonoBehaviour:
   _blinkSize: 1.2
   _rejectedColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkDuration: 0.35
+--- !u!114 &2109782511421618817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3430881806673799445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6f319251784067a75091a630d99a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _productReceiver: {fileID: 3909234495149277216}
 --- !u!4 &5750132844795649700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
@@ -1310,9 +1337,21 @@ PrefabInstance:
       value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: _interactionValidator._underlyingValue
       value: 
       objectReference: {fileID: 4909222309093986545}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.data[0]._underlyingValue
+      value: 
+      objectReference: {fileID: 4909222309093986545}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.data[1]._underlyingValue
+      value: 
+      objectReference: {fileID: 1460249325368682733}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -1376,6 +1415,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 44025918950904125, guid: 59497999b22ec9347b03e84896037938, type: 3}
       insertIndex: -1
       addedObject: {fileID: 128386901549268349}
+    - targetCorrespondingSourceObject: {fileID: 44025918950904125, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1460249325368682733}
   m_SourcePrefab: {fileID: 100100000, guid: 59497999b22ec9347b03e84896037938, type: 3}
 --- !u!4 &31385790775815282 stripped
 Transform:
@@ -1475,6 +1517,19 @@ MonoBehaviour:
   _blinkSize: 1.2
   _rejectedColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkDuration: 0.35
+--- !u!114 &1460249325368682733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935511256280488899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6f319251784067a75091a630d99a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _productReceiver: {fileID: 5716785033092227486}
 --- !u!1001 &7220756759719906700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1620,9 +1675,21 @@ PrefabInstance:
       value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: _interactionValidator._underlyingValue
       value: 
       objectReference: {fileID: 6097467054479534885}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.data[0]._underlyingValue
+      value: 
+      objectReference: {fileID: 6097467054479534885}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.data[1]._underlyingValue
+      value: 
+      objectReference: {fileID: 7814726234214372355}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -1686,6 +1753,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 44025918950904125, guid: 59497999b22ec9347b03e84896037938, type: 3}
       insertIndex: -1
       addedObject: {fileID: 255890425406688617}
+    - targetCorrespondingSourceObject: {fileID: 44025918950904125, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7814726234214372355}
   m_SourcePrefab: {fileID: 100100000, guid: 59497999b22ec9347b03e84896037938, type: 3}
 --- !u!4 &489706029580554715 stripped
 Transform:
@@ -1785,3 +1855,16 @@ MonoBehaviour:
   _blinkSize: 1.2
   _rejectedColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkDuration: 0.35
+--- !u!114 &7814726234214372355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393690688882845290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6f319251784067a75091a630d99a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _productReceiver: {fileID: 3709607714256095998}

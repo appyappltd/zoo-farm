@@ -13,9 +13,9 @@ namespace Logic.Interactions
     {
         [SerializeField] private float _interactionDelay;
         [SerializeField] private bool _isValidate;
-
+        
         [SerializeField] [ShowIf("_isValidate")]
-        private InterfaceReference<IInteractionValidator, MonoBehaviour> _interactionValidator;
+        private InterfaceReference<IInteractionValidator, MonoBehaviour>[] _interactionValidators;
 
 #if UNITY_EDITOR
         private float _prevDelayValue;
@@ -59,12 +59,17 @@ namespace Logic.Interactions
         {
             if (_isValidate)
             {
-                if (_interactionValidator.Value.IsValid(hero.Inventory))
+                bool _isAllValid = true;
+
+                for (var index = 0; index < _interactionValidators.Length; index++) 
+                    _isAllValid &= _interactionValidators[index].Value.IsValid(hero.Inventory);
+
+                if (_isAllValid)
                 {
                     InvokeEntered(hero);
                     return;
                 }
-                
+
                 Rejected.Invoke();
             }
             else

@@ -657,7 +657,15 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: _interactionValidator._underlyingValue
+      value: 
+      objectReference: {fileID: 8085249532688538939}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.data[0]._underlyingValue
       value: 
       objectReference: {fileID: 8085249532688538939}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}

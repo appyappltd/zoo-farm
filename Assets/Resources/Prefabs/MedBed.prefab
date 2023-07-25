@@ -304,6 +304,7 @@ MonoBehaviour:
   - {fileID: 3424525604650532449}
   _isSortable: 0
   _isRemoteInit: 0
+  _isModifyRotation: 0
   _adderMono: {fileID: 2380999859386510404}
   _removerMono: {fileID: 2380999859386510404}
 --- !u!114 &5191996932801900539
@@ -905,7 +906,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: _interactionValidator._underlyingValue
+      value: 
+      objectReference: {fileID: 1097801034554320809}
+    - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionValidators.Array.data[0]._underlyingValue
       value: 
       objectReference: {fileID: 1097801034554320809}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}

@@ -17,7 +17,6 @@ namespace Ui.Services
         {
             return windowId switch
             {
-                WindowId.None => null,
                 WindowId.AnimalRelease => _uiFactory.CreateReleaseAnimalWindow(),
                 WindowId.BuildHouse => _uiFactory.CreateBuildHouseWindow(),
                 _ => throw new ArgumentOutOfRangeException(nameof(windowId), windowId, null)

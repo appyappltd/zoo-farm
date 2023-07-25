@@ -86,15 +86,13 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _volunteerSpawner.Spawn();
-                // _toVolunteerGate.Open();
                 _arrow.Hide();
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_volunteerTransform)));
-            TutorialModules.Add(new TutorialTimeAwaiter(4.5f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(4f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
-                // _animalTransmittingView.gameObject.SetActive(true);
                 _arrow.Move(_animalTransmittingView.position);
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
@@ -115,7 +113,6 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _houseGridOperator.ShowNextBuildCell();
-                // _toYardGate.Open();
                 _arrow.Move(_firstHouse.position);
                 _cameraOperatorService.Focus(_firstHouse);
             }));
