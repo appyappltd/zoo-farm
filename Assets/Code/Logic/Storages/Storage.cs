@@ -14,6 +14,7 @@ namespace Logic.Storages
 
         [SerializeField] private bool _isSortable;
         [SerializeField] private bool _isRemoteInit;
+        [SerializeField] private bool _isModifyRotation;
         
         [HideIf("_isRemoteInit")]
         [SerializeField] [RequireInterface(typeof(IAddItemObserver))] private MonoBehaviour _adderMono;
@@ -28,7 +29,6 @@ namespace Logic.Storages
         public Action<IItem> Replenished = i => { };
 
         private IAddItemObserver Adder => _adder;
-        // ReSharper disable once SuspiciousTypeConversion.Global
         private IGetItemObserver Remover => _remover;
         
         public Transform TopPlace => _places[_topIndex];
@@ -91,7 +91,7 @@ namespace Logic.Storages
 
         private void PlaceItem(IItem item)
         {
-            item.Mover.Move(TopPlace, TopPlace);
+            item.Mover.Move(TopPlace, TopPlace, _isModifyRotation);
             _items[_topIndex] = item;
             _topIndex++;
             Replenished.Invoke(item);

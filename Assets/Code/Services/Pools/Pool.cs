@@ -28,8 +28,6 @@ namespace Services.Pools
 
             for (int i = 0; i < preloadCount; i++)
                 Return(CreatePooled(preloadFunc));
-
-            
         }
 
         ~Pool()

@@ -15,7 +15,6 @@ namespace Logic
             enabled = false;
 
         protected override void Run() =>
-            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             _timer.Tick(Time.deltaTime);
 
         public void SetUp(float duration, Action action)

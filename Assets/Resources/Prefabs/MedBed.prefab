@@ -285,7 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPlace: {fileID: 3424525604650532449}
-  _playerInteraction: {fileID: 5436332981189037272}
   _timerOperator: {fileID: 4392389649313021502}
   _healingTime: 1
 --- !u!114 &8571788848278621971

@@ -75,9 +75,9 @@ namespace Infrastructure.Factory
         public GameObject CreateHud() =>
             _assets.Instantiate(AssetPath.HudPath);
 
-        public GameObject CreateAnimal(AnimalItemData animalData, Vector3 at)
+        public GameObject CreateAnimal(AnimalItemData animalData, Vector3 at, Quaternion rotation)
         {
-            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalData.Type}", at);
+            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalData.Type}", at, rotation);
             _animalBuilder.Build(animal.GetComponent<Animal>(), animalData);
             return animal;
         }

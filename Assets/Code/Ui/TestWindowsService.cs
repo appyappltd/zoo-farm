@@ -14,7 +14,7 @@ namespace Ui
             _windowService = AllServices.Container.Single<IWindowService>();
         }
 
-        [Button("Open Release window")]
+        [Button]
         private void OpenReleaseWindow()
         {
             _windowService.Open(WindowId.AnimalRelease);

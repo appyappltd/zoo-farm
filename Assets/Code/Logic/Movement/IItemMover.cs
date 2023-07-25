@@ -7,9 +7,7 @@ namespace Logic.Movement
     {
         public event Action Started;
         public event Action Ended;
-
-        public void Move(Transform to, Transform finishParent = null);
-        
-        public void Move(Transform to, Action OnMoveEnded, Transform finishParent = null);
+        public void Move(Transform to, Transform finishParent = null, bool isModifyRotation = false);
+        public void Move(Transform to, Action OnMoveEnded, Transform finishParent = null, bool isModifyRotation = false);
     }
 }

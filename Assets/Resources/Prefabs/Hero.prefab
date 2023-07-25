@@ -6907,6 +6907,7 @@ MonoBehaviour:
   - {fileID: 5936875780444958822}
   _isSortable: 1
   _isRemoteInit: 1
+  _isModifyRotation: 1
   _adderMono: {fileID: 3209468561728551432}
   _removerMono: {fileID: 3209468561728551432}
 --- !u!114 &7803516307033350702

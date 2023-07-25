@@ -37,7 +37,6 @@ namespace Logic.Payment
             _poolService = AllServices.Container.Single<IPoolService>();
             _translator = GetComponent<RunTranslator>();
             _timerOperator = GetComponent<TimerOperator>();
-            _timerOperator.SetUp(_paymentRate, OnPay);
             _playerInteraction.Entered += Init;
         }
 
@@ -61,6 +60,7 @@ namespace Logic.Payment
         public void SetCost(int buildCost)
         {
             _defaultCost = buildCost;
+            _timerOperator.SetUp(_paymentRate, OnPay);
             _leftCoinsToPay.Value = buildCost;
         }
 
@@ -75,7 +75,7 @@ namespace Logic.Payment
             _playerInteraction.Entered -= Init;
         }
 
-        private void OnPay()
+        private void OnPay() 
         {
             if (_wallet.TrySpend(_currencyPerTick) == false)
                 return;

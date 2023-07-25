@@ -18,7 +18,6 @@ namespace Logic.Medical
     public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IEffectTrigger
     {
         [SerializeField] private Transform _spawnPlace;
-        [SerializeField] private PlayerInteraction _playerInteraction;
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] [Range(0f, 5f)] private float _healingTime = 2.5f;
 
@@ -88,7 +87,7 @@ namespace Logic.Medical
 
             EffectTriggered.Invoke();
             
-            _healingAnimal = _gameFactory.CreateAnimal(_animalData, _spawnPlace.position)
+            _healingAnimal = _gameFactory.CreateAnimal(_animalData, _spawnPlace.position, _spawnPlace.rotation)
                 .GetComponent<Animal>();
             
             Healed.Invoke(_healingAnimal.AnimalId);

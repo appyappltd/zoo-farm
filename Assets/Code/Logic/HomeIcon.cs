@@ -24,7 +24,6 @@ namespace Logic
 
         private void OnUpdated()
         {
-            Debug.Log(!_medicalBedsReporter.HasFreeBeds());
             _icon.enabled = !_medicalBedsReporter.HasFreeBeds();
         }
     }

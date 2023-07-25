@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInteraction: {fileID: 1557065283847802836}
   _paymentRate: 0.05
+  _paymentDuration: 0.98
   _currencyPerTick: 1
 --- !u!114 &3582736144516291536
 MonoBehaviour:

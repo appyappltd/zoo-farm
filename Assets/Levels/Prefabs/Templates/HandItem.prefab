@@ -59,7 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _errorOffset: 0.01
+  _errorOffset: 0.001
+  _rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &8232276638184471300
 MonoBehaviour:
   m_ObjectHideFlags: 0
