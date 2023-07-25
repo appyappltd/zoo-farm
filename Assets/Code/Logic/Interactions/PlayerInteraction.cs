@@ -38,6 +38,7 @@ namespace Logic.Interactions
             _timerOperator.SetUp(_interactionDelay, OnDelayPassed);
         }
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if (Mathf.Approximately(_interactionDelay, _prevDelayValue))
@@ -45,6 +46,7 @@ namespace Logic.Interactions
 
             OnAwake();
         }
+#endif
 
         protected override void OnDisabled()
         {

@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: WebGLTemplate
+  companyName: AppyApp
+  productName: ZooFarm
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -133,7 +133,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.1
+  bundleVersion: 0.0.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -476,7 +476,7 @@ PlayerSettings:
     m_StaticBatching: 1
     m_DynamicBatching: 0
   - m_BuildTarget: WebGL
-    m_StaticBatching: 0
+    m_StaticBatching: 1
     m_DynamicBatching: 0
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs:
@@ -535,7 +535,8 @@ PlayerSettings:
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
-  m_TemplateCustomTags: {}
+  m_TemplateCustomTags:
+    PRODUCT_DESCRIPTION: 
   mobileMTRendering:
     Android: 1
     iPhone: 1
@@ -803,20 +804,20 @@ PlayerSettings:
   spritePackerPolicy: 
   webGLMemorySize: 16
   webGLExceptionSupport: 1
-  webGLNameFilesAsHashes: 0
+  webGLNameFilesAsHashes: 1
   webGLShowDiagnostics: 0
-  webGLDataCaching: 1
+  webGLDataCaching: 0
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: APPLICATION:Default
+  webGLTemplate: PROJECT:ResizeToFill
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 1
+  webGLCompressionFormat: 0
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  webGLDecompressionFallback: 0
+  webGLDecompressionFallback: 1
   webGLInitialMemorySize: 32
   webGLMaximumMemorySize: 2048
   webGLMemoryGrowthMode: 2
@@ -848,7 +849,7 @@ PlayerSettings:
   suppressCommonWarnings: 1
   allowUnsafeCode: 1
   useDeterministicCompilation: 1
-  selectedPlatform: 0
+  selectedPlatform: 4
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1
