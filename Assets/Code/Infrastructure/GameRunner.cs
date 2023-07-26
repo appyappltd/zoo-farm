@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Infrastructure
 {
@@ -6,18 +7,21 @@ namespace Infrastructure
     {
         [SerializeField] private GameBootstrapper _bootstrapperPrefab;
 
-#if UNITY_EDITOR
         private void Awake()
         {
+#if UNITY_EDITOR
             var bootstrapper = FindObjectOfType<GameBootstrapper>();
 
-            if (bootstrapper != null)
+            if (bootstrapper == null)
             {
-                return;
+                Instantiate(_bootstrapperPrefab);
             }
-
-            Instantiate(_bootstrapperPrefab);
-        }
+#else
+            if (SceneManager.GetActiveScene().name.Equals(LevelNames.Initial))
+            {
+                Instantiate(_bootstrapperPrefab);
+            }
 #endif
+        }
     }
 }

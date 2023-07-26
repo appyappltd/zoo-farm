@@ -32,7 +32,6 @@ namespace Logic
 
         public void Restart()
         {
-            enabled = false;
             _timer.Reset();
             enabled = true;
         }

@@ -17,9 +17,8 @@ namespace Logic.Volunteers.Queue
         public QueueOperator(QueuePlace[] places)
         {
             _places = places;
-            _places[0].Vacated += OnVacatedPlace;
             
-            for (int i = 1; i < _places.Length; i++)
+            for (int i = 0; i < _places.Length; i++)
             {
                 QueuePlace queuePlace = _places[i];
                 queuePlace.Vacated += OnVacatedPlace;
@@ -31,54 +30,62 @@ namespace Logic.Volunteers.Queue
             _freeIndex++;
             
             if (_freeIndex > _places.Length)
-            { 
                 throw new IndexOutOfRangeException();
-            }
 
-            QueuePlace queuePlace = _places[_freeIndex - 1];
+            QueuePlace queuePlace = GetFreeQueuePlace();
             queuePlace.Construct(volunteer.Inventory);
             return queuePlace;
         }
 
         private void OnVacatedPlace(QueuePlace vacated)
         {
-            int vacateIndex = Array.FindIndex(_places, place => Equals(place, vacated));
+            int vacateIndex = FindVacateIndex(vacated);
             Move(vacateIndex);
             FreeQueue();
         }
 
         private void Move(int fromIndex)
         {
-            if (fromIndex == _places.Length - 1)
+            if (IsLastIndex(fromIndex))
                 return;
 
-            Vector3 lastPosition = _places[^1].transform.position;
+            Vector3 lastPosition = GetPositionOfLastPlace();
 
-            for (int i = _places.Length - 1; i > 0; i--)
-            {
-                _places[i].transform.position = _places[i - 1].transform.position;
-            }
+            MoveQueueTransforms();
 
             _places[fromIndex].transform.position = lastPosition;
-
             QueuePlace firstPlace = _places[fromIndex];
             
-            for (int i = fromIndex + 1; i < _places.Length; i++)
-            {
-                _places[i - 1] = _places[i];
-            }
+            MoveQueueInArray(fromIndex);
 
             _places[^1] = firstPlace;
         }
 
-        private void FreeQueue()
+        private void MoveQueueInArray(int fromIndex)
         {
-            _freeIndex--;
-            
-            // if (_freeIndex < 0)
-            // {
-            //     throw new IndexOutOfRangeException();
-            // }
+            for (int i = fromIndex + 1; i < _places.Length; i++)
+                _places[i - 1] = _places[i];
         }
+
+        private void MoveQueueTransforms()
+        {
+            for (int i = _places.Length - 1; i > 0; i--)
+                _places[i].transform.position = _places[i - 1].transform.position;
+        }
+
+        private Vector3 GetPositionOfLastPlace() =>
+            _places[^1].transform.position;
+
+        private bool IsLastIndex(int fromIndex) =>
+            fromIndex == _places.Length - 1;
+
+        private QueuePlace GetFreeQueuePlace() =>
+            _places[_freeIndex - 1];
+
+        private int FindVacateIndex(QueuePlace vacated) =>
+            Array.FindIndex(_places, place => Equals(place, vacated));
+
+        private void FreeQueue() =>
+            _freeIndex--;
     }
 }

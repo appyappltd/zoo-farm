@@ -44,12 +44,18 @@ namespace Services.AnimalHouses
                 throw new NullReferenceException(HouseNotFoundException);
 
             attachedHouse.DetachAnimal();
+            TryTakeHouse(attachedHouse);
         }
 
         public void RegisterHouse(AnimalHouse house)
         {
             _animalHouses.Add(house);
 
+            TryTakeHouse(house);
+        }
+
+        private void TryTakeHouse(AnimalHouse house)
+        {
             if (TryGetAnimalFromQueue(house.ForAnimal, out QueueToHouse animalQueue))
             {
                 IAnimal animal = animalQueue.OnTakeHouse.Invoke();

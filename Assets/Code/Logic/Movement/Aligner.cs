@@ -5,7 +5,7 @@ namespace Logic.Movement
 {
     public class Aligner : MonoCache
     {
-        private const float TurnOffThreshold = 0.999f;
+        private const float TurnOffThreshold = 1f;
 
         [SerializeField] private float _rotateSpeed;
 
@@ -32,7 +32,10 @@ namespace Logic.Movement
             }
         }
 
-        private bool IsAligned() =>
-            Vector3.Dot(transform.forward, _aligneRotation * Vector3.forward) > TurnOffThreshold;
+        private bool IsAligned()
+        {
+            float dot = Vector3.Dot(transform.forward, _aligneRotation * Vector3.forward);
+            return Mathf.Approximately(dot, TurnOffThreshold);
+        }
     }
 }

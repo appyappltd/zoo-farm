@@ -6559,10 +6559,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2585291448916305417, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      propertyPath: m_RootOrder
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 2585291448916305417, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.32
       objectReference: {fileID: 0}
@@ -6601,6 +6597,26 @@ PrefabInstance:
     - target: {fileID: 2585291448916305417, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709607714256095998, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+      propertyPath: _receiveRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909234495149277216, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+      propertyPath: _mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909234495149277216, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+      propertyPath: _receiveRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909234495149277216, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+      propertyPath: _isSerialReceive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716785033092227486, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+      propertyPath: _receiveRate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6471376086031602452, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
       propertyPath: m_Name

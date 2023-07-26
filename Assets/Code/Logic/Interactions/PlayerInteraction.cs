@@ -54,28 +54,36 @@ namespace Logic.Interactions
             _timerOperator.Pause();
         }
 
-        private void OnDelayPassed() =>
-            Interacted.Invoke(_cashedHero);
-
         protected override void OnTargetEntered(Hero hero)
         {
             if (_isValidate)
-            {
-                bool _isAllValid = true;
-
-                for (var index = 0; index < _interactionValidators.Length; index++) 
-                    _isAllValid &= _interactionValidators[index].Value.IsValid(hero.Inventory);
-
-                if (_isAllValid)
-                {
-                    InvokeEntered(hero);
-                    return;
-                }
-
-                Rejected.Invoke();
-            }
+                Validate(hero);
             else
                 InvokeEntered(hero);
+        }
+
+        private void Validate(Hero hero)
+        {
+            bool isAllValid = true;
+
+            for (var index = 0; index < _interactionValidators.Length; index++)
+                isAllValid &= _interactionValidators[index].Value.IsValid(hero.Inventory);
+
+            if (isAllValid)
+                InvokeEntered(hero);
+            else
+                Rejected.Invoke();
+        }
+
+        protected override void OnTargetExited(Hero hero)
+        {
+            _timerOperator.Pause();
+            Canceled.Invoke();
+        }
+
+        private void OnDelayPassed()
+        {
+            Interacted.Invoke(_cashedHero);
         }
 
         private void InvokeEntered(Hero hero)
@@ -83,12 +91,6 @@ namespace Logic.Interactions
             _cashedHero = hero;
             _timerOperator.Restart();
             Entered.Invoke(hero);
-        }
-
-        protected override void OnTargetExited(Hero hero)
-        {
-            _timerOperator.Pause();
-            Canceled.Invoke();
         }
     }
 }

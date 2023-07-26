@@ -2,6 +2,7 @@ using System;
 using Logic.Interactions;
 using Logic.Player;
 using Logic.Storages;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace Logic.Volunteers.Queue
@@ -26,19 +27,22 @@ namespace Logic.Volunteers.Queue
 
         public void Show()
         {
-            _playerInteraction.gameObject.SetActive(true);
-            _interactionView.SetActive(true);
+            _playerInteraction.Enable();
+            _playerInteraction.gameObject.Enable();
+            _interactionView.Enable();
             _interactionSine.SetDefault();
         }
 
         public void Hide()
         {
-            _playerInteraction.gameObject.SetActive(false);
-            _interactionView.SetActive(false);
+            _playerInteraction.Disable();
+            _playerInteraction.gameObject.Disable();
+            _interactionView.Disable();
         }
 
         private void OnInteracted(Hero _)
         {
+            Hide();
             Vacated.Invoke(this);
         }
     }

@@ -17,6 +17,9 @@ namespace Infrastructure
 
         private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
         {
+            if (SceneManager.GetActiveScene().name.Equals(nextScene))
+                yield break;
+
             AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
 
             while (!waitNextScene.isDone)
