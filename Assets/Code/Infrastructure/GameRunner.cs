@@ -6,14 +6,9 @@ namespace Infrastructure
     {
         [SerializeField] private GameBootstrapper _bootstrapperPrefab;
 
+#if UNITY_EDITOR
         private void Awake()
         {
-            if (Application.isEditor == false)
-            {
-                Instantiate(_bootstrapperPrefab);
-                return;
-            }
-
             var bootstrapper = FindObjectOfType<GameBootstrapper>();
 
             if (bootstrapper != null)
@@ -23,5 +18,6 @@ namespace Infrastructure
 
             Instantiate(_bootstrapperPrefab);
         }
+#endif
     }
 }
