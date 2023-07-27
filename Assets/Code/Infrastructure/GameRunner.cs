@@ -19,6 +19,7 @@ namespace Infrastructure
 #else
             if (SceneManager.GetActiveScene().name.Equals(LevelNames.Initial))
             {
+                Debug.Log($"Instantiate scene name {SceneManager.GetActiveScene().name}");
                 Instantiate(_bootstrapperPrefab);
             }
 #endif

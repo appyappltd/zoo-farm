@@ -18,13 +18,17 @@ namespace Infrastructure
         private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
         {
             if (SceneManager.GetActiveScene().name.Equals(nextScene))
+            {
+                onLoaded?.Invoke();
                 yield break;
+            }
 
             AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
 
             while (!waitNextScene.isDone)
                 yield return null;
 
+            Debug.Log($"Scene {SceneManager.GetActiveScene().name} loading");
             onLoaded?.Invoke();
         }
     }
