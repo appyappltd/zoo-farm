@@ -57,23 +57,23 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
-    m_PreInfinity: 1
-    m_PostInfinity: 1
+    m_PreInfinity: 2
+    m_PostInfinity: 2
     m_RotationOrder: 4
   _deltaXCurve:
     serializedVersion: 2
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3ca83bd38e440d8781c5f116dfda1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _handItem: {fileID: 5198049490747757072}
+  _handItem: {fileID: 0}
   _medToolItemData: {fileID: 11400000, guid: 6426f56da4c5fb94488295e579662f44, type: 2}
 --- !u!114 &8768081159347200387
 MonoBehaviour:
@@ -373,17 +373,6 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65cd91c87cf643fd826caa5ce174ff02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5198049490747757072 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4860821192426651167, guid: dd5e035eb72563340be12d54b8396246, type: 3}
-  m_PrefabInstance: {fileID: 816899095819742223}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3879724824152832763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c14dc3c7271688246a8f12ec4ff20de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &7061101767739508678 stripped

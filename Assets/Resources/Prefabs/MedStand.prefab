@@ -620,7 +620,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _blinkSize: 1.2
-  _rejectedColor: {r: 1, g: 0, b: 0, a: 1}
+  _rejectedColor: {r: 0.38823533, g: 0.38823533, b: 0.38823533, a: 1}
   _blinkDuration: 0.35
 --- !u!4 &2756148221650615581 stripped
 Transform:
