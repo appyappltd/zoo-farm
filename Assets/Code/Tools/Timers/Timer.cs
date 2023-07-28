@@ -1,10 +1,8 @@
 ﻿using System;
-using NTC.Global.Cache.Interfaces;
-using UnityEngine;
 
 namespace Tools
 {
-    public class Timer : IRunSystem
+    public class Timer : ITimer
     {
         private readonly float _duration;
         private readonly Action _onTimeIsOn;
@@ -19,9 +17,6 @@ namespace Tools
             _elapsedTime = duration;
             _onTimeIsOn = onTimeIsOn;
         }
-
-        public void OnRun() =>
-            Tick(Time.deltaTime);
 
         public void Tick(float deltaTime)
         {
