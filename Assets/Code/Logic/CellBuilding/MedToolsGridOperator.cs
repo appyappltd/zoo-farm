@@ -9,7 +9,7 @@ namespace Logic.CellBuilding
             if (marker is not MedToolMarker medToolMarker)
                 throw new Exception("Build marker is not MedToolMarker");
             
-            GameFactory.CreateMedToolStand(medToolMarker.Location.Position, medToolMarker.Location.Rotation,
+            GameFactory.CreateMedToolStand(medToolMarker.BuildPosition, medToolMarker.Location.Rotation,
                 medToolMarker.ToolId);
         }
     }

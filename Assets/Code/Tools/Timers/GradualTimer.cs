@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.Tools.Timers
+namespace Tools.Timers
 {
     public class GradualTimer : ITimer
     {
@@ -29,6 +29,11 @@ namespace Code.Tools.Timers
             Reset();
         }
 
+        public void Restart()
+        {
+            _elapsedTime = 0;
+        }
+        
         public void Reset()
         {
             _elapsedTime = 0;
@@ -38,10 +43,8 @@ namespace Code.Tools.Timers
     
         public void Tick(float delta)
         {
-            if (IsActive == false)
-                return;
-
             _elapsedTime += delta;
+            Debug.Log(_elapsedTime + " " + _currentDelay);
 
             if (_elapsedTime >= _currentDelay)
             {
@@ -60,6 +63,5 @@ namespace Code.Tools.Timers
             _currentStep++;
             return Mathf.Lerp(_initialDelay, _finalDelay, steppedDelay);
         }
-
     }
 }

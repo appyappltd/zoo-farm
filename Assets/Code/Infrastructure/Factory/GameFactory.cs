@@ -117,9 +117,6 @@ namespace Infrastructure.Factory
             return medToolStandObject;
         }
 
-        public GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicalToolId toolIdType) =>
-            _assets.Instantiate($"{AssetPath.MedToolItemPath}/{toolIdType}", at, rotation);
-
         public GameObject CreateVolunteer(Vector3 at, Transform parent)
         {
             GameObject volunteerObject = _assets.Instantiate(AssetPath.VolunteerPath, at);

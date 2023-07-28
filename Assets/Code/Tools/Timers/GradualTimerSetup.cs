@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Tools.Timers
+namespace Tools.Timers
 {
     public struct GradualTimerSetup
     {

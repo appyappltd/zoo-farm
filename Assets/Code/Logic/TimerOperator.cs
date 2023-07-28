@@ -1,13 +1,14 @@
 ﻿using System;
 using NTC.Global.Cache;
 using Tools;
+using Tools.Timers;
 using UnityEngine;
 
 namespace Logic
 {
     public class TimerOperator : MonoCache
     {
-        private Timer _timer;
+        private ITimer _timer;
         private Action _callBack;
         private bool _isEnabled;
 
@@ -23,6 +24,13 @@ namespace Logic
             _callBack = action;
             Reset();
         }
+        
+        public void SetUp(GradualTimerSetup setup, Action action)
+        {
+            _timer = new GradualTimer(setup.InitialDelay, setup.FinalDelay, setup.DelaySteps, setup.DelayCurve, OnTimeIsOn);
+            _callBack = action;
+            Reset();
+        }
 
         public void Pause() =>
             enabled = false;
@@ -32,8 +40,8 @@ namespace Logic
 
         public void Restart()
         {
-            _timer.Reset();
             enabled = true;
+            _timer.Restart();
         }
 
         public void Reset() =>
@@ -42,7 +50,7 @@ namespace Logic
         private void OnTimeIsOn()
         {
             enabled = false;
-            _callBack?.Invoke();
+            _callBack.Invoke();
         }
     }
 }

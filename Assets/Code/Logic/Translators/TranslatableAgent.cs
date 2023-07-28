@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AYellowpaper;
 using NaughtyAttributes;
 using Services.Pools;
-using Tools;
 using UnityEngine;
 
 namespace Logic.Translators
@@ -15,7 +15,7 @@ namespace Logic.Translators
         [ShowIf("_isAutoPlay")]
         [SerializeField] [RequireInterface(typeof(ITranslator))] private MonoBehaviour _translator;
         [SerializeField] [RequireInterface(typeof(ITranslatable))] private MonoBehaviour _mainTranslatable;
-        [SerializeField] [RequireInterface(typeof(List<ITranslatable>))] private List<MonoBehaviour> _subTranslatables;
+        [SerializeField] [RequireInterface(typeof(ITranslatable))] private List<MonoBehaviour> _subTranslatables;
 
         private ReadOnlyCollection<ITranslatable> _translatables;
         

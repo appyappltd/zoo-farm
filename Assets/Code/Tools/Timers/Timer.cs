@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tools
+namespace Tools.Timers
 {
     public class Timer : ITimer
     {
@@ -21,21 +21,18 @@ namespace Tools
         public void Tick(float deltaTime)
         {
             if (IsActive == false)
-            {
                 return;
-            }
 
             _elapsedTime -= deltaTime;
 
             if (_elapsedTime <= 0)
-            {
                 _onTimeIsOn?.Invoke();
-            }
         }
 
-        public void Reset()
-        {
+        public void Restart() =>
+            Reset();
+
+        public void Reset() =>
             _elapsedTime = _duration;
-        }
     }
 }

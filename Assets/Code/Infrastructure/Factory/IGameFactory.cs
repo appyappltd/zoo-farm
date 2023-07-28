@@ -29,7 +29,6 @@ namespace Infrastructure.Factory
         GameObject CreateGardenBad(Vector3 at, Quaternion rotation, FoodId foodId);
         GameObject CreateMedBed(Vector3 at, Quaternion rotation);
         GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
-        GameObject CreateMedToolItem(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
         GameObject CreateVolunteer(Vector3 at, Transform parent);
         GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId);
     }

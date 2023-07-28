@@ -44,7 +44,7 @@ namespace Logic.CellBuilding
 
         private void OnAnimalChosen(AnimalId Id)
         {
-            AnimalHouse house = GameFactory.CreateAnimalHouse(_cashedMarker.Location.Position, _cashedMarker.Location.Rotation, Id.Type).GetComponent<AnimalHouse>();
+            AnimalHouse house = GameFactory.CreateAnimalHouse(_cashedMarker.BuildPosition, _cashedMarker.Location.Rotation, Id.Type).GetComponent<AnimalHouse>();
             _houseService.RegisterHouse(house);
         }
     }

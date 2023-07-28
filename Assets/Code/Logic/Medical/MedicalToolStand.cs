@@ -18,18 +18,18 @@ namespace Logic.Medical
         [SerializeField] private SpriteRenderer _icon;
         [SerializeField, Min(.0f)] private float _respawnTime = 2f;
 
-        private IGameFactory _gameFactory;
+        private IHandItemFactory _handItemFactory;
         private IMedicalBedsReporter _needsReporter;
         private IItem _toolItem;
         private MedicalToolId _toolId;
 
         public event Action<IItem> Removed = i => { };
-        
+
         public MedicalToolId ToolId => _toolId;
 
         private void Awake()
         {
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
+            _handItemFactory = AllServices.Container.Single<IGameFactory>().HandItemFactory;
             _timerOperator ??= GetComponent<TimerOperator>();
             _timerOperator.SetUp(_respawnTime, OnRespawn);
         }
@@ -57,10 +57,9 @@ namespace Logic.Medical
 
             if (_toolItem is null || (_toolItem.ItemId & ItemId.Medical) <= 0)
                 return false;
-            
+
             item = _toolItem;
             return true;
-
         }
 
         public bool TryGet(ItemId byId, out IItem result)
@@ -74,11 +73,8 @@ namespace Logic.Medical
             return false;
         }
 
-        private void OnRespawn()
-        {
-            _toolItem = _gameFactory.CreateMedToolItem(_spawnPlace.position, Quaternion.identity, ToolId)
-                .GetComponent<IItem>();
-        }
+        private void OnRespawn() =>
+            _toolItem = _handItemFactory.CreateMedicalToolItem(_spawnPlace.position, Quaternion.identity, ToolId);
 
         private void PlayRespawnDelay() =>
             _timerOperator.Restart();

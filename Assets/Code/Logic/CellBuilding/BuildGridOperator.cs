@@ -2,6 +2,7 @@ using Infrastructure.Factory;
 using NaughtyAttributes;
 using NTC.Global.System;
 using Services;
+using Tools.Extension;
 using UnityEngine;
 
 namespace Logic.CellBuilding
@@ -10,6 +11,7 @@ namespace Logic.CellBuilding
     {
         [SerializeField] private BuildPlaceMarker[] _buildPlaces;
         [SerializeField] private int[] _buildCosts;
+        [SerializeField] private Vector3 _buildOffset;
         [SerializeField] private bool _isAutoBuild = true;
 
         protected IGameFactory GameFactory;
@@ -20,7 +22,7 @@ namespace Logic.CellBuilding
         private bool _isCellBuilt = true;
 
         public Vector3 BuildCellPosition => _activeBuildCell.transform.position;
-        
+
         private void Awake()
         {
             InitMarkers();
@@ -88,9 +90,7 @@ namespace Logic.CellBuilding
             BuildCell();
             
             if (_isAutoBuild)
-            {
                 ShowNextBuildCell();
-            }
         }
 
         private void BuildCell()
@@ -103,9 +103,7 @@ namespace Logic.CellBuilding
         private void InitMarkers()
         {
             for (int i = 0; i < _buildPlaces.Length; i++)
-            {
-                _buildPlaces[i].Init();
-            }
+                _buildPlaces[i].Init(_buildOffset);
         }
 
         [Button]

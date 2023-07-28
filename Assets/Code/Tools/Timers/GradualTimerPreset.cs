@@ -1,7 +1,8 @@
 using UnityEngine;
 
-namespace Code.Tools.Timers
+namespace Tools.Timers
 {
+    [CreateAssetMenu(menuName = "Presets/GradualTimerPreset", fileName = "NewGradualTimerPreset", order = 0)]
     public class GradualTimerPreset : ScriptableObject
     {
         [SerializeField] private float _initialDelay;

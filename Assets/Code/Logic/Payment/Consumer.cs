@@ -7,6 +7,7 @@ using Logic.Translators;
 using Observables;
 using Services;
 using Services.Pools;
+using Tools.Timers;
 using UnityEngine;
 
 namespace Logic.Payment
@@ -18,7 +19,7 @@ namespace Logic.Payment
         private readonly Observable<int> _leftCoinsToPay = new Observable<int>();
         
         [SerializeField] private PlayerInteraction _playerInteraction;
-        [SerializeField, Min(0f)] private float _paymentRate = 0.05f;
+        [SerializeField] private GradualTimerPreset _timerPreset;
         [SerializeField, Min(0)] private int _currencyPerTick = 1;
 
         private IPoolService _poolService;
@@ -60,12 +61,14 @@ namespace Logic.Payment
         public void SetCost(int buildCost)
         {
             _defaultCost = buildCost;
-            _timerOperator.SetUp(_paymentRate, OnPay);
+            _timerOperator.SetUp(_timerPreset.GetSetup(), OnPay);
             _leftCoinsToPay.Value = buildCost;
         }
 
         private void Init(Hero hero)
         {
+            ////TODO: Добавить инициализацию пула в сервис
+            
             _spawner = new VisualTranslatorsSpawner(() =>
                     AllServices.Container.Single<IGameFactory>().CreateVisual(VisualType.Money,
                         Quaternion.identity),
@@ -97,6 +100,7 @@ namespace Logic.Payment
             if (_leftCoinsToPay.Value <= 0)
                 return;
 
+            _timerOperator.Reset();
             _timerOperator.Restart();
         }
 

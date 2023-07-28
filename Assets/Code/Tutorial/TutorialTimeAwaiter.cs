@@ -1,5 +1,5 @@
 using NTC.Global.Cache;
-using Tools;
+using Tools.Timers;
 using UnityEngine;
 
 namespace Tutorial

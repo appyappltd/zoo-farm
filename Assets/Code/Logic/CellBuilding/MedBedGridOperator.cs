@@ -4,7 +4,7 @@ namespace Logic.CellBuilding
     {
         protected override void BuildCell(BuildPlaceMarker marker)
         {
-            GameFactory.CreateMedBed(marker.Location.Position, marker.Location.Rotation);
+            GameFactory.CreateMedBed(marker.BuildPosition, marker.Location.Rotation);
         }
     }
 }

@@ -2,6 +2,7 @@ using Data.ItemsData;
 using Infrastructure.AssetManagement;
 using Logic.Animals;
 using Logic.Foods.FoodSettings;
+using Logic.Medical;
 using UnityEngine;
 
 namespace Infrastructure.Factory
@@ -21,6 +22,10 @@ namespace Infrastructure.Factory
 
         public HandItem CreateFood(Vector3 at, Quaternion rotation, FoodId foodId) =>
             _assets.Instantiate($"{AssetPath.HandItemPath}/{ItemId.Food}/{foodId}", at, rotation)
+                .GetComponent<HandItem>();
+
+        public HandItem CreateMedicalToolItem(Vector3 at, Quaternion rotation, MedicalToolId toolId) =>
+            _assets.Instantiate($"{AssetPath.HandItemPath}/{ItemId.Medical}/{toolId}", at, rotation)
                 .GetComponent<HandItem>();
     }
 }
