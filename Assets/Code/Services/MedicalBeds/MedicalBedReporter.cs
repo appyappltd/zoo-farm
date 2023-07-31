@@ -10,7 +10,7 @@ namespace Services.MedicalBeds
     {
         private readonly List<MedicalBed> _medicalBeds = new List<MedicalBed>();
         private readonly List<MedicalToolId> _neededTools = new List<MedicalToolId>();
-        
+
         public event Action Updated = () => { };
 
         public bool HasFreeBeds()
@@ -34,7 +34,7 @@ namespace Services.MedicalBeds
                 medicalBed.Removed -= OnItemRemoved;
                 medicalBed.FeedUp -= OnFeedUp;
             }
-            
+
             _medicalBeds.Clear();
         }
 
@@ -42,7 +42,7 @@ namespace Services.MedicalBeds
         {
             if (_medicalBeds.Contains(medicalBed))
                 return;
-            
+
             _medicalBeds.Add(medicalBed);
             medicalBed.Added += OnItemAdd;
             medicalBed.Removed += OnItemRemoved;
@@ -57,7 +57,7 @@ namespace Services.MedicalBeds
         {
             if ((item.ItemId & ItemId.Animal) == 0)
                 return;
-            
+
             AnimalItemData animalData = (AnimalItemData) item.ItemData;
             _neededTools.Remove(animalData.TreatToolId);
         }
@@ -66,7 +66,7 @@ namespace Services.MedicalBeds
         {
             if ((item.ItemId & ItemId.Animal) == 0)
                 return;
-            
+
             AnimalItemData animalData = (AnimalItemData) item.ItemData;
             _neededTools.Add(animalData.TreatToolId);
             Updated.Invoke();

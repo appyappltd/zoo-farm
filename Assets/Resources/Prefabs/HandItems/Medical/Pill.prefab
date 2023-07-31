@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: _handItem
       value: 
       objectReference: {fileID: 2362251524379456715}
+    - target: {fileID: 1269673199937553730, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: _medicalToolItemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6426f56da4c5fb94488295e579662f44, type: 2}
     - target: {fileID: 2305059050406395138, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_Name
       value: Pill
@@ -110,6 +114,10 @@ PrefabInstance:
     - target: {fileID: 3431421745551393077, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879724824152832763, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: m_Name
+      value: Pill
       objectReference: {fileID: 0}
     - target: {fileID: 5464178577024892991, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_LocalPosition.x

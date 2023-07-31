@@ -95,6 +95,14 @@ PrefabInstance:
       propertyPath: _handItem
       value: 
       objectReference: {fileID: 1374919000664819857}
+    - target: {fileID: 1269673199937553730, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: _medToolItemData
+      value: 
+      objectReference: {fileID: 11400000, guid: cd84ce8d112b5514a9b0e2d3bfb74b3b, type: 2}
+    - target: {fileID: 1269673199937553730, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: _medicalToolItemData
+      value: 
+      objectReference: {fileID: 11400000, guid: cd84ce8d112b5514a9b0e2d3bfb74b3b, type: 2}
     - target: {fileID: 2305059050406395138, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_Name
       value: Tire
@@ -130,6 +138,10 @@ PrefabInstance:
     - target: {fileID: 3431421745551393077, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879724824152832763, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: m_Name
+      value: Tire
       objectReference: {fileID: 0}
     - target: {fileID: 5464178577024892991, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_LocalPosition.x

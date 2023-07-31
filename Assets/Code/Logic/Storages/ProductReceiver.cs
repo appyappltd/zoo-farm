@@ -96,8 +96,6 @@ namespace Logic.Storages
 
         private void TryReceive()
         {
-            Debug.Log(GetInstanceID());
-            
             if (_sender.TryPeek(_itemIdFilter, out IItem item))
                 if (_receiver.CanAdd(item))
                     Receive();

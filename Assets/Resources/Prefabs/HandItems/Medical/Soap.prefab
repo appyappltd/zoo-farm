@@ -95,6 +95,14 @@ PrefabInstance:
       propertyPath: _handItem
       value: 
       objectReference: {fileID: 4950744456181903711}
+    - target: {fileID: 1269673199937553730, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: _medToolItemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f97357637530384ab05e1bd973d8a87, type: 2}
+    - target: {fileID: 1269673199937553730, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: _medicalToolItemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f97357637530384ab05e1bd973d8a87, type: 2}
     - target: {fileID: 2305059050406395138, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_Name
       value: Soap
@@ -134,6 +142,10 @@ PrefabInstance:
     - target: {fileID: 3431421745551393077, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879724824152832763, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: m_Name
+      value: Soap
       objectReference: {fileID: 0}
     - target: {fileID: 5464178577024892991, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: m_LocalPosition.x

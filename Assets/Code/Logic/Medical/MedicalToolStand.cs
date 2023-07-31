@@ -16,20 +16,21 @@ namespace Logic.Medical
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private SpriteRenderer _icon;
-        [SerializeField, Min(.0f)] private float _respawnTime = 2f;
+        [SerializeField] [Min(.0f)] private float _respawnTime = 2f;
 
         private IHandItemFactory _handItemFactory;
-        private IMedicalBedsReporter _needsReporter;
+        private IMedicalBedsReporter _medicalBedsReporter;
         private IItem _toolItem;
         private MedicalToolId _toolId;
 
-        public event Action<IItem> Removed = i => { };
+        public event Action<IItem> Removed = _ => { };
 
         public MedicalToolId ToolId => _toolId;
 
         private void Awake()
         {
             _handItemFactory = AllServices.Container.Single<IGameFactory>().HandItemFactory;
+            _medicalBedsReporter = AllServices.Container.Single<IMedicalBedsReporter>();
             _timerOperator ??= GetComponent<TimerOperator>();
             _timerOperator.SetUp(_respawnTime, OnRespawn);
         }
@@ -55,11 +56,15 @@ namespace Logic.Medical
         {
             item = null;
 
-            if (_toolItem is null || (_toolItem.ItemId & ItemId.Medical) <= 0)
-                return false;
+            bool isCanPeek = _toolItem is not null && _medicalBedsReporter.IsNeeds(_toolId);
 
-            item = _toolItem;
-            return true;
+            if (isCanPeek)
+            {
+                item = _toolItem;
+                return true;
+            }
+
+            return false;
         }
 
         public bool TryGet(ItemId byId, out IItem result)

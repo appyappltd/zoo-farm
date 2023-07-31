@@ -22,7 +22,7 @@ namespace Logic.Medical
         [SerializeField] [Range(0f, 5f)] private float _healingTime = 2.5f;
 
         private AnimalItemData _animalData;
-        private MedToolItemData _medToolData;
+        private MedicalToolItemData _medicalToolData;
 
         private IItem _animalItem;
         private IItem _medToolItem;
@@ -61,7 +61,7 @@ namespace Logic.Medical
             }
             else if (ItemIsMedTool(item))
             {
-                _medToolData = item.ItemData as MedToolItemData;
+                _medicalToolData = item.ItemData as MedicalToolItemData;
                 _medToolItem = item;
                 BeginHeal();
             }
@@ -111,7 +111,7 @@ namespace Logic.Medical
             _animalData = null;
             
             _medToolItem = null;
-            _medToolData = null;
+            _medicalToolData = null;
 
             _isFree = true;
         }
@@ -137,10 +137,10 @@ namespace Logic.Medical
         }
 
         private bool HasMedTool() =>
-            _medToolData is not null;
+            _medicalToolData is not null;
 
         private bool IsSuitableTool(IItem item) =>
-            _animalData.TreatToolId == ((MedToolItemData) item.ItemData)._medicalToolId;
+            _animalData.TreatToolId == ((MedicalToolItemData) item.ItemData).MedicineToolId;
 
         private bool HasAnimal() =>
             _animalData is not null;

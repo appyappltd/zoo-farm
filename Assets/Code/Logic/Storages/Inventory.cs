@@ -8,16 +8,16 @@ namespace Logic.Storages
     public class Inventory : IInventory
     {
         private readonly int _maxWeight;
-        
+
         private int _weight;
-        
+
         private readonly List<IItem> _items = new List<IItem>();
         private IItem _cashedGetItem;
 
         public Inventory(int maxWeight, List<IItem> items = null)
         {
             _maxWeight = maxWeight;
-            
+
             if (items is not null)
                 _items = items;
         }
@@ -28,7 +28,7 @@ namespace Logic.Storages
 
         public event Action<IItem> Added = c => { };
         public event Action<IItem> Removed = c => { };
-        
+
         public void Add(IItem item)
         {
             _items.Add(item);
@@ -36,10 +36,8 @@ namespace Logic.Storages
             Added.Invoke(item);
         }
 
-        public bool CanAdd(IItem item)
-        {
-            return item.Weight + _weight <= _maxWeight;
-        }
+        public bool CanAdd(IItem item) =>
+            item.Weight + _weight <= _maxWeight;
 
         public IItem Get()
         {
@@ -54,10 +52,10 @@ namespace Logic.Storages
         public bool TryPeek(ItemId byId, out IItem item)
         {
             item = null;
-            
+
             if (_weight <= 0)
                 return false;
-            
+
             _cashedGetItem = _items.FindLast(found => (found.ItemId & byId) > 0);
 
             if (_cashedGetItem is null)

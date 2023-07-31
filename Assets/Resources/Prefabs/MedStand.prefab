@@ -651,7 +651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: _isValidate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: _interactionDelay
