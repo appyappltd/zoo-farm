@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Tools.Timers
 {
-    [CreateAssetMenu(menuName = "Presets/GradualTimerPreset", fileName = "NewGradualTimerPreset", order = 0)]
+    [CreateAssetMenu(menuName = "Presets/Gradual Timer Preset", fileName = "NewGradualTimerPreset", order = 0)]
     public class GradualTimerPreset : ScriptableObject
     {
         [SerializeField] private float _initialDelay;

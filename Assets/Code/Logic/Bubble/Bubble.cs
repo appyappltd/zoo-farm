@@ -27,7 +27,5 @@ namespace Logic.Bubble
             else
                 transform.position = _parent.position + offset;
         }
-
-        public void ChangeState(Sprite sprite) => _state.sprite = sprite;
     }
 }

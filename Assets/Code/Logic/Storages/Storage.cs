@@ -26,7 +26,7 @@ namespace Logic.Storages
         
         private int _topIndex = 0;
 
-        public Action<IItem> Replenished = i => { };
+        public Action<IItem> Replenished = _ => { };
 
         private IAddItemObserver Adder => _adder;
         private IGetItemObserver Remover => _remover;

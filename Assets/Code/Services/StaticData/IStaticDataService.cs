@@ -5,6 +5,7 @@ using Logic.Medical;
 using Logic.SpawnPlaces;
 using Services.Effects;
 using StaticData;
+using StaticData.ScaleModifiers;
 using Ui.Services;
 using Ui.Windows;
 using UnityEngine;
@@ -22,5 +23,6 @@ namespace Services.StaticData
         Sprite IconByAnimalType(AnimalType animalIdType);
         ParticleSystem ParticlesById(EffectId id);
         ParticleConfig ParticlesConfig();
+        ScaleModifierConfig ScaleModifierById(ScaleModifierId id);
     }
 }

@@ -8,6 +8,7 @@ using Logic.Medical;
 using Logic.SpawnPlaces;
 using Services.Effects;
 using StaticData;
+using StaticData.ScaleModifiers;
 using StaticData.Windows;
 using Ui.Services;
 using Ui.Windows;
@@ -24,12 +25,14 @@ namespace Services.StaticData
         private const string GardenBedConfigPath = "StaticData/GardenBedConfigs";
         private const string AnimalIconConfigPath = "StaticData/AnimalIconConfigs";
         private const string ParticleConfigPath = "StaticData/ParticleConfigs";
-        
+        private const string ScaleModifierPath = "StaticData/ScaleModifierConfigs";
+
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
         private Dictionary<MedicalToolId, MedToolStandConfig> _medStandConfigs;
         private Dictionary<FoodId, GardenBedConfig> _gardenBedConfigs;
-        
+        private Dictionary<ScaleModifierId, ScaleModifierConfig> _scaleModifierConfigs;
+
         private SpawnPlaceConfig _spawnPlaceConfig;
         private AnimalIconConfig _animalIcons;
         private ParticleConfig _particlesConfig;
@@ -39,6 +42,7 @@ namespace Services.StaticData
             _emotionConfigs = LoadFor<EmotionId, EmotionConfig>(EmotionConfigPath, x => x.Name);
             _medStandConfigs = LoadFor<MedicalToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
             _gardenBedConfigs = LoadFor<FoodId, GardenBedConfig>(GardenBedConfigPath, x => x.FoodId);
+            _scaleModifierConfigs = LoadFor<ScaleModifierId, ScaleModifierConfig>(ScaleModifierPath, x => x.ModifierId);
 
             _animalIcons = Resources.Load<AnimalIconConfig>(AnimalIconConfigPath);
             _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
@@ -60,6 +64,9 @@ namespace Services.StaticData
 
         public Sprite IconByAnimalType(AnimalType animalIdType) =>
             _animalIcons.AnimalIcons[animalIdType];
+
+        public ScaleModifierConfig ScaleModifierById(ScaleModifierId id) =>
+            _scaleModifierConfigs[id];
 
         public ParticleSystem ParticlesById(EffectId id) =>
             _particlesConfig.Particles[id];

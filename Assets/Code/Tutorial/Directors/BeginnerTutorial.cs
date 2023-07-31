@@ -1,10 +1,10 @@
 using Logic.CellBuilding;
-using Logic.Gates;
 using Logic.Volunteers;
 using NTC.Global.Cache;
 using Services;
 using Services.Camera;
 using Tutorial.StaticTriggers;
+using Tutorial.TimePresets;
 using UnityEngine;
 
 namespace Tutorial.Directors
@@ -37,6 +37,7 @@ namespace Tutorial.Directors
         [SerializeField] private HouseGridOperator _houseGridOperator;
         [SerializeField] private GardenBedGridOperator _gardenBedGridOperator;
         [SerializeField] private VolunteerSpawner _volunteerSpawner;
+        [SerializeField] private BeginnerTutorialTimeDelayPreset _timeDelay;
 
         private ICameraOperatorService _cameraOperatorService;
         private TutorialInteractedTriggerContainer _healingOption;
@@ -50,17 +51,17 @@ namespace Tutorial.Directors
             _firstHealingOptionSpawned.TriggeredPayload += OnMedToolSpawned;
             _firstAnimalSpawned.TriggeredPayload += OnAnimalSpawned;
             _firstVolunteerSpawned.TriggeredPayload += OnVolunteerSpawned;
-            
+
             Construct(AllServices.Container.Single<ICameraOperatorService>());
         }
 
         private void OnDestroy()
-         {
-             _firstMedBadSpawned.TriggeredPayload -= OnMedBadSpawned;
-             _firstHealingOptionSpawned.TriggeredPayload -= OnMedToolSpawned;
-             _firstAnimalSpawned.TriggeredPayload -= OnAnimalSpawned;
-             _firstVolunteerSpawned.TriggeredPayload -= OnVolunteerSpawned;
-         }
+        {
+            _firstMedBadSpawned.TriggeredPayload -= OnMedBadSpawned;
+            _firstHealingOptionSpawned.TriggeredPayload -= OnMedToolSpawned;
+            _firstAnimalSpawned.TriggeredPayload -= OnAnimalSpawned;
+            _firstVolunteerSpawned.TriggeredPayload -= OnVolunteerSpawned;
+        }
 
         public void Construct(ICameraOperatorService cameraOperatorService)
         {
@@ -88,14 +89,11 @@ namespace Tutorial.Directors
                 _volunteerSpawner.Spawn();
                 _arrow.Hide();
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.MedicalToolSpawnedToVolunteerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_volunteerTransform)));
-            TutorialModules.Add(new TutorialTimeAwaiter(4f, GlobalUpdate.Instance));
-            TutorialModules.Add(new TutorialAction(() =>
-            {
-                _arrow.Move(_animalTransmittingView.position);
-            }));
-            TutorialModules.Add(new TutorialTimeAwaiter(1f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.VolunteerFocusToArrowMoveToInteractionZone, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_animalTransmittingView.position)));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.ArrowMoveToInteractionZoneToPlayerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalTakenInteracted));
             TutorialModules.Add(new TutorialAction(() =>
@@ -103,7 +101,7 @@ namespace Tutorial.Directors
                 _arrow.Move(_medBed.transform.position);
                 _cameraOperatorService.Focus(_medBed.transform);
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.MedicalBedFocusToPlayerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_medBedInteracted));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_healingOption.transform.position)));
@@ -116,24 +114,24 @@ namespace Tutorial.Directors
                 _arrow.Move(_firstHouse.position);
                 _cameraOperatorService.Focus(_firstHouse);
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.HouseFocusToPlayerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_houseBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
-            TutorialModules.Add(new TutorialTimeAwaiter(0.2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.HouseBuiltToAnimalFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_animalTransform)));
-            TutorialModules.Add(new TutorialTimeAwaiter(2f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.AnimalFocusToPlantFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _gardenBedGridOperator.ShowNextBuildCell();
                 _arrow.Move(_plant.position);
                 _cameraOperatorService.Focus(_plant);
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(1.5f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.PlantFocusToPlayerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_plantBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
-            TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.PlantBuiltToPlantFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_plant.position)));
             TutorialModules.Add(new TutorialTriggerAwaiter(_foodTaken));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstHouse.position)));
@@ -143,11 +141,8 @@ namespace Tutorial.Directors
                 _cameraOperatorService.Focus(_animalReleaser);
                 _arrow.Move(_animalReleaser.position);
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
-            TutorialModules.Add(new TutorialAction(() =>
-            {
-                _cameraOperatorService.FocusOnDefault();
-            }));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.AnimalReleaserFocusToPlayerFocus, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
             TutorialModules.Add(new TutorialAction(() =>
             {
@@ -159,6 +154,7 @@ namespace Tutorial.Directors
             {
                 _volunteerSpawner.StartAutoSpawning();
                 _medToolGridOperator.ShowNextBuildCell();
+                _houseGridOperator.ShowNextBuildCell();
                 _arrow.Move(_medToolGridOperator.BuildCellPosition);
             }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));

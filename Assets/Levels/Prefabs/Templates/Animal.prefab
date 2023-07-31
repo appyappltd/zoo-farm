@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059383626457612700}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: -0.1}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8638602644969519916}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4398652746174957784
 SpriteRenderer:
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 7461468065001438259}
   - component: {fileID: 3823740206972028246}
   - component: {fileID: 5062255906830864564}
+  - component: {fileID: 6901850329722103781}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -110,6 +111,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2630466876669196884}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.774, y: 1.045, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
@@ -117,7 +119,6 @@ Transform:
   m_Children:
   - {fileID: 1440855876566770448}
   m_Father: {fileID: 951227949797535625}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7461468065001438259
 SpriteRenderer:
@@ -198,6 +199,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6901850329722103781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2630466876669196884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878f4476ee124052bb4c0083a276a8ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scaleModifierId: 0
 --- !u!1001 &7465656485935678528
 PrefabInstance:
   m_ObjectHideFlags: 0
