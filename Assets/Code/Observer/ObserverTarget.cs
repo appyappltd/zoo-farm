@@ -15,7 +15,7 @@ namespace Observer
         }
 
         protected virtual void OnAwake() { }
-        
+
         protected override void OnEnabled() =>
             Observer.Entered += OnTriggerObserverEntered;
 

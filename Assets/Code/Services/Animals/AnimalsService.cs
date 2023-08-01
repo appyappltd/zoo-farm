@@ -14,10 +14,12 @@ namespace Services.Animals
         private readonly IAnimalHouseService _houseService;
         private readonly List<IAnimal> _animals = new List<IAnimal>();
 
-        public AnimalsService(IAnimalHouseService houseService) =>
+        public AnimalsService(IAnimalHouseService houseService)
+        {
             _houseService = houseService;
+        }
 
-        public event Action<AnimalId> Released = t => { };
+        public event Action<IAnimal> Released = _ => { };
 
         public int TotalAnimalCount => _animals.Count;
         public int ReleaseReadyAnimalCount => _animals.Count(animal => animal.Stats.Vitality.IsFull);
@@ -30,7 +32,9 @@ namespace Services.Animals
 
             _animals.Add(animal);
 
+#if DEBUG
             Debug.Log($"Animal {animal.AnimalId.Type} (id: {animal.AnimalId.ID}) registered");
+#endif
         }
 
         public void Release(IAnimal animal)
@@ -61,10 +65,11 @@ namespace Services.Animals
         {
             Unregister(releasedAnimal);
             _houseService.VacateHouse(releasedAnimal.AnimalId);
-            releasedAnimal.Destroy();
-            Released.Invoke(releasedAnimal.AnimalId);
+            Released.Invoke(releasedAnimal);
 
+#if DEBUG
             Debug.Log($"Animal {releasedAnimal.AnimalId.Type} (id: {releasedAnimal.AnimalId.ID}) released");
+#endif
         }
 
         private void Unregister(IAnimal animal)

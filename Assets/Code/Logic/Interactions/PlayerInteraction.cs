@@ -9,11 +9,11 @@ using UnityEngine;
 namespace Logic.Interactions
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class PlayerInteraction : ObserverTargetExit<Hero, TriggerObserverExit>
+    public sealed class PlayerInteraction : ObserverTargetExit<Hero, TriggerObserverExit>
     {
         [SerializeField] private float _interactionDelay;
         [SerializeField] private bool _isValidate;
-        
+
         [SerializeField] [ShowIf("_isValidate")]
         private InterfaceReference<IInteractionValidator, MonoBehaviour>[] _interactionValidators;
 

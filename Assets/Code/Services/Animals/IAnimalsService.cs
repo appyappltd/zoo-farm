@@ -7,9 +7,9 @@ namespace Services.Animals
 {
     public interface IAnimalsService : IService
     {
-        event Action<AnimalId> Released;
-        int TotalAnimalCount { get; } 
-        int ReleaseReadyAnimalCount { get; } 
+        event Action<IAnimal> Released;
+        int TotalAnimalCount { get; }
+        int ReleaseReadyAnimalCount { get; }
         IReadOnlyList<IAnimal> Animals { get; }
         void Register(IAnimal animal);
         void Release(IAnimal animal);

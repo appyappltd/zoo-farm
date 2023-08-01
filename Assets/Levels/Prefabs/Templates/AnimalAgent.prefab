@@ -248,11 +248,11 @@ MonoBehaviour:
   _satiety: {fileID: 4985158875982950670}
   _peppiness: {fileID: 4862242970874921462}
   _age: {fileID: 8970900749014159932}
-  _satietyReplanishSpeed: 0.5
-  _peppinessReplanishSpeed: 0.5
-  _maxWanderDistance: 3
+  _satietyReplanishSpeed: 0.2
+  _peppinessReplanishSpeed: 0.2
+  _maxWanderDistance: 4
   _idleDelayRange: {x: 2, y: 5}
-  _placeOffset: 0.1
+  _placeOffset: 1
 --- !u!114 &1117839774714342269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,9 +370,9 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 0
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6
   m_BaseOffset: 0

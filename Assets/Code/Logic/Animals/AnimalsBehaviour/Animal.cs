@@ -21,7 +21,7 @@ namespace Logic.Animals.AnimalsBehaviour
         public AnimalId AnimalId => _animalId;
         public IStatsProvider Stats => _statProvider;
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _stateMachineObserver.Dispose();
             _emotionService.Unregister(_stateMachineObserver);
@@ -43,6 +43,11 @@ namespace Logic.Animals.AnimalsBehaviour
             Activate();
         }
 
+        public void ForceMove(Transform to)
+        {
+            _stateMachine.ReleaseMove(to);
+        }
+
         public void Destroy()
         {
             Destroy(gameObject);
@@ -51,13 +56,10 @@ namespace Logic.Animals.AnimalsBehaviour
         private void Activate() =>
             _jumper.Jump();
 
-        public override string ToString()
-        {
-            return
-                $"Animal {_animalId.Type} (id: {_animalId.ID}\nStats:\n" +
-                $"  Vitality - {_statProvider.Vitality.CurrentNormalized}/1,\n" +
-                $"  Satiety - {_statProvider.Satiety.CurrentNormalized}/1,\n " +
-                $" Peppiness - {_statProvider.Peppiness.CurrentNormalized}/1,\n)";
-        }
+        public override string ToString() =>
+            $"Animal {_animalId.Type} (id: {_animalId.ID}\nStats:\n" +
+            $"  Vitality - {_statProvider.Vitality.CurrentNormalized}/1,\n" +
+            $"  Satiety - {_statProvider.Satiety.CurrentNormalized}/1,\n " +
+            $" Peppiness - {_statProvider.Peppiness.CurrentNormalized}/1,\n)";
     }
 }

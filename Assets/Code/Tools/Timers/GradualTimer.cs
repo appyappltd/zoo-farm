@@ -17,7 +17,8 @@ namespace Tools.Timers
 
         public bool IsActive => _elapsedTime > 0;
 
-        public GradualTimer(float initialDelay, float finalDelay, float delaySteps, AnimationCurve delayCurve, Action timerCallback)
+        public GradualTimer(float initialDelay, float finalDelay, float delaySteps, AnimationCurve delayCurve,
+            Action timerCallback)
         {
             _initialDelay = initialDelay;
             _finalDelay = finalDelay;
@@ -25,7 +26,7 @@ namespace Tools.Timers
             _delayCurve = delayCurve;
             _delaySteps = delaySteps;
             _timerCallback = timerCallback;
-        
+
             Reset();
         }
 
@@ -33,18 +34,17 @@ namespace Tools.Timers
         {
             _elapsedTime = 0;
         }
-        
+
         public void Reset()
         {
             _elapsedTime = 0;
             _currentStep = 0;
             _currentDelay = LerpDelay();
         }
-    
+
         public void Tick(float delta)
         {
             _elapsedTime += delta;
-            Debug.Log(_elapsedTime + " " + _currentDelay);
 
             if (_elapsedTime >= _currentDelay)
             {

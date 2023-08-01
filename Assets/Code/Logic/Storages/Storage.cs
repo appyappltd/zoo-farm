@@ -9,28 +9,29 @@ namespace Logic.Storages
     public class Storage : MonoBehaviour
     {
         private readonly IItem[] _items = new IItem[10];
-        
+
         [SerializeField] private Transform[] _places;
 
         [SerializeField] private bool _isSortable;
         [SerializeField] private bool _isRemoteInit;
         [SerializeField] private bool _isModifyRotation;
-        
-        [HideIf("_isRemoteInit")]
-        [SerializeField] [RequireInterface(typeof(IAddItemObserver))] private MonoBehaviour _adderMono;
-        [HideIf("_isRemoteInit")]
-        [SerializeField] [RequireInterface(typeof(IGetItemObserver))] private MonoBehaviour _removerMono;
+
+        [HideIf("_isRemoteInit")] [SerializeField] [RequireInterface(typeof(IAddItemObserver))]
+        private MonoBehaviour _adderMono;
+
+        [HideIf("_isRemoteInit")] [SerializeField] [RequireInterface(typeof(IGetItemObserver))]
+        private MonoBehaviour _removerMono;
 
         private IAddItemObserver _adder;
         private IGetItemObserver _remover;
-        
+
         private int _topIndex = 0;
 
         public Action<IItem> Replenished = _ => { };
 
         private IAddItemObserver Adder => _adder;
         private IGetItemObserver Remover => _remover;
-        
+
         public Transform TopPlace => _places[_topIndex];
 
         private void Awake() =>
@@ -42,7 +43,7 @@ namespace Logic.Storages
             {
                 Adder.Added -= PlaceItem;
             }
-            
+
             if (Remover is not null)
             {
                 Remover.Removed -= RevertItem;
@@ -56,7 +57,7 @@ namespace Logic.Storages
                 enabled = false;
                 return;
             }
-            
+
             Construct(_adderMono as IAddItemObserver, _removerMono as IGetItemObserver);
         }
 
@@ -67,7 +68,7 @@ namespace Logic.Storages
 
             Subscribe();
         }
-        
+
         public void Construct(IInventory inventory)
         {
             _adder = inventory;
@@ -82,7 +83,7 @@ namespace Logic.Storages
             {
                 Adder.Added += PlaceItem;
             }
-            
+
             if (Remover is not null)
             {
                 Remover.Removed += RevertItem;

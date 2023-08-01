@@ -40,7 +40,7 @@ namespace Logic.Gates
         private void Open()
         {
             transform.localPosition = _openedLocation.Position;
-            transform.localRotation = _closedLocation.Rotation;
+            transform.localRotation = _openedLocation.Rotation;
         }
     }
 }

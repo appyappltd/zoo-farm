@@ -12,18 +12,19 @@ namespace Logic.Gates
     [RequireComponent(typeof(RunTranslator))]
     public class Gate : MonoBehaviour
     {
-        [Header("References")]
-        [SerializeField] private List<Door> _doors = new List<Door>();
+        [Header("References")] [SerializeField]
+        private List<Door> _doors = new List<Door>();
+
         [SerializeField] private PlayerInteraction _playerInteraction;
-        
+
         [Space] [Header("Settings")] [SerializeField]
         private bool _isAuto;
-        
-        private ITranslator translator;
+
+        private ITranslator _translator;
 
         private void Awake()
         {
-            translator = GetComponent<RunTranslator>();
+            _translator = GetComponent<RunTranslator>();
             _playerInteraction ??= GetComponent<PlayerInteraction>();
             enabled = _isAuto;
         }
@@ -33,7 +34,7 @@ namespace Logic.Gates
             _playerInteraction.Interacted += OnInteracted;
             _playerInteraction.Canceled += OnCanceled;
         }
-        
+
         private void OnDisable()
         {
             _playerInteraction.Interacted -= OnInteracted;
@@ -53,7 +54,7 @@ namespace Logic.Gates
             {
                 Door door = _doors[index];
                 door.Translatable.Play(door.ClosedLocation, door.OpenedLocation);
-                translator.AddTranslatable(door.Translatable);
+                _translator.AddTranslatable(door.Translatable);
             }
         }
 
@@ -64,14 +65,15 @@ namespace Logic.Gates
             {
                 Door door = _doors[index];
                 door.Translatable.Play(door.OpenedLocation, door.ClosedLocation);
-                translator.AddTranslatable(door.Translatable);
+                _translator.AddTranslatable(door.Translatable);
             }
         }
 
-        [Button("Collect Doors", enabledMode: EButtonEnableMode.Editor)] [Conditional("UNITY_EDITOR")]
+        [Button("Collect Doors", enabledMode: EButtonEnableMode.Editor)]
+        [Conditional("UNITY_EDITOR")]
         private void CollectDoorChildes()
         {
             _doors = GetComponentsInChildren<Door>().ToList();
-        }   
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace StateMachineBase
         public abstract bool CheckCondition();
 
         public virtual void Enter() { }
+
         public virtual void Exit() { }
 
         public void Update()

@@ -7,16 +7,16 @@ namespace Logic.Movement
 {
     public class ItemMover : MonoCache, IItemMover
     {
-        [SerializeField, Min(.0f)] private float _speed = 5.0f;
-        [SerializeField, Min(.0f)] private float _errorOffset = 0.1f;
+        [SerializeField] [Min(.0f)] private float _speed = 5.0f;
+        [SerializeField] [Min(.0f)] private float _errorOffset = 0.1f;
         [SerializeField] private Vector3 _rotationOffset;
 
         private Transform _target;
         private Transform _finalParent;
         private Quaternion _finalRotation;
 
-        private Action EndMoveCallback;
-        private Action Moving;
+        private Action _endMoveCallback;
+        private Action _moving;
 
         private bool _isModifyRotation;
 
@@ -25,23 +25,23 @@ namespace Logic.Movement
 
         private void Awake()
         {
-            Moving += Translate;
+            _moving += Translate;
             enabled = false;
         }
 
-        public void Move(Transform to, Action OnMoveEnded, Transform finishParent = null, bool isModifyRotation = false)
+        public void Move(Transform to, Action onMoveEnded, Transform finishParent = null, bool isModifyRotation = false)
         {
-            EndMoveCallback = OnMoveEnded;
+            _endMoveCallback = onMoveEnded;
             Move(to, finishParent, isModifyRotation);
         }
 
-        public void Move(Transform target, Transform finishParent = null, bool isModifyRotation = false)
+        public void Move(Transform to, Transform finishParent = null, bool isModifyRotation = false)
         {
             if (finishParent)
-                Moving += Rotate;
+                _moving += Rotate;
 
             _isModifyRotation = isModifyRotation;
-            _target = target;
+            _target = to;
             _finalParent = finishParent;
             transform.Unparent();
             enabled = true;
@@ -50,7 +50,7 @@ namespace Logic.Movement
 
         protected override void Run()
         {
-            Moving.Invoke();
+            _moving.Invoke();
 
             if (IsFinished())
                 FinishTranslation();
@@ -77,7 +77,7 @@ namespace Logic.Movement
 
             if (_finalParent)
             {
-                Moving -= Rotate;
+                _moving -= Rotate;
                 transform.rotation = GetFinalRotation();
             }
 
@@ -87,12 +87,10 @@ namespace Logic.Movement
         private bool IsFinished() =>
             GetDistanceToTarget() < _errorOffset;
 
-        private Quaternion GetFinalRotation()
-        {
-            return _isModifyRotation
+        private Quaternion GetFinalRotation() =>
+            _isModifyRotation
                 ? _finalParent.rotation * Quaternion.Euler(_rotationOffset)
                 : _finalParent.rotation;
-        }
 
         private float GetDistanceToTarget() =>
             Vector3.Distance(transform.position, _target.position);

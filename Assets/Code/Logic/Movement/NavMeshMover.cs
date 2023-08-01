@@ -13,7 +13,7 @@ namespace Logic.Movement
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private bool _isAlignAtEnd;
         [SerializeField] [ShowIf("_isAlignAtEnd")] private Aligner _aligner;
-        
+
         private Quaternion _finalRotation;
 
         public Vector3 DestinationPoint => _agent.destination;
@@ -44,7 +44,7 @@ namespace Logic.Movement
             normalizedSpeed = Mathf.Clamp01(normalizedSpeed);
             _agent.speed = normalizedSpeed * _maxSpeed;
         }
-        
+
         public void SetLocation(Location location)
         {
             SetDestination(location.Position);

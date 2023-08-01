@@ -48,6 +48,12 @@ namespace Logic.Animals.AnimalsStateMachine
             EnableStatIndicators();
         }
 
+        public void ReleaseMove(Transform to)
+        {
+            State moveTo = new MoveTo(_animator, _mover, to);
+            ForceState(moveTo);
+        }
+
         private void SetUp()
         {
             Bowl bowl = _eatPlace.GetComponent<Bowl>();
@@ -60,6 +66,7 @@ namespace Logic.Animals.AnimalsStateMachine
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
             State moveToEat = new MoveTo(_animator, _mover, _eatPlace);
 
+            Transition released = new ActionTransition();
             Transition fullBowl = GetOnFullActionTransition(bowl.ProgressBarView);
             Transition fullPeppiness = GetOnFullActionTransition(_peppiness.ProgressBar);
             Transition fullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
@@ -93,7 +100,7 @@ namespace Logic.Animals.AnimalsStateMachine
                     }
                 },
                 {
-                    waitForFood , new Dictionary<Transition, State>
+                    waitForFood, new Dictionary<Transition, State>
                     {
                         {fullBowl, eat}
                     }
