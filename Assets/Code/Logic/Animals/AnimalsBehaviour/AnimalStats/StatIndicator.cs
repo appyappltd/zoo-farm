@@ -10,7 +10,7 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
     public class StatIndicator : MonoCache
     {
         private readonly float _speedModifier = 0.1f;
-        
+
         [SerializeField] [Range(0, 100f)] private float _maxValue;
         [SerializeField] [Range(0, 1f)] private float _changeSpeed;
         [SerializeField] private Turn _turn;
@@ -28,16 +28,17 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         public void Construct(float startValue)
         {
             enabled = false;
-            
+
             _progressBar = new ProgressBar(_maxValue, startValue);
-            _progressBarOperator = new ProgressBarOperator(_progressBar, _changeSpeed * _speedModifier, Convert.ToBoolean(_turn));
-            
+            _progressBarOperator =
+                new ProgressBarOperator(_progressBar, _changeSpeed * _speedModifier, Convert.ToBoolean(_turn));
+
             _progressBar.Empty += Disable;
         }
 
         public void Disable() =>
             enabled = false;
-        
+
         public void Enable() =>
             enabled = true;
 
