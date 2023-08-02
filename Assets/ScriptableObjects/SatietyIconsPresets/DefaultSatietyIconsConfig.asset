@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5191b848caf547ca846a3d275128d373, type: 3}
+  m_Name: DefaultSatietyIconsConfig
+  m_EditorClassIdentifier: 
+  FullSatiety: {fileID: -2121254716, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
+  SatietyBarBack: {fileID: -1494481210, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
+  SatietyBarFill: {fileID: -602555683, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
+  EmptySatiety: {fileID: -666996151, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
+  Mask: {fileID: -420834769, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}

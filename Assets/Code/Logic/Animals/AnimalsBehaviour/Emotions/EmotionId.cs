@@ -3,7 +3,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
     public enum EmotionId : byte
     {
         None,
-        Healthy,
+        Hunger,
         Eating,
         Sleeping,
         Homeless,

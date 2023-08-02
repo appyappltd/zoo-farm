@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tools.DelayRoutine
+namespace DelayRoutines
 {
     public sealed class Executor : Routine
     {
@@ -9,7 +9,7 @@ namespace Tools.DelayRoutine
         public Executor(Action action) =>
             _action = action;
 
-        public override void Play()
+        protected override void OnPlay()
         {
             _action.Invoke();
             Next();

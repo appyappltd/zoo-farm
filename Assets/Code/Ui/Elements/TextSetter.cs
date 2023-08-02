@@ -9,14 +9,12 @@ namespace Ui.Elements
     public class TextSetter : MonoCache
     {
         [SerializeField] private bool _isUi;
-        
-        [HideIf("_isUi")]
-        [SerializeField] private TextMeshPro _textSprite;
-        
-        [ShowIf("_isUi")]
-        [SerializeField] private TextMeshProUGUI _textUi;
 
-        private Action<string> _setTextAction = s => {};
+        [HideIf("_isUi")] [SerializeField] private TextMeshPro _textSprite;
+
+        [ShowIf("_isUi")] [SerializeField] private TextMeshProUGUI _textUi;
+
+        private Action<string> _setTextAction = s => { };
 
         private void Awake()
         {
@@ -32,9 +30,7 @@ namespace Ui.Elements
             OnAwake();
         }
 
-        protected virtual void OnAwake()
-        {
-        }
+        protected virtual void OnAwake() { }
 
         public void SetText(string text) =>
             _setTextAction.Invoke(text);

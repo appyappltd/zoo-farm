@@ -27,8 +27,10 @@ namespace Logic.Animals.AnimalsStateMachine.States
             PlayAnimation(_animator);
         }
 
-        protected override void OnExit() =>
+        protected override void OnExit()
+        {
             _barIndicator.enabled = true;
+        }
 
         protected override void OnUpdate() =>
             _barOperator.Update(Time.deltaTime);

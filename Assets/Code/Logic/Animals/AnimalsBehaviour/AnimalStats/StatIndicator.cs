@@ -20,10 +20,8 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
 
         public IProgressBar ProgressBar => _progressBar;
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _progressBar.Empty -= Disable;
-        }
 
         public void Construct(float startValue)
         {

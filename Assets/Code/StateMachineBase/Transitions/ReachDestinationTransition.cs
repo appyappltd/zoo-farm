@@ -6,7 +6,7 @@ namespace StateMachineBase.Transitions
     {
         private readonly NavMeshMover _mover;
 
-        public ReachDestinationTransition( NavMeshMover mover) =>
+        public ReachDestinationTransition(NavMeshMover mover) =>
             _mover = mover;
 
         public override bool CheckCondition() =>

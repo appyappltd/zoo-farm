@@ -4,8 +4,8 @@ namespace StateMachineBase.States
 {
     public class Idle : PrimeAnimatorState
     {
-        public Idle(IPrimeAnimator animator) : base(animator) { } 
-        
+        public Idle(IPrimeAnimator animator) : base(animator) { }
+
         protected override void OnEnter() =>
             Animator.SetIdle();
     }

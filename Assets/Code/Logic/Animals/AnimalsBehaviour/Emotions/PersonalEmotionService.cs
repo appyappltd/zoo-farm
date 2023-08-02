@@ -7,7 +7,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
         private readonly List<IEmotive> _emotivs = new List<IEmotive>();
         private readonly Stack<EmotionId> _emotionsStack = new Stack<EmotionId>();
         private readonly List<EmotionId> _suppressEmotionsOrder = new List<EmotionId>();
-        
+
         private readonly EmotionProvider _emotionProvider;
 
         public PersonalEmotionService(EmotionProvider emotionProvider)
@@ -17,21 +17,21 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
         }
 
         private EmotionId ActiveEmotionId => _emotionsStack.Peek();
-        
+
         public void Register(IEmotive emotive)
         {
             if (_emotivs.Contains(emotive))
                 return;
-            
+
             _emotivs.Add(emotive);
             Subscribe(emotive);
         }
-        
+
         public void Unregister(IEmotive emotive)
         {
             if (_emotivs.Contains(emotive) == false)
                 return;
-            
+
             _emotivs.Remove(emotive);
             Unsubscribe(emotive);
         }
@@ -51,7 +51,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
             emotive.ShowEmotion += OnShowEmotion;
             emotive.SuppressEmotion += OnSuppressEmotion;
         }
-        
+
         private void Unsubscribe(IEmotive emotive)
         {
             emotive.ShowEmotion -= OnShowEmotion;

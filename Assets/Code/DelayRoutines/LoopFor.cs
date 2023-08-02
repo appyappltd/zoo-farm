@@ -1,22 +1,25 @@
-﻿namespace Tools.DelayRoutine
+﻿namespace DelayRoutines
 {
-    public class Loop : Routine
+    public class LoopFor : Loop
     {
         private int _remainingTimes;
 
-        public Loop(int times)
+        public LoopFor(int times)
         {
             _remainingTimes = times;
         }
 
-        public override void Play()
+        protected override void OnPlay()
         {
             _remainingTimes--;
 
             if (_remainingTimes > 0)
             {
-                Next();
+                Iterate();
+                return;
             }
+
+            Next();
         }
     }
 }
