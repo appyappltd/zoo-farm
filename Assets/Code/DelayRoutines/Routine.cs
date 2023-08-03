@@ -21,7 +21,7 @@ namespace DelayRoutines
 
         public void Stop()
         {
-            if (this is Awaiter awaiter)
+            if (this is TimeAwaiter awaiter)
             {
                 awaiter.Pause();
                 return;

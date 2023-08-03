@@ -1,6 +1,8 @@
 using Data.ItemsData;
+using DelayRoutines;
 using Logic.Storages;
 using Logic.Storages.Items;
+using NaughtyAttributes;
 using Observables;
 using Progress;
 using UnityEngine;
@@ -9,17 +11,30 @@ namespace Logic
 {
     public class Bowl : MonoBehaviour, IProgressBarProvider
     {
+        private const float ReplanishDelayAfterEmptyFood = 0.2f;
+#if UNITY_EDITOR
+        [ProgressBar("Food", 4f, EColor.Green)]
+        [SerializeField] private float _foodValue;
+#endif
+
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
         private IInventory _inventory;
         private ProgressBar _food;
         private IItem _eatenFood;
 
+        private bool _isReplenishing;
+        private int _foodLeft;
+
+        private DelayRoutine _delayedReplenish;
+
         public IProgressBar ProgressBarView => _food;
 
         private void OnDestroy()
         {
             _inventory.Added -= ReplenishFromInventory;
+            _food.Empty -= OnEmptyFood;
+            _food.Full -= OnFullFood;
             _compositeDisposable.Dispose();
         }
 
@@ -30,7 +45,13 @@ namespace Logic
 
             _inventory.Added += ReplenishFromInventory;
             _food.Empty += OnEmptyFood;
+            _food.Full += OnFullFood;
             _compositeDisposable.Add(_food.Current.Then(OnSpend));
+#if UNITY_EDITOR
+            _compositeDisposable.Add(_food.Current.Then((f => _foodValue = f)));
+#endif
+
+            _isReplenishing = true;
         }
 
         private void ReplenishFromInventory(IItem item)
@@ -40,18 +61,29 @@ namespace Logic
 
         private void Replenish(int amount)
         {
-            _food.Replenish(amount);
+            if (_isReplenishing)
+            {
+                _food.Replenish(amount);
+            }
+            else
+            {
+                new DelayRoutine()
+                    .WaitUntil(() => _food.IsEmpty)
+                    .WaitForSeconds(ReplanishDelayAfterEmptyFood)
+                    .Then(() => _food.Replenish(amount)).Play();
+            }
         }
 
         private void OnSpend()
         {
-            if (Mathf.RoundToInt(_food.Current.Value) >= _inventory.Weight)
+            if (Mathf.FloorToInt(_food.Current.Value) >= _foodLeft)
                 return;
 
-            _eatenFood?.Destroy();
+            ClearEatenFood();
 
             if (_inventory.TryGet(ItemId.Food, out IItem item))
             {
+                _foodLeft--;
                 item.Mover.Move(transform, transform);
                 _eatenFood = item;
             }
@@ -59,8 +91,20 @@ namespace Logic
 
         private void OnEmptyFood()
         {
-            _eatenFood.Destroy();
+            _isReplenishing = true;
+            ClearEatenFood();
+        }
+
+        private void ClearEatenFood()
+        {
+            _eatenFood?.Destroy();
             _eatenFood = null;
+        }
+
+        private void OnFullFood()
+        {
+            _isReplenishing = false;
+            _foodLeft = _inventory.Weight;
         }
     }
 }

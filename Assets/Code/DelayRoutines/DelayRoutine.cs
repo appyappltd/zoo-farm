@@ -15,10 +15,8 @@ namespace DelayRoutines
         private IRoutine LastRoutine => _routines[_currentRoutineIndex];
         private IRoutine ActiveRoutine => _routines.Find(routine => routine.IsActive);
 
-        public DelayRoutine()
-        {
+        public DelayRoutine() =>
             _globalUpdate = GlobalUpdate.Instance;
-        }
 
         //TODO: Добавить enum для выбора
         public void Play(bool atFirst = true) =>
@@ -29,15 +27,27 @@ namespace DelayRoutines
 
         #region Wait
 
-        public DelayRoutine Wait(float forSeconds)
+        public DelayRoutine WaitForSeconds(float seconds)
         {
-            AddToSequence(new Awaiter(forSeconds, _globalUpdate));
+            AddToSequence(new TimeAwaiter(seconds, _globalUpdate));
             return this;
         }
 
-        public DelayRoutine Wait(Awaiter awaiter)
+        public DelayRoutine Wait(TimeAwaiter timeAwaiter)
         {
-            AddToSequence(awaiter);
+            AddToSequence(timeAwaiter);
+            return this;
+        }
+
+        public DelayRoutine WaitUntil(Func<bool> waitFor)
+        {
+            AddToSequence(new UntilAwaiter(waitFor, _globalUpdate));
+            return this;
+        }
+
+        public DelayRoutine WaitWhile(Func<bool> waitFor)
+        {
+            AddToSequence(new WhileAwaiter(waitFor, _globalUpdate));
             return this;
         }
 

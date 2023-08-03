@@ -17,7 +17,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
         {
             _barIndicator = barIndicator;
             _bowlBarOperator = new ProgressBarOperator(bowlBar, changingSpeed, true);
-            _routine.Wait(hungerDelay).Then(() => barIndicator.enabled = true);
+            _routine.WaitForSeconds(hungerDelay).Then(() => barIndicator.enabled = true);
         }
 
         protected override void PlayAnimation(AnimalAnimator animator) =>

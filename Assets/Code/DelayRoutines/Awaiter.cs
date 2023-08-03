@@ -1,37 +1,28 @@
 ﻿using NTC.Global.Cache;
 using NTC.Global.Cache.Interfaces;
-using UnityEngine;
 
 namespace DelayRoutines
 {
-    public sealed class Awaiter : Routine, IRunSystem
+    public abstract class Awaiter : Routine, IRunSystem
     {
         private readonly GlobalUpdate _globalUpdate;
-        private readonly float _waitTime;
 
-        private float _elapsedTime;
-
-        public Awaiter(float waitTime, GlobalUpdate globalUpdate)
-        {
-            _waitTime = waitTime;
+        protected Awaiter(GlobalUpdate globalUpdate) =>
             _globalUpdate = globalUpdate;
-        }
 
-        protected override void OnPlay()
+        public abstract void OnRun();
+
+        protected override void OnPlay() =>
+            Activate();
+
+        protected void Activate()
         {
-            _elapsedTime = _waitTime;
             _globalUpdate.AddRunSystem(this);
         }
 
-        public void OnRun()
+        protected void Deactivate()
         {
-            _elapsedTime -= Time.deltaTime;
-
-            if (_elapsedTime <= 0)
-            {
-                _globalUpdate.RemoveRunSystem(this);
-                Next();
-            }
+            _globalUpdate.RemoveRunSystem(this);
         }
 
         public void Pause()
@@ -39,7 +30,7 @@ namespace DelayRoutines
             if (IsActive)
             {
                 IsActive = false;
-                _globalUpdate.RemoveRunSystem(this);
+                Deactivate();
             }
         }
 
