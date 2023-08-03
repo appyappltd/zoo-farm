@@ -1,4 +1,5 @@
 ﻿using Logic.Animals.AnimalsBehaviour.AnimalStats;
+using NTC.Global.System;
 using Observables;
 using StaticData;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
         private void Awake()
         {
             _active = _staticSatietyView.gameObject;
+            _active.Enable();
             _dynamicSatietyBarView.Construct(_iconsConfig);
         }
 
@@ -37,27 +39,30 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
 
         private void ShowFullIcon()
         {
-            _active.SetActive(false);
+            SwitchActive(_staticSatietyView.gameObject);
             _staticSatietyView.Show(_iconsConfig.FullSatiety, 2);
-            _active = _staticSatietyView.gameObject;
         }
 
         private void ShowEmptyIcon()
         {
-            _active.SetActive(false);
+            SwitchActive(_staticSatietyView.gameObject);
             _staticSatietyView.Show(_iconsConfig.EmptySatiety, 0);
-            _active = _staticSatietyView.gameObject;
         }
 
         private void ShowDynamicBarIcon(float normalized)
         {
-            if (_active != _dynamicSatietyBarView.gameObject)
-            {
-                _active.SetActive(false);
-                _dynamicSatietyBarView.gameObject.SetActive(true);
-            }
-
+            SwitchActive(_dynamicSatietyBarView.gameObject);
             _dynamicSatietyBarView.SetFill(normalized);
+        }
+
+        private void SwitchActive(GameObject to)
+        {
+            if (_active != to)
+            {
+                _active.Disable();
+                _active = to;
+                _active.Enable();
+            }
         }
 
         private void OnSatietyUpdated()

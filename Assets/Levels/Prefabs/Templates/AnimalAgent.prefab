@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 5340628444517854784}
   - component: {fileID: 3053055107136101561}
   - component: {fileID: 4633396415940825508}
+  - component: {fileID: 5604806523560033372}
   m_Layer: 8
   m_Name: AnimalAgent
   m_TagString: Untagged
@@ -525,6 +526,7 @@ MonoBehaviour:
   _jumper: {fileID: 4427930827428211018}
   _emotionProvider: {fileID: 7552548722606521529}
   _statProvider: {fileID: 4992200357749588135}
+  _happinessFactor: {fileID: 5604806523560033372}
 --- !u!114 &3053055107136101561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,6 +558,19 @@ MonoBehaviour:
   _mover: {fileID: 5921953604120698182}
   _normalizedWalkSpeed: 0.5
   _normalizedRunSpeed: 1
+--- !u!114 &5604806523560033372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8643315356767832591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4286ead8874ff485d17c5f029fb9c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isEnableDecrementation: 1
 --- !u!1001 &8294897801359430536
 PrefabInstance:
   m_ObjectHideFlags: 0

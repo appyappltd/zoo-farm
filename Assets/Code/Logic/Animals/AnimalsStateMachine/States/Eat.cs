@@ -15,12 +15,19 @@ namespace Logic.Animals.AnimalsStateMachine.States
         public Eat(AnimalAnimator animator, StatIndicator barIndicator, float changingSpeed, float hungerDelay, IProgressBar bowlBar)
             : base(animator, barIndicator, changingSpeed)
         {
+            _barIndicator = barIndicator;
             _bowlBarOperator = new ProgressBarOperator(bowlBar, changingSpeed, true);
             _routine.Wait(hungerDelay).Then(() => barIndicator.enabled = true);
         }
 
         protected override void PlayAnimation(AnimalAnimator animator) =>
             animator.SetEat();
+
+        protected override void OnEnter()
+        {
+            _barIndicator.ProgressBar.Reset();
+            base.OnEnter();
+        }
 
         protected override void OnExit()
         {

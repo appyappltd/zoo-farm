@@ -49,12 +49,18 @@ namespace Logic
                 return;
 
             _eatenFood?.Destroy();
-            _inventory.TryGet(ItemId.Food, out IItem item);
-            item.Mover.Move(transform, transform);
-            _eatenFood = item;
+
+            if (_inventory.TryGet(ItemId.Food, out IItem item))
+            {
+                item.Mover.Move(transform, transform);
+                _eatenFood = item;
+            }
         }
 
-        private void OnEmptyFood() =>
+        private void OnEmptyFood()
+        {
             _eatenFood.Destroy();
+            _eatenFood = null;
+        }
     }
 }

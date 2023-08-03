@@ -1,32 +1,34 @@
-﻿using Logic.Animals.AnimalsBehaviour.AnimalStats;
+﻿using Progress;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour
 {
     public class HappinessFactor : MonoBehaviour
     {
-        [SerializeField] private StatIndicator _satiety;
         [SerializeField] private bool _isEnableDecrementation;
 
-        private int _factor;
+        private IProgressBarView _satietyBar;
+        private int _factor = 1;
 
         public int Factor => _factor;
 
-        private void OnEnable()
+        public void Construct(IProgressBarView satietyBar)
         {
-            _satiety.ProgressBar.Empty += DecrementFactor;
-            _satiety.ProgressBar.Full += IncrementFactor;
+            _satietyBar = satietyBar;
+
+            _satietyBar.Empty += DecrementFactor;
+            _satietyBar.Full += IncrementFactor;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            _satiety.ProgressBar.Empty += DecrementFactor;
-            _satiety.ProgressBar.Full += IncrementFactor;
+            _satietyBar.Empty += DecrementFactor;
+            _satietyBar.Full += IncrementFactor;
         }
 
         private void IncrementFactor()
         {
-            if (_satiety.ProgressBar.IsEmpty)
+            if (_satietyBar.IsEmpty)
                 return;
 
             _factor++;

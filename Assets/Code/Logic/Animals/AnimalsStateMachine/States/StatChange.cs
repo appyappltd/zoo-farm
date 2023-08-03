@@ -1,5 +1,6 @@
 ﻿using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
+using NTC.Global.System;
 using Progress;
 using StateMachineBase.States;
 using UnityEngine;
@@ -23,13 +24,13 @@ namespace Logic.Animals.AnimalsStateMachine.States
 
         protected override void OnEnter()
         {
-            _barIndicator.enabled = false;
+            _barIndicator.Disable();
             PlayAnimation(_animator);
         }
 
         protected override void OnExit()
         {
-            _barIndicator.enabled = true;
+            _barIndicator.Enable();
         }
 
         protected override void OnUpdate() =>

@@ -13,13 +13,12 @@ namespace Logic.Animals.AnimalsStateMachine
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
         private readonly Dictionary<Type, EmotionId> _emotionsPerState = new Dictionary<Type, EmotionId>
         {
-            [typeof(Eat)] = EmotionId.Eating,
+            // [typeof(Eat)] = EmotionId.Eating,
             [typeof(Rest)] = EmotionId.Sleeping,
             [typeof(Idle)] = EmotionId.Hunger,
         };
 
         public event Action<EmotionId> ShowEmotion = e => { };
-
         public event Action<EmotionId> SuppressEmotion = e => { };
 
         public AnimalStateMachineObserver(AnimalStateMachine stateMachine, IPersonalEmotionService emotionService)

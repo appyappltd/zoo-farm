@@ -37,6 +37,7 @@ namespace Logic.Animals.AnimalsBehaviour
             _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine, _emotionService);
             _emotionService.Register(_stateMachineObserver);
             _statProvider.Construct(beginStats);
+            _happinessFactor.Construct(_statProvider.Satiety);
         }
 
         public void AttachHouse(AnimalHouse house)

@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace StaticData
 {
+    [CreateAssetMenu(menuName = "Static Data/Release Coins Config", fileName = "NewReleaseCoinsConfig", order = 0)]
     public class ReleaseCoinsConfig : ScriptableObject
     {
-        [SerializeField] private SerializedDictionary<AnimalId, int> _coinsPerAnimalRelease;
+        [SerializeField] private SerializedDictionary<AnimalType, int> _coinsPerAnimalRelease;
 
-        public int Coins(AnimalId forAnimal) =>
+        public int Coins(AnimalType forAnimal) =>
             _coinsPerAnimalRelease[forAnimal];
     }
 }

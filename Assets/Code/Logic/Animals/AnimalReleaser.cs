@@ -59,7 +59,7 @@ namespace Logic.Animals
         }
 
         private int CalculateCoins(IAnimal animal) =>
-            _releaseCoinsConfig.Coins(animal.AnimalId) * animal.HappinessFactor.Factor;
+            _releaseCoinsConfig.Coins(animal.AnimalId.Type) * animal.HappinessFactor.Factor;
 
         private void OnInteracted(Hero _) =>
             _windowService.Open(WindowId.AnimalRelease);

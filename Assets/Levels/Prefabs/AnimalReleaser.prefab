@@ -177,7 +177,7 @@ MonoBehaviour:
   _spawner: {fileID: 3150760461251203967}
   _releaseOutPlace: {fileID: 7620125397106776952}
   _gate: {fileID: 0}
-  _coinsToSpawn: 10
+  _releaseCoinsConfig: {fileID: 11400000, guid: b2ea3db776e4cdd4ead916281ab8ed10, type: 2}
 --- !u!114 &4889423967771694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,13 +234,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4296236846738524977}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34, y: -0, z: -16.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0.004363274, z: 0, w: 0.9999905}
+  m_LocalPosition: {x: 0.34, y: 0.42, z: -16.5}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4183773827939015689}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.5, z: 0}
 --- !u!114 &5833298021971950721
 MonoBehaviour:
   m_ObjectHideFlags: 0

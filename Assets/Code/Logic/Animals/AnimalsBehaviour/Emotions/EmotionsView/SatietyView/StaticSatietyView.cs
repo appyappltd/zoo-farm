@@ -12,7 +12,6 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
         public void Show(Sprite icon, int coefficient)
         {
             _sprite.sprite = icon;
-            gameObject.SetActive(true);
 
             if (coefficient > 1)
             {

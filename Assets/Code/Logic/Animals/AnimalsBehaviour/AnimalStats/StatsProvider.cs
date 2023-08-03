@@ -9,7 +9,7 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
     public class StatsProvider : MonoCache, IStatsProvider
     {
         private readonly List<IStatOperateRule> _operateRules = new List<IStatOperateRule>();
-        
+
         [SerializeField] private StatIndicator _vitality;
         [SerializeField] private StatIndicator _satiety;
         [SerializeField] private StatIndicator _peppiness;
@@ -24,16 +24,16 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
 
         [SerializeField] [ProgressBar("Peppiness", 100f, EColor.Violet)]
         private float _peppinessValue;
-        
+
         [SerializeField] [ProgressBar("Age", 100f, EColor.Violet)]
         private float _ageValue;
 #endif
-        
+
         public IProgressBarView Vitality => _vitality.ProgressBar;
         public IProgressBarView Satiety => _satiety.ProgressBar;
         public IProgressBarView Peppiness => _peppiness.ProgressBar;
         public IProgressBarView Age => _age.ProgressBar;
-        
+
         protected override void Run()
         {
 #if UNITY_EDITOR
@@ -54,7 +54,7 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
             _peppiness.Construct(beginStats.RandomPeppiness);
             _age.Construct(beginStats.RandomAge);
         }
-        
+
         private void InitStatOperateRules()
         {
             _operateRules.Add(new VitalityOperateRule(_vitality, _satiety, _peppiness));
