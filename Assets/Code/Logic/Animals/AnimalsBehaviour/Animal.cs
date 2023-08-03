@@ -12,6 +12,7 @@ namespace Logic.Animals.AnimalsBehaviour
         [SerializeField] private Jumper _jumper;
         [SerializeField] private EmotionProvider _emotionProvider;
         [SerializeField] private StatsProvider _statProvider;
+        [SerializeField] private HappinessFactor _happinessFactor;
 
         private PersonalEmotionService _emotionService;
         private AnimalStateMachineObserver _stateMachineObserver;
@@ -20,6 +21,7 @@ namespace Logic.Animals.AnimalsBehaviour
 
         public AnimalId AnimalId => _animalId;
         public IStatsProvider Stats => _statProvider;
+        public HappinessFactor HappinessFactor => _happinessFactor;
 
         private void OnDestroy()
         {

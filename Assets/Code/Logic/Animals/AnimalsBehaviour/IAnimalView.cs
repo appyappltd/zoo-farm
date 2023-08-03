@@ -6,5 +6,6 @@ namespace Logic.Animals.AnimalsBehaviour
     {
         AnimalId AnimalId { get; }
         IStatsProvider Stats { get; }
+        HappinessFactor HappinessFactor { get; }
     }
 }

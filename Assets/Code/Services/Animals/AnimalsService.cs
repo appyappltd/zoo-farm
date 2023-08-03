@@ -4,7 +4,6 @@ using System.Linq;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services.AnimalHouses;
-using TMPro;
 using UnityEngine;
 
 namespace Services.Animals
@@ -14,16 +13,16 @@ namespace Services.Animals
         private readonly IAnimalHouseService _houseService;
         private readonly List<IAnimal> _animals = new List<IAnimal>();
 
-        public AnimalsService(IAnimalHouseService houseService)
-        {
-            _houseService = houseService;
-        }
-
         public event Action<IAnimal> Released = _ => { };
 
         public int TotalAnimalCount => _animals.Count;
         public int ReleaseReadyAnimalCount => _animals.Count(animal => animal.Stats.Vitality.IsFull);
         public IReadOnlyList<IAnimal> Animals => _animals;
+
+        public AnimalsService(IAnimalHouseService houseService)
+        {
+            _houseService = houseService;
+        }
 
         public void Register(IAnimal animal)
         {
@@ -37,14 +36,12 @@ namespace Services.Animals
 #endif
         }
 
-        public void Release(IAnimal animal)
-        {
+        public void Release(IAnimal animal) =>
             ReleaseAnimal(animal);
-        }
 
         public void Release(AnimalType animalType)
         {
-            IAnimal unregisterAnimal = Animals.First(animal => animal.AnimalId.Type == animalType);
+            IAnimal unregisterAnimal = Animals.OrderByDescending(animal => animal.HappinessFactor.Factor).First();
             ReleaseAnimal(unregisterAnimal);
         }
 
