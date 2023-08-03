@@ -10,9 +10,11 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
     {
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
-        [Header("References")] [SerializeField]
-        private StatIndicator _satietyBarIndicator;
+        [Header("References")]
+        [SerializeField] private StatIndicator _satietyBarIndicator;
+        [SerializeField] private HappinessFactor _happinessFactor;
 
+        [Space] [Header("StaticData")]
         [SerializeField] private SatietyIconsConfig _iconsConfig;
 
         [Space] [Header("SatietyStages")]
@@ -40,7 +42,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
         private void ShowFullIcon()
         {
             SwitchActive(_staticSatietyView.gameObject);
-            _staticSatietyView.Show(_iconsConfig.FullSatiety, 2);
+            _staticSatietyView.Show(_iconsConfig.FullSatiety, _happinessFactor.Factor);
         }
 
         private void ShowEmptyIcon()
