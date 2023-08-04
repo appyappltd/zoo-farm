@@ -1,9 +1,8 @@
-using System;
 using NTC.Global.Cache;
 using Services.Input;
 using UnityEngine;
 
-namespace Player
+namespace Logic.Player
 {
     public class PlayerMovement : MonoCache
     {

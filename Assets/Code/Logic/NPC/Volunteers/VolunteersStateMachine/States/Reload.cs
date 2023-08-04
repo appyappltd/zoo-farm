@@ -1,8 +1,7 @@
 using Logic.AnimatorStateMachine;
-using Logic.Volunteers;
 using StateMachineBase.States;
 
-namespace Logic.VolunteersStateMachine.States
+namespace Logic.NPC.Volunteers.VolunteersStateMachine.States
 {
     public class Reload : Idle
     {

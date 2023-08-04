@@ -1,5 +1,6 @@
 using System;
 using Logic.Storages;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Logic.Animals
@@ -11,6 +12,7 @@ namespace Logic.Animals
 
         [Space] [Header("References")]
         [SerializeField] private Bowl _bowl;
+
         [SerializeField] private Storage _storage;
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private ProductReceiver _productReceiver;
@@ -19,11 +21,11 @@ namespace Logic.Animals
         [SerializeField] private Transform _restPlace;
         [SerializeField] private Transform _eatPlace;
         [SerializeField] private AnimalType _forAnimal;
-        
         [SerializeField] private bool _isTaken;
-        
-        
+
         private AnimalId _animalId;
+
+        public event Action<AnimalHouse> BowlEmpty = _ => { };
 
         public AnimalId AnimalId => _animalId;
         public Transform RestPlace => _restPlace;
@@ -36,6 +38,9 @@ namespace Logic.Animals
             Construct();
         }
 
+        private void OnDestroy() =>
+            _bowl.ProgressBarView.Empty += OnBowlEmpty;
+
         public void Construct()
         {
             _inventoryHolder.Construct();
@@ -43,7 +48,7 @@ namespace Logic.Animals
             _storage.Construct(_inventoryHolder.Inventory);
             _productReceiver.Construct(_inventoryHolder.Inventory);
         }
-        
+
         public void AttachAnimal(AnimalId animalId)
         {
             if (_isTaken)
@@ -61,5 +66,8 @@ namespace Logic.Animals
             _isTaken = false;
             _animalId = null;
         }
+
+        private void OnBowlEmpty() =>
+            BowlEmpty.Invoke(this);
     }
 }

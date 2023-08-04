@@ -1,10 +1,9 @@
 using Logic.AnimatorStateMachine;
 using Logic.Movement;
-using Logic.Volunteers;
 using NTC.Global.System;
 using StateMachineBase.States;
 
-namespace Logic.VolunteersStateMachine.States
+namespace Logic.NPC.Volunteers.VolunteersStateMachine.States
 {
     public class Transmitting : Idle
     {

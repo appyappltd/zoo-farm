@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace Player
+namespace Logic.Player
 {
     public class HeroAnimator : MonoBehaviour
     {
         private static readonly int IsMoving = Animator.StringToHash("Moving");
-        
+
         [SerializeField] private Animator _animator;
 
         public void SetMove(bool isMoving)

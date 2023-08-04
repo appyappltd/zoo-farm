@@ -15,7 +15,6 @@ namespace StateMachineBase
         private State _currentState;
         private State _initialState;
 
-
         private void OnDestroy()
         {
             foreach (var transition in _disposableTransitions)

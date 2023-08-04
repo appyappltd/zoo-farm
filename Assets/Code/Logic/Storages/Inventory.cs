@@ -8,11 +8,11 @@ namespace Logic.Storages
     public class Inventory : IInventory
     {
         private readonly int _maxWeight;
+        private readonly List<IItem> _items = new List<IItem>();
 
         private int _weight;
-
-        private readonly List<IItem> _items = new List<IItem>();
         private IItem _cashedGetItem;
+        private bool _isActive;
 
         public Inventory(int maxWeight, List<IItem> items = null)
         {
@@ -23,11 +23,19 @@ namespace Logic.Storages
         }
 
         public bool IsFull => Weight == _maxWeight;
+        public bool IsEmpty => Weight == 0;
         public int MaxWeight => _maxWeight;
         public int Weight => _weight;
+        public bool IsActive => _isActive;
 
-        public event Action<IItem> Added = c => { };
-        public event Action<IItem> Removed = c => { };
+        public event Action<IItem> Added = _ => { };
+        public event Action<IItem> Removed = _ => { };
+
+        public void Activate() =>
+            _isActive = true;
+
+        public void Deactivate() =>
+            _isActive = false;
 
         public void Add(IItem item)
         {

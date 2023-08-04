@@ -1,12 +1,12 @@
 using System;
 using Data.ItemsData;
+using Logic.NPC.Volunteers.Queue;
+using Logic.NPC.Volunteers.VolunteersStateMachine;
 using Logic.Storages;
 using Logic.Storages.Items;
-using Logic.Volunteers.Queue;
-using Logic.VolunteersStateMachine;
 using UnityEngine;
 
-namespace Logic.Volunteers
+namespace Logic.NPC.Volunteers
 {
     public class Volunteer : MonoBehaviour, IGetItem
     {

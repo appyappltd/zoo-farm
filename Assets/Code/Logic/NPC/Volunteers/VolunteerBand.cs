@@ -2,17 +2,16 @@ using System.Collections.Generic;
 using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.Animals;
-using Logic.Volunteers.Queue;
-using Logic.VolunteersStateMachine;
+using Logic.NPC.Volunteers.Queue;
+using Logic.NPC.Volunteers.VolunteersStateMachine;
 using NaughtyAttributes;
 using Services;
 using UnityEngine;
 
-namespace Logic.Volunteers
+namespace Logic.NPC.Volunteers
 {
     public class VolunteerBand : MonoBehaviour
     {
-        
         [SerializeField] private AnimalItemSpawner _animalItemSpawner;
 
         [SerializeField] private Transform _container;
@@ -20,7 +19,7 @@ namespace Logic.Volunteers
         [SerializeField] private Transform _outPlace;
 
         [SerializeField] private QueuePlace[] _queuePlaces;
-        
+
         private IGameFactory _gameFactory;
         private QueueOperator _queueOperator;
         private Volunteer _volunteerCashed;
@@ -50,19 +49,19 @@ namespace Logic.Volunteers
             for (int i = 0; i < _volunteers.Count; i++)
             {
                 Volunteer volunteer = _volunteers[i];
-                
+
                 if (volunteer.IsFree)
                 {
                     SetVolunteer(volunteer);
                     return;
                 }
             }
-            
+
             Volunteer newVolunteer = _gameFactory.CreateVolunteer(_spawnPlace.position, _container)
                 .GetComponent<Volunteer>();
             SetVolunteer(newVolunteer);
             VolunteerStateMachine machine = newVolunteer.StateMachine;
-            machine.Construct(_queueOperator, _outPlace, newVolunteer);
+            machine.Construct(_outPlace, newVolunteer);
             machine.Play();
         }
     }

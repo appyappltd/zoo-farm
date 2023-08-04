@@ -4,8 +4,6 @@ namespace StateMachineBase.States
 {
     public class Waiting : Idle
     {
-        public Waiting(IPrimeAnimator animator) : base(animator)
-        {
-        }
+        public Waiting(IPrimeAnimator animator) : base(animator) { }
     }
 }

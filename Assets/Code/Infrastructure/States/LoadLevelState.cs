@@ -4,7 +4,6 @@ using Logic;
 using Logic.Payment;
 using Logic.Player;
 using Logic.SpawnPlaces;
-using Player;
 using Services.Camera;
 using Services.Effects;
 using Services.Input;

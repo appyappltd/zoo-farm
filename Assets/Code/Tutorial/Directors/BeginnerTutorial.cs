@@ -1,5 +1,5 @@
 using Logic.CellBuilding;
-using Logic.Volunteers;
+using Logic.NPC.Volunteers;
 using NTC.Global.Cache;
 using Services;
 using Services.Camera;

@@ -3,7 +3,7 @@ using Logic.Movement;
 using StateMachineBase.States;
 using UnityEngine;
 
-namespace Logic.VolunteersStateMachine.States
+namespace Logic.NPC.Volunteers.VolunteersStateMachine.States
 {
     public class MoveToOut : MoveTo
     {

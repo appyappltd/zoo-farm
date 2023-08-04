@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Logic.Volunteers
+namespace Logic.NPC.Volunteers
 {
     [RequireComponent(typeof(TimerOperator))]
     public class VolunteerSpawner : MonoBehaviour

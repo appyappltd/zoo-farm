@@ -5,5 +5,8 @@ namespace Logic.Storages
         bool IsFull { get; }
         int MaxWeight { get; }
         int Weight { get; }
+        bool IsEmpty { get; }
+        void Activate();
+        void Deactivate();
     }
 }

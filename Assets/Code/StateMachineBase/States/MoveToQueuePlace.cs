@@ -1,6 +1,6 @@
 using Logic.AnimatorStateMachine;
 using Logic.Movement;
-using Logic.Volunteers;
+using Logic.NPC.Volunteers;
 using UnityEngine;
 
 namespace StateMachineBase.States

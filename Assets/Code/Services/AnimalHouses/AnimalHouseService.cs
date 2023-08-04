@@ -5,20 +5,30 @@ using Infrastructure.Factory;
 using JetBrains.Annotations;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
-using UnityEngine;
 
 namespace Services.AnimalHouses
 {
     public class AnimalHouseService : IAnimalHouseService
     {
         private const string HouseNotFoundException = "An animal with this Id has not been assigned a home";
-        
+
         private readonly IGameFactory _gameFactory;
-        
+
         private readonly List<AnimalHouse> _animalHouses = new List<AnimalHouse>();
         private readonly List<QueueToHouse> _animalsInQueue = new List<QueueToHouse>();
+        private readonly Queue<AnimalHouse> _feedQueue = new Queue<AnimalHouse>();
 
         public IReadOnlyList<QueueToHouse> AnimalsInQueue => _animalsInQueue;
+
+        public void RegisterHouse(AnimalHouse house)
+        {
+            if (_animalHouses.Contains(house))
+                throw new Exception($"House {house} already registered");
+
+            _animalHouses.Add(house);
+            house.BowlEmpty += AddToFeedQueue;
+            TryTakeHouse(house);
+        }
 
         public void TakeQueueToHouse(QueueToHouse queueToHouse)
         {
@@ -47,12 +57,8 @@ namespace Services.AnimalHouses
             TryTakeHouse(attachedHouse);
         }
 
-        public void RegisterHouse(AnimalHouse house)
-        {
-            _animalHouses.Add(house);
-
-            TryTakeHouse(house);
-        }
+        public bool TryGetNextFeedHouse(out AnimalHouse feedHouse) =>
+            _feedQueue.TryDequeue(out feedHouse);
 
         private void TryTakeHouse(AnimalHouse house)
         {
@@ -67,20 +73,23 @@ namespace Services.AnimalHouses
         private bool TryGetAnimalFromQueue(AnimalType forHouseType, out QueueToHouse queueToHouse)
         {
             queueToHouse = new QueueToHouse();
-            
+
             for (var index = 0; index < _animalsInQueue.Count; index++)
             {
                 QueueToHouse queueAnimal = _animalsInQueue[index];
 
                 if (queueAnimal.AnimalId.Type != forHouseType)
                     continue;
-                
+
                 queueToHouse = queueAnimal;
                 return true;
             }
 
             return false;
         }
+
+        private void AddToFeedQueue(AnimalHouse house) =>
+            _feedQueue.Enqueue(house);
 
         [CanBeNull]
         private AnimalHouse GetFreeHouseFor(AnimalType animalIdType) =>

@@ -5,7 +5,7 @@ using Logic.Storages;
 using NTC.Global.System;
 using UnityEngine;
 
-namespace Logic.Volunteers.Queue
+namespace Logic.NPC.Volunteers.Queue
 {
     public class QueuePlace : MonoBehaviour
     {

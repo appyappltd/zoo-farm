@@ -3,7 +3,7 @@ using Services.PersistentProgress;
 using Tools.Extension;
 using UnityEngine;
 
-namespace Player
+namespace Logic.Player
 {
     public class PlayerLocation : MonoBehaviour, ISavedProgress
     {

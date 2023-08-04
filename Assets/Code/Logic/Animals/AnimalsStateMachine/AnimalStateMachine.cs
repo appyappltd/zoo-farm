@@ -63,7 +63,7 @@ namespace Logic.Animals.AnimalsStateMachine
             State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, _hungerDelay, bowl.ProgressBarView);
             State rest = new Rest(_animator, _peppiness, _peppinessReplanishSpeed);
             State idle = new Idle(_animator);
-            State waitForFood = new Waiting(_animator);
+            State waitForFood = new Idle(_animator);
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
             State moveToEat = new MoveTo(_animator, _mover, _eatPlace);
@@ -72,7 +72,6 @@ namespace Logic.Animals.AnimalsStateMachine
             Transition fullPeppiness = GetOnFullActionTransition(_peppiness.ProgressBar);
             Transition fullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
             Transition emptyPeppiness = GetOnEmptyActionTransition(_peppiness.ProgressBar);
-            // Transition emptySatiety = GetOnEmptyActionTransition(_satiety.ProgressBar);
             Transition notFullSatiety = new BarNotFullTransition(_satiety.ProgressBar);
             Transition randomDelay = new RandomTimerTransition(_idleDelayRange.y, _idleDelayRange.x);
             Transition inRestPlace = new TargetInRange(_mover.transform, _restPlace, _placeOffset);

@@ -1,9 +1,9 @@
 using Logic.AnimatorStateMachine;
 using UnityEngine;
 
-namespace Logic.VolunteersStateMachine
+namespace Logic.NPC
 {
-    public class VolunteerAnimator : MonoBehaviour, IPrimeAnimator
+    public class NPCAnimator : MonoBehaviour, IPrimeAnimator
     {
         private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int Move = Animator.StringToHash("Move");

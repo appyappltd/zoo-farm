@@ -1,4 +1,4 @@
-using Logic.Volunteers;
+using Logic.NPC.Volunteers;
 using UnityEngine;
 
 namespace StateMachineBase.Transitions
