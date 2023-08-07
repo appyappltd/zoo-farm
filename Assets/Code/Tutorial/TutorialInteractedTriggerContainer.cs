@@ -7,7 +7,7 @@ namespace Tutorial
 {
     public class TutorialInteractedTriggerContainer : MonoBehaviour
     {
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private HumanInteraction _playerInteraction;
         [SerializeField] private TutorialTriggerStatic _staticTrigger;
 
         private void OnEnable() =>
@@ -16,7 +16,7 @@ namespace Tutorial
         private void OnDisable() =>
             _playerInteraction.Interacted -= OnComplete;
 
-        private void OnComplete(Hero sender) =>
+        private void OnComplete(Human sender) =>
             _staticTrigger.Trigger(sender.gameObject);
     }
 }

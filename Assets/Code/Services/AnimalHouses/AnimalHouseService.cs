@@ -27,6 +27,7 @@ namespace Services.AnimalHouses
 
             _animalHouses.Add(house);
             house.BowlEmpty += AddToFeedQueue;
+            AddToFeedQueue(house);
             TryTakeHouse(house);
         }
 

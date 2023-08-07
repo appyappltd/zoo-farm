@@ -2,7 +2,7 @@
 using Logic.Storages;
 using StateMachineBase.States;
 
-namespace Logic.NPC.Keepers.KeepersStateMachine.States
+namespace Code.Logic.NPC.Keepers.KeepersStateMachine.States
 {
     public class ReceiveItems : Idle
     {
@@ -15,13 +15,13 @@ namespace Logic.NPC.Keepers.KeepersStateMachine.States
 
         protected override void OnEnter()
         {
-            _inventory.Activate();
+            // _inventory.Activate();
             base.OnEnter();
         }
 
         protected override void OnExit()
         {
-            _inventory.Deactivate();
+            // _inventory.Deactivate();
             base.OnExit();
         }
     }

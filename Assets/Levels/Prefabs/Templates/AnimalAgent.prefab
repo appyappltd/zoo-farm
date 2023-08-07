@@ -680,6 +680,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 880114d0ef0b39c44b0347ecf523a5de, type: 2}
     - target: {fileID: 3330185995752834215, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: _happinessFactor
+      value: 
+      objectReference: {fileID: 5604806523560033372}
+    - target: {fileID: 3330185995752834215, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: _satietyBarIndicator
       value: 
       objectReference: {fileID: 4985158875982950670}

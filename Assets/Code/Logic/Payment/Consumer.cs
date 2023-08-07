@@ -18,7 +18,7 @@ namespace Logic.Payment
     {
         private readonly Observable<int> _leftCoinsToPay = new Observable<int>();
         
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private HeroInteraction _playerInteraction;
         [SerializeField] private GradualTimerPreset _timerPreset;
         [SerializeField, Min(0)] private int _currencyPerTick = 1;
 
@@ -38,11 +38,11 @@ namespace Logic.Payment
             _poolService = AllServices.Container.Single<IPoolService>();
             _translator = GetComponent<RunTranslator>();
             _timerOperator = GetComponent<TimerOperator>();
-            _playerInteraction.Entered += Init;
         }
 
         private void OnEnable()
         {
+            _playerInteraction.Interacted += Init;
             _playerInteraction.Interacted += BeginTransaction;
             _playerInteraction.Canceled += CancelTransaction;
         }
@@ -74,8 +74,7 @@ namespace Logic.Payment
                         Quaternion.identity),
                 10, _translator, hero.transform, transform, _poolService);
             
-            _wallet = hero.Wallet;
-            _playerInteraction.Entered -= Init;
+            _playerInteraction.Interacted -= Init;
         }
 
         private void OnPay() 
@@ -100,6 +99,7 @@ namespace Logic.Payment
             if (_leftCoinsToPay.Value <= 0)
                 return;
 
+            _wallet = hero.Wallet;
             _timerOperator.Reset();
             _timerOperator.Restart();
         }

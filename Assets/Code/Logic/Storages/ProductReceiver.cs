@@ -12,7 +12,7 @@ namespace Logic.Storages
     [RequireComponent(typeof(TimerOperator))]
     public class ProductReceiver : MonoBehaviour
     {
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private HumanInteraction _playerInteraction;
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] private ItemId _itemIdFilter;
         [SerializeField] private bool _isSerialReceive;
@@ -120,7 +120,7 @@ namespace Logic.Storages
         private void OnCanceled() =>
             _timerOperator.Pause();
 
-        private void OnInteracted(Hero hero)
+        private void OnInteracted(Human hero)
         {
             ApplyRemoteInventory(hero.Inventory);
             BeginReceive.Invoke();

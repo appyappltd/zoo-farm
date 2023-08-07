@@ -15,7 +15,7 @@ namespace Logic.Gates
         [Header("References")] [SerializeField]
         private List<Door> _doors = new List<Door>();
 
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private HumanInteraction _playerInteraction;
 
         [Space] [Header("Settings")] [SerializeField]
         private bool _isAuto;
@@ -25,7 +25,6 @@ namespace Logic.Gates
         private void Awake()
         {
             _translator = GetComponent<RunTranslator>();
-            _playerInteraction ??= GetComponent<PlayerInteraction>();
             enabled = _isAuto;
         }
 
@@ -41,7 +40,7 @@ namespace Logic.Gates
             _playerInteraction.Canceled -= OnCanceled;
         }
 
-        private void OnInteracted(Hero _) =>
+        private void OnInteracted(Human _) =>
             Open();
 
         private void OnCanceled() =>

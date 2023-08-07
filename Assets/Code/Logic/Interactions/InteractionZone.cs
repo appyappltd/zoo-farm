@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Logic.Interactions
 {
     [RequireComponent(typeof(TimerOperator))]
-    public sealed class PlayerInteraction : ObserverTargetExit<Hero, TriggerObserverExit>
+    public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone where T : Human
     {
         [SerializeField] private float _interactionDelay;
         [SerializeField] private bool _isValidate;
@@ -23,10 +23,10 @@ namespace Logic.Interactions
 
         [SerializeField] private TimerOperator _timerOperator;
 
-        private Hero _cashedHero;
+        private T _cashed;
 
-        public event Action<Hero> Interacted = c => { };
-        public event Action<Hero> Entered = c => { };
+        public event Action<T> Interacted = c => { };
+        public event Action Entered = () => { };
         public event Action Canceled = () => { };
         public event Action Rejected = () => { };
 
@@ -54,7 +54,7 @@ namespace Logic.Interactions
             _timerOperator.Pause();
         }
 
-        protected override void OnTargetEntered(Hero hero)
+        protected override void OnTargetEntered(T hero)
         {
             if (_isValidate)
                 Validate(hero);
@@ -62,7 +62,7 @@ namespace Logic.Interactions
                 InvokeEntered(hero);
         }
 
-        private void Validate(Hero hero)
+        private void Validate(T hero)
         {
             bool isAllValid = true;
 
@@ -75,7 +75,7 @@ namespace Logic.Interactions
                 Rejected.Invoke();
         }
 
-        protected override void OnTargetExited(Hero hero)
+        protected override void OnTargetExited(T hero)
         {
             _timerOperator.Pause();
             Canceled.Invoke();
@@ -83,14 +83,14 @@ namespace Logic.Interactions
 
         private void OnDelayPassed()
         {
-            Interacted.Invoke(_cashedHero);
+            Interacted.Invoke(_cashed);
         }
 
-        private void InvokeEntered(Hero hero)
+        private void InvokeEntered(T hero)
         {
-            _cashedHero = hero;
+            _cashed = hero;
             _timerOperator.Restart();
-            Entered.Invoke(hero);
+            Entered.Invoke();
         }
     }
 }

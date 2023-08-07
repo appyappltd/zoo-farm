@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d232fb6cacc2a46b394bb16a61f5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInteraction: {fileID: 6490162861986545206}
+  _playerInteraction: {fileID: 337063020574557339}
   _timerOperator: {fileID: 2498510736733292187}
   _itemIdFilter: 8
   _isSerialReceive: 1
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e51ed6c77104ecabc97009003f31bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _foodValue: 0
 --- !u!114 &5905476580270274857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d92f5894c94a2fa6eb414a6751c821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInteraction: {fileID: 6490162861986545206}
+  _playerInteraction: {fileID: 337063020574557339}
   _staticTrigger: {fileID: 11400000, guid: e7c35ae65949e6345b72a7baec7e61e3, type: 2}
 --- !u!114 &809057692272165439
 MonoBehaviour:
@@ -381,6 +382,7 @@ MonoBehaviour:
   _restPlace: {fileID: 6223570695547407479}
   _eatPlace: {fileID: 1926723737059924004}
   _forAnimal: 0
+  _edibleFoodType: 0
   _isTaken: 0
 --- !u!114 &5744955856180027580
 MonoBehaviour:
@@ -438,9 +440,9 @@ PrefabInstance:
       value: Interaction View
       objectReference: {fileID: 0}
     - target: {fileID: 7508259080912930176, guid: 455673b7379507242b6bc48a8270f0c7, type: 3}
-      propertyPath: _playerInteraction
+      propertyPath: _playerInteraction._underlyingValue
       value: 
-      objectReference: {fileID: 6490162861986545206}
+      objectReference: {fileID: 337063020574557339}
     - target: {fileID: 8870940261284975017, guid: 455673b7379507242b6bc48a8270f0c7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -749,24 +751,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6250368949507349905, guid: 59497999b22ec9347b03e84896037938, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 44025918950904125, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 337063020574557339}
   m_SourcePrefab: {fileID: 100100000, guid: 59497999b22ec9347b03e84896037938, type: 3}
 --- !u!4 &1071758529985391668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
   m_PrefabInstance: {fileID: 7931872946090478264}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6490162861986545206 stripped
+--- !u!114 &1146339653406643280 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3747589553836455054, guid: 59497999b22ec9347b03e84896037938, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7060291525204139752, guid: 59497999b22ec9347b03e84896037938, type: 3}
   m_PrefabInstance: {fileID: 7931872946090478264}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_GameObject: {fileID: 7966803128953314181}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 398288d12e0148a296e0fcdc91a04732, type: 3}
+  m_Script: {fileID: 11500000, guid: 7453362d9c4da71498f26f48391cc381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7966803128953314181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 44025918950904125, guid: 59497999b22ec9347b03e84896037938, type: 3}
+  m_PrefabInstance: {fileID: 7931872946090478264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &337063020574557339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966803128953314181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0510194f60d4490908fe6fed2780a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionDelay: 0.5
+  _isValidate: 0
+  _interactionValidators: []
+  _timerOperator: {fileID: 1146339653406643280}

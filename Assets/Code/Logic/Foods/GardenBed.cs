@@ -2,23 +2,30 @@ using System;
 using Infrastructure.Factory;
 using Logic.Foods.FoodSettings;
 using NaughtyAttributes;
+using Services.Food;
 using StaticData;
 using UnityEngine;
 
 namespace Logic.Foods
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class GardenBed : MonoBehaviour
+    public class GardenBed : MonoBehaviour, IFoodVendor
     {
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] private Transform _spawnPlace;
         
         private GrowthPlan _growthPlan;
+        private Vector3 _position;
 
         public event Action GrowUp = () => { };
 
+        public FoodId Type { get; private set; }
+        public bool IsReady { get; private set; }
+        public Vector3 Position => _position;
+
         private void Awake()
         {
+            _position = transform.position;
             _timerOperator ??= GetComponent<TimerOperator>();
         }
 
@@ -26,6 +33,7 @@ namespace Logic.Foods
         {
             _growthPlan = config.GetGrowthPlan();
             _growthPlan.Init(foodFactory, config.FoodId, _spawnPlace, transform);
+            Type = config.FoodId;
             PlantNew();
         }
 
@@ -39,7 +47,8 @@ namespace Logic.Foods
 
                 return;
             }
-            
+
+            IsReady = true;
             GrowUp.Invoke();
         }
 

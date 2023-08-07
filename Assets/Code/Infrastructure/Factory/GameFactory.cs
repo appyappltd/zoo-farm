@@ -8,6 +8,7 @@ using Logic.Foods.FoodSettings;
 using Logic.Medical;
 using Logic.Spawners;
 using Services.Animals;
+using Services.Food;
 using Services.MedicalBeds;
 using Services.PersistentProgress;
 using Services.Pools;
@@ -38,7 +39,8 @@ namespace Infrastructure.Factory
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService progressService, IStaticDataService staticDataService,
-            IAnimalsService animalsService, IPoolService poolService, IMedicalBedsReporter medicalBedsReporter)
+            IAnimalsService animalsService, IPoolService poolService, IMedicalBedsReporter medicalBedsReporter,
+            IFoodService foodService)
         {
             _assets = assets;
             _poolService = poolService;
@@ -53,7 +55,7 @@ namespace Infrastructure.Factory
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _medStandBuilder = new MedStandBuilder(staticDataService);
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _gardenBedBuilder = new GardenBadBuilder(staticDataService, FoodFactory);
+            _gardenBedBuilder = new GardenBadBuilder(staticDataService, FoodFactory, foodService);
         }
 
         public void Cleanup()

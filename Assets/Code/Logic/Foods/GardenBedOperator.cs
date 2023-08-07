@@ -19,7 +19,7 @@ namespace Logic.Foods
         private IHandItemFactory _handItemFactory;
         private FoodItemData _foodItemData;
 
-        public event Action<IItem> Removed = i => { };
+        public event Action<IItem> Removed = _ => { };
         
         private void Awake()
         {

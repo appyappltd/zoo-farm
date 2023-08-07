@@ -1,4 +1,4 @@
-using Logic.Player;
+using AYellowpaper;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace Logic.Interactions
 {
     public class InteractionView : MonoCache
     {
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private InterfaceReference<IInteractionZone, MonoBehaviour> _playerInteraction;
         [SerializeField] private Transform _sine;
 
         [SerializeField] private float _defaultSize;
@@ -19,16 +19,16 @@ namespace Logic.Interactions
         
         private void Awake()
         {
-            _playerInteraction.Entered += OnEnter;
-            _playerInteraction.Canceled += OnCancel;
+            _playerInteraction.Value.Entered += OnEnter;
+            _playerInteraction.Value.Canceled += OnCancel;
 
             _deltaSize = _defaultSize;
         }
 
         private void OnDestroy()
         {
-            _playerInteraction.Entered -= OnEnter;
-            _playerInteraction.Canceled -= OnCancel;
+            _playerInteraction.Value.Entered -= OnEnter;
+            _playerInteraction.Value.Canceled -= OnCancel;
         }
 
         public void SetDefault()
@@ -43,7 +43,7 @@ namespace Logic.Interactions
             Cancel();
         }
 
-        private void OnEnter(Hero hero)
+        private void OnEnter()
         {
             BeginIncrease();
         }
@@ -62,7 +62,7 @@ namespace Logic.Interactions
         private void BeginIncrease()
         {
             _targetSize = _maxSize;
-            _smoothTime = _playerInteraction.InteractionDelay;
+            _smoothTime = _playerInteraction.Value.InteractionDelay;
             enabled = true;
         }
 

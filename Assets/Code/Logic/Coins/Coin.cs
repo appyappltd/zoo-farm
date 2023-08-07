@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace Logic.Coins
 {
-    [RequireComponent(typeof(PlayerInteraction))]
+    [RequireComponent(typeof(HeroInteraction))]
     [RequireComponent(typeof(ItemMover))]
     public class CollectibleCoin : MonoBehaviour, IPoolable
     {
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private HeroInteraction _playerInteraction;
         [SerializeField] private TranslatableAgent _translatableAgent;
         [SerializeField, Min(0)] private int _amount = 1;
 
@@ -26,8 +26,6 @@ namespace Logic.Coins
         private void Awake()
         {
             _itemMover ??= GetComponent<IItemMover>();
-            _playerInteraction ??= GetComponent<PlayerInteraction>();
-
             _playerInteraction.Interacted += OnEnter;
         }
 

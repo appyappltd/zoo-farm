@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using Logic.Animals;
-using Logic.Animals.AnimalsBehaviour;
 
 namespace Services.AnimalHouses
 {
@@ -11,5 +9,6 @@ namespace Services.AnimalHouses
         void RegisterHouse(AnimalHouse position);
         void VacateHouse(AnimalId withAnimalId);
         IReadOnlyList<QueueToHouse> AnimalsInQueue { get; }
+        bool TryGetNextFeedHouse(out AnimalHouse feedHouse);
     }
 }

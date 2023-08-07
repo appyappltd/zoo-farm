@@ -13,7 +13,7 @@ namespace Tutorial
     {
         [SerializeField] private RunTranslator _translator;
         [SerializeField] private TranslatableAgent _translatableAgent;
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private HeroInteraction _playerInteraction;
 
         public event Action Triggered = () => { };
 

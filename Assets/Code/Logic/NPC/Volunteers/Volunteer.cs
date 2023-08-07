@@ -2,40 +2,37 @@ using System;
 using Data.ItemsData;
 using Logic.NPC.Volunteers.Queue;
 using Logic.NPC.Volunteers.VolunteersStateMachine;
+using Logic.Player;
 using Logic.Storages;
 using Logic.Storages.Items;
 using UnityEngine;
 
 namespace Logic.NPC.Volunteers
 {
-    public class Volunteer : MonoBehaviour, IGetItem
+    public class Volunteer : Human, IGetItem
     {
-        [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private VolunteerStateMachine _stateMachine;
-        [SerializeField] private InventoryAnimatorObserver _handsAnimator;
-        [SerializeField] private Storage _storage;
 
         private bool _isFree;
         private bool _isReadyTransmitting;
         private QueuePlace _queuePlace;
-
-        public IInventory Inventory => _inventoryHolder.Inventory;
+        
         public VolunteerStateMachine StateMachine => _stateMachine;
         public bool IsFree => _isFree;
         public Vector3 QueuePosition => _queuePlace.transform.position;
         public Quaternion QueueRotation => _queuePlace.transform.rotation;
 
-        public event Action<IItem> Removed = i => { };
+        public event Action<IItem> Removed = _ => { };
         
         private void Awake()
         {
-            _inventoryHolder.Construct();
-            _handsAnimator.Construct(_inventoryHolder.Inventory);
-            _storage.Construct(_inventoryHolder.Inventory);
-
+            Init();
             Inventory.Added += OnAdd;
             Inventory.Removed += OnRemove;
         }
+
+        private void OnDestroy() =>
+            Inventory.Added -= OnAdd;
 
         public IItem Get()
         {
@@ -72,7 +69,7 @@ namespace Logic.NPC.Volunteers
             _isReadyTransmitting = true;
             _queuePlace.Show();
         }
-        
+
         public void DeactivateTransmitting()
         {
             _isReadyTransmitting = false;
@@ -81,9 +78,6 @@ namespace Logic.NPC.Volunteers
 
         private void OnRemove(IItem _) =>
             _isReadyTransmitting = false;
-
-        private void OnDestroy() =>
-            Inventory.Added -= OnAdd;
 
         private void OnAdd(IItem _) =>
             _isFree = false;

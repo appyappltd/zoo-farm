@@ -2,6 +2,8 @@ namespace Logic.Foods.FoodSettings
 {
     public enum FoodId
     {
-        Carrot
+        None = 0,
+        Carrot = 1,
+        Meat = 2
     }
 }

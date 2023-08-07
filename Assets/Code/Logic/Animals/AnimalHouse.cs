@@ -1,6 +1,6 @@
 using System;
+using Logic.Foods.FoodSettings;
 using Logic.Storages;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Logic.Animals
@@ -12,7 +12,6 @@ namespace Logic.Animals
 
         [Space] [Header("References")]
         [SerializeField] private Bowl _bowl;
-
         [SerializeField] private Storage _storage;
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private ProductReceiver _productReceiver;
@@ -21,6 +20,7 @@ namespace Logic.Animals
         [SerializeField] private Transform _restPlace;
         [SerializeField] private Transform _eatPlace;
         [SerializeField] private AnimalType _forAnimal;
+        [SerializeField] private FoodId _edibleFoodType;
         [SerializeField] private bool _isTaken;
 
         private AnimalId _animalId;
@@ -32,6 +32,9 @@ namespace Logic.Animals
         public Transform EatPlace => _eatPlace;
         public bool IsTaken => _isTaken;
         public AnimalType ForAnimal => _forAnimal;
+        public FoodId EdibleFoodType => _edibleFoodType;
+        public IInventory Inventory => _inventoryHolder.Inventory;
+
 
         private void Awake()
         {

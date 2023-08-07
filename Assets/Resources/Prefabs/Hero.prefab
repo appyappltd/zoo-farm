@@ -6893,11 +6893,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614a6a3f31634c59b9242971846a7b82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryHolder: {fileID: 3209468561728551432}
+  InventoryHolder: {fileID: 3209468561728551432}
+  HandsAnimator: {fileID: 7803516307033350702}
+  Storage: {fileID: 4534267659011596571}
   _walletHolder: {fileID: 4233403076897180460}
   _maxIndicator: {fileID: 2453116752958184982}
-  _handsAnimator: {fileID: 7803516307033350702}
-  _storage: {fileID: 4534267659011596571}
   _playerMovement: {fileID: 4943368622742371110}
 --- !u!114 &3209468561728551432
 MonoBehaviour:

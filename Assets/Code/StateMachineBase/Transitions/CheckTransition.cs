@@ -7,7 +7,7 @@ namespace StateMachineBase.Transitions
         private readonly Func<bool> _func;
         private readonly bool _isCheck;
 
-        public CheckTransition(ref Func<bool> func) =>
+        public CheckTransition(Func<bool> func) =>
             _func = func;
 
         public override bool CheckCondition() =>

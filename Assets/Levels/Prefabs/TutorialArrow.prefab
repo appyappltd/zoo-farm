@@ -24,6 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287413117544087413}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,7 +32,6 @@ Transform:
   m_Children:
   - {fileID: 3749342778946625694}
   m_Father: {fileID: 1958194717119288185}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5715231726367246175
 MonoBehaviour:
@@ -71,13 +71,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246017820247563502}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.44, y: 0.44, z: 0.44}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3341248301948015455}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &3131016720746216102
 SpriteRenderer:
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 3066754098659389321}
   - component: {fileID: 2979288336060152682}
   - component: {fileID: 3443894119902931101}
-  - component: {fileID: 8186694048545390766}
+  - component: {fileID: 1560547390694358371}
   m_Layer: 0
   m_Name: TutorialArrow
   m_TagString: Untagged
@@ -289,6 +289,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8390170312364042213}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -296,7 +297,6 @@ Transform:
   m_Children:
   - {fileID: 3341248301948015455}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5876356354120000562
 MonoBehaviour:
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _translator: {fileID: 5876356354120000562}
   _translatableAgent: {fileID: 7993582039744617308}
-  _playerInteraction: {fileID: 8186694048545390766}
+  _playerInteraction: {fileID: 1560547390694358371}
 --- !u!65 &3066754098659389321
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6f990e757f6459c8138a158fdff26ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8186694048545390766
+--- !u!114 &1560547390694358371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -379,8 +379,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8390170312364042213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 398288d12e0148a296e0fcdc91a04732, type: 3}
+  m_Script: {fileID: 11500000, guid: 94dd364d905c4ca9b8cd80c467693272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionDelay: 0
+  _interactionDelay: 0.5
+  _isValidate: 0
+  _interactionValidators: []
   _timerOperator: {fileID: 2979288336060152682}

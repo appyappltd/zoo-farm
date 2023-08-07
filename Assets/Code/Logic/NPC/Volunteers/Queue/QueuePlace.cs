@@ -9,7 +9,7 @@ namespace Logic.NPC.Volunteers.Queue
 {
     public class QueuePlace : MonoBehaviour
     {
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private HumanInteraction _playerInteraction;
         [SerializeField] private GameObject _interactionView;
         [SerializeField] private InteractionView _interactionSine;
         [SerializeField] private ProductReceiver _productReceiver;
@@ -40,7 +40,7 @@ namespace Logic.NPC.Volunteers.Queue
             _interactionView.Disable();
         }
 
-        private void OnInteracted(Hero _)
+        private void OnInteracted(Human _)
         {
             Hide();
             Vacated.Invoke(this);

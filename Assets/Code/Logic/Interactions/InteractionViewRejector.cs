@@ -1,3 +1,4 @@
+using AYellowpaper;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace Logic.Interactions
 {
     public class InteractionViewRejector : MonoCache
     {
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private InterfaceReference<IInteractionZone, MonoBehaviour> _playerInteraction;
         [SerializeField] private SpriteRenderer _sineSprite;
         [SerializeField] private Transform _sineTransform;
         [SerializeField] private AnimationCurve _blinkCurve;
@@ -24,11 +25,11 @@ namespace Logic.Interactions
         {
             _defaultScale = _sineTransform.localScale;
             _defaultColor = _sineSprite.color;
-            _playerInteraction.Rejected += OnRejected;
+            _playerInteraction.Value.Rejected += OnRejected;
         }
 
         private void OnDestroy() =>
-            _playerInteraction.Rejected -= OnRejected;
+            _playerInteraction.Value.Rejected -= OnRejected;
 
         protected override void Run()
         {

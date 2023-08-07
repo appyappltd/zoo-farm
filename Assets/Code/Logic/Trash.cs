@@ -11,7 +11,7 @@ namespace Logic
     public class Trash : MonoBehaviour, IAddItemObserver, IGetItemObserver, IAddItemObserverProvider, IGetItemObserverProvider
     {
         [SerializeField] private Storage _storage;
-        [SerializeField] private PlayerInteraction _playerInteraction;
+        [SerializeField] private HumanInteraction _playerInteraction;
 
         public event Action<IItem> Added = i => { };
         public event Action<IItem> Removed = i => { };
@@ -25,7 +25,7 @@ namespace Logic
             _storage.Replenished += OnReplenished;
         }
 
-        private void OnInteracted(Hero provider)
+        private void OnInteracted(Human provider)
         {
             if (provider.Inventory.TryGet(ItemId.All, out IItem item))
             {

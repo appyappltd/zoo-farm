@@ -5,6 +5,7 @@ using Services.AnimalHouses;
 using Services.Animals;
 using Services.Camera;
 using Services.Effects;
+using Services.Food;
 using Services.Input;
 using Services.MedicalBeds;
 using Services.PersistentProgress;
@@ -52,6 +53,7 @@ namespace Infrastructure.States
             Register<IAssetProvider>(new AssetProvider());
             Register<IPersistentProgressService>(new PersistentProgressService());
             Register<IAnimalHouseService>(new AnimalHouseService());
+            Register<IFoodService>(new FoodService());
             Register<IMedicalBedsReporter>(new MedicalBedsReporter());
             Register<IAnimalsService>(
                 new AnimalsService(Get<IAnimalHouseService>()));
@@ -64,7 +66,8 @@ namespace Infrastructure.States
                     Get<IStaticDataService>(),
                     Get<IAnimalsService>(),
                     Get<IPoolService>(),
-                    Get<IMedicalBedsReporter>()));
+                    Get<IMedicalBedsReporter>(),
+                    Get<IFoodService>()));
             Register<IUIFactory>(
                 new UIFactory(
                     Get<IAssetProvider>(),

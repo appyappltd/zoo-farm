@@ -60,6 +60,8 @@ namespace Logic.Spawners
         {
             _remainingCountCoins += amountCoins;
 
+            Debug.Log($"Spawn: {_remainingCountCoins}");
+            
             if (_timerOperator.enabled)
                 return;
 
