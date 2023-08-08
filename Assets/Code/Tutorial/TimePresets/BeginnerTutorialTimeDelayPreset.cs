@@ -15,5 +15,6 @@ namespace Tutorial.TimePresets
         [Range(0, 6f)] public float PlantFocusToPlayerFocus = 1.5f;
         [Range(0, 6f)] public float PlantBuiltToPlantFocus = 0.5f;
         [Range(0, 6f)] public float AnimalReleaserFocusToPlayerFocus = 3f;
+        [Range(0, 6f)] public float KeeperGridFocusToPlayerFocus = 3f;
     }
 }

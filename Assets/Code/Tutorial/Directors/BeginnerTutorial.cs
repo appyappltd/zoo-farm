@@ -17,6 +17,7 @@ namespace Tutorial.Directors
         [SerializeField] private Transform _firstMedToolSpawnPoint;
         [SerializeField] private Transform _firstMedBedSpawnPoint;
         [SerializeField] private Transform _animalReleaser;
+        [SerializeField] private Transform _keeper;
         [SerializeField] private TutorialTriggerStatic _beginnerCoinsCollected;
         [SerializeField] private TutorialTriggerStatic _firstMedBadSpawned;
         [SerializeField] private TutorialTriggerStatic _firstHealingOptionSpawned;
@@ -31,11 +32,13 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialTriggerStatic _houseBuilt;
         [SerializeField] private TutorialTriggerStatic _plantBuilt;
         [SerializeField] private TutorialTriggerStatic _firstVolunteerSpawned;
+        [SerializeField] private TutorialTriggerStatic _animalHouseSpawned;
         [SerializeField] private TutorialArrow _arrow;
         [SerializeField] private MedBedGridOperator _medBedGridOperator;
         [SerializeField] private MedToolGridOperator _medToolGridOperator;
         [SerializeField] private HouseGridOperator _houseGridOperator;
         [SerializeField] private GardenBedGridOperator _gardenBedGridOperator;
+        [SerializeField] private KeeperGridOperator _keeperGridOperator;
         [SerializeField] private VolunteerSpawner _volunteerSpawner;
         [SerializeField] private BeginnerTutorialTimeDelayPreset _timeDelay;
 
@@ -164,6 +167,15 @@ namespace Tutorial.Directors
                 ActivateAutoBuild(_medToolGridOperator);
                 ActivateAutoBuild(_houseGridOperator);
             }));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalHouseSpawned));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalHouseSpawned));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
+                _cameraOperatorService.Focus(_keeper);
+                _keeperGridOperator.ShowNextBuildCell();
+            }));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.KeeperGridFocusToPlayerFocus, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialAction(() => Destroy(gameObject)));
         }
 
