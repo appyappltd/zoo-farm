@@ -31,5 +31,6 @@ namespace Infrastructure.Factory
         GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
         GameObject CreateVolunteer(Vector3 at, Transform parent);
         GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId);
+        GameObject CreateKeeper(Vector3 markerBuildPosition);
     }
 }

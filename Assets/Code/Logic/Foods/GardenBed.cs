@@ -54,6 +54,7 @@ namespace Logic.Foods
 
         public void PlantNew()
         {
+            IsReady = false;
             _growthPlan.Reset();
             Grow();
         }

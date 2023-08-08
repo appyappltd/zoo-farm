@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6458203654473790460}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.26, y: 4, z: 2.74}
   m_LocalScale: {x: 3, y: 4, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8455488414873005536}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1340755171155193329
 MeshFilter:
@@ -118,6 +118,10 @@ PrefabInstance:
     - target: {fileID: 278578183252406965, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
       propertyPath: _forAnimal
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 278578183252406965, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
+      propertyPath: _edibleFoodType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7904430147291196124, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
       propertyPath: m_RootOrder

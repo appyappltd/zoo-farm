@@ -17,6 +17,7 @@ namespace Logic.Storages
         public Inventory(int maxWeight, List<IItem> items = null)
         {
             _maxWeight = maxWeight;
+            _isActive = true;
 
             if (items is not null)
                 _items = items;

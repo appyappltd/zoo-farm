@@ -1,4 +1,5 @@
-﻿using DelayRoutines;
+﻿using System;
+using DelayRoutines;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Progress;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine.States
 {
-    public class Eat : StatChange
+    public class Eat : StatChange, IDisposable
     {
         private readonly StatIndicator _barIndicator;
         private readonly ProgressBarOperator _bowlBarOperator;
@@ -38,6 +39,11 @@ namespace Logic.Animals.AnimalsStateMachine.States
         {
             base.OnUpdate();
             _bowlBarOperator.Update(Time.deltaTime);
+        }
+
+        public void Dispose()
+        {
+            _routine.Kill();
         }
     }
 }

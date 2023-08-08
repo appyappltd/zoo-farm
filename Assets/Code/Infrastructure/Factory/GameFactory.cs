@@ -129,6 +129,9 @@ namespace Infrastructure.Factory
         public GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId) =>
             _assets.Instantiate($"{AssetPath.HandItemPath}/{itemId}", at, rotation);
 
+        public GameObject CreateKeeper(Vector3 at) =>
+            _assets.Instantiate(AssetPath.KeeperPath, at);
+
         private GameObject InstantiateRegistered(string prefabPath)
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath);

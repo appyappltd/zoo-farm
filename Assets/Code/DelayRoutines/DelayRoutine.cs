@@ -22,8 +22,14 @@ namespace DelayRoutines
         public void Play(bool atFirst = true) =>
             _routines[atFirst ? 0 : _currentRoutineIndex].Play();
 
+        public void Kill()
+        {
+            Stop();
+            _routines.Clear();
+        }
+        
         public void Stop() =>
-            ActiveRoutine.Stop();
+            ActiveRoutine?.Stop();
 
         #region Wait
 

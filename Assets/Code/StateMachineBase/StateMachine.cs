@@ -10,14 +10,14 @@ namespace StateMachineBase
     {
         public readonly Observable<Type> CurrentStateType = new Observable<Type>(typeof(Idle));
 
-        private readonly HashSet<IDisposable> _disposableTransitions = new HashSet<IDisposable>();
+        private readonly HashSet<IDisposable> _disposable = new HashSet<IDisposable>();
 
         private State _currentState;
         private State _initialState;
 
         private void OnDestroy()
         {
-            foreach (var transition in _disposableTransitions)
+            foreach (var transition in _disposable)
                 transition.Dispose();
         }
 
@@ -53,7 +53,10 @@ namespace StateMachineBase
                     state.AddTransition(key);
 
                     if (key is IDisposable disposable)
-                        _disposableTransitions.Add(disposable);
+                        _disposable.Add(disposable);
+                    
+                    if (value is IDisposable disposable1)
+                        _disposable.Add(disposable1);
                 }
             }
 

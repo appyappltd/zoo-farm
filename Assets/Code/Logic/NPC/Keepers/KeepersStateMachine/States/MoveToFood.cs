@@ -9,15 +9,15 @@ namespace Logic.NPC.Keepers.KeepersStateMachine.States
 {
     internal class MoveToFood : MoveTo
     {
-        private readonly NavMeshMover _mover;
         private readonly Transform _target;
         private readonly IFoodService _foodService;
         private readonly Func<AnimalHouse> _getFeedHouse;
 
+        private IFoodVendor _vendor;
+
         public MoveToFood(NPCAnimator animator, NavMeshMover mover, Transform target, Func<AnimalHouse> getFeedHouse,
             IFoodService foodService) : base(animator, mover, target)
         {
-            _mover = mover;
             _target = target;
             _getFeedHouse = getFeedHouse;
             _foodService = foodService;
@@ -26,9 +26,15 @@ namespace Logic.NPC.Keepers.KeepersStateMachine.States
         protected override void OnEnter()
         {
             IFoodVendor vendor = _foodService.GetReadyVendor(_getFeedHouse.Invoke().EdibleFoodType);
-            Debug.Log(vendor);
-            _target.position = vendor != null ? vendor.Position : _mover.transform.position;
-            base.OnEnter();
+
+            // if (vendor == _vendor)
+            //     return;
+
+            if (vendor != null)
+            {
+                _target.position = vendor.Position;
+                base.OnEnter();
+            }
         }
     }
 }

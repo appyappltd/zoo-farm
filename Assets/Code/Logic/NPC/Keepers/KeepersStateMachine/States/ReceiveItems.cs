@@ -15,13 +15,13 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine.States
 
         protected override void OnEnter()
         {
-            // _inventory.Activate();
+            _inventory.Activate();
             base.OnEnter();
         }
 
         protected override void OnExit()
         {
-            // _inventory.Deactivate();
+            _inventory.Deactivate();
             base.OnExit();
         }
     }

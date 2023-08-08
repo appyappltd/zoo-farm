@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Logic.Foods.FoodSettings;
+using UnityEngine;
 
 namespace Services.Food
 {
@@ -12,6 +14,7 @@ namespace Services.Food
             _vendors.Add(foodVendor);
         }
 
+        [CanBeNull]
         public IFoodVendor GetReadyVendor(FoodId byFoodId)
         {
             foreach (var vendor in _vendors)
@@ -20,6 +23,9 @@ namespace Services.Food
                     return vendor;
             }
 
+#if DEBUG
+            Debug.LogWarning($"Food with {byFoodId} type does not exist");
+#endif
             return null;
         }
     }
