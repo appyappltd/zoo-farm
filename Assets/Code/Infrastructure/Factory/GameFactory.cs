@@ -27,7 +27,6 @@ namespace Infrastructure.Factory
 
         private readonly AnimalBuilder _animalBuilder;
         private readonly MedStandBuilder _medStandBuilder;
-        private readonly GardenBadBuilder _gardenBedBuilder;
         private readonly MedBedBuilder _medBedBuilder;
         private readonly AnimalHouseBuilder _animalHouseBuilder;
 
@@ -55,7 +54,6 @@ namespace Infrastructure.Factory
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _medStandBuilder = new MedStandBuilder(staticDataService);
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _gardenBedBuilder = new GardenBadBuilder(staticDataService, FoodFactory, foodService);
         }
 
         public void Cleanup()
@@ -85,7 +83,7 @@ namespace Infrastructure.Factory
         }
 
         public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType) =>
-            InstantiateRegistered($"{AssetPath.AnimalHousePath}/{animalType}", at, rotation);
+            InstantiateRegistered($"{AssetPath.AnimalHousePath}/{animalType}House", at, rotation);
 
         public GameObject CreateBuildCell(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.BuildCellPath, at, rotation);
@@ -96,10 +94,9 @@ namespace Infrastructure.Factory
         public GameObject CreateCollectibleCoin() =>
             _assets.Instantiate(AssetPath.CollectableCoinPath);
 
-        public GameObject CreateGardenBad(Vector3 at, Quaternion rotation, FoodId foodId)
+        public GameObject CreateFoodVendor(Vector3 at, Quaternion rotation, FoodId foodId)
         {
-            GameObject gardenBedObject = _assets.Instantiate(AssetPath.GardenBed, at, rotation);
-            _gardenBedBuilder.Build(gardenBedObject, foodId);
+            GameObject gardenBedObject = _assets.Instantiate($"{AssetPath.FoodVendorPath}/{foodId}Vendor", at, rotation);
             return gardenBedObject;
         }
 

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25654119585548d78dd36e0eb51b9dcb, type: 3}
+  m_Name: Carrot
+  m_EditorClassIdentifier: 
+  _foodName: Carrot
+  _handItemData: {fileID: 11400000, guid: 49385c961d57c2e4e88ac3fa82700407, type: 2}
+  _produceDurationRange: {x: 1.44, y: 3.3599987}
+  _maxStockQuantity: 1

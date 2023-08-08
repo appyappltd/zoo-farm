@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using NTC.Global.Cache;
+using Tutorial;
+using UnityEngine;
+using Random = System.Random;
 
 namespace DelayRoutines
 {
@@ -35,13 +38,25 @@ namespace DelayRoutines
 
         public DelayRoutine WaitForSeconds(float seconds)
         {
-            AddToSequence(new TimeAwaiter(seconds, _globalUpdate));
+            AddToSequence(new ConstTimeAwaiter(seconds, _globalUpdate));
             return this;
         }
 
-        public DelayRoutine Wait(TimeAwaiter timeAwaiter)
+        public DelayRoutine WaitForRandomSeconds(Vector2 timeRange)
         {
-            AddToSequence(timeAwaiter);
+            AddToSequence(new RandomTimeAwaiter(timeRange, _globalUpdate));
+            return this;
+        }
+
+        public DelayRoutine WaitForEvent(Action readyProduce)
+        {
+            AddToSequence(new EventAwaiter(readyProduce, _globalUpdate));
+            return this;
+        }
+
+        public DelayRoutine Wait(TimeAwaiter constTimeAwaiter)
+        {
+            AddToSequence(constTimeAwaiter);
             return this;
         }
 
@@ -169,5 +184,19 @@ namespace DelayRoutines
             _routines.Add(routine);
             _currentRoutineIndex++;
         }
+    }
+
+    public class EventAwaiter : Awaiter
+    {
+        private Action _callback;
+
+        public EventAwaiter(Action callback, GlobalUpdate globalUpdate) : base(globalUpdate)
+        {
+            _callback = callback;
+            Deactivate();
+            callback += Next;
+        }
+
+        public override void OnRun() { }
     }
 }

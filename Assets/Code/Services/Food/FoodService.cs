@@ -7,15 +7,15 @@ namespace Services.Food
 {
     public class FoodService : IFoodService
     {
-        private readonly HashSet<IFoodVendor> _vendors = new HashSet<IFoodVendor>();
+        private readonly HashSet<IFoodVendorView> _vendors = new HashSet<IFoodVendorView>();
 
-        public void Register(IFoodVendor foodVendor)
+        public void Register(IFoodVendorView foodVendor)
         {
             _vendors.Add(foodVendor);
         }
 
         [CanBeNull]
-        public IFoodVendor GetReadyVendor(FoodId byFoodId)
+        public IFoodVendorView GetReadyVendor(FoodId byFoodId)
         {
             foreach (var vendor in _vendors)
             {

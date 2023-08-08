@@ -4,7 +4,7 @@ namespace Services.Food
 {
     public interface IFoodService : IService
     {
-        void Register(IFoodVendor foodVendor);
-        IFoodVendor GetReadyVendor(FoodId byFoodId);
+        void Register(IFoodVendorView foodVendor);
+        IFoodVendorView GetReadyVendor(FoodId byFoodId);
     }
 }

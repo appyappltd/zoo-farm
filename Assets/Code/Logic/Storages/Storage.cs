@@ -25,7 +25,7 @@ namespace Logic.Storages
         private IAddItemObserver _adder;
         private IGetItemObserver _remover;
 
-        private int _topIndex = 0;
+        private int _topIndex = -1;
 
         public Action<IItem> Replenished = _ => { };
 
@@ -92,30 +92,30 @@ namespace Logic.Storages
 
         private void PlaceItem(IItem item)
         {
+            _topIndex++;
             item.Mover.Move(TopPlace, TopPlace, _isModifyRotation);
             _items[_topIndex] = item;
-            _topIndex++;
             Replenished.Invoke(item);
         }
 
         private void RevertItem(IItem item)
         {
-            int revertItemIndex = Array.IndexOf(_items, item);
-            Sort(revertItemIndex);
+            if (_isSortable)
+            {
+                int revertItemIndex = Array.IndexOf(_items, item);
+                Sort(revertItemIndex);
+            }
+            
             _topIndex--;
         }
 
         private void Sort(int fromIndex)
         {
-            if (_isSortable == false)
-                return;
-
             for (int i = fromIndex; i < _topIndex - 1; i++)
             {
                 _items[i] = _items[i + 1];
                 Transform finishParent = _places[i];
                 _items[i].Mover.Move(finishParent, finishParent);
-                Debug.Log($"Sort {i}");
             }
         }
     }

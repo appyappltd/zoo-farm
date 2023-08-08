@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace DelayRoutines
 {
-    public sealed class TimeAwaiter : Awaiter
+    public abstract class TimeAwaiter : Awaiter
     {
-        private readonly float _waitTime;
         private float _elapsedTime;
 
-        public TimeAwaiter(float waitTime, GlobalUpdate globalUpdate) : base(globalUpdate)
+        protected TimeAwaiter(GlobalUpdate globalUpdate) : base(globalUpdate)
         {
-            _waitTime = waitTime;
         }
 
         protected override void OnPlay()
         {
-            _elapsedTime = _waitTime;
+            _elapsedTime = GetWaitTime();
             base.OnPlay();
         }
+
+        protected abstract float GetWaitTime();
 
         public override void OnRun()
         {

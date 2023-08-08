@@ -96,7 +96,7 @@ MonoBehaviour:
   _mode: 1
   _isRemoteInit: 0
   _adder: {fileID: 0}
-  _remover: {fileID: 7933672959643137799}
+  _remover: {fileID: -8857752537735742973}
 --- !u!1 &7515118753703320428
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,13 +106,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8369247241134201329}
-  - component: {fileID: 7246917226978682809}
-  - component: {fileID: 2469829682761127621}
-  - component: {fileID: 7933672959643137799}
   - component: {fileID: 7385303102356367107}
   - component: {fileID: 8860913446579008965}
+  - component: {fileID: -8857752537735742973}
+  - component: {fileID: 6295839654385929945}
   m_Layer: 7
-  m_Name: GardenBed
+  m_Name: CarrotVendor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,48 +134,9 @@ Transform:
   - {fileID: 6989696427243302371}
   - {fileID: 8639966073535395073}
   - {fileID: 8751634574924255979}
+  - {fileID: 4242820207600920459}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7246917226978682809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7515118753703320428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0598f53e0cf7234dbb74ea355fd730c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerOperator: {fileID: 2469829682761127621}
-  _spawnPlace: {fileID: 6989696427243302371}
---- !u!114 &2469829682761127621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7515118753703320428}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7453362d9c4da71498f26f48391cc381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7933672959643137799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7515118753703320428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d52e3c628542879ef8d2bfec730898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gardenBed: {fileID: 7246917226978682809}
-  _spawnPlace: {fileID: 6989696427243302371}
 --- !u!114 &7385303102356367107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446b6559d9094bd3a3ab5b6b32ef42a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _getter: {fileID: 7933672959643137799}
+  _getter: {fileID: -8857752537735742973}
   _triggerStatic: {fileID: 11400000, guid: 67411d56389732a4c932415e5ff870f3, type: 2}
 --- !u!114 &8860913446579008965
 MonoBehaviour:
@@ -206,6 +166,117 @@ MonoBehaviour:
   _trigger: {fileID: 11400000, guid: 8e2a395fa87dba54eb30e96ad61473e8, type: 2}
   _IsTriggerOnEnable: 1
   _IsTriggerOnDisable: 0
+--- !u!114 &-8857752537735742973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7515118753703320428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3231708780ff4dca869329ac9cc8f4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPlace: {fileID: 6989696427243302371}
+  _vendorConfig: {fileID: 11400000, guid: 4ca20a13872136843b642ef12f8220f6, type: 2}
+--- !u!114 &6295839654385929945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7515118753703320428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef2559bbb904d6eb2a147e20183ffdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodVendor: {fileID: -8857752537735742973}
+  _sprout: {fileID: 7595291557606917810}
+--- !u!1 &7595291557606917810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4242820207600920459}
+  - component: {fileID: 2955127164953912878}
+  - component: {fileID: 2693190227480453357}
+  m_Layer: 0
+  m_Name: Stage0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4242820207600920459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595291557606917810}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8369247241134201329}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!33 &2955127164953912878
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595291557606917810}
+  m_Mesh: {fileID: 4300000, guid: fbd33e75d8d4bf9479c9cb59e83a9e37, type: 3}
+--- !u!23 &2693190227480453357
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595291557606917810}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 29a286d2dc90be241a18e462c6b29a5c, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7647510445884541044
 GameObject:
   m_ObjectHideFlags: 0

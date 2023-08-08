@@ -26,7 +26,7 @@ namespace Infrastructure.Factory
         GameObject CreateBuildCell(Vector3 at, Quaternion rotation);
         GameObject CreateVisual(VisualType visual, Quaternion quaternion);
         GameObject CreateCollectibleCoin();
-        GameObject CreateGardenBad(Vector3 at, Quaternion rotation, FoodId foodId);
+        GameObject CreateFoodVendor(Vector3 at, Quaternion rotation, FoodId foodId);
         GameObject CreateMedBed(Vector3 at, Quaternion rotation);
         GameObject CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
         GameObject CreateVolunteer(Vector3 at, Transform parent);

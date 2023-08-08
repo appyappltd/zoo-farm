@@ -9,7 +9,7 @@ namespace Logic.CellBuilding
 
         protected override void BuildCell(BuildPlaceMarker marker)
         {
-            GameFactory.CreateGardenBad(marker.BuildPosition, marker.Location.Rotation, _foodId);
+            GameFactory.CreateFoodVendor(marker.BuildPosition, marker.Location.Rotation, _foodId);
         }
     }
 }

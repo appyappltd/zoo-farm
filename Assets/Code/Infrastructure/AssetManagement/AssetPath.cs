@@ -8,7 +8,7 @@ namespace Infrastructure.AssetManagement
         public const string BuildCellPath = "Prefabs/BuildCell";
         public const string VisualsPath = "Prefabs/Visuals";
         public const string CollectableCoinPath = "Prefabs/Coin";
-        public const string GardenBed = "Prefabs/GardenBed";
+        public const string FoodVendorPath = "Prefabs/FoodVenders";
         public const string MedBed = "Prefabs/MedBed";
         public const string MedToolStandPath = "Prefabs/MedStand";
         public const string VolunteerPath = "Prefabs/Volunteer";

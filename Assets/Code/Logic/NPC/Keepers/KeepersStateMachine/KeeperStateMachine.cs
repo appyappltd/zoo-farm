@@ -133,7 +133,7 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
                 _inventoryHolder.Inventory.IsFull)
                 return false;
 
-            IFoodVendor vendor = _foodService.GetReadyVendor(_feedHouse.EdibleFoodType);
+            IFoodVendorView vendor = _foodService.GetReadyVendor(_feedHouse.EdibleFoodType);
             bool isNewVendorFound = vendor != null;
 
             if (isNewVendorFound && vendor.Position != _foodTarget.position)

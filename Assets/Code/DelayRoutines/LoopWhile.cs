@@ -5,6 +5,7 @@ namespace DelayRoutines
     public class LoopWhile : Loop
     {
         private readonly Func<bool> _repeatCondition;
+        private bool _repeatCondition1;
 
         public LoopWhile(Func<bool> repeatCondition)
         {

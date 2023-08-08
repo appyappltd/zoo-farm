@@ -13,7 +13,7 @@ namespace Logic.NPC.Keepers.KeepersStateMachine.States
         private readonly IFoodService _foodService;
         private readonly Func<AnimalHouse> _getFeedHouse;
 
-        private IFoodVendor _vendor;
+        private IFoodVendorView _vendor;
 
         public MoveToFood(NPCAnimator animator, NavMeshMover mover, Transform target, Func<AnimalHouse> getFeedHouse,
             IFoodService foodService) : base(animator, mover, target)
@@ -25,7 +25,7 @@ namespace Logic.NPC.Keepers.KeepersStateMachine.States
 
         protected override void OnEnter()
         {
-            IFoodVendor vendor = _foodService.GetReadyVendor(_getFeedHouse.Invoke().EdibleFoodType);
+            IFoodVendorView vendor = _foodService.GetReadyVendor(_getFeedHouse.Invoke().EdibleFoodType);
 
             // if (vendor == _vendor)
             //     return;
