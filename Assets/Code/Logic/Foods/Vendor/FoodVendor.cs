@@ -11,7 +11,7 @@ using Services.Food;
 using StaticData;
 using UnityEngine;
 
-namespace Logic.Foods
+namespace Logic.Foods.Vendor
 {
     public class FoodVendor : MonoBehaviour, IFoodVendorView, IGetItem
     {

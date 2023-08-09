@@ -192,7 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef2559bbb904d6eb2a147e20183ffdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodVendor: {fileID: -8857752537735742973}
+  _foodVendor:
+    _underlyingValue: {fileID: -8857752537735742973}
   _sprout: {fileID: 7595291557606917810}
 --- !u!1 &7595291557606917810
 GameObject:

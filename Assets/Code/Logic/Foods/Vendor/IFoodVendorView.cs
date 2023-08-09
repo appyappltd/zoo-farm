@@ -3,7 +3,7 @@ using Logic.Foods.FoodSettings;
 using Logic.Storages.Items;
 using UnityEngine;
 
-namespace Services.Food
+namespace Logic.Foods.Vendor
 {
     public interface IFoodVendorView
     {

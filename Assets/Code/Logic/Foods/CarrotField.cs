@@ -1,19 +1,21 @@
+using AYellowpaper;
+using Logic.Foods.Vendor;
 using Logic.Storages.Items;
 using NTC.Global.System;
 using UnityEngine;
 
-namespace Logic.Foods
+namespace Logic.Foods.Carrot
 {
     [RequireComponent(typeof(FoodVendor))]
     public class CarrotField : MonoBehaviour
     {
-        [SerializeField] private FoodVendor _foodVendor;
+        [SerializeField] private InterfaceReference<IFoodVendorView, MonoBehaviour> _foodVendor;
         [SerializeField] private GameObject _sprout;
         
         private void Awake()
         {
-            _foodVendor.BeginProduceFood += OnBeginProduceFood;
-            _foodVendor.FoodProduced += OnFoodProduced;
+            _foodVendor.Value.BeginProduceFood += OnBeginProduceFood;
+            _foodVendor.Value.FoodProduced += OnFoodProduced;
         }
 
         private void OnFoodProduced(IItem item) =>

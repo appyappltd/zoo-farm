@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Code.Logic.NPC.Keepers.KeepersStateMachine.States;
 using Logic.Animals;
+using Logic.Foods.Vendor;
 using Logic.Movement;
 using Logic.NPC;
-using Logic.NPC.Keepers.KeepersStateMachine.States;
 using Logic.NPC.Keepers.KeepersStateMachine.Transitions;
 using Logic.Storages;
 using NaughtyAttributes;
@@ -47,8 +46,8 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
             _foodService = AllServices.Container.Single<IFoodService>();
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
 
-            _foodTarget = new GameObject("FoodTarget").transform;
-            _houseTarget = new GameObject("HouseTarget").transform;
+            _foodTarget = new GameObject("KeeperFoodTarget").transform;
+            _houseTarget = new GameObject("KeeperHouseTarget").transform;
 
             SetUp();
         }

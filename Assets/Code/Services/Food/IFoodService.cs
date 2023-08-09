@@ -1,3 +1,4 @@
+using Logic.Foods.Vendor;
 using Logic.Foods.FoodSettings;
 
 namespace Services.Food
