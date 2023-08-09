@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Infrastructure.Factory;
 using NaughtyAttributes;
@@ -35,11 +36,21 @@ namespace Logic.CellBuilding
             _activeBuildCell.SetBuildCost(_buildCosts[0]);
             _activeBuildCell.SetIcon(_currentMarker.Icon);
             _activeBuildCell.Build += BuildAndActivate;
+
+            if (_isAutoBuild)
+                ShowNextBuildCell();
+
             OnAwake();
         }
 
         private void OnDestroy() =>
             _activeBuildCell.Build -= BuildAndActivate;
+
+        [Conditional("UNITY_EDITOR")]
+        private void OnValidate()
+        {
+            ApplyOffsetToMarkers();
+        }
 
         protected abstract void BuildCell(BuildPlaceMarker marker);
 
