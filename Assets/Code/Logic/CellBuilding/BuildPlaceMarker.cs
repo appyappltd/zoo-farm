@@ -15,15 +15,17 @@ namespace Logic.CellBuilding
 
         public void Init(Vector3 buildOffset)
         {
-            _buildOffset = transform.TransformVector(buildOffset);
-            _location = new Location(transform.position, transform.rotation);
+            Transform self = transform;
+            _buildOffset = self.TransformVector(buildOffset);
+            _location = new Location(self.position, self.rotation);
         }
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawCube(transform.position, Vector3.one);
-            Vector3 forwardMarkedPosition = transform.position + transform.forward;
-            Gizmos.DrawSphere( forwardMarkedPosition, 0.25f);
+            Vector3 position = transform.position + _buildOffset;
+            Gizmos.DrawWireCube(position, Vector3.one);
+            Vector3 forwardMarkedPosition = position + transform.forward;
+            Gizmos.DrawWireSphere( forwardMarkedPosition, 0.25f);
         }
     }
 }

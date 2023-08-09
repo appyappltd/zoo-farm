@@ -1,8 +1,8 @@
+using System.Diagnostics;
 using Infrastructure.Factory;
 using NaughtyAttributes;
 using NTC.Global.System;
 using Services;
-using Tools.Extension;
 using UnityEngine;
 
 namespace Logic.CellBuilding
@@ -43,29 +43,21 @@ namespace Logic.CellBuilding
 
         protected abstract void BuildCell(BuildPlaceMarker marker);
 
-        protected virtual void OnAwake()
-        {
-        }
+        protected virtual void OnAwake() { }
 
         public void Enable()
         {
             gameObject.SetActive(true);
             
             if (_isAutoBuild)
-            {
-               BuildAndActivate();
-            }
+                BuildAndActivate();
         }
 
-        public void Disable()
-        {
+        public void Disable() =>
             gameObject.SetActive(false);
-        }
 
-        public void SetAutoNext(bool isAuto)
-        {
+        public void SetAutoNext(bool isAuto) =>
             _isAutoBuild = isAuto;
-        }
 
         [Button("Show Next")]
         public void ShowNextBuildCell()
@@ -106,10 +98,15 @@ namespace Logic.CellBuilding
                 _buildPlaces[i].Init(_buildOffset);
         }
 
-        [Button]
-        private void CollectMarkers()
-        {
+        [Button("CollectMarkers", EButtonEnableMode.Editor)] [Conditional("UNITY_EDITOR")]
+        private void CollectMarkers() =>
             _buildPlaces = GetComponentsInChildren<BuildPlaceMarker>();
+        
+        [Button("ApplyOffsetToMarkers", EButtonEnableMode.Editor)] [Conditional("UNITY_EDITOR")]
+        private void ApplyOffsetToMarkers()
+        {
+            foreach (var place in _buildPlaces)
+                place.Init(_buildOffset);
         }
     }
 }
