@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,13 +13,13 @@ namespace Logic.Gates
     [RequireComponent(typeof(RunTranslator))]
     public class Gate : MonoBehaviour
     {
-        [Header("References")] [SerializeField]
-        private List<Door> _doors = new List<Door>();
-
+        [Header("References")] 
+        [SerializeField] private List<Door> _doors = new List<Door>();
         [SerializeField] private HumanInteraction _playerInteraction;
 
-        [Space] [Header("Settings")] [SerializeField]
-        private bool _isAuto;
+        [Space] [Header("Settings")]
+        [SerializeField] private bool _isAuto;
+        [SerializeField] private bool _isOpenOnEnter;
 
         private ITranslator _translator;
 
@@ -30,21 +31,23 @@ namespace Logic.Gates
 
         private void OnEnable()
         {
-            _playerInteraction.Interacted += OnInteracted;
+            if (_isOpenOnEnter)
+                _playerInteraction.Entered += OnEntered;
+            else
+                _playerInteraction.Interacted += OnInteracted;
+
             _playerInteraction.Canceled += OnCanceled;
         }
 
         private void OnDisable()
         {
-            _playerInteraction.Interacted -= OnInteracted;
+            if (_isOpenOnEnter)
+                _playerInteraction.Entered -= OnEntered;
+            else
+                _playerInteraction.Interacted -= OnInteracted;
+            
             _playerInteraction.Canceled -= OnCanceled;
         }
-
-        private void OnInteracted(Human _) =>
-            Open();
-
-        private void OnCanceled() =>
-            Close();
 
         [Button("Open", enabledMode: EButtonEnableMode.Playmode)]
         public void Open()
@@ -52,7 +55,7 @@ namespace Logic.Gates
             for (var index = 0; index < _doors.Count; index++)
             {
                 Door door = _doors[index];
-                door.Translatable.Play(door.ClosedLocation, door.OpenedLocation);
+                door.Translatable.Play(door.CurrentLocation, door.OpenedLocation);
                 _translator.AddTranslatable(door.Translatable);
             }
         }
@@ -63,7 +66,7 @@ namespace Logic.Gates
             for (var index = 0; index < _doors.Count; index++)
             {
                 Door door = _doors[index];
-                door.Translatable.Play(door.OpenedLocation, door.ClosedLocation);
+                door.Translatable.Play(door.CurrentLocation, door.ClosedLocation);
                 _translator.AddTranslatable(door.Translatable);
             }
         }
@@ -73,6 +76,19 @@ namespace Logic.Gates
         private void CollectDoorChildes()
         {
             _doors = GetComponentsInChildren<Door>().ToList();
+        }
+
+        private void OnEntered()
+        {
+            Open();
+        }
+
+        private void OnInteracted(Human _) =>
+            Open();
+
+        private void OnCanceled()
+        {
+           Close();
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Logic.Translators
 
         private ITranslatable _translatable;
 
+        public bool IsActive => enabled;
+
         private void OnValidate() =>
             enabled = false;
 

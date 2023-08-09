@@ -2,6 +2,7 @@ namespace Logic.Translators
 {
     public interface ITranslator
     {
-        public void AddTranslatable(ITranslatable translatable);
+        bool IsActive { get; } 
+        void AddTranslatable(ITranslatable translatable);
     }
 }

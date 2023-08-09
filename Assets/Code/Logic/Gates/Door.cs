@@ -16,6 +16,7 @@ namespace Logic.Gates
         
         public Location OpenedLocation => _openedLocation;
         public Location ClosedLocation => _closedLocation;
+        public Location CurrentLocation => new Location(transform.localPosition, transform.localRotation);
         public ITranslatableParametric<Location> Translatable => _translatable;
         
         private void Awake() =>
@@ -32,15 +33,17 @@ namespace Logic.Gates
         [Button("Close")] [Conditional("UNITY_EDITOR")]
         private void Close()
         {
-            transform.localPosition = _closedLocation.Position;
-            transform.localRotation = _closedLocation.Rotation;
+            Transform self = transform;
+            self.localPosition = _closedLocation.Position;
+            self.localRotation = _closedLocation.Rotation;
         }
         
         [Button("Open")] [Conditional("UNITY_EDITOR")]
         private void Open()
         {
-            transform.localPosition = _openedLocation.Position;
-            transform.localRotation = _openedLocation.Rotation;
+            var self = transform;
+            self.localPosition = _openedLocation.Position;
+            self.localRotation = _openedLocation.Rotation;
         }
     }
 }

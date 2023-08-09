@@ -1,6 +1,7 @@
 using System;
 using Logic.Foods.FoodSettings;
 using Logic.Storages;
+using Ui;
 using UnityEngine;
 
 namespace Logic.Animals
@@ -15,6 +16,7 @@ namespace Logic.Animals
         [SerializeField] private Storage _storage;
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private ProductReceiver _productReceiver;
+        [SerializeField] private BarIconView _barIconView;
 
         [Header("Settings")]
         [SerializeField] private Transform _restPlace;
@@ -35,20 +37,18 @@ namespace Logic.Animals
         public FoodId EdibleFoodType => _edibleFoodType;
         public IInventory Inventory => _inventoryHolder.Inventory;
 
-
-        private void Awake()
-        {
-            Construct();
-        }
+        private void Awake() =>
+            Init();
 
         private void OnDestroy() =>
             _bowl.ProgressBarView.Empty += OnBowlEmpty;
 
-        public void Construct()
+        private void Init()
         {
             _inventoryHolder.Construct();
             _bowl.Construct(_inventoryHolder.Inventory);
             _storage.Construct(_inventoryHolder.Inventory);
+            _barIconView.Construct(_bowl.ProgressBarView);
             _productReceiver.Construct(_inventoryHolder.Inventory);
         }
 

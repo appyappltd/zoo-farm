@@ -379,6 +379,7 @@ MonoBehaviour:
   _storage: {fileID: 5905476580270274857}
   _inventoryHolder: {fileID: 809057692272165439}
   _productReceiver: {fileID: 6120894045264727969}
+  _barIconView: {fileID: 2980597317853307896}
   _restPlace: {fileID: 6223570695547407479}
   _eatPlace: {fileID: 1926723737059924004}
   _forAnimal: 0
@@ -658,6 +659,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbc9f3ed3389e70438d5758b4ba41c42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2980597317853307896 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3795157622060416634, guid: f4b750d216a362342a5d716074ab2fe8, type: 3}
+  m_PrefabInstance: {fileID: 2158964508245499266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5716163032148962196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1b116882904e0eb27c45e7f1166b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5716163032148962196 stripped

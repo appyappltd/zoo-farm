@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Logic.Foods.Vendor
 {
-    public class FoodVendor : MonoBehaviour, IFoodVendorView, IGetItem
+    public class FoodVendor : MonoBehaviour, IFoodVendorView
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private FoodVendorConfig _vendorConfig;
@@ -31,6 +31,7 @@ namespace Logic.Foods.Vendor
         public FoodId Type => _vendorConfig.FoodId;
         public bool IsReady => _readyFoods.Count > 0;
         public Vector3 Position => transform.position;
+        public int MaxFoodCount => _vendorConfig.MaxStockQuantity;
         
         private void OnDestroy() =>
             _delayRoutine.Kill();
@@ -101,6 +102,7 @@ namespace Logic.Foods.Vendor
         private void CreateFood()
         {
             HandItem food = _factory.CreateFood(_spawnPlace.position, _spawnPlace.rotation, _vendorConfig.FoodId);
+            food.transform.SetParent(transform, true);
             food.Construct(_vendorConfig.HandItemData);
             _readyFoods.Push(food);
 
