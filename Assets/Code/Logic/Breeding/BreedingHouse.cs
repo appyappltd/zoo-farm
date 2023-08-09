@@ -53,7 +53,11 @@ namespace Logic.Breeding
 
         private void MoveToPlace(IAnimal animal, Transform place)
         {
+            //TODO: Сделать переход на полностью ручное управление животным, отключив стейт машину.
+            //TODO: Затем отправить его в месту еды и заставлять есть, включая анимацию
+            
             animal.ForceMove(place);
+            animal.Stats.Deactivate();
             _houseService.VacateHouse(animal.AnimalId);
             
             _disposable.Add(animal.StateMachine.CurrentStateType.Then(state =>

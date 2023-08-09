@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using Progress;
@@ -8,7 +7,7 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
 {
     public class StatsProvider : MonoCache, IStatsProvider
     {
-        private readonly List<IStatOperateRule> _operateRules = new List<IStatOperateRule>();
+        // private readonly List<IStatOperateRule> _operateRules = new List<IStatOperateRule>();
 
         [SerializeField] private StatIndicator _vitality;
         [SerializeField] private StatIndicator _satiety;
@@ -34,6 +33,12 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         public IProgressBarView Peppiness => _peppiness.ProgressBar;
         public IProgressBarView Age => _age.ProgressBar;
 
+        public void Activate() =>
+            enabled = true;
+
+        public void Deactivate() =>
+            enabled = false;
+
         protected override void Run()
         {
 #if UNITY_EDITOR
@@ -43,7 +48,7 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
             _ageValue = _age.ProgressBar.Current.Value;
 #endif
 
-            InitStatOperateRules();
+            // InitStatOperateRules();
         }
 
         public void Construct(BeginStats beginStats)
@@ -55,9 +60,9 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
             _age.Construct(beginStats.RandomAge);
         }
 
-        private void InitStatOperateRules()
-        {
-            _operateRules.Add(new VitalityOperateRule(_vitality, _satiety, _peppiness));
-        }
+        // private void InitStatOperateRules()
+        // {
+        //     _operateRules.Add(new VitalityOperateRule(_vitality, _satiety, _peppiness));
+        // }
     }
 }

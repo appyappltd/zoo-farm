@@ -39,6 +39,12 @@ namespace Logic.Movement
                 _aligner.Aligne(_finalRotation);
         }
 
+        public void ActivateAlignAtEnd() =>
+            _isAlignAtEnd = true;
+        
+        public void DeactivateAlignAtEnd() =>
+            _isAlignAtEnd = false;
+
         public void SetNormalizedSpeed(float normalizedSpeed)
         {
             normalizedSpeed = Mathf.Clamp01(normalizedSpeed);

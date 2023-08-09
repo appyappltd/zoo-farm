@@ -1,6 +1,7 @@
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Animals.AnimalsStateMachine;
+using Logic.Movement;
 using Services.StaticData;
 using StateMachineBase;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Logic.Animals.AnimalsBehaviour
 {
     public class Animal : MonoBehaviour, IAnimal
     {
+        [SerializeField] private NavMeshMover _mover;
         [SerializeField] private AnimalStateMachine _stateMachine;
         [SerializeField] private Jumper _jumper;
         [SerializeField] private EmotionProvider _emotionProvider;
@@ -50,7 +52,8 @@ namespace Logic.Animals.AnimalsBehaviour
 
         public void ForceMove(Transform to)
         {
-            _stateMachine.ForceMove(to);
+            _mover.SetLocation(new Location(to.position, to.rotation));
+            // _stateMachine.ForceMove(to);
         }
 
         public void Destroy()
