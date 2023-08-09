@@ -9,7 +9,6 @@ namespace StateMachineBase
     public abstract class StateMachine : MonoCache
     {
         public readonly Observable<Type> CurrentStateType = new Observable<Type>(typeof(Idle));
-
         private readonly HashSet<IDisposable> _disposable = new HashSet<IDisposable>();
 
         private State _currentState;

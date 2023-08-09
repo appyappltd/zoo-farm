@@ -10,6 +10,8 @@ namespace Services.Animals
 {
     public class AnimalsService : IAnimalsService
     {
+        private const int AnimalsInPair = 2;
+        
         private readonly IAnimalHouseService _houseService;
         private readonly List<IAnimal> _animals = new List<IAnimal>();
 
@@ -48,6 +50,18 @@ namespace Services.Animals
         public IAnimal[] GetAnimals(AnimalType panelAnimalType) =>
             _animals.FindAll(animal => animal.AnimalId.Type == panelAnimalType).ToArray();
 
+        public List<AnimalType> GetBreedingReady()
+        {
+            return _animals.GroupBy(animal => animal.AnimalId.Type).Where(grouping => grouping.Count() > 1)
+                .Select(grouping => grouping.Key).ToList();
+        }
+
+        public BreedingPair SelectPairForBreeding(AnimalType byType)
+        {
+            IAnimal[] animalsToPair = Animals.OrderBy(animal => animal.HappinessFactor.Factor).Take(AnimalsInPair).ToArray();
+            return new BreedingPair(animalsToPair[0], animalsToPair[1]);
+        }
+        
         public AnimalCountData GetAnimalsCount(AnimalType panelAnimalType)
         {
             IAnimal[] animals = GetAnimals(panelAnimalType);

@@ -2,6 +2,7 @@ using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Animals.AnimalsStateMachine;
 using Services.StaticData;
+using StateMachineBase;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour
@@ -22,6 +23,7 @@ namespace Logic.Animals.AnimalsBehaviour
         public AnimalId AnimalId => _animalId;
         public IStatsProvider Stats => _statProvider;
         public HappinessFactor HappinessFactor => _happinessFactor;
+        public StateMachine StateMachine => _stateMachine;
 
         private void OnDestroy()
         {
@@ -48,7 +50,7 @@ namespace Logic.Animals.AnimalsBehaviour
 
         public void ForceMove(Transform to)
         {
-            _stateMachine.ReleaseMove(to);
+            _stateMachine.ForceMove(to);
         }
 
         public void Destroy()

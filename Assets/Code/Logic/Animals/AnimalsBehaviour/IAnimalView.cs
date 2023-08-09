@@ -1,4 +1,5 @@
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
+using StateMachineBase;
 
 namespace Logic.Animals.AnimalsBehaviour
 {
@@ -7,5 +8,6 @@ namespace Logic.Animals.AnimalsBehaviour
         AnimalId AnimalId { get; }
         IStatsProvider Stats { get; }
         HappinessFactor HappinessFactor { get; }
+        StateMachine StateMachine { get; }
     }
 }

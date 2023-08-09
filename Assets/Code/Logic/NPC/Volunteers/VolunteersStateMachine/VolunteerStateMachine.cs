@@ -38,7 +38,7 @@ namespace Logic.NPC.Volunteers.VolunteersStateMachine
 
             State moveInQueue = new MoveToQueuePlace(_animator, _mover, null, _volunteer);
             State transmitting = new Transmitting(_animator, _volunteer, _aligner);
-            State moveToOutPlace = new MoveToPosition(_animator, _mover, _outPlace);
+            State moveToOutPlace = new MoveToPosition(_animator, _mover, _outPlace.position);
             State reload = new Reload(_animator, _volunteer);
 
             Transition inQueuePlace = new InQueuePlace(moverTransform, null, _volunteer, _placeOffset);

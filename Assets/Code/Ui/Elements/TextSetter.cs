@@ -11,12 +11,17 @@ namespace Ui.Elements
         [SerializeField] private bool _isUi;
 
         [HideIf("_isUi")] [SerializeField] private TextMeshPro _textSprite;
-
         [ShowIf("_isUi")] [SerializeField] private TextMeshProUGUI _textUi;
 
-        private Action<string> _setTextAction = s => { };
+        private Action<string> _setTextAction;
 
         private void Awake()
+        {
+            Init();
+            OnAwake();
+        }
+
+        private void Init()
         {
             if (_isUi)
             {
@@ -26,16 +31,24 @@ namespace Ui.Elements
             {
                 _setTextAction = (text) => _textSprite.SetText(text);
             }
-
-            OnAwake();
         }
 
         protected virtual void OnAwake() { }
 
-        public void SetText(string text) =>
-            _setTextAction.Invoke(text);
+        public void SetText(string text)
+        {
+            if (_setTextAction is null)
+                Init();
 
-        public void SetText(int text) =>
+            _setTextAction.Invoke(text);
+        }
+
+        public void SetText(int text)
+        {
+            if (_setTextAction is null)
+                Init();
+            
             _setTextAction.Invoke(text.ToString());
+        }
     }
 }

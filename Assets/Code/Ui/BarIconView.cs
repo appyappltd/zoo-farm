@@ -15,7 +15,7 @@ namespace Ui
 
         [Space] [Header("Settings")]
         [SerializeField] private bool _isDeactivateOnFull = true;
-        [SerializeField] private float _delayBeforeDeactivate;
+        [SerializeField] private float _delayBeforeDeactivate = 2f;
 
         private IProgressBarView _barView;
         private DelayRoutine _deactivateDelay;

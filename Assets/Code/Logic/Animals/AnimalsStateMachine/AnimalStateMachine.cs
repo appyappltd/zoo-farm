@@ -15,31 +15,34 @@ namespace Logic.Animals.AnimalsStateMachine
 {
     public class AnimalStateMachine : StateMachine
     {
-        [Header("Controls")]
-        [SerializeField] private AnimalAnimator _animator;
+        [Header("Controls")] [SerializeField] private AnimalAnimator _animator;
         [SerializeField] private NavMeshMover _mover;
 
-        [Header("Stats")] [Space]
-        [SerializeField] private StatIndicator _vitality;
+        [Header("Stats")] [Space] [SerializeField]
+        private StatIndicator _vitality;
+
         [SerializeField] private StatIndicator _satiety;
         [SerializeField] private StatIndicator _peppiness;
         [SerializeField] private StatIndicator _age;
 
-        [Header("Stats Settings")] [Space]
-        [SerializeField] private float _satietyReplanishSpeed;
+        [Header("Stats Settings")] [Space] [SerializeField]
+        private float _satietyReplanishSpeed;
+
         [SerializeField] private float _peppinessReplanishSpeed;
         [SerializeField] private float _hungerDelay;
 
-        [Header("Move Settings")] [Space]
-        [SerializeField] private float _maxWanderDistance;
+        [Header("Move Settings")] [Space] [SerializeField]
+        private float _maxWanderDistance;
 
-        [MinMaxSlider(1f, 20f)]
-        [SerializeField] private Vector2 _idleDelayRange;
+        [MinMaxSlider(1f, 20f)] [SerializeField]
+        private Vector2 _idleDelayRange;
 
         [SerializeField] private float _placeOffset;
 
         private Transform _restPlace;
         private Transform _eatPlace;
+
+        private MoveToPosition _forceMove;
 
         public void Construct(Transform houseRestPlace, Transform houseEatPlace)
         {
@@ -50,10 +53,10 @@ namespace Logic.Animals.AnimalsStateMachine
             EnableStatIndicators();
         }
 
-        public void ReleaseMove(Transform to)
+        public void ForceMove(Transform to)
         {
-            State moveTo = new MoveTo(_animator, _mover, to);
-            ForceState(moveTo);
+            _forceMove.SetNewPosition(to.position);
+            ForceState(_forceMove);
         }
 
         private void SetUp()
@@ -67,6 +70,8 @@ namespace Logic.Animals.AnimalsStateMachine
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
             State moveToEat = new MoveTo(_animator, _mover, _eatPlace);
+
+            _forceMove = new MoveToPosition(_animator, _mover, Vector3.zero);
 
             Transition fullBowl = GetOnFullActionTransition(bowl.ProgressBarView);
             Transition fullPeppiness = GetOnFullActionTransition(_peppiness.ProgressBar);
@@ -124,6 +129,12 @@ namespace Logic.Animals.AnimalsStateMachine
                         {fullPeppiness, idle},
                     }
                 },
+                {
+                    _forceMove, new Dictionary<Transition, State>
+                    {
+                        {reachTarget, idle},
+                    }
+                },
             });
         }
 
@@ -149,6 +160,13 @@ namespace Logic.Animals.AnimalsStateMachine
             barView.Empty += transition.SetConditionTrue;
             transition.SetUnsubscribeAction(() => barView.Empty -= transition.SetConditionTrue);
             return transition;
+        }
+
+        [Button]
+        private void TestForceMove()
+        {
+            _forceMove.SetNewPosition(Vector3.zero);
+            ForceState(_forceMove);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Ui
 {
-    public class BuildHousePanel : MonoBehaviour
+    public class ChoseAnimalPanel : MonoBehaviour
     {
         [SerializeField] private Image _animalIcon;
         [SerializeField] private Button _button;

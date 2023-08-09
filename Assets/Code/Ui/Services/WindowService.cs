@@ -19,6 +19,7 @@ namespace Ui.Services
             {
                 WindowId.AnimalRelease => _uiFactory.CreateReleaseAnimalWindow(),
                 WindowId.BuildHouse => _uiFactory.CreateBuildHouseWindow(),
+                WindowId.Breeding => _uiFactory.CreateBreedingWindow(),
                 _ => throw new ArgumentOutOfRangeException(nameof(windowId), windowId, null)
             };
         }

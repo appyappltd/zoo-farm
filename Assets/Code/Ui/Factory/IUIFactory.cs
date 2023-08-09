@@ -8,7 +8,8 @@ namespace Ui.Factory
         void CreateUIRoot();
         GameObject CreateReleaseAnimalWindow();
         GameObject CreateBuildHouseWindow();
-        BuildHousePanel CreateBuildHousePanel(Transform parent);
+        GameObject CreateBreedingWindow();
+        ChoseAnimalPanel CreateChoseAnimalPanel(Transform parent);
         ReleaseAnimalPanel CreateReleaseAnimalPanel(Transform panelsParent);
     }
 }

@@ -1,13 +1,13 @@
 using System;
 using Logic.Animals;
-using Services.AnimalHouses;
+using Services.Animals;
 using Services.StaticData;
 using Ui.Factory;
 using UnityEngine;
 
 namespace Ui.Windows
 {
-    public class HouseBuildWindow : WindowBase
+    public class BreedingWindow : WindowBase
     {
         [SerializeField] private Transform _panelsParent;
 
@@ -15,15 +15,15 @@ namespace Ui.Windows
 
         public void SetOnChoseCallback(Action<AnimalType> callback) =>
             _onChoseCallback = callback;
-
-        public void Construct(IAnimalHouseService houseService, IUIFactory uiFactory, IStaticDataService staticData)
+        
+        public void Construct(IAnimalsService animalsService, UIFactory uiFactory, IStaticDataService staticData)
         {
-            foreach (QueueToHouse animal in houseService.AnimalsInQueue)
+            foreach (AnimalType animal in animalsService.GetBreedingReady())
             {
                 ChoseAnimalPanel panel = uiFactory.CreateChoseAnimalPanel(_panelsParent);
-                panel.Construct(staticData.IconByAnimalType(animal.AnimalId.Type), () =>
+                panel.Construct(staticData.IconByAnimalType(animal), () =>
                 {
-                    _onChoseCallback.Invoke(animal.AnimalId.Type);
+                    _onChoseCallback.Invoke(animal);
                     CloseWindow();
                 });
             }

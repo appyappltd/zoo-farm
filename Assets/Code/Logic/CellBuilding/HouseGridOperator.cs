@@ -29,7 +29,7 @@ namespace Logic.CellBuilding
             }
             else
             {
-                OnAnimalChosen(_houseService.AnimalsInQueue[0].AnimalId);
+                OnAnimalChosen(_houseService.AnimalsInQueue[0].AnimalId.Type);
             }
         }
 
@@ -42,9 +42,9 @@ namespace Logic.CellBuilding
 #endif
         }
 
-        private void OnAnimalChosen(AnimalId Id)
+        private void OnAnimalChosen(AnimalType type)
         {
-            AnimalHouse house = GameFactory.CreateAnimalHouse(_cashedMarker.BuildPosition, _cashedMarker.Location.Rotation, Id.Type).GetComponent<AnimalHouse>();
+            AnimalHouse house = GameFactory.CreateAnimalHouse(_cashedMarker.BuildPosition, _cashedMarker.Location.Rotation, type).GetComponent<AnimalHouse>();
             _houseService.RegisterHouse(house);
         }
     }
