@@ -64,13 +64,6 @@ namespace Ui.Factory
         // }
         //
 
-        public GameObject CreateReleaseAnimalWindow()
-        {
-            AnimalReleaseWindow window = CreateWindow<AnimalReleaseWindow>(WindowId.AnimalRelease);
-            window.Construct(_animalsService, this, _staticData);
-            return window.gameObject;
-        }
-
         public void CreateUIRoot()
         {
             GameObject root = _assets.Instantiate(AssetPath.UIRootPath);
@@ -78,10 +71,24 @@ namespace Ui.Factory
             root.GetComponent<Canvas>().worldCamera = Camera.main;
         }
 
+        public GameObject CreateReleaseAnimalWindow()
+        {
+            AnimalReleaseWindow window = CreateWindow<AnimalReleaseWindow>(WindowId.AnimalRelease);
+            window.Construct(_animalsService, this, _staticData);
+            return window.gameObject;
+        }
+
         public GameObject CreateBreedingWindow()
         {
-            BreedingWindow window = CreateWindow<BreedingWindow>(WindowId.BuildHouse);
+            BreedingWindow window = CreateWindow<BreedingWindow>(WindowId.Breeding);
             window.Construct(_animalsService, this, _staticData);
+            return window.gameObject;
+        }
+
+        public GameObject CreateBuildHouseWindow()
+        {
+            HouseBuildWindow window = CreateWindow<HouseBuildWindow>(WindowId.BuildHouse);
+            window.Construct(_houseService, this, _staticData);
             return window.gameObject;
         }
 
@@ -90,13 +97,6 @@ namespace Ui.Factory
 
         public ReleaseAnimalPanel CreateReleaseAnimalPanel(Transform parent) =>
             _assets.Instantiate(AssetPath.ReleaseAnimalPanel, parent).GetComponent<ReleaseAnimalPanel>();
-
-        public GameObject CreateBuildHouseWindow()
-        {
-            HouseBuildWindow window = CreateWindow<HouseBuildWindow>(WindowId.BuildHouse);
-            window.Construct(_houseService, this, _staticData);
-            return window.gameObject;
-        }
 
         private TWindow CreateWindow<TWindow>(WindowId windowId) where TWindow : WindowBase
         {

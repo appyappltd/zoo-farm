@@ -8,7 +8,6 @@ namespace StateMachineBase.States
     public class MoveToQueuePlace : MoveTo
     {
         private readonly Volunteer _volunteer;
-        private readonly Aligner _aligner;
 
         public MoveToQueuePlace(IPrimeAnimator animator, NavMeshMover mover, Transform target, Volunteer volunteer) : base(animator, mover, target)
         {

@@ -1,4 +1,6 @@
 using System;
+using AYellowpaper;
+using Logic.AnimatorStateMachine;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
@@ -16,6 +18,8 @@ namespace Logic.Movement
 
         private Quaternion _finalRotation;
 
+        public event Action DestinationReached = () => { };
+        
         public Vector3 DestinationPoint => _agent.destination;
         public float Distance => _agent.remainingDistance;
         public float StoppingDistance => _agent.stoppingDistance;
@@ -32,9 +36,12 @@ namespace Logic.Movement
 
         private void CheckForEndMove()
         {
-            if (_agent.isStopped)
-                enabled = false;
-
+            if (_agent.isStopped == false)
+                return;
+            
+            enabled = false;
+            DestinationReached.Invoke();
+                
             if (_isAlignAtEnd)
                 _aligner.Aligne(_finalRotation);
         }
@@ -80,6 +87,7 @@ namespace Logic.Movement
                 }
 #endif
 
+                enabled = true;
                 _agent.SetPath(path);
                 return;
             }

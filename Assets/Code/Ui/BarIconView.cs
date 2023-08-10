@@ -15,7 +15,7 @@ namespace Ui
 
         [Space] [Header("Settings")]
         [SerializeField] private bool _isDeactivateOnFull = true;
-        [SerializeField] private float _delayBeforeDeactivate = 2f;
+        [SerializeField] [Min(0)] private float _delayBeforeDeactivate = 2f;
 
         private IProgressBarView _barView;
         private DelayRoutine _deactivateDelay;
@@ -24,7 +24,7 @@ namespace Ui
         {
             _compositeDisposable.Dispose();
 
-            if (_isDeactivateOnFull)
+            if (_isDeactivateOnFull && _barView != null)
             {
                 _deactivateDelay.Kill();
                 _barView.Empty -= ActivateView;

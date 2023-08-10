@@ -1,11 +1,10 @@
 ﻿using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
-using NTC.Global.System;
 using Progress;
 using StateMachineBase.States;
 using UnityEngine;
 
-namespace Logic.Animals.AnimalsStateMachine.States
+namespace Code.Logic.Animals.AnimalsStateMachine.States
 {
     public abstract class StatChange : PrimeAnimatorState
     {

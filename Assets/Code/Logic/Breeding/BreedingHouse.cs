@@ -2,11 +2,9 @@ using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Interactions;
 using Logic.Player;
-using Observables;
 using Services;
 using Services.AnimalHouses;
 using Services.Animals;
-using StateMachineBase.States;
 using Ui.Services;
 using Ui.Windows;
 using UnityEngine;
@@ -15,19 +13,22 @@ namespace Logic.Breeding
 {
     public class BreedingHouse : MonoBehaviour
     {
-        private readonly CompositeDisposable _disposable = new CompositeDisposable();
-        
+        private const int MaxAnimals = 2;
+
         [SerializeField] private Transform _firstPlace;
         [SerializeField] private Transform _secondPlace;
         [SerializeField] private Transform _childPlace;
         
-        [SerializeField] private HeroInteraction _heroInteraction;
+        [SerializeField] private HumanInteraction _humanInteraction;
+        
         private IWindowService _windowService;
         private IAnimalsService _animalService;
         private IAnimalHouseService _houseService;
             
         private IAnimal _first;
         private IAnimal _second;
+        
+        private int _animalsInHouse;
 
         private void Awake()
         {
@@ -35,13 +36,16 @@ namespace Logic.Breeding
             _animalService = AllServices.Container.Single<IAnimalsService>();
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
 
-            _heroInteraction.Interacted += OnInteracted;
+            _humanInteraction.Interacted += OnInteracted;
         }
 
-        private void OnInteracted(Hero _)
+        private void OnInteracted(Human human)
         {
-            GameObject window = _windowService.Open(WindowId.Breeding);
-            window.GetComponent<BreedingWindow>().SetOnChoseCallback(OnAnimalChosen);
+            if (human is Hero)
+            {
+                GameObject window = _windowService.Open(WindowId.Breeding);
+                window.GetComponent<BreedingWindow>().SetOnChoseCallback(OnAnimalChosen);
+            }
         }
 
         private void OnAnimalChosen(AnimalType type)
@@ -53,20 +57,30 @@ namespace Logic.Breeding
 
         private void MoveToPlace(IAnimal animal, Transform place)
         {
-            //TODO: Сделать переход на полностью ручное управление животным, отключив стейт машину.
-            //TODO: Затем отправить его в месту еды и заставлять есть, включая анимацию
-            
-            animal.ForceMove(place);
+            animal.StateMachine.ForceMove(place);
+            animal.Mover.DestinationReached += OnDestinationReached;
             animal.Stats.Deactivate();
+
             _houseService.VacateHouse(animal.AnimalId);
-            
-            _disposable.Add(animal.StateMachine.CurrentStateType.Then(state =>
+
+            void OnDestinationReached()
             {
-                if (state == typeof(Idle))
-                {
-                    animal.StateMachine.Stop();
-                }
-            }));
+                animal.Mover.DestinationReached -= OnDestinationReached;
+                CheckForBeginBreeding();
+            }
+        }
+
+        private void CheckForBeginBreeding()
+        {
+            _animalsInHouse++;
+            
+            if (_animalsInHouse >= MaxAnimals)
+                BeginBreeding();
+        }
+
+        private void BeginBreeding()
+        {
+            Debug.Log("Begin breeding");
         }
     }
 }   

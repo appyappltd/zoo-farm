@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.Logic.Animals.AnimalsStateMachine.States;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Animals.AnimalsStateMachine.States;
@@ -43,6 +44,8 @@ namespace Logic.Animals.AnimalsStateMachine
         private Transform _eatPlace;
 
         private MoveToPosition _forceMove;
+        private Idle _forceIdle;
+        private ForceEat _forceEat;
 
         public void Construct(Transform houseRestPlace, Transform houseEatPlace)
         {
@@ -59,6 +62,12 @@ namespace Logic.Animals.AnimalsStateMachine
             ForceState(_forceMove);
         }
 
+        public void ForceIdle() =>
+            ForceState(_forceIdle);
+        
+        public void ForceEat() =>
+            ForceState(_forceEat);
+
         private void SetUp()
         {
             Bowl bowl = _eatPlace.GetComponent<Bowl>();
@@ -71,7 +80,9 @@ namespace Logic.Animals.AnimalsStateMachine
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
             State moveToEat = new MoveTo(_animator, _mover, _eatPlace);
 
+            _forceIdle = new Idle(_animator);
             _forceMove = new MoveToPosition(_animator, _mover, Vector3.zero);
+            _forceEat = new ForceEat(_animator, _satiety, _satietyReplanishSpeed, bowl.ProgressBarView);
 
             Transition fullBowl = GetOnFullActionTransition(bowl.ProgressBarView);
             Transition fullPeppiness = GetOnFullActionTransition(_peppiness.ProgressBar);
@@ -132,7 +143,13 @@ namespace Logic.Animals.AnimalsStateMachine
                 {
                     _forceMove, new Dictionary<Transition, State>
                     {
-                        {reachTarget, idle},
+                        {reachTarget, _forceIdle},
+                    }
+                },
+                {
+                    _forceEat, new Dictionary<Transition, State>
+                    {
+                        {fullSatiety, _forceIdle},
                     }
                 },
             });

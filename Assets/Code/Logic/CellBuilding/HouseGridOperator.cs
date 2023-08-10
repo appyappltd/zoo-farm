@@ -1,8 +1,10 @@
 using Logic.Animals;
+using NaughtyAttributes;
 using Services;
 using Services.AnimalHouses;
 using Ui.Services;
 using Ui.Windows;
+using UnityEngine;
 
 namespace Logic.CellBuilding
 {

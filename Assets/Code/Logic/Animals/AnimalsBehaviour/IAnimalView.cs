@@ -1,5 +1,6 @@
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
-using StateMachineBase;
+using Logic.Animals.AnimalsStateMachine;
+using Logic.Movement;
 
 namespace Logic.Animals.AnimalsBehaviour
 {
@@ -8,6 +9,8 @@ namespace Logic.Animals.AnimalsBehaviour
         AnimalId AnimalId { get; }
         IStatsProvider Stats { get; }
         HappinessFactor HappinessFactor { get; }
-        StateMachine StateMachine { get; }
+        AnimalStateMachine StateMachine { get; }
+        NavMeshMover Mover { get; }
+        AnimalAnimator Animator { get; }
     }
 }

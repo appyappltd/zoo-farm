@@ -25,8 +25,10 @@ namespace StateMachineBase.States
             _mover.enabled = true;
         }
 
-        protected override void OnExit() =>
+        protected override void OnExit()
+        {
             _mover.enabled = false;
+        }
 
         protected override void OnUpdate() =>
             Animator.SetSpeed(_mover.NormalizedSpeed);

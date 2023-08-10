@@ -11,6 +11,7 @@ namespace Logic.Animals.AnimalsBehaviour
     public class Animal : MonoBehaviour, IAnimal
     {
         [SerializeField] private NavMeshMover _mover;
+        [SerializeField] private AnimalAnimator _animator;
         [SerializeField] private AnimalStateMachine _stateMachine;
         [SerializeField] private Jumper _jumper;
         [SerializeField] private EmotionProvider _emotionProvider;
@@ -25,7 +26,9 @@ namespace Logic.Animals.AnimalsBehaviour
         public AnimalId AnimalId => _animalId;
         public IStatsProvider Stats => _statProvider;
         public HappinessFactor HappinessFactor => _happinessFactor;
-        public StateMachine StateMachine => _stateMachine;
+        public AnimalStateMachine StateMachine => _stateMachine;
+        public NavMeshMover Mover => _mover;
+        public AnimalAnimator Animator => _animator;
 
         private void OnDestroy()
         {
@@ -52,8 +55,8 @@ namespace Logic.Animals.AnimalsBehaviour
 
         public void ForceMove(Transform to)
         {
-            _mover.SetLocation(new Location(to.position, to.rotation));
-            // _stateMachine.ForceMove(to);
+            // _mover.SetLocation(new Location(to.position, to.rotation));
+            _stateMachine.ForceMove(to);
         }
 
         public void Destroy()

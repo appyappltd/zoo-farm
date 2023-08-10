@@ -32,10 +32,13 @@ namespace Logic
 
         private void OnDestroy()
         {
-            _inventory.Added -= ReplenishFromInventory;
-            _food.Empty -= OnEmptyFood;
-            _food.Full -= OnFullFood;
-            _compositeDisposable.Dispose();
+            if (_inventory != null)
+            {
+                _inventory.Added -= ReplenishFromInventory;
+                _food.Empty -= OnEmptyFood;
+                _food.Full -= OnFullFood;
+                _compositeDisposable.Dispose();
+            }
         }
 
         public void Construct(IInventory inventory)
