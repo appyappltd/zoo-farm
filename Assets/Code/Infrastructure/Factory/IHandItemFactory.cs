@@ -1,5 +1,5 @@
-using Data.ItemsData;
 using Logic.Animals;
+using Data.ItemsData;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
 using UnityEngine;

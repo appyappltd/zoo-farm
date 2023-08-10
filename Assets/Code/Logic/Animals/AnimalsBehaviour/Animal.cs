@@ -3,7 +3,6 @@ using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Animals.AnimalsStateMachine;
 using Logic.Movement;
 using Services.StaticData;
-using StateMachineBase;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour

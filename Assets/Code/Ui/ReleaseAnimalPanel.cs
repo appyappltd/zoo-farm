@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using Logic.Animals;
-using NaughtyAttributes;
 using Observables;
 using Services.Animals;
 using Tools;

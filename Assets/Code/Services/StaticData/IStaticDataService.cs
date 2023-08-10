@@ -1,4 +1,5 @@
-﻿using Logic.Animals;
+﻿using Data.ItemsData;
+using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
@@ -24,5 +25,6 @@ namespace Services.StaticData
         ParticleSystem ParticlesById(EffectId id);
         ParticleConfig ParticlesConfig();
         ScaleModifierConfig ScaleModifierById(ScaleModifierId id);
+        AnimalItemStaticData AnimalItemDataById(AnimalType id);
     }
 }

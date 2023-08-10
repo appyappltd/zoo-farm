@@ -1,8 +1,7 @@
-using Data.ItemsData;
-using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
-using Logic.Medical;
+using Data.ItemsData;
+using Infrastructure.Factory;
 using NaughtyAttributes;
 using Services;
 using Services.AnimalHouses;
@@ -27,7 +26,7 @@ namespace Logic
         [Button]
         private void Spawn()
         {
-            var animal = _gameFactory.CreateAnimal(new AnimalItemData(_animalData, MedicalToolId.Syringe), _spawnPoint.position,
+            var animal = _gameFactory.CreateAnimal(_animalData, _spawnPoint.position,
                 _spawnPoint.rotation).GetComponent<Animal>();
             _houseService.TakeQueueToHouse(new QueueToHouse(animal.AnimalId, () => animal));
         }

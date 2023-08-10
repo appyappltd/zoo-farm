@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Infrastructure.Factory;
-using JetBrains.Annotations;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using Infrastructure.Factory;
+using JetBrains.Annotations;
 
 namespace Services.AnimalHouses
 {
@@ -31,7 +31,7 @@ namespace Services.AnimalHouses
             TryTakeHouse(house);
         }
 
-        public void TakeQueueToHouse(QueueToHouse queueToHouse)
+        public void TakeQueueToHouse(QueueToHouse queueToHouse, bool isHighPriority = false)
         {
             AnimalHouse freeHouse = GetFreeHouseFor(queueToHouse.AnimalId.Type);
 

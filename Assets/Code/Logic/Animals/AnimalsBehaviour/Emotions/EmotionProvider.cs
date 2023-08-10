@@ -1,8 +1,8 @@
 using AYellowpaper.SerializedCollections;
 using Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView;
 using UnityEngine;
- 
- namespace Logic.Animals.AnimalsBehaviour.Emotions
+
+namespace Logic.Animals.AnimalsBehaviour.Emotions
  {
      public class EmotionProvider : MonoBehaviour
      {

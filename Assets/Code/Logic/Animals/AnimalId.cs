@@ -1,6 +1,6 @@
 using System;
- 
- namespace Logic.Animals
+
+namespace Logic.Animals
  {
      public sealed class AnimalId
      {

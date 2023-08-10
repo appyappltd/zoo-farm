@@ -9,6 +9,7 @@ namespace Data.ItemsData
     {
         [field: SerializeField] public ItemId ItemId { get; set; }
         [field: SerializeField] public int Weight { get; set; }
+        
         public AnimalType AnimalType;
         public BeginStats BeginStats;
     }

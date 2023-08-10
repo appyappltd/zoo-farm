@@ -1,4 +1,5 @@
 using System;
+using Logic.Animals;
 using Logic.Foods.FoodSettings;
 using Logic.Storages;
 using Ui;

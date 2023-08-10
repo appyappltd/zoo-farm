@@ -5,7 +5,7 @@ using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Progress;
 using UnityEngine;
 
-namespace Code.Logic.Animals.AnimalsStateMachine.States
+namespace Logic.Animals.AnimalsStateMachine.States
 {
     public class Eat : StatChange, IDisposable
     {

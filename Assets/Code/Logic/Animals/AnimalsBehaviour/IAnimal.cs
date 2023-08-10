@@ -1,3 +1,4 @@
+using Data.ItemsData;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour

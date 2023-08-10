@@ -7,7 +7,7 @@ using Observables;
 using Progress;
 using UnityEngine;
 
-namespace Logic
+namespace Logic.Animals
 {
     public class Bowl : MonoBehaviour, IProgressBarProvider
     {

@@ -1,5 +1,5 @@
-using Infrastructure.Factory;
 using Logic.Animals;
+using Infrastructure.Factory;
 using NaughtyAttributes;
 using Services;
 using Services.AnimalHouses;

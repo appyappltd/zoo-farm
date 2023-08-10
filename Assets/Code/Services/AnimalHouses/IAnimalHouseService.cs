@@ -5,7 +5,7 @@ namespace Services.AnimalHouses
 {
     public interface IAnimalHouseService : IService
     {
-        void TakeQueueToHouse(QueueToHouse queueToHouse);
+        void TakeQueueToHouse(QueueToHouse queueToHouse, bool isHighPriority = false);
         void RegisterHouse(AnimalHouse position);
         void VacateHouse(AnimalId withAnimalId);
         IReadOnlyList<QueueToHouse> AnimalsInQueue { get; }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Data.ItemsData;
 using Logic.Animals;
+using Data.ItemsData;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
 using Logic.Spawners;
@@ -21,7 +21,7 @@ namespace Infrastructure.Factory
         void WarmUp();
         GameObject CreateHud();
         GameObject CreateHero(Vector3 vector3);
-        GameObject CreateAnimal(AnimalItemData animalData, Vector3 at, Quaternion rotation);
+        GameObject CreateAnimal(AnimalItemStaticData animalData, Vector3 at, Quaternion rotation);
         GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType);
         GameObject CreateBuildCell(Vector3 at, Quaternion rotation);
         GameObject CreateVisual(VisualType visual, Quaternion quaternion);

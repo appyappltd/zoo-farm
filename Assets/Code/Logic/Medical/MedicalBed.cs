@@ -1,10 +1,9 @@
 using System;
-using Data.ItemsData;
-using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using Data.ItemsData;
+using Infrastructure.Factory;
 using Logic.Effects;
-using Logic.Interactions;
 using Logic.Storages;
 using Logic.Storages.Items;
 using NTC.Global.Cache;
@@ -87,7 +86,7 @@ namespace Logic.Medical
 
             EffectTriggered.Invoke();
             
-            _healingAnimal = _gameFactory.CreateAnimal(_animalData, _spawnPlace.position, _spawnPlace.rotation)
+            _healingAnimal = _gameFactory.CreateAnimal(_animalData.StaticData, _spawnPlace.position, _spawnPlace.rotation)
                 .GetComponent<Animal>();
             
             Healed.Invoke(_healingAnimal.AnimalId);

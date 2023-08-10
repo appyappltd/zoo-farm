@@ -9,12 +9,13 @@ namespace Data.ItemsData
         private readonly AnimalItemStaticData _data;
         private readonly MedicalToolId _treatToolId;
 
-        public ItemId ItemId => _data.ItemId;
-        public int Weight => _data.Weight;
-        public AnimalType Type => _data.AnimalType;
+        public ItemId ItemId => StaticData.ItemId;
+        public int Weight => StaticData.Weight;
+        public AnimalType Type => StaticData.AnimalType;
         public MedicalToolId TreatToolId => _treatToolId;
-        public BeginStats BeginStats => _data.BeginStats;
-        
+        public BeginStats BeginStats => StaticData.BeginStats;
+        public AnimalItemStaticData StaticData => _data;
+
         public AnimalItemData(AnimalItemStaticData data, MedicalToolId treatToolId)
         {
             _data = data;

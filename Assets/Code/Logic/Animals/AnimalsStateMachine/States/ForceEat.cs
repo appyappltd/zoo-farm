@@ -1,4 +1,3 @@
-using Code.Logic.Animals.AnimalsStateMachine.States;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Progress;

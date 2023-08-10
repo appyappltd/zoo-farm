@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using Logic.Animals;
+using Logic.Animals.AnimalsBehaviour;
 using Data.ItemsData;
 using Infrastructure.AssetManagement;
 using Infrastructure.Builders;
-using Logic.Animals;
-using Logic.Animals.AnimalsBehaviour;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
 using Logic.Spawners;
@@ -75,9 +75,9 @@ namespace Infrastructure.Factory
         public GameObject CreateHud() =>
             _assets.Instantiate(AssetPath.HudPath);
 
-        public GameObject CreateAnimal(AnimalItemData animalData, Vector3 at, Quaternion rotation)
+        public GameObject CreateAnimal(AnimalItemStaticData animalData, Vector3 at, Quaternion rotation)
         {
-            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalData.Type}", at, rotation);
+            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalData.AnimalType}", at, rotation);
             _animalBuilder.Build(animal.GetComponent<Animal>(), animalData);
             return animal;
         }

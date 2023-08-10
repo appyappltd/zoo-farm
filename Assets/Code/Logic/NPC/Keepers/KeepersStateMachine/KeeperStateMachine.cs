@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Code.Logic.NPC.Keepers.KeepersStateMachine.States;
 using Logic.Animals;
+using Code.Logic.NPC.Keepers.KeepersStateMachine.States;
 using Logic.Foods.Vendor;
 using Logic.Movement;
 using Logic.NPC;

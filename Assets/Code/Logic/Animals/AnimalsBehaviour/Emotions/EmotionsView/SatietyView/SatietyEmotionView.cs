@@ -1,4 +1,7 @@
-﻿using Logic.Animals.AnimalsBehaviour.AnimalStats;
+﻿using Logic.Animals.AnimalsBehaviour;
+using Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView;
+using Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView;
+using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using NTC.Global.System;
 using Observables;
 using StaticData;

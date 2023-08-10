@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data.ItemsData;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Foods.FoodSettings;
@@ -26,12 +27,14 @@ namespace Services.StaticData
         private const string AnimalIconConfigPath = "StaticData/AnimalIconConfigs";
         private const string ParticleConfigPath = "StaticData/ParticleConfigs";
         private const string ScaleModifierPath = "StaticData/ScaleModifierConfigs";
+        private const string AnimalItemsPath = "StaticData/HandItemConfigs/Animals";
 
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
         private Dictionary<MedicalToolId, MedToolStandConfig> _medStandConfigs;
         private Dictionary<FoodId, GardenBedConfig> _gardenBedConfigs;
         private Dictionary<ScaleModifierId, ScaleModifierConfig> _scaleModifierConfigs;
+        private Dictionary<AnimalType, AnimalItemStaticData> _animalItemConfigs;
 
         private SpawnPlaceConfig _spawnPlaceConfig;
         private AnimalIconConfig _animalIcons;
@@ -43,6 +46,7 @@ namespace Services.StaticData
             _medStandConfigs = LoadFor<MedicalToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
             _gardenBedConfigs = LoadFor<FoodId, GardenBedConfig>(GardenBedConfigPath, x => x.FoodId);
             _scaleModifierConfigs = LoadFor<ScaleModifierId, ScaleModifierConfig>(ScaleModifierPath, x => x.ModifierId);
+            _animalItemConfigs = LoadFor<AnimalType, AnimalItemStaticData>(AnimalItemsPath, x => x.AnimalType);
 
             _animalIcons = Resources.Load<AnimalIconConfig>(AnimalIconConfigPath);
             _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
@@ -64,10 +68,14 @@ namespace Services.StaticData
 
         public Sprite IconByAnimalType(AnimalType animalIdType) =>
             _animalIcons.AnimalIcons[animalIdType];
+        
 
         public ScaleModifierConfig ScaleModifierById(ScaleModifierId id) =>
-            _scaleModifierConfigs[id];
+            GetDataFor(id, _scaleModifierConfigs);
 
+        public AnimalItemStaticData AnimalItemDataById(AnimalType id) =>
+            GetDataFor(id, _animalItemConfigs);
+        
         public ParticleSystem ParticlesById(EffectId id) =>
             _particlesConfig.Particles[id];
 

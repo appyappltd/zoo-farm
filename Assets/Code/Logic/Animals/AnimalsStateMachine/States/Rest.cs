@@ -1,7 +1,7 @@
 ﻿using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 
-namespace Code.Logic.Animals.AnimalsStateMachine.States
+namespace Logic.Animals.AnimalsStateMachine.States
 {
     public class Rest : StatChange
     {

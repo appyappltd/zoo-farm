@@ -1,6 +1,6 @@
+using Logic.Animals;
 using Data.ItemsData;
 using Infrastructure.AssetManagement;
-using Logic.Animals;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
 using UnityEngine;

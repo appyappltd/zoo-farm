@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
-using Code.Logic.Animals.AnimalsStateMachine.States;
+using Logic.Animals.AnimalsStateMachine.Transitions;
+using Logic.Animals.AnimalsStateMachine.States;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
-using Logic.Animals.AnimalsStateMachine.States;
-using Logic.Animals.AnimalsStateMachine.Transitions;
 using Logic.Movement;
 using NaughtyAttributes;
 using Progress;
 using StateMachineBase;
 using StateMachineBase.States;
 using StateMachineBase.Transitions;
-using Tools.Constants;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine

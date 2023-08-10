@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Data.ItemsData;
 using Logic.Animals;
-using Logic.Animals.AnimalsBehaviour;
+using Data.ItemsData;
 using Logic.Medical;
 using Logic.Storages.Items;
 using StaticData;
