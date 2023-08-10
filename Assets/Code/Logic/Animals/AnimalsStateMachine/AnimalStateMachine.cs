@@ -10,6 +10,7 @@ using Progress;
 using StateMachineBase;
 using StateMachineBase.States;
 using StateMachineBase.Transitions;
+using Tools.Constants;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine
@@ -18,6 +19,7 @@ namespace Logic.Animals.AnimalsStateMachine
     {
         [Header("Controls")] [SerializeField] private AnimalAnimator _animator;
         [SerializeField] private NavMeshMover _mover;
+        [SerializeField] private Aligner _aligner;
 
         [Header("Stats")] [Space] [SerializeField]
         private StatIndicator _vitality;
@@ -43,7 +45,7 @@ namespace Logic.Animals.AnimalsStateMachine
         private Transform _restPlace;
         private Transform _eatPlace;
 
-        private MoveToPosition _forceMove;
+        private ForceMove _forceMove;
         private Idle _forceIdle;
         private ForceEat _forceEat;
 
@@ -58,13 +60,18 @@ namespace Logic.Animals.AnimalsStateMachine
 
         public void ForceMove(Transform to)
         {
-            _forceMove.SetNewPosition(to.position);
+            _forceMove.SetNewPosition(to);
             ForceState(_forceMove);
         }
 
+        public void SetForceBowl(Bowl bowl)
+        {
+            _forceEat.SetBowl(bowl);
+        }
+        
         public void ForceIdle() =>
             ForceState(_forceIdle);
-        
+
         public void ForceEat() =>
             ForceState(_forceEat);
 
@@ -78,11 +85,11 @@ namespace Logic.Animals.AnimalsStateMachine
             State waitForFood = new Idle(_animator);
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
-            State moveToEat = new MoveTo(_animator, _mover, _eatPlace);
+            State moveToEat = new MoveToAndRotate(_animator, _mover, _eatPlace, _aligner);
 
             _forceIdle = new Idle(_animator);
-            _forceMove = new MoveToPosition(_animator, _mover, Vector3.zero);
-            _forceEat = new ForceEat(_animator, _satiety, _satietyReplanishSpeed, bowl.ProgressBarView);
+            _forceMove = new ForceMove(_animator, _mover, _aligner);
+            _forceEat = new ForceEat(_animator, _satiety, _satietyReplanishSpeed);
 
             Transition fullBowl = GetOnFullActionTransition(bowl.ProgressBarView);
             Transition fullPeppiness = GetOnFullActionTransition(_peppiness.ProgressBar);
@@ -177,13 +184,6 @@ namespace Logic.Animals.AnimalsStateMachine
             barView.Empty += transition.SetConditionTrue;
             transition.SetUnsubscribeAction(() => barView.Empty -= transition.SetConditionTrue);
             return transition;
-        }
-
-        [Button]
-        private void TestForceMove()
-        {
-            _forceMove.SetNewPosition(Vector3.zero);
-            ForceState(_forceMove);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace StateMachineBase
         private State _currentState;
         private State _initialState;
 
+        private bool _isStateChanging;
+
         private void OnDestroy()
         {
             foreach (var transition in _disposable)
@@ -33,8 +35,10 @@ namespace StateMachineBase
             ChangeState(_initialState);
         }
 
-        protected override void Run() =>
+        protected override void Run()
+        {
             _currentState.Update();
+        }
 
         protected void ForceState(State state)
         {
@@ -65,6 +69,7 @@ namespace StateMachineBase
 
         private void ChangeState(State newState)
         {
+            _isStateChanging = true;
             _currentState?.Exit();
             _currentState = newState;
             _currentState.Enter();

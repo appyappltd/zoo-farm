@@ -5,6 +5,7 @@ namespace Infrastructure.AssetManagement
         public const string HeroPath = "Prefabs/Hero";
         public const string AnimalPath = "Prefabs/Animals";
         public const string AnimalHousePath = "Prefabs/AnimalHouses";
+        public const string ChildAnimalPath = "Prefabs/Animals/Childs";
         public const string BuildCellPath = "Prefabs/BuildCell";
         public const string VisualsPath = "Prefabs/Visuals";
         public const string CollectableCoinPath = "Prefabs/Coin";
@@ -15,12 +16,12 @@ namespace Infrastructure.AssetManagement
         public const string HandItemPath = "Prefabs/HandItems";
         public const string PlantPath = "Prefabs/Plants";
         public const string KeeperPath = "Prefabs/Keeper";
-        
+
         public const string UIRootPath = "Prefabs/UI/UIRoot";
         public const string HudPath = "Prefabs/UI/HUD";
         public const string BuildHousePanel = "Prefabs/UI/Panels/BuildHouse";
         public const string ReleaseAnimalPanel = "Prefabs/UI/Panels/ReleaseAnimal";
-        
+
         public const string EffectsPath = "Effects";
     }
 }

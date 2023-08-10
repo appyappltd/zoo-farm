@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f819800eab414cb2902a415326063947, type: 3}
   m_Name: DefaultGradualTimer
   m_EditorClassIdentifier: 
-  _initialDelay: 0.3
+  _initialDelay: 0.2
   _finalDelay: 0.02
-  _delaySteps: 30
+  _delaySteps: 20
   _delayCurve:
     serializedVersion: 2
     m_Curve:

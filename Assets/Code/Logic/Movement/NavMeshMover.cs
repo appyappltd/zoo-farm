@@ -18,8 +18,6 @@ namespace Logic.Movement
 
         private Quaternion _finalRotation;
 
-        public event Action DestinationReached = () => { };
-        
         public Vector3 DestinationPoint => _agent.destination;
         public float Distance => _agent.remainingDistance;
         public float StoppingDistance => _agent.stoppingDistance;
@@ -40,8 +38,7 @@ namespace Logic.Movement
                 return;
             
             enabled = false;
-            DestinationReached.Invoke();
-                
+
             if (_isAlignAtEnd)
                 _aligner.Aligne(_finalRotation);
         }

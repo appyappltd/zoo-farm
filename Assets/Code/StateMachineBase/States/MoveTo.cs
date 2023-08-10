@@ -6,12 +6,12 @@ namespace StateMachineBase.States
 {
     public class MoveTo : Move
     {
-        private readonly Transform _target;
+        protected readonly Transform Target;
 
         public MoveTo(IPrimeAnimator animator, NavMeshMover mover, Transform target) : base(animator, mover) =>
-            _target = target;
+            Target = target;
 
         protected override Vector3 GetMovePosition() =>
-            _target.position;
+            Target.position;
     }
 }

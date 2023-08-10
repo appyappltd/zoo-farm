@@ -7,8 +7,6 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
 {
     public class StatsProvider : MonoCache, IStatsProvider
     {
-        // private readonly List<IStatOperateRule> _operateRules = new List<IStatOperateRule>();
-
         [SerializeField] private StatIndicator _vitality;
         [SerializeField] private StatIndicator _satiety;
         [SerializeField] private StatIndicator _peppiness;
@@ -47,8 +45,6 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
             _peppinessValue = _peppiness.ProgressBar.Current.Value;
             _ageValue = _age.ProgressBar.Current.Value;
 #endif
-
-            // InitStatOperateRules();
         }
 
         public void Construct(BeginStats beginStats)
@@ -59,10 +55,5 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
             _peppiness.Construct(beginStats.RandomPeppiness);
             _age.Construct(beginStats.RandomAge);
         }
-
-        // private void InitStatOperateRules()
-        // {
-        //     _operateRules.Add(new VitalityOperateRule(_vitality, _satiety, _peppiness));
-        // }
     }
 }

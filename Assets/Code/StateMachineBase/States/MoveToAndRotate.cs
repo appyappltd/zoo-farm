@@ -6,15 +6,16 @@ namespace StateMachineBase.States
 {
     public class MoveToAndRotate : MoveTo
     {
-        private readonly NavMeshMover _mover;
+        private readonly Aligner _aligner;
 
-        public MoveToAndRotate(IPrimeAnimator animator, NavMeshMover mover, Transform target) : base(animator, mover, target)
+        public MoveToAndRotate(IPrimeAnimator animator, NavMeshMover mover, Transform target, Aligner aligner) : base(animator, mover, target)
         {
-            _mover = mover;
+            _aligner = aligner;
         }
 
         protected override void OnExit()
         {
+            _aligner.Aligne(Target.rotation);
             base.OnExit();
         }
     }

@@ -32,7 +32,9 @@ namespace Code.Logic.Animals.AnimalsStateMachine.States
             _barIndicator.Enable();
         }
 
-        protected override void OnUpdate() =>
+        protected override void OnUpdate()
+        {
             _barOperator.Update(Time.deltaTime);
+        }
     }
 }

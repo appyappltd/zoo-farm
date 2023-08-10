@@ -244,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1584153114449162156}
   _mover: {fileID: 5921953604120698182}
+  _aligner: {fileID: 2475102383029443612}
   _vitality: {fileID: 6272545603082111471}
   _satiety: {fileID: 4985158875982950670}
   _peppiness: {fileID: 4862242970874921462}
@@ -253,7 +254,7 @@ MonoBehaviour:
   _hungerDelay: 10
   _maxWanderDistance: 4
   _idleDelayRange: {x: 2, y: 5}
-  _placeOffset: 1
+  _placeOffset: 0.12
 --- !u!114 &1117839774714342269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +334,7 @@ GameObject:
   - component: {fileID: 3053055107136101561}
   - component: {fileID: 4633396415940825508}
   - component: {fileID: 5604806523560033372}
+  - component: {fileID: 2475102383029443612}
   m_Layer: 8
   m_Name: AnimalAgent
   m_TagString: Untagged
@@ -372,7 +374,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 0
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -522,6 +524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183de22946a246b9a0ff88ccb8e7770b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mover: {fileID: 5921953604120698182}
+  _animator: {fileID: 1584153114449162156}
   _stateMachine: {fileID: 6021254209361128710}
   _jumper: {fileID: 4427930827428211018}
   _emotionProvider: {fileID: 7552548722606521529}
@@ -571,6 +575,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isEnableDecrementation: 1
+--- !u!114 &2475102383029443612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8643315356767832591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea54b987ba1de0a498ed6fe2905da0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotateSpeed: 5
 --- !u!1001 &8294897801359430536
 PrefabInstance:
   m_ObjectHideFlags: 0

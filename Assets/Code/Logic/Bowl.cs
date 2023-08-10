@@ -19,6 +19,8 @@ namespace Logic
 
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
+        [SerializeField] private Transform _bowlPlace;
+
         private IInventory _inventory;
         private ProgressBar _food;
         private IItem _eatenFood;
@@ -87,7 +89,7 @@ namespace Logic
             if (_inventory.TryGet(ItemId.Food, out IItem item))
             {
                 _foodLeft--;
-                item.Mover.Move(transform, transform);
+                item.Mover.Move(_bowlPlace, _bowlPlace);
                 _eatenFood = item;
             }
         }

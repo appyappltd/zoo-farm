@@ -11,9 +11,6 @@ namespace StateMachineBase.States
         public MoveToPosition(IPrimeAnimator animator, NavMeshMover mover, Vector3 target) : base(animator, mover) =>
             _position = target;
 
-        public void SetNewPosition(Vector3 newPosition) =>
-            _position = newPosition;
-
         protected override Vector3 GetMovePosition() =>
             _position;
     }

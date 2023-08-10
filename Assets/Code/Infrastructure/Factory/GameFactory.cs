@@ -82,6 +82,9 @@ namespace Infrastructure.Factory
             return animal;
         }
 
+        public GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type) =>
+            _assets.Instantiate($"{AssetPath.ChildAnimalPath}/{type}", at, rotation);
+
         public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType) =>
             InstantiateRegistered($"{AssetPath.AnimalHousePath}/{animalType}House", at, rotation);
 

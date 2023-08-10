@@ -26,6 +26,11 @@ namespace Logic.Animals.AnimalsBehaviour
             _satietyBar.Full += IncrementFactor;
         }
 
+        public void ResetFactor()
+        {
+            _factor = 1;
+        }
+        
         private void IncrementFactor()
         {
             if (_satietyBar.IsEmpty)
