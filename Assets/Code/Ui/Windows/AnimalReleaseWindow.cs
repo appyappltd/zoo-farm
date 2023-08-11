@@ -38,8 +38,7 @@ namespace Ui.Windows
         {
             _animalsService = animalsService;
 
-            IEnumerable<IAnimal> animalTypes = _animalsService.Animals.Where(animal => animal.Stats.Vitality.IsFull)
-                .Distinct(new AnimalByTypeComparer());
+            IEnumerable<IAnimal> animalTypes = _animalsService.GetReleaseReady();
 
             foreach (IAnimal animal in animalTypes)
             {

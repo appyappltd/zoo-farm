@@ -1598,6 +1598,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6024936477913870918}
     m_Modifications:
+    - target: {fileID: 117306346615242139, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 824840818623168513, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -1655,6 +1659,10 @@ PrefabInstance:
       value: Emotions
       objectReference: {fileID: 0}
     - target: {fileID: 2732117154703930001, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747572850375554094, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

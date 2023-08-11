@@ -1,6 +1,4 @@
 using System;
-using AYellowpaper;
-using Logic.AnimatorStateMachine;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
@@ -37,12 +35,18 @@ namespace Logic.Movement
             if (_agent.isStopped == false)
                 return;
             
-            enabled = false;
+            Stop();
 
             if (_isAlignAtEnd)
                 _aligner.Aligne(_finalRotation);
         }
 
+        public void Stop()
+        {
+            enabled = false;
+            _agent.isStopped = true;
+        }
+        
         public void ActivateAlignAtEnd() =>
             _isAlignAtEnd = true;
         
@@ -83,8 +87,8 @@ namespace Logic.Movement
                     Debug.DrawLine(cornerFrom, cornerTo, Color.blue, 10f);
                 }
 #endif
-
                 enabled = true;
+                _agent.isStopped = false;
                 _agent.SetPath(path);
                 return;
             }

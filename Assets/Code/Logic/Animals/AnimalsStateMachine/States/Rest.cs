@@ -7,5 +7,10 @@ namespace Logic.Animals.AnimalsStateMachine.States
     {
         public Rest(AnimalAnimator animator, StatIndicator barIndicator, float changingSpeed) : base(animator, barIndicator, changingSpeed) { }
         protected override void PlayAnimation(AnimalAnimator animator) => animator.SetRest();
+
+        protected override void OnEnter()
+        {
+            base.OnEnter();
+        }
     }
 }

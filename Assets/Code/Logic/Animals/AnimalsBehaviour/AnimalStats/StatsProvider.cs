@@ -31,11 +31,21 @@ namespace Logic.Animals.AnimalsBehaviour.AnimalStats
         public IProgressBarView Peppiness => _peppiness.ProgressBar;
         public IProgressBarView Age => _age.ProgressBar;
 
-        public void Activate() =>
-            enabled = true;
+        public void Activate()
+        {
+            _vitality.Disable();
+            _satiety.Disable();
+            _peppiness.Disable();
+            _age.Disable();
+        }
 
-        public void Deactivate() =>
-            enabled = false;
+        public void Deactivate()
+        {
+            _vitality.Disable();
+            _satiety.Disable();
+            _peppiness.Disable();
+            _age.Disable();
+        }
 
         protected override void Run()
         {

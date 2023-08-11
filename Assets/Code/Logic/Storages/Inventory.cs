@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Data.ItemsData;
 using Logic.Storages.Items;
 
@@ -45,12 +46,17 @@ namespace Logic.Storages
             Added.Invoke(item);
         }
 
-        public bool CanAdd(IItem item) =>
-            item.Weight + _weight <= _maxWeight;
+        public bool CanAdd(IItem item)
+        {
+            if (_isActive == false)
+                return false;
+
+            return item.Weight + _weight <= _maxWeight;
+        }
 
         public IItem Get()
         {
-            IItem result = _cashedGetItem;
+            IItem result = _cashedGetItem ?? _items.First();
             _cashedGetItem = null;
             _items.Remove(result);
             _weight -= result.Weight;
@@ -61,6 +67,9 @@ namespace Logic.Storages
         public bool TryPeek(ItemId byId, out IItem item)
         {
             item = null;
+
+            if (_isActive == false)
+                return false;
 
             if (_weight <= 0)
                 return false;

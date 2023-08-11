@@ -1,7 +1,4 @@
-﻿using Logic.Animals.AnimalsBehaviour;
-using Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView;
-using Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView;
-using Logic.Animals.AnimalsBehaviour.AnimalStats;
+﻿using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using NTC.Global.System;
 using Observables;
 using StaticData;
@@ -29,7 +26,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
         private void Awake()
         {
             _active = _staticSatietyView.gameObject;
-            _active.Enable();
+            // _active.Enable();
             _dynamicSatietyBarView.Construct(_iconsConfig);
         }
 

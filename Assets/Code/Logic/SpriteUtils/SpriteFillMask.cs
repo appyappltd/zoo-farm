@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using NaughtyAttributes;
+using NTC.Global.System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -37,6 +38,12 @@ namespace Logic.SpriteUtils
             normalizedFill = Mathf.Clamp01(normalizedFill);
             _mask.localScale = Vector3.Lerp(_hiddenMaskScale, _shownMaskScale, normalizedFill);
         }
+
+        public void Activate() =>
+            gameObject.Enable();
+
+        public void Deactivate() =>
+            gameObject.Disable();
 
         [Button("CaptureHiddenScale", EButtonEnableMode.Editor)]
         [Conditional("UNITY_EDITOR")]

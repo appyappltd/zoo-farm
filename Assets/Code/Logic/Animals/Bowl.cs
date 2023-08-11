@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Data.ItemsData;
 using DelayRoutines;
 using Logic.Storages;
@@ -11,7 +12,7 @@ namespace Logic.Animals
 {
     public class Bowl : MonoBehaviour, IProgressBarProvider
     {
-        private const float ReplanishDelayAfterEmptyFood = 0.2f;
+        private const float ReplenishDelayAfterEmptyFood = 0.2f;
 #if UNITY_EDITOR
         [ProgressBar("Food", 4f, EColor.Green)]
         [SerializeField] private float _foodValue;
@@ -28,7 +29,7 @@ namespace Logic.Animals
         private bool _isReplenishing;
         private int _foodLeft;
 
-        private DelayRoutine _delayedReplenish;
+        private List<DelayRoutine> _routines = new List<DelayRoutine>();
 
         public IProgressBar ProgressBarView => _food;
 
@@ -59,10 +60,8 @@ namespace Logic.Animals
             _isReplenishing = true;
         }
 
-        private void ReplenishFromInventory(IItem item)
-        {
+        private void ReplenishFromInventory(IItem item) =>
             Replenish(item.Weight);
-        }
 
         private void Replenish(int amount)
         {
@@ -72,10 +71,13 @@ namespace Logic.Animals
             }
             else
             {
-                new DelayRoutine()
+                DelayRoutine delayRoutine = new DelayRoutine()
                     .WaitUntil(() => _food.IsEmpty)
-                    .WaitForSeconds(ReplanishDelayAfterEmptyFood)
-                    .Then(() => _food.Replenish(amount)).Play();
+                    .WaitForSeconds(ReplenishDelayAfterEmptyFood)
+                    .Then(() => _food.Replenish(amount));
+                
+                _routines.Add(delayRoutine);
+                delayRoutine.Play();
             }
         }
 
@@ -110,6 +112,19 @@ namespace Logic.Animals
         {
             _isReplenishing = false;
             _foodLeft = _inventory.Weight;
+        }
+
+        public void Clear()
+        {
+            _isReplenishing = true;
+            
+            foreach (var routine in _routines)
+                routine.Kill();
+            
+            _routines.Clear();
+
+            _food.Reset();
+            ClearEatenFood();
         }
     }
 }

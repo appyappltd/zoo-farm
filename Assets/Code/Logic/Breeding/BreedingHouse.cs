@@ -1,12 +1,17 @@
 using System.Collections.Generic;
+using System.Linq;
 using Data.ItemsData;
+using DelayRoutines;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Infrastructure.Factory;
 using Logic.Interactions;
 using Logic.Player;
+using Logic.SpriteUtils;
 using Logic.Storages;
+using NTC.Global.System;
 using Observables;
+using Progress;
 using Services;
 using Services.AnimalHouses;
 using Services.Animals;
@@ -15,7 +20,6 @@ using StateMachineBase.States;
 using Ui;
 using Ui.Services;
 using Ui.Windows;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Logic.Breeding
@@ -23,7 +27,7 @@ namespace Logic.Breeding
     public class BreedingHouse : MonoBehaviour
     {
         private const int MaxAnimals = 2;
-        
+
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
         [Header("References")]
@@ -32,6 +36,7 @@ namespace Logic.Breeding
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private ProductReceiver _productReceiver;
         [SerializeField] private BarIconView _barIconView;
+        [SerializeField] private SpriteFillMask _growthBar;
         [SerializeField] private Transform _firstPlace;
         [SerializeField] private Transform _secondPlace;
         [SerializeField] private Transform _childPlace;
@@ -47,11 +52,14 @@ namespace Logic.Breeding
         private IStaticDataService _staticData;
 
         private List<IAnimal> _animals = new List<IAnimal>(2);
+        private DelayRoutine _afterbeginBreedingDelay;
 
         private int _currentFeedingCycle;
         private int _animalsInHouse;
         private AnimalType _breedingAnimalType;
-        
+        private GameObject _childModel;
+
+        public bool IsBusy => _animals.Count > 0;
 
         private void Awake()
         {
@@ -62,7 +70,7 @@ namespace Logic.Breeding
             _staticData = AllServices.Container.Single<IStaticDataService>();
 
             _humanInteraction.Interacted += OnInteracted;
-            
+
             Init();
         }
 
@@ -71,6 +79,8 @@ namespace Logic.Breeding
             _humanInteraction.Interacted -= OnInteracted;
             _bowl.ProgressBarView.Full -= BeginEat;
             _bowl.ProgressBarView.Empty -= EndEat;
+            
+            _afterbeginBreedingDelay.Kill();
         }
 
         private void Init()
@@ -80,9 +90,17 @@ namespace Logic.Breeding
             _storage.Construct(_inventoryHolder.Inventory);
             _barIconView.Construct(_bowl.ProgressBarView);
             _productReceiver.Construct(_inventoryHolder.Inventory);
+            _growthBar.Deactivate();
+            _inventoryHolder.Inventory.Deactivate();
 
             _bowl.ProgressBarView.Full += BeginEat;
             _bowl.ProgressBarView.Empty += EndEat;
+
+            _afterbeginBreedingDelay = new DelayRoutine();
+            _afterbeginBreedingDelay
+                .WaitForSeconds(1f)
+                .Then(_disposable.Dispose)
+                .Then(_inventoryHolder.Inventory.Activate);
         }
 
         private void BeginEat()
@@ -91,25 +109,58 @@ namespace Logic.Breeding
             {
                 IAnimal animal = _animals[index];
                 animal.StateMachine.ForceEat();
-                _currentFeedingCycle++;
             }
+            
+            _currentFeedingCycle++;
         }
 
         private void EndEat()
         {
+            UpdateGrowthBar();
+
             if (_currentFeedingCycle >= _feedingCyclesToMaturity)
                 FinishBreedingProcess();
         }
 
+        private void UpdateGrowthBar() =>
+            _growthBar.SetFill(_currentFeedingCycle / (float) _feedingCyclesToMaturity);
+
         private void FinishBreedingProcess()
         {
             AnimalItemStaticData newAnimalType = _staticData.AnimalItemDataById(_animals[0].AnimalId.Type);
-            IAnimal animal = _gameFactory.CreateAnimal(newAnimalType, _childPlace.position, _childPlace.rotation).GetComponent<IAnimal>();
-            _houseService.TakeQueueToHouse(new QueueToHouse(animal.AnimalId, () => animal), true);
+            Destroy(_childModel);
+            _animals.Add( _gameFactory.CreateAnimal(newAnimalType, _childPlace.position, _childPlace.rotation)
+                .GetComponent<IAnimal>());
+
+            int animalsCount = _animals.Count;
+            
+            for (var index = 0; index < animalsCount; index++)
+            {
+                IAnimal animal = _animals.First();
+                SendAnimalToFreeMoving(animal);
+            }
+            
+            _inventoryHolder.Inventory.Deactivate();
+        }
+
+        private void SendAnimalToFreeMoving(IAnimal animal)
+        {
+            Debug.Log($"send animal {_animals.Count}");
+            
+            _houseService.TakeQueueToHouse(new QueueToHouse(animal.AnimalId, () =>
+            {
+                _animals.Remove(animal);
+                animal.StateMachine.Play();
+                animal.Stats.Activate();
+                return animal;
+            }), true);
         }
 
         private void OnInteracted(Human human)
         {
+            if (IsBusy)
+                return;
+            
             if (human is Hero)
             {
                 GameObject window = _windowService.Open(WindowId.Breeding);
@@ -126,15 +177,18 @@ namespace Logic.Breeding
         }
 
         private void MoveToPlace(IAnimal animal, Transform place)
-        {
+        {   
             _animals.Add(animal);
             animal.StateMachine.ForceMove(place);
             animal.Stats.Deactivate();
+            IProgressBar statsSatiety = (IProgressBar) animal.Stats.Satiety;
+            statsSatiety.SetMaxNonFull();
             animal.StateMachine.SetForceBowl(_bowl);
             _disposable.Add(animal.StateMachine.CurrentStateType.Then(state =>
             {
                 if (state == typeof(Idle))
                 {
+                    _animalsInHouse++;
                     CheckForBeginBreeding();
                 }
             }));
@@ -144,16 +198,17 @@ namespace Logic.Breeding
 
         private void CheckForBeginBreeding()
         {
-            _animalsInHouse++;
-            
             if (_animalsInHouse >= MaxAnimals)
                 BeginBreeding();
         }
 
         private void BeginBreeding()
         {
-            Debug.Log("Begin breeding");
-            _gameFactory.CreateAnimalChild(_childPlace.position, _childPlace.rotation, _breedingAnimalType);
+            Debug.Log("BeginBreeding");
+            _growthBar.Activate();
+            UpdateGrowthBar();
+            _childModel = _gameFactory.CreateAnimalChild(_childPlace.position, _childPlace.rotation, _breedingAnimalType);
+            _afterbeginBreedingDelay.Play();
         }
     }
-}   
+}

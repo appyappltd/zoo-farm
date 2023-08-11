@@ -1,7 +1,9 @@
 using System;
-using Logic.Animals;
+using Data.ItemsData;
 using Logic.Foods.FoodSettings;
 using Logic.Storages;
+using Logic.Storages.Items;
+using NTC.Global.System;
 using Ui;
 using UnityEngine;
 
@@ -44,15 +46,6 @@ namespace Logic.Animals
         private void OnDestroy() =>
             _bowl.ProgressBarView.Empty += OnBowlEmpty;
 
-        private void Init()
-        {
-            _inventoryHolder.Construct();
-            _bowl.Construct(_inventoryHolder.Inventory);
-            _storage.Construct(_inventoryHolder.Inventory);
-            _barIconView.Construct(_bowl.ProgressBarView);
-            _productReceiver.Construct(_inventoryHolder.Inventory);
-        }
-
         public void AttachAnimal(AnimalId animalId)
         {
             if (_isTaken)
@@ -69,6 +62,24 @@ namespace Logic.Animals
 
             _isTaken = false;
             _animalId = null;
+        }
+
+        public void Clear()
+        {
+            _bowl.Clear();
+            _barIconView.Enable();
+
+            while (_inventoryHolder.Inventory.TryGet(ItemId.All, out IItem result))
+                result.Destroy();
+        }
+
+        private void Init()
+        {
+            _inventoryHolder.Construct();
+            _bowl.Construct(_inventoryHolder.Inventory);
+            _storage.Construct(_inventoryHolder.Inventory);
+            _barIconView.Construct(_bowl.ProgressBarView);
+            _productReceiver.Construct(_inventoryHolder.Inventory);
         }
 
         private void OnBowlEmpty() =>

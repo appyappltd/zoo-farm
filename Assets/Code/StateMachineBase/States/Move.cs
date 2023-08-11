@@ -22,11 +22,12 @@ namespace StateMachineBase.States
             _animator.SetMove();
             Vector3 movePosition = GetMovePosition();
             _mover.SetDestination(movePosition);
-            _mover.enabled = true;
         }
 
-        protected override void OnExit() =>
-            _mover.enabled = false;
+        protected override void OnExit()
+        {
+            _mover.Stop();
+        }
 
         protected override void OnUpdate() =>
             Animator.SetSpeed(_mover.NormalizedSpeed);

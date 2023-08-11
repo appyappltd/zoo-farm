@@ -4,6 +4,7 @@ using System.Linq;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services.AnimalHouses;
+using Tools.Comparers;
 using UnityEngine;
 
 namespace Services.Animals
@@ -50,10 +51,16 @@ namespace Services.Animals
         public IAnimal[] GetAnimals(AnimalType panelAnimalType) =>
             _animals.FindAll(animal => animal.AnimalId.Type == panelAnimalType).ToArray();
 
-        public List<AnimalType> GetBreedingReady()
+        public IEnumerable<AnimalType> GetBreedingReady()
         {
             return _animals.GroupBy(animal => animal.AnimalId.Type).Where(grouping => grouping.Count() > 1)
-                .Select(grouping => grouping.Key).ToList();
+                .Select(grouping => grouping.Key);
+        }
+
+        public IEnumerable<IAnimal> GetReleaseReady()
+        {
+            return Animals.Where(animal => animal.Stats.Vitality.IsFull)
+                .Distinct(new AnimalByTypeComparer());
         }
 
         public BreedingPair SelectPairForBreeding(AnimalType byType)
@@ -61,7 +68,7 @@ namespace Services.Animals
             IAnimal[] animalsToPair = Animals.OrderBy(animal => animal.HappinessFactor.Factor).Take(AnimalsInPair).ToArray();
             return new BreedingPair(animalsToPair[0], animalsToPair[1]);
         }
-        
+
         public AnimalCountData GetAnimalsCount(AnimalType panelAnimalType)
         {
             IAnimal[] animals = GetAnimals(panelAnimalType);

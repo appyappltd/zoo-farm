@@ -11,12 +11,13 @@ namespace Services.Animals
         int TotalAnimalCount { get; }
         int ReleaseReadyAnimalCount { get; }
         IReadOnlyList<IAnimal> Animals { get; }
-        List<AnimalType> GetBreedingReady();
+        IEnumerable<AnimalType> GetBreedingReady();
         void Register(IAnimal animal);
         void Release(IAnimal animal);
         void Release(AnimalType animalType);
         IAnimal[] GetAnimals(AnimalType panelAnimalType);
         AnimalCountData GetAnimalsCount(AnimalType panelAnimalType);
         BreedingPair SelectPairForBreeding(AnimalType byType);
+        IEnumerable<IAnimal> GetReleaseReady();
     }
 }

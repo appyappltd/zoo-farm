@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace StateMachineBase
 {
@@ -36,11 +37,12 @@ namespace StateMachineBase
         public void Update()
         {
             OnUpdate();
-            
+
             for (int i = 0; i < _transitions.Count; i++)
             {
                 _transitions[i].Update();
             }
+            
         }
     }
 }

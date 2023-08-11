@@ -16,6 +16,7 @@ namespace Services.AnimalHouses
 
         private readonly List<AnimalHouse> _animalHouses = new List<AnimalHouse>();
         private readonly List<QueueToHouse> _animalsInQueue = new List<QueueToHouse>();
+        private readonly List<QueueToHouse> _animalsInPriorityQueue = new List<QueueToHouse>();
         private readonly Queue<AnimalHouse> _feedQueue = new Queue<AnimalHouse>();
 
         public IReadOnlyList<QueueToHouse> AnimalsInQueue => _animalsInQueue;
@@ -35,9 +36,11 @@ namespace Services.AnimalHouses
         {
             AnimalHouse freeHouse = GetFreeHouseFor(queueToHouse.AnimalId.Type);
 
+            List<QueueToHouse> targetQueue = GetQueueByPriority(isHighPriority);
+            
             if (freeHouse is null)
             {
-                _animalsInQueue.Add(queueToHouse);
+                targetQueue.Add(queueToHouse);
             }
             else
             {
@@ -45,6 +48,9 @@ namespace Services.AnimalHouses
                 TakeHouse(freeHouse, animal);
             }
         }
+
+        private List<QueueToHouse> GetQueueByPriority(bool isHighPriority) =>
+            isHighPriority ? _animalsInPriorityQueue : _animalsInQueue;
 
         public void VacateHouse(AnimalId withAnimalId)
         {
@@ -55,6 +61,7 @@ namespace Services.AnimalHouses
                 throw new NullReferenceException(HouseNotFoundException);
 
             attachedHouse.DetachAnimal();
+            attachedHouse.Clear();
             TryTakeHouse(attachedHouse);
         }
 
@@ -63,21 +70,30 @@ namespace Services.AnimalHouses
 
         private void TryTakeHouse(AnimalHouse house)
         {
-            if (TryGetAnimalFromQueue(house.ForAnimal, out QueueToHouse animalQueue))
+            if (TryGetAnimalFromQueue(_animalsInPriorityQueue, house.ForAnimal, out QueueToHouse animalQueue))
             {
-                IAnimal animal = animalQueue.OnTakeHouse.Invoke();
-                _animalsInQueue.Remove(animalQueue);
-                TakeHouse(house, animal);
+                SendTheAnimalHome(house, _animalsInPriorityQueue, animalQueue);
+            }
+            else if (TryGetAnimalFromQueue(_animalsInQueue, house.ForAnimal, out animalQueue))
+            {
+                SendTheAnimalHome(house, _animalsInQueue, animalQueue);
             }
         }
 
-        private bool TryGetAnimalFromQueue(AnimalType forHouseType, out QueueToHouse queueToHouse)
+        private void SendTheAnimalHome(AnimalHouse house, List<QueueToHouse> queue, QueueToHouse animalQueue)
+        {
+            IAnimal animal = animalQueue.OnTakeHouse.Invoke();
+            queue.Remove(animalQueue);
+            TakeHouse(house, animal);
+        }
+
+        private bool TryGetAnimalFromQueue(List<QueueToHouse> queue, AnimalType forHouseType, out QueueToHouse queueToHouse)
         {
             queueToHouse = new QueueToHouse();
-
-            for (var index = 0; index < _animalsInQueue.Count; index++)
+            
+            for (var index = 0; index < queue.Count; index++)
             {
-                QueueToHouse queueAnimal = _animalsInQueue[index];
+                QueueToHouse queueAnimal = queue[index];
 
                 if (queueAnimal.AnimalId.Type != forHouseType)
                     continue;

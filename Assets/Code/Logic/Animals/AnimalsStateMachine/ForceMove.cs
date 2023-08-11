@@ -15,6 +15,12 @@ namespace Logic.Animals.AnimalsStateMachine
             _aligner = aligner;
         }
 
+        protected override void OnEnter()
+        {
+            Debug.Log("Force Move");
+            base.OnEnter();
+        }
+
         protected override void OnExit()
         {
             _aligner.Aligne(_target.rotation);

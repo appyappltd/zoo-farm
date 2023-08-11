@@ -52,16 +52,11 @@ namespace Logic.Animals.AnimalsBehaviour
             Activate();
         }
 
-        public void ForceMove(Transform to)
-        {
-            // _mover.SetLocation(new Location(to.position, to.rotation));
+        public void ForceMove(Transform to) =>
             _stateMachine.ForceMove(to);
-        }
 
-        public void Destroy()
-        {
+        public void Destroy() =>
             Destroy(gameObject);
-        }
 
         private void Activate() =>
             _jumper.Jump();

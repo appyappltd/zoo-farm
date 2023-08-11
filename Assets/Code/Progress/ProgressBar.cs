@@ -7,6 +7,7 @@ namespace Progress
     {
         private const string ReplenishErrorMessage = "Replenish amount must be positive value";
         private const string SpendErrorMessage = "Spend amount must be positive value";
+        private const float MinEpsilonFactor = 0.001f;
 
         public event Action Full = () => { };
         public event Action Empty = () => { };
@@ -26,6 +27,16 @@ namespace Progress
         public void Reset() =>
             Current.Value = 0f;
 
+        public void SetMinNonZero()
+        {
+            Current.Value = Max * MinEpsilonFactor;
+        }
+
+        public void SetMaxNonFull()
+        {
+            Current.Value = Max - Max * MinEpsilonFactor;
+        }
+        
         public void Replenish(float amount)
         {
             if (IsFull)

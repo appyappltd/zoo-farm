@@ -4,6 +4,10 @@ namespace Logic.Storages
 {
     public class InventoryHolder : MonoBehaviour, IInventoryProvider
     {
+#if UNITY_EDITOR
+        [SerializeField] private float _weight;
+#endif
+        
         [SerializeField] private int _maxWeight;
 
         private IInventory _inventory;
@@ -16,6 +20,11 @@ namespace Logic.Storages
         public void Construct()
         {
             _inventory = new Inventory(_maxWeight);
+            
+#if UNITY_EDITOR
+            _inventory.Added += item => _weight += item.Weight;
+            _inventory.Removed += item => _weight -= item.Weight;
+#endif
         }
     }
 }

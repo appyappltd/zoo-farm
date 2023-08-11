@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NTC.Global.Cache;
 using Observables;
 using StateMachineBase.States;
+using UnityEngine;
 
 namespace StateMachineBase
 {
@@ -14,12 +15,9 @@ namespace StateMachineBase
         private State _currentState;
         private State _initialState;
 
-        private bool _isStateChanging;
-
         private void OnDestroy()
         {
-            foreach (var transition in _disposable)
-                transition.Dispose();
+           Cleanup();
         }
 
         public void Stop() =>
@@ -35,9 +33,13 @@ namespace StateMachineBase
             ChangeState(_initialState);
         }
 
-        protected override void Run()
-        {
+        protected override void Run() =>
             _currentState.Update();
+
+        protected void Cleanup()
+        {
+            foreach (var transition in _disposable)
+                transition.Dispose();
         }
 
         protected void ForceState(State state)
@@ -69,10 +71,11 @@ namespace StateMachineBase
 
         private void ChangeState(State newState)
         {
-            _isStateChanging = true;
             _currentState?.Exit();
             _currentState = newState;
             _currentState.Enter();
+            Debug.Log($"state: {_currentState.GetType()}");
+            
             CurrentStateType.Value = _currentState.GetType();
         }
     }

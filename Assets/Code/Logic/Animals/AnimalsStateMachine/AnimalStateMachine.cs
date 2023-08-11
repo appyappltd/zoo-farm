@@ -51,7 +51,7 @@ namespace Logic.Animals.AnimalsStateMachine
         {
             _restPlace = houseRestPlace;
             _eatPlace = houseEatPlace;
-
+            
             SetUp();
             EnableStatIndicators();
         }
@@ -66,15 +66,19 @@ namespace Logic.Animals.AnimalsStateMachine
         {
             _forceEat.SetBowl(bowl);
         }
-        
+
         public void ForceIdle() =>
             ForceState(_forceIdle);
 
-        public void ForceEat() =>
+        public void ForceEat()
+        {
             ForceState(_forceEat);
+        }
 
         private void SetUp()
         {
+            Cleanup();
+            
             Bowl bowl = _eatPlace.GetComponent<Bowl>();
 
             State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, _hungerDelay, bowl.ProgressBarView);
@@ -92,15 +96,34 @@ namespace Logic.Animals.AnimalsStateMachine
             Transition fullBowl = GetOnFullActionTransition(bowl.ProgressBarView);
             Transition fullPeppiness = GetOnFullActionTransition(_peppiness.ProgressBar);
             Transition fullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
+            Transition forceFullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
             Transition emptyPeppiness = GetOnEmptyActionTransition(_peppiness.ProgressBar);
             Transition notFullSatiety = new BarNotFullTransition(_satiety.ProgressBar);
             Transition randomDelay = new RandomTimerTransition(_idleDelayRange.y, _idleDelayRange.x);
             Transition inRestPlace = new TargetInRange(_mover.transform, _restPlace, _placeOffset);
             Transition inEatPlace = new TargetInRange(_mover.transform, _eatPlace, _placeOffset);
             Transition reachTarget = new ReachDestinationTransition(_mover);
+            Transition forceReachTarget = new ReachDestinationTransition(_mover);
 
             Init(idle, new Dictionary<State, Dictionary<Transition, State>>
             {
+                {
+                    _forceIdle, new Dictionary<Transition, State>
+                    {
+                    }
+                },
+                {
+                    _forceMove, new Dictionary<Transition, State>
+                    {
+                        {forceReachTarget, _forceIdle},
+                    }
+                },
+                {
+                    _forceEat, new Dictionary<Transition, State>
+                    {
+                        {forceFullSatiety, _forceIdle},
+                    }
+                },
                 {
                     idle, new Dictionary<Transition, State>
                     {
@@ -145,18 +168,7 @@ namespace Logic.Animals.AnimalsStateMachine
                         {fullPeppiness, idle},
                     }
                 },
-                {
-                    _forceMove, new Dictionary<Transition, State>
-                    {
-                        {reachTarget, _forceIdle},
-                    }
-                },
-                {
-                    _forceEat, new Dictionary<Transition, State>
-                    {
-                        {fullSatiety, _forceIdle},
-                    }
-                },
+
             });
         }
 

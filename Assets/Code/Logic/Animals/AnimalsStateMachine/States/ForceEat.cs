@@ -31,7 +31,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
 
         protected override void OnExit()
         {
-            _barIndicator.ProgressBar.Reset();
+            _barIndicator.ProgressBar.SetMaxNonFull();
         }
 
         protected override void OnUpdate()
