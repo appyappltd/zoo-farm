@@ -181,9 +181,14 @@ namespace Logic.Breeding
             _animals.Add(animal);
             animal.StateMachine.ForceMove(place);
             animal.Stats.Deactivate();
+            
             IProgressBar statsSatiety = (IProgressBar) animal.Stats.Satiety;
             statsSatiety.SetMaxNonFull();
             animal.StateMachine.SetForceBowl(_bowl);
+            
+            IProgressBar statsVitality = (IProgressBar) animal.Stats.Vitality;
+            statsVitality.SetMaxNonFull();
+            
             _disposable.Add(animal.StateMachine.CurrentStateType.Then(state =>
             {
                 if (state == typeof(Idle))
