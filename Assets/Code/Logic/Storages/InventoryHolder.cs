@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Logic.Storages
@@ -5,7 +6,7 @@ namespace Logic.Storages
     public class InventoryHolder : MonoBehaviour, IInventoryProvider
     {
 #if UNITY_EDITOR
-        [SerializeField] private float _weight;
+        [SerializeField] [ReadOnly] private float _weight;
 #endif
         
         [SerializeField] private int _maxWeight;

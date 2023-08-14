@@ -41,6 +41,8 @@ namespace Logic.Breeding
         [SerializeField] private Transform _secondPlace;
         [SerializeField] private Transform _childPlace;
         [SerializeField] private HumanInteraction _humanInteraction;
+        [SerializeField] private InteractionView _defaultInteractionView;
+        [SerializeField] private InteractionView _backgroundInteractionView;
 
         [Space] [Header("Settings")]
         [SerializeField] private int _feedingCyclesToMaturity;
@@ -52,12 +54,14 @@ namespace Logic.Breeding
         private IStaticDataService _staticData;
 
         private List<IAnimal> _animals = new List<IAnimal>(2);
-        private DelayRoutine _afterbeginBreedingDelay;
+        private DelayRoutine _afterBreedingDelay;
 
         private int _currentFeedingCycle;
         private int _animalsInHouse;
         private AnimalType _breedingAnimalType;
         private GameObject _childModel;
+
+        private InteractionViewSwitcher _viewSwitcher;
 
         public bool IsBusy => _animals.Count > 0;
 
@@ -80,7 +84,7 @@ namespace Logic.Breeding
             _bowl.ProgressBarView.Full -= BeginEat;
             _bowl.ProgressBarView.Empty -= EndEat;
             
-            _afterbeginBreedingDelay.Kill();
+            _afterBreedingDelay.Kill();
         }
 
         private void Init()
@@ -93,11 +97,17 @@ namespace Logic.Breeding
             _growthBar.Deactivate();
             _inventoryHolder.Inventory.Deactivate();
 
+            _viewSwitcher =
+                new InteractionViewSwitcher(
+                    _defaultInteractionView,
+                    _backgroundInteractionView);
+            _viewSwitcher.SwitchToBackground();
+
             _bowl.ProgressBarView.Full += BeginEat;
             _bowl.ProgressBarView.Empty += EndEat;
 
-            _afterbeginBreedingDelay = new DelayRoutine();
-            _afterbeginBreedingDelay
+            _afterBreedingDelay = new DelayRoutine();
+            _afterBreedingDelay
                 .WaitForSeconds(1f)
                 .Then(_disposable.Dispose)
                 .Then(_inventoryHolder.Inventory.Activate);
@@ -125,6 +135,14 @@ namespace Logic.Breeding
         private void UpdateGrowthBar() =>
             _growthBar.SetFill(_currentFeedingCycle / (float) _feedingCyclesToMaturity);
 
+        private void BeginBreeding()
+        {
+            _growthBar.Activate();
+            UpdateGrowthBar();
+            _childModel = _gameFactory.CreateAnimalChild(_childPlace.position, _childPlace.rotation, _breedingAnimalType);
+            _afterBreedingDelay.Play();
+        }
+
         private void FinishBreedingProcess()
         {
             AnimalItemStaticData newAnimalType = _staticData.AnimalItemDataById(_animals[0].AnimalId.Type);
@@ -141,12 +159,11 @@ namespace Logic.Breeding
             }
             
             _inventoryHolder.Inventory.Deactivate();
+            _viewSwitcher.SwitchToBackground();
         }
 
         private void SendAnimalToFreeMoving(IAnimal animal)
         {
-            Debug.Log($"send animal {_animals.Count}");
-            
             _houseService.TakeQueueToHouse(new QueueToHouse(animal.AnimalId, () =>
             {
                 _animals.Remove(animal);
@@ -174,6 +191,7 @@ namespace Logic.Breeding
             BreedingPair pair = _animalService.SelectPairForBreeding(type);
             MoveToPlace(pair.First, _firstPlace);
             MoveToPlace(pair.Second, _secondPlace);
+            _viewSwitcher.SwitchToDefault();
         }
 
         private void MoveToPlace(IAnimal animal, Transform place)
@@ -205,15 +223,6 @@ namespace Logic.Breeding
         {
             if (_animalsInHouse >= MaxAnimals)
                 BeginBreeding();
-        }
-
-        private void BeginBreeding()
-        {
-            Debug.Log("BeginBreeding");
-            _growthBar.Activate();
-            UpdateGrowthBar();
-            _childModel = _gameFactory.CreateAnimalChild(_childPlace.position, _childPlace.rotation, _breedingAnimalType);
-            _afterbeginBreedingDelay.Play();
         }
     }
 }

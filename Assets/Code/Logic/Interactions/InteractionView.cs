@@ -16,7 +16,7 @@ namespace Logic.Interactions
         private float _deltaSize;
         private float _targetSize;
         private float _smoothTime;
-        
+
         private void Awake()
         {
             _playerInteraction.Value.Entered += OnEnter;
@@ -29,6 +29,8 @@ namespace Logic.Interactions
         {
             _playerInteraction.Value.Entered -= OnEnter;
             _playerInteraction.Value.Canceled -= OnCancel;
+            
+            SetDefault();
         }
 
         public void SetDefault()

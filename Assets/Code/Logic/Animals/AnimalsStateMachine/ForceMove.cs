@@ -1,5 +1,6 @@
 using Logic.AnimatorStateMachine;
 using Logic.Movement;
+using NTC.Global.System;
 using StateMachineBase.States;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace Logic.Animals.AnimalsStateMachine
         protected override void OnEnter()
         {
             Debug.Log("Force Move");
+            _aligner.Disable();
             base.OnEnter();
         }
 
