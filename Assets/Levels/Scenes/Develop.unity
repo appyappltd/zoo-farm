@@ -5851,6 +5851,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1466ddc90a669554f8203b8dac6750c2, type: 3}
+--- !u!114 &1953696741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2748258151412229388, guid: 5920686d977b0cd49a22ac8878d08bd7, type: 3}
+  m_PrefabInstance: {fileID: 4054419995701728995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0510194f60d4490908fe6fed2780a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1960819096
 GameObject:
   m_ObjectHideFlags: 0
@@ -7240,6 +7251,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1313175194547247571, guid: 5920686d977b0cd49a22ac8878d08bd7, type: 3}
+      propertyPath: _playerInteraction._underlyingValue
+      value: 
+      objectReference: {fileID: 1953696741}
     - target: {fileID: 2266385589709661014, guid: 5920686d977b0cd49a22ac8878d08bd7, type: 3}
       propertyPath: m_Name
       value: BreedingAnimalHouse
