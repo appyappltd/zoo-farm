@@ -13,6 +13,7 @@ namespace DelayRoutines
         private readonly List<IRoutine> _routines = new List<IRoutine>();
 
         private int _currentRoutineIndex = -1;
+        private bool _isAutoKill;
 
         private IRoutine FirstRoutine => _routines[0];
         private IRoutine LastRoutine => _routines[_currentRoutineIndex];
@@ -22,13 +23,25 @@ namespace DelayRoutines
             _globalUpdate = GlobalUpdate.Instance;
 
         //TODO: Добавить enum для выбора
-        public void Play(bool atFirst = true) =>
+        public void Play(bool atFirst = true)
+        {
+            if (_isAutoKill)
+                LastRoutine.AddNext(new Executor(Kill));
+
             _routines[atFirst ? 0 : _currentRoutineIndex].Play();
+        }
 
         public void Kill()
         {
             Stop();
             _routines.Clear();
+            _currentRoutineIndex = 0;
+        }
+
+        public DelayRoutine SetAutoKill(bool isAutoKill)
+        {
+            _isAutoKill = isAutoKill;
+            return this;
         }
         
         public void Stop() =>
@@ -184,19 +197,5 @@ namespace DelayRoutines
             _routines.Add(routine);
             _currentRoutineIndex++;
         }
-    }
-
-    public class EventAwaiter : Awaiter
-    {
-        private Action _callback;
-
-        public EventAwaiter(Action callback, GlobalUpdate globalUpdate) : base(globalUpdate)
-        {
-            _callback = callback;
-            Deactivate();
-            callback += Next;
-        }
-
-        public override void OnRun() { }
     }
 }

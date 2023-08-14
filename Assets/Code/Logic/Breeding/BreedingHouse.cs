@@ -5,11 +5,11 @@ using DelayRoutines;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Infrastructure.Factory;
+using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Interactions;
 using Logic.Player;
 using Logic.SpriteUtils;
 using Logic.Storages;
-using NTC.Global.System;
 using Observables;
 using Progress;
 using Services;
@@ -27,6 +27,9 @@ namespace Logic.Breeding
     public class BreedingHouse : MonoBehaviour
     {
         private const int MaxAnimals = 2;
+        private const float AfterBreedingDelay = 0.707f;
+        private const float DispersalDelay = 1.2f;
+        private const float HomelessEmotionSetDelay = 0.15f;
 
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
@@ -54,7 +57,9 @@ namespace Logic.Breeding
         private IStaticDataService _staticData;
 
         private List<IAnimal> _animals = new List<IAnimal>(2);
-        private DelayRoutine _afterBreedingDelay;
+        private DelayRoutine _afterBreeding;
+        private DelayRoutine _animalsDispersal;
+        private DelayRoutine _homelessEmotionSetDelay;
 
         private int _currentFeedingCycle;
         private int _animalsInHouse;
@@ -73,8 +78,6 @@ namespace Logic.Breeding
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _staticData = AllServices.Container.Single<IStaticDataService>();
 
-            _humanInteraction.Interacted += OnInteracted;
-
             Init();
         }
 
@@ -84,7 +87,9 @@ namespace Logic.Breeding
             _bowl.ProgressBarView.Full -= BeginEat;
             _bowl.ProgressBarView.Empty -= EndEat;
             
-            _afterBreedingDelay.Kill();
+            _afterBreeding.Kill();
+            _animalsDispersal.Kill();
+            _homelessEmotionSetDelay.Kill();
         }
 
         private void Init()
@@ -96,25 +101,61 @@ namespace Logic.Breeding
             _productReceiver.Construct(_inventoryHolder.Inventory);
             _growthBar.Deactivate();
             _inventoryHolder.Inventory.Deactivate();
+            
+            _humanInteraction.Interacted += OnInteracted;
+            _bowl.ProgressBarView.Full += BeginEat;
+            _bowl.ProgressBarView.Empty += EndEat;
 
+            InitViewSwitcher();
+            InitAfterBreedingRoutine();
+            InitAnimalsDispersal();
+            InitHomelessEmotionDelay();
+        }
+
+        private void InitHomelessEmotionDelay()
+        {
+            _homelessEmotionSetDelay = new DelayRoutine();
+            _homelessEmotionSetDelay
+                .WaitForSeconds(HomelessEmotionSetDelay)
+                .Then(ShowHomelessEmotion);
+        }
+
+        private void InitAnimalsDispersal()
+        {
+            _animalsDispersal = new DelayRoutine();
+            _animalsDispersal
+                .WaitForSeconds(DispersalDelay)
+                .Then(() =>
+                {
+                    Debug.Log("DispersalDelay");
+                    SendAnimalToFreeMoving(_animals.First());
+                })
+                .LoopFor(MaxAnimals + 1);
+        }
+
+        private void InitAfterBreedingRoutine()
+        {
+            _afterBreeding = new DelayRoutine();
+            _afterBreeding
+                .WaitForSeconds(AfterBreedingDelay)
+                .Then(_disposable.Dispose)
+                .Then(_inventoryHolder.Inventory.Activate);
+        }
+
+        private void InitViewSwitcher()
+        {
             _viewSwitcher =
                 new InteractionViewSwitcher(
                     _defaultInteractionView,
                     _backgroundInteractionView);
             _viewSwitcher.SwitchToBackground();
-
-            _bowl.ProgressBarView.Full += BeginEat;
-            _bowl.ProgressBarView.Empty += EndEat;
-
-            _afterBreedingDelay = new DelayRoutine();
-            _afterBreedingDelay
-                .WaitForSeconds(1f)
-                .Then(_disposable.Dispose)
-                .Then(_inventoryHolder.Inventory.Activate);
         }
 
         private void BeginEat()
         {
+            if (_currentFeedingCycle >= _feedingCyclesToMaturity)
+                return;
+
             for (var index = 0; index < _animals.Count; index++)
             {
                 IAnimal animal = _animals[index];
@@ -140,7 +181,7 @@ namespace Logic.Breeding
             _growthBar.Activate();
             UpdateGrowthBar();
             _childModel = _gameFactory.CreateAnimalChild(_childPlace.position, _childPlace.rotation, _breedingAnimalType);
-            _afterBreedingDelay.Play();
+            _afterBreeding.Play();
         }
 
         private void FinishBreedingProcess()
@@ -150,16 +191,19 @@ namespace Logic.Breeding
             _animals.Add( _gameFactory.CreateAnimal(newAnimalType, _childPlace.position, _childPlace.rotation)
                 .GetComponent<IAnimal>());
 
-            int animalsCount = _animals.Count;
-            
-            for (var index = 0; index < animalsCount; index++)
-            {
-                IAnimal animal = _animals.First();
-                SendAnimalToFreeMoving(animal);
-            }
-            
+            _animalsDispersal.Play();
+            _homelessEmotionSetDelay.Play();
             _inventoryHolder.Inventory.Deactivate();
             _viewSwitcher.SwitchToBackground();
+            _growthBar.Deactivate();
+        }
+
+        private void ShowHomelessEmotion()
+        {
+            for (int i = 0; i < _animals.Count; i++)
+            {
+                _animals[i].Emotions.Show(EmotionId.Homeless);
+            }
         }
 
         private void SendAnimalToFreeMoving(IAnimal animal)

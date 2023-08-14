@@ -7259,6 +7259,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BreedingAnimalHouse
       objectReference: {fileID: 0}
+    - target: {fileID: 8403025763791422773, guid: 5920686d977b0cd49a22ac8878d08bd7, type: 3}
+      propertyPath: _feedingCyclesToMaturity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8539451799298247592, guid: 5920686d977b0cd49a22ac8878d08bd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.99

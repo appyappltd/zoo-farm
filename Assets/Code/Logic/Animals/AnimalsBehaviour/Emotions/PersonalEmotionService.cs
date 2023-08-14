@@ -36,15 +36,11 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
             Unsubscribe(emotive);
         }
 
-        public void Suppress(EmotionId emotion)
-        {
+        public void Suppress(EmotionId emotion) =>
             OnSuppressEmotion(emotion);
-        }
 
-        public void Show(EmotionId emotion)
-        {
+        public void Show(EmotionId emotion) =>
             OnShowEmotion(emotion);
-        }
 
         private void Subscribe(IEmotive emotive)
         {
@@ -61,17 +57,16 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
         private void OnSuppressEmotion(EmotionId emotionId)
         {
             if (ActiveEmotionId == emotionId)
-            {
                 SuppressEmotions();
-            }
             else
-            {
                 _suppressEmotionsOrder.Add(emotionId);
-            }
         }
 
         private void OnShowEmotion(EmotionId emotionId)
         {
+            if (ActiveEmotionId == emotionId)
+                return;
+
             _emotionsStack.Push(emotionId);
             _emotionProvider.ChangeEmotion(emotionId);
         }
@@ -87,9 +82,7 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
             }
         }
 
-        private void SuppressActiveEmotion()
-        {
+        private void SuppressActiveEmotion() =>
             _emotionProvider.ChangeEmotion(_emotionsStack.Pop());
-        }
     }
 }

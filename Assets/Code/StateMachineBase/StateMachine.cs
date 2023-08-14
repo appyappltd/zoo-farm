@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using NTC.Global.Cache;
 using Observables;
 using StateMachineBase.States;
-using UnityEngine;
 
 namespace StateMachineBase
 {
@@ -74,8 +73,6 @@ namespace StateMachineBase
             _currentState?.Exit();
             _currentState = newState;
             _currentState.Enter();
-            Debug.Log($"state: {_currentState.GetType()}");
-            
             CurrentStateType.Value = _currentState.GetType();
         }
     }

@@ -31,6 +31,7 @@ namespace Logic.Interactions
 
             _currentView.gameObject.Disable();
             _currentView = toView;
+            _currentView.SetDefault();
             _currentView.gameObject.Enable();
         }
     }

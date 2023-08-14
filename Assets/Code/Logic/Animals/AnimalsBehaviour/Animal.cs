@@ -28,6 +28,7 @@ namespace Logic.Animals.AnimalsBehaviour
         public AnimalStateMachine StateMachine => _stateMachine;
         public NavMeshMover Mover => _mover;
         public AnimalAnimator Animator => _animator;
+        public PersonalEmotionService Emotions => _emotionService;
 
         private void OnDestroy()
         {
