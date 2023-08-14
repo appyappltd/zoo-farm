@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Logic.Animals;
+using Logic.Animals.AnimalsBehaviour;
 using Services.AnimalHouses;
 using Services.StaticData;
+using Tools.Comparers;
 using Ui.Factory;
 using UnityEngine;
 
@@ -18,7 +22,9 @@ namespace Ui.Windows
 
         public void Construct(IAnimalHouseService houseService, IUIFactory uiFactory, IStaticDataService staticData)
         {
-            foreach (QueueToHouse animal in houseService.AnimalsInQueue)
+            IEnumerable<IAnimal> houseServiceAnimalsInQueue = houseService.AnimalsInQueue.Select(queue => queue.Animal).Distinct(new AnimalByTypeComparer());
+            
+            foreach (IAnimal animal in houseServiceAnimalsInQueue)
             {
                 ChoseAnimalPanel panel = uiFactory.CreateChoseAnimalPanel(_panelsParent);
                 panel.Construct(staticData.IconByAnimalType(animal.AnimalId.Type), () =>

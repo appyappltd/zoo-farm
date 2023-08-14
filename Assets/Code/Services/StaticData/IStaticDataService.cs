@@ -20,7 +20,6 @@ namespace Services.StaticData
         WindowBase WindowById(WindowId windowId);
         Transform SpawnPlaceById(SpawnPlaceId placeId);
         MedToolStandConfig MedStandConfigById(MedicalToolId toolIdId);
-        GardenBedConfig GardenBedConfigById(FoodId foodId);
         Sprite IconByAnimalType(AnimalType animalIdType);
         ParticleSystem ParticlesById(EffectId id);
         ParticleConfig ParticlesConfig();

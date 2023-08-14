@@ -23,7 +23,6 @@ namespace Services.StaticData
         private const string WindowConfigPath = "StaticData/WindowConfigs";
         private const string MedStandConfigPath = "StaticData/MedStandConfigs";
         private const string SpawnPlaceConfigPath = "StaticData/SpawnPlaceConfig";
-        private const string GardenBedConfigPath = "StaticData/GardenBedConfigs";
         private const string AnimalIconConfigPath = "StaticData/AnimalIconConfigs";
         private const string ParticleConfigPath = "StaticData/ParticleConfigs";
         private const string ScaleModifierPath = "StaticData/ScaleModifierConfigs";
@@ -32,7 +31,6 @@ namespace Services.StaticData
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
         private Dictionary<MedicalToolId, MedToolStandConfig> _medStandConfigs;
-        private Dictionary<FoodId, GardenBedConfig> _gardenBedConfigs;
         private Dictionary<ScaleModifierId, ScaleModifierConfig> _scaleModifierConfigs;
         private Dictionary<AnimalType, AnimalItemStaticData> _animalItemConfigs;
 
@@ -44,7 +42,6 @@ namespace Services.StaticData
         {
             _emotionConfigs = LoadFor<EmotionId, EmotionConfig>(EmotionConfigPath, x => x.Name);
             _medStandConfigs = LoadFor<MedicalToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
-            _gardenBedConfigs = LoadFor<FoodId, GardenBedConfig>(GardenBedConfigPath, x => x.FoodId);
             _scaleModifierConfigs = LoadFor<ScaleModifierId, ScaleModifierConfig>(ScaleModifierPath, x => x.ModifierId);
             _animalItemConfigs = LoadFor<AnimalType, AnimalItemStaticData>(AnimalItemsPath, x => x.AnimalType);
 
@@ -84,9 +81,6 @@ namespace Services.StaticData
 
         public MedToolStandConfig MedStandConfigById(MedicalToolId toolIdId) =>
             GetDataFor(toolIdId, _medStandConfigs);
-
-        public GardenBedConfig GardenBedConfigById(FoodId foodId) =>
-            GetDataFor(foodId, _gardenBedConfigs);
 
         public WindowBase WindowById(WindowId windowId) =>
             GetDataFor(windowId, _windows).Template;

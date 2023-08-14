@@ -94,7 +94,7 @@ namespace Logic.Medical
             RemoveItem(_animalItem);
             RemoveItem(_medToolItem);
 
-            QueueToHouse queueToHouse = new QueueToHouse(_healingAnimal.AnimalId,() =>
+            QueueToHouse queueToHouse = new QueueToHouse(_healingAnimal,() =>
             {
                 FreeTheBad();
                 FeedUp.Invoke();

@@ -28,7 +28,7 @@ namespace Logic
         {
             var animal = _gameFactory.CreateAnimal(_animalData, _spawnPoint.position,
                 _spawnPoint.rotation).GetComponent<Animal>();
-            _houseService.TakeQueueToHouse(new QueueToHouse(animal.AnimalId, () => animal));
+            _houseService.TakeQueueToHouse(new QueueToHouse(animal, () => animal));
         }
     }
 }

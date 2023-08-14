@@ -126,6 +126,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.AnimalFocusToPlantFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                ActivateAutoBuild(_gardenBedGridOperator);
                 _gardenBedGridOperator.ShowNextBuildCell();
                 _arrow.Move(_plant.position);
                 _cameraOperatorService.Focus(_plant);
@@ -163,6 +164,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                _arrow.Hide();
                 ActivateAutoBuild(_medBedGridOperator);
                 ActivateAutoBuild(_medToolGridOperator);
                 ActivateAutoBuild(_houseGridOperator);

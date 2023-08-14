@@ -28,7 +28,7 @@ namespace Services.AnimalHouses
             switch (house)
             {
                 case AnimalHouse animalHouse:
-                    RegisterAnimalHose(animalHouse);
+                    RegisterAnimalHouse(animalHouse);
                     break;
                 case BreedingHouse breedingHouse:
                     RegisterBreedingHouse(breedingHouse);
@@ -44,7 +44,7 @@ namespace Services.AnimalHouses
             _breedingHouses.Add(breedingHouse);
         }
 
-        private void RegisterAnimalHose(AnimalHouse animalHouse)
+        private void RegisterAnimalHouse(AnimalHouse animalHouse)
         {
             if (_animalHouses.Contains(animalHouse))
                 throw new Exception($"House {animalHouse} already registered");
@@ -57,7 +57,7 @@ namespace Services.AnimalHouses
 
         public void TakeQueueToHouse(QueueToHouse queueToHouse, bool isHighPriority = false)
         {
-            AnimalHouse freeHouse = GetFreeHouseFor(queueToHouse.AnimalId.Type);
+            AnimalHouse freeHouse = GetFreeHouseFor(queueToHouse.Animal.AnimalId.Type);
 
             List<QueueToHouse> targetQueue = GetQueueByPriority(isHighPriority);
             
@@ -95,7 +95,7 @@ namespace Services.AnimalHouses
         {
             if (_animalsInQueue.Count > 0)
             {
-                animalId = _animalsInQueue[0].AnimalId;
+                animalId = _animalsInQueue[0].Animal.AnimalId;
                 return true;
             }
 
@@ -130,7 +130,7 @@ namespace Services.AnimalHouses
             {
                 QueueToHouse queueAnimal = queue[index];
 
-                if (queueAnimal.AnimalId.Type != forHouseType)
+                if (queueAnimal.Animal.AnimalId.Type != forHouseType)
                     continue;
 
                 queueToHouse = queueAnimal;

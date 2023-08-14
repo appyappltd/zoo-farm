@@ -5,13 +5,13 @@ namespace Logic.Animals
 {
     public struct QueueToHouse
     {
-        public AnimalId AnimalId { get; }
+        public IAnimal Animal { get; }
         public Func<IAnimal> OnTakeHouse { get; }
 
-        public QueueToHouse(AnimalId animalId, Func<IAnimal> onTakeHouse)
+        public QueueToHouse(IAnimal animal, Func<IAnimal> onTakeHouse)
         {
             OnTakeHouse = onTakeHouse;
-            AnimalId = animalId;
+            Animal = animal;
         }
     }
 }

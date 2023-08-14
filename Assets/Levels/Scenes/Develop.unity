@@ -7242,7 +7242,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5128701945320157053, guid: 37e6a86e435b85d44a3cca9daf8e4df0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.21
+      value: -22.73
       objectReference: {fileID: 0}
     - target: {fileID: 5128701945320157053, guid: 37e6a86e435b85d44a3cca9daf8e4df0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7250,7 +7250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5128701945320157053, guid: 37e6a86e435b85d44a3cca9daf8e4df0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.36
+      value: -8.56
       objectReference: {fileID: 0}
     - target: {fileID: 5128701945320157053, guid: 37e6a86e435b85d44a3cca9daf8e4df0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7466,7 +7466,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 344636981333281854, guid: 26d6a06a289e8984999e12bdfe0536db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.76
+      value: -10.68
       objectReference: {fileID: 0}
     - target: {fileID: 344636981333281854, guid: 26d6a06a289e8984999e12bdfe0536db, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7474,7 +7474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 344636981333281854, guid: 26d6a06a289e8984999e12bdfe0536db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.09
+      value: -8.39
       objectReference: {fileID: 0}
     - target: {fileID: 344636981333281854, guid: 26d6a06a289e8984999e12bdfe0536db, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7507,6 +7507,10 @@ PrefabInstance:
     - target: {fileID: 1111801263962842018, guid: 26d6a06a289e8984999e12bdfe0536db, type: 3}
       propertyPath: m_Name
       value: KeeperGrid
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117372345816672441, guid: 26d6a06a289e8984999e12bdfe0536db, type: 3}
+      propertyPath: _isAutoBuild
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2117372345816672441, guid: 26d6a06a289e8984999e12bdfe0536db, type: 3}
       propertyPath: _buildCosts.Array.data[0]

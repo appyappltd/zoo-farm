@@ -224,7 +224,7 @@ namespace Logic.Breeding
 
         private void SendAnimalToFreeMoving(IAnimal animal)
         {
-            _houseService.TakeQueueToHouse(new QueueToHouse(animal.AnimalId, () =>
+            _houseService.TakeQueueToHouse(new QueueToHouse(animal, () =>
             {
                 _animals.Remove(animal);
                 animal.StateMachine.Play();

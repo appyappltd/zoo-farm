@@ -22,18 +22,29 @@ namespace Logic.CellBuilding
         {
             _cashedMarker = marker;
 
-            if (_houseService.TryGetNextAnimalInQueue(out AnimalId animalId))
+            if (IsOpenChoseHouseWindow())
             {
                 HouseBuildWindow window = _windowsService.Open(WindowId.BuildHouse).GetComponent<HouseBuildWindow>();
                 window.SetOnChoseCallback(OnAnimalChosen);
             }
             else
             {
-                OnAnimalChosen(animalId.Type);
+                OnAnimalChosen(_houseService.AnimalsInQueue[0].Animal.AnimalId.Type);
             }
         }
 
-        private void OnAnimalChosen(AnimalType type) =>
-            GameFactory.CreateAnimalHouse(_cashedMarker.BuildPosition, _cashedMarker.Location.Rotation, type);
+        private bool IsOpenChoseHouseWindow()
+        {
+#if DEBUG
+            return true;
+#else
+            return _houseService.AnimalsInQueue.Count > 1;
+#endif
+        }
+
+        private void OnAnimalChosen(AnimalType type)
+        {
+            GameFactory.CreateAnimalHouse(_cashedMarker.BuildPosition, _cashedMarker.Location.Rotation, type).GetComponent<AnimalHouse>();
+        }
     }
 }

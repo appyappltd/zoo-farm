@@ -19,7 +19,7 @@ namespace Services.Animals
         public event Action<IAnimal> Released = _ => { };
 
         public int TotalAnimalCount => _animals.Count;
-        public int ReleaseReadyAnimalCount => _animals.Count(animal => animal.Stats.Vitality.IsFull);
+        public int ReleaseReadyAnimalCount => _animals.Count(animal => animal.Stats.Satiety.IsFull);
         public IReadOnlyList<IAnimal> Animals => _animals;
 
         public AnimalsService(IAnimalHouseService houseService)
@@ -59,7 +59,7 @@ namespace Services.Animals
 
         public IEnumerable<IAnimal> GetReleaseReady()
         {
-            return Animals.Where(animal => animal.Stats.Vitality.IsFull)
+            return Animals.Where(animal => animal.Stats.Satiety.IsFull)
                 .Distinct(new AnimalByTypeComparer());
         }
 
