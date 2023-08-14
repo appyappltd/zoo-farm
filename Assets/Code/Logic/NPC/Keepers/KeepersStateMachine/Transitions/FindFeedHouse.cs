@@ -8,9 +8,9 @@ namespace Logic.NPC.Keepers.KeepersStateMachine.Transitions
     public class FoundNewFeedHouse : Transition
     {
         private readonly IAnimalHouseService _houseService;
-        private readonly Action<AnimalHouse> _applyHouse;
+        private readonly Action<IAnimalHouse> _applyHouse;
 
-        public FoundNewFeedHouse(IAnimalHouseService houseService, Action<AnimalHouse> applyHouse)
+        public FoundNewFeedHouse(IAnimalHouseService houseService, Action<IAnimalHouse> applyHouse)
         {
             _houseService = houseService;
             _applyHouse = applyHouse;
@@ -18,7 +18,7 @@ namespace Logic.NPC.Keepers.KeepersStateMachine.Transitions
 
         public override bool CheckCondition()
         {
-            bool found = _houseService.TryGetNextFeedHouse(out AnimalHouse feedHouse);
+            bool found = _houseService.TryGetNextFeedHouse(out IAnimalHouse feedHouse);
 
             if (found)
                 _applyHouse.Invoke(feedHouse);

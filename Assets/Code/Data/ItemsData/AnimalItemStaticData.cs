@@ -1,5 +1,6 @@
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
+using Logic.Foods.FoodSettings;
 using UnityEngine;
 
 namespace Data.ItemsData
@@ -11,6 +12,7 @@ namespace Data.ItemsData
         [field: SerializeField] public int Weight { get; set; }
         
         public AnimalType AnimalType;
+        public FoodId EdibleFood;
         public BeginStats BeginStats;
     }
 }

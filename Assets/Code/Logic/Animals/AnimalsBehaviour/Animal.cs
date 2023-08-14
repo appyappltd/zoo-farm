@@ -49,7 +49,7 @@ namespace Logic.Animals.AnimalsBehaviour
 
         public void AttachHouse(AnimalHouse house)
         {
-            _stateMachine.Construct(house.RestPlace, house.EatPlace);
+            _stateMachine.Construct(house.FeedingPlace, house.EatPlace);
             Activate();
         }
 

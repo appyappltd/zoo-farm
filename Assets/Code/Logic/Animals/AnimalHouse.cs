@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Logic.Animals
 {
-    public class AnimalHouse : MonoBehaviour
+    public class AnimalHouse : MonoBehaviour, IAnimalHouse
     {
         private const string ThisHouseIsAlreadyTaken = "This house is already taken";
         private const string ThisHouseIsAlreadyFree = "This house is already free";
@@ -30,10 +30,10 @@ namespace Logic.Animals
 
         private AnimalId _animalId;
 
-        public event Action<AnimalHouse> BowlEmpty = _ => { };
+        public event Action<IAnimalHouse> BowlEmpty = _ => { };
 
         public AnimalId AnimalId => _animalId;
-        public Transform RestPlace => _restPlace;
+        public Transform FeedingPlace => _restPlace;
         public Transform EatPlace => _eatPlace;
         public bool IsTaken => _isTaken;
         public AnimalType ForAnimal => _forAnimal;

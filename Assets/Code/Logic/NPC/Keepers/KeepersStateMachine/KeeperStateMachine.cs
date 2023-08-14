@@ -36,7 +36,7 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
         private Transform _foodTarget;
         private Transform _houseTarget;
 
-        private AnimalHouse _feedHouse;
+        private IAnimalHouse _feedHouse;
 
         private IAnimalHouseService _houseService;
         private IFoodService _foodService;
@@ -152,10 +152,10 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
             return inventoryIsFull;
         }
 
-        private void AppleFeedHouse(AnimalHouse house)
+        private void AppleFeedHouse(IAnimalHouse house)
         {
             _feedHouse = house;
-            _houseTarget.position = house.RestPlace.position;
+            _houseTarget.position = house.FeedingPlace.position;
         }
     }
 }

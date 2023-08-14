@@ -33,5 +33,6 @@ namespace Infrastructure.Factory
         GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId);
         GameObject CreateKeeper(Vector3 markerBuildPosition);
         GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type);
+        GameObject CreateBreedingHouse(Vector3 at, Quaternion rotation);
     }
 }

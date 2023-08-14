@@ -67,7 +67,7 @@ namespace Infrastructure.States
                     Get<IAnimalsService>(),
                     Get<IPoolService>(),
                     Get<IMedicalBedsReporter>(),
-                    Get<IFoodService>()));
+                    Get<IAnimalHouseService>()));
             Register<IUIFactory>(
                 new UIFactory(
                     Get<IAssetProvider>(),

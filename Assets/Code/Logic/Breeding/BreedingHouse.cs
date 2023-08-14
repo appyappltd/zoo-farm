@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data.ItemsData;
@@ -6,6 +7,7 @@ using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour.Emotions;
+using Logic.Foods.FoodSettings;
 using Logic.Interactions;
 using Logic.Player;
 using Logic.SpriteUtils;
@@ -24,7 +26,7 @@ using UnityEngine;
 
 namespace Logic.Breeding
 {
-    public class BreedingHouse : MonoBehaviour
+    public class BreedingHouse : MonoBehaviour, IAnimalHouse
     {
         private const int MaxAnimals = 2;
         private const float AfterBreedingDelay = 0.707f;
@@ -40,15 +42,20 @@ namespace Logic.Breeding
         [SerializeField] private ProductReceiver _productReceiver;
         [SerializeField] private BarIconView _barIconView;
         [SerializeField] private SpriteFillMask _growthBar;
+        
         [SerializeField] private Transform _firstPlace;
         [SerializeField] private Transform _secondPlace;
         [SerializeField] private Transform _childPlace;
+        [SerializeField] private Transform _feedingPlace;
+        
         [SerializeField] private HumanInteraction _humanInteraction;
         [SerializeField] private InteractionView _defaultInteractionView;
         [SerializeField] private InteractionView _backgroundInteractionView;
 
         [Space] [Header("Settings")]
         [SerializeField] private int _feedingCyclesToMaturity;
+        [SerializeField] private bool _isServedByKeeper;
+        
 
         private IWindowService _windowService;
         private IAnimalsService _animalService;
@@ -57,18 +64,27 @@ namespace Logic.Breeding
         private IStaticDataService _staticData;
 
         private List<IAnimal> _animals = new List<IAnimal>(2);
+        
         private DelayRoutine _afterBreeding;
         private DelayRoutine _animalsDispersal;
         private DelayRoutine _homelessEmotionSetDelay;
 
         private int _currentFeedingCycle;
         private int _animalsInHouse;
+        
         private AnimalType _breedingAnimalType;
+        private FoodId _edibleFoodType;
+        
         private GameObject _childModel;
-
         private InteractionViewSwitcher _viewSwitcher;
 
+        public event Action<IAnimalHouse> BowlEmpty;
+        
         public bool IsBusy => _animals.Count > 0;
+        public Transform FeedingPlace => _feedingPlace;
+        public IInventory Inventory => _inventoryHolder.Inventory;
+        public FoodId EdibleFoodType => _edibleFoodType;
+        public bool IsServedByKeeper => _isServedByKeeper;
 
         private void Awake()
         {
@@ -233,6 +249,7 @@ namespace Logic.Breeding
         {
             _breedingAnimalType = type;
             BreedingPair pair = _animalService.SelectPairForBreeding(type);
+            _edibleFoodType = pair.First.AnimalId.EdibleFood;
             MoveToPlace(pair.First, _firstPlace);
             MoveToPlace(pair.Second, _secondPlace);
             _viewSwitcher.SwitchToDefault();

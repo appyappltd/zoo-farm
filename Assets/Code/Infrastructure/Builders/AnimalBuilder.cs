@@ -20,7 +20,7 @@ namespace Infrastructure.Builders
         public void Build(Animal animal, AnimalItemStaticData staticData)
         {
             //TODO: заменить реализацию хеш кода на уникальный id и добавить статик дату для животного
-            AnimalId animalId = new AnimalId(staticData.AnimalType, animal.GetHashCode());
+            AnimalId animalId = new AnimalId(staticData.AnimalType, animal.GetHashCode(), staticData.EdibleFood);
             animal.Construct(animalId, staticData.BeginStats, _staticDataService);
             _animalsService.Register(animal);
         }

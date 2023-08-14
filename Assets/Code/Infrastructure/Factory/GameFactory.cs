@@ -7,8 +7,8 @@ using Infrastructure.Builders;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
 using Logic.Spawners;
+using Services.AnimalHouses;
 using Services.Animals;
-using Services.Food;
 using Services.MedicalBeds;
 using Services.PersistentProgress;
 using Services.Pools;
@@ -39,7 +39,7 @@ namespace Infrastructure.Factory
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService progressService, IStaticDataService staticDataService,
             IAnimalsService animalsService, IPoolService poolService, IMedicalBedsReporter medicalBedsReporter,
-            IFoodService foodService)
+            IAnimalHouseService houseService)
         {
             _assets = assets;
             _poolService = poolService;
@@ -50,7 +50,7 @@ namespace Infrastructure.Factory
             HandItemFactory = new HandItemFactory(assets);
             EffectFactory = new EffectFactory(assets, staticDataService, poolService);
 
-            _animalHouseBuilder = new AnimalHouseBuilder();
+            _animalHouseBuilder = new AnimalHouseBuilder(houseService);
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _medStandBuilder = new MedStandBuilder(staticDataService);
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
@@ -85,8 +85,19 @@ namespace Infrastructure.Factory
         public GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type) =>
             _assets.Instantiate($"{AssetPath.ChildAnimalPath}/{type}", at, rotation);
 
-        public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType) =>
-            InstantiateRegistered($"{AssetPath.AnimalHousePath}/{animalType}House", at, rotation);
+        public GameObject CreateBreedingHouse(Vector3 at, Quaternion rotation)
+        {
+            GameObject houseObject = InstantiateRegistered(AssetPath.BreedingHouse, at, rotation);
+            _animalHouseBuilder.Build(houseObject.GetComponent<IAnimalHouse>());
+            return houseObject;
+        }
+
+        public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType)
+        {
+            GameObject houseObject = InstantiateRegistered($"{AssetPath.AnimalHousePath}/{animalType}House", at, rotation);
+            _animalHouseBuilder.Build(houseObject.GetComponent<IAnimalHouse>());
+            return houseObject;
+        }
 
         public GameObject CreateBuildCell(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.BuildCellPath, at, rotation);

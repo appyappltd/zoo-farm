@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &948392204378004076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1195867983486302618}
+  m_Layer: 7
+  m_Name: FeedingPlace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1195867983486302618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948392204378004076}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.46, y: 0, z: 5.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8539451799298247592}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1738643882791879845
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +223,7 @@ Transform:
   - {fileID: 2444323082519179518}
   - {fileID: 8906080547906094545}
   - {fileID: 4461258970409613720}
+  - {fileID: 1195867983486302618}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!208 &2512973339050907811
@@ -246,10 +278,12 @@ MonoBehaviour:
   _firstPlace: {fileID: 8906080547906094545}
   _secondPlace: {fileID: 2444323082519179518}
   _childPlace: {fileID: 4461258970409613720}
+  _feedingPlace: {fileID: 1195867983486302618}
   _humanInteraction: {fileID: 2748258151412229388}
   _defaultInteractionView: {fileID: 5680394189173804133}
   _backgroundInteractionView: {fileID: 1313175194547247571}
-  _feedingCyclesToMaturity: 4
+  _feedingCyclesToMaturity: 2
+  _isServedByKeeper: 1
 --- !u!1 &2463878341852753316
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,6 +995,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5787264161011303992, guid: fae7029fe3c223c478e2c059fc3117f6, type: 3}
+      propertyPath: _playerInteraction._underlyingValue
+      value: 
+      objectReference: {fileID: 2748258151412229388}
     - target: {fileID: 6947297355195682139, guid: fae7029fe3c223c478e2c059fc3117f6, type: 3}
       propertyPath: m_Name
       value: Interaction View Background
@@ -1097,6 +1135,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 969896252442500805, guid: 591663bf658186e48afd2ab6bcf8b48d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3636408662190762595}
+    - targetCorrespondingSourceObject: {fileID: 969896252442500805, guid: 591663bf658186e48afd2ab6bcf8b48d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6225373115045881734}
   m_SourcePrefab: {fileID: 100100000, guid: 591663bf658186e48afd2ab6bcf8b48d, type: 3}
 --- !u!114 &934205096168091202 stripped
 MonoBehaviour:
@@ -1131,3 +1172,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6225373115045881734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9043931338693582470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878f4476ee124052bb4c0083a276a8ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scaleModifierId: 0

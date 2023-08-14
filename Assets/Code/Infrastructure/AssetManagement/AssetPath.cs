@@ -5,6 +5,7 @@ namespace Infrastructure.AssetManagement
         public const string HeroPath = "Prefabs/Hero";
         public const string AnimalPath = "Prefabs/Animals";
         public const string AnimalHousePath = "Prefabs/AnimalHouses";
+        public const string BreedingHouse = "Prefabs/AnimalHouses/BreedingHouse";
         public const string ChildAnimalPath = "Prefabs/Animals/Childs";
         public const string BuildCellPath = "Prefabs/BuildCell";
         public const string VisualsPath = "Prefabs/Visuals";

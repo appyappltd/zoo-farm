@@ -5,6 +5,7 @@ using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Infrastructure.Factory;
 using JetBrains.Annotations;
+using Logic.Breeding;
 
 namespace Services.AnimalHouses
 {
@@ -15,21 +16,43 @@ namespace Services.AnimalHouses
         private readonly IGameFactory _gameFactory;
 
         private readonly List<AnimalHouse> _animalHouses = new List<AnimalHouse>();
+        private readonly List<BreedingHouse> _breedingHouses = new List<BreedingHouse>();
         private readonly List<QueueToHouse> _animalsInQueue = new List<QueueToHouse>();
         private readonly List<QueueToHouse> _animalsInPriorityQueue = new List<QueueToHouse>();
-        private readonly Queue<AnimalHouse> _feedQueue = new Queue<AnimalHouse>();
+        private readonly Queue<IAnimalHouse> _feedQueue = new Queue<IAnimalHouse>();
 
         public IReadOnlyList<QueueToHouse> AnimalsInQueue => _animalsInQueue;
 
-        public void RegisterHouse(AnimalHouse house)
+        public void RegisterHouse(IAnimalHouse house)
         {
-            if (_animalHouses.Contains(house))
-                throw new Exception($"House {house} already registered");
+            switch (house)
+            {
+                case AnimalHouse animalHouse:
+                    RegisterAnimalHose(animalHouse);
+                    break;
+                case BreedingHouse breedingHouse:
+                    RegisterBreedingHouse(breedingHouse);
+                    break;
+            }
+        }
 
-            _animalHouses.Add(house);
-            house.BowlEmpty += AddToFeedQueue;
-            AddToFeedQueue(house);
-            TryTakeHouse(house);
+        private void RegisterBreedingHouse(BreedingHouse breedingHouse)
+        {
+            if (breedingHouse.IsServedByKeeper)
+                breedingHouse.BowlEmpty += AddToFeedQueue;
+
+            _breedingHouses.Add(breedingHouse);
+        }
+
+        private void RegisterAnimalHose(AnimalHouse animalHouse)
+        {
+            if (_animalHouses.Contains(animalHouse))
+                throw new Exception($"House {animalHouse} already registered");
+
+            animalHouse.BowlEmpty += AddToFeedQueue;
+            _animalHouses.Add(animalHouse);
+            AddToFeedQueue(animalHouse);
+            TryTakeHouse(animalHouse);
         }
 
         public void TakeQueueToHouse(QueueToHouse queueToHouse, bool isHighPriority = false)
@@ -65,8 +88,20 @@ namespace Services.AnimalHouses
             TryTakeHouse(attachedHouse);
         }
 
-        public bool TryGetNextFeedHouse(out AnimalHouse feedHouse) =>
+        public bool TryGetNextFeedHouse(out IAnimalHouse feedHouse) =>
             _feedQueue.TryDequeue(out feedHouse);
+
+        public bool TryGetNextAnimalInQueue(out AnimalId animalId)
+        {
+            if (_animalsInQueue.Count > 0)
+            {
+                animalId = _animalsInQueue[0].AnimalId;
+                return true;
+            }
+
+            animalId = null;
+            return false;
+        }
 
         private void TryTakeHouse(AnimalHouse house)
         {
@@ -105,7 +140,7 @@ namespace Services.AnimalHouses
             return false;
         }
 
-        private void AddToFeedQueue(AnimalHouse house) =>
+        private void AddToFeedQueue(IAnimalHouse house) =>
             _feedQueue.Enqueue(house);
 
         [CanBeNull]

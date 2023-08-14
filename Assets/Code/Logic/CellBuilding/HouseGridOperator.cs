@@ -1,10 +1,8 @@
 using Logic.Animals;
-using NaughtyAttributes;
 using Services;
 using Services.AnimalHouses;
 using Ui.Services;
 using Ui.Windows;
-using UnityEngine;
 
 namespace Logic.CellBuilding
 {
@@ -24,30 +22,18 @@ namespace Logic.CellBuilding
         {
             _cashedMarker = marker;
 
-            if (IsOpenChoseHouseWindow())
+            if (_houseService.TryGetNextAnimalInQueue(out AnimalId animalId))
             {
                 HouseBuildWindow window = _windowsService.Open(WindowId.BuildHouse).GetComponent<HouseBuildWindow>();
                 window.SetOnChoseCallback(OnAnimalChosen);
             }
             else
             {
-                OnAnimalChosen(_houseService.AnimalsInQueue[0].AnimalId.Type);
+                OnAnimalChosen(animalId.Type);
             }
         }
 
-        private bool IsOpenChoseHouseWindow()
-        {
-#if DEBUG
-            return true;
-#else
-            return _houseService.AnimalsInQueue.Count > 1;
-#endif
-        }
-
-        private void OnAnimalChosen(AnimalType type)
-        {
-            AnimalHouse house = GameFactory.CreateAnimalHouse(_cashedMarker.BuildPosition, _cashedMarker.Location.Rotation, type).GetComponent<AnimalHouse>();
-            _houseService.RegisterHouse(house);
-        }
+        private void OnAnimalChosen(AnimalType type) =>
+            GameFactory.CreateAnimalHouse(_cashedMarker.BuildPosition, _cashedMarker.Location.Rotation, type);
     }
 }
