@@ -92,9 +92,9 @@ namespace Logic.Movement
                 _agent.SetPath(path);
                 return;
             }
-
+            
 #if DEBUG
-            throw new Exception("Path cannot be found");
+           Debug.LogError("Path cannot be found");
 #endif
         }
 

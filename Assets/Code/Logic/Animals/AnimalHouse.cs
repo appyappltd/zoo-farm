@@ -43,7 +43,7 @@ namespace Logic.Animals
             Init();
 
         private void OnDestroy() =>
-            _bowl.ProgressBarView.Empty += OnBowlEmpty;
+            _bowl.ProgressBarView.Empty -= OnBowlEmpty;
 
         public void AttachAnimal(AnimalId animalId)
         {
@@ -79,6 +79,7 @@ namespace Logic.Animals
             _storage.Construct(_inventoryHolder.Inventory);
             _barIconView.Construct(_bowl.ProgressBarView);
             _productReceiver.Construct(_inventoryHolder.Inventory);
+            _bowl.ProgressBarView.Empty += OnBowlEmpty;
         }
 
         private void OnBowlEmpty() =>

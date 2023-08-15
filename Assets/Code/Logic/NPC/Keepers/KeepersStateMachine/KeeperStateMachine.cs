@@ -59,6 +59,8 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
             inventory.Deactivate();
 
             State waiting = new Idle(_animator);
+            State vendorFinding = new Idle(_animator);
+            State houseFinding = new Idle(_animator);
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToFood = new MoveTo(_animator, _mover, _foodTarget);
             State moveToHouse = new MoveTo(_animator, _mover, _houseTarget);
@@ -71,9 +73,10 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
             Transition reachTarget = new ReachDestinationTransition(_mover);
             Transition randomDelay = new RandomTimerTransition(_waitingDelayRange.y, _waitingDelayRange.x);
             Transition foodNeeds = new CheckTransition(IsFoodNeeds);
-            Transition foodCollected = new CheckTransition(IsFoodCollected);
+            Transition allFoodCollected = new CheckTransition(IsFoodCollected);
             Transition foodNotEnough = new CheckTransition(IsVendorFound);
             Transition emptyInventory = new EmptyInventory(inventory);
+            Transition foodItemCollected = new ItemCollected(inventory);
 
             Init(waiting, new Dictionary<State, Dictionary<Transition, State>>
             {
@@ -81,14 +84,14 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
                     waiting, new Dictionary<Transition, State>
                     {
                         {randomDelay, wander},
-                        {foodNeeds, collect},
-                        {foundNewFeedHouse, waiting}
+                        {foodNeeds, vendorFinding},
                     }
                 },
                 {
                     wander, new Dictionary<Transition, State>
                     {
                         {reachTarget, waiting},
+                        {foundNewFeedHouse, waiting},
                     }
                 },
                 {
@@ -100,8 +103,14 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
                 {
                     collect, new Dictionary<Transition, State>
                     {
+                        {foodItemCollected, vendorFinding},
+                    }
+                },
+                {
+                    vendorFinding, new Dictionary<Transition, State>
+                    {
+                        {allFoodCollected, moveToHouse},
                         {foodNotEnough, moveToFood},
-                        {foodCollected, moveToHouse}
                     }
                 },
                 {
@@ -121,7 +130,8 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
 
         private bool IsFoodNeeds()
         {
-            bool isFoodNeeds = _feedHouse is {IsTaken: true} && _feedHouse.Inventory.Weight < _feedHouse.Inventory.MaxWeight;
+            bool isFoodNeeds = _feedHouse is {IsTaken: true} &&
+                               _feedHouse.Inventory.IsEmpty;
             Debug.Log($"IsFoodNeeds: {isFoodNeeds}");
             return isFoodNeeds;
         }

@@ -1743,7 +1743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac4445639b4649a5998ee9a6566e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxWeight: 3
+  _weight: 0
+  _maxWeight: 4
 --- !u!114 &6417601466712274811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1775,9 +1776,6 @@ MonoBehaviour:
   HandsAnimator: {fileID: 3680925168905657938}
   Storage: {fileID: 9153705430419385334}
   _stateMachine: {fileID: 1826278362862123120}
-  _inventoryHolder: {fileID: 8894359891175667605}
-  _handsAnimator: {fileID: 3680925168905657938}
-  _storage: {fileID: 9153705430419385334}
 --- !u!114 &1826278362862123120
 MonoBehaviour:
   m_ObjectHideFlags: 0

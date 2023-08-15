@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6021254209361128710, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: _hungerDelay
-      value: 30
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8643315356767832591, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: m_Name

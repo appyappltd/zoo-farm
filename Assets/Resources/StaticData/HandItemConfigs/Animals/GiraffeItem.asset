@@ -15,6 +15,7 @@ MonoBehaviour:
   <ItemId>k__BackingField: 2
   <Weight>k__BackingField: 3
   AnimalType: 2
+  EdibleFood: 1
   BeginStats:
     VitalityRange: {x: 26.388712, y: 46.556793}
     SatietyRange: {x: 0, y: 0}

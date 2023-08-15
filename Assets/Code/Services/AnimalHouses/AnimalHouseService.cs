@@ -93,8 +93,17 @@ namespace Services.AnimalHouses
             TryTakeHouse(attachedHouse);
         }
 
-        public bool TryGetNextFeedHouse(out IAnimalHouse feedHouse) =>
-            _feedQueue.TryDequeue(out feedHouse);
+        public bool TryGetNextFeedHouse(out IAnimalHouse feedHouse)
+        {
+            bool tryGetNextFeedHouse = _feedQueue.TryDequeue(out feedHouse);
+
+            if (tryGetNextFeedHouse)
+            {
+                Debug.Log($"FeedQueue dequeued, remaining {_feedQueue.Count}");
+            }
+            
+            return tryGetNextFeedHouse;
+        }
 
         public bool TryGetNextAnimalIdInQueue(out AnimalId animalId)
         {
