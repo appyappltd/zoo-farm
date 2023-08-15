@@ -4,5 +4,6 @@ namespace Services.Effects
     {
         HealingPluses = 0,
         Hearts = 1,
+        Puff = 2,
     }
 }

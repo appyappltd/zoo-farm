@@ -79,7 +79,8 @@ namespace Logic.Breeding
 
         private GameObject _childModel;
         private InteractionViewSwitcher _viewSwitcher;
-        private Location _effectsLocation;
+        private Location _heartsEffectsLocation;
+        private Location _puffEffectsLocation;
 
         public event Action<IAnimalHouse> BowlEmpty = _ => { };
         
@@ -122,7 +123,8 @@ namespace Logic.Breeding
             _growthBar.Deactivate();
             _inventoryHolder.Inventory.Deactivate();
             
-            _effectsLocation = new Location(transform.position, Quaternion.LookRotation(Vector3.up));
+            _heartsEffectsLocation = new Location(transform.position, Quaternion.LookRotation(Vector3.up));
+            _puffEffectsLocation = new Location(_childPlace.position, Quaternion.LookRotation(Vector3.up));
 
             _humanInteraction.Interacted += OnInteracted;
             _bowl.ProgressBarView.Full += OnBeginEat;
@@ -205,12 +207,13 @@ namespace Logic.Breeding
             UpdateGrowthBar();
             _childModel = _gameFactory.CreateAnimalChild(_childPlace.position, _childPlace.rotation, _breedingAnimalType);
             _afterBreeding.Play();
-            _effectService.SpawnEffect(EffectId.Hearts, _effectsLocation);
+            _effectService.SpawnEffect(EffectId.Hearts, _heartsEffectsLocation);
         }
 
         private void FinishBreedingProcess()
         {
             AnimalItemStaticData newAnimalType = _staticData.AnimalItemDataById(_animals[0].AnimalId.Type);
+            _effectService.SpawnEffect(EffectId.Puff,_puffEffectsLocation);
             Destroy(_childModel);
             _animals.Add( _gameFactory.CreateAnimal(newAnimalType, _childPlace.position, _childPlace.rotation)
                 .GetComponent<IAnimal>());
@@ -297,7 +300,7 @@ namespace Logic.Breeding
         [Button]
         private void SpawnEffect()
         {
-            _effectService.SpawnEffect(EffectId.Hearts, _effectsLocation);
+            _effectService.SpawnEffect(EffectId.Puff, _puffEffectsLocation);
         }
     }
 }

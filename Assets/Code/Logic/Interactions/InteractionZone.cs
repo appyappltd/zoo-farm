@@ -58,7 +58,7 @@ namespace Logic.Interactions
         protected override void OnDisabled()
         {
             base.OnDisabled();
-            _timerOperator.Pause();
+            OnTargetExited(null);
         }
 
         protected override void OnTargetEntered(T hero)
@@ -93,7 +93,7 @@ namespace Logic.Interactions
                 Rejected.Invoke();
         }
 
-        protected override void OnTargetExited(T hero)
+        protected override void OnTargetExited(T _)
         {
             _isLock = false;
             _timerOperator.Pause();
