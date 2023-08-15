@@ -2,7 +2,7 @@ using Logic.Storages;
 using Logic.Storages.Items;
 using UnityEngine;
 
-namespace Logic.Bubble
+namespace Logic
 {
     public class MaxIndicator : MonoBehaviour
     {
