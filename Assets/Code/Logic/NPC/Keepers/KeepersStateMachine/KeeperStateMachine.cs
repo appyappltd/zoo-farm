@@ -82,7 +82,7 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
                     {
                         {randomDelay, wander},
                         {foodNeeds, collect},
-                        {foundNewFeedHouse, collect}
+                        {foundNewFeedHouse, waiting}
                     }
                 },
                 {
@@ -121,7 +121,7 @@ namespace Code.Logic.NPC.Keepers.KeepersStateMachine
 
         private bool IsFoodNeeds()
         {
-            bool isFoodNeeds = _feedHouse != null && _feedHouse.Inventory.Weight < _feedHouse.Inventory.MaxWeight;
+            bool isFoodNeeds = _feedHouse is {IsTaken: true} && _feedHouse.Inventory.Weight < _feedHouse.Inventory.MaxWeight;
             Debug.Log($"IsFoodNeeds: {isFoodNeeds}");
             return isFoodNeeds;
         }

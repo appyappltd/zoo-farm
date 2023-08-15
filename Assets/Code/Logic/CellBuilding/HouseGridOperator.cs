@@ -21,25 +21,9 @@ namespace Logic.CellBuilding
         protected override void BuildCell(BuildPlaceMarker marker)
         {
             _cashedMarker = marker;
-
-            if (IsOpenChoseHouseWindow())
-            {
-                HouseBuildWindow window = _windowsService.Open(WindowId.BuildHouse).GetComponent<HouseBuildWindow>();
-                window.SetOnChoseCallback(OnAnimalChosen);
-            }
-            else
-            {
-                OnAnimalChosen(_houseService.AnimalsInQueue[0].Animal.AnimalId.Type);
-            }
-        }
-
-        private bool IsOpenChoseHouseWindow()
-        {
-#if DEBUG
-            return true;
-#else
-            return _houseService.AnimalsInQueue.Count > 1;
-#endif
+            HouseBuildWindow window = _windowsService.Open(WindowId.BuildHouse).GetComponent<HouseBuildWindow>();
+            window.SetOnChoseCallback(OnAnimalChosen);
+            
         }
 
         private void OnAnimalChosen(AnimalType type)

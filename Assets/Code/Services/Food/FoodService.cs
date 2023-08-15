@@ -10,10 +10,8 @@ namespace Services.Food
     {
         private readonly HashSet<IFoodVendorView> _vendors = new HashSet<IFoodVendorView>();
 
-        public void Register(IFoodVendorView foodVendor)
-        {
+        public void Register(IFoodVendorView foodVendor) =>
             _vendors.Add(foodVendor);
-        }
 
         [CanBeNull]
         public IFoodVendorView GetReadyVendor(FoodId byFoodId)

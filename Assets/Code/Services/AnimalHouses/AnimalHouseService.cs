@@ -6,6 +6,7 @@ using Logic.Animals.AnimalsBehaviour;
 using Infrastructure.Factory;
 using JetBrains.Annotations;
 using Logic.Breeding;
+using UnityEngine;
 
 namespace Services.AnimalHouses
 {
@@ -22,6 +23,7 @@ namespace Services.AnimalHouses
         private readonly Queue<IAnimalHouse> _feedQueue = new Queue<IAnimalHouse>();
 
         public IReadOnlyList<QueueToHouse> AnimalsInQueue => _animalsInQueue;
+        public int AnimalsInHouseQueueCount => _animalsInQueue.Count;
 
         public void RegisterHouse(IAnimalHouse house)
         {
@@ -39,7 +41,10 @@ namespace Services.AnimalHouses
         private void RegisterBreedingHouse(BreedingHouse breedingHouse)
         {
             if (breedingHouse.IsServedByKeeper)
+            {
                 breedingHouse.BowlEmpty += AddToFeedQueue;
+                AddToFeedQueue(breedingHouse);
+            }
 
             _breedingHouses.Add(breedingHouse);
         }
@@ -57,12 +62,15 @@ namespace Services.AnimalHouses
 
         public void TakeQueueToHouse(QueueToHouse queueToHouse, bool isHighPriority = false)
         {
+            Debug.Log("TakeQueueToHouse");
+            
             AnimalHouse freeHouse = GetFreeHouseFor(queueToHouse.Animal.AnimalId.Type);
 
             List<QueueToHouse> targetQueue = GetQueueByPriority(isHighPriority);
             
             if (freeHouse is null)
             {
+                Debug.Log("Add to queue");
                 targetQueue.Add(queueToHouse);
             }
             else
@@ -71,9 +79,6 @@ namespace Services.AnimalHouses
                 TakeHouse(freeHouse, animal);
             }
         }
-
-        private List<QueueToHouse> GetQueueByPriority(bool isHighPriority) =>
-            isHighPriority ? _animalsInPriorityQueue : _animalsInQueue;
 
         public void VacateHouse(AnimalId withAnimalId)
         {
@@ -91,7 +96,7 @@ namespace Services.AnimalHouses
         public bool TryGetNextFeedHouse(out IAnimalHouse feedHouse) =>
             _feedQueue.TryDequeue(out feedHouse);
 
-        public bool TryGetNextAnimalInQueue(out AnimalId animalId)
+        public bool TryGetNextAnimalIdInQueue(out AnimalId animalId)
         {
             if (_animalsInQueue.Count > 0)
             {
@@ -103,19 +108,25 @@ namespace Services.AnimalHouses
             return false;
         }
 
+        public IEnumerable<AnimalType> GetAnimalTypesInHouseQueue(bool isHighPriority = false) =>
+            GetQueueByPriority(isHighPriority).Select(queue => queue.Animal.AnimalId.Type).Distinct();
+
+        private List<QueueToHouse> GetQueueByPriority(bool isHighPriority) =>
+            isHighPriority ? _animalsInPriorityQueue : _animalsInQueue;
+
         private void TryTakeHouse(AnimalHouse house)
         {
             if (TryGetAnimalFromQueue(_animalsInPriorityQueue, house.ForAnimal, out QueueToHouse animalQueue))
             {
-                SendTheAnimalHome(house, _animalsInPriorityQueue, animalQueue);
+                SendAnimalHome(house, _animalsInPriorityQueue, animalQueue);
             }
             else if (TryGetAnimalFromQueue(_animalsInQueue, house.ForAnimal, out animalQueue))
             {
-                SendTheAnimalHome(house, _animalsInQueue, animalQueue);
+                SendAnimalHome(house, _animalsInQueue, animalQueue);
             }
         }
 
-        private void SendTheAnimalHome(AnimalHouse house, List<QueueToHouse> queue, QueueToHouse animalQueue)
+        private void SendAnimalHome(AnimalHouse house, List<QueueToHouse> queue, QueueToHouse animalQueue)
         {
             IAnimal animal = animalQueue.OnTakeHouse.Invoke();
             queue.Remove(animalQueue);

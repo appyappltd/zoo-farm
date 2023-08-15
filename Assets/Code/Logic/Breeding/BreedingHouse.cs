@@ -78,9 +78,9 @@ namespace Logic.Breeding
         private GameObject _childModel;
         private InteractionViewSwitcher _viewSwitcher;
 
-        public event Action<IAnimalHouse> BowlEmpty;
+        public event Action<IAnimalHouse> BowlEmpty = _ => { };
         
-        public bool IsBusy => _animals.Count > 0;
+        public bool IsTaken => _animals.Count > 0;
         public Transform FeedingPlace => _feedingPlace;
         public IInventory Inventory => _inventoryHolder.Inventory;
         public FoodId EdibleFoodType => _edibleFoodType;
@@ -100,8 +100,8 @@ namespace Logic.Breeding
         private void OnDestroy()
         {
             _humanInteraction.Interacted -= OnInteracted;
-            _bowl.ProgressBarView.Full -= BeginEat;
-            _bowl.ProgressBarView.Empty -= EndEat;
+            _bowl.ProgressBarView.Full -= OnBeginEat;
+            _bowl.ProgressBarView.Empty -= OnEndEat;
             
             _afterBreeding.Kill();
             _animalsDispersal.Kill();
@@ -119,8 +119,8 @@ namespace Logic.Breeding
             _inventoryHolder.Inventory.Deactivate();
             
             _humanInteraction.Interacted += OnInteracted;
-            _bowl.ProgressBarView.Full += BeginEat;
-            _bowl.ProgressBarView.Empty += EndEat;
+            _bowl.ProgressBarView.Full += OnBeginEat;
+            _bowl.ProgressBarView.Empty += OnEndEat;
 
             InitViewSwitcher();
             InitAfterBreedingRoutine();
@@ -167,7 +167,7 @@ namespace Logic.Breeding
             _viewSwitcher.SwitchToBackground();
         }
 
-        private void BeginEat()
+        private void OnBeginEat()
         {
             if (_currentFeedingCycle >= _feedingCyclesToMaturity)
                 return;
@@ -181,8 +181,9 @@ namespace Logic.Breeding
             _currentFeedingCycle++;
         }
 
-        private void EndEat()
+        private void OnEndEat()
         {
+            BowlEmpty.Invoke(this);
             UpdateGrowthBar();
 
             if (_currentFeedingCycle >= _feedingCyclesToMaturity)
@@ -235,7 +236,7 @@ namespace Logic.Breeding
 
         private void OnInteracted(Human human)
         {
-            if (IsBusy)
+            if (IsTaken)
                 return;
             
             if (human is Hero)

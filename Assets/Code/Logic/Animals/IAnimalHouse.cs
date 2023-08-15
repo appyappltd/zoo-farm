@@ -11,5 +11,6 @@ namespace Logic.Animals
         Transform FeedingPlace { get; }
         IInventory Inventory { get; }
         FoodId EdibleFoodType { get; }
+        bool IsTaken { get; }
     }
 }

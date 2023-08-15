@@ -226,10 +226,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _places:
-  - {fileID: 1519200010505710134}
-  - {fileID: 3620724505821387837}
-  - {fileID: 4504754390375549035}
   - {fileID: 9181153984840200654}
+  - {fileID: 4504754390375549035}
+  - {fileID: 3620724505821387837}
+  - {fileID: 1519200010505710134}
   _isSortable: 1
   _isRemoteInit: 1
   _isModifyRotation: 0
@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac4445639b4649a5998ee9a6566e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weight: 0
   _maxWeight: 4
 --- !u!1 &5488007558412268629
 GameObject:
@@ -416,7 +417,6 @@ MonoBehaviour:
   _restPlace: {fileID: 6223570695547407479}
   _eatPlace: {fileID: 1926723737059924004}
   _forAnimal: 0
-  _edibleFoodType: 0
   _isTaken: 0
 --- !u!114 &5744955856180027580
 MonoBehaviour:

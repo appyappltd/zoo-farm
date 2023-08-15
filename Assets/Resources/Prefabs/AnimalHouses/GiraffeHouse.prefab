@@ -123,6 +123,10 @@ PrefabInstance:
       propertyPath: _edibleFoodType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1926723737059924004, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7904430147291196124, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -169,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8633194243721409408, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
       propertyPath: m_Name
-      value: Giraffe
+      value: GiraffeHouse
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

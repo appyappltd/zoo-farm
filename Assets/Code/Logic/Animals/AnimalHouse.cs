@@ -25,7 +25,6 @@ namespace Logic.Animals
         [SerializeField] private Transform _restPlace;
         [SerializeField] private Transform _eatPlace;
         [SerializeField] private AnimalType _forAnimal;
-        [SerializeField] private FoodId _edibleFoodType;
         [SerializeField] private bool _isTaken;
 
         private AnimalId _animalId;
@@ -37,7 +36,7 @@ namespace Logic.Animals
         public Transform EatPlace => _eatPlace;
         public bool IsTaken => _isTaken;
         public AnimalType ForAnimal => _forAnimal;
-        public FoodId EdibleFoodType => _edibleFoodType;
+        public FoodId EdibleFoodType => _animalId.EdibleFood;
         public IInventory Inventory => _inventoryHolder.Inventory;
 
         private void Awake() =>
