@@ -637,6 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _toCameraOffset: 3
 --- !u!114 &5480058765449588492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +771,7 @@ MonoBehaviour:
   _interactionDelay: 0.5
   _isValidate: 0
   _interactionValidators: []
+  _isLock: 0
   _timerOperator: {fileID: 7662343981420929819}
 --- !u!54 &8719728934667746137
 Rigidbody:

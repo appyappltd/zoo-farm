@@ -12,11 +12,13 @@ using Logic.Interactions;
 using Logic.Player;
 using Logic.SpriteUtils;
 using Logic.Storages;
+using NaughtyAttributes;
 using Observables;
 using Progress;
 using Services;
 using Services.AnimalHouses;
 using Services.Animals;
+using Services.Effects;
 using Services.StaticData;
 using StateMachineBase.States;
 using Ui;
@@ -55,28 +57,29 @@ namespace Logic.Breeding
         [Space] [Header("Settings")]
         [SerializeField] private int _feedingCyclesToMaturity;
         [SerializeField] private bool _isServedByKeeper;
-        
 
         private IWindowService _windowService;
+        private IEffectService _effectService;
         private IAnimalsService _animalService;
         private IAnimalHouseService _houseService;
         private IGameFactory _gameFactory;
         private IStaticDataService _staticData;
 
         private List<IAnimal> _animals = new List<IAnimal>(2);
-        
+
         private DelayRoutine _afterBreeding;
         private DelayRoutine _animalsDispersal;
         private DelayRoutine _homelessEmotionSetDelay;
 
         private int _currentFeedingCycle;
         private int _animalsInHouse;
-        
+
         private AnimalType _breedingAnimalType;
         private FoodId _edibleFoodType;
-        
+
         private GameObject _childModel;
         private InteractionViewSwitcher _viewSwitcher;
+        private Location _effectsLocation;
 
         public event Action<IAnimalHouse> BowlEmpty = _ => { };
         
@@ -89,6 +92,7 @@ namespace Logic.Breeding
         private void Awake()
         {
             _windowService = AllServices.Container.Single<IWindowService>();
+            _effectService = AllServices.Container.Single<IEffectService>();
             _animalService = AllServices.Container.Single<IAnimalsService>();
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
             _gameFactory = AllServices.Container.Single<IGameFactory>();
@@ -118,6 +122,8 @@ namespace Logic.Breeding
             _growthBar.Deactivate();
             _inventoryHolder.Inventory.Deactivate();
             
+            _effectsLocation = new Location(transform.position, Quaternion.LookRotation(Vector3.up));
+
             _humanInteraction.Interacted += OnInteracted;
             _bowl.ProgressBarView.Full += OnBeginEat;
             _bowl.ProgressBarView.Empty += OnEndEat;
@@ -199,6 +205,7 @@ namespace Logic.Breeding
             UpdateGrowthBar();
             _childModel = _gameFactory.CreateAnimalChild(_childPlace.position, _childPlace.rotation, _breedingAnimalType);
             _afterBreeding.Play();
+            _effectService.SpawnEffect(EffectId.Hearts, _effectsLocation);
         }
 
         private void FinishBreedingProcess()
@@ -285,6 +292,12 @@ namespace Logic.Breeding
         {
             if (_animalsInHouse >= MaxAnimals)
                 BeginBreeding();
+        }
+
+        [Button]
+        private void SpawnEffect()
+        {
+            _effectService.SpawnEffect(EffectId.Hearts, _effectsLocation);
         }
     }
 }

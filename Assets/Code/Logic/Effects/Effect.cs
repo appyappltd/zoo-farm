@@ -9,7 +9,7 @@ namespace Logic.Effects
         [SerializeField] private ParticleSystem _particleSystem;
 
         public GameObject GameObject => gameObject;
-        public event Action<ISelfPoolable> Disabled = i => { };
+        public event Action<ISelfPoolable> Disabled = _ => { };
 
         public void Play(Location at)
         {
