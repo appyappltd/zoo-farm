@@ -61,9 +61,9 @@ namespace DelayRoutines
             return this;
         }
 
-        public DelayRoutine WaitForEvent(Action readyProduce)
+        public DelayRoutine WaitForEvent(Action action)
         {
-            AddToSequence(new EventAwaiter(readyProduce, _globalUpdate));
+            AddToSequence(new EventAwaiter(action, _globalUpdate));
             return this;
         }
 

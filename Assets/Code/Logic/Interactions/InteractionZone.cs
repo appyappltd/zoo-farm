@@ -1,5 +1,6 @@
 using System;
 using AYellowpaper;
+using DelayRoutines;
 using Logic.Interactions.Validators;
 using Logic.Player;
 using NaughtyAttributes;
@@ -16,6 +17,9 @@ namespace Logic.Interactions
 
         [SerializeField] [ShowIf("_isValidate")]
         private InterfaceReference<IInteractionValidator, MonoBehaviour>[] _interactionValidators;
+
+        [SerializeField] private bool _isLock;
+        private DelayRoutine _waitToUnlock;
 
 #if UNITY_EDITOR
         private float _prevDelayValue;
@@ -38,6 +42,9 @@ namespace Logic.Interactions
             _timerOperator.SetUp(_interactionDelay, OnDelayPassed);
         }
 
+        private void OnDestroy() =>
+            _waitToUnlock?.Kill();
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
@@ -56,6 +63,17 @@ namespace Logic.Interactions
 
         protected override void OnTargetEntered(T hero)
         {
+            if (_isLock)
+            {
+                _waitToUnlock = new DelayRoutine();
+                _waitToUnlock
+                    .WaitUntil(() => _isLock == false)
+                    .Then(() => OnTargetEntered(hero))
+                    .SetAutoKill(true)
+                    .Play();
+                return;
+            }
+
             if (_isValidate)
                 Validate(hero);
             else
@@ -77,6 +95,7 @@ namespace Logic.Interactions
 
         protected override void OnTargetExited(T hero)
         {
+            _isLock = false;
             _timerOperator.Pause();
             Canceled.Invoke();
         }
@@ -88,6 +107,7 @@ namespace Logic.Interactions
 
         private void InvokeEntered(T hero)
         {
+            _isLock = true;
             _cashed = hero;
             _timerOperator.Restart();
             Entered.Invoke();
