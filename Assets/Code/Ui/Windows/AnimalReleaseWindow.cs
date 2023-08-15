@@ -38,9 +38,9 @@ namespace Ui.Windows
         {
             _animalsService = animalsService;
 
-            IEnumerable<IAnimal> animalTypes = _animalsService.GetReleaseReady();
+            IEnumerable<IAnimal> releaseReadyAnimals = _animalsService.GetReleaseReady();
 
-            foreach (IAnimal animal in animalTypes)
+            foreach (IAnimal animal in releaseReadyAnimals)
             {
                 ReleaseAnimalPanel panel = uiFactory.CreateReleaseAnimalPanel(_panelsParent);
                 AnimalType animalIdType = animal.AnimalId.Type;

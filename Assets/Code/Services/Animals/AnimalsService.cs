@@ -19,7 +19,7 @@ namespace Services.Animals
         public event Action<IAnimal> Released = _ => { };
 
         public int TotalAnimalCount => _animals.Count;
-        public int ReleaseReadyAnimalCount => _animals.Count(animal => animal.Stats.Satiety.IsFull);
+        public int ReleaseReadyAnimalCount => _animals.Count(IsReleaseReady);
         public IReadOnlyList<IAnimal> Animals => _animals;
 
         public AnimalsService(IAnimalHouseService houseService)
@@ -57,11 +57,8 @@ namespace Services.Animals
                 .Select(grouping => grouping.Key);
         }
 
-        public IEnumerable<IAnimal> GetReleaseReady()
-        {
-            return Animals.Where(animal => animal.Stats.Satiety.IsFull)
-                .Distinct(new AnimalByTypeComparer());
-        }
+        public IEnumerable<IAnimal> GetReleaseReady() =>
+            Animals.Where(IsReleaseReady).Distinct(new AnimalByTypeComparer());
 
         public BreedingPair SelectPairForBreeding(AnimalType byType)
         {
@@ -74,10 +71,13 @@ namespace Services.Animals
             IAnimal[] animals = GetAnimals(panelAnimalType);
 
             int total = animals.Length;
-            int releaseReady = animals.Count(animal => animal.Stats.Vitality.IsFull);
+            int releaseReady = animals.Count(IsReleaseReady);
 
             return new AnimalCountData(total, releaseReady);
         }
+
+        private static bool IsReleaseReady(IAnimal animal) =>
+            animal.Stats.Satiety.IsFull;
 
         private void ReleaseAnimal(IAnimal releasedAnimal)
         {
