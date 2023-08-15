@@ -4,10 +4,10 @@ namespace Logic.Bubble
 {
     public class BubbleHolder : MonoBehaviour
     {
-        public Bubble GetBubble => bubble;
+        public MovingBubble GetMovingBubble => _movingBubble;
 
-        private Bubble bubble;
+        private MovingBubble _movingBubble;
 
-        public void SetBubble(Bubble bubble) => this.bubble = bubble;
+        public void SetBubble(MovingBubble movingBubble) => this._movingBubble = movingBubble;
     }
 }

@@ -413,7 +413,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.25000006, y: -0.24999997, z: 0.066987306, w: 0.9330127}
   m_LocalPosition: {x: -0.039999723, y: 2.45, z: -0.015999937}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2956055232109399834}
@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _toCameraOffset: 3
 --- !u!114 &4977388631052885717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,4 +807,5 @@ MonoBehaviour:
   _isValidate: 1
   _interactionValidators:
   - _underlyingValue: {fileID: 8085249532688538939}
+  _isLock: 0
   _timerOperator: {fileID: 759187231370623593}

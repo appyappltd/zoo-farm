@@ -1311,7 +1311,9 @@ PrefabInstance:
       propertyPath: _rotationOffset.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3823740206972028246, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
+    - {fileID: 1559860621656391492, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 951227949797535625, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
