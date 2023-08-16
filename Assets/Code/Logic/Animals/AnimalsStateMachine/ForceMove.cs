@@ -6,35 +6,26 @@ using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine
 {
-    public class ForceMove : Move
+    public class ForceMove : MoveTo
     {
         private readonly Aligner _aligner;
-        private Transform _target;
 
-        public ForceMove(IPrimeAnimator animator, NavMeshMover mover, Aligner aligner) : base(animator, mover)
-        {
+        public ForceMove(IPrimeAnimator animator, NavMeshMover mover, Aligner aligner) : base(animator, mover, null) =>
             _aligner = aligner;
-        }
 
         protected override void OnEnter()
         {
-            Debug.Log("Force Move");
             _aligner.Disable();
             base.OnEnter();
         }
 
         protected override void OnExit()
         {
-            _aligner.Aligne(_target.rotation);
+            _aligner.Aligne(Target.rotation);
             base.OnExit();
         }
 
-        protected override Vector3 GetMovePosition()
-        {
-            return _target.position;
-        }
-
         public void SetNewPosition(Transform newTarget) =>
-            _target = newTarget;
+            Target = newTarget;
     }
 }

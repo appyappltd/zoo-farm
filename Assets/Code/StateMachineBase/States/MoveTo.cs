@@ -6,7 +6,7 @@ namespace StateMachineBase.States
 {
     public class MoveTo : Move
     {
-        protected readonly Transform Target;
+        protected Transform Target;
 
         public MoveTo(IPrimeAnimator animator, NavMeshMover mover, Transform target) : base(animator, mover) =>
             Target = target;

@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toCameraOffset: 3
+  _toCameraOffset: 0
 --- !u!1 &2428162248566037645
 GameObject:
   m_ObjectHideFlags: 0
@@ -7378,6 +7378,7 @@ GameObject:
   - component: {fileID: 5012472203250941117}
   - component: {fileID: 1146156017875273967}
   - component: {fileID: 3182235030398293056}
+  - component: {fileID: 4668980282578674458}
   m_Layer: 6
   m_Name: View
   m_TagString: Untagged
@@ -7465,6 +7466,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scaleModifierId: 0
+--- !u!114 &4668980282578674458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6423187174042151732}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toCameraOffset: 3
 --- !u!1 &6447088355153293225
 GameObject:
   m_ObjectHideFlags: 0
