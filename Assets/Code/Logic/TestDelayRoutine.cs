@@ -1,4 +1,5 @@
-﻿using DelayRoutines;
+﻿using System;
+using DelayRoutines;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ namespace Logic
         [SerializeField] private bool _isUntil = false;
         [SerializeField] private bool _isWhile = false;
         private RoutineSequence _whileRoutineSequence;
+
+        private void OnDestroy()
+        {
+            _whileRoutineSequence.Kill();
+        }
 
         private void Awake()
         {

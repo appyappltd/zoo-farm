@@ -23,7 +23,6 @@ namespace Logic.Movement
         public event Action Started = () => { };
         public event Action Ended = () => { };
 
-
         private void Awake()
         {
             _moving += Translate;

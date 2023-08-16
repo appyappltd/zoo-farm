@@ -19,8 +19,11 @@ namespace DelayRoutines
         private IRoutine LastRoutine => _routines[_currentRoutineIndex];
         private IRoutine ActiveRoutine => _routines.Find(routine => routine.IsActive);
 
-        public RoutineSequence() =>
+        public RoutineSequence()
+        {
+            Debug.Log("New swquance");
             _globalUpdate = GlobalUpdate.Instance;
+        }
 
         /// <summary>
         /// Launch routine
