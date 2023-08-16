@@ -18,7 +18,7 @@ namespace Ui
         [SerializeField] [Min(0)] private float _delayBeforeDeactivate = 2f;
 
         private IProgressBarView _barView;
-        private DelayRoutine _deactivateDelay;
+        private RoutineSequence _deactivate;
 
         private void OnDestroy()
         {
@@ -26,7 +26,7 @@ namespace Ui
 
             if (_isDeactivateOnFull && _barView != null)
             {
-                _deactivateDelay.Kill();
+                _deactivate.Kill();
                 _barView.Empty -= ActivateView;
                 _barView.Full -= DeactivateView;
             }
@@ -42,8 +42,8 @@ namespace Ui
 
             if (_isDeactivateOnFull)
             {
-                _deactivateDelay = new DelayRoutine();
-                _deactivateDelay
+                _deactivate = new RoutineSequence();
+                _deactivate
                     .WaitForSeconds(_delayBeforeDeactivate)
                     .Then(() => gameObject.SetActive(false));
                 
@@ -58,7 +58,7 @@ namespace Ui
         }
 
         private void DeactivateView() =>
-            _deactivateDelay.Play();
+            _deactivate.Play();
 
         private void ActivateView() =>
             gameObject.SetActive(true);

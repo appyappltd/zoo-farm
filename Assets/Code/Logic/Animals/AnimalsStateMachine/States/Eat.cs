@@ -11,14 +11,14 @@ namespace Logic.Animals.AnimalsStateMachine.States
     {
         private readonly StatIndicator _barIndicator;
         private readonly ProgressBarOperator _bowlBarOperator;
-        private readonly DelayRoutine _routine = new DelayRoutine();
+        private readonly RoutineSequence _routineSequence = new RoutineSequence();
 
         public Eat(AnimalAnimator animator, StatIndicator barIndicator, float changingSpeed, float hungerDelay, IProgressBar bowlBar)
             : base(animator, barIndicator, changingSpeed)
         {
             _barIndicator = barIndicator;
             _bowlBarOperator = new ProgressBarOperator(bowlBar, changingSpeed, true);
-            _routine.WaitForSeconds(hungerDelay).Then(() => barIndicator.enabled = true);
+            _routineSequence.WaitForSeconds(hungerDelay).Then(() => barIndicator.enabled = true);
         }
 
         protected override void PlayAnimation(AnimalAnimator animator) =>
@@ -32,7 +32,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
 
         protected override void OnExit()
         {
-            _routine.Play();
+            _routineSequence.Play();
         }
 
         protected override void OnUpdate()
@@ -43,7 +43,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
 
         public void Dispose()
         {
-            _routine.Kill();
+            _routineSequence.Kill();
         }
     }
 }

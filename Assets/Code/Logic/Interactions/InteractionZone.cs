@@ -19,7 +19,7 @@ namespace Logic.Interactions
         private InterfaceReference<IInteractionValidator, MonoBehaviour>[] _interactionValidators;
 
         [SerializeField] private bool _isLock;
-        private DelayRoutine _waitToUnlock;
+        private RoutineSequence _waitToUnlock;
 
 #if UNITY_EDITOR
         private float _prevDelayValue;
@@ -65,7 +65,7 @@ namespace Logic.Interactions
         {
             if (_isLock)
             {
-                _waitToUnlock = new DelayRoutine();
+                _waitToUnlock = new RoutineSequence();
                 _waitToUnlock
                     .WaitUntil(() => _isLock == false)
                     .Then(() => OnTargetEntered(hero))

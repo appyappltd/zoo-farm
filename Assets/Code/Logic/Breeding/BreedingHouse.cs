@@ -67,9 +67,9 @@ namespace Logic.Breeding
 
         private List<IAnimal> _animals = new List<IAnimal>(2);
 
-        private DelayRoutine _afterBreeding;
-        private DelayRoutine _animalsDispersal;
-        private DelayRoutine _homelessEmotionSetDelay;
+        private RoutineSequence _afterBreeding;
+        private RoutineSequence _animalsDispersal;
+        private RoutineSequence _homelessEmotionSet;
 
         private int _currentFeedingCycle;
         private int _animalsInHouse;
@@ -110,7 +110,7 @@ namespace Logic.Breeding
             
             _afterBreeding.Kill();
             _animalsDispersal.Kill();
-            _homelessEmotionSetDelay.Kill();
+            _homelessEmotionSet.Kill();
         }
 
         private void Init()
@@ -138,15 +138,15 @@ namespace Logic.Breeding
 
         private void InitHomelessEmotionDelay()
         {
-            _homelessEmotionSetDelay = new DelayRoutine();
-            _homelessEmotionSetDelay
+            _homelessEmotionSet = new RoutineSequence();
+            _homelessEmotionSet
                 .WaitForSeconds(HomelessEmotionSetDelay)
                 .Then(ShowHomelessEmotion);
         }
 
         private void InitAnimalsDispersal()
         {
-            _animalsDispersal = new DelayRoutine();
+            _animalsDispersal = new RoutineSequence();
             _animalsDispersal
                 .WaitForSeconds(DispersalDelay)
                 .Then(() =>
@@ -159,7 +159,7 @@ namespace Logic.Breeding
 
         private void InitAfterBreedingRoutine()
         {
-            _afterBreeding = new DelayRoutine();
+            _afterBreeding = new RoutineSequence();
             _afterBreeding
                 .WaitForSeconds(AfterBreedingDelay)
                 .Then(_disposable.Dispose)
@@ -219,7 +219,7 @@ namespace Logic.Breeding
                 .GetComponent<IAnimal>());
 
             _animalsDispersal.Play();
-            _homelessEmotionSetDelay.Play();
+            _homelessEmotionSet.Play();
             _inventoryHolder.Inventory.Deactivate();
             _viewSwitcher.SwitchToBackground();
             _growthBar.Deactivate();

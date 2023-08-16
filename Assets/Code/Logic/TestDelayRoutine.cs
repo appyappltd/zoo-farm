@@ -6,21 +6,21 @@ namespace Logic
 {
     public class TestDelayRoutine : MonoBehaviour
     {
-        private DelayRoutine _untilRoutine;
+        private RoutineSequence _untilRoutineSequence;
 
         private bool _isPlay = true;
         [SerializeField] private bool _isUntil = false;
         [SerializeField] private bool _isWhile = false;
-        private DelayRoutine _whileRoutine;
+        private RoutineSequence _whileRoutineSequence;
 
         private void Awake()
         {
-            _untilRoutine = new DelayRoutine();
-            _untilRoutine.Then(() => Debug.Log("Begin Until")).WaitUntil(() => _isUntil).Then((() => Debug.Log("Until")));
+            _untilRoutineSequence = new RoutineSequence();
+            _untilRoutineSequence.Then(() => Debug.Log("Begin Until")).WaitUntil(() => _isUntil).Then((() => Debug.Log("Until")));
 
             
-            _whileRoutine = new DelayRoutine();
-            _whileRoutine.Then(() => Debug.Log("Begin While")).WaitWhile(() => _isWhile).Then((() => Debug.Log("While")));
+            _whileRoutineSequence = new RoutineSequence();
+            _whileRoutineSequence.Then(() => Debug.Log("Begin While")).WaitWhile(() => _isWhile).Then((() => Debug.Log("While")));
         }
 
         private bool RepeatCondition()
@@ -31,12 +31,12 @@ namespace Logic
         [Button]
         private void PlayUntil()
         {
-            _untilRoutine.Play();
+            _untilRoutineSequence.Play();
         }
 
         [Button] private void PlayWhile()
         {
-            _whileRoutine.Play();
+            _whileRoutineSequence.Play();
         }
         
         [Button]

@@ -29,7 +29,7 @@ namespace Logic.Animals
         private bool _isReplenishing;
         private int _foodLeft;
 
-        private List<DelayRoutine> _routines = new List<DelayRoutine>();
+        private List<RoutineSequence> _routines = new List<RoutineSequence>();
 
         public IProgressBar ProgressBarView => _food;
 
@@ -71,13 +71,13 @@ namespace Logic.Animals
             }
             else
             {
-                DelayRoutine delayRoutine = new DelayRoutine()
+                RoutineSequence routineSequence = new RoutineSequence()
                     .WaitUntil(() => _food.IsEmpty)
                     .WaitForSeconds(ReplenishDelayAfterEmptyFood)
                     .Then(() => _food.Replenish(amount));
                 
-                _routines.Add(delayRoutine);
-                delayRoutine.Play();
+                _routines.Add(routineSequence);
+                routineSequence.Play();
             }
         }
 

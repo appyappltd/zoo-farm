@@ -18,7 +18,7 @@ namespace Logic.Foods.Vendor
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private FoodVendorConfig _vendorConfig;
         
-        private DelayRoutine _delayRoutine;
+        private RoutineSequence _routineSequence;
         private Stack<IItem> _readyFoods;
         private IHandItemFactory _factory;
         
@@ -34,7 +34,7 @@ namespace Logic.Foods.Vendor
         public int MaxFoodCount => _vendorConfig.MaxStockQuantity;
         
         private void OnDestroy() =>
-            _delayRoutine.Kill();
+            _routineSequence.Kill();
 
         private void Awake()
         {
@@ -48,7 +48,7 @@ namespace Logic.Foods.Vendor
             AllServices.Container.Single<IFoodService>().Register(this);
             _readyFoods = new Stack<IItem>(_vendorConfig.MaxStockQuantity);
 
-            _delayRoutine = new DelayRoutine()
+            _routineSequence = new RoutineSequence()
                 .Then(OnBeginProduceFood)
                 .WaitForRandomSeconds(_vendorConfig.ProduceDurationRange)
                 .Then(CreateFood)
@@ -94,10 +94,10 @@ namespace Logic.Foods.Vendor
         }
 
         public void StartProduce() =>
-            _delayRoutine.Play();
+            _routineSequence.Play();
 
         public void StopProduce() =>
-            _delayRoutine.Stop();
+            _routineSequence.Stop();
 
         private void CreateFood()
         {

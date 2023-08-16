@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 136105023251995781, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
+      propertyPath: _toCameraOffset
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1023276172029501970, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_fontColor.b
       value: 0
