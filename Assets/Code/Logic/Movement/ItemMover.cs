@@ -23,6 +23,7 @@ namespace Logic.Movement
         public event Action Started = () => { };
         public event Action Ended = () => { };
 
+
         private void Awake()
         {
             _moving += Translate;
@@ -66,7 +67,7 @@ namespace Logic.Movement
         private void Translate()
         {
             Vector3 translateDirection = (_target.position - transform.position).normalized;
-            Vector3 deltaTranslation = translateDirection * _speed * Time.deltaTime;
+            Vector3 deltaTranslation = translateDirection * _speed * Time.smoothDeltaTime;
             transform.Translate(deltaTranslation, Space.World);
         }
 
