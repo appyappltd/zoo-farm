@@ -560,7 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 6021254209361128710}
   _mover: {fileID: 5921953604120698182}
-  _normalizedWalkSpeed: 0.5
+  _normalizedWalkSpeed: 0.28
   _normalizedRunSpeed: 1
 --- !u!114 &5604806523560033372
 MonoBehaviour:

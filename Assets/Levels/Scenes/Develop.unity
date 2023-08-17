@@ -6705,7 +6705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _isAutoBuild
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _buildCosts.Array.data[0]

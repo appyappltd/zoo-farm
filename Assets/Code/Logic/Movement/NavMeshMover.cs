@@ -1,4 +1,3 @@
-using System;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
