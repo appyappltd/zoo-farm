@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using NTC.Global.Cache;
 using NTC.Global.System;
 using UnityEngine;
@@ -10,21 +11,27 @@ namespace Logic.Movement
         [SerializeField] [Min(.0f)] private float _speed = 5.0f;
         [SerializeField] [Min(.0f)] private float _errorOffset = 0.1f;
         [SerializeField] private Vector3 _rotationOffset;
+        [SerializeField] private bool _isChangeScale;
+        [SerializeField] [ShowIf(nameof(_isChangeScale))] private AnimationCurve _scaleCurve;
 
         private Transform _target;
         private Transform _finalParent;
         private Quaternion _finalRotation;
 
         private Action _endMoveCallback;
-        private Action _moving;
+        private Action<float> _moving;
 
         private bool _isModifyRotation;
+        private DistanceBasedScaleModifier _scaleModifier;
 
         public event Action Started = () => { };
         public event Action Ended = () => { };
 
+        public Transform Target => _target;
+
         private void Awake()
         {
+            _scaleModifier = new DistanceBasedScaleModifier();
             _moving += Translate;
             enabled = false;
         }
@@ -36,13 +43,22 @@ namespace Logic.Movement
         }
 
         public void Move(Transform to, Transform finishParent = null, bool isModifyRotation = false)
-        {
-            if (finishParent)
-                _moving += Rotate;
-
-            _isModifyRotation = isModifyRotation;
+        { 
             _target = to;
-            _finalParent = finishParent;
+
+            if (finishParent)
+            {
+                _finalParent = finishParent;
+                _moving += Rotate;
+            }
+            
+            if (_isChangeScale)
+            {
+                _scaleModifier.Init(transform, GetDistanceToTarget(), _scaleCurve);
+                _moving += UpdateScale;
+            }
+            
+            _isModifyRotation = isModifyRotation;
             transform.Unparent();
             enabled = true;
             Started.Invoke();
@@ -50,22 +66,21 @@ namespace Logic.Movement
 
         protected override void Run()
         {
-            _moving.Invoke();
+            _moving.Invoke(GetDistanceToTarget());
 
             if (IsFinished())
                 FinishTranslation();
         }
 
-        private void Rotate()
+        private void Rotate(float distanceToTarget)
         {
-            float distanceToTarget = GetDistanceToTarget();
             transform.rotation = Quaternion.Lerp(transform.rotation, GetFinalRotation(),
                 Time.deltaTime * _speed / distanceToTarget);
         }
 
-        private void Translate()
+        private void Translate(float _)
         {
-            Vector3 translateDirection = (_target.position - transform.position).normalized;
+            Vector3 translateDirection = (Target.position - transform.position).normalized;
             Vector3 deltaTranslation = translateDirection * _speed * Time.smoothDeltaTime;
             transform.Translate(deltaTranslation, Space.World);
         }
@@ -81,6 +96,9 @@ namespace Logic.Movement
                 transform.rotation = GetFinalRotation();
             }
 
+            if (_isChangeScale)
+                _moving -= UpdateScale;
+
             Ended.Invoke();
         }
 
@@ -93,6 +111,9 @@ namespace Logic.Movement
                 : _finalParent.rotation;
 
         private float GetDistanceToTarget() =>
-            Vector3.Distance(transform.position, _target.position);
+            Vector3.Distance(transform.position, Target.position);
+
+        private void UpdateScale(float distanceToTarget) =>
+            _scaleModifier.UpdateScale(distanceToTarget);
     }
 }
