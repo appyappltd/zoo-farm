@@ -8,7 +8,7 @@ namespace Logic.Animals.AnimalsBehaviour
         [SerializeField] private bool _isEnableDecrementation;
 
         private IProgressBarView _satietyBar;
-        private int _factor = 1;
+        private int _factor;
 
         public int Factor => _factor;
 
