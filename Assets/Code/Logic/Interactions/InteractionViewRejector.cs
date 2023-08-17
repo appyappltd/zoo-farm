@@ -31,6 +31,12 @@ namespace Logic.Interactions
         private void OnDestroy() =>
             _playerInteraction.Value.Rejected -= OnRejected;
 
+        public void SetDefault()
+        {
+            enabled = false;
+            _elapsedTime = float.MaxValue;
+        }
+
         protected override void Run()
         {
             _elapsedTime += Time.deltaTime;

@@ -12,9 +12,10 @@ namespace Logic.NPC.Volunteers.Queue
         [SerializeField] private HumanInteraction _playerInteraction;
         [SerializeField] private GameObject _interactionView;
         [SerializeField] private InteractionView _interactionSine;
+        [SerializeField] private InteractionViewRejector _interactionRejector;
         [SerializeField] private ProductReceiver _productReceiver;
 
-        public event Action<QueuePlace> Vacated = q => { };
+        public event Action<QueuePlace> Vacated = _ => { };
 
         private void Awake() =>
             _playerInteraction.Interacted += OnInteracted;
@@ -30,6 +31,7 @@ namespace Logic.NPC.Volunteers.Queue
             _playerInteraction.Enable();
             _playerInteraction.gameObject.Enable();
             _interactionView.Enable();
+            _interactionRejector.SetDefault();
             _interactionSine.SetDefault();
         }
 

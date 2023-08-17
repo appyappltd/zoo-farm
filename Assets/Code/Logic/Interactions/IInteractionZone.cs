@@ -1,5 +1,4 @@
 using System;
-using Logic.Player;
 
 namespace Logic.Interactions
 {

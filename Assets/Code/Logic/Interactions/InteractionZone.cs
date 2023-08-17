@@ -18,7 +18,7 @@ namespace Logic.Interactions
         [SerializeField] [ShowIf("_isValidate")]
         private InterfaceReference<IInteractionValidator, MonoBehaviour>[] _interactionValidators;
 
-        [SerializeField] private bool _isLock;
+        private bool _isLock;
         private RoutineSequence _waitToUnlock;
 
 #if UNITY_EDITOR
