@@ -149,11 +149,7 @@ namespace Logic.Breeding
             _animalsDispersal = new RoutineSequence();
             _animalsDispersal
                 .WaitForSeconds(DispersalDelay)
-                .Then(() =>
-                {
-                    Debug.Log("DispersalDelay");
-                    SendAnimalToFreeMoving(_animals.First());
-                })
+                .Then(() => SendAnimalToFreeMoving(_animals.First()))
                 .LoopFor(MaxAnimals + 1);
         }
 

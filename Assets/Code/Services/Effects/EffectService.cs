@@ -16,10 +16,18 @@ namespace Services.Effects
             _poolService = poolService;
         }
 
-        public void SpawnEffect(EffectId id, Location location)
+        public Effect SpawnEffect(EffectId id, Location location)
         {
             Effect effect = _poolService.Get<Effect>(new PoolKey(id));
             effect.Play(location);
+            return effect;
+        }
+
+        public Effect SpawnEffect(EffectId id, Vector3 position, Quaternion rotation)
+        {
+            Effect effect = _poolService.Get<Effect>(new PoolKey(id));
+            effect.Play(position, rotation);
+            return effect;
         }
     }
 }

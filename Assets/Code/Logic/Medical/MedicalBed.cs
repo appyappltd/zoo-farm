@@ -9,12 +9,13 @@ using Logic.Storages.Items;
 using NTC.Global.Cache;
 using Services;
 using Services.AnimalHouses;
+using Services.Effects;
 using UnityEngine;
 
 namespace Logic.Medical
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver, IEffectTrigger
+    public class MedicalBed : MonoCache, IAddItem, IGetItemObserver
     {
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private TimerOperator _timerOperator;
@@ -28,15 +29,20 @@ namespace Logic.Medical
 
         private IGameFactory _gameFactory;
         private IAnimalHouseService _houseService;
+        private IEffectService _effectService;
         
         private IAnimal _healingAnimal;
         private byte Id;
         private bool _isFree = true;
+        
+        private Location _workingEffectSpawnLocation;
+        private Location _healingEffectSpawnLocation;
+        
+        private Effect _workingEffect;
 
-        public event Action EffectTriggered = () => { };
-        public event Action<IItem> Added = i => { };
-        public event Action<IItem> Removed = i => { };
-        public event Action<AnimalId> Healed = i => { };
+        public event Action<IItem> Added = _ => { };
+        public event Action<IItem> Removed = _ => { };
+        public event Action<AnimalId> Healed = _ => { };
         public event Action FeedUp = () => { };
 
         public bool IsFree => _isFree;
@@ -48,6 +54,10 @@ namespace Logic.Medical
             
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
+            _effectService = AllServices.Container.Single<IEffectService>();
+
+            _workingEffectSpawnLocation = new Location(_spawnPlace.position, Quaternion.LookRotation(-Camera.main.transform.forward));
+            _healingEffectSpawnLocation = new Location(_spawnPlace.position, Quaternion.LookRotation(Vector3.up));
         }
 
         public void Add(IItem item)
@@ -83,14 +93,13 @@ namespace Logic.Medical
         private void OnHealed()
         {
             Debug.Log("Healed");
-
-            EffectTriggered.Invoke();
-            
+            _workingEffect.Stop();
+            _effectService.SpawnEffect(EffectId.HealingPluses, _healingEffectSpawnLocation);
             _healingAnimal = _gameFactory.CreateAnimal(_animalData.StaticData, _spawnPlace.position, _spawnPlace.rotation)
                 .GetComponent<Animal>();
-            
+
             Healed.Invoke(_healingAnimal.AnimalId);
-            
+
             RemoveItem(_animalItem);
             RemoveItem(_medToolItem);
 
@@ -115,8 +124,11 @@ namespace Logic.Medical
             _isFree = true;
         }
 
-        private void BeginHeal() =>
+        private void BeginHeal()
+        {
+            _workingEffect = _effectService.SpawnEffect(EffectId.Working, _workingEffectSpawnLocation);
             _timerOperator.Restart();
+        }
 
         private void RemoveItem(IItem item)
         {
