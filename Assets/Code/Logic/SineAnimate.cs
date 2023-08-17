@@ -13,10 +13,10 @@ namespace Logic
         
         private Vector2 _startScale;
 
-        private void Start()
+        private void Awake()
         {
-            _sprite.drawMode = SpriteDrawMode.Sliced;
             _startScale = _sprite.size;
+            _sprite.drawMode = SpriteDrawMode.Sliced;
         }
 
         protected override void Run()

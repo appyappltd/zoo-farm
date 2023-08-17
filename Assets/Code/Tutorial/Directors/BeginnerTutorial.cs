@@ -12,7 +12,6 @@ namespace Tutorial.Directors
     public class BeginnerTutorial : TutorialDirector
     {
         [SerializeField] private Transform _firstHouse;
-        [SerializeField] private Transform _plant;
         [SerializeField] private Transform _animalTransmittingView;
         [SerializeField] private Transform _firstMedToolSpawnPoint;
         [SerializeField] private Transform _firstMedBedSpawnPoint;
@@ -26,12 +25,12 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialTriggerStatic _medToolInteracted;
         [SerializeField] private TutorialTriggerStatic _animalTakenInteracted;
         [SerializeField] private TutorialTriggerStatic _animalHealed;
-        [SerializeField] private TutorialTriggerStatic _foodTaken;
-        [SerializeField] private TutorialTriggerStatic _animalHouseInteracted;
+        [SerializeField] private TutorialTriggerStatic _bowlFull;
+        [SerializeField] private TutorialTriggerStatic _bowlEmpty;
         [SerializeField] private TutorialTriggerStatic _animalReleased;
         [SerializeField] private TutorialTriggerStatic _houseBuilt;
-        [SerializeField] private TutorialTriggerStatic _plantBuilt;
         [SerializeField] private TutorialTriggerStatic _firstVolunteerSpawned;
+        [SerializeField] private TutorialTriggerStatic _foodVendorSpawned;
         [SerializeField] private TutorialTriggerStatic _animalHouseSpawned;
         [SerializeField] private TutorialArrow _arrow;
         [SerializeField] private MedBedGridOperator _medBedGridOperator;
@@ -128,18 +127,20 @@ namespace Tutorial.Directors
             {
                 ActivateAutoBuild(_gardenBedGridOperator);
                 _gardenBedGridOperator.ShowNextBuildCell();
-                _arrow.Move(_plant.position);
-                _cameraOperatorService.Focus(_plant);
+                _arrow.Move(_gardenBedGridOperator.BuildCellPosition);
+                _cameraOperatorService.Focus(_gardenBedGridOperator.BuildCellPosition);
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.PlantFocusToPlayerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_plantBuilt));
-            TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
-            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.PlantBuiltToPlantFocus, GlobalUpdate.Instance));
-            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_plant.position)));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_foodTaken));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_foodVendorSpawned));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.PlantBuiltToPlantBuilt, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_gardenBedGridOperator.BuildCellPosition)));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_foodVendorSpawned));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstHouse.position)));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_animalHouseInteracted));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_bowlFull));
+            TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_bowlEmpty));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.BowlEmptyToReleaserFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _cameraOperatorService.Focus(_animalReleaser);

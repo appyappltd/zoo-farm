@@ -13,7 +13,9 @@ namespace Tutorial.TimePresets
         [Range(0, 6f)] public float HouseBuiltToAnimalFocus = 0.2f;
         [Range(0, 6f)] public float AnimalFocusToPlantFocus = 2f;
         [Range(0, 6f)] public float PlantFocusToPlayerFocus = 1.5f;
+        [Range(0, 6f)] public float PlantBuiltToPlantBuilt = 0.75f;
         [Range(0, 6f)] public float PlantBuiltToPlantFocus = 0.5f;
+        [Range(0, 6f)] public float BowlEmptyToReleaserFocus = 1f;
         [Range(0, 6f)] public float AnimalReleaserFocusToPlayerFocus = 3f;
         [Range(0, 6f)] public float KeeperGridFocusToPlayerFocus = 3f;
     }

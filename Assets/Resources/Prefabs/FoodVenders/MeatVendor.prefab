@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6589810206953156616}
   - component: {fileID: 1548699813772149972}
   - component: {fileID: 3568230975695236834}
+  - component: {fileID: -4756884800230695803}
   m_Layer: 0
   m_Name: MeatVendor
   m_TagString: Untagged
@@ -100,6 +101,21 @@ MonoBehaviour:
   _playerInteraction: {fileID: 110428601610426857}
   _isAuto: 1
   _isOpenOnEnter: 1
+--- !u!114 &-4756884800230695803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681536803548108215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6587e1c10a14308820357213e533404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trigger: {fileID: 0}
+  _IsTriggerOnEnable: 1
+  _IsTriggerOnDisable: 0
 --- !u!1 &3032709214327404733
 GameObject:
   m_ObjectHideFlags: 0

@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 5905476580270274857}
   - component: {fileID: 2028847348029743779}
   - component: {fileID: 809057692272165439}
+  - component: {fileID: 1640224439565696991}
   m_Layer: 7
   m_Name: EatPlace
   m_TagString: Untagged
@@ -263,6 +264,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 0
   _maxWeight: 4
+--- !u!114 &1640224439565696991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4950683319215666746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019cf082621547e7a03a51136c54f1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _barViewProvider:
+    _underlyingValue: {fileID: 532289187294645607}
+  _isTriggerOnFull: 1
+  _staticTriggerFull: {fileID: 11400000, guid: 3db571305cc66b6419c30a0a6b68716f, type: 2}
+  _isTriggerOnEmpty: 1
+  _staticTriggerEmpty: {fileID: 11400000, guid: ab2ed29edff4be64f8aeaa9565fd0c6c, type: 2}
 --- !u!1 &5488007558412268629
 GameObject:
   m_ObjectHideFlags: 0

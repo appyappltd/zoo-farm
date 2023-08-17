@@ -27,7 +27,7 @@ namespace Logic.Animals.AnimalsBehaviour
             if (stateType == typeof(Wander))
                 _mover.SetNormalizedSpeed(_normalizedWalkSpeed);
 
-            if (stateType == typeof(MoveTo))
+            if (typeof(MoveTo).IsAssignableFrom(stateType))
                 _mover.SetNormalizedSpeed(_normalizedRunSpeed);
         }
     }
