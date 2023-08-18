@@ -1,48 +1,32 @@
 using System;
-using Data.ItemsData;
-using Logic.Interactions;
-using Logic.Player;
 using Logic.Storages;
 using Logic.Storages.Items;
 using UnityEngine;
 
 namespace Logic
 {
-    public class Trash : MonoBehaviour, IAddItemObserver, IGetItemObserver, IAddItemObserverProvider, IGetItemObserverProvider
+    public class Trash : MonoBehaviour, IAddItem
     {
-        [SerializeField] private Storage _storage;
-        [SerializeField] private HumanInteraction _playerInteraction;
+        public event Action<IItem> Added = _ => { };
 
-        public event Action<IItem> Added = i => { };
-        public event Action<IItem> Removed = i => { };
-
-        public IGetItemObserver GetItemObserver => this;
-        public IAddItemObserver AddItemObserver => this;
-
-        private void OnEnable()
+        public void Add(IItem item)
         {
-            _playerInteraction.Interacted += OnInteracted;
-            _storage.Replenished += OnReplenished;
+            Added.Invoke(item);
+            item.Mover.Move(transform, item.Destroy, null, false, true);
         }
 
-        private void OnInteracted(Human provider)
-        {
-            if (provider.Inventory.TryGet(ItemId.All, out IItem item))
-            {
-                Added.Invoke(item);
-            }
-        }
+        public bool CanAdd(IItem item) =>
+            true;
 
-        private void OnReplenished(IItem item)
+        public bool TryAdd(IItem item)
         {
-            item.Mover.Ended += OnMoveEnded;
-
-            void OnMoveEnded()
+            if (CanAdd(item))
             {
-                item.Mover.Ended -= OnMoveEnded;
-                Removed.Invoke(item);
-                item.Destroy();
+                Add(item);
+                return true;
             }
+
+            return false;
         }
     }
 }

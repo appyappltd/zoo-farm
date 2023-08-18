@@ -3,8 +3,6 @@ using Data.ItemsData;
 using Logic.Medical;
 using Logic.Storages;
 using Logic.Storages.Items;
-using Services;
-using Services.MedicalBeds;
 using UnityEngine;
 
 namespace Logic.Interactions.Validators
@@ -12,11 +10,6 @@ namespace Logic.Interactions.Validators
     public class MedicalBedValidator : MonoBehaviour, IInteractionValidator
     {
         [SerializeField] private MedicalBed _medicalBed;
-        
-        private IMedicalBedsReporter _medicalBedsReporter;
-
-        private void Awake() =>
-            _medicalBedsReporter = AllServices.Container.Single<IMedicalBedsReporter>();
 
         public bool IsValid(IInventory inventory = default)
         {

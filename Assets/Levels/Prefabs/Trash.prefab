@@ -41,9 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 818227905858976498}
   - component: {fileID: 3612458854345647706}
-  - component: {fileID: 5398537652537077356}
   m_Layer: 7
-  m_Name: urn
+  m_Name: Trash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,27 +79,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4613547d8cb54aba9cd231ccd29ba3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _storage: {fileID: 5398537652537077356}
-  _playerInteraction: {fileID: 5829675158701667679}
---- !u!114 &5398537652537077356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6300296010246131306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688b5c76923200049a031ee171dd9d7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _places:
-  - {fileID: 6813431846381959724}
-  _isSortable: 0
-  _isRemoteInit: 0
-  _isModifyRotation: 0
-  _adderMono: {fileID: 3612458854345647706}
-  _removerMono: {fileID: 3612458854345647706}
 --- !u!1 &8639234903260074893
 GameObject:
   m_ObjectHideFlags: 0

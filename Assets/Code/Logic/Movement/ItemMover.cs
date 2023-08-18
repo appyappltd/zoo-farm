@@ -11,14 +11,14 @@ namespace Logic.Movement
         [SerializeField] [Min(.0f)] private float _speed = 5.0f;
         [SerializeField] [Min(.0f)] private float _errorOffset = 0.1f;
         [SerializeField] private Vector3 _rotationOffset;
-        [SerializeField] private bool _isChangeScale;
-        [SerializeField] [ShowIf(nameof(_isChangeScale))] private AnimationCurve _scaleCurve;
+        [SerializeField] private bool _isCanChangeScale;
+        [SerializeField] [ShowIf(nameof(_isCanChangeScale))] private AnimationCurve _scaleCurve;
 
         private Transform _target;
         private Transform _finalParent;
         private Quaternion _finalRotation;
 
-        private Action _endMoveCallback;
+        private Action _endMoveCallback = () => { };
         private Action<float> _moving;
 
         private bool _isModifyRotation;
@@ -36,13 +36,13 @@ namespace Logic.Movement
             enabled = false;
         }
 
-        public void Move(Transform to, Action onMoveEnded, Transform finishParent = null, bool isModifyRotation = false)
+        public void Move(Transform to, Action onMoveEnded, Transform finishParent = null, bool isModifyRotation = false,  bool isModifyScale = false)
         {
-            _endMoveCallback = onMoveEnded;
-            Move(to, finishParent, isModifyRotation);
+            _endMoveCallback = onMoveEnded ?? (() => { }) ;
+            Move(to, finishParent, isModifyRotation, isModifyScale);
         }
 
-        public void Move(Transform to, Transform finishParent = null, bool isModifyRotation = false)
+        public void Move(Transform to, Transform finishParent = null, bool isModifyRotation = false,  bool isModifyScale = false)
         { 
             _target = to;
 
@@ -52,7 +52,7 @@ namespace Logic.Movement
                 _moving += Rotate;
             }
             
-            if (_isChangeScale)
+            if (_isCanChangeScale && isModifyScale)
             {
                 _scaleModifier.Init(transform, GetDistanceToTarget(), _scaleCurve);
                 _moving += UpdateScale;
@@ -96,10 +96,11 @@ namespace Logic.Movement
                 transform.rotation = GetFinalRotation();
             }
 
-            if (_isChangeScale)
+            if (_isCanChangeScale)
                 _moving -= UpdateScale;
 
             Ended.Invoke();
+            _endMoveCallback.Invoke();
         }
 
         private bool IsFinished() =>
