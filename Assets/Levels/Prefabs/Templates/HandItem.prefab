@@ -58,5 +58,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _errorOffset: 0.01
+  _errorOffset: 0.25
   _rotationOffset: {x: 0, y: 0, z: 0}
+  _isChangeScale: 0
+  _scaleCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

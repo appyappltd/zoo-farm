@@ -13,7 +13,6 @@ namespace Ui
     {
         private readonly Observable<int> _releaseAnimalCount = new Observable<int>();
         
-        [SerializeField] private AnimalType _animalType;
         [SerializeField] private TextSetter _animalsCount;
         [SerializeField] private TextSetter _toReleaseCount;
         [SerializeField] private Image _imageIcon;
@@ -25,6 +24,7 @@ namespace Ui
         [SerializeField] private int _testReady;
 #endif
 
+        private AnimalType _animalType;
         private AnimalCountData _countData;
 
         public IObservable<int> ReleaseAnimalCount => _releaseAnimalCount;
