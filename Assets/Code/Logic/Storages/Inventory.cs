@@ -6,13 +6,16 @@ using Logic.Storages.Items;
 
 namespace Logic.Storages
 {
-    public class Inventory : IInventory
+    public class Inventory : IInventory, IImprovable
     {
-        private readonly int _maxWeight;
+        private const string ImproveWeightException = "Improve weight value must be grater then zero";
+        
+        private int _maxWeight;
         private readonly List<IItem> _items = new List<IItem>();
 
         private int _weight;
         private IItem _cashedGetItem;
+
         private bool _isActive;
 
         public Inventory(int maxWeight, List<IItem> items = null)
@@ -29,9 +32,17 @@ namespace Logic.Storages
         public int MaxWeight => _maxWeight;
         public int Weight => _weight;
         public bool IsActive => _isActive;
-
+        
         public event Action<IItem> Added = _ => { };
         public event Action<IItem> Removed = _ => { };
+
+        void IImprovable.Improve(int byValue)
+        {
+            if (byValue <= 0)
+                throw new ArgumentOutOfRangeException(nameof(byValue), byValue, ImproveWeightException);
+
+            _maxWeight += byValue;
+        }
 
         public void Activate() =>
             _isActive = true;

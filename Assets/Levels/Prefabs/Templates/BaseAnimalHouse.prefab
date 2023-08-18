@@ -622,6 +622,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2008307126301092606, guid: f4b750d216a362342a5d716074ab2fe8, type: 3}
+      propertyPath: _playerInteraction._underlyingValue
+      value: 
+      objectReference: {fileID: 337063020574557339}
     - target: {fileID: 3795157622060416634, guid: f4b750d216a362342a5d716074ab2fe8, type: 3}
       propertyPath: _needText
       value: 
@@ -871,5 +875,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 0.5
   _isValidate: 0
+  _validationMode: 0
   _interactionValidators: []
   _timerOperator: {fileID: 1146339653406643280}
