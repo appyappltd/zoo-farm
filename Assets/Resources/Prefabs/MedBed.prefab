@@ -999,6 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dac081e25504eef9d163a1f5d506653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _medicalBed: {fileID: 2380999859386510404}
 --- !u!114 &1773663137957779792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1013,6 +1014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 0.5
   _isValidate: 1
+  _validationMode: 0
   _interactionValidators:
   - _underlyingValue: {fileID: 6368229831655983854}
   _timerOperator: {fileID: 2200168263409723070}

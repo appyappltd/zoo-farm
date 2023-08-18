@@ -79,7 +79,7 @@ namespace Logic.Medical
         }
 
         private void OnRespawn() =>
-            _toolItem = _handItemFactory.CreateMedicalToolItem(_spawnPlace.position, Quaternion.identity, ToolId);
+            _toolItem = _handItemFactory.CreateMedicalToolItem(_spawnPlace.position, Quaternion.identity, _toolId);
 
         private void PlayRespawnDelay() =>
             _timerOperator.Restart();

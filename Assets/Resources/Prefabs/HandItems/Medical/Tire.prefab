@@ -91,6 +91,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 816098661978548637, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
+      propertyPath: _isChangeScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1269673199937553730, guid: bfc1c4db168898747a9e39a002404af5, type: 3}
       propertyPath: _handItem
       value: 

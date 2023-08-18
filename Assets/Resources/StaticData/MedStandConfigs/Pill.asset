@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751776f008644b26be2006142d136967, type: 3}
   m_Name: Pill
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 1
   Icon: {fileID: 21300000, guid: b212e4dcdaf5b264dae2d42dae0f0580, type: 3}

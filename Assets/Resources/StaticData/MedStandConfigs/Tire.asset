@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751776f008644b26be2006142d136967, type: 3}
   m_Name: Tire
   m_EditorClassIdentifier: 
-  Type: 3
+  Type: 4
   Icon: {fileID: 21300000, guid: fd25a4e0782652140ab83c1a7ef9a0d6, type: 3}

@@ -6927,30 +6927,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedToolGrid
       objectReference: {fileID: 0}
-    - target: {fileID: 647168739666414208, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 795026069104985206, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.91
-      objectReference: {fileID: 0}
-    - target: {fileID: 1090609683594088131, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 3945973453378921983, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 4122937078260853927, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 5410219828237784833, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_RootOrder
-      value: 16
-      objectReference: {fileID: 0}
     - target: {fileID: 5410219828237784833, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.42
@@ -6990,38 +6966,6 @@ PrefabInstance:
     - target: {fileID: 5410219828237784833, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5815309708239290526, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6320322523067176647, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.64
-      objectReference: {fileID: 0}
-    - target: {fileID: 7472790710838285167, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 8409473650381681826, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: _buildOffset.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409473650381681826, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: _buildCosts.Array.data[0]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409473650381681826, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: _buildCosts.Array.data[1]
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409473650381681826, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: _buildCosts.Array.data[2]
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409473650381681826, guid: 06312ec5e9fdb474188a52dee2494633, type: 3}
-      propertyPath: _buildCosts.Array.data[3]
-      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

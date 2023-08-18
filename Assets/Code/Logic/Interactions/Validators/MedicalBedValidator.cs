@@ -1,5 +1,6 @@
 ﻿using System;
 using Data.ItemsData;
+using Logic.Medical;
 using Logic.Storages;
 using Logic.Storages.Items;
 using Services;
@@ -10,6 +11,8 @@ namespace Logic.Interactions.Validators
 {
     public class MedicalBedValidator : MonoBehaviour, IInteractionValidator
     {
+        [SerializeField] private MedicalBed _medicalBed;
+        
         private IMedicalBedsReporter _medicalBedsReporter;
 
         private void Awake() =>
@@ -24,7 +27,7 @@ namespace Logic.Interactions.Validators
                 return true;
 
             MedicalToolItemData toolId = (MedicalToolItemData) tool.ItemData;
-            return _medicalBedsReporter.IsNeeds(toolId.MedicineToolId);
+            return _medicalBed.ThreatTool == toolId.MedicineToolId;
         }
     }
 }
