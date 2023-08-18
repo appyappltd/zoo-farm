@@ -14,6 +14,7 @@ namespace Logic.Interactions
     {
         [SerializeField] private float _interactionDelay;
         [SerializeField] private bool _isValidate;
+        [SerializeField] [ShowIf(nameof(_isValidate))] private ValidationMode _validationMode;
 
         [SerializeField] [ShowIf("_isValidate")]
         private InterfaceReference<IInteractionValidator, MonoBehaviour>[] _interactionValidators;
@@ -59,7 +60,7 @@ namespace Logic.Interactions
         {
             base.OnDisabled();
             _isLock = false;
-            _timerOperator.Pause();
+            StopDelayedInteraction();
         }
 
         protected override void OnTargetEntered(T hero)
@@ -78,7 +79,7 @@ namespace Logic.Interactions
             if (_isValidate)
                 Validate(hero);
             else
-                InvokeEntered(hero);
+                PassEnter(hero);
         }
 
         private void Validate(T hero)
@@ -89,15 +90,22 @@ namespace Logic.Interactions
                 isAllValid &= _interactionValidators[index].Value.IsValid(hero.Inventory);
 
             if (isAllValid)
-                InvokeEntered(hero);
+            {
+                PassEnter(hero);
+            }
             else
-                Rejected.Invoke();
+            {
+                if (_validationMode == ValidationMode.PassThrough)
+                    InvokeEntered(hero);
+                else
+                    Rejected.Invoke();
+            }
         }
 
         protected override void OnTargetExited(T _)
         {
             _isLock = false;
-            _timerOperator.Pause();
+            StopDelayedInteraction();
             Canceled.Invoke();
         }
 
@@ -106,12 +114,23 @@ namespace Logic.Interactions
             Interacted.Invoke(_cashed);
         }
 
+        private void PassEnter(T hero)
+        {
+            InvokeDelayedInteraction();
+            InvokeEntered(hero);
+        }
+
         private void InvokeEntered(T hero)
         {
             _isLock = true;
             _cashed = hero;
-            _timerOperator.Restart();
             Entered.Invoke();
         }
+
+        private void InvokeDelayedInteraction() =>
+            _timerOperator.Restart();
+        
+        private void StopDelayedInteraction() =>
+            _timerOperator.Pause();
     }
 }

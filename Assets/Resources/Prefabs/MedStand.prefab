@@ -576,81 +576,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6344179823458651875, guid: 455673b7379507242b6bc48a8270f0c7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8090756129863997519}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 455673b7379507242b6bc48a8270f0c7, type: 3}
---- !u!1 &373564510451081815 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6344179823458651875, guid: 455673b7379507242b6bc48a8270f0c7, type: 3}
-  m_PrefabInstance: {fileID: 6711532357349092532}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8090756129863997519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373564510451081815}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7e7b8a4ad54e9684c8b070d13d9647, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerInteraction:
-    _underlyingValue: {fileID: 7700568814714074169}
-  _sineSprite: {fileID: 4059767612798358287}
-  _sineTransform: {fileID: 4277182462765455119}
-  _blinkCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 45.508415
-      outSlope: 2
-      tangentMode: 65
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.05560704
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 2
-      outSlope: -2
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.6519661
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2
-      outSlope: -42.101147
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.22891617
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _blinkSize: 1.2
-  _rejectedColor: {r: 0.38823533, g: 0.38823533, b: 0.38823533, a: 1}
-  _blinkDuration: 0.35
 --- !u!4 &2756148221650615581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8870940261284975017, guid: 455673b7379507242b6bc48a8270f0c7, type: 3}
-  m_PrefabInstance: {fileID: 6711532357349092532}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4059767612798358287 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7310211071219761083, guid: 455673b7379507242b6bc48a8270f0c7, type: 3}
-  m_PrefabInstance: {fileID: 6711532357349092532}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4277182462765455119 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7385830647157193659, guid: 455673b7379507242b6bc48a8270f0c7, type: 3}
   m_PrefabInstance: {fileID: 6711532357349092532}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7742283143010706561
@@ -805,6 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 0.5
   _isValidate: 1
+  _validationMode: 1
   _interactionValidators:
   - _underlyingValue: {fileID: 8085249532688538939}
   _timerOperator: {fileID: 759187231370623593}
