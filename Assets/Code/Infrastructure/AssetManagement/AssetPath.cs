@@ -13,10 +13,10 @@ namespace Infrastructure.AssetManagement
         public const string FoodVendorPath = "Prefabs/FoodVenders";
         public const string MedBed = "Prefabs/MedBed";
         public const string MedToolStandPath = "Prefabs/MedStand";
-        public const string VolunteerPath = "Prefabs/Volunteer";
+        public const string VolunteerPath = "Prefabs/NPC/Volunteer";
+        public const string KeeperPath = "Prefabs/NPC/Keeper";
         public const string HandItemPath = "Prefabs/HandItems";
         public const string PlantPath = "Prefabs/Plants";
-        public const string KeeperPath = "Prefabs/Keeper";
 
         public const string UIRootPath = "Prefabs/UI/UIRoot";
         public const string HudPath = "Prefabs/UI/HUD";
