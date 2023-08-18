@@ -94,5 +94,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 0.2
   _isValidate: 0
+  _validationMode: 0
   _interactionValidators: []
   _timerOperator: {fileID: 212491825641853808}

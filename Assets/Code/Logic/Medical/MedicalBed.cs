@@ -46,6 +46,7 @@ namespace Logic.Medical
         public event Action FeedUp = () => { };
 
         public bool IsFree => _isFree;
+        public MedicalToolId ThreatTool => _animalData?.TreatToolId ?? MedicalToolId.None;
 
         private void Awake()
         {
