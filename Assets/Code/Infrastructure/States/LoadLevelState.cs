@@ -1,11 +1,10 @@
-﻿using Cameras;
-using Infrastructure.Factory;
+﻿using Infrastructure.Factory;
 using Logic;
+using Logic.Cameras;
 using Logic.Payment;
 using Logic.Player;
 using Logic.SpawnPlaces;
 using Services.Camera;
-using Services.Effects;
 using Services.Input;
 using Services.MedicalBeds;
 using Services.PersistentProgress;

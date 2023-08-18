@@ -3,7 +3,7 @@ using NTC.Global.Cache;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Cameras
+namespace Logic.Cameras
 {
     public class CameraMovement : MonoCache
     {

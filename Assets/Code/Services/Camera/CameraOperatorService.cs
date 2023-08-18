@@ -1,4 +1,4 @@
-using Cameras;
+using Logic.Cameras;
 using UnityEngine;
 
 namespace Services.Camera

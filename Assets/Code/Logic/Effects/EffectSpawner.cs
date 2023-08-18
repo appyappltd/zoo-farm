@@ -1,31 +1,52 @@
-using AYellowpaper;
-using Services;
+using System;
+using System.Collections.Generic;
 using Services.Effects;
 using UnityEngine;
 
 namespace Logic.Effects
 {
-    public class EffectSpawner : MonoBehaviour
+    public class EffectSpawner : IDisposable
     {
-        [SerializeField] private InterfaceReference<IEffectTrigger, MonoBehaviour> _effectTrigger;
-        [SerializeField] private EffectId _healedEffect;
+        private readonly IEffectService _effectService;
+        private readonly Dictionary<EffectId, Func<Effect>> _effectSpawnFunctions = new Dictionary<EffectId, Func<Effect>>();
 
-        private IEffectService _effectService;
-        
-        private void Awake()
+        public EffectSpawner(IEffectService effectService)
         {
-            _effectService = AllServices.Container.Single<IEffectService>();
+            _effectService = effectService;
         }
 
-        private void OnEnable()
+        public void InitEffect(EffectId effectId, Vector3 spawnAt, Quaternion spawnRotation, Transform parent = null)
         {
-            _effectTrigger.Value.EffectTriggered += OnPlayEffect;
+            var location = new Location(spawnAt, spawnRotation);
+
+            if (_effectSpawnFunctions.ContainsKey(effectId))
+            {
+#if DEBUG
+                Debug.LogWarning($"Effect spawner a;ready contains effect {effectId}");
+#endif
+                return;
+            }
+               
+
+            _effectSpawnFunctions.Add(effectId, () => SpawnFunction(effectId, location, parent));
         }
 
-        private void OnPlayEffect()
+        public Effect Spawn(EffectId effectId)
         {
-            Transform self = transform;
-            _effectService.SpawnEffect(_healedEffect, new Location(self.position, self.rotation));
+            if (_effectSpawnFunctions.TryGetValue(effectId, out Func<Effect> spawnFunction))
+                return spawnFunction.Invoke();
+
+            throw new NullReferenceException(nameof(spawnFunction));
+        }
+
+        public void Dispose() =>
+            _effectSpawnFunctions.Clear();
+
+        private Effect SpawnFunction(EffectId effectId, Location location, Transform parent)
+        {
+            Effect effect = _effectService.SpawnEffect(effectId, location);
+            effect.transform.SetParent(parent, true);
+            return effect;
         }
     }
 }

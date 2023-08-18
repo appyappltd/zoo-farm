@@ -29,16 +29,13 @@ namespace Logic.Medical
 
         private IGameFactory _gameFactory;
         private IAnimalHouseService _houseService;
-        private IEffectService _effectService;
+
+        private EffectSpawner _effectSpawner;
+        private Effect _workingEffect;
         
         private IAnimal _healingAnimal;
         private byte Id;
         private bool _isFree = true;
-        
-        private Location _workingEffectSpawnLocation;
-        private Location _healingEffectSpawnLocation;
-        
-        private Effect _workingEffect;
 
         public event Action<IItem> Added = _ => { };
         public event Action<IItem> Removed = _ => { };
@@ -50,17 +47,28 @@ namespace Logic.Medical
 
         private void Awake()
         {
-            _timerOperator ??= GetComponent<TimerOperator>();
-            _timerOperator.SetUp(_healingTime, OnHealed);
-            
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
-            _houseService = AllServices.Container.Single<IAnimalHouseService>();
-            _effectService = AllServices.Container.Single<IEffectService>();
-
-            _workingEffectSpawnLocation = new Location(_spawnPlace.position, Quaternion.LookRotation(-Camera.main.transform.forward));
-            _healingEffectSpawnLocation = new Location(_spawnPlace.position, Quaternion.LookRotation(Vector3.up));
+            Construct(
+                AllServices.Container.Single<IGameFactory>(),
+                AllServices.Container.Single<IAnimalHouseService>(),
+                AllServices.Container.Single<IEffectService>());
         }
 
+        private void OnDestroy() =>
+            _effectSpawner.Dispose();
+
+        private void Construct(IGameFactory gameFactory, IAnimalHouseService houseService, IEffectService effectService)
+        {
+            _gameFactory = gameFactory;
+            _houseService = houseService;
+            
+            _effectSpawner = new EffectSpawner(effectService);
+            _effectSpawner.InitEffect(EffectId.HealingPluses, _spawnPlace.position, Quaternion.LookRotation(Vector3.up));
+            _effectSpawner.InitEffect(EffectId.Working, _spawnPlace.position, Quaternion.LookRotation(-Camera.main.transform.forward));
+
+            _timerOperator ??= GetComponent<TimerOperator>();
+            _timerOperator.SetUp(_healingTime, OnHealed);
+        }
+        
         public void Add(IItem item)
         {
             if (ItemIsAnimal(item))
@@ -95,7 +103,7 @@ namespace Logic.Medical
         {
             Debug.Log("Healed");
             _workingEffect.Stop();
-            _effectService.SpawnEffect(EffectId.HealingPluses, _healingEffectSpawnLocation);
+            _effectSpawner.Spawn(EffectId.HealingPluses);
             _healingAnimal = _gameFactory.CreateAnimal(_animalData.StaticData, _spawnPlace.position, _spawnPlace.rotation)
                 .GetComponent<Animal>();
 
@@ -127,7 +135,7 @@ namespace Logic.Medical
 
         private void BeginHeal()
         {
-            _workingEffect = _effectService.SpawnEffect(EffectId.Working, _workingEffectSpawnLocation);
+            _workingEffect = _effectSpawner.Spawn(EffectId.Working);
             _timerOperator.Restart();
         }
 
