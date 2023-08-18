@@ -1,5 +1,6 @@
 using Logic.Storages;
 using Logic.Storages.Items;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace Logic
@@ -33,9 +34,13 @@ namespace Logic
             if (_inventory.IsFull)
             {
                 _indicator.transform.SetParent(_storage.TopPlace);
+                _indicator.transform.localPosition = Vector3.zero;
+                _indicator.gameObject.Enable();
             }
-
-            _indicator.gameObject.SetActive(_inventory.IsFull);
+            else
+            {
+                _indicator.gameObject.Disable();
+            }
         }
     }
 }
