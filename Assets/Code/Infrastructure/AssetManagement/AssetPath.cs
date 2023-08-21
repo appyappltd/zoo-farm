@@ -17,6 +17,7 @@ namespace Infrastructure.AssetManagement
         public const string KeeperPath = "Prefabs/NPC/Keeper";
         public const string HandItemPath = "Prefabs/HandItems";
         public const string PlantPath = "Prefabs/Plants";
+        public const string ReleaseInteractionPath = "Prefabs/Interactions";
 
         public const string UIRootPath = "Prefabs/UI/UIRoot";
         public const string HudPath = "Prefabs/UI/HUD";

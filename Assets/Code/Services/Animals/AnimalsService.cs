@@ -17,6 +17,7 @@ namespace Services.Animals
         private readonly List<IAnimal> _animals = new List<IAnimal>();
 
         public event Action<IAnimal> Released = _ => { };
+        public event Action<IAnimal> Registered = _ => { };
 
         public int TotalAnimalCount => _animals.Count;
         public int ReleaseReadyAnimalCount => _animals.Count(IsReleaseReady);
@@ -44,7 +45,7 @@ namespace Services.Animals
 
         public void Release(AnimalType animalType)
         {
-            IAnimal unregisterAnimal = Animals.OrderByDescending(animal => animal.HappinessFactor.Factor).First();
+            IAnimal unregisterAnimal = _animals.OrderByDescending(animal => animal.HappinessFactor.Factor).First();
             ReleaseAnimal(unregisterAnimal);
         }
 
@@ -58,11 +59,11 @@ namespace Services.Animals
         }
 
         public IEnumerable<IAnimal> GetReleaseReady() =>
-            Animals.Where(IsReleaseReady).Distinct(new AnimalByTypeComparer());
+            _animals.Where(IsReleaseReady).Distinct(new AnimalByTypeComparer());
 
         public BreedingPair SelectPairForBreeding(AnimalType byType)
         {
-            IAnimal[] animalsToPair = Animals.OrderBy(animal => animal.HappinessFactor.Factor).Take(AnimalsInPair).ToArray();
+            IAnimal[] animalsToPair = _animals.OrderBy(animal => animal.HappinessFactor.Factor).Take(AnimalsInPair).ToArray();
             return new BreedingPair(animalsToPair[0], animalsToPair[1]);
         }
 

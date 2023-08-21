@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Logic.Animals;
 using Data.ItemsData;
 using Logic.Foods.FoodSettings;
+using Logic.LevelGoals;
 using Logic.Medical;
 using Logic.Spawners;
 using Services;
@@ -34,5 +35,6 @@ namespace Infrastructure.Factory
         GameObject CreateKeeper(Vector3 markerBuildPosition);
         GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type);
         GameObject CreateBreedingHouse(Vector3 at, Quaternion rotation);
+        ReleaseInteractionProvider CreateReleaseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
     }
 }

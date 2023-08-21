@@ -974,7 +974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8458958772868156414
 Transform:
   m_ObjectHideFlags: 0
@@ -6848,8 +6848,8 @@ MonoBehaviour:
   _isSortable: 1
   _isRemoteInit: 1
   _isModifyRotation: 1
-  _adderMono: {fileID: 3209468561728551432}
-  _removerMono: {fileID: 3209468561728551432}
+  _adderMono: {fileID: 0}
+  _removerMono: {fileID: 0}
 --- !u!114 &7803516307033350702
 MonoBehaviour:
   m_ObjectHideFlags: 0

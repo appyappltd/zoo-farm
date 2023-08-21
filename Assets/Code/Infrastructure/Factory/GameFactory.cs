@@ -5,6 +5,7 @@ using Data.ItemsData;
 using Infrastructure.AssetManagement;
 using Infrastructure.Builders;
 using Logic.Foods.FoodSettings;
+using Logic.LevelGoals;
 using Logic.Medical;
 using Logic.Spawners;
 using Services.AnimalHouses;
@@ -29,6 +30,7 @@ namespace Infrastructure.Factory
         private readonly MedStandBuilder _medStandBuilder;
         private readonly MedBedBuilder _medBedBuilder;
         private readonly AnimalHouseBuilder _animalHouseBuilder;
+        private readonly ReleaseInteractionZoneBuilder _releaseInteractionZoneBuilder;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -54,6 +56,7 @@ namespace Infrastructure.Factory
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _medStandBuilder = new MedStandBuilder(staticDataService);
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
+            _releaseInteractionZoneBuilder = new ReleaseInteractionZoneBuilder(staticDataService);
         }
 
         public void Cleanup()
@@ -90,6 +93,13 @@ namespace Infrastructure.Factory
             GameObject houseObject = InstantiateRegistered(AssetPath.BreedingHouse, at, rotation);
             _animalHouseBuilder.Build(houseObject.GetComponent<IAnimalHouse>());
             return houseObject;
+        }
+
+        public ReleaseInteractionProvider CreateReleaseInteraction(Vector3 at, Quaternion rotation, AnimalType withType)
+        {
+            GameObject zoneObject = _assets.Instantiate(AssetPath.ReleaseInteractionPath, at, rotation);
+            return _releaseInteractionZoneBuilder.Build(zoneObject, withType);
+
         }
 
         public GameObject CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType)
