@@ -14,6 +14,7 @@ namespace Logic.LevelGoals
     public class ReleaseInteractionsGrid : IDisposable
     {
         private const string ValidationException = "Interaction zone with this type of animal not found";
+        
         private readonly Vector3 _undergroundPosition = new Vector3(0f, -10f, 0f);
 
         private readonly Dictionary<AnimalType, HeroInteraction> _interactions = new Dictionary<AnimalType, HeroInteraction>();
@@ -21,8 +22,6 @@ namespace Logic.LevelGoals
 
         private readonly IGameFactory _gameFactory;
         private readonly ITransformGrid _transformGrid;
-
-        private List<AnimalType> _releaseTypes = new List<AnimalType>();
 
         public event Action<AnimalType> ReleaseInteracted = _ => { };
 
@@ -39,17 +38,13 @@ namespace Logic.LevelGoals
         public void ActivateZone(AnimalType withType)
         {
             if (Validate(withType, out HeroInteraction interaction, false))
-            {
                 _transformGrid.AddCell(interaction.transform.parent);
-            }
         }
 
         public void DeactivateZone(AnimalType withType)
         {
             if (Validate(withType, out HeroInteraction interaction, true))
-            {
                 _transformGrid.RemoveCell(interaction.transform.parent);
-            }
         }
 
         public void Dispose()
@@ -76,13 +71,8 @@ namespace Logic.LevelGoals
 
         private bool Validate(AnimalType withType, out HeroInteraction interaction, bool shouldBeActive)
         {
-           
             if (_interactions.TryGetValue(withType, out interaction))
-            {
-                Debug.Log($"Validate {interaction.gameObject.activeInHierarchy == shouldBeActive}");
                 return interaction.gameObject.activeInHierarchy == shouldBeActive;
-            }
-
 
             throw new NullReferenceException(ValidationException);
         }

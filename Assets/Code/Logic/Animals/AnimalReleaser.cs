@@ -1,6 +1,8 @@
+using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Gates;
 using Logic.Interactions;
+using Logic.LevelGoals;
 using Logic.Player;
 using Logic.Spawners;
 using Logic.Translators;
@@ -17,7 +19,7 @@ namespace Logic.Animals
     public class AnimalReleaser : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private HeroInteraction _playerInteraction;
+        [SerializeField] private LevelGoalView _levelGoal;
         [SerializeField] private AnimalInteraction _animalInteraction;
         [SerializeField] private TutorialTriggerStatic _animalReleasedTrigger;
         [SerializeField] private CollectibleCoinSpawner _spawner;
@@ -34,19 +36,31 @@ namespace Logic.Animals
         private void Awake()
         {
             _animalService = AllServices.Container.Single<IAnimalsService>();
-            _windowService = AllServices.Container.Single<IWindowService>();
 
-            _animalService.Released += OnReleased;
-            _playerInteraction.Interacted += OnInteracted;
-            _animalInteraction.Interacted += OnGatePassed;
+            Construct(
+                AllServices.Container.Single<IGameFactory>(),
+                AllServices.Container.Single<IAnimalsService>());
         }
 
         private void OnDestroy()
         {
             _animalService.Released -= OnReleased;
-            _playerInteraction.Interacted -= OnInteracted;
             _animalInteraction.Interacted -= OnGatePassed;
+            _levelGoal.ReleaseInteraction -= OnReleaseInteracted;
         }
+        
+        public void Construct(IGameFactory gameFactory, IAnimalsService animalsService)
+        {
+            _animalService = animalsService;
+            _levelGoal.Construct(gameFactory, animalsService);
+            
+            _animalService.Released += OnReleased;
+            _animalInteraction.Interacted += OnGatePassed;
+            _levelGoal.ReleaseInteraction += OnReleaseInteracted;
+        }
+
+        private void OnReleaseInteracted(AnimalType releaseType) =>
+            _animalService.Release(releaseType);
 
         private void OnGatePassed(IAnimal animal)
         {
@@ -61,12 +75,6 @@ namespace Logic.Animals
         {
             Debug.Log($"release coins: {_releaseCoinsConfig.Coins(animal.AnimalId.Type) * animal.HappinessFactor.Factor}");
             return _releaseCoinsConfig.Coins(animal.AnimalId.Type) * animal.HappinessFactor.Factor;
-        }
-
-        private void OnInteracted(Hero _)
-        {
-            Debug.Log("Open release window");
-            _windowService.Open(WindowId.AnimalRelease);
         }
 
         private void OnReleased(IAnimal animal)

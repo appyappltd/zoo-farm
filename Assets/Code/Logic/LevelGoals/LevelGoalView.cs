@@ -1,7 +1,8 @@
+using System;
 using AYellowpaper;
 using Infrastructure.Factory;
+using Logic.Animals;
 using Logic.TransformGrid;
-using Services;
 using Services.Animals;
 using UnityEngine;
 
@@ -15,10 +16,10 @@ namespace Logic.LevelGoals
         private LevelGoal _goal;
         private ReleaseInteractionsGrid _releaseInteractions;
 
-        private void Awake()
+        public event Action<AnimalType> ReleaseInteraction
         {
-            Construct(AllServices.Container.Single<IGameFactory>(),
-                AllServices.Container.Single<IAnimalsService>());
+            add => _releaseInteractions.ReleaseInteracted += value;
+            remove => _releaseInteractions.ReleaseInteracted -= value;
         }
 
         private void OnDestroy()
