@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Logic.Animals;
 using Progress;
+using UnityEngine;
 
 namespace Logic.LevelGoals
 {
@@ -31,6 +32,11 @@ namespace Logic.LevelGoals
                 bar.Increment();
             else
                 throw new NullReferenceException(nameof(withType));
+
+            foreach (KeyValuePair<AnimalType, ProgressBar> progressBar in _releaseProgressBars)
+            {
+                Debug.Log($"Progress {progressBar.Key}, {progressBar.Value}");
+            }
         }
 
         private void RegisterProgressBar(AnimalType animalType, int goalAmount)

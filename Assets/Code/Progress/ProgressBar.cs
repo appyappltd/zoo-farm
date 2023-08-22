@@ -27,6 +27,9 @@ namespace Progress
             Current = new Observable<float>(current);
         }
 
+        public override string ToString() =>
+            $"Bar {Current.Value}/{Max}";
+
         public void Reset() =>
             Current.Value = ZeroUnit;
 

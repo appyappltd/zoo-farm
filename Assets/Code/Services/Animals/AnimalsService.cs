@@ -34,7 +34,7 @@ namespace Services.Animals
                 throw new Exception($"Animal {animal} already registered");
 
             _animals.Add(animal);
-
+            Registered.Invoke(animal);
 #if DEBUG
             Debug.Log($"Animal {animal.AnimalId.Type} (id: {animal.AnimalId.ID}) registered");
 #endif
@@ -45,18 +45,18 @@ namespace Services.Animals
 
         public void Release(AnimalType animalType)
         {
-            IAnimal unregisterAnimal = _animals.OrderByDescending(animal => animal.HappinessFactor.Factor).First();
+            IAnimal unregisterAnimal = _animals
+                .Where(animal => animal.AnimalId.Type == animalType)
+                .OrderByDescending(animal => animal.HappinessFactor.Factor).First();
             ReleaseAnimal(unregisterAnimal);
         }
 
         public IAnimal[] GetAnimals(AnimalType panelAnimalType) =>
             _animals.FindAll(animal => animal.AnimalId.Type == panelAnimalType).ToArray();
 
-        public IEnumerable<AnimalType> GetBreedingReady()
-        {
-            return _animals.GroupBy(animal => animal.AnimalId.Type).Where(grouping => grouping.Count() > 1)
+        public IEnumerable<AnimalType> GetBreedingReady() =>
+            _animals.GroupBy(animal => animal.AnimalId.Type).Where(grouping => grouping.Count() > 1)
                 .Select(grouping => grouping.Key);
-        }
 
         public IEnumerable<IAnimal> GetReleaseReady() =>
             _animals.Where(IsReleaseReady).Distinct(new AnimalByTypeComparer());

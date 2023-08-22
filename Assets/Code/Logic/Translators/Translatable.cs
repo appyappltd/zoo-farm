@@ -29,8 +29,8 @@ namespace Logic.Translators
         private bool IsComplete => _delta >= FinalTranslateValue;
         public bool IsPreload => _isPreload;
 
-        public event Action<ITranslatable> Begin = t => {};
-        public event Action<ITranslatable> End = t => {};
+        public event Action<ITranslatable> Begin = _ => {};
+        public event Action<ITranslatable> End = _ => {};
         
         protected abstract void ApplyModifiers();
         protected abstract void ApplyTranslation(T value);

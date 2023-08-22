@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DelayRoutines;
 using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Interactions;
@@ -37,19 +38,17 @@ namespace Logic.LevelGoals
 
         public void ActivateZone(AnimalType withType)
         {
-            if (Validate(withType, out var interaction, false))
+            if (Validate(withType, out HeroInteraction interaction, false))
             {
-                interaction.gameObject.Enable();
-                _transformGrid.AddCell(interaction.transform);
+                _transformGrid.AddCell(interaction.transform.parent);
             }
         }
 
         public void DeactivateZone(AnimalType withType)
         {
-            if (Validate(withType, out var interaction, true))
+            if (Validate(withType, out HeroInteraction interaction, true))
             {
-                interaction.gameObject.Disable();
-                _transformGrid.RemoveCell(interaction.transform);
+                _transformGrid.RemoveCell(interaction.transform.parent);
             }
         }
 
@@ -66,7 +65,6 @@ namespace Logic.LevelGoals
             zone.gameObject.Disable();
             Subscribe(type, zone.Interaction);
             _interactions.Add(type, zone.Interaction);
-            // _transformGrid.AddCell(zone.transform);
         }
 
         private void Subscribe(AnimalType type, HeroInteraction zone)
@@ -78,8 +76,13 @@ namespace Logic.LevelGoals
 
         private bool Validate(AnimalType withType, out HeroInteraction interaction, bool shouldBeActive)
         {
+           
             if (_interactions.TryGetValue(withType, out interaction))
-                return interaction.gameObject.activeSelf == shouldBeActive;
+            {
+                Debug.Log($"Validate {interaction.gameObject.activeInHierarchy == shouldBeActive}");
+                return interaction.gameObject.activeInHierarchy == shouldBeActive;
+            }
+
 
             throw new NullReferenceException(ValidationException);
         }

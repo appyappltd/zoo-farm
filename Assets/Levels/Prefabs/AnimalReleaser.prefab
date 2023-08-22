@@ -1,5 +1,68 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &877855440088785803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 330025182433327862}
+  - component: {fileID: 6858167144037880955}
+  - component: {fileID: 5327803216180847502}
+  m_Layer: 0
+  m_Name: FlexGrid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &330025182433327862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877855440088785803}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.00076109346, y: -0.9999573, z: -0.000008501007, w: -0.009209559}
+  m_LocalPosition: {x: 0.41653824, y: -0.019363273, z: -0.89247984}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4183773827939015689}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6858167144037880955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877855440088785803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5364818e9f0440819cfb5e6ecac283cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _translator:
+    _underlyingValue: {fileID: 5327803216180847502}
+  _align: 1
+  _space: 2
+  _horizontalClamp: 3
+  _verticalClamp: 3
+--- !u!114 &5327803216180847502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877855440088785803}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65cd91c87cf643fd826caa5ce174ff02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2293404611748591608
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +183,7 @@ GameObject:
   - component: {fileID: 4185388342728400461}
   - component: {fileID: 4889423967771694}
   - component: {fileID: 3150760461251203967}
+  - component: {fileID: 6858902481104651391}
   m_Layer: 0
   m_Name: AnimalReleaser
   m_TagString: Untagged
@@ -145,6 +209,7 @@ Transform:
   - {fileID: 8835236271941146783}
   - {fileID: 9173256744127808516}
   - {fileID: 7620125397106776952}
+  - {fileID: 330025182433327862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8975085369200294445
@@ -205,6 +270,21 @@ MonoBehaviour:
   _coinsSpawnZone: {fileID: 3448658708505515664}
   _zoneOffset: {x: 2, y: 2}
   _spawnDelay: 0.05
+--- !u!114 &6858902481104651391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3328784661039704705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a9804134d149d39832b8e0bba3e142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transformGrid:
+    _underlyingValue: {fileID: 6858167144037880955}
+  _temporalGoalPreset: {fileID: 11400000, guid: 9ac8f15135488cf4ea218b6556acd851, type: 2}
 --- !u!1 &4296236846738524977
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +315,7 @@ Transform:
   m_GameObject: {fileID: 4296236846738524977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.004363274, z: 0, w: 0.9999905}
-  m_LocalPosition: {x: 0.34, y: 0.42, z: -16.5}
+  m_LocalPosition: {x: 0.8, y: 0.42, z: -14.44}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -300,10 +380,10 @@ Rigidbody:
     m_Bits: 1783
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &129334275775354243
 BoxCollider:
@@ -587,5 +667,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 0.5
   _isValidate: 0
+  _validationMode: 0
   _interactionValidators: []
   _timerOperator: {fileID: 1365130976158219068}

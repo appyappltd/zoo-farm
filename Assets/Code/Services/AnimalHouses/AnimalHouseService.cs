@@ -86,7 +86,12 @@ namespace Services.AnimalHouses
                 _animalHouses.FirstOrDefault(house => house.IsTaken && house.AnimalId.Type.Equals(withAnimalId.Type));
 
             if (attachedHouse is null)
+            {
+#if DEBUG
+                return;
+#endif
                 throw new NullReferenceException(HouseNotFoundException);
+            }
 
             attachedHouse.DetachAnimal();
             attachedHouse.Clear();
