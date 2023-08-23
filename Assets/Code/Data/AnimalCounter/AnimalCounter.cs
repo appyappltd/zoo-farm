@@ -45,10 +45,10 @@ namespace Data
             animalSatietyObserver.Dispose();
             _satietyObservers.Remove(animalId);
             
+            Updated.Invoke(animalType, _countDatas[animalType]);
+            
             if (_countDatas[animalType].Total == 0)
                 _countDatas.Remove(animalType);
-            
-            Updated.Invoke(animalType, _countDatas[animalType]);
         }
 
         public AnimalCountData GetAnimalCountData(AnimalType byType)
