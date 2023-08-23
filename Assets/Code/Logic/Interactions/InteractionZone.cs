@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Logic.Interactions
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone where T : Human
+    public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone<T> where T : IHuman
     {
         [SerializeField] private float _interactionDelay;
         [SerializeField] private bool _isLooped;

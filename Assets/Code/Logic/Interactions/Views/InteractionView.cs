@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using AYellowpaper;
+using Logic.Player;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Logic.Interactions
     public class InteractionView : MonoCache
     {
         [Header("References")]
-        [SerializeField] private InterfaceReference<IInteractionZone, MonoBehaviour> _playerInteraction;
+        [SerializeField] private InterfaceReference<IInteractionZone<IHuman>, MonoBehaviour> _playerInteraction;
         [SerializeField] private Transform _sine;
 
         [Space] [Header("Settings")]

@@ -3,7 +3,12 @@ using UnityEngine;
 
 namespace Logic.Player
 {
-    public abstract class Human : MonoBehaviour
+    public interface IHuman
+    {
+        IInventory Inventory { get; }
+    }
+
+    public abstract class Human : MonoBehaviour, IHuman
     {
         [SerializeField] protected InventoryHolder InventoryHolder;
         [SerializeField] protected InventoryAnimatorObserver HandsAnimator;
