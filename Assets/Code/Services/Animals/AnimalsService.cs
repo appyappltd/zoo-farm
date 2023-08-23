@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services.AnimalHouses;
@@ -15,13 +16,15 @@ namespace Services.Animals
         
         private readonly IAnimalHouseService _houseService;
         private readonly List<IAnimal> _animals = new List<IAnimal>();
-
+        private readonly AnimalCounter _animalCounter = new AnimalCounter();
+        
         public event Action<IAnimal> Released = _ => { };
         public event Action<IAnimal> Registered = _ => { };
 
         public int TotalAnimalCount => _animals.Count;
         public int ReleaseReadyAnimalCount => _animals.Count(IsReleaseReady);
         public IReadOnlyList<IAnimal> Animals => _animals;
+        public IAnimalCounter AnimalCounter => _animalCounter;
 
         public AnimalsService(IAnimalHouseService houseService)
         {
@@ -34,6 +37,7 @@ namespace Services.Animals
                 throw new Exception($"Animal {animal} already registered");
 
             _animals.Add(animal);
+            _animalCounter.Register(animal);
             Registered.Invoke(animal);
 #if DEBUG
             Debug.Log($"Animal {animal.AnimalId.Type} (id: {animal.AnimalId.ID}) registered");
@@ -48,6 +52,7 @@ namespace Services.Animals
             IAnimal unregisterAnimal = _animals
                 .Where(animal => animal.AnimalId.Type == animalType)
                 .OrderByDescending(animal => animal.HappinessFactor.Factor).First();
+            
             ReleaseAnimal(unregisterAnimal);
         }
 
@@ -63,13 +68,17 @@ namespace Services.Animals
 
         public BreedingPair SelectPairForBreeding(AnimalType byType)
         {
-            IAnimal[] animalsToPair = _animals.OrderBy(animal => animal.HappinessFactor.Factor).Take(AnimalsInPair).ToArray();
+            IAnimal[] animalsToPair = _animals
+                .Where(animal => animal.AnimalId.Type == byType)
+                .OrderBy(animal => animal.HappinessFactor.Factor)
+                .Take(AnimalsInPair)
+                .ToArray();
             return new BreedingPair(animalsToPair[0], animalsToPair[1]);
         }
 
-        public AnimalCountData GetAnimalsCount(AnimalType panelAnimalType)
+        public AnimalCountData GetAnimalsCount(AnimalType animalType)
         {
-            IAnimal[] animals = GetAnimals(panelAnimalType);
+            IAnimal[] animals = GetAnimals(animalType);
 
             int total = animals.Length;
             int releaseReady = animals.Count(IsReleaseReady);
@@ -96,6 +105,7 @@ namespace Services.Animals
             if (_animals.Contains(animal) == false)
                 throw new Exception($"Animal {animal} wasn't registered");
 
+            _animalCounter.Unregister(animal);
             _animals.Remove(animal);
         }
     }

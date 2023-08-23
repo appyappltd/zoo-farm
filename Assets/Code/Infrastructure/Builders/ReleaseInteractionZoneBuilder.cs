@@ -1,5 +1,6 @@
 using Logic.Animals;
 using Logic.LevelGoals;
+using Services.Animals;
 using Services.StaticData;
 using UnityEngine;
 
@@ -8,16 +9,18 @@ namespace Infrastructure.Builders
     public class ReleaseInteractionZoneBuilder
     {
         private readonly IStaticDataService _staticDataService;
+        private readonly IAnimalsService _animalsService;
 
-        public ReleaseInteractionZoneBuilder(IStaticDataService staticDataService)
+        public ReleaseInteractionZoneBuilder(IAnimalsService animalsService, IStaticDataService staticDataService)
         {
+            _animalsService = animalsService;
             _staticDataService = staticDataService;
         }
 
         public ReleaseInteractionProvider Build(GameObject zoneObject, AnimalType animalType)
         {
             ReleaseInteractionProvider provider = zoneObject.GetComponent<ReleaseInteractionProvider>();
-            provider.AnimalIcon.sprite = _staticDataService.IconByAnimalType(animalType);
+            provider.ReleaseIcon.Construct(_animalsService, _staticDataService, animalType);
             return provider;
         }
     }

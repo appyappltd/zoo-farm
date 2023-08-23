@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 
@@ -12,12 +13,13 @@ namespace Services.Animals
         int TotalAnimalCount { get; }
         int ReleaseReadyAnimalCount { get; }
         IReadOnlyList<IAnimal> Animals { get; }
+        IAnimalCounter AnimalCounter { get; }
         IEnumerable<AnimalType> GetBreedingReady();
         void Register(IAnimal animal);
         void Release(IAnimal animal);
         void Release(AnimalType animalType);
         IAnimal[] GetAnimals(AnimalType panelAnimalType);
-        AnimalCountData GetAnimalsCount(AnimalType panelAnimalType);
+        AnimalCountData GetAnimalsCount(AnimalType animalType);
         BreedingPair SelectPairForBreeding(AnimalType byType);
         IEnumerable<IAnimal> GetReleaseReady();
     }

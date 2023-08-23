@@ -56,7 +56,7 @@ namespace Infrastructure.Factory
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _medStandBuilder = new MedStandBuilder(staticDataService);
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _releaseInteractionZoneBuilder = new ReleaseInteractionZoneBuilder(staticDataService);
+            _releaseInteractionZoneBuilder = new ReleaseInteractionZoneBuilder(animalsService, staticDataService);
         }
 
         public void Cleanup()

@@ -1,9 +1,11 @@
+using UnityEngine;
+
 namespace Services.Animals
 {
     public struct AnimalCountData
     {
-        public int Total { get; }
-        public int ReleaseReady { get; }
+        public int Total { get; private set; }
+        public int ReleaseReady { get; private set; }
 
         public AnimalCountData(int total, int releaseReady)
         {
@@ -11,9 +13,19 @@ namespace Services.Animals
             ReleaseReady = releaseReady;
         }
 
-        public override string ToString()
-        {
-            return $"Total: {Total}, Ready: {ReleaseReady}";
-        }
+        public void AddTotal() =>
+            Total++;
+
+        public void RemoveTotal() =>
+            Total = Mathf.Min(0, --Total);
+
+        public void AddReleaseReady() =>
+            ReleaseReady = Mathf.Max(++ReleaseReady, Total);
+
+        public void RemoveReleaseReady() =>
+            ReleaseReady = Mathf.Min(0, --ReleaseReady);
+
+        public override string ToString() =>
+            $"Total: {Total}, Ready: {ReleaseReady}";
     }
 }

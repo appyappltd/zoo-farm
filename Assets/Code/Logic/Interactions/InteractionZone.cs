@@ -30,7 +30,7 @@ namespace Logic.Interactions
 
         private T _cashed;
 
-        public event Action<T> Interacted = c => { };
+        public event Action<T> Interacted = _ => { };
         public event Action Entered = () => { };
         public event Action Canceled = () => { };
         public event Action Rejected = () => { };
@@ -109,10 +109,8 @@ namespace Logic.Interactions
             Canceled.Invoke();
         }
 
-        private void OnDelayPassed()
-        {
+        private void OnDelayPassed() =>
             Interacted.Invoke(_cashed);
-        }
 
         private void PassEnter(T hero)
         {

@@ -8407,6 +8407,7 @@ GameObject:
   - component: {fileID: 1449482678611837699}
   - component: {fileID: 5117336554223624140}
   - component: {fileID: 8953895405422408356}
+  - component: {fileID: 8953895405422408357}
   m_Layer: 0
   m_Name: FillingBar
   m_TagString: Untagged
@@ -8430,6 +8431,19 @@ MonoBehaviour:
   _hiddenMaskScale: {x: 1.4223197, y: 0, z: 0.82}
   _shownMaskScale: {x: 1.4223197, y: 1.925, z: 0.82}
   _testFill: 0
+--- !u!114 &8953895405422408357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953895405422408355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d412a3d57c4c078646e637d7c50427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fillMask: {fileID: 0}
 --- !u!212 &9016045632412406223
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using AYellowpaper;
 using NTC.Global.Cache;
 using UnityEngine;
@@ -6,9 +8,13 @@ namespace Logic.Interactions
 {
     public class InteractionView : MonoCache
     {
+        [Header("References")]
         [SerializeField] private InterfaceReference<IInteractionZone, MonoBehaviour> _playerInteraction;
         [SerializeField] private Transform _sine;
 
+        [Space] [Header("Settings")]
+        [SerializeField] private AxleInfluence _axleInfluence;
+        
         [SerializeField] private float _defaultSize;
         [SerializeField] private float _maxSize;
         [SerializeField] private float _decreaseTime = 0.25f;
@@ -16,13 +22,18 @@ namespace Logic.Interactions
         private float _deltaSize;
         private float _targetSize;
         private float _smoothTime;
+        
+        private Vector3 _axleFilter;
+        private Vector3 _initialSize;
 
         private void Awake()
         {
             _playerInteraction.Value.Entered += OnEnter;
             _playerInteraction.Value.Canceled += OnCancel;
 
+            _initialSize = _sine.localScale;
             _deltaSize = _defaultSize;
+            SetupFilter();
         }
 
         private void OnDestroy()
@@ -32,11 +43,17 @@ namespace Logic.Interactions
             
             SetDefault();
         }
+        
+        [Conditional("UNITY_EDITOR")]
+        private void OnValidate()
+        {
+            SetupFilter();
+        }
 
         public void SetDefault()
         {
             enabled = false;
-            _sine.localScale = Vector3.one * _defaultSize;
+            _sine.localScale = ScaleFiltrate(_initialSize, _defaultSize);
             _deltaSize = _defaultSize;
         }
 
@@ -53,7 +70,7 @@ namespace Logic.Interactions
         protected override void Run()
         {
             _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime);
-            _sine.localScale = Vector3.one * _deltaSize;
+            _sine.localScale = ScaleFiltrate(_initialSize, _deltaSize);
             
             if (Mathf.Approximately(_deltaSize, _targetSize))
             {
@@ -73,6 +90,26 @@ namespace Logic.Interactions
             _targetSize = _defaultSize;
             _smoothTime = _decreaseTime;
             enabled = true;
+        }
+
+        private Vector3 ScaleFiltrate(Vector3 origin, float scale)
+        {
+            Vector3 inverseFilter = -(_axleFilter - Vector3.one);
+            Vector3 filtered = Vector3.Scale(origin, _axleFilter);
+            Vector3 scaled = filtered * scale;
+            Vector3 invertedFilteredOrigin = Vector3.Scale(origin, inverseFilter);
+            return scaled + invertedFilteredOrigin;
+        }
+
+        private void SetupFilter()
+        {
+            _axleFilter = _axleInfluence switch
+            {
+                AxleInfluence.Both => new Vector3(1, 1, 0),
+                AxleInfluence.Vertical => new Vector3(1, 0, 0),
+                AxleInfluence.Horizontal => new Vector3(0, 1, 0),
+                _ => throw new ArgumentOutOfRangeException(nameof(_axleInfluence))
+            };
         }
     }
 }
