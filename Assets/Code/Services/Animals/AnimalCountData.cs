@@ -13,17 +13,29 @@ namespace Services.Animals
             ReleaseReady = releaseReady;
         }
 
-        public void AddTotal() =>
+        public AnimalCountData AddTotal()
+        {
             Total++;
+            return this;
+        }
 
-        public void RemoveTotal() =>
-            Total = Mathf.Min(0, --Total);
+        public AnimalCountData RemoveTotal()
+        {
+            Total = Mathf.Max(0, --Total);
+            return this;
+        }
 
-        public void AddReleaseReady() =>
-            ReleaseReady = Mathf.Max(++ReleaseReady, Total);
+        public AnimalCountData AddReleaseReady()
+        {
+            ReleaseReady = Mathf.Min(++ReleaseReady, Total);
+            return this;
+        }
 
-        public void RemoveReleaseReady() =>
-            ReleaseReady = Mathf.Min(0, --ReleaseReady);
+        public AnimalCountData RemoveReleaseReady()
+        {
+            ReleaseReady = Mathf.Max(0, --ReleaseReady);
+            return this;
+        }
 
         public override string ToString() =>
             $"Total: {Total}, Ready: {ReleaseReady}";

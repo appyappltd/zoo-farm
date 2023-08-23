@@ -106,8 +106,8 @@ namespace Logic.Interactions
             _axleFilter = _axleInfluence switch
             {
                 AxleInfluence.Both => new Vector3(1, 1, 0),
-                AxleInfluence.Vertical => new Vector3(1, 0, 0),
-                AxleInfluence.Horizontal => new Vector3(0, 1, 0),
+                AxleInfluence.Vertical => new Vector3(0, 1, 0),
+                AxleInfluence.Horizontal => new Vector3(1, 0, 0),
                 _ => throw new ArgumentOutOfRangeException(nameof(_axleInfluence))
             };
         }

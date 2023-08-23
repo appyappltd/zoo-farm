@@ -350,7 +350,6 @@ GameObject:
   - component: {fileID: 4355956524785405889}
   - component: {fileID: 1776143652154602528}
   - component: {fileID: 8741105270092319691}
-  - component: {fileID: 9205318041046373525}
   m_Layer: 0
   m_Name: FillingBar
   m_TagString: Untagged
@@ -412,20 +411,6 @@ MonoBehaviour:
   _defaultSize: 0
   _maxSize: 1.92
   _decreaseTime: 0.25
---- !u!114 &9205318041046373525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864345947891425531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24d412a3d57c4c078646e637d7c50427, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animalIcon: {fileID: 7360844526296884705}
-  _amountText: {fileID: 1131859396451737135}
 --- !u!1 &2011287463186433189
 GameObject:
   m_ObjectHideFlags: 0

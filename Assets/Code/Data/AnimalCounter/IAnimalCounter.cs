@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services.Animals;
@@ -12,5 +13,6 @@ namespace Data
         void Unregister(IAnimal animal);
 
         AnimalCountData GetAnimalCountData(AnimalType byType);
+        IReadOnlyDictionary<AnimalType, AnimalCountData> GetAllData();
     }
 }

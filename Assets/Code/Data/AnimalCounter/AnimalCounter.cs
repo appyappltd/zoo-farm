@@ -16,13 +16,19 @@ namespace Data
         public void Register(IAnimal animal)
         {
             AnimalType animalType = animal.AnimalId.Type;
-            
+
             if (_countDatas.ContainsKey(animalType))
-                _countDatas[animalType].AddTotal();
+            {
+                _countDatas[animalType] = _countDatas[animalType].AddTotal();
+            }
             else
-                _countDatas.Add(animalType, new AnimalCountData(1, 0));
-            
+            {
+                var animalCountData = new AnimalCountData(1, 0);
+                _countDatas.Add(animalType, animalCountData);
+            }
+
             _satietyObservers.Add(animal.AnimalId, new AnimalSatietyObserver(animal, this));
+            Updated.Invoke(animalType, _countDatas[animalType]);
         }
 
         public void Unregister(IAnimal animal)
@@ -32,16 +38,17 @@ namespace Data
             
             if (_countDatas.ContainsKey(animalType) == false)
                 throw new ArgumentNullException();
-
-            AnimalCountData animalCountData = _countDatas[animalType];
-            animalCountData.RemoveTotal();
+            
+            _countDatas[animalType] = _countDatas[animalType].RemoveTotal();
 
             AnimalSatietyObserver animalSatietyObserver = _satietyObservers[animalId];
             animalSatietyObserver.Dispose();
             _satietyObservers.Remove(animalId);
             
-            if (animalCountData.Total == 0)
+            if (_countDatas[animalType].Total == 0)
                 _countDatas.Remove(animalType);
+            
+            Updated.Invoke(animalType, _countDatas[animalType]);
         }
 
         public AnimalCountData GetAnimalCountData(AnimalType byType)
@@ -51,6 +58,9 @@ namespace Data
 
             throw new ArgumentNullException();
         }
+
+        public IReadOnlyDictionary<AnimalType, AnimalCountData> GetAllData() =>
+            _countDatas;
 
         public void Dispose()
         {
@@ -63,16 +73,14 @@ namespace Data
 
         private void AddReleaseReady(AnimalType animalType)
         {
-            AnimalCountData animalCountData = _countDatas[animalType];
-            animalCountData.AddReleaseReady();
-            Updated.Invoke(animalType, animalCountData);
+            _countDatas[animalType] = _countDatas[animalType].AddReleaseReady();
+            Updated.Invoke(animalType, _countDatas[animalType]);
         }
 
         private void RemoveReleaseReady(AnimalType animalType)
         {
-            AnimalCountData animalCountData = _countDatas[animalType];
-            animalCountData.RemoveReleaseReady();
-            Updated.Invoke(animalType, animalCountData);
+            _countDatas[animalType] = _countDatas[animalType].RemoveReleaseReady();
+            Updated.Invoke(animalType, _countDatas[animalType]);
         }
 
         private class AnimalSatietyObserver : IDisposable
