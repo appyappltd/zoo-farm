@@ -13,6 +13,7 @@ namespace Logic.Interactions
     public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone where T : Human
     {
         [SerializeField] private float _interactionDelay;
+        [SerializeField] private bool _isLooped;
         [SerializeField] private bool _isValidate;
         [SerializeField] [ShowIf(nameof(_isValidate))] private ValidationMode _validationMode;
 
@@ -82,6 +83,21 @@ namespace Logic.Interactions
                 PassEnter(hero);
         }
 
+        protected override void OnTargetExited(T _)
+        {
+            _isLock = false;
+            Canceled.Invoke();
+            StopDelayedInteraction();
+        }
+
+        private void OnDelayPassed()
+        {
+            Interacted.Invoke(_cashed);
+
+            if (_isLooped)
+                PassEnter(_cashed);
+        }
+
         private void Validate(T hero)
         {
             bool isAllValid = true;
@@ -101,16 +117,6 @@ namespace Logic.Interactions
                     Rejected.Invoke();
             }
         }
-
-        protected override void OnTargetExited(T _)
-        {
-            _isLock = false;
-            StopDelayedInteraction();
-            Canceled.Invoke();
-        }
-
-        private void OnDelayPassed() =>
-            Interacted.Invoke(_cashed);
 
         private void PassEnter(T hero)
         {

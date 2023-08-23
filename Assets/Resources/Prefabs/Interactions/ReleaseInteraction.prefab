@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactionDelay: 1.5
+  _isLooped: 1
   _isValidate: 0
   _validationMode: 0
   _interactionValidators: []
