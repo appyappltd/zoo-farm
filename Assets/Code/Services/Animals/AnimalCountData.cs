@@ -7,7 +7,7 @@ namespace Services.Animals
         public int Total { get; private set; }
         public int ReleaseReady { get; private set; }
 
-        public AnimalCountData(int total, int releaseReady)
+        public AnimalCountData(int total = 0, int releaseReady = 0)
         {
             Total = total;
             ReleaseReady = releaseReady;

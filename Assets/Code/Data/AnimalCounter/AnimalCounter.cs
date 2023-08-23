@@ -23,7 +23,7 @@ namespace Data
             }
             else
             {
-                var animalCountData = new AnimalCountData(1, 0);
+                var animalCountData = new AnimalCountData().AddTotal();
                 _countDatas.Add(animalType, animalCountData);
             }
 
