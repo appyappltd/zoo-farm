@@ -4,7 +4,7 @@ using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.TransformGrid;
 using Services.Animals;
-using Ui;
+using Ui.LevelGoalPanel;
 using UnityEngine;
 
 namespace Logic.LevelGoals

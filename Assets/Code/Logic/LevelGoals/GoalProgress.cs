@@ -13,15 +13,12 @@ namespace Logic.LevelGoals
         private int _notFullBarCount;
 
         public event Action Compleated = () => { };
-        
-        public List<Observables.IObservable<float>> Observables { get; }
 
         public GoalProgress(GoalPreset goalPreset)
         {
             int capacity = goalPreset.AnimalsToRelease.Count;
             _releaseProgressBars = new Dictionary<AnimalType, ProgressBar>(capacity);
-            Observables = new List<Observables.IObservable<float>>(capacity);
-            
+
             foreach (var (animalType, goalAmount) in goalPreset.AnimalsToRelease)
                 RegisterProgressBar(animalType, goalAmount);
         }
@@ -33,16 +30,25 @@ namespace Logic.LevelGoals
             else
                 throw new NullReferenceException(nameof(withType));
 
+#if DEBUG
             foreach (KeyValuePair<AnimalType, ProgressBar> progressBar in _releaseProgressBars)
             {
                 Debug.Log($"Progress {progressBar.Key}, {progressBar.Value}");
             }
+#endif
+        }
+
+        public Observables.IObservable<float> GetProgressAmount(AnimalType byType)
+        {
+            if (_releaseProgressBars.TryGetValue(byType, out ProgressBar bar))
+                return bar.Current;
+
+            throw new ArgumentNullException(nameof(byType));
         }
 
         private void RegisterProgressBar(AnimalType animalType, int goalAmount)
         {
             ProgressBar progressBar = new ProgressBar(goalAmount);
-            Observables.Add(progressBar.Current);
             _releaseProgressBars.Add(animalType, progressBar);
 
             if (progressBar.IsFull)

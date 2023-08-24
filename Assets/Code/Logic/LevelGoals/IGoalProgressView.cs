@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
+using Logic.Animals;
 
 namespace Logic.LevelGoals
 {
     public interface IGoalProgressView
     {
         event Action Compleated;
-        List<Observables.IObservable<float>> Observables { get; }
+        Observables.IObservable<float> GetProgressAmount(AnimalType byType);
     }
 }
