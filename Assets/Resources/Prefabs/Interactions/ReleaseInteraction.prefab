@@ -400,6 +400,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6250368949507349905, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250368949507349905, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: _interactionValidators.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -568,6 +572,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7676232083861611919, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
     - target: {fileID: 8741105270092319691, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       propertyPath: _sine
       value: 
@@ -593,6 +601,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8741105270092319691, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      propertyPath: _isSupportLoopedInteraction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8741105270092319691, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       propertyPath: _playerInteraction._underlyingValue
       value: 
       objectReference: {fileID: 5606969781174813892}
@@ -603,6 +615,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1864345947891425531, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8427769841339600072}
+    - targetCorrespondingSourceObject: {fileID: 1864345947891425531, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4476321548934197084}
     - targetCorrespondingSourceObject: {fileID: 2659545068070483738, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8772304891916860647}
@@ -626,6 +641,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animalIcon: {fileID: 9046863957483201044}
   _amountText: {fileID: 1449947773744863706}
+--- !u!114 &4476321548934197084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177169864851334926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7e7b8a4ad54e9684c8b070d13d9647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInteraction:
+    _underlyingValue: {fileID: 5606969781174813892}
+  _sineSprite: {fileID: 4582180633394982186}
+  _sineTransform: {fileID: 2871436943516682292}
+  _blinkCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 45.508415
+      outSlope: 2
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.05560704
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 2
+      outSlope: -2
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.6519661
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -42.101147
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.22891617
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _blinkSize: 1.15
+  _rejectedColor: {r: 0.7924528, g: 0.16197929, b: 0.16197929, a: 1}
+  _blinkDuration: 0.5
 --- !u!114 &1449947773744863706 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1131859396451737135, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
@@ -667,10 +734,16 @@ MonoBehaviour:
   _playerInteraction:
     _underlyingValue: {fileID: 5606969781174813892}
   _sine: {fileID: 2610864466734732300}
+  _isSupportLoopedInteraction: 1
   _axleInfluence: 1
   _defaultSize: 0
   _maxSize: 1.92
   _decreaseTime: 0.5
+--- !u!212 &4582180633394982186 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2611312407388187359, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+  m_PrefabInstance: {fileID: 1993427563264854005}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &9046863957483201044 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7360844526296884705, guid: a24db00039b348648ba5deedbf0f6562, type: 3}

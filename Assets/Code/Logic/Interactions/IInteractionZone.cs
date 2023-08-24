@@ -1,5 +1,4 @@
 using System;
-using Logic.Player;
 
 namespace Logic.Interactions
 {
@@ -10,6 +9,5 @@ namespace Logic.Interactions
         event Action Rejected;
         event Action Interacted;
         float InteractionDelay { get; }
-        bool IsLooped { get; }
     }
 }

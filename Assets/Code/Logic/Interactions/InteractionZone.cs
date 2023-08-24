@@ -47,7 +47,6 @@ namespace Logic.Interactions
         public event Action Rejected = () => { };
 
         public float InteractionDelay => _interactionDelay;
-        public bool IsLooped => _isLooped;
 
         protected override void OnAwake()
         {
@@ -96,10 +95,17 @@ namespace Logic.Interactions
 
         private void TryValidateEnter(T hero)
         {
-            if (_isValidate)
-                Validate(hero);
-            else
+            if (Validate(hero))
+            {
                 PassEnter(hero);
+            }
+            else
+            {
+                if (_validationMode == ValidationMode.PassThrough)
+                    InvokeEntered(hero);
+                else
+                    Rejected.Invoke();
+            }
         }
 
         protected override void OnTargetExited(T _)
@@ -111,30 +117,36 @@ namespace Logic.Interactions
 
         private void OnDelayPassed()
         {
-            Interacted.Invoke(_cashed);
-
             if (_isLooped)
-                TryValidateEnter(_cashed);
+            {
+                Interacted.Invoke(_cashed);
+                
+                if (Validate(_cashed))
+                {
+                    InvokeDelayedInteraction();
+                }
+                else
+                {
+                    Rejected.Invoke();
+                }
+            }
+            else
+            {
+                Interacted.Invoke(_cashed);
+            }
         }
 
-        private void Validate(T hero)
+        private bool Validate(T hero)
         {
+            if (_isValidate == false)
+                return true;
+
             bool isAllValid = true;
 
             for (var index = 0; index < _interactionValidators.Length; index++)
                 isAllValid &= _interactionValidators[index].Value.IsValid(hero.Inventory);
 
-            if (isAllValid)
-            {
-                PassEnter(hero);
-            }
-            else
-            {
-                if (_validationMode == ValidationMode.PassThrough)
-                    InvokeEntered(hero);
-                else
-                    Rejected.Invoke();
-            }
+            return isAllValid;
         }
 
         private void PassEnter(T hero)

@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics;
 using AYellowpaper;
-using Logic.Player;
 using NTC.Global.Cache;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Logic.Interactions
 {
@@ -14,8 +14,8 @@ namespace Logic.Interactions
         [SerializeField] private Transform _sine;
 
         [Space] [Header("Settings")]
+        [SerializeField] private bool _isSupportLoopedInteraction;
         [SerializeField] private AxleInfluence _axleInfluence;
-        
         [SerializeField] private float _defaultSize;
         [SerializeField] private float _maxSize;
         [SerializeField] private float _decreaseTime = 0.25f;
@@ -31,8 +31,9 @@ namespace Logic.Interactions
         {
             _playerInteraction.Value.Entered += OnEnter;
             _playerInteraction.Value.Canceled += OnCancel;
+            _playerInteraction.Value.Rejected += OnRejected;
             
-            if (_playerInteraction.Value.IsLooped)
+            if (_isSupportLoopedInteraction)
                 _playerInteraction.Value.Interacted += OnInteracted;
 
             _initialSize = _sine.localScale;
@@ -44,8 +45,9 @@ namespace Logic.Interactions
         {
             _playerInteraction.Value.Entered -= OnEnter;
             _playerInteraction.Value.Canceled -= OnCancel;
+            _playerInteraction.Value.Rejected -= OnRejected;
             
-            if (_playerInteraction.Value.IsLooped)
+            if (_isSupportLoopedInteraction)
                 _playerInteraction.Value.Interacted -= OnInteracted;
             
             SetDefault();
@@ -78,15 +80,27 @@ namespace Logic.Interactions
             BeginIncrease();
         }
 
+        private void OnRejected()
+        {
+            Reset();
+        }
+
         private void OnInteracted()
         {
-            Cancel();
+            SetDefault();
             BeginIncrease();
         }
 
         private void OnCancel()
         {
             Cancel();
+        }
+
+        private void Reset()
+        {
+            _targetSize = _defaultSize;
+            _deltaSize = _defaultSize;
+            enabled = false;
         }
 
         private void BeginIncrease()
