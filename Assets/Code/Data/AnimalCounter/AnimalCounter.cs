@@ -47,8 +47,8 @@ namespace Data
             
             Updated.Invoke(animalType, _countDatas[animalType]);
             
-            if (_countDatas[animalType].Total == 0)
-                _countDatas.Remove(animalType);
+            // if (_countDatas[animalType].Total == 0)
+            //     _countDatas.Remove(animalType);
         }
 
         public AnimalCountData GetAnimalCountData(AnimalType byType)

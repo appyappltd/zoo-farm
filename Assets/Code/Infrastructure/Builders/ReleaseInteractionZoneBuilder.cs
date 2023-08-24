@@ -21,6 +21,7 @@ namespace Infrastructure.Builders
         {
             ReleaseInteractionProvider provider = zoneObject.GetComponent<ReleaseInteractionProvider>();
             provider.ReleaseIcon.Construct(_animalsService, _staticDataService, animalType);
+            provider.Validator.Construct(_animalsService, animalType);
             return provider;
         }
     }

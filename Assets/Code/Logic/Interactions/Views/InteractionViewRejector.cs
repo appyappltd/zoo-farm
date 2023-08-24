@@ -7,7 +7,7 @@ namespace Logic.Interactions
 {
     public class InteractionViewRejector : MonoCache
     {
-        [SerializeField] private InterfaceReference<IInteractionZone<IHuman>, MonoBehaviour> _playerInteraction;
+        [SerializeField] private InterfaceReference<IInteractionZone, MonoBehaviour> _playerInteraction;
         [SerializeField] private SpriteRenderer _sineSprite;
         [SerializeField] private Transform _sineTransform;
         [SerializeField] private AnimationCurve _blinkCurve;

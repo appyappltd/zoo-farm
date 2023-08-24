@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AYellowpaper;
 using DelayRoutines;
 using Logic.Interactions.Validators;
@@ -10,8 +11,10 @@ using UnityEngine;
 namespace Logic.Interactions
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone<T> where T : IHuman
+    public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone where T : IHuman
     {
+        private readonly HashSet<Action> _interactionSubs = new HashSet<Action>();
+
         [SerializeField] private float _interactionDelay;
         [SerializeField] private bool _isLooped;
         [SerializeField] private bool _isValidate;
@@ -32,16 +35,26 @@ namespace Logic.Interactions
         private T _cashed;
 
         public event Action<T> Interacted = _ => { };
+
+        event Action IInteractionZone.Interacted
+        {
+            add => _interactionSubs.Add(value);
+            remove =>  _interactionSubs.Remove(value);
+        }
+
         public event Action Entered = () => { };
         public event Action Canceled = () => { };
         public event Action Rejected = () => { };
 
         public float InteractionDelay => _interactionDelay;
+        public bool IsLooped => _isLooped;
 
         protected override void OnAwake()
         {
             _timerOperator ??= GetComponent<TimerOperator>();
             _timerOperator.SetUp(_interactionDelay, OnDelayPassed);
+
+            Interacted += NotifyAllHashInteractionSubs;
         }
 
         private void OnDestroy() =>
@@ -55,6 +68,7 @@ namespace Logic.Interactions
 
             OnAwake();
         }
+
 #endif
 
         protected override void OnDisabled()
@@ -77,6 +91,11 @@ namespace Logic.Interactions
                 return;
             }
 
+            TryValidateEnter(hero);
+        }
+
+        private void TryValidateEnter(T hero)
+        {
             if (_isValidate)
                 Validate(hero);
             else
@@ -95,7 +114,7 @@ namespace Logic.Interactions
             Interacted.Invoke(_cashed);
 
             if (_isLooped)
-                PassEnter(_cashed);
+                TryValidateEnter(_cashed);
         }
 
         private void Validate(T hero)
@@ -133,8 +152,14 @@ namespace Logic.Interactions
 
         private void InvokeDelayedInteraction() =>
             _timerOperator.Restart();
-        
+
         private void StopDelayedInteraction() =>
             _timerOperator.Pause();
+
+        private void NotifyAllHashInteractionSubs(T _)
+        {
+            foreach (Action action in _interactionSubs)
+                action.Invoke();
+        }
     }
 }

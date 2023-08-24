@@ -10,7 +10,7 @@ namespace Logic.Interactions
     public class InteractionView : MonoCache
     {
         [Header("References")]
-        [SerializeField] private InterfaceReference<IInteractionZone<IHuman>, MonoBehaviour> _playerInteraction;
+        [SerializeField] private InterfaceReference<IInteractionZone, MonoBehaviour> _playerInteraction;
         [SerializeField] private Transform _sine;
 
         [Space] [Header("Settings")]
@@ -31,6 +31,9 @@ namespace Logic.Interactions
         {
             _playerInteraction.Value.Entered += OnEnter;
             _playerInteraction.Value.Canceled += OnCancel;
+            
+            if (_playerInteraction.Value.IsLooped)
+                _playerInteraction.Value.Interacted += OnInteracted;
 
             _initialSize = _sine.localScale;
             _deltaSize = _defaultSize;
@@ -42,9 +45,12 @@ namespace Logic.Interactions
             _playerInteraction.Value.Entered -= OnEnter;
             _playerInteraction.Value.Canceled -= OnCancel;
             
+            if (_playerInteraction.Value.IsLooped)
+                _playerInteraction.Value.Interacted -= OnInteracted;
+            
             SetDefault();
         }
-        
+
         [Conditional("UNITY_EDITOR")]
         private void OnValidate()
         {
@@ -58,9 +64,13 @@ namespace Logic.Interactions
             _deltaSize = _defaultSize;
         }
 
-        private void OnCancel()
+        protected override void Run()
         {
-            Cancel();
+            _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime);
+            _sine.localScale = ScaleFiltrate(_initialSize, _deltaSize);
+            
+            if (Mathf.Approximately(_deltaSize, _targetSize))
+                enabled = false;
         }
 
         private void OnEnter()
@@ -68,15 +78,15 @@ namespace Logic.Interactions
             BeginIncrease();
         }
 
-        protected override void Run()
+        private void OnInteracted()
         {
-            _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime);
-            _sine.localScale = ScaleFiltrate(_initialSize, _deltaSize);
-            
-            if (Mathf.Approximately(_deltaSize, _targetSize))
-            {
-                enabled = false;
-            }
+            Cancel();
+            BeginIncrease();
+        }
+
+        private void OnCancel()
+        {
+            Cancel();
         }
 
         private void BeginIncrease()

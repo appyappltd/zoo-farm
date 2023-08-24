@@ -1,4 +1,3 @@
-using Logic.Player;
 using NTC.Global.System;
 
 namespace Logic.Interactions
@@ -7,7 +6,6 @@ namespace Logic.Interactions
     {
         private readonly InteractionView _defaultView;
         private readonly InteractionView _viewWithBackground;
-        private readonly IInteractionZone<Human> _interactionZone;
 
         private InteractionView _currentView;
         
