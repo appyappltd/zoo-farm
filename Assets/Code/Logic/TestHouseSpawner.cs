@@ -21,7 +21,7 @@ namespace Logic
         [Button]
         private void SpawnHouse()
         {
-            AnimalHouse house = _gameFactory.CreateAnimalHouse(transform.position, transform.rotation, _type).GetComponent<AnimalHouse>();
+            _gameFactory.CreateAnimalHouse(transform.position, transform.rotation, _type);
         }
     }
 }

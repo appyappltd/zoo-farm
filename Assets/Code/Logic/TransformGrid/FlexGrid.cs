@@ -24,6 +24,10 @@ namespace Logic.TransformGrid
         [SerializeField] [Range(1, 100)] private int _horizontalClamp;
         [SerializeField] [Range(1, 100)] private int _verticalClamp;
 
+#if UNITY_EDITOR
+        [SerializeField] private GameObject _testPrefab;
+#endif
+        
         private float _elapsedTime;
         
         private int MaxSize => _horizontalClamp * _verticalClamp;
@@ -47,7 +51,8 @@ namespace Logic.TransformGrid
             UpdatePositions();
             transform.position = _positions.Last();
             MoveCells();
-            Translate(transform.GetComponent<CustomScaleTranslatable>(), Vector3.zero, Vector3.one);
+            CustomScaleTranslatable customScaleTranslatable = transform.GetComponent<CustomScaleTranslatable>();
+            Translate(customScaleTranslatable, Vector3.zero, customScaleTranslatable.transform.localScale);
         }
 
         public void RemoveCell(Transform transform)
@@ -61,13 +66,13 @@ namespace Logic.TransformGrid
             UpdatePositions();
             MoveCells();
             CustomScaleTranslatable translatable = transform.GetComponent<CustomScaleTranslatable>();
-            Translate(translatable, Vector3.one, Vector3.zero, transform.gameObject.Disable);
+            Translate(translatable, translatable.transform.localScale, Vector3.zero, transform.gameObject.Disable);
         }
 
         [Button] [Conditional("UNITY_EDITOR")]
         private void ManualAdd()
         {
-            AddCell(new GameObject("TestGrid").transform);
+            AddCell(Instantiate(_testPrefab).transform);
         }
         
         [Button] [Conditional("UNITY_EDITOR")]

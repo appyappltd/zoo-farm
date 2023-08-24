@@ -1,7 +1,8 @@
 using Logic.Medical;
 using Services.MedicalBeds;
+using UnityEngine;
 
-namespace Infrastructure.Builders
+namespace Code.Infrastructure.Builders
 {
     public class MedBedBuilder
     {
@@ -12,9 +13,11 @@ namespace Infrastructure.Builders
             _reporter = medicalBedsReporter;
         }
 
-        public void Build(MedicalBed medicalBed)
+        public MedicalBed Build(GameObject medicalBedObject)
         {
+            MedicalBed medicalBed = medicalBedObject.GetComponent<MedicalBed>();
             _reporter.Register(medicalBed);
+            return medicalBed;
         }
     }
 }

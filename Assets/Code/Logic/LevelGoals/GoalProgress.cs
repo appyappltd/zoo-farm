@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Logic.LevelGoals
 {
-    public class GoalProgress
+    public class GoalProgress : IGoalProgressView
     {
         private readonly Dictionary<AnimalType, ProgressBar> _releaseProgressBars;
         
-        private int _noTFullBarCount;
+        private int _notFullBarCount;
 
         public event Action Compleated = () => { };
         
@@ -18,11 +18,11 @@ namespace Logic.LevelGoals
 
         public GoalProgress(GoalPreset goalPreset)
         {
-            int capacity = goalPreset.AmountAnimalToRelease.Count;
+            int capacity = goalPreset.AnimalsToRelease.Count;
             _releaseProgressBars = new Dictionary<AnimalType, ProgressBar>(capacity);
             Observables = new List<Observables.IObservable<float>>(capacity);
             
-            foreach (var (animalType, goalAmount) in goalPreset.AmountAnimalToRelease)
+            foreach (var (animalType, goalAmount) in goalPreset.AnimalsToRelease)
                 RegisterProgressBar(animalType, goalAmount);
         }
 
@@ -59,9 +59,9 @@ namespace Logic.LevelGoals
 
         private void CheckForGoal()
         {
-            _noTFullBarCount--;
+            _notFullBarCount--;
             
-            if (_noTFullBarCount <= 0)
+            if (_notFullBarCount <= 0)
                 Compleated.Invoke();
         }
     }

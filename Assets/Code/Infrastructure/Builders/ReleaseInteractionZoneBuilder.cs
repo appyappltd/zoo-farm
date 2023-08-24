@@ -4,7 +4,7 @@ using Services.Animals;
 using Services.StaticData;
 using UnityEngine;
 
-namespace Infrastructure.Builders
+namespace Code.Infrastructure.Builders
 {
     public class ReleaseInteractionZoneBuilder
     {
@@ -17,9 +17,9 @@ namespace Infrastructure.Builders
             _staticDataService = staticDataService;
         }
 
-        public ReleaseInteractionProvider Build(GameObject zoneObject, AnimalType animalType)
+        public ReleaseInteractionProvider Build(GameObject providerObject, AnimalType animalType)
         {
-            ReleaseInteractionProvider provider = zoneObject.GetComponent<ReleaseInteractionProvider>();
+            var provider = providerObject.GetComponent<ReleaseInteractionProvider>();
             provider.ReleaseIcon.Construct(_animalsService, _staticDataService, animalType);
             provider.Validator.Construct(_animalsService, animalType);
             return provider;

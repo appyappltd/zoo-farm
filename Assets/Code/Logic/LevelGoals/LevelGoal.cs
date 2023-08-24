@@ -23,6 +23,8 @@ namespace Logic.LevelGoals
             _animalsService.Released += OnReleased;
         }
 
+        public IGoalProgressView Progress => _goalProgress;
+
         public void Dispose()
         {
             _releaseInteractionsGrid.Dispose();

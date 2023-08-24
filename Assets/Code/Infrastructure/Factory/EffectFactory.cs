@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Infrastructure.AssetManagement;
 using Logic.Effects;
-using NTC.Global.System;
 using Services.Effects;
 using Services.Pools;
 using Services.StaticData;

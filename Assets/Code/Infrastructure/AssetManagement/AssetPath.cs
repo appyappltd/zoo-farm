@@ -23,7 +23,9 @@ namespace Infrastructure.AssetManagement
         public const string HudPath = "Prefabs/UI/HUD";
         public const string BuildHousePanel = "Prefabs/UI/Panels/BuildHouse";
         public const string ReleaseAnimalPanel = "Prefabs/UI/Panels/ReleaseAnimal";
+        public const string AnimalGoalPanelPath = "Prefabs/UI/Panels/AnimalGoalPanel";
 
         public const string EffectsPath = "Effects";
+
     }
 }

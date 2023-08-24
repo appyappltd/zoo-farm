@@ -4,6 +4,7 @@ using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.TransformGrid;
 using Services.Animals;
+using Ui;
 using UnityEngine;
 
 namespace Logic.LevelGoals
@@ -11,6 +12,7 @@ namespace Logic.LevelGoals
     public class LevelGoalView : MonoBehaviour
     {
         [SerializeField] private InterfaceReference<ITransformGrid, MonoBehaviour> _transformGrid;
+        [SerializeField] private LevelGoalPanelView _goalPanelView;
         [SerializeField] private GoalPreset _temporalGoalPreset;
 
         private LevelGoal _goal;
@@ -30,8 +32,9 @@ namespace Logic.LevelGoals
 
         public void Construct(IGameFactory gameFactory, IAnimalsService animalsService)
         {
-            _releaseInteractions = new ReleaseInteractionsGrid(gameFactory, _transformGrid.Value, _temporalGoalPreset.AmountAnimalToRelease.Keys);
+            _releaseInteractions = new ReleaseInteractionsGrid(gameFactory, _transformGrid.Value, _temporalGoalPreset.AnimalsToRelease.Keys);
             _goal = new LevelGoal(animalsService, _releaseInteractions, _temporalGoalPreset);
+            _goalPanelView.Construct(gameFactory, _temporalGoalPreset, _goal.Progress);
         }
     }
 }

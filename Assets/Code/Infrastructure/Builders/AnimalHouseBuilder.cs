@@ -1,7 +1,8 @@
 using Logic.Animals;
 using Services.AnimalHouses;
+using UnityEngine;
 
-namespace Infrastructure.Builders
+namespace Code.Infrastructure.Builders
 {
     public class AnimalHouseBuilder
     {
@@ -10,7 +11,11 @@ namespace Infrastructure.Builders
         public AnimalHouseBuilder(IAnimalHouseService houseService) =>
             _houseService = houseService;
 
-        public void Build(IAnimalHouse house) =>
+        public IAnimalHouse Build(GameObject houseObject)
+        {
+            IAnimalHouse house = houseObject.GetComponent<IAnimalHouse>();
             _houseService.RegisterHouse(house);
+            return house;
+        }
     }
 }

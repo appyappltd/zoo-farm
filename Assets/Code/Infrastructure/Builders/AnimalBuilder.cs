@@ -1,10 +1,11 @@
+using Data.ItemsData;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
-using Data.ItemsData;
 using Services.Animals;
 using Services.StaticData;
+using UnityEngine;
 
-namespace Infrastructure.Builders
+namespace Code.Infrastructure.Builders
 {
     public class AnimalBuilder
     {
@@ -17,12 +18,14 @@ namespace Infrastructure.Builders
             _animalsService = animalsService;
         }
 
-        public void Build(Animal animal, AnimalItemStaticData staticData)
+        public Animal Build(GameObject animalObject, AnimalItemStaticData staticData)
         {
             //TODO: заменить реализацию хеш кода на уникальный id и добавить статик дату для животного
+            Animal animal = animalObject.GetComponent<Animal>();
             AnimalId animalId = new AnimalId(staticData.AnimalType, animal.GetHashCode(), staticData.EdibleFood);
             animal.Construct(animalId, staticData.BeginStats, _staticDataService);
             _animalsService.Register(animal);
+            return animal;
         }
     }
 }

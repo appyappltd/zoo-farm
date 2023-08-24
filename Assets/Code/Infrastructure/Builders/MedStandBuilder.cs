@@ -1,7 +1,8 @@
 using Logic.Medical;
 using Services.StaticData;
+using UnityEngine;
 
-namespace Infrastructure.Builders
+namespace Code.Infrastructure.Builders
 {
     public class MedStandBuilder
     {
@@ -12,7 +13,11 @@ namespace Infrastructure.Builders
             _staticDataService = staticDataService;
         }
 
-        public void Build(MedicalToolStand medicalStand, MedicalToolId toolId) =>
+        public MedicalToolStand Build(GameObject medicalStandObject, MedicalToolId toolId)
+        {
+            var medicalStand = medicalStandObject.GetComponent<MedicalToolStand>();
             medicalStand.Construct(_staticDataService.MedStandConfigById(toolId));
+            return medicalStand;
+        }
     }
 }
