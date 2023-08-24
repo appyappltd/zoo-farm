@@ -3,11 +3,6 @@ using UnityEngine;
 
 namespace Logic.Player
 {
-    public interface IHuman
-    {
-        IInventory Inventory { get; }
-    }
-
     public abstract class Human : MonoBehaviour, IHuman
     {
         [SerializeField] protected InventoryHolder InventoryHolder;
