@@ -3,7 +3,6 @@ using Logic.Animals.AnimalsBehaviour;
 using Logic.Gates;
 using Logic.Interactions;
 using Logic.LevelGoals;
-using Logic.Player;
 using Logic.Spawners;
 using Logic.Translators;
 using Services;

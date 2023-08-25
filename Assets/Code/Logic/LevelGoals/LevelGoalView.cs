@@ -3,6 +3,7 @@ using AYellowpaper;
 using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Interactions;
+using Logic.Spawners;
 using Logic.TransformGrid;
 using Services.Animals;
 using Ui.LevelGoalPanel;
@@ -12,6 +13,7 @@ namespace Logic.LevelGoals
 {
     public class LevelGoalView : MonoBehaviour
     {
+        [SerializeField] private CollectibleCoinSpawner _coinSpawner;
         [SerializeField] private AnimalInteraction _animalInteraction;
         [SerializeField] private InterfaceReference<ITransformGrid, MonoBehaviour> _transformGrid;
         [SerializeField] private LevelGoalPanelView _goalPanelView;
@@ -37,7 +39,7 @@ namespace Logic.LevelGoals
         public void Construct(IGameFactory gameFactory, IAnimalsService animalsService)
         {
             _releaseInteractions = new ReleaseInteractionsGrid(gameFactory, _transformGrid.Value, _temporalGoalPreset.AnimalsToRelease.Keys);
-            _goal = new LevelGoal(animalsService, _animalInteraction, _releaseInteractions, _temporalGoalPreset, _isDeactivateOnRelease);
+            _goal = new LevelGoal(animalsService, _animalInteraction, _releaseInteractions, _temporalGoalPreset, _coinSpawner, _isDeactivateOnRelease);
             _goalPanelView.Construct(gameFactory, _temporalGoalPreset, _goal.Progress);
         }
     }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Logic.Animals;
 using Progress;
-using UnityEngine;
 
 namespace Logic.LevelGoals
 {
