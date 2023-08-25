@@ -10,17 +10,21 @@ namespace Logic.LevelGoals
         private readonly GoalProgress _goalProgress;
         private readonly IAnimalsService _animalsService;
         private readonly ReleaseInteractionsGrid _releaseInteractionsGrid;
+        private readonly bool _isDeactivateOnRelease;
 
-        public LevelGoal(IAnimalsService animalsService, ReleaseInteractionsGrid releaseInteractionsGrid, GoalPreset goalPreset)
+        public LevelGoal(IAnimalsService animalsService, ReleaseInteractionsGrid releaseInteractionsGrid, GoalPreset goalPreset, bool isDeactivateOnRelease)
         {
             _animalsService = animalsService;
             _releaseInteractionsGrid = releaseInteractionsGrid;
+            _isDeactivateOnRelease = isDeactivateOnRelease;
             _goalProgress = new GoalProgress(goalPreset);
             
             _releaseInteractionsGrid.ReleaseInteracted += OnReleaseInteracted;
             
             _animalsService.Registered += OnRegistered;
-            _animalsService.Released += OnReleased;
+            
+            if (_isDeactivateOnRelease)
+                _animalsService.Released += OnReleased;
         }
 
         public IGoalProgressView Progress => _goalProgress;
@@ -30,7 +34,9 @@ namespace Logic.LevelGoals
             _releaseInteractionsGrid.Dispose();
             
             _animalsService.Registered -= OnRegistered;
-            _animalsService.Released -= OnReleased;
+            
+            if (_isDeactivateOnRelease)
+                _animalsService.Released -= OnReleased;
         }
 
         private void OnReleaseInteracted(AnimalType type) =>

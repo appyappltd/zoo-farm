@@ -14,6 +14,10 @@ namespace Logic.TransformGrid
     [RequireComponent(typeof(RunTranslator))]
     public class FlexGrid : MonoBehaviour, ITransformGrid
     {
+#if UNITY_EDITOR
+        private const float DebugRadius = 0.5f;
+#endif
+        
         private readonly List<Transform> _cells = new List<Transform>();
         private readonly List<Vector3> _positions = new List<Vector3>();
 
@@ -36,37 +40,45 @@ namespace Logic.TransformGrid
         private void OnDrawGizmos()
         {
             foreach (var position in _positions)
-                Gizmos.DrawWireCube(position, Vector3.one * 0.5f);
+                Gizmos.DrawWireSphere(ToGlobalPosition(position), DebugRadius);
         }
 
-        public void AddCell(Transform transform)
+        private Vector3 ToGlobalPosition(Vector3 position)
+        {
+            Transform selfTransform = transform;
+            return selfTransform.TransformVector(position) + selfTransform.position;
+        }
+
+        public void AddCell(Transform cellTransform)
         {
             if (_cells.Count >= MaxSize)
                 throw new ArgumentOutOfRangeException(nameof(_cells.Count));
 
-            transform.gameObject.Enable();
-            _cells.Add(transform);
-            _positions.Add(transform.position);
+            cellTransform.gameObject.Enable();
+            cellTransform.SetParent(transform, true);
+            _cells.Add(cellTransform);
+            _positions.Add(cellTransform.localPosition);
             
             UpdatePositions();
-            transform.position = _positions.Last();
+            cellTransform.localPosition = _positions.Last();
             MoveCells();
-            CustomScaleTranslatable customScaleTranslatable = transform.GetComponent<CustomScaleTranslatable>();
-            Translate(customScaleTranslatable, Vector3.zero, customScaleTranslatable.transform.localScale);
+            CustomScaleTranslatable customScaleTranslatable = cellTransform.GetComponent<CustomScaleTranslatable>();
+            Translate(customScaleTranslatable, Vector3.zero, Vector3.one);
         }
 
-        public void RemoveCell(Transform transform)
+        public void RemoveCell(Transform cellTransform)
         {
             if (_cells.Count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(_cells.Count));
 
-            _cells.Remove(transform);
+            cellTransform.Unparent();
+            _cells.Remove(cellTransform);
             _positions.Remove(_positions.Last());
             
             UpdatePositions();
             MoveCells();
-            CustomScaleTranslatable translatable = transform.GetComponent<CustomScaleTranslatable>();
-            Translate(translatable, translatable.transform.localScale, Vector3.zero, transform.gameObject.Disable);
+            CustomScaleTranslatable translatable = cellTransform.GetComponent<CustomScaleTranslatable>();
+            Translate(translatable, Vector3.one, Vector3.zero, cellTransform.gameObject.Disable);
         }
 
         [Button] [Conditional("UNITY_EDITOR")]
@@ -88,18 +100,16 @@ namespace Logic.TransformGrid
                 Transform cell = _cells[index];
 
                 Vector3 nextPosition = _positions[index];
-                if (cell.position.Equals(nextPosition))
+                if (cell.localPosition.Equals(nextPosition))
                     continue;
                 
-                Translate(cell.GetComponent<CustomPositionTranslatable>(), cell.position, nextPosition);
+                Translate(cell.GetComponent<CustomPositionTranslatable>(),  cell.localPosition, nextPosition);
             }
         }
 
         private void UpdatePositions()
         {
-            Vector3 transformPosition = transform.position;
-            float originY = transformPosition.y;
-            Vector2 origin = transformPosition.RemoveY();
+            Vector2 origin = Vector2.zero;
 
             int cellCount = _cells.Count;
             int maxHorizontal = Mathf.Min(_horizontalClamp, cellCount);
@@ -145,7 +155,7 @@ namespace Logic.TransformGrid
                             break;
                     }
 
-                    _positions[positionIndex] = position.AddY(originY);
+                    _positions[positionIndex] = position;
                 }
             }
         }

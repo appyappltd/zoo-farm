@@ -59,8 +59,10 @@ namespace Logic.Animals
             _levelGoal.ReleaseInteraction += OnReleaseInteracted;
         }
 
-        private void OnReleaseInteracted(AnimalType releaseType) =>
+        private void OnReleaseInteracted(AnimalType releaseType)
+        {
             _animalService.Release(releaseType);
+        }
 
         private void OnGatePassed(IAnimal animal)
         {

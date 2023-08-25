@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 388094577560679050}
+  - component: {fileID: 5946297427922820463}
   - component: {fileID: 6538779608213749955}
   - component: {fileID: 3571444311399203470}
   m_Layer: 0
@@ -112,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6527984277502923575}
@@ -120,6 +121,20 @@ Transform:
   - {fileID: 5891267115111871133}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5946297427922820463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003838543168749596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2e6fb48c6740bab2408ffbecc91154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animalIcon: {fileID: 4483700163064197782}
+  _countText: {fileID: 4089331784216049511}
 --- !u!114 &6538779608213749955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +372,7 @@ GameObject:
   - component: {fileID: 5891267115111871133}
   - component: {fileID: 8086046236222693679}
   - component: {fileID: 9135800709905910007}
+  - component: {fileID: 4089331784216049511}
   m_Layer: 0
   m_Name: CountText
   m_TagString: Untagged
@@ -472,13 +488,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46
-  m_fontSizeBase: 46
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -496,7 +512,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
-  m_isRichText: 1
+  m_isRichText: 0
   m_parseCtrlCharacters: 1
   m_isOrthographic: 0
   m_isCullingEnabled: 0
@@ -517,6 +533,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8086046236222693679}
   m_maskType: 0
+--- !u!114 &4089331784216049511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296051601229463149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e304f8745515034448856c17649da82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isUi: 0
+  _textSprite: {fileID: 9135800709905910007}
+  _textUi: {fileID: 0}
 --- !u!1 &5546085558182398551
 GameObject:
   m_ObjectHideFlags: 0
