@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _background: {fileID: 7945377906192853621}
-  _elementSize: {x: 15, y: 9}
+  _elementSize: {x: 13.5, y: 9}
   _margin: {x: 2, y: 1, z: 2, w: 1}
 --- !u!1 &856387103770076035
 GameObject:
@@ -160,7 +160,7 @@ MonoBehaviour:
   _translator:
     _underlyingValue: {fileID: 8812686196362799958}
   _align: 21
-  _space: 15
+  _space: 13.5
   _horizontalClamp: 10
   _verticalClamp: 1
   _testPrefab: {fileID: 0}
@@ -446,6 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a9804134d149d39832b8e0bba3e142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animalInteraction: {fileID: 6212852764711831163}
   _transformGrid:
     _underlyingValue: {fileID: 6858167144037880955}
   _goalPanelView: {fileID: 2042277197601508744}
@@ -715,8 +716,8 @@ Transform:
   m_GameObject: {fileID: 5939056119006771641}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 5.8, z: 1.9}
-  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
+  m_LocalPosition: {x: -0.3, y: 4.74, z: 1.9}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7655389901919684829}

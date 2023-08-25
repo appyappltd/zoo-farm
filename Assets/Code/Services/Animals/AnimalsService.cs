@@ -49,8 +49,7 @@ namespace Services.Animals
 
         public void Release(AnimalType animalType)
         {
-            IAnimal unregisterAnimal = _animals
-                .Where(animal => animal.AnimalId.Type == animalType)
+            IAnimal unregisterAnimal = GetReleaseReady()
                 .OrderByDescending(animal => animal.HappinessFactor.Factor).First();
             
             ReleaseAnimal(unregisterAnimal);
@@ -63,8 +62,26 @@ namespace Services.Animals
             _animals.GroupBy(animal => animal.AnimalId.Type).Where(grouping => grouping.Count() > 1)
                 .Select(grouping => grouping.Key);
 
-        public IEnumerable<IAnimal> GetReleaseReady() =>
-            _animals.Where(IsReleaseReady).Distinct(new AnimalByTypeComparer());
+        public IAnimal GetReleaseReadySingle(AnimalType withType)
+        {
+            IEnumerable<IAnimal> releaseReady = GetReleaseReady();
+            IAnimal releaseReadyAnimal = releaseReady.FirstOrDefault(animal => animal.AnimalId.Type == withType);
+            
+            if (releaseReadyAnimal is null)
+                throw new ArgumentNullException(nameof(releaseReadyAnimal));
+
+            return releaseReadyAnimal;
+        }
+
+        public IEnumerable<IAnimal> GetReleaseReady()
+        {
+            IEnumerable<IAnimal> releaseReady = _animals.Where(IsReleaseReady).ToArray();
+
+            if (releaseReady.Any())
+                return releaseReady.Distinct(new AnimalByTypeComparer());
+
+            throw new ArgumentNullException(nameof(releaseReady));
+        }
 
         public BreedingPair SelectPairForBreeding(AnimalType byType)
         {
@@ -86,7 +103,7 @@ namespace Services.Animals
             return new AnimalCountData(total, releaseReady);
         }
 
-        private static bool IsReleaseReady(IAnimal animal) =>
+        private bool IsReleaseReady(IAnimal animal) =>
             animal.Stats.Satiety.IsFull;
 
         private void ReleaseAnimal(IAnimal releasedAnimal)

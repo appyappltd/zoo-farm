@@ -44,7 +44,6 @@ namespace Logic.Animals
 
         private void OnDestroy()
         {
-            _animalService.Released -= OnReleased;
             _animalInteraction.Interacted -= OnGatePassed;
             _levelGoal.ReleaseInteraction -= OnReleaseInteracted;
         }
@@ -54,14 +53,18 @@ namespace Logic.Animals
             _animalService = animalsService;
             _levelGoal.Construct(gameFactory, animalsService);
             
-            _animalService.Released += OnReleased;
             _animalInteraction.Interacted += OnGatePassed;
             _levelGoal.ReleaseInteraction += OnReleaseInteracted;
         }
 
         private void OnReleaseInteracted(AnimalType releaseType)
         {
-            _animalService.Release(releaseType);
+            IAnimal animal = _animalService.GetReleaseReadySingle(releaseType);
+            _animalService.Release(animal);
+            _releasingAnimalCount++;
+            animal.ForceMove(_releaseOutPlace);
+            _animalReleasedTrigger.Trigger(gameObject);
+            _gate.Open();
         }
 
         private void OnGatePassed(IAnimal animal)
@@ -77,14 +80,6 @@ namespace Logic.Animals
         {
             Debug.Log($"release coins: {_releaseCoinsConfig.Coins(animal.AnimalId.Type) * animal.HappinessFactor.Factor}");
             return _releaseCoinsConfig.Coins(animal.AnimalId.Type) * animal.HappinessFactor.Factor;
-        }
-
-        private void OnReleased(IAnimal animal)
-        {
-            _releasingAnimalCount++;
-            animal.ForceMove(_releaseOutPlace);
-            _animalReleasedTrigger.Trigger(gameObject);
-            _gate.Open();
         }
     }
 }
