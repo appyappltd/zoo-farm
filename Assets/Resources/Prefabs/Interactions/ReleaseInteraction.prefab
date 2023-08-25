@@ -572,6 +572,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7666287658176788401, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b494c007733de4548b93913e91de9743, type: 3}
     - target: {fileID: 7676232083861611919, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       propertyPath: m_Color.a
       value: 0.78431374
