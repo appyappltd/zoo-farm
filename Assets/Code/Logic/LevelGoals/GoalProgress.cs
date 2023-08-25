@@ -29,13 +29,6 @@ namespace Logic.LevelGoals
                 bar.Increment();
             else
                 throw new NullReferenceException(nameof(withType));
-
-#if DEBUG
-            foreach (KeyValuePair<AnimalType, ProgressBar> progressBar in _releaseProgressBars)
-            {
-                Debug.Log($"Progress {progressBar.Key}, {progressBar.Value}");
-            }
-#endif
         }
 
         public Observables.IObservable<float> GetProgressAmount(AnimalType byType)

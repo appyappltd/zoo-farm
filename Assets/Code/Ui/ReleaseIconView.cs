@@ -1,5 +1,6 @@
 using Data;
 using Logic.Animals;
+using Logic.Interactions;
 using Services.Animals;
 using Services.StaticData;
 using Ui.Elements;

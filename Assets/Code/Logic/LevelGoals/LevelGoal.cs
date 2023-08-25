@@ -1,6 +1,7 @@
 using System;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using Logic.Interactions;
 using Services.Animals;
 
 namespace Logic.LevelGoals
@@ -11,20 +12,19 @@ namespace Logic.LevelGoals
         private readonly IAnimalsService _animalsService;
         private readonly ReleaseInteractionsGrid _releaseInteractionsGrid;
         private readonly bool _isDeactivateOnRelease;
+        private AnimalInteraction _animalInteraction;
 
-        public LevelGoal(IAnimalsService animalsService, ReleaseInteractionsGrid releaseInteractionsGrid, GoalPreset goalPreset, bool isDeactivateOnRelease)
+        public LevelGoal(IAnimalsService animalsService, AnimalInteraction animalInteraction,
+            ReleaseInteractionsGrid releaseInteractionsGrid, GoalPreset goalPreset, bool isDeactivateOnRelease)
         {
+            _animalInteraction = animalInteraction;
             _animalsService = animalsService;
             _releaseInteractionsGrid = releaseInteractionsGrid;
             _isDeactivateOnRelease = isDeactivateOnRelease;
             _goalProgress = new GoalProgress(goalPreset);
-            
-            _releaseInteractionsGrid.ReleaseInteracted += OnReleaseInteracted;
-            
+
             _animalsService.Registered += OnRegistered;
-            
-            if (_isDeactivateOnRelease)
-                _animalsService.Released += OnReleased;
+            animalInteraction.Interacted += OnAnimalPassGates;
         }
 
         public IGoalProgressView Progress => _goalProgress;
@@ -34,20 +34,21 @@ namespace Logic.LevelGoals
             _releaseInteractionsGrid.Dispose();
             
             _animalsService.Registered -= OnRegistered;
-            
-            if (_isDeactivateOnRelease)
-                _animalsService.Released -= OnReleased;
+            _animalInteraction.Interacted -= OnAnimalPassGates;
         }
 
-        private void OnReleaseInteracted(AnimalType type) =>
-            _goalProgress.AddToReleased(type);
-        
-        private void OnReleased(IAnimal animal)
-        {
-            AnimalType registeredType = animal.AnimalId.Type;
 
-            if (IsMissing(registeredType))
-                _releaseInteractionsGrid.DeactivateZone(registeredType);
+        private void OnAnimalPassGates(IAnimal animal)
+        {
+            AnimalType releasedType = animal.AnimalId.Type;
+
+            _goalProgress.AddToReleased(releasedType);
+            
+            if (_isDeactivateOnRelease == false)
+                return;
+
+            if (IsMissing(releasedType))
+                _releaseInteractionsGrid.DeactivateZone(releasedType);
         }
 
         private void OnRegistered(IAnimal animal)

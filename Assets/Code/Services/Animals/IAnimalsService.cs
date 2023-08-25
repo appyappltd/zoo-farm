@@ -22,5 +22,6 @@ namespace Services.Animals
         AnimalCountData GetAnimalsCount(AnimalType animalType);
         BreedingPair SelectPairForBreeding(AnimalType byType);
         IEnumerable<IAnimal> GetReleaseReady();
+        IAnimal GetReleaseReadySingle(AnimalType withType);
     }
 }
