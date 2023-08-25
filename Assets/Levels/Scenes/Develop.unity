@@ -5338,17 +5338,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893ccd000bf33e1439e3040c8dce6f60, type: 3}
---- !u!114 &1832474140 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6212852764711831163, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-  m_PrefabInstance: {fileID: 7798346275492091957}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ee9951f1824d01bd06a692b06a221d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1838827677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7563,22 +7552,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnimalReleaser
       objectReference: {fileID: 0}
-    - target: {fileID: 3345873510631259422, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3345873510631259422, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3345873510631259422, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3345873510631259422, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.74
-      objectReference: {fileID: 0}
     - target: {fileID: 4183773827939015689, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.58
@@ -7623,22 +7596,6 @@ PrefabInstance:
       propertyPath: _gate
       value: 
       objectReference: {fileID: 1605814448}
-    - target: {fileID: 5009710876707267008, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: _space
-      value: 13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5009710876707267008, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: _testPrefab
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6858902481104651391, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: _animalInteraction
-      value: 
-      objectReference: {fileID: 1832474140}
-    - target: {fileID: 8765364940562916593, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: _elementSize.x
-      value: 13.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
