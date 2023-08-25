@@ -1136,17 +1136,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66e8667a4914b5d49b39213abb3b740d, type: 3}
---- !u!114 &434539985 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3150760461251203967, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-  m_PrefabInstance: {fileID: 7798346275492091957}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13482aa46fec441ebc47d9b44a502f4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &434633980 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 334140481942996847, guid: 417535caf23b2e94ab9b83f55a6f4037, type: 3}
@@ -7559,6 +7548,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 487669327098069044, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 487669327098069044, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 487669327098069044, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918478994576147379, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_text
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918478994576147379, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_margin.x
+      value: 13.168285
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500141472600202678, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500141472600202678, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500141472600202678, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3328784661039704705, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
       propertyPath: m_Name
       value: AnimalReleaser
@@ -7607,10 +7628,10 @@ PrefabInstance:
       propertyPath: _gate
       value: 
       objectReference: {fileID: 1605814448}
-    - target: {fileID: 6858902481104651391, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
-      propertyPath: _coinSpawner
-      value: 
-      objectReference: {fileID: 434539985}
+    - target: {fileID: 8770033874700322688, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

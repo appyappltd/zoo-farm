@@ -34,8 +34,6 @@ namespace Logic.Animals
 
         private void Awake()
         {
-            _animalService = AllServices.Container.Single<IAnimalsService>();
-
             Construct(
                 AllServices.Container.Single<IGameFactory>(),
                 AllServices.Container.Single<IAnimalsService>());
