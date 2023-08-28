@@ -34,6 +34,7 @@ namespace Infrastructure.Factory
         private readonly AnimalHouseBuilder _animalHouseBuilder;
         private readonly ReleaseInteractionZoneBuilder _releaseInteractionZoneBuilder;
         private readonly AnimalGoalPanelBuilder _animalGoalPanelBuilder;
+        private readonly IStaticDataService _staticDataService;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -46,6 +47,7 @@ namespace Infrastructure.Factory
             IAnimalsService animalsService, IPoolService poolService, IMedicalBedsReporter medicalBedsReporter,
             IAnimalHouseService houseService)
         {
+            _staticDataService = staticDataService;
             _assets = assets;
             _poolService = poolService;
             _randomService = randomService;
@@ -88,6 +90,13 @@ namespace Infrastructure.Factory
             return _animalBuilder.Build(animal, animalData);
         }
 
+        public Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation)
+        {
+            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{clone.AnimalId.Type}", at, rotation);
+            AnimalItemStaticData animalData = _staticDataService.AnimalItemDataById(clone.AnimalId.Type);
+            return _animalBuilder.Build(animal, animalData);
+        }
+        
         public GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type) =>
             _assets.Instantiate($"{AssetPath.ChildAnimalPath}/{type}", at, rotation);
 

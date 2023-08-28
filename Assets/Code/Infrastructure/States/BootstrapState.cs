@@ -56,7 +56,9 @@ namespace Infrastructure.States
             Register<IFoodService>(new FoodService());
             Register<IMedicalBedsReporter>(new MedicalBedsReporter());
             Register<IAnimalsService>(
-                new AnimalsService(Get<IAnimalHouseService>()));
+                new AnimalsService(Get<IAnimalHouseService>(),
+                    Get<IEffectService>(),
+                    Get<IGameFactory>()));
             Register<ICameraOperatorService>(new CameraOperatorService());
             Register<IGameFactory>(
                 new GameFactory(

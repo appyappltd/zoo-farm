@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
+using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using Logic.Animals.Breeding;
 using Services.AnimalHouses;
+using Services.Effects;
 using Tools.Comparers;
 using UnityEngine;
 
@@ -17,6 +20,8 @@ namespace Services.Animals
         private readonly IAnimalHouseService _houseService;
         private readonly List<IAnimal> _animals = new List<IAnimal>();
         private readonly AnimalCounter _animalCounter = new AnimalCounter();
+
+        private AnimalBreeder _breeder;
         
         public event Action<IAnimal> Released = _ => { };
         public event Action<IAnimal> Registered = _ => { };
@@ -26,9 +31,11 @@ namespace Services.Animals
         public IReadOnlyList<IAnimal> Animals => _animals;
         public IAnimalCounter AnimalCounter => _animalCounter;
 
-        public AnimalsService(IAnimalHouseService houseService)
+        public AnimalsService(IAnimalHouseService houseService, IEffectService effectService, IGameFactory gameFactory)
         {
             _houseService = houseService;
+
+            _breeder = new AnimalBreeder(effectService, gameFactory, houseService);
         }
 
         public void Register(IAnimal animal)
@@ -38,6 +45,7 @@ namespace Services.Animals
 
             _animals.Add(animal);
             _animalCounter.Register(animal);
+            _breeder.Register(animal);
             Registered.Invoke(animal);
 #if DEBUG
             Debug.Log($"Animal {animal.AnimalId.Type} (id: {animal.AnimalId.ID}) registered");
@@ -123,6 +131,7 @@ namespace Services.Animals
                 throw new Exception($"Animal {animal} wasn't registered");
 
             _animalCounter.Unregister(animal);
+            _breeder.Unregister(animal);
             _animals.Remove(animal);
         }
     }

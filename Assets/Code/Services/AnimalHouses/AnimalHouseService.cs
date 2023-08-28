@@ -122,6 +122,9 @@ namespace Services.AnimalHouses
             return false;
         }
 
+        public bool HasEmptyHouse(AnimalType forAnimal) =>
+            _animalHouses.Any(house => house.ForAnimal == forAnimal);
+
         public IEnumerable<AnimalType> GetAnimalTypesInHouseQueue(bool isHighPriority = false) =>
             GetQueueByPriority(isHighPriority).Select(queue => queue.Animal.AnimalId.Type).Distinct();
 

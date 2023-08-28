@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Animals.AnimalsStateMachine.States;
+using Logic.Animals.AnimalsBehaviour.Emotions;
 using Observables;
 using StateMachineBase.States;
 

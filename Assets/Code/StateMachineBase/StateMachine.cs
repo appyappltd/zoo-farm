@@ -49,25 +49,28 @@ namespace StateMachineBase
 
         protected void Init(State initialState, Dictionary<State, Dictionary<Transition, State>> states)
         {
-            foreach ((State state, Dictionary<Transition, State> dictionary) in states)
-            {
-                foreach ((Transition key, State value) in dictionary)
-                {
-                    key.Callback = () => ChangeState(value);
-                    state.AddTransition(key);
-
-                    if (key is IDisposable disposable)
-                        _disposable.Add(disposable);
-                    
-                    if (value is IDisposable disposable1)
-                        _disposable.Add(disposable1);
-                }
-            }
+            foreach ((State state, Dictionary<Transition, State> transitions) in states)
+                AddState(state, transitions);
 
             _initialState = initialState;
             _currentState = initialState;
         }
 
+        protected void AddState(State state, Dictionary<Transition, State> transitions)
+        {
+            foreach ((Transition key, State value) in transitions)
+            {
+                key.Callback = () => ChangeState(value);
+                state.AddTransition(key);
+
+                if (key is IDisposable disposable)
+                    _disposable.Add(disposable);
+                    
+                if (value is IDisposable disposable1)
+                    _disposable.Add(disposable1);
+            }
+        }
+        
         private void ChangeState(State newState)
         {
             _currentState?.Exit();

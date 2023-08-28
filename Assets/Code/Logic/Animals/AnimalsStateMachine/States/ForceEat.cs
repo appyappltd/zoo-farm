@@ -1,3 +1,4 @@
+using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Progress;

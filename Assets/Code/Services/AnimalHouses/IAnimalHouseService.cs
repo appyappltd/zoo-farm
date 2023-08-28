@@ -13,5 +13,6 @@ namespace Services.AnimalHouses
         bool TryGetNextFeedHouse(out IAnimalHouse feedHouse);
         bool TryGetNextAnimalIdInQueue(out AnimalId animalId);
         IEnumerable<AnimalType> GetAnimalTypesInHouseQueue(bool isHighPriority = false);
+        bool HasEmptyHouse(AnimalType forAnimal);
     }
 }

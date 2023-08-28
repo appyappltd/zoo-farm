@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using NTC.Global.Cache;
-using Tutorial;
 using UnityEngine;
-using Random = System.Random;
 
 namespace DelayRoutines
 {
-    public class RoutineSequence
+    public class RoutineSequence : IDisposable
     {
         private readonly GlobalUpdate _globalUpdate;
+
         private readonly List<IRoutine> _routines = new List<IRoutine>();
 
         private int _currentRoutineIndex = -1;
+
         private bool _isAutoKill;
 
         private IRoutine FirstRoutine => _routines[0];
+
         private IRoutine LastRoutine => _routines[_currentRoutineIndex];
+
         private IRoutine ActiveRoutine => _routines.Find(routine => routine.IsActive);
 
         public RoutineSequence()
@@ -24,6 +26,9 @@ namespace DelayRoutines
             Debug.Log("New swquance");
             _globalUpdate = GlobalUpdate.Instance;
         }
+
+        void IDisposable.Dispose() =>
+            Kill();
 
         /// <summary>
         /// Launch routine
@@ -47,7 +52,7 @@ namespace DelayRoutines
             _routines.Clear();
             _currentRoutineIndex = 0;
         }
-        
+
         /// <summary>
         /// Adds a command to stop the routine and unload resources at the end of the sequence (similar to Kill()).
         /// </summary>
@@ -175,7 +180,7 @@ namespace DelayRoutines
             AddToSequence(routine);
             return this;
         }
-        
+
         /// <summary>
         /// Includes a loop object in a sequence.
         /// </summary>

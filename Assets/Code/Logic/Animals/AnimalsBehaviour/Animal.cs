@@ -22,6 +22,7 @@ namespace Logic.Animals.AnimalsBehaviour
         private AnimalId _animalId;
         private IStaticDataService _staticDataService;
 
+        public Transform Transform => transform;
         public AnimalId AnimalId => _animalId;
         public IStatsProvider Stats => _statProvider;
         public HappinessFactor HappinessFactor => _happinessFactor;
