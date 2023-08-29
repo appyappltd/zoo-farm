@@ -15,6 +15,7 @@ using Services.Pools;
 using Services.Randomizer;
 using Services.SaveLoad;
 using Services.StaticData;
+using Tools;
 using Ui.Factory;
 using Ui.Services;
 
@@ -49,6 +50,7 @@ namespace Infrastructure.States
         {
             RegisterStaticDataService();
             Register<ICoroutineRunner>(_coroutineRunner);
+            Register<IGlobalSettings>(new GlobalDebugSettings());
             Register<IPlayerInputService>(new PlayerInputService());
             Register<IRandomService>(new RandomService());
             Register<IPoolService>(new PoolService());

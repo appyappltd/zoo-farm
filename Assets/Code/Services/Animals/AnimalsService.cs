@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
-using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services.AnimalHouses;
 using Services.Breeding;
-using Services.Effects;
+using Tools;
 using Tools.Comparers;
 using UnityEngine;
 
@@ -109,8 +108,10 @@ namespace Services.Animals
             return new AnimalCountData(total, releaseReady);
         }
 
-        private bool IsReleaseReady(IAnimal animal) =>
-            animal.Stats.Satiety.IsEmpty == false;
+        private bool IsReleaseReady(IAnimal animal)
+        {
+            return animal.Stats.Satiety.IsEmpty == false || AllServices.Container.Single<IGlobalSettings>().CanLetHungryAnimalsRelease;
+        }
 
         private void ReleaseAnimal(IAnimal releasedAnimal)
         {

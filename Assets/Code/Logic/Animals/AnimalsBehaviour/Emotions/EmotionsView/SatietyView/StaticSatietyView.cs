@@ -1,26 +1,14 @@
-﻿using NTC.Global.System;
-using Ui.Elements;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
 {
     public class StaticSatietyView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _sprite;
-        [SerializeField] private TextSetter _coefficientText;
 
-        public void Show(Sprite icon, int coefficient)
+        public void Show(Sprite icon)
         {
             _sprite.sprite = icon;
-
-            if (coefficient > 1)
-            {
-                _coefficientText.gameObject.Enable();
-                _coefficientText.SetText($"x{coefficient}");
-                return;
-            }
-
-            _coefficientText.gameObject.Disable();
         }
     }
 }

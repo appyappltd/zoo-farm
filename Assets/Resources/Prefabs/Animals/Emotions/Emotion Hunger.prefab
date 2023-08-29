@@ -537,7 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mask: {fileID: 1533259221740974851}
   _hiddenMaskScale: {x: 0.82, y: 0, z: 0.82}
-  _fullMaskScale: {x: 0.82, y: 0.515, z: 0.82}
+  _shownMaskScale: {x: 0.82, y: 0.515, z: 0.82}
   _testFill: 0
 --- !u!114 &8511927646474439834
 MonoBehaviour:
@@ -867,7 +867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _satietyBarIndicator: {fileID: 0}
-  _iconsConfig: {fileID: 0}
+  _happinessFactor: {fileID: 0}
+  _iconsConfig: {fileID: 11400000, guid: 880114d0ef0b39c44b0347ecf523a5de, type: 2}
   _staticSatietyView: {fileID: 5565946250094138404}
   _dynamicSatietyBarView: {fileID: 8511927646474439834}
 --- !u!4 &1629778915037754038 stripped

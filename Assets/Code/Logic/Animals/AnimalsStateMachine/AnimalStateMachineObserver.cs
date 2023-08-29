@@ -6,6 +6,7 @@ using Observables;
 
 namespace Logic.Animals.AnimalsStateMachine
 {
+    //TODO: удалить класс при следующей возможности пл ненадобности
     public class AnimalStateMachineObserver : IDisposable
     {
         private readonly IPersonalEmotionService _emotionService;

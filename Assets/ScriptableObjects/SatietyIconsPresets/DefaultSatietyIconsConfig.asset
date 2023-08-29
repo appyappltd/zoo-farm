@@ -15,5 +15,5 @@ MonoBehaviour:
   FullSatiety: {fileID: -2121254716, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
   SatietyBarBack: {fileID: -1494481210, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
   SatietyBarFill: {fileID: -602555683, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
-  EmptySatiety: {fileID: -666996151, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
+  EmptySatiety: {fileID: -602555683, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
   Mask: {fileID: -420834769, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}

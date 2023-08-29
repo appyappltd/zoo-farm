@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour.Emotions
 {

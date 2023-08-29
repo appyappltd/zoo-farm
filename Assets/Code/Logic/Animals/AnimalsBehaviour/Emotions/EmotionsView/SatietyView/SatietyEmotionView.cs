@@ -12,7 +12,6 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
 
         [Header("References")]
         [SerializeField] private StatIndicator _satietyBarIndicator;
-        [SerializeField] private HappinessFactor _happinessFactor;
 
         [Space] [Header("StaticData")]
         [SerializeField] private SatietyIconsConfig _iconsConfig;
@@ -41,13 +40,13 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
         private void ShowFullIcon()
         {
             SwitchActive(_staticSatietyView.gameObject);
-            _staticSatietyView.Show(_iconsConfig.FullSatiety, _happinessFactor.Factor);
+            _staticSatietyView.Show(_iconsConfig.FullSatiety);
         }
 
         private void ShowEmptyIcon()
         {
             SwitchActive(_staticSatietyView.gameObject);
-            _staticSatietyView.Show(_iconsConfig.EmptySatiety, 0);
+            _staticSatietyView.Show(_iconsConfig.EmptySatiety);
         }
 
         private void ShowDynamicBarIcon(float normalized)
@@ -78,9 +77,6 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
                 case <= 0f:
                     ShowEmptyIcon();
                     break;
-                // default:
-                //     ShowDynamicBarIcon(normalized);
-                //     break;
             }
         }
     }
