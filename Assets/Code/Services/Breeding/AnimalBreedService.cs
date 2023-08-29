@@ -146,7 +146,7 @@ namespace Services.Breeding
             
             Vector3 centerAnimalsPosition = GetPositionBetweenAnimals(first.Transform, second.Transform);
             var newAnimal = _gameFactory.CreateAnimal(first, centerAnimalsPosition, Quaternion.identity);
-            _houseService.TakeQueueToHouse(new QueueToHouse(newAnimal, () => ));
+            _houseService.TakeQueueToHouse(new QueueToHouse(newAnimal, () => { }));
         }
 
         private void OnBreedingBegin(IAnimal first, IAnimal second)

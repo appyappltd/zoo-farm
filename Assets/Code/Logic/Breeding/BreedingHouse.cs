@@ -236,7 +236,6 @@ namespace Logic.Breeding
                 _animals.Remove(animal);
                 animal.StateMachine.Play();
                 animal.Stats.Activate();
-                return animal;
             }), true);
         }
 

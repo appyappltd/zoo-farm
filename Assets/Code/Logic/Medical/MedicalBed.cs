@@ -116,7 +116,6 @@ namespace Logic.Medical
             {
                 FreeTheBad();
                 FeedUp.Invoke();
-                return _healingAnimal;
             });
             
             _houseService.TakeQueueToHouse(queueToHouse);

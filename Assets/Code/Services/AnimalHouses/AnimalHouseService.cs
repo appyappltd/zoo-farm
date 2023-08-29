@@ -145,9 +145,9 @@ namespace Services.AnimalHouses
 
         private void SendAnimalHome(AnimalHouse house, List<QueueToHouse> queue, QueueToHouse animalQueue)
         {
-            IAnimal animal = animalQueue.OnTakeHouse.Invoke();
+            animalQueue.OnTakeHouse.Invoke();
             queue.Remove(animalQueue);
-            TakeHouse(house, animal);
+            TakeHouse(house, animalQueue.Animal);
         }
 
         private bool TryGetAnimalFromQueue(List<QueueToHouse> queue, AnimalType forHouseType, out QueueToHouse queueToHouse)
