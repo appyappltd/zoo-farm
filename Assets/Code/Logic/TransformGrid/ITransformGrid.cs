@@ -6,5 +6,6 @@ namespace Logic.TransformGrid
     {
         public void AddCell(Transform cellTransform);
         public void RemoveCell(Transform cellTransform);
+        void RemoveAll();
     }
 }

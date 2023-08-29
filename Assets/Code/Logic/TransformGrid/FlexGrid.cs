@@ -81,6 +81,16 @@ namespace Logic.TransformGrid
             Translate(translatable, Vector3.one, Vector3.zero, cellTransform.gameObject.Disable);
         }
 
+        public void RemoveAll()
+        {
+            int cellsCount = _cells.Count;
+            
+            for (int i = 0; i < cellsCount; i++)
+            {
+                RemoveCell(_cells[i]);
+            }
+        }
+        
         [Button] [Conditional("UNITY_EDITOR")]
         private void ManualAdd()
         {

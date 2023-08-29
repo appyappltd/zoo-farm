@@ -40,10 +40,7 @@ namespace Logic.Houses
 
         public void Hide()
         {
-            foreach (var animalType in _animalCounter.GetAvailableAnimalTypes())
-            {
-                _transformGrid.RemoveCell(_choseHouseInteractions[animalType].transform);
-            }
+            _transformGrid.RemoveAll();
         }
         
         private void CreateAllHouseInteractions()
