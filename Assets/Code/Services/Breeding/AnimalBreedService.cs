@@ -64,25 +64,20 @@ namespace Services.Breeding
                 dispose.Invoke();
 
                 if (_breedingReadyAnimals.Contains(animal))
-                {
-                    animal.Emotions.Suppress(EmotionId.Sleeping);
                     _breedingReadyAnimals.Remove(animal);
-                }
-                
+
                 return;
             }
 
             throw new ArgumentNullException(nameof(dispose));
         }
 
-        private void OnSatietyFull(IAnimal animal)
-        {
+        private void OnSatietyFull(IAnimal animal) =>
             _breedingReadyAnimals.Add(animal);
-        }
 
         private void FindPairs()
         {
-            Debug.Log("FindPairs");
+            // Debug.Log("FindPairs");
             
             using IEnumerator<AnimalType> enumerator = _typesEnumerator.GetEnumerator();
 
@@ -100,18 +95,18 @@ namespace Services.Breeding
 
             if (_houseService.HasEmptyHouse(animalType) == false)
             {
-                Debug.Log("No empty house");
+                // Debug.Log("No empty house");
                 return;
             }
 
             if (TryFindPair(animalType, out AnimalPair animalPair))
             {
-                Debug.Log($"Pair found {animalPair}");
+                // Debug.Log($"Pair found {animalPair}");
                 BeginBreeding(animalPair.First, animalPair.Second);
                 return;
             }
             
-            Debug.Log($"Pair not found");
+            // Debug.Log($"Pair not found");
         }
 
         private bool TryFindPair(AnimalType breedingAnimalType, out AnimalPair pair)
@@ -141,9 +136,6 @@ namespace Services.Breeding
 
         private void OnBreedingComplete(IAnimal first, IAnimal second)
         {
-            first.Emotions.Suppress(EmotionId.Sleeping);
-            second.Emotions.Suppress(EmotionId.Sleeping);
-            
             Vector3 centerAnimalsPosition = GetPositionBetweenAnimals(first.Transform, second.Transform);
             var newAnimal = _gameFactory.CreateAnimal(first, centerAnimalsPosition, Quaternion.identity);
             _houseService.TakeQueueToHouse(new QueueToHouse(newAnimal, () => { }));

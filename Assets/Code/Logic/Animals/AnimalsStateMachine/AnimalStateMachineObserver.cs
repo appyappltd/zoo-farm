@@ -7,7 +7,7 @@ using StateMachineBase.States;
 
 namespace Logic.Animals.AnimalsStateMachine
 {
-    public class AnimalStateMachineObserver : IEmotive, IDisposable
+    public class AnimalStateMachineObserver : IDisposable
     {
         private readonly IPersonalEmotionService _emotionService;
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
@@ -15,10 +15,9 @@ namespace Logic.Animals.AnimalsStateMachine
         {
             [typeof(Rest)] = EmotionId.Sleeping,
             [typeof(Idle)] = EmotionId.Hunger,
+            [typeof(FollowToBreed)] = EmotionId.Breeding,
+            [typeof(BreedingIdle)] = EmotionId.Breeding,
         };
-
-        public event Action<EmotionId> ShowEmotion = _ => { };
-        public event Action<EmotionId> SuppressEmotion = _ => { };
 
         public AnimalStateMachineObserver(AnimalStateMachine stateMachine, IPersonalEmotionService emotionService)
         {

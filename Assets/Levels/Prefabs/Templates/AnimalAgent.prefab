@@ -597,30 +597,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5853824301467310379}
     m_Modifications:
-    - target: {fileID: 117306346615242139, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_Name
-      value: Emotion Hunger
-      objectReference: {fileID: 0}
-    - target: {fileID: 117306346615242139, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 354590082167371921, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 354590082167371921, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 354590082167371921, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 824840818623168513, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_RootOrder
-      value: 21
-      objectReference: {fileID: 0}
     - target: {fileID: 824840818623168513, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -661,46 +637,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 824840818623168513, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249500771585471598, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: <EmotionId>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2003379001618870065, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: _emotions._serializedList.Array.data[4].Value
-      value: 
-      objectReference: {fileID: 5853808378595977899}
     - target: {fileID: 2638663326910131590, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: m_Name
       value: Emotions
       objectReference: {fileID: 0}
-    - target: {fileID: 2677692147448548498, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -666996151, guid: 94de53161798c294b8a026b53ce64c9b, type: 3}
-    - target: {fileID: 2732117154703930001, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830427739166970659, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830427739166970659, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830427739166970659, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3330185995752834215, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: _iconsConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 880114d0ef0b39c44b0347ecf523a5de, type: 2}
     - target: {fileID: 3330185995752834215, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: _happinessFactor
       value: 
@@ -709,103 +649,11 @@ PrefabInstance:
       propertyPath: _satietyBarIndicator
       value: 
       objectReference: {fileID: 4985158875982950670}
-    - target: {fileID: 4747572850375554094, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783921889726306324, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783921889726306324, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783921889726306324, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242849252360684720, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242849252360684720, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242849252360684720, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5426975882360965868, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5426975882360965868, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5426975882360965868, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5587093377527153082, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5628230160775696358, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5660058674653191468, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: <EmotionId>k__BackingField
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6187948359429447992, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6562702499090209005, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: _toCameraOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7485207695552104774, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.19999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 7485207695552104774, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.19999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 7485207695552104774, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.19999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 7928609674021979394, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: <EmotionId>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8574840252358775584, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7110001770532129868, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
---- !u!114 &5853808378595977899 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2459390008811436323, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
-  m_PrefabInstance: {fileID: 8294897801359430536}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 801fee38044847b0a130c522abcb91a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7552548722606521529 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2003379001618870065, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}

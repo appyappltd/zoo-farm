@@ -98,6 +98,7 @@ namespace Logic.Animals.AnimalsStateMachine
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
             State moveToEat = new MoveToAndRotate(_animator, _mover, _eatPlace, _aligner);
+            
             _followToBreeding = new FollowToBreed(_animator, _mover, _satiety);
             _breeding = new BreedingIdle(_animator);
 

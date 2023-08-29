@@ -8,14 +8,12 @@ namespace Logic.Animals.AnimalsStateMachine.States
 {
     public class FollowToBreed : Move
     {
-        private readonly NavMeshMover _mover;
         private readonly StatIndicator _satiety;
         
         private Transform _followAnimal;
         
         public FollowToBreed(IPrimeAnimator animator, NavMeshMover mover, StatIndicator satiety) : base(animator, mover)
         {
-            _mover = mover;
             _satiety = satiety;
         }
 

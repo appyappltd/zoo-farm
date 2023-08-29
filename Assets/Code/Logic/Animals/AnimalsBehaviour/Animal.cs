@@ -34,7 +34,6 @@ namespace Logic.Animals.AnimalsBehaviour
         private void OnDestroy()
         {
             _stateMachineObserver.Dispose();
-            _emotionService.Unregister(_stateMachineObserver);
         }
 
         public void Construct(AnimalId animalId, BeginStats beginStats, IStaticDataService staticDataService)
@@ -43,7 +42,6 @@ namespace Logic.Animals.AnimalsBehaviour
             _animalId = animalId;
             _emotionService = new PersonalEmotionService(_emotionProvider);
             _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine, _emotionService);
-            _emotionService.Register(_stateMachineObserver);
             _statProvider.Construct(beginStats);
             _happinessFactor.Construct(_statProvider.Satiety);
         }

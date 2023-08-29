@@ -110,7 +110,7 @@ namespace Services.Animals
         }
 
         private bool IsReleaseReady(IAnimal animal) =>
-            animal.Stats.Satiety.IsFull;
+            animal.Stats.Satiety.IsEmpty == false;
 
         private void ReleaseAnimal(IAnimal releasedAnimal)
         {

@@ -7,5 +7,6 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
         Eating,
         Sleeping,
         Homeless,
+        Breeding,
     }
 }

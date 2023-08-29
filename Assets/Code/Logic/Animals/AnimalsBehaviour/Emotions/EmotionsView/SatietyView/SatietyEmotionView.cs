@@ -26,7 +26,6 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
         private void Awake()
         {
             _active = _staticSatietyView.gameObject;
-            // _active.Enable();
             _dynamicSatietyBarView.Construct(_iconsConfig);
         }
 
