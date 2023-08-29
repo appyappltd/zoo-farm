@@ -13,12 +13,12 @@ namespace Logic.LevelGoals
 
         public event Action Compleated = () => { };
 
-        public GoalProgress(GoalPreset goalPreset)
+        public GoalProgress(GoalConfig goalConfig)
         {
-            int capacity = goalPreset.AnimalsToRelease.Count;
+            int capacity = goalConfig.AnimalsToRelease.Count;
             _releaseProgressBars = new Dictionary<AnimalType, ProgressBar>(capacity);
 
-            foreach (var (animalType, goalAmount) in goalPreset.AnimalsToRelease)
+            foreach (var (animalType, goalAmount) in goalConfig.AnimalsToRelease)
                 RegisterProgressBar(animalType, goalAmount);
         }
 

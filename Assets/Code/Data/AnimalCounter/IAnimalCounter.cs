@@ -14,5 +14,6 @@ namespace Data
 
         AnimalCountData GetAnimalCountData(AnimalType byType);
         IReadOnlyDictionary<AnimalType, AnimalCountData> GetAllData();
+        IReadOnlyCollection<AnimalType> GetAvailableAnimalTypes();
     }
 }

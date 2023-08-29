@@ -18,7 +18,6 @@ namespace Services.Animals
         void Register(IAnimal animal);
         void Release(IAnimal animal);
         void Release(AnimalType animalType);
-        IAnimal[] GetAnimals(AnimalType panelAnimalType);
         AnimalCountData GetAnimalsCount(AnimalType animalType);
         BreedingPair SelectPairForBreeding(AnimalType byType);
         IEnumerable<IAnimal> GetReleaseReady();

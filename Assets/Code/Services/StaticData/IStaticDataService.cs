@@ -2,6 +2,7 @@
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Foods.FoodSettings;
+using Logic.LevelGoals;
 using Logic.Medical;
 using Logic.SpawnPlaces;
 using Services.Effects;
@@ -25,5 +26,6 @@ namespace Services.StaticData
         ParticleConfig ParticlesConfig();
         ScaleModifierConfig ScaleModifierById(ScaleModifierId id);
         AnimalItemStaticData AnimalItemDataById(AnimalType id);
+        GoalConfig GoalConfigForLevel(string levelName);
     }
 }

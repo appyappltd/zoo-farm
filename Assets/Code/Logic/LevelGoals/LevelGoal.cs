@@ -12,21 +12,21 @@ namespace Logic.LevelGoals
         private readonly GoalProgress _goalProgress;
         private readonly IAnimalsService _animalsService;
         private readonly ReleaseInteractionsGrid _releaseInteractionsGrid;
-        private readonly GoalPreset _goalPreset;
+        private readonly GoalConfig _goalConfig;
         private readonly CollectibleCoinSpawner _coinSpawner;
         private readonly bool _isDeactivateOnRelease;
         private readonly AnimalInteraction _animalInteraction;
 
         public LevelGoal(IAnimalsService animalsService, AnimalInteraction animalInteraction,
-            ReleaseInteractionsGrid releaseInteractionsGrid, GoalPreset goalPreset, CollectibleCoinSpawner coinSpawner, bool isDeactivateOnRelease)
+            ReleaseInteractionsGrid releaseInteractionsGrid, GoalConfig goalConfig, CollectibleCoinSpawner coinSpawner, bool isDeactivateOnRelease)
         {
             _animalInteraction = animalInteraction;
             _animalsService = animalsService;
             _releaseInteractionsGrid = releaseInteractionsGrid;
-            _goalPreset = goalPreset;
+            _goalConfig = goalConfig;
             _coinSpawner = coinSpawner;
             _isDeactivateOnRelease = isDeactivateOnRelease;
-            _goalProgress = new GoalProgress(goalPreset);
+            _goalProgress = new GoalProgress(goalConfig);
 
             _goalProgress.Compleated += OnGoalCompleated;
             _animalsService.Registered += OnRegistered;
@@ -67,7 +67,7 @@ namespace Logic.LevelGoals
         }
 
         private void OnGoalCompleated() =>
-            _coinSpawner.Spawn(_goalPreset.CashRewardForCompletingGoal);
+            _coinSpawner.Spawn(_goalConfig.CashRewardForCompletingGoal);
 
         private bool IsSingle(AnimalType animalType) =>
             _animalsService.GetAnimalsCount(animalType).Total == 1;

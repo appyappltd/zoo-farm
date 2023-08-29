@@ -20,18 +20,18 @@ namespace Ui.LevelGoalPanel
         [SerializeField] private BackgroundScaler _backgroundScaler;
         [SerializeField] private Transform _panelsParent;
 
-        public void Construct(IGameFactory gameFactory, GoalPreset preset, IGoalProgressView goalProgress)
+        public void Construct(IGameFactory gameFactory, GoalConfig config, IGoalProgressView goalProgress)
         {
-            InitPanels(gameFactory, preset, goalProgress);
-            _rewardText.SetText(preset.CashRewardForCompletingGoal);
+            InitPanels(gameFactory, config, goalProgress);
+            _rewardText.SetText(config.CashRewardForCompletingGoal);
         }
 
         public void Dispose() =>
             _disposable.Dispose();
 
-        private void InitPanels(IGameFactory gameFactory, GoalPreset preset, IGoalProgressView goalProgress)
+        private void InitPanels(IGameFactory gameFactory, GoalConfig config, IGoalProgressView goalProgress)
         {
-            foreach (KeyValuePair<AnimalType, int> pair in preset.AnimalsToRelease)
+            foreach (KeyValuePair<AnimalType, int> pair in config.AnimalsToRelease)
             {
                 int goalAmount = pair.Value;
                 AnimalType animalType = pair.Key;

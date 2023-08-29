@@ -10,13 +10,15 @@ namespace Data
     {
         private readonly Dictionary<AnimalType, AnimalCountData> _countDatas = new Dictionary<AnimalType, AnimalCountData>();
         private readonly Dictionary<AnimalId, AnimalSatietyObserver> _satietyObservers = new Dictionary<AnimalId, AnimalSatietyObserver>();
+        private readonly List<AnimalType> _availableTypes = new List<AnimalType>();
 
         public event Action<AnimalType, AnimalCountData> Updated = (_, _) => { };
 
         public void Register(IAnimal animal)
         {
             AnimalType animalType = animal.AnimalId.Type;
-
+            AddToAvailable(animalType);
+            
             if (_countDatas.ContainsKey(animalType))
             {
                 _countDatas[animalType] = _countDatas[animalType].AddTotal();
@@ -46,9 +48,6 @@ namespace Data
             _satietyObservers.Remove(animalId);
             
             Updated.Invoke(animalType, _countDatas[animalType]);
-            
-            // if (_countDatas[animalType].Total == 0)
-            //     _countDatas.Remove(animalType);
         }
 
         public AnimalCountData GetAnimalCountData(AnimalType byType)
@@ -61,6 +60,9 @@ namespace Data
 
         public IReadOnlyDictionary<AnimalType, AnimalCountData> GetAllData() =>
             _countDatas;
+
+        public IReadOnlyCollection<AnimalType> GetAvailableAnimalTypes() =>
+            _availableTypes;
 
         public void Dispose()
         {
@@ -81,6 +83,14 @@ namespace Data
         {
             _countDatas[animalType] = _countDatas[animalType].RemoveReleaseReady();
             Updated.Invoke(animalType, _countDatas[animalType]);
+        }
+
+        private void AddToAvailable(AnimalType animalType)
+        {
+            if (_availableTypes.Contains(animalType))
+                return;
+            
+            _availableTypes.Add(animalType);
         }
 
         private class AnimalSatietyObserver : IDisposable
