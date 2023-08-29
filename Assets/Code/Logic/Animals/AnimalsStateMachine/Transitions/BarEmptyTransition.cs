@@ -3,16 +3,16 @@ using StateMachineBase;
 
 namespace Logic.Animals.AnimalsStateMachine.Transitions
 {
-    public class BarNotFullTransition : Transition
+    public class BarEmptyTransition : Transition
     {
         private readonly IProgressBarView _barView;
 
-        public BarNotFullTransition(IProgressBarView barView)
+        public BarEmptyTransition(IProgressBarView barView)
         {
             _barView = barView;
         }
 
         public override bool CheckCondition() =>
-            !_barView.IsFull;
+            _barView.IsEmpty;
     }
 }

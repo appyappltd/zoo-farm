@@ -111,7 +111,7 @@ namespace Logic.Animals.AnimalsStateMachine
             Transition fullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
             Transition forceFullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
             Transition emptyPeppiness = GetOnEmptyActionTransition(_peppiness.ProgressBar);
-            Transition notFullSatiety = new BarNotFullTransition(_satiety.ProgressBar);
+            Transition emptySatiety = GetOnEmptyActionTransition(_satiety.ProgressBar);
             Transition randomDelay = new RandomTimerTransition(_idleDelayRange.y, _idleDelayRange.x);
             Transition inRestPlace = new TargetInRange(_mover.transform, _restPlace, _placeOffset);
             Transition inEatPlace = new TargetInRange(_mover.transform, _eatPlace, _placeOffset);
@@ -154,7 +154,7 @@ namespace Logic.Animals.AnimalsStateMachine
                 {
                     idle, new Dictionary<Transition, State>
                     {
-                        {notFullSatiety, moveToEat},
+                        {emptySatiety, moveToEat},
                         {emptyPeppiness, moveToRest},
                         {randomDelay, wander},
                     }

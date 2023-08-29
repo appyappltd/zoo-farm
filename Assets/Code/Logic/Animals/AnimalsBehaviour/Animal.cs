@@ -58,8 +58,11 @@ namespace Logic.Animals.AnimalsBehaviour
         public void Destroy() =>
             Destroy(gameObject);
 
-        private void Activate() =>
+        private void Activate()
+        {
             _jumper.Jump();
+            Emotions.Show(EmotionId.Hunger);
+        }
 
         public override string ToString() =>
             $"Animal {_animalId.Type} (id: {_animalId.ID}\nStats:\n" +

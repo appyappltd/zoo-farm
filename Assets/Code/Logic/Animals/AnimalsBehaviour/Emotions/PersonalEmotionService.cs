@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour.Emotions
 {
@@ -56,6 +57,9 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
 
         private void OnSuppressEmotion(EmotionId emotionId)
         {
+            Debug.Log($"Suppress {emotionId}");
+            Debug.Log($"Active {ActiveEmotionId}");
+            
             if (ActiveEmotionId == emotionId)
                 SuppressEmotions();
             else
@@ -82,7 +86,15 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
             }
         }
 
-        private void SuppressActiveEmotion() =>
-            _emotionProvider.ChangeEmotion(_emotionsStack.Pop());
+        private void SuppressActiveEmotion()
+        {
+            foreach (var emotion in _emotionsStack)
+            {
+                Debug.Log(emotion);
+            }
+
+            _emotionsStack.Pop();
+            _emotionProvider.ChangeEmotion(_emotionsStack.Peek());
+        }
     }
 }

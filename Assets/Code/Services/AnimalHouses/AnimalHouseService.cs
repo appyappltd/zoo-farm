@@ -123,7 +123,7 @@ namespace Services.AnimalHouses
         }
 
         public bool HasEmptyHouse(AnimalType forAnimal) =>
-            _animalHouses.Any(house => house.ForAnimal == forAnimal);
+            _animalHouses.Any(house => house.IsTaken == false && house.ForAnimal == forAnimal);
 
         public IEnumerable<AnimalType> GetAnimalTypesInHouseQueue(bool isHighPriority = false) =>
             GetQueueByPriority(isHighPriority).Select(queue => queue.Animal.AnimalId.Type).Distinct();

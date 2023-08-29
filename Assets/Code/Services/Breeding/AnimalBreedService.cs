@@ -132,13 +132,19 @@ namespace Services.Breeding
                 () => OnBreedingBegin(first, second),
                 () => OnBreedingComplete(first, second));
             second.StateMachine.MoveBreeding(first, () => { }, () => { });
+            
+            first.Emotions.Show(EmotionId.Breeding);
+            second.Emotions.Show(EmotionId.Breeding);
         }
 
         private void OnBreedingComplete(IAnimal first, IAnimal second)
         {
             Vector3 centerAnimalsPosition = GetPositionBetweenAnimals(first.Transform, second.Transform);
-            var newAnimal = _gameFactory.CreateAnimal(first, centerAnimalsPosition, Quaternion.identity);
+            Animal newAnimal = _gameFactory.CreateAnimal(first, centerAnimalsPosition, Quaternion.identity);
             _houseService.TakeQueueToHouse(new QueueToHouse(newAnimal, () => { }));
+            
+            first.Emotions.Suppress(EmotionId.Breeding);
+            second.Emotions.Suppress(EmotionId.Breeding);
         }
 
         private void OnBreedingBegin(IAnimal first, IAnimal second)

@@ -16,17 +16,11 @@ namespace DelayRoutines
         protected override void OnPlay() =>
             Activate();
 
-        protected void Activate()
-        {
-            Debug.Log("activate");
+        protected void Activate() =>
             _globalUpdate.AddRunSystem(this);
-        }
 
-        protected void Deactivate()
-        {
-            Debug.Log("deactivate");
+        protected void Deactivate() =>
             _globalUpdate.RemoveRunSystem(this);
-        }
 
         public void Pause()
         {

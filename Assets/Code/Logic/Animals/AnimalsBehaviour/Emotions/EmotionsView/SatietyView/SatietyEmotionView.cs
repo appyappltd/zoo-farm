@@ -78,9 +78,9 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView.SatietyView
                 case <= 0f:
                     ShowEmptyIcon();
                     break;
-                default:
-                    ShowDynamicBarIcon(normalized);
-                    break;
+                // default:
+                //     ShowDynamicBarIcon(normalized);
+                //     break;
             }
         }
     }

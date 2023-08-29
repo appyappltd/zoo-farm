@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Logic.Animals.AnimalsStateMachine.States;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Observables;
-using StateMachineBase.States;
 
 namespace Logic.Animals.AnimalsStateMachine
 {
@@ -13,10 +12,9 @@ namespace Logic.Animals.AnimalsStateMachine
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
         private readonly Dictionary<Type, EmotionId> _emotionsPerState = new Dictionary<Type, EmotionId>
         {
-            [typeof(Rest)] = EmotionId.Sleeping,
-            [typeof(Idle)] = EmotionId.Hunger,
-            [typeof(FollowToBreed)] = EmotionId.Breeding,
-            [typeof(BreedingIdle)] = EmotionId.Breeding,
+            // [typeof(Rest)] = EmotionId.Sleeping,
+            // [typeof(FollowToBreed)] = EmotionId.Breeding,
+            // [typeof(BreedingIdle)] = EmotionId.Breeding,
         };
 
         public AnimalStateMachineObserver(AnimalStateMachine stateMachine, IPersonalEmotionService emotionService)
