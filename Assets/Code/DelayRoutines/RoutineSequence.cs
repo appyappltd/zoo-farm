@@ -23,12 +23,14 @@ namespace DelayRoutines
 
         public RoutineSequence()
         {
-            Debug.Log("New swquance");
+            Debug.Log("New sequence");
             _globalUpdate = GlobalUpdate.Instance;
         }
 
-        void IDisposable.Dispose() =>
-            Kill();
+        void IDisposable.Dispose()
+        {
+            // Kill();
+        }
 
         /// <summary>
         /// Launch routine

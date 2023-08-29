@@ -47,7 +47,7 @@ namespace Logic.Animals.AnimalsStateMachine
         private ForceMove _forceMove;
         private Idle _forceIdle;
         private ForceEat _forceEat;
-        private MoveToBreedPlace _moveToBreeding;
+        private FollowToBreed _followToBreeding;
         private BreedingIdle _breeding;
 
         public void Construct(Transform houseRestPlace, Transform houseEatPlace)
@@ -80,9 +80,9 @@ namespace Logic.Animals.AnimalsStateMachine
 
         public void MoveBreeding(IAnimal second, Action onBreedingBegin, Action onBreedingComplete)
         {
-            _moveToBreeding.Init(second.Transform);
+            _followToBreeding.Init(second.Transform);
             _breeding.Init(onBreedingBegin, onBreedingComplete);
-            ForceState(_moveToBreeding);
+            ForceState(_followToBreeding);
         }
 
         private void SetUp()
@@ -98,7 +98,7 @@ namespace Logic.Animals.AnimalsStateMachine
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToRest = new MoveTo(_animator, _mover, _restPlace);
             State moveToEat = new MoveToAndRotate(_animator, _mover, _eatPlace, _aligner);
-            _moveToBreeding = new MoveToBreedPlace(_animator, _mover, _satiety);
+            _followToBreeding = new FollowToBreed(_animator, _mover, _satiety);
             _breeding = new BreedingIdle(_animator);
 
             _forceIdle = new Idle(_animator);
@@ -122,7 +122,7 @@ namespace Logic.Animals.AnimalsStateMachine
             Init(idle, new Dictionary<State, Dictionary<Transition, State>>
             {
                 {
-                    _moveToBreeding, new Dictionary<Transition, State>
+                    _followToBreeding, new Dictionary<Transition, State>
                     {
                         {reachedBreeding, _breeding}
                     }

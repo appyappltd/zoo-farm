@@ -6,14 +6,16 @@ using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine.States
 {
-    public class MoveToBreedPlace : Move
+    public class FollowToBreed : Move
     {
+        private readonly NavMeshMover _mover;
         private readonly StatIndicator _satiety;
         
         private Transform _followAnimal;
         
-        public MoveToBreedPlace(IPrimeAnimator animator, NavMeshMover mover, StatIndicator satiety) : base(animator, mover)
+        public FollowToBreed(IPrimeAnimator animator, NavMeshMover mover, StatIndicator satiety) : base(animator, mover)
         {
+            _mover = mover;
             _satiety = satiety;
         }
 
@@ -24,6 +26,12 @@ namespace Logic.Animals.AnimalsStateMachine.States
         {
             base.OnEnter();
             _satiety.ProgressBar.Reset();
+        }
+
+        protected override void OnUpdate()
+        {
+            base.OnUpdate();
+            UpdateDestination();
         }
 
         public void Init(Transform followAnimal) =>

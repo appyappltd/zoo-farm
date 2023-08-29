@@ -25,10 +25,16 @@ namespace Logic.Animals.AnimalsBehaviour
         private void Observer(Type stateType)
         {
             if (stateType == typeof(Wander))
+            {
                 _mover.SetNormalizedSpeed(_normalizedWalkSpeed);
+                return;
+            }
 
-            if (typeof(MoveTo).IsAssignableFrom(stateType))
+            if (typeof(Move).IsAssignableFrom(stateType))
+            {
                 _mover.SetNormalizedSpeed(_normalizedRunSpeed);
+                return;
+            }
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Infrastructure.AssetManagement;
 using Infrastructure.Factory;
+using Logic.Animals;
 using Services;
 using Services.AnimalHouses;
 using Services.Animals;
+using Services.Breeding;
 using Services.Camera;
 using Services.Effects;
 using Services.Food;
@@ -55,11 +57,11 @@ namespace Infrastructure.States
             Register<IAnimalHouseService>(new AnimalHouseService());
             Register<IFoodService>(new FoodService());
             Register<IMedicalBedsReporter>(new MedicalBedsReporter());
-            Register<IAnimalsService>(
-                new AnimalsService(Get<IAnimalHouseService>(),
-                    Get<IEffectService>(),
-                    Get<IGameFactory>()));
             Register<ICameraOperatorService>(new CameraOperatorService());
+            Register<IEffectService>(new EffectService(Get<IPoolService>()));
+            Register<IAnimalsService>(
+                new AnimalsService(
+                    Get<IAnimalHouseService>()));
             Register<IGameFactory>(
                 new GameFactory(
                     Get<IAssetProvider>(),
@@ -70,6 +72,11 @@ namespace Infrastructure.States
                     Get<IPoolService>(),
                     Get<IMedicalBedsReporter>(),
                     Get<IAnimalHouseService>()));
+            Register<IAnimalBreedService>(
+                new AnimalBreedService(Get<IEffectService>(),
+                    Get<IGameFactory>(),
+                    Get<IAnimalHouseService>(),
+                    Get<IAnimalsService>()));
             Register<IUIFactory>(
                 new UIFactory(
                     Get<IAssetProvider>(),
@@ -78,7 +85,6 @@ namespace Infrastructure.States
                     Get<IAnimalsService>(),
                     Get<IAnimalHouseService>()
                 ));
-            Register<IEffectService>(new EffectService(Get<IPoolService>()));
             Register<IWindowService>(
                 new WindowService(
                     Get<IUIFactory>()));

@@ -7,9 +7,7 @@ namespace DelayRoutines
     {
         private float _elapsedTime;
 
-        protected TimeAwaiter(GlobalUpdate globalUpdate) : base(globalUpdate)
-        {
-        }
+        protected TimeAwaiter(GlobalUpdate globalUpdate) : base(globalUpdate) { }
 
         protected override void OnPlay()
         {

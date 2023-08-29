@@ -75,8 +75,8 @@ namespace Services.AnimalHouses
             }
             else
             {
-                IAnimal animal = queueToHouse.OnTakeHouse.Invoke();
-                TakeHouse(freeHouse, animal);
+                queueToHouse.OnTakeHouse.Invoke();
+                TakeHouse(freeHouse, queueToHouse.Animal);
             }
         }
 

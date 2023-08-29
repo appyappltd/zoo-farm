@@ -253,6 +253,7 @@ MonoBehaviour:
   _peppinessReplanishSpeed: 0.2
   _hungerDelay: 10
   _maxWanderDistance: 4
+  _breedingPositionOffset: 0.65
   _idleDelayRange: {x: 2, y: 5}
   _placeOffset: 0.12
 --- !u!114 &1117839774714342269

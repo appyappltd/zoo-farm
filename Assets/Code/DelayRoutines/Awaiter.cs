@@ -1,5 +1,6 @@
 ﻿using NTC.Global.Cache;
 using NTC.Global.Cache.Interfaces;
+using UnityEngine;
 
 namespace DelayRoutines
 {
@@ -17,11 +18,13 @@ namespace DelayRoutines
 
         protected void Activate()
         {
+            Debug.Log("activate");
             _globalUpdate.AddRunSystem(this);
         }
 
         protected void Deactivate()
         {
+            Debug.Log("deactivate");
             _globalUpdate.RemoveRunSystem(this);
         }
 
@@ -39,7 +42,7 @@ namespace DelayRoutines
             if (IsActive == false)
             {
                 IsActive = true;
-                _globalUpdate.AddRunSystem(this);
+                Activate();
             }
         }
     }

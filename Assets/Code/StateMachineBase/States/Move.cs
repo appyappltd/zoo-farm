@@ -20,8 +20,7 @@ namespace StateMachineBase.States
         protected override void OnEnter()
         {
             _animator.SetMove();
-            Vector3 movePosition = GetMovePosition();
-            _mover.SetDestination(movePosition);
+            UpdateDestination();
         }
 
         protected override void OnExit()
@@ -31,5 +30,11 @@ namespace StateMachineBase.States
 
         protected override void OnUpdate() =>
             Animator.SetSpeed(_mover.NormalizedSpeed);
+
+        protected void UpdateDestination()
+        {
+            Vector3 movePosition = GetMovePosition();
+            _mover.SetDestination(movePosition);
+        }
     }
 }

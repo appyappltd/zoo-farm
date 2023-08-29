@@ -92,7 +92,7 @@ namespace Logic.Movement
                 return;
             }
 
-            SetDestination(destination);
+            // SetDestination(destination);
 #if DEBUG
             Debug.LogWarning("Path cannot be found");
 #endif

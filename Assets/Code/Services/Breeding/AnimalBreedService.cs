@@ -3,39 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using DelayRoutines;
 using Infrastructure.Factory;
+using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Services.AnimalHouses;
+using Services.Animals;
 using Services.Effects;
 using Tools.Constants;
 using UnityEngine;
 
-namespace Logic.Animals.Breeding
+namespace Services.Breeding
 {
-    public class AnimalBreeder
+    public class AnimalBreedService : IAnimalBreedService
     {
         private readonly IEffectService _effectService;
         private readonly IGameFactory _gameFactory;
         private readonly IAnimalHouseService _houseService;
+        private readonly IAnimalsService _animalsService;
 
         private readonly Dictionary<IAnimal, Action> _disposes = new Dictionary<IAnimal, Action>();
         private readonly List<IAnimal> _breedingReadyAnimals = new List<IAnimal>();
-        private readonly List<IAnimal> _remainingBreedingReadyAnimals = new List<IAnimal>();
 
         private IEnumerable<AnimalType> _typesEnumerator = new List<AnimalType>();
 
-        private Vector2 _pairFoundingDelay = new Vector2(5f, 10f);
+        private Vector2 _pairFoundingDelay = new Vector2(3f, 8f);
 
         private RoutineSequence _pairFounding;
+        private bool _isFirstLoad = true;
 
-        public AnimalBreeder(IEffectService effectService, IGameFactory gameFactory, IAnimalHouseService houseService)
+        public AnimalBreedService(IEffectService effectService, IGameFactory gameFactory, IAnimalHouseService houseService, IAnimalsService animalsService)
         {
             _effectService = effectService;
             _gameFactory = gameFactory;
             _houseService = houseService;
+            _animalsService = animalsService;
 
-            _pairFounding = new RoutineSequence();
-            _pairFounding.WaitForRandomSeconds(_pairFoundingDelay).Then(FindPairs);
+            _animalsService.Registered += Register;
+            _animalsService.Released += Unregister;
         }
 
         public void Register(IAnimal animal)
@@ -43,6 +47,14 @@ namespace Logic.Animals.Breeding
             void LocalSatietyOnFull() => OnSatietyFull(animal);
             animal.Stats.Satiety.Full += LocalSatietyOnFull;
             _disposes.Add(animal, () => animal.Stats.Satiety.Full -= LocalSatietyOnFull);
+            
+            if (_isFirstLoad)
+            {
+                _isFirstLoad = false;
+                _pairFounding = new RoutineSequence();
+                _pairFounding.WaitForRandomSeconds(_pairFoundingDelay).Then(FindPairs);
+                _pairFounding.Play();
+            }
         }
 
         public void Unregister(IAnimal animal)
@@ -56,9 +68,11 @@ namespace Logic.Animals.Breeding
                     animal.Emotions.Suppress(EmotionId.Sleeping);
                     _breedingReadyAnimals.Remove(animal);
                 }
+                
+                return;
             }
 
-            throw new ArgumentOutOfRangeException(nameof(animal));
+            throw new ArgumentNullException(nameof(dispose));
         }
 
         private void OnSatietyFull(IAnimal animal)
@@ -68,23 +82,36 @@ namespace Logic.Animals.Breeding
 
         private void FindPairs()
         {
-            if (_typesEnumerator.GetEnumerator().MoveNext())
-            {
-                AnimalType animalType = _typesEnumerator.GetEnumerator().Current;
+            Debug.Log("FindPairs");
+            
+            using IEnumerator<AnimalType> enumerator = _typesEnumerator.GetEnumerator();
 
-                if (_houseService.HasEmptyHouse(animalType))
-                {
-                    _pairFounding.Play();
-                    return;
-                }
-                
-                if (TryFindPair(animalType, out AnimalPair animalPair)) 
-                    BeginBreeding(animalPair.First, animalPair.Second);
-            }
+            if (enumerator.MoveNext())
+                FindSinglePair(enumerator);
             else
-            {
                 _typesEnumerator = _breedingReadyAnimals.Select(animal => animal.AnimalId.Type).Distinct();
+            
+            _pairFounding.Play();
+        }
+
+        private void FindSinglePair(IEnumerator<AnimalType> enumerator)
+        {
+            AnimalType animalType = enumerator.Current;
+
+            if (_houseService.HasEmptyHouse(animalType) == false)
+            {
+                Debug.Log("No empty house");
+                return;
             }
+
+            if (TryFindPair(animalType, out AnimalPair animalPair))
+            {
+                Debug.Log($"Pair found {animalPair}");
+                BeginBreeding(animalPair.First, animalPair.Second);
+                return;
+            }
+            
+            Debug.Log($"Pair not found");
         }
 
         private bool TryFindPair(AnimalType breedingAnimalType, out AnimalPair pair)
@@ -92,7 +119,7 @@ namespace Logic.Animals.Breeding
             IAnimal[] ready = _breedingReadyAnimals.Where(animal => animal.AnimalId.Type == breedingAnimalType && IsBreedingReady(animal)).ToArray();
             pair = new AnimalPair();
             
-            if (ready.Count() > AnimalPair.PairCount)
+            if (ready.Count() >= AnimalPair.PairCount)
             {
                 pair = new AnimalPair(ready[0], ready[1]);
                 return true;
@@ -105,8 +132,10 @@ namespace Logic.Animals.Breeding
         {
             _breedingReadyAnimals.Remove(first);
             _breedingReadyAnimals.Remove(second);
-            
-            first.StateMachine.MoveBreeding(second, () => OnBreedingBegin(first, second), () =>  OnBreedingComplete(first, second));
+
+            first.StateMachine.MoveBreeding(second, 
+                () => OnBreedingBegin(first, second),
+                () => OnBreedingComplete(first, second));
             second.StateMachine.MoveBreeding(first, () => { }, () => { });
         }
 
@@ -116,7 +145,8 @@ namespace Logic.Animals.Breeding
             second.Emotions.Suppress(EmotionId.Sleeping);
             
             Vector3 centerAnimalsPosition = GetPositionBetweenAnimals(first.Transform, second.Transform);
-            _gameFactory.CreateAnimal(first, centerAnimalsPosition, Quaternion.identity);
+            var newAnimal = _gameFactory.CreateAnimal(first, centerAnimalsPosition, Quaternion.identity);
+            _houseService.TakeQueueToHouse(new QueueToHouse(newAnimal, () => ));
         }
 
         private void OnBreedingBegin(IAnimal first, IAnimal second)

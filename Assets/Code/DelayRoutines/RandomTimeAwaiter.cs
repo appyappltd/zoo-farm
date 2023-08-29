@@ -8,7 +8,6 @@ namespace DelayRoutines
     public sealed class RandomTimeAwaiter : TimeAwaiter
     {
         private readonly Vector2 _timeRange;
-        private object _elapsedTime;
 
         public RandomTimeAwaiter(Vector2 timeRange, GlobalUpdate globalUpdate) : base(globalUpdate) =>
             _timeRange = timeRange;
