@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using Logic.Interactions;
 using Logic.Animals;
 using Data.ItemsData;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Foods.FoodSettings;
-using Logic.LevelGoals;
 using Logic.Medical;
 using Logic.Spawners;
 using Services;
@@ -39,6 +39,7 @@ namespace Infrastructure.Factory
         GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type);
         IAnimalHouse CreateBreedingHouse(Vector3 at, Quaternion rotation);
         ReleaseInteractionProvider CreateReleaseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
+        ChoseHouseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
         GoalAnimalPanelProvider CreateAnimalGoalPanel(Vector3 at, Quaternion rotation, Transform parent, KeyValuePair<AnimalType, int> countTypePair);
     }
 }

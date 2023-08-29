@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Code.Infrastructure.Builders;
+using Logic.Interactions;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Data.ItemsData;
 using Infrastructure.AssetManagement;
 using Infrastructure.Builders;
 using Logic.Foods.FoodSettings;
-using Logic.LevelGoals;
 using Logic.Medical;
 using Logic.Spawners;
 using Services.AnimalHouses;
@@ -32,7 +32,7 @@ namespace Infrastructure.Factory
         private readonly MedStandBuilder _medStandBuilder;
         private readonly MedBedBuilder _medBedBuilder;
         private readonly AnimalHouseBuilder _animalHouseBuilder;
-        private readonly ReleaseInteractionZoneBuilder _releaseInteractionZoneBuilder;
+        private readonly InteractionZoneBuilder _interactionZoneBuilder;
         private readonly AnimalGoalPanelBuilder _animalGoalPanelBuilder;
         private readonly IStaticDataService _staticDataService;
 
@@ -61,7 +61,7 @@ namespace Infrastructure.Factory
             _medBedBuilder = new MedBedBuilder(medicalBedsReporter);
             _medStandBuilder = new MedStandBuilder(staticDataService);
             _animalBuilder = new AnimalBuilder(staticDataService, animalsService);
-            _releaseInteractionZoneBuilder = new ReleaseInteractionZoneBuilder(animalsService, staticDataService);
+            _interactionZoneBuilder = new InteractionZoneBuilder(animalsService, staticDataService);
             _animalGoalPanelBuilder = new AnimalGoalPanelBuilder(staticDataService);
         }
 
@@ -109,7 +109,13 @@ namespace Infrastructure.Factory
         public ReleaseInteractionProvider CreateReleaseInteraction(Vector3 at, Quaternion rotation, AnimalType withType)
         {
             GameObject zoneObject = _assets.Instantiate(AssetPath.ReleaseInteractionPath, at, rotation);
-            return _releaseInteractionZoneBuilder.Build(zoneObject, withType);
+            return _interactionZoneBuilder.Build<ReleaseInteractionProvider>(zoneObject, withType);
+        }
+
+        public ChoseHouseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, AnimalType withType)
+        {
+            GameObject zoneObject = _assets.Instantiate(AssetPath.ChoseHouseInteractionPath, at, rotation);
+            return _interactionZoneBuilder.Build<ChoseHouseInteractionProvider>(zoneObject, withType);
         }
 
         public GoalAnimalPanelProvider CreateAnimalGoalPanel(Vector3 at, Quaternion rotation, Transform parent,

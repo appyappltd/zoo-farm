@@ -1,3 +1,4 @@
+using Logic.Houses;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour

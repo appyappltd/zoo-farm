@@ -1,11 +1,10 @@
-using Logic.Interactions;
 using Logic.Interactions.Validators;
 using Ui;
 using UnityEngine;
 
-namespace Logic.LevelGoals
+namespace Logic.Interactions
 {
-    public class ReleaseInteractionProvider : MonoBehaviour
+    public class ReleaseInteractionProvider : MonoBehaviour, IInteractionZoneProvider
     {
         [SerializeField] private HeroInteraction _interaction;
         [SerializeField] private ReleaseIconView _releaseIcon;

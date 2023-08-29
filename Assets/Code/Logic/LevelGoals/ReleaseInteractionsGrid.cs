@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Logic.Interactions;
 using Infrastructure.Factory;
 using Logic.Animals;
-using Logic.Interactions;
 using Logic.Player;
 using Logic.TransformGrid;
 using NTC.Global.System;

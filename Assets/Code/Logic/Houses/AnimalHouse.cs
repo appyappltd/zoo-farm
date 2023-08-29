@@ -1,5 +1,6 @@
 using System;
 using Data.ItemsData;
+using Logic.Animals;
 using Logic.Foods.FoodSettings;
 using Logic.Storages;
 using Logic.Storages.Items;
@@ -7,7 +8,7 @@ using NTC.Global.System;
 using Ui;
 using UnityEngine;
 
-namespace Logic.Animals
+namespace Logic.Houses
 {
     public class AnimalHouse : MonoBehaviour, IAnimalHouse
     {
