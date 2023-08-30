@@ -6,7 +6,7 @@ namespace Ui
 {
     public class BuildIconView : MonoBehaviour
     {
-        [SerializeField] private Consumer _consumer;
+        [SerializeField] private SmoothConsumer _consumer;
         [SerializeField] private TextSetter _costText;
 
         private void Start()

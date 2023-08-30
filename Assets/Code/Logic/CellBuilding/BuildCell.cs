@@ -7,10 +7,10 @@ namespace Logic.CellBuilding
 {
     public class BuildCell : MonoBehaviour
     {
-        [SerializeField] private Consumer _consumer;
+        [SerializeField] private SmoothConsumer _consumer;
         [SerializeField] private SpriteRenderer _icon;
         [SerializeField] private ToCameraRotator _toCameraRotator;
-        
+
         public event Action Build = () => { };
 
         private void Awake() =>

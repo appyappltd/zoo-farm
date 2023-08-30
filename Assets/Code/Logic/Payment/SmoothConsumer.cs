@@ -14,7 +14,7 @@ namespace Logic.Payment
 {
     [RequireComponent(typeof(TimerOperator))]
     [RequireComponent(typeof(RunTranslator))]
-    public class Consumer : MonoBehaviour
+    public class SmoothConsumer : MonoBehaviour, ISmoothConsumer
     {
         private readonly Observable<int> _leftCoinsToPay = new Observable<int>();
         
