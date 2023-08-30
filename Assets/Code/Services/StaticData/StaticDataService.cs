@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data.ItemsData;
-using Infrastructure;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
-using Logic.Foods.FoodSettings;
 using Logic.LevelGoals;
 using Logic.Medical;
 using Logic.SpawnPlaces;

@@ -217,7 +217,8 @@ MonoBehaviour:
   _playerInteraction:
     _underlyingValue: {fileID: 0}
   _sine: {fileID: 6781702071561779203}
+  _isSupportLoopedInteraction: 0
   _axleInfluence: 0
   _defaultSize: 0
   _maxSize: 1
-  _decreaseTime: 0.5
+  _decreaseTime: 0.15

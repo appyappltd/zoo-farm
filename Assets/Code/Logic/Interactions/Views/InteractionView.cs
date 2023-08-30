@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics;
 using AYellowpaper;
+using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Logic.Interactions
 {
@@ -16,16 +16,21 @@ namespace Logic.Interactions
         [Space] [Header("Settings")]
         [SerializeField] private bool _isSupportLoopedInteraction;
         [SerializeField] private AxleInfluence _axleInfluence;
-        [SerializeField] private float _defaultSize;
-        [SerializeField] private float _maxSize;
-        [SerializeField] private float _decreaseTime = 0.25f;
-
+        [SerializeField] private float _defaultSize = 1f;
+        [SerializeField] private float _maxSize = 1.2f;
+        [SerializeField] private float _decreaseTime = 0.15f;
+        [SerializeField] private bool _isCustomIncreaseTime;
+        
+        [ShowIf(nameof(_isCustomIncreaseTime))]
+        [SerializeField] private float _increaseTime = 0.15f;
+        
         private float _deltaSize;
         private float _targetSize;
         private float _smoothTime;
+        private float _sizeDifference;
         
         private Vector3 _axleFilter;
-        private Vector3 _initialSize;
+        private Vector3 _initialScale;
 
         private void Awake()
         {
@@ -36,9 +41,16 @@ namespace Logic.Interactions
             if (_isSupportLoopedInteraction)
                 _playerInteraction.Value.Interacted += OnInteracted;
 
-            _initialSize = _sine.localScale;
+            _increaseTime = _isCustomIncreaseTime
+                ? _increaseTime
+                : _playerInteraction.Value.InteractionDelay;
+            
+            _initialScale = _sine.localScale;
             _deltaSize = _defaultSize;
+            _sizeDifference = Mathf.Abs(_defaultSize - _maxSize);
+            
             SetupFilter();
+            SetDefault();
         }
 
         private void OnDestroy()
@@ -62,14 +74,14 @@ namespace Logic.Interactions
         public void SetDefault()
         {
             enabled = false;
-            _sine.localScale = ScaleFiltrate(_initialSize, _defaultSize);
+            _sine.localScale = ScaleFiltrate(_initialScale, _defaultSize);
             _deltaSize = _defaultSize;
         }
 
         protected override void Run()
         {
-            _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime);
-            _sine.localScale = ScaleFiltrate(_initialSize, _deltaSize);
+            _deltaSize = Mathf.MoveTowards(_deltaSize, _targetSize, Time.deltaTime / _smoothTime * _sizeDifference);
+            _sine.localScale = ScaleFiltrate(_initialScale, _deltaSize);
             
             if (Mathf.Approximately(_deltaSize, _targetSize))
                 enabled = false;
@@ -106,7 +118,7 @@ namespace Logic.Interactions
         private void BeginIncrease()
         {
             _targetSize = _maxSize;
-            _smoothTime = _playerInteraction.Value.InteractionDelay;
+            _smoothTime = _increaseTime;
             enabled = true;
         }
 

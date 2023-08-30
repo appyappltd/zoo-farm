@@ -8,7 +8,6 @@ using Logic.TransformGrid;
 using Services.Animals;
 using Ui.LevelGoalPanel;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Logic.LevelGoals
 {
@@ -19,7 +18,6 @@ namespace Logic.LevelGoals
         [SerializeField] private InterfaceReference<ITransformGrid, MonoBehaviour> _transformGrid;
         [SerializeField] private LevelGoalPanelView _goalPanelView;
         [SerializeField] private bool _isDeactivateOnRelease;
-        [FormerlySerializedAs("_temporalGoalPreset")] [SerializeField] private GoalConfig _temporalGoalConfig;
 
         private LevelGoal _goal;
         private ReleaseInteractionsGrid _releaseInteractions;
@@ -37,11 +35,11 @@ namespace Logic.LevelGoals
             _goalPanelView.Dispose();
         }
 
-        public void Construct(IGameFactory gameFactory, IAnimalsService animalsService)
+        public void Construct(IGameFactory gameFactory, IAnimalsService animalsService, GoalConfig goalConfig)
         {
-            _releaseInteractions = new ReleaseInteractionsGrid(gameFactory, _transformGrid.Value, _temporalGoalConfig.AnimalsToRelease.Keys);
-            _goal = new LevelGoal(animalsService, _animalInteraction, _releaseInteractions, _temporalGoalConfig, _coinSpawner, _isDeactivateOnRelease);
-            _goalPanelView.Construct(gameFactory, _temporalGoalConfig, _goal.Progress);
+            _releaseInteractions = new ReleaseInteractionsGrid(gameFactory, _transformGrid.Value, goalConfig.AnimalsToRelease.Keys);
+            _goal = new LevelGoal(animalsService, _animalInteraction, _releaseInteractions, goalConfig, _coinSpawner, _isDeactivateOnRelease);
+            _goalPanelView.Construct(gameFactory, goalConfig, _goal.Progress);
         }
     }
 }

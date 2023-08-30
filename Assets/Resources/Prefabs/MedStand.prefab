@@ -733,7 +733,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0510194f60d4490908fe6fed2780a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionDelay: 0.5
+  _interactionDelay: 0.15
+  _isLooped: 0
   _isValidate: 1
   _validationMode: 1
   _interactionValidators:

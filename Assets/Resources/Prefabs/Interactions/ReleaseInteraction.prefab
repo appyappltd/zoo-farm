@@ -598,11 +598,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8741105270092319691, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       propertyPath: _decreaseTime
-      value: 0.5
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8741105270092319691, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       propertyPath: _axleInfluence
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8741105270092319691, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      propertyPath: _isCustomIncreaseTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8741105270092319691, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       propertyPath: _isSupportLoopedInteraction
@@ -622,6 +626,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1864345947891425531, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4476321548934197084}
+    - targetCorrespondingSourceObject: {fileID: 1864345947891425531, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6753358414154777199}
     - targetCorrespondingSourceObject: {fileID: 2659545068070483738, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8772304891916860647}
@@ -697,6 +704,19 @@ MonoBehaviour:
   _blinkSize: 1.15
   _rejectedColor: {r: 0.7924528, g: 0.16197929, b: 0.16197929, a: 1}
   _blinkDuration: 0.5
+--- !u!114 &6753358414154777199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177169864851334926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878f4476ee124052bb4c0083a276a8ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scaleModifierId: 0
 --- !u!114 &1449947773744863706 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1131859396451737135, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
@@ -741,8 +761,10 @@ MonoBehaviour:
   _isSupportLoopedInteraction: 1
   _axleInfluence: 1
   _defaultSize: 0
-  _maxSize: 1.92
+  _maxSize: 1
   _decreaseTime: 0.5
+  _isCustomIncreaseTime: 0
+  _increaseTime: 0.15
 --- !u!212 &4582180633394982186 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2611312407388187359, guid: a24db00039b348648ba5deedbf0f6562, type: 3}

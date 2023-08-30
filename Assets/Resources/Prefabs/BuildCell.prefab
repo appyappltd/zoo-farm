@@ -351,6 +351,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractionZone
       objectReference: {fileID: 0}
+    - target: {fileID: 6250368949507349905, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: _interactionDelay
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_RootOrder
       value: -1

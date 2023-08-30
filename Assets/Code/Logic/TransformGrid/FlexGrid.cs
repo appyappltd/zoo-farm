@@ -8,6 +8,7 @@ using NaughtyAttributes;
 using NTC.Global.System;
 using Tools.Extension;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Logic.TransformGrid
 {
@@ -83,10 +84,22 @@ namespace Logic.TransformGrid
 
         public void RemoveAll()
         {
-            int cellsCount = _cells.Count;
+            List<Transform> _tempCells = ListPool<Transform>.Get();
             
-            for (int i = 0; i < cellsCount; i++)
-                RemoveCell(_cells[i]);
+            for (int i = 0; i < _cells.Count; i++)
+                _tempCells.Add(_cells[i]);
+
+            for (int i = 0; i < _tempCells.Count; i++)
+            {
+                Transform tempCell = _tempCells[i];
+                tempCell.Unparent();
+                _cells.Remove(tempCell);
+                _positions.Remove(_positions.Last());
+                CustomScaleTranslatable translatable = tempCell.GetComponent<CustomScaleTranslatable>();
+                Translate(translatable, Vector3.one, Vector3.zero, tempCell.gameObject.Disable);
+            }
+            
+            ListPool<Transform>.Release(_tempCells);
         }
         
         [Button] [Conditional("UNITY_EDITOR")]

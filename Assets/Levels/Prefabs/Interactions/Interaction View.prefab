@@ -48,9 +48,11 @@ MonoBehaviour:
   _playerInteraction:
     _underlyingValue: {fileID: 0}
   _sine: {fileID: 7385830647157193659}
+  _isSupportLoopedInteraction: 0
+  _axleInfluence: 0
   _defaultSize: 1
   _maxSize: 1.2
-  _decreaseTime: 0.5
+  _decreaseTime: 0.15
 --- !u!1 &8736131136128588407
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Infrastructure;
 using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Gates;
@@ -7,6 +8,7 @@ using Logic.Spawners;
 using Logic.Translators;
 using Services;
 using Services.Animals;
+using Services.StaticData;
 using StaticData;
 using Tutorial.StaticTriggers;
 using Ui.Services;
@@ -36,7 +38,8 @@ namespace Logic.Animals
         {
             Construct(
                 AllServices.Container.Single<IGameFactory>(),
-                AllServices.Container.Single<IAnimalsService>());
+                AllServices.Container.Single<IAnimalsService>(),
+                AllServices.Container.Single<IStaticDataService>());
         }
 
         private void OnDestroy()
@@ -45,10 +48,12 @@ namespace Logic.Animals
             _levelGoal.ReleaseInteraction -= OnReleaseInteracted;
         }
         
-        public void Construct(IGameFactory gameFactory, IAnimalsService animalsService)
+        public void Construct(IGameFactory gameFactory, IAnimalsService animalsService, IStaticDataService staticData)
         {
             _animalService = animalsService;
-            _levelGoal.Construct(gameFactory, animalsService);
+            GoalConfig goalConfig = staticData.GoalConfigForLevel(LevelNames.First);
+            
+            _levelGoal.Construct(gameFactory, animalsService, goalConfig);
             
             _animalInteraction.Interacted += OnGatePassed;
             _levelGoal.ReleaseInteraction += OnReleaseInteracted;

@@ -506,6 +506,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2008307126301092606, guid: f4b750d216a362342a5d716074ab2fe8, type: 3}
+      propertyPath: _decreaseTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2008307126301092606, guid: f4b750d216a362342a5d716074ab2fe8, type: 3}
+      propertyPath: _playerInteraction._underlyingValue
+      value: 
+      objectReference: {fileID: 110428601610426857}
     - target: {fileID: 3795157622060416634, guid: f4b750d216a362342a5d716074ab2fe8, type: 3}
       propertyPath: _needText
       value: 
@@ -586,8 +594,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2008307126301092606, guid: f4b750d216a362342a5d716074ab2fe8, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -685,7 +692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4624410425686242124, guid: f003213573d8dc14eb8b73211bd82225, type: 3}
       propertyPath: _interactionDelay
-      value: 0.5
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7465137993590127624, guid: f003213573d8dc14eb8b73211bd82225, type: 3}
       propertyPath: m_Name

@@ -8,6 +8,7 @@ using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Player;
 using Logic.TransformGrid;
+using NTC.Global.System;
 using Services.StaticData;
 using UnityEngine;
 
@@ -54,6 +55,7 @@ namespace Logic.Houses
             foreach (AnimalType availableAnimalType in _staticData.GoalConfigForLevel(LevelNames.First).AnimalsToRelease.Keys)
             {
                 ChoseHouseInteractionProvider choseHouseZone = _gameFactory.CreateChoseInteraction(Vector3.zero, Quaternion.identity, availableAnimalType);
+                choseHouseZone.gameObject.Disable();
                 choseHouseZone.Construct(availableAnimalType);
                 _choseHouseInteractions.Add(availableAnimalType, choseHouseZone);
 
