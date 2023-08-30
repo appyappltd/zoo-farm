@@ -14,7 +14,7 @@ namespace Logic.Payment
 {
     [RequireComponent(typeof(TimerOperator))]
     [RequireComponent(typeof(RunTranslator))]
-    public class SmoothConsumer : MonoBehaviour, ISmoothConsumer
+    public class SmoothConsumer : MonoBehaviour, IConsumer
     {
         private readonly Observable<int> _leftCoinsToPay = new Observable<int>();
         
@@ -38,24 +38,13 @@ namespace Logic.Payment
             _poolService = AllServices.Container.Single<IPoolService>();
             _translator = GetComponent<RunTranslator>();
             _timerOperator = GetComponent<TimerOperator>();
+            
+            Subscribe();
         }
 
-        private void OnEnable()
+        private void OnDestroy()
         {
-            _playerInteraction.Interacted += Init;
-            _playerInteraction.Interacted += BeginTransaction;
-            _playerInteraction.Canceled += CancelTransaction;
-        }
-
-        private void OnDisable()
-        {
-            _playerInteraction.Interacted -= BeginTransaction;
-            _playerInteraction.Canceled -= CancelTransaction;
-        }
-
-        private void CancelTransaction()
-        {
-            _timerOperator.Pause();
+            Unsubscribe();
         }
 
         public void SetCost(int buildCost)
@@ -76,6 +65,22 @@ namespace Logic.Payment
             
             _playerInteraction.Interacted -= Init;
         }
+
+        private void Subscribe()
+        {
+            _playerInteraction.Interacted += Init;
+            _playerInteraction.Interacted += BeginTransaction;
+            _playerInteraction.Canceled += CancelTransaction;
+        }
+
+        private void Unsubscribe()
+        {
+            _playerInteraction.Interacted -= BeginTransaction;
+            _playerInteraction.Canceled -= CancelTransaction;
+        }
+
+        private void CancelTransaction() =>
+            _timerOperator.Pause();
 
         private void OnPay() 
         {

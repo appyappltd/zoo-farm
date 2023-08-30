@@ -8,6 +8,7 @@ using Infrastructure.AssetManagement;
 using Infrastructure.Builders;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
+using Logic.Payment;
 using Logic.Spawners;
 using Services.AnimalHouses;
 using Services.Animals;
@@ -135,8 +136,8 @@ namespace Infrastructure.Factory
             return _animalHouseBuilder.Build(houseObject);
         }
 
-        public GameObject CreateBuildCell(Vector3 at, Quaternion rotation) =>
-            _assets.Instantiate(AssetPath.BuildCellPath, at, rotation);
+        public GameObject CreateBuildCell(Vector3 at, Quaternion rotation, ConsumeType consumeType) =>
+            _assets.Instantiate($"{AssetPath.BuildCellPath}/{consumeType}", at, rotation);
 
         public GameObject CreateVisual(VisualType visual, Quaternion quaternion) =>
             _assets.Instantiate($"{AssetPath.VisualsPath}/{visual}");

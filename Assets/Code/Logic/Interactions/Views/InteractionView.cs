@@ -18,11 +18,11 @@ namespace Logic.Interactions
         [SerializeField] private AxleInfluence _axleInfluence;
         [SerializeField] private float _defaultSize = 1f;
         [SerializeField] private float _maxSize = 1.2f;
-        [SerializeField] private float _decreaseTime = 0.15f;
+        [SerializeField] private float _decreaseTime = 0.25f;
         [SerializeField] private bool _isCustomIncreaseTime;
         
         [ShowIf(nameof(_isCustomIncreaseTime))]
-        [SerializeField] private float _increaseTime = 0.15f;
+        [SerializeField] private float _increaseTime = 0.25f;
         
         private float _deltaSize;
         private float _targetSize;

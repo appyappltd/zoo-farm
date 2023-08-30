@@ -2,7 +2,7 @@ using System;
 
 namespace Logic.Payment
 {
-    public interface ISmoothConsumer
+    public interface IConsumer
     {
         event Action Bought;
         Observables.IObservable<int> LeftCoinsToPay { get; }

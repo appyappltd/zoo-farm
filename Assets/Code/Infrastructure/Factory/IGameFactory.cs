@@ -5,6 +5,7 @@ using Data.ItemsData;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
+using Logic.Payment;
 using Logic.Spawners;
 using Services;
 using Services.PersistentProgress;
@@ -24,7 +25,7 @@ namespace Infrastructure.Factory
         void WarmUp();
         GameObject CreateHud();
         GameObject CreateHero(Vector3 vector3);
-        GameObject CreateBuildCell(Vector3 at, Quaternion rotation);
+        GameObject CreateBuildCell(Vector3 at, Quaternion rotation, ConsumeType consumeType);
         GameObject CreateVisual(VisualType visual, Quaternion quaternion);
         GameObject CreateCollectibleCoin();
         GameObject CreateFoodVendor(Vector3 at, Quaternion rotation, FoodId foodId);

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Logic.Payment
 {
-    public class OnceConsumer : MonoBehaviour, ISmoothConsumer
+    public class OnceConsumer : MonoBehaviour, IConsumer
     {
         private readonly Observable<int> _leftCoinsToPay = new Observable<int>();
         

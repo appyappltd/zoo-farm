@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using Infrastructure.Factory;
+using Logic.Payment;
 using NaughtyAttributes;
 using NTC.Global.System;
 using Services;
@@ -14,6 +15,7 @@ namespace Logic.CellBuilding
         [SerializeField] private int[] _buildCosts;
         [SerializeField] private Vector3 _buildOffset;
         [SerializeField] private bool _isAutoBuild = true;
+        [SerializeField] private ConsumeType _consumeType = ConsumeType.Smooth;
 
         protected IGameFactory GameFactory;
         
@@ -29,7 +31,7 @@ namespace Logic.CellBuilding
             InitMarkers();
             GameFactory = AllServices.Container.Single<IGameFactory>();
             _currentMarker = _buildPlaces[0];
-            _activeBuildCell = GameFactory.CreateBuildCell(_currentMarker.Location.Position, _currentMarker.Location.Rotation)
+            _activeBuildCell = GameFactory.CreateBuildCell(_currentMarker.Location.Position, _currentMarker.Location.Rotation, _consumeType)
                 .GetComponent<BuildCell>();
             _activeBuildCell.transform.SetParent(transform, true);
             _activeBuildCell.gameObject.SetActive(false);
