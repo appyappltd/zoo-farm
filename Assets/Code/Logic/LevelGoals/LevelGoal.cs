@@ -14,8 +14,8 @@ namespace Logic.LevelGoals
         private readonly ReleaseInteractionsGrid _releaseInteractionsGrid;
         private readonly GoalConfig _goalConfig;
         private readonly CollectibleCoinSpawner _coinSpawner;
-        private readonly bool _isDeactivateOnRelease;
         private readonly AnimalInteraction _animalInteraction;
+        private readonly bool _isDeactivateOnRelease;
 
         public LevelGoal(IAnimalsService animalsService, AnimalInteraction animalInteraction,
             ReleaseInteractionsGrid releaseInteractionsGrid, GoalConfig goalConfig, CollectibleCoinSpawner coinSpawner, bool isDeactivateOnRelease)

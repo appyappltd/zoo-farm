@@ -126,6 +126,9 @@ namespace Infrastructure.Factory
             return _animalGoalPanelBuilder.Build(panelObject, countTypePair);
         }
 
+        public GameObject CreateHouseFoundation(Vector3 at, Quaternion rotation) =>
+            _assets.Instantiate(AssetPath.HouseFoundationPath, at, rotation);
+
         public IAnimalHouse CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType)
         {
             GameObject houseObject = InstantiateRegistered($"{AssetPath.AnimalHousePath}/{animalType}House", at, rotation);

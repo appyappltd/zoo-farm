@@ -9,10 +9,7 @@ namespace Logic.Interactions
     {
         public event Action<IAnimal> Interacted = _ => { };
 
-        protected override void OnTargetEntered(IAnimal animal)
-        {
+        protected override void OnTargetEntered(IAnimal animal) =>
             Interacted.Invoke(animal);
-            Debug.Log("Interacted");
-        }
     }
 }

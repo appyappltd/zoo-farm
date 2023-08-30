@@ -1,4 +1,3 @@
-using System;
 using AYellowpaper;
 using Data;
 using Infrastructure.Factory;
@@ -32,7 +31,7 @@ namespace Logic.Houses
             Unsubscribe();
         }
 
-        public void Construct(IStaticDataService staticData, IGameFactory gameFactory, IAnimalCounter animalCounter)
+        private void Construct(IStaticDataService staticData, IGameFactory gameFactory, IAnimalCounter animalCounter)
         {
             _foundation = new HouseFoundation(staticData, gameFactory, _transformGrid.Value, animalCounter);
 
@@ -49,6 +48,8 @@ namespace Logic.Houses
         {
             _heroInteraction.Interacted -= OnInteracted;
             _heroInteraction.Canceled -= OnCanceled;
+            
+            _foundation.Dispose();
         }
 
         private void OnInteracted(Hero _) =>

@@ -19,6 +19,7 @@ namespace Infrastructure.AssetManagement
         public const string PlantPath = "Prefabs/Plants";
         public const string ReleaseInteractionPath = "Prefabs/Interactions/ReleaseInteraction";
         public const string ChoseHouseInteractionPath = "Prefabs/Interactions/ChoseHouseInteraction";
+        public const string HouseFoundationPath = "Prefabs/AnimalHouses/HouseFoundation";
 
         public const string UIRootPath = "Prefabs/UI/UIRoot";
         public const string HudPath = "Prefabs/UI/HUD";

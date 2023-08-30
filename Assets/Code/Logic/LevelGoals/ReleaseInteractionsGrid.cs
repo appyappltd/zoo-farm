@@ -50,6 +50,8 @@ namespace Logic.LevelGoals
         {
             for (var index = 0; index < _disposables.Count; index++)
                 _disposables[index].Invoke();
+            
+            _disposables.Clear();
         }
 
         private void InitNewInteractionZone(AnimalType type)

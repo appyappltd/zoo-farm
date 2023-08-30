@@ -24,21 +24,22 @@ namespace Infrastructure.Factory
         void WarmUp();
         GameObject CreateHud();
         GameObject CreateHero(Vector3 vector3);
-        Animal CreateAnimal(AnimalItemStaticData animalData, Vector3 at, Quaternion rotation);
-        Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation);
-        IAnimalHouse CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType);
         GameObject CreateBuildCell(Vector3 at, Quaternion rotation);
         GameObject CreateVisual(VisualType visual, Quaternion quaternion);
         GameObject CreateCollectibleCoin();
         GameObject CreateFoodVendor(Vector3 at, Quaternion rotation, FoodId foodId);
-        MedicalBed CreateMedBed(Vector3 at, Quaternion rotation);
-        MedicalToolStand CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
         GameObject CreateVolunteer(Vector3 at, Transform parent);
         GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId);
         GameObject CreateKeeper(Vector3 markerBuildPosition);
         GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type);
+        MedicalBed CreateMedBed(Vector3 at, Quaternion rotation);
+        MedicalToolStand CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
+        Animal CreateAnimal(AnimalItemStaticData animalData, Vector3 at, Quaternion rotation);
+        Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation);
+        GameObject CreateHouseFoundation(Vector3 markerBuildPosition, Quaternion locationRotation);
         IAnimalHouse CreateBreedingHouse(Vector3 at, Quaternion rotation);
         ReleaseInteractionProvider CreateReleaseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
+        IAnimalHouse CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType);
         ChoseHouseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
         GoalAnimalPanelProvider CreateAnimalGoalPanel(Vector3 at, Quaternion rotation, Transform parent, KeyValuePair<AnimalType, int> countTypePair);
     }
