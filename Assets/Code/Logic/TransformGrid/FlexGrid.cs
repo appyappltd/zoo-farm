@@ -86,9 +86,7 @@ namespace Logic.TransformGrid
             int cellsCount = _cells.Count;
             
             for (int i = 0; i < cellsCount; i++)
-            {
                 RemoveCell(_cells[i]);
-            }
         }
         
         [Button] [Conditional("UNITY_EDITOR")]

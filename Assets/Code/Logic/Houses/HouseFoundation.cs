@@ -30,7 +30,7 @@ namespace Logic.Houses
             CreateAllHouseInteractions();
         }
 
-        public void Show()
+        public void ShowBuildChoice()
         {
             foreach (var animalType in _animalCounter.GetAvailableAnimalTypes())
             {
@@ -38,7 +38,7 @@ namespace Logic.Houses
             }
         }
 
-        public void Hide()
+        public void HideBuildChoice()
         {
             _transformGrid.RemoveAll();
         }

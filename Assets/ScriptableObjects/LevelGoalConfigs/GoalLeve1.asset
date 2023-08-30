@@ -21,3 +21,4 @@ MonoBehaviour:
     - Key: 3
       Value: 3
   _cashRewardForCompletingGoal: 420
+  _levelName: Level1
