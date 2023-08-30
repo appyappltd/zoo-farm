@@ -33,7 +33,7 @@ namespace Logic.Houses
 
         private void Construct(IStaticDataService staticData, IGameFactory gameFactory, IAnimalCounter animalCounter)
         {
-            _foundation = new HouseFoundation(staticData, gameFactory, _transformGrid.Value, animalCounter);
+            _foundation = new HouseFoundation(staticData, gameFactory, _transformGrid.Value, animalCounter, transform);
 
             Subscribe();
         }

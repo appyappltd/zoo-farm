@@ -11,27 +11,30 @@ using Logic.TransformGrid;
 using NTC.Global.System;
 using Services.StaticData;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Logic.Houses
 {
     public class HouseFoundation : IDisposable
     {
-        private readonly ITransformGrid _transformGrid;
-        private readonly IAnimalCounter _animalCounter;
         private readonly IStaticDataService _staticData;
         private readonly IGameFactory _gameFactory;
+        private readonly ITransformGrid _transformGrid;
+        private readonly IAnimalCounter _animalCounter;
+        private readonly Transform _selfTransform;
 
         private CompositeDisposable _disposable = new CompositeDisposable();
         
         private Dictionary<AnimalType, ChoseHouseInteractionProvider> _choseHouseInteractions = new Dictionary<AnimalType, ChoseHouseInteractionProvider>();
 
         public HouseFoundation(IStaticDataService staticData, IGameFactory gameFactory, ITransformGrid transformGrid,
-            IAnimalCounter animalCounter)
+            IAnimalCounter animalCounter, Transform selfTransform)
         {
             _staticData = staticData;
             _gameFactory = gameFactory;
             _transformGrid = transformGrid;
             _animalCounter = animalCounter;
+            _selfTransform = selfTransform;
 
             CreateAllHouseInteractions();
         }
@@ -67,9 +70,10 @@ namespace Logic.Houses
         {
             void OnHouseChosen(Hero hero)
             {
-                Transform transform = choseHouseZone.transform;
-                _gameFactory.CreateAnimalHouse(transform.position, transform.rotation,
+                _gameFactory.CreateAnimalHouse(_selfTransform.position, _selfTransform.rotation,
                     choseHouseZone.AssociatedAnimalType);
+                
+                Object.Destroy(_selfTransform.gameObject);
             }
 
             choseHouseZone.Interaction.Interacted += OnHouseChosen;
