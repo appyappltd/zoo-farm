@@ -18,19 +18,19 @@ MonoBehaviour:
       _serializedList:
       - Key: 1
         Value: 1
-    CashRewardForCompletingGoal: 100
+    CashRewardForCompletingGoal: 10
   - AnimalsToRelease:
       _serializedList:
       - Key: 1
         Value: 3
-    CashRewardForCompletingGoal: 100
+    CashRewardForCompletingGoal: 10
   - AnimalsToRelease:
       _serializedList:
       - Key: 1
         Value: 3
       - Key: 2
         Value: 3
-    CashRewardForCompletingGoal: 100
+    CashRewardForCompletingGoal: 10
   - AnimalsToRelease:
       _serializedList:
       - Key: 1
@@ -39,4 +39,4 @@ MonoBehaviour:
         Value: 3
       - Key: 3
         Value: 3
-    CashRewardForCompletingGoal: 100
+    CashRewardForCompletingGoal: 10
