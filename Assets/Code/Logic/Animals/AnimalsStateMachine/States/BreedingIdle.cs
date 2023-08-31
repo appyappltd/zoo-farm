@@ -27,7 +27,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
         protected override void OnExit()
         {
             _onBreedingComplete.Invoke();
-            _satiety.ProgressBar.Replenish(_satietyAfterBreeding);
+            _satiety.ProgressBar.Replenish(_satiety.ProgressBar.Max);
         }
 
         public void Init(Action onBreedingBegin, Action onBreedingComplete)

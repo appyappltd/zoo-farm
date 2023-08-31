@@ -1,9 +1,5 @@
-using System;
-using Logic.Interactions;
 using Logic.Interactions;
 using Logic.Animals;
-using Logic.Houses;
-using Logic.LevelGoals;
 using Services.Animals;
 using Services.StaticData;
 using UnityEngine;
