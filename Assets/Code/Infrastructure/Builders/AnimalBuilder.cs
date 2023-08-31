@@ -12,6 +12,8 @@ namespace Code.Infrastructure.Builders
         private readonly IStaticDataService _staticDataService;
         private readonly IAnimalsService _animalsService;
 
+        private int _animalsCount;
+        
         public AnimalBuilder(IStaticDataService staticDataService, IAnimalsService animalsService)
         {
             _staticDataService = staticDataService;
@@ -20,9 +22,9 @@ namespace Code.Infrastructure.Builders
 
         public Animal Build(GameObject animalObject, AnimalItemStaticData staticData)
         {
-            //TODO: заменить реализацию хеш кода на уникальный id и добавить статик дату для животного
+            _animalsCount++;
             Animal animal = animalObject.GetComponent<Animal>();
-            AnimalId animalId = new AnimalId(staticData.AnimalType, animal.GetHashCode(), staticData.EdibleFood);
+            AnimalId animalId = new AnimalId(staticData.AnimalType, _animalsCount, staticData.EdibleFood);
             animal.Construct(animalId, staticData.BeginStats, _staticDataService);
             _animalsService.Register(animal);
             return animal;

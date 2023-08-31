@@ -56,8 +56,6 @@ namespace Logic.Payment
 
         private void Init(Hero hero)
         {
-            ////TODO: Добавить инициализацию пула в сервис
-            
             _spawner = new VisualTranslatorsSpawner(() =>
                     AllServices.Container.Single<IGameFactory>().CreateVisual(VisualType.Money,
                         Quaternion.identity),
