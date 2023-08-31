@@ -50,6 +50,8 @@ MonoBehaviour:
     _underlyingValue: {fileID: 3361213146630432397}
   _icon: {fileID: 3393501234020279562}
   _toCameraRotator: {fileID: 42798364035269590}
+  _interactionViews:
+  - {fileID: 4326809647273741817}
 --- !u!1 &3289744635632833630
 GameObject:
   m_ObjectHideFlags: 0

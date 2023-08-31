@@ -151,27 +151,50 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                _volunteerSpawner.Spawn();
                 _medBedGridOperator.ShowNextBuildCell();
                 _arrow.Move(_medBedGridOperator.BuildCellPosition);
             }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstMedBadSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
-                _volunteerSpawner.StartAutoSpawning();
+                _arrow.Hide();
+                _volunteerSpawner.Spawn();
                 _medToolGridOperator.ShowNextBuildCell();
                 _houseGridOperator.ShowNextBuildCell();
-                _arrow.Move(_medToolGridOperator.BuildCellPosition);
             }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
-                _arrow.Hide();
                 ActivateAutoBuild(_medBedGridOperator);
-                ActivateAutoBuild(_medToolGridOperator);
                 ActivateAutoBuild(_houseGridOperator);
+                ActivateAutoBuild(_houseGridOperator);
+                _houseGridOperator.ShowNextBuildCell();
             }));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_animalHouseSpawned));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_animalHouseSpawned));
+            
+            // Ожидание выполнения цели выпуска трёх зебр
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+
+            //Спавн двух зебр и двух жираффов
+            for (int i = 0; i < 4; i++)
+            {
+                TutorialModules.Add(new TutorialTimeAwaiter(5f, GlobalUpdate.Instance));
+                TutorialModules.Add(new TutorialAction(() => _volunteerSpawner.Spawn()));
+            }
+
+            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_animalReleaser.position)));
+            
+            //Ожидание выполнения цели
+            
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _cameraOperatorService.Focus(_keeper);

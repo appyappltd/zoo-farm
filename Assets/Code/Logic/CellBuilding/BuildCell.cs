@@ -1,6 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using AYellowpaper;
+using Logic.Interactions;
 using Logic.Payment;
+using NaughtyAttributes;
 using Tools.Extension;
 using UnityEngine;
 
@@ -11,6 +16,7 @@ namespace Logic.CellBuilding
         [SerializeField] private InterfaceReference<IConsumer, MonoBehaviour> _consumer;
         [SerializeField] private SpriteRenderer _icon;
         [SerializeField] private ToCameraRotator _toCameraRotator;
+        [SerializeField] private List<InteractionView> _interactionViews;
         
         public event Action Build = () => { };
 
@@ -20,6 +26,7 @@ namespace Logic.CellBuilding
         private void OnDestroy() =>
             _consumer.Value.Bought -= OnBought;
 
+        [Conditional("UNITY_EDITOR")]
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(transform.position.ChangeY(transform.position.y + 0.5f), Vector3.one);
@@ -37,9 +44,21 @@ namespace Logic.CellBuilding
             selfTransform.position = toLocation.Position;
             selfTransform.rotation = toLocation.Rotation;
             _toCameraRotator.UpdateRotation();
+
+            for (var index = 0; index < _interactionViews.Count; index++)
+            {
+                InteractionView view = _interactionViews[index];
+                view.SetDefault();
+            }
         }
 
         private void OnBought() =>
             Build.Invoke();
+
+        [Button] [Conditional("UNITY_EDITOR")]
+        private void CollectAllInteractionViews()
+        {
+            _interactionViews = GetComponentsInChildren<InteractionView>().ToList();
+        }
     }
 }

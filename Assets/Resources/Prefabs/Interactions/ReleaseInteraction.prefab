@@ -589,6 +589,10 @@ PrefabInstance:
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 7691580727360107363, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      propertyPath: _isSupportLoopedInteraction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691580727360107363, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       propertyPath: _playerInteraction._underlyingValue
       value: 
       objectReference: {fileID: 5606969781174813892}
@@ -638,9 +642,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1864345947891425531, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       insertIndex: 4
       addedObject: {fileID: 4476321548934197084}
-    - targetCorrespondingSourceObject: {fileID: 2659545068070483738, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8772304891916860647}
   m_SourcePrefab: {fileID: 100100000, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
 --- !u!1 &177169864851334926 stripped
 GameObject:
@@ -724,43 +725,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc9f3ed3389e70438d5758b4ba41c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2610864466734732300 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4580640933581034489, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
-  m_PrefabInstance: {fileID: 1993427563264854005}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2871436943516682292 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4355956524785405889, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
   m_PrefabInstance: {fileID: 1993427563264854005}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4558357405190353135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2659545068070483738, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
-  m_PrefabInstance: {fileID: 1993427563264854005}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8772304891916860647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4558357405190353135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e556351d2f1454849850359e6b3280ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerInteraction:
-    _underlyingValue: {fileID: 5606969781174813892}
-  _sine: {fileID: 2610864466734732300}
-  _isSupportLoopedInteraction: 1
-  _axleInfluence: 1
-  _defaultSize: 0
-  _maxSize: 1
-  _decreaseTime: 0.5
-  _isCustomIncreaseTime: 0
-  _increaseTime: 0.15
 --- !u!212 &4582180633394982186 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2611312407388187359, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
