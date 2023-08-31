@@ -1,4 +1,3 @@
-using Infrastructure;
 using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Gates;
