@@ -12,9 +12,6 @@ namespace Logic.Payment
         
         [SerializeField] private HeroInteraction _playerInteraction;
 
-        private int _defaultCost;
-        private IWallet _wallet;
-
         public event Action Bought = () => { };
 
         public Observables.IObservable<int> LeftCoinsToPay => _leftCoinsToPay;
@@ -33,15 +30,15 @@ namespace Logic.Payment
         {
             if (buildCost < 0)
                 throw new ArgumentOutOfRangeException(nameof(buildCost));
-
-            _defaultCost = buildCost;
+            
+            _leftCoinsToPay.Value = buildCost;
         }
         
-        private void Buy(Hero _)
+        private void Buy(Hero hero)
         {
-            if (_wallet.TrySpend(_defaultCost))
+            if (hero.Wallet.TrySpend(_leftCoinsToPay.Value))
             {
-                _leftCoinsToPay.Value -= _defaultCost;
+                _leftCoinsToPay.Value -= _leftCoinsToPay.Value;
                 Bought.Invoke();
             }
         }

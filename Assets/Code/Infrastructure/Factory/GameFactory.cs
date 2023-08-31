@@ -137,7 +137,7 @@ namespace Infrastructure.Factory
         }
 
         public GameObject CreateBuildCell(Vector3 at, Quaternion rotation, ConsumeType consumeType) =>
-            _assets.Instantiate($"{AssetPath.BuildCellPath}/{consumeType}", at, rotation);
+            _assets.Instantiate($"{AssetPath.BuildCellPath}{consumeType}", at, rotation);
 
         public GameObject CreateVisual(VisualType visual, Quaternion quaternion) =>
             _assets.Instantiate($"{AssetPath.VisualsPath}/{visual}");
