@@ -8,6 +8,7 @@ using Logic.Spawners;
 using Logic.Translators;
 using Services;
 using Services.Animals;
+using Services.PersistentProgress;
 using Services.StaticData;
 using StaticData;
 using Tutorial.StaticTriggers;
@@ -39,7 +40,8 @@ namespace Logic.Animals
             Construct(
                 AllServices.Container.Single<IGameFactory>(),
                 AllServices.Container.Single<IAnimalsService>(),
-                AllServices.Container.Single<IStaticDataService>());
+                AllServices.Container.Single<IStaticDataService>(),
+                AllServices.Container.Single<IPersistentProgressService>());
         }
 
         private void OnDestroy()
@@ -48,10 +50,11 @@ namespace Logic.Animals
             _levelGoal.ReleaseInteraction -= OnReleaseInteracted;
         }
         
-        public void Construct(IGameFactory gameFactory, IAnimalsService animalsService, IStaticDataService staticData)
+        public void Construct(IGameFactory gameFactory, IAnimalsService animalsService, IStaticDataService staticData,
+            IPersistentProgressService persistenceProgress)
         {
             _animalService = animalsService;
-            GoalConfig goalConfig = staticData.GoalConfigForLevel(LevelNames.First);
+            GoalConfig goalConfig = staticData.GoalConfigForLevel(persistenceProgress.Progress.LevelData.LevelKey);
             
             _levelGoal.Construct(gameFactory, animalsService, goalConfig);
             
