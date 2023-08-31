@@ -25,6 +25,12 @@ namespace Ui.Elements
             UpdateScale();
         }
 
+        public void Reset()
+        {
+            _amountElements = 0;
+            UpdateScale();
+        }
+        
         private void UpdateScale()
         {
             float horizontalSize = _elementSize.x * _amountElements + _margin.x + _margin.z;

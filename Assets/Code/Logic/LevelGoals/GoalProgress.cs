@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data;
 using Logic.Animals;
 using Progress;
 
@@ -13,12 +14,12 @@ namespace Logic.LevelGoals
 
         public event Action Compleated = () => { };
 
-        public GoalProgress(GoalConfig goalConfig)
+        public GoalProgress(SingleGoalData goalData)
         {
-            int capacity = goalConfig.AnimalsToRelease.Count;
+            int capacity = goalData.AnimalsToRelease.Count;
             _releaseProgressBars = new Dictionary<AnimalType, ProgressBar>(capacity);
 
-            foreach (var (animalType, goalAmount) in goalConfig.AnimalsToRelease)
+            foreach (var (animalType, goalAmount) in goalData.AnimalsToRelease)
                 RegisterProgressBar(animalType, goalAmount);
         }
 

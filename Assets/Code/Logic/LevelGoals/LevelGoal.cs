@@ -1,21 +1,27 @@
 using System;
+using Data;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Interactions;
 using Logic.Spawners;
 using Services.Animals;
+using UnityEngine;
 
 namespace Logic.LevelGoals
 {
     public class LevelGoal : IDisposable
     {
-        private readonly GoalProgress _goalProgress;
+        private GoalProgress _goalProgress;
         private readonly IAnimalsService _animalsService;
         private readonly ReleaseInteractionsGrid _releaseInteractionsGrid;
         private readonly GoalConfig _goalConfig;
         private readonly CollectibleCoinSpawner _coinSpawner;
         private readonly AnimalInteraction _animalInteraction;
         private readonly bool _isDeactivateOnRelease;
+
+        private int _currentGoalStage;
+
+        public event Action Updated = () => { };
 
         public LevelGoal(IAnimalsService animalsService, AnimalInteraction animalInteraction,
             ReleaseInteractionsGrid releaseInteractionsGrid, GoalConfig goalConfig, CollectibleCoinSpawner coinSpawner, bool isDeactivateOnRelease)
@@ -26,11 +32,16 @@ namespace Logic.LevelGoals
             _goalConfig = goalConfig;
             _coinSpawner = coinSpawner;
             _isDeactivateOnRelease = isDeactivateOnRelease;
-            _goalProgress = new GoalProgress(goalConfig);
-
-            _goalProgress.Compleated += OnGoalCompleated;
+            
+            UpdateProgress();
             _animalsService.Registered += OnRegistered;
             _animalInteraction.Interacted += OnAnimalPassGates;
+        }
+
+        private void UpdateProgress()
+        {
+            _goalProgress = new GoalProgress(_goalConfig.Goals[_currentGoalStage]);
+            _goalProgress.Compleated += OnGoalCompleated;
         }
 
         public IGoalProgressView Progress => _goalProgress;
@@ -44,6 +55,8 @@ namespace Logic.LevelGoals
             _animalInteraction.Interacted -= OnAnimalPassGates;
         }
 
+        public SingleGoalData GetCurrentGoal() =>
+            _goalConfig.Goals[_currentGoalStage];
 
         private void OnAnimalPassGates(IAnimal animal)
         {
@@ -66,8 +79,27 @@ namespace Logic.LevelGoals
                 _releaseInteractionsGrid.ActivateZone(registeredType);
         }
 
-        private void OnGoalCompleated() =>
-            _coinSpawner.Spawn(_goalConfig.CashRewardForCompletingGoal);
+        private void OnGoalCompleated()
+        {
+            _coinSpawner.Spawn(_goalConfig.Goals[_currentGoalStage].CashRewardForCompletingGoal);
+            _currentGoalStage++;
+
+            if (_currentGoalStage > _goalConfig.Goals.Count - 1)
+            {
+#if DEBUG
+                Debug.LogWarning("All Goals compete");
+#endif
+                return;
+            }
+
+            UpdateGoal();
+        }
+
+        private void UpdateGoal()
+        {
+            UpdateProgress();
+            Updated.Invoke();
+        }
 
         private bool IsSingle(AnimalType animalType) =>
             _animalsService.GetAnimalsCount(animalType).Total == 1;

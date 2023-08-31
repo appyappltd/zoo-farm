@@ -55,7 +55,7 @@ namespace Logic.Houses
 
         private void CreateAllHouseInteractions()
         {
-            foreach (AnimalType availableAnimalType in _staticData.GoalConfigForLevel(LevelNames.First).AnimalsToRelease.Keys)
+            foreach (AnimalType availableAnimalType in _staticData.GoalConfigForLevel(LevelNames.First).GetAnimalsToRelease())
             {
                 ChoseHouseInteractionProvider choseHouseZone = _gameFactory.CreateChoseInteraction(Vector3.zero, Quaternion.identity, availableAnimalType);
                 choseHouseZone.gameObject.Disable();

@@ -1,19 +1,31 @@
 using System.Collections.Generic;
-using AYellowpaper.SerializedCollections;
+using System.Linq;
+using Data;
 using Logic.Animals;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Logic.LevelGoals
 {
     [CreateAssetMenu(menuName = "Presets/GoalPreset", fileName = "NewGoalPreset", order = 0)]
     public class GoalConfig : ScriptableObject
     {
-        [SerializeField] private SerializedDictionary<AnimalType, int> _animalsToRelease;
-        [SerializeField] [Min(0)] private int _cashRewardForCompletingGoal;
         [SerializeField] private string _levelName;
+        [SerializeField] private List<SingleGoalData> _goals;
 
-        public IReadOnlyDictionary<AnimalType, int> AnimalsToRelease => _animalsToRelease;
-        public int CashRewardForCompletingGoal => _cashRewardForCompletingGoal;
         public string LevelName => _levelName;
+        public IReadOnlyList<SingleGoalData> Goals => _goals;
+
+        public IEnumerable<AnimalType> GetAnimalsToRelease()
+        {
+            List<AnimalType> _releaseTypes = ListPool<AnimalType>.Get();
+
+            foreach (var singleGoal in _goals)
+            {
+                _releaseTypes.AddRange(singleGoal.AnimalsToRelease.Keys);
+            }
+
+            return _releaseTypes.Distinct();
+        }   
     }
 }

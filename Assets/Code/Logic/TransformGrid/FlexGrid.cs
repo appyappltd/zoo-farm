@@ -72,7 +72,7 @@ namespace Logic.TransformGrid
             if (_cells.Count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(_cells.Count));
 
-            cellTransform.Unparent();
+            // cellTransform.Unparent();
             _cells.Remove(cellTransform);
             _positions.Remove(_positions.Last());
             
@@ -92,7 +92,7 @@ namespace Logic.TransformGrid
             for (int i = 0; i < _tempCells.Count; i++)
             {
                 Transform tempCell = _tempCells[i];
-                tempCell.Unparent();
+                // tempCell.Unparent();
                 _cells.Remove(tempCell);
                 _positions.Remove(_positions.Last());
                 CustomScaleTranslatable translatable = tempCell.GetComponent<CustomScaleTranslatable>();

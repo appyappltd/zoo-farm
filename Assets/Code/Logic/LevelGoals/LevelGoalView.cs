@@ -37,9 +37,9 @@ namespace Logic.LevelGoals
 
         public void Construct(IGameFactory gameFactory, IAnimalsService animalsService, GoalConfig goalConfig)
         {
-            _releaseInteractions = new ReleaseInteractionsGrid(gameFactory, _transformGrid.Value, goalConfig.AnimalsToRelease.Keys);
+            _releaseInteractions = new ReleaseInteractionsGrid(gameFactory, _transformGrid.Value, goalConfig.GetAnimalsToRelease());
             _goal = new LevelGoal(animalsService, _animalInteraction, _releaseInteractions, goalConfig, _coinSpawner, _isDeactivateOnRelease);
-            _goalPanelView.Construct(gameFactory, goalConfig, _goal.Progress);
+            _goalPanelView.Construct(gameFactory, _goal);
         }
     }
 }
