@@ -289,6 +289,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7224650146018558318, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8879924645502378765, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: _consumer
       value: 
@@ -301,9 +305,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4225859528077242858, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5449917468158920238}
     - targetCorrespondingSourceObject: {fileID: 4225859528077242858, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4326809647273741817}
@@ -329,19 +330,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4225859528077242858, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
   m_PrefabInstance: {fileID: 106826550688522067}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5449917468158920238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4314099860923018937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 878f4476ee124052bb4c0083a276a8ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scaleModifierId: 0
 --- !u!114 &4326809647273741817
 MonoBehaviour:
   m_ObjectHideFlags: 0

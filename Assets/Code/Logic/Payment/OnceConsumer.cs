@@ -16,15 +16,11 @@ namespace Logic.Payment
 
         public Observables.IObservable<int> LeftCoinsToPay => _leftCoinsToPay;
 
-        private void Awake()
-        {
+        private void Awake() =>
             _playerInteraction.Interacted += Buy;
-        }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _playerInteraction.Interacted -= Buy;
-        }
 
         public void SetCost(int buildCost)
         {
@@ -40,7 +36,12 @@ namespace Logic.Payment
             {
                 _leftCoinsToPay.Value -= _leftCoinsToPay.Value;
                 Bought.Invoke();
+                return;
             }
+
+#if DEBUG
+            Debug.LogWarning("Not enough money");
+#endif
         }
     }
 }

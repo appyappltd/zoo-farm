@@ -165,6 +165,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7691580727360107363, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      propertyPath: _increaseTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691580727360107363, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
+      propertyPath: _playerInteraction._underlyingValue
+      value: 
+      objectReference: {fileID: 8053560436845100752}
     - target: {fileID: 8741105270092319691, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
       propertyPath: _sine
       value: 
@@ -204,16 +212,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2011287463186433189, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 792988965940987775}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
---- !u!4 &1864125640201946811 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4580640933581034489, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
-  m_PrefabInstance: {fileID: 2760425973871105346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1890517529134652035 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4355956524785405889, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
@@ -230,33 +230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc9f3ed3389e70438d5758b4ba41c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4442387095821341159 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2011287463186433189, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
-  m_PrefabInstance: {fileID: 2760425973871105346}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &792988965940987775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4442387095821341159}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e556351d2f1454849850359e6b3280ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerInteraction:
-    _underlyingValue: {fileID: 8053560436845100752}
-  _sine: {fileID: 1864125640201946811}
-  _isSupportLoopedInteraction: 0
-  _axleInfluence: 1
-  _defaultSize: 0
-  _maxSize: 1
-  _decreaseTime: 0.25
-  _isCustomIncreaseTime: 0
-  _increaseTime: 0.15
 --- !u!114 &4533191821075161442 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1776143652154602528, guid: a24db00039b348648ba5deedbf0f6562, type: 3}
