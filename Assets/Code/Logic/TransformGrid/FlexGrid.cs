@@ -15,9 +15,7 @@ namespace Logic.TransformGrid
     [RequireComponent(typeof(RunTranslator))]
     public class FlexGrid : MonoBehaviour, ITransformGrid
     {
-#if UNITY_EDITOR
         private const float DebugRadius = 0.5f;
-#endif
         
         private readonly List<Transform> _cells = new List<Transform>();
         private readonly List<Vector3> _positions = new List<Vector3>();
@@ -29,10 +27,6 @@ namespace Logic.TransformGrid
         [SerializeField] [Range(1, 100)] private int _horizontalClamp;
         [SerializeField] [Range(1, 100)] private int _verticalClamp;
 
-#if UNITY_EDITOR
-        [SerializeField] private GameObject _testPrefab;
-#endif
-        
         private float _elapsedTime;
         
         private int MaxSize => _horizontalClamp * _verticalClamp;
@@ -100,12 +94,6 @@ namespace Logic.TransformGrid
             }
             
             ListPool<Transform>.Release(_tempCells);
-        }
-        
-        [Button] [Conditional("UNITY_EDITOR")]
-        private void ManualAdd()
-        {
-            AddCell(Instantiate(_testPrefab).transform);
         }
         
         [Button] [Conditional("UNITY_EDITOR")]
