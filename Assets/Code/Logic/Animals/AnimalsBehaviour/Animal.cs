@@ -19,7 +19,6 @@ namespace Logic.Animals.AnimalsBehaviour
         [SerializeField] private HappinessFactor _happinessFactor;
 
         private PersonalEmotionService _emotionService;
-        private AnimalStateMachineObserver _stateMachineObserver;
         private AnimalId _animalId;
         private IStaticDataService _staticDataService;
 
@@ -32,19 +31,15 @@ namespace Logic.Animals.AnimalsBehaviour
         public AnimalAnimator Animator => _animator;
         public PersonalEmotionService Emotions => _emotionService;
 
-        private void OnDestroy()
-        {
-            _stateMachineObserver.Dispose();
-        }
-
         public void Construct(AnimalId animalId, BeginStats beginStats, IStaticDataService staticDataService)
         {
             _staticDataService = staticDataService;
             _animalId = animalId;
             _emotionService = new PersonalEmotionService(_emotionProvider);
-            _stateMachineObserver = new AnimalStateMachineObserver(_stateMachine, _emotionService);
             _statProvider.Construct(beginStats);
             _happinessFactor.Construct(_statProvider.Satiety);
+            
+            _emotionService.Show(EmotionId.Homeless);
         }
 
         public void AttachHouse(AnimalHouse house)
