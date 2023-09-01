@@ -1,5 +1,6 @@
 using Logic.Interactions;
 using Logic.Animals;
+using Logic.Foods.FoodSettings;
 using Services.Animals;
 using Services.StaticData;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace Code.Infrastructure.Builders
                 case ReleaseInteractionProvider release:
                     Build(release, animalType);
                     break;
-                case ChoseHouseInteractionProvider choseHouse:
+                case ChoseInteractionProvider choseHouse:
                     Build(choseHouse, animalType);
                     break;
             }
@@ -35,15 +36,24 @@ namespace Code.Infrastructure.Builders
             return provider;
         }
 
+        public TZone Build<TZone>(GameObject providerObject,
+            FoodId foodType) where TZone : IInteractionZoneProvider
+        {
+            var provider = providerObject.GetComponent<TZone>();
+            Build(provider as ChoseInteractionProvider, foodType);
+            return provider;
+        }
+        
         private void Build(ReleaseInteractionProvider provider, AnimalType animalType)
         {
             provider.ReleaseIcon.Construct(_animalsService, _staticDataService, animalType);
             provider.Validator.Construct(_animalsService, animalType);
         }
 
-        private void Build(ChoseHouseInteractionProvider provider, AnimalType animalType)
-        {
+        private void Build(ChoseInteractionProvider provider, AnimalType animalType) =>
             provider.AnimalIcon.sprite = _staticDataService.IconByAnimalType(animalType);
-        }
+
+        private void Build(ChoseInteractionProvider provider, FoodId foodId) =>
+            provider.AnimalIcon.sprite = _staticDataService.IconByFoodType(foodId);
     }
 }

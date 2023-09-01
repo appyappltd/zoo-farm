@@ -98,16 +98,6 @@ namespace Services.Animals
             return new BreedingPair(animalsToPair[0], animalsToPair[1]);
         }
 
-        public AnimalCountData GetAnimalsCount(AnimalType animalType)
-        {
-            IAnimal[] animals = GetAnimals(animalType);
-
-            int total = animals.Length;
-            int releaseReady = animals.Count(IsReleaseReady);
-
-            return new AnimalCountData(total, releaseReady);
-        }
-
         private bool IsReleaseReady(IAnimal animal)
         {
             return animal.Stats.Satiety.IsEmpty == false || AllServices.Container.Single<IGlobalSettings>().CanLetHungryAnimalsRelease;

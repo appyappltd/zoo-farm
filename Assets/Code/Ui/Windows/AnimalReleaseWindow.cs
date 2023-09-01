@@ -67,7 +67,7 @@ namespace Ui.Windows
 
         private void InitPanel(ReleaseAnimalPanel panel, AnimalType animalType, Sprite icon)
         {
-            AnimalCountData countData = _animalsService.GetAnimalsCount(animalType);
+            AnimalCountData countData = _animalsService.AnimalCounter.GetAnimalCountData(animalType);
             _releaseButton.interactable = false;
 
             if (countData.Total <= 0)

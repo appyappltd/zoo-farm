@@ -22,6 +22,8 @@ namespace Logic.Animals.AnimalFeeders
 
         private AnimalFeeder _animalFeeder;
 
+        public AnimalFeeder Feeder => _animalFeeder;
+
         private void Awake()
         {
             Construct(AllServices.Container.Single<IAnimalFeederService>());
@@ -34,7 +36,7 @@ namespace Logic.Animals.AnimalFeeders
             _storage.Construct(_inventoryHolder.Inventory);
             _productReceiver.Construct(_inventoryHolder.Inventory);
             _animalFeeder = new AnimalFeeder(_bowls, _foodID);
-            feederService.Register(_animalFeeder);
+            feederService.Register(Feeder);
         }
 
         private void ConstructBowls()

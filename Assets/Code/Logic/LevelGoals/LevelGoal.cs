@@ -102,9 +102,9 @@ namespace Logic.LevelGoals
         }
 
         private bool IsSingle(AnimalType animalType) =>
-            _animalsService.GetAnimalsCount(animalType).Total == 1;
+            _animalsService.AnimalCounter.GetAnimalCountData(animalType).Total == 1;
 
         private bool IsMissing(AnimalType animalType) =>
-            _animalsService.GetAnimalsCount(animalType).Total < 1;
+            _animalsService.AnimalCounter.GetAnimalCountData(animalType).Total < 1;
     }
 }

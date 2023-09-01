@@ -18,14 +18,16 @@ namespace Logic.LevelGoals
 
         public IEnumerable<AnimalType> GetAnimalsToRelease()
         {
-            List<AnimalType> _releaseTypes = ListPool<AnimalType>.Get();
-
-            foreach (var singleGoal in _goals)
+            using (ListPool<AnimalType>.Get(out List<AnimalType> list))
             {
-                _releaseTypes.AddRange(singleGoal.AnimalsToRelease.Keys);
-            }
+                for (var index = 0; index < _goals.Count; index++)
+                {
+                    var singleGoal = _goals[index];
+                    list.AddRange(singleGoal.AnimalsToRelease.Keys);
+                }
 
-            return _releaseTypes.Distinct();
+                return list.Distinct();
+            }
         }   
     }
 }

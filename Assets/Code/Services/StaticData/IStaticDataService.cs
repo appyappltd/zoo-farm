@@ -22,6 +22,7 @@ namespace Services.StaticData
         Transform SpawnPlaceById(SpawnPlaceId placeId);
         MedToolStandConfig MedStandConfigById(MedicalToolId toolIdId);
         Sprite IconByAnimalType(AnimalType animalIdType);
+        Sprite IconByFoodType(FoodId foodId);
         ParticleSystem ParticlesById(EffectId id);
         ParticleConfig ParticlesConfig();
         ScaleModifierConfig ScaleModifierById(ScaleModifierId id);

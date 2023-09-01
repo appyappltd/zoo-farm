@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Logic.Interactions
 {
-    public class ChoseHouseInteractionProvider : MonoBehaviour, IInteractionZoneProvider
+    public class ChoseInteractionProvider : MonoBehaviour, IInteractionZoneProvider
     {
         [SerializeField] private HeroInteraction _heroInteraction;
         [SerializeField] private SpriteRenderer _animalIcon;

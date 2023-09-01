@@ -4,6 +4,7 @@ using System.Linq;
 using Data.ItemsData;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour.Emotions;
+using Logic.Foods.FoodSettings;
 using Logic.LevelGoals;
 using Logic.Medical;
 using Logic.SpawnPlaces;
@@ -23,7 +24,7 @@ namespace Services.StaticData
         private const string WindowConfigPath = "StaticData/WindowConfigs";
         private const string MedStandConfigPath = "StaticData/MedStandConfigs";
         private const string SpawnPlaceConfigPath = "StaticData/SpawnPlaceConfig";
-        private const string AnimalIconConfigPath = "StaticData/AnimalIconConfigs";
+        private const string IconsConfigPath = "StaticData/IconsConfig";
         private const string ParticleConfigPath = "StaticData/ParticleConfigs";
         private const string ScaleModifierPath = "StaticData/ScaleModifierConfigs";
         private const string AnimalItemsPath = "StaticData/HandItemConfigs/Animals";
@@ -37,7 +38,7 @@ namespace Services.StaticData
         private Dictionary<string, GoalConfig> _levelGoalConfigs;
 
         private SpawnPlaceConfig _spawnPlaceConfig;
-        private AnimalIconConfig _animalIcons;
+        private IconConfig _icons;
         private ParticleConfig _particlesConfig;
 
         public void Load()
@@ -48,7 +49,7 @@ namespace Services.StaticData
             _animalItemConfigs = LoadFor<AnimalType, AnimalItemStaticData>(AnimalItemsPath, x => x.AnimalType);
             _levelGoalConfigs = LoadFor<string, GoalConfig>(LevelGoalConfigPath, x => x.LevelName);
 
-            _animalIcons = Resources.Load<AnimalIconConfig>(AnimalIconConfigPath);
+            _icons = Resources.Load<IconConfig>(IconsConfigPath);
             _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
             _particlesConfig = Resources.Load<ParticleConfig>(ParticleConfigPath);
             _windows = Resources
@@ -67,7 +68,10 @@ namespace Services.StaticData
             _spawnPlaceConfig.SpawnPlaces[placeId].SpawnPlaceByDefault;
 
         public Sprite IconByAnimalType(AnimalType animalIdType) =>
-            _animalIcons.AnimalIcons[animalIdType];
+            _icons.AnimalIcons[animalIdType];
+
+        public Sprite IconByFoodType(FoodId foodId) =>
+            _icons.FoodIcons[foodId];
 
         public GoalConfig GoalConfigForLevel(string levelName) =>
             GetDataFor(levelName, _levelGoalConfigs);

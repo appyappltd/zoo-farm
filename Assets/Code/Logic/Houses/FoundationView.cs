@@ -1,29 +1,26 @@
 using AYellowpaper;
-using Data;
-using Infrastructure.Factory;
+using Logic.CellBuilding.Foundations;
+using Logic.CellBuilding.Foundations.Views;
 using Logic.Interactions;
 using Logic.Player;
 using Logic.TransformGrid;
-using Services;
-using Services.Animals;
-using Services.StaticData;
 using UnityEngine;
 
 namespace Logic.Houses
 {
-    public class HouseFoundationView : MonoBehaviour
+    public abstract class FoundationView : MonoBehaviour
     {
-        [SerializeField] private InterfaceReference<ITransformGrid, MonoBehaviour> _transformGrid;
+        [SerializeField] protected InterfaceReference<ITransformGrid, MonoBehaviour> TransformGrid;
         [SerializeField] private HeroInteraction _heroInteraction;
         
-        private HouseFoundation _foundation;
+        private IFoundation _foundation;
+        private readonly HouseFoundationView _houseFoundationView;
 
         private void Awake()
         {
-            Construct(
-                AllServices.Container.Single<IStaticDataService>(),
-                AllServices.Container.Single<IGameFactory>(),
-                AllServices.Container.Single<IAnimalsService>().AnimalCounter);
+            OnAwake();
+            _foundation = CreateFoundation();
+            Subscribe();
         }
 
         private void OnDestroy()
@@ -31,12 +28,8 @@ namespace Logic.Houses
             Unsubscribe();
         }
 
-        private void Construct(IStaticDataService staticData, IGameFactory gameFactory, IAnimalCounter animalCounter)
-        {
-            _foundation = new HouseFoundation(staticData, gameFactory, _transformGrid.Value, animalCounter, transform);
-
-            Subscribe();
-        }
+        protected abstract IFoundation CreateFoundation();
+        protected virtual void OnAwake() { }
 
         private void Subscribe()
         {

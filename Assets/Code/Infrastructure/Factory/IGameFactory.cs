@@ -41,7 +41,10 @@ namespace Infrastructure.Factory
         IAnimalHouse CreateBreedingHouse(Vector3 at, Quaternion rotation);
         ReleaseInteractionProvider CreateReleaseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
         IAnimalHouse CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType);
-        ChoseHouseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
+        ChoseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
+        ChoseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, FoodId withType);
         GoalAnimalPanelProvider CreateAnimalGoalPanel(Vector3 at, Quaternion rotation, Transform parent, KeyValuePair<AnimalType, int> countTypePair);
+        GameObject CreateFeederFoundation(Vector3 at, Quaternion rotation);
+        GameObject CreateFeeder(Vector3 at, Quaternion rotation, FoodId withFoodId);
     }
 }

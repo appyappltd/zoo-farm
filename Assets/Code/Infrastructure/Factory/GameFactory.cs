@@ -113,10 +113,16 @@ namespace Infrastructure.Factory
             return _interactionZoneBuilder.Build<ReleaseInteractionProvider>(zoneObject, withType);
         }
 
-        public ChoseHouseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, AnimalType withType)
+        public ChoseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, AnimalType withType)
         {
             GameObject zoneObject = _assets.Instantiate(AssetPath.ChoseHouseInteractionPath, at, rotation);
-            return _interactionZoneBuilder.Build<ChoseHouseInteractionProvider>(zoneObject, withType);
+            return _interactionZoneBuilder.Build<ChoseInteractionProvider>(zoneObject, withType);
+        }
+        
+        public ChoseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, FoodId withType)
+        {
+            GameObject zoneObject = _assets.Instantiate(AssetPath.ChoseHouseInteractionPath, at, rotation);
+            return _interactionZoneBuilder.Build<ChoseInteractionProvider>(zoneObject, withType);
         }
 
         public GoalAnimalPanelProvider CreateAnimalGoalPanel(Vector3 at, Quaternion rotation, Transform parent,
@@ -126,6 +132,12 @@ namespace Infrastructure.Factory
             panelObject.transform.SetParent(parent, true);
             return _animalGoalPanelBuilder.Build(panelObject, countTypePair);
         }
+
+        public GameObject CreateFeederFoundation(Vector3 at, Quaternion rotation) =>
+            _assets.Instantiate(AssetPath.FeederFoundationPath, at, rotation);
+
+        public GameObject CreateFeeder(Vector3 at, Quaternion rotation, FoodId withFoodId) =>
+            _assets.Instantiate($"{AssetPath.FeederPath}/{withFoodId}Feeder", at, rotation);
 
         public GameObject CreateHouseFoundation(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.HouseFoundationPath, at, rotation);

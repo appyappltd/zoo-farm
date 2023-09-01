@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3e2f22821a248f986a62c42c8354aed, type: 3}
-  m_Name: AnimalIconConfigs
+  m_Name: IconsConfig
   m_EditorClassIdentifier: 
   AnimalIcons:
     _serializedList:
@@ -24,3 +24,9 @@ MonoBehaviour:
       Value: {fileID: 21300000, guid: 1ec8df8ec6ef732439086307cf9675e3, type: 3}
     - Key: 5
       Value: {fileID: 21300000, guid: 1ec8df8ec6ef732439086307cf9675e3, type: 3}
+  FoodIcons:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 21300000, guid: c138f281722bb0e4abc851711d07cc65, type: 3}
+    - Key: 2
+      Value: {fileID: 21300000, guid: caeebabe30686b247a404a604dac83d4, type: 3}

@@ -19,7 +19,9 @@ namespace Infrastructure.AssetManagement
         public const string PlantPath = "Prefabs/Plants";
         public const string ReleaseInteractionPath = "Prefabs/Interactions/ReleaseInteraction";
         public const string ChoseHouseInteractionPath = "Prefabs/Interactions/ChoseHouseInteraction";
-        public const string HouseFoundationPath = "Prefabs/AnimalHouses/HouseFoundation";
+        
+        public const string HouseFoundationPath = "Prefabs//Foundations/HouseFoundation";
+        public const string FeederFoundationPath = "Prefabs/Foundations/FeederFoundation";
 
         public const string UIRootPath = "Prefabs/UI/UIRoot";
         public const string HudPath = "Prefabs/UI/HUD";
@@ -28,5 +30,6 @@ namespace Infrastructure.AssetManagement
         public const string AnimalGoalPanelPath = "Prefabs/UI/Panels/AnimalGoalPanel";
 
         public const string EffectsPath = "Effects";
+        public const string FeederPath = "Prefabs/Feeders";
     }
 }
