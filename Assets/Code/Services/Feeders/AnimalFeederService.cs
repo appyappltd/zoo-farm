@@ -11,7 +11,7 @@ namespace Services.Feeders
 
         public void Register(AnimalFeeder feeder)
         {
-            if ( _feeders.TryAdd(feeder.FoodId, feeder) == false)
+            if (_feeders.TryAdd(feeder.FoodId, feeder) == false)
                 throw new ArgumentOutOfRangeException(nameof(feeder));
         }
 

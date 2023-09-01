@@ -26,7 +26,11 @@ MonoBehaviour:
       Value: {fileID: 21300000, guid: 1ec8df8ec6ef732439086307cf9675e3, type: 3}
   FoodIcons:
     _serializedList:
+    - Key: 0
+      Value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - Key: 1
       Value: {fileID: 21300000, guid: c138f281722bb0e4abc851711d07cc65, type: 3}
     - Key: 2
       Value: {fileID: 21300000, guid: caeebabe30686b247a404a604dac83d4, type: 3}
+    - Key: 255
+      Value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

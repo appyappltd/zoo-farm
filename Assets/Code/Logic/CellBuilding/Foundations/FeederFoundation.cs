@@ -33,8 +33,13 @@ namespace Logic.CellBuilding.Foundations
         protected override IReadOnlyCollection<FoodId> GetAvailableTypes() =>
             _animalsService.Animals.Select(animal => animal.AnimalId.EdibleFood).Distinct().ToArray();
 
-        protected override IReadOnlyCollection<FoodId> GetAllPossibleTypes() =>
-            Enum.GetValues(typeof(FoodId)).Cast<FoodId>().ToArray();
+        //TODO: Заменить на нормальную реализацию
+        protected override IReadOnlyCollection<FoodId> GetAllPossibleTypes()
+        {
+            var readOnlyCollection = Enum.GetValues(typeof(FoodId)).Cast<FoodId>().ToList();
+            readOnlyCollection = readOnlyCollection.GetRange(1, readOnlyCollection.Count - 2);
+            return readOnlyCollection;
+        }
 
         protected override void CreateBuilding(ChoseInteractionProvider choseZone, FoodId associatedType)
         {

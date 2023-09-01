@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Logic.Animals;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -10,13 +11,13 @@ namespace Logic.LevelGoals
     [CreateAssetMenu(menuName = "Presets/GoalPreset", fileName = "NewGoalPreset", order = 0)]
     public class GoalConfig : ScriptableObject
     {
-        [SerializeField] private string _levelName;
+        [SerializeField] [Scene] private string _levelName;
         [SerializeField] private List<SingleGoalData> _goals;
 
         public string LevelName => _levelName;
         public IReadOnlyList<SingleGoalData> Goals => _goals;
 
-        public IEnumerable<AnimalType> GetAnimalsToRelease()
+        public ICollection<AnimalType> GetAnimalsToRelease()
         {
             using (ListPool<AnimalType>.Get(out List<AnimalType> list))
             {
@@ -26,7 +27,7 @@ namespace Logic.LevelGoals
                     list.AddRange(singleGoal.AnimalsToRelease.Keys);
                 }
 
-                return list.Distinct();
+                return list.Distinct().ToArray();
             }
         }   
     }

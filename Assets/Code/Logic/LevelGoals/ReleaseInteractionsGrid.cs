@@ -25,10 +25,17 @@ namespace Logic.LevelGoals
         public event Action<AnimalType> ReleaseInteracted = _ => { };
 
         public ReleaseInteractionsGrid(IGameFactory gameFactory, ITransformGrid transformGrid,
-            IEnumerable<AnimalType> releaseTypes)
+            ICollection<AnimalType> releaseTypes)
         {
             _transformGrid = transformGrid;
             _gameFactory = gameFactory;
+            
+            Debug.Log("Types");
+            foreach (var type in releaseTypes)
+            {
+                Debug.Log(type);
+            }
+
 
             foreach (AnimalType type in releaseTypes)
                 InitNewInteractionZone(type);
@@ -72,6 +79,8 @@ namespace Logic.LevelGoals
 
         private bool Validate(AnimalType withType, out HeroInteraction interaction, bool shouldBeActive)
         {
+            Debug.Log($"Validate animal type {withType}");
+            
             if (_interactions.TryGetValue(withType, out interaction))
                 return interaction.gameObject.activeInHierarchy == shouldBeActive;
 

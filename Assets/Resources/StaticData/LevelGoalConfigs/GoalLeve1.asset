@@ -12,13 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d98bf25a37c49248b7bb1b05947d5da, type: 3}
   m_Name: GoalLeve1
   m_EditorClassIdentifier: 
-  _animalsToRelease:
-    _serializedList:
-    - Key: 2
-      Value: 3
-    - Key: 1
-      Value: 3
-    - Key: 3
-      Value: 3
-  _cashRewardForCompletingGoal: 420
-  _levelName: Level1
+  _levelName: Initial
+  _goals:
+  - AnimalsToRelease:
+      _serializedList: []
+    CashRewardForCompletingGoal: 0

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2692803746260616703}
-  - component: {fileID: 56200708654064631}
+  - component: {fileID: 7889643989399936065}
   m_Layer: 7
   m_Name: HouseFoundation
   m_TagString: Untagged
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 4485624217484610508}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &56200708654064631
+--- !u!114 &7889643989399936065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +44,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1371462643506671578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92d1239dc1db49d98c72c6d32be0e8d1, type: 3}
+  m_Script: {fileID: 11500000, guid: ec05fcceef174962bba6e0171b51673f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transformGrid:
+  TransformGrid:
     _underlyingValue: {fileID: 6076656077319452508}
   _heroInteraction: {fileID: 3529873496381939852}
 --- !u!1 &3648667797106715379
@@ -113,7 +113,6 @@ MonoBehaviour:
   _space: 2
   _horizontalClamp: 2
   _verticalClamp: 2
-  _testPrefab: {fileID: 0}
 --- !u!1001 &874866754114144361
 PrefabInstance:
   m_ObjectHideFlags: 0

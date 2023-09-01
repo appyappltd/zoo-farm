@@ -374,7 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _storage: {fileID: 7155758622551359392}
   _inventoryHolder: {fileID: 6352886986957808832}
-  _productReceiver: {fileID: 0}
+  _productReceiver: {fileID: 5794277014431715089}
   _bowls:
   - {fileID: 995524689317250001}
   - {fileID: 1874636788740503776}

@@ -8,8 +8,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
     public class BreedingIdle : Idle
     {
         private readonly StatIndicator _satiety;
-        private readonly float _satietyAfterBreeding = 50f;
-        
+
         private Action _onBreedingComplete;
         private Action _onBreedingBegin;
 
