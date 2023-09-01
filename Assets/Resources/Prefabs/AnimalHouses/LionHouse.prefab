@@ -11211,6 +11211,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6120894045264727969, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
+      propertyPath: _foodIdFilter
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7904430147291196124, guid: 5e8bc2ed41e96094ea921d7541e97240, type: 3}
       propertyPath: m_RootOrder
       value: 22

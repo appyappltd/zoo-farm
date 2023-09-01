@@ -52,7 +52,7 @@ namespace Logic.Medical
             return toolItem;
         }
 
-        public bool TryPeek(ItemId byId, out IItem item)
+        public bool TryPeek(ItemFilter filter, out IItem item)
         {
             item = null;
 
@@ -67,9 +67,9 @@ namespace Logic.Medical
             return false;
         }
 
-        public bool TryGet(ItemId byId, out IItem result)
+        public bool TryGet(ItemFilter filter, out IItem result)
         {
-            if (TryPeek(byId, out result))
+            if (TryPeek(filter, out result))
             {
                 result = Get();
                 return true;

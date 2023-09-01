@@ -4,6 +4,7 @@ namespace Logic.Foods.FoodSettings
     {
         None = 0,
         Carrot = 1,
-        Meat = 2
+        Meat = 2,
+        All = 255
     }
 }

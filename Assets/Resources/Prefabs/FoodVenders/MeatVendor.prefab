@@ -460,6 +460,7 @@ MonoBehaviour:
   _playerInteraction: {fileID: 110428601610426857}
   _timerOperator: {fileID: 432754841822138406}
   _itemIdFilter: 8
+  _foodIdFilter: 2
   _isSerialReceive: 1
   _receiveRate: 0.2
   _mode: 1

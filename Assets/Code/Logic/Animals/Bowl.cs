@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Data.ItemsData;
 using DelayRoutines;
+using Logic.Foods.FoodSettings;
 using Logic.Storages;
 using Logic.Storages.Items;
 using NaughtyAttributes;
@@ -31,9 +32,16 @@ namespace Logic.Animals
         private bool _isReplenishing;
         private int _foodLeft;
         private int _maxFoodAmount;
+        private ItemFilter _itemFilter;
         
         public IProgressBar ProgressBarView => _food;
-        public Transform EatPlace => _eatPlace;
+        public Transform BowlPlace => _bowlPlace;
+
+        public Transform EatPlace
+        {
+            get => _eatPlace;
+            set => _eatPlace = value;
+        }
 
         private void OnDestroy()
         {
@@ -48,8 +56,9 @@ namespace Logic.Animals
 
         public void Construct(IInventory inventory)
         {
-            _maxFoodAmount = _inventory.MaxWeight; 
             _inventory = inventory;
+            _itemFilter = new ItemFilter(ItemId.Food, FoodId.All);
+            _maxFoodAmount = _inventory.MaxWeight; 
             _food = new ProgressBar(_inventory.MaxWeight);
             Subscribe();
             _isReplenishing = true;
@@ -103,10 +112,10 @@ namespace Logic.Animals
 
             ClearEatenFood();
 
-            if (_inventory.TryGet(ItemId.Food, out IItem item))
+            if (_inventory.TryGet(_itemFilter, out IItem item))
             {
                 _foodLeft--;
-                item.Mover.Move(EatPlace, EatPlace);
+                item.Mover.Move(BowlPlace, BowlPlace);
                 _eatenFood = item;
             }
         }

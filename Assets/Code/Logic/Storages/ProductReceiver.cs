@@ -18,7 +18,7 @@ namespace Logic.Storages
         [SerializeField] private ItemId _itemIdFilter;
         
         [ShowIf(nameof(_itemIdFilter), ItemId.Food)]
-        [SerializeField] [EnumFlags] private FoodId _foodIdFilter;
+        [SerializeField] private FoodId _foodIdFilter;
         
         [SerializeField] private bool _isSerialReceive;
 
@@ -43,18 +43,21 @@ namespace Logic.Storages
         private IAddItem _receiver;
         private IGetItem _sender;
 
-        private Action BeginReceive;
+        private ItemFilter _itemFilter;
+        private Action _beginReceive;
 
         private void Awake()
         {
-            BeginReceive = TryReceive;
+            _beginReceive = TryReceive;
             
             if (_isSerialReceive)
-                BeginReceive += RestartTimer;
+                _beginReceive += RestartTimer;
             
             _timerOperator ??= GetComponent<TimerOperator>();
-            _timerOperator.SetUp(_receiveRate, BeginReceive);
+            _timerOperator.SetUp(_receiveRate, _beginReceive);
 
+            _itemFilter = new ItemFilter(_itemIdFilter, _foodIdFilter);
+            
             if (_isRemoteInit)
                 return;
 
@@ -96,12 +99,12 @@ namespace Logic.Storages
         public bool CanReceive(IInventory inventory)
         {
             ApplyRemoteInventory(inventory);
-            return _sender.TryPeek(_itemIdFilter, out IItem item) && _receiver.CanAdd(item);
+            return _sender.TryPeek(_itemFilter, out IItem item) && _receiver.CanAdd(item);
         }
 
         private void TryReceive()
         {
-            if (_sender.TryPeek(_itemIdFilter, out IItem item) && _receiver.CanAdd(item))
+            if (_sender.TryPeek(_itemFilter, out IItem item) && _receiver.CanAdd(item))
                 Receive();
         }
 
@@ -127,7 +130,7 @@ namespace Logic.Storages
         private void OnInteracted(Human hero)
         {
             ApplyRemoteInventory(hero.Inventory);
-            BeginReceive.Invoke();
+            _beginReceive.Invoke();
         }
 
         private void RestartTimer() =>

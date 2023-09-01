@@ -1,4 +1,3 @@
-using Data.ItemsData;
 using Logic.Storages.Items;
 
 namespace Logic.Storages
@@ -6,7 +5,7 @@ namespace Logic.Storages
     public interface IGetItem : IGetItemObserver
     {
         public IItem Get();
-        public bool TryPeek(ItemId byId, out IItem item);
-        bool TryGet(ItemId byId, out IItem result);
+        public bool TryPeek(ItemFilter filter, out IItem item);
+        bool TryGet(ItemFilter filter, out IItem result);
     }
 }

@@ -41,15 +41,15 @@ namespace Logic.NPC.Volunteers
             return item;
         }
 
-        public bool TryPeek(ItemId byId, out IItem item)
+        public bool TryPeek(ItemFilter filter, out IItem item)
         {
             item = null;
-            return _isReadyTransmitting && Inventory.TryPeek(ItemId.Animal, out item);
+            return _isReadyTransmitting && Inventory.TryPeek(new ItemFilter(ItemId.Animal), out item);
         }
 
-        public bool TryGet(ItemId byId, out IItem result)
+        public bool TryGet(ItemFilter filter, out IItem result)
         {
-            if (TryPeek(byId, out result))
+            if (TryPeek(filter, out result))
             {
                 result = Get();
                 return true;

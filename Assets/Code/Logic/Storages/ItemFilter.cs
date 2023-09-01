@@ -1,32 +1,35 @@
+using Data.ItemsData;
+using Logic.Foods.FoodSettings;
+
 namespace Logic.Storages
 {
     public readonly struct ItemFilter
     {
         private const int FullMack = 1111111111;
         
-        private readonly int _mailFilter;
-        private readonly int _subFilter;
+        public readonly ItemId ItemIdFilter;
+        public readonly FoodId FoodIdFilter;
 
-        public ItemFilter(int mailFilter, int subFilter)
+        public ItemFilter(ItemId itemIdFilter, FoodId foodIdFilter)
         {
-            _mailFilter = mailFilter;
-            _subFilter = subFilter;
+            ItemIdFilter = itemIdFilter;
+            FoodIdFilter = foodIdFilter;
         }
         
-        public ItemFilter(int mailFilter)
+        public ItemFilter(ItemId itemIdFilter)
         {
-            _mailFilter = mailFilter;
-            _subFilter = FullMack;
+            ItemIdFilter = itemIdFilter;
+            FoodIdFilter = FoodId.All;
         }
         
-        public bool Contains(int mainMask, int subMask)
+        public bool Contains(ItemId mainMask, FoodId subMask)
         {
-            return (_mailFilter & mainMask) != 0 && (_subFilter & subMask) != 0;
+            return (ItemIdFilter & mainMask) != 0 && FoodIdFilter == subMask;
         }
         
-        public bool Contains(int mainMask)
+        public bool Contains(ItemId mainMask)
         {
-            return (_mailFilter & mainMask) != 0;
+            return (ItemIdFilter & mainMask) != 0;
         }
     }
 }

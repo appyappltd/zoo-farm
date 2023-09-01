@@ -267,10 +267,11 @@ MonoBehaviour:
   _playerInteraction: {fileID: 1219702744600898206}
   _timerOperator: {fileID: 5875813357311973976}
   _itemIdFilter: 8
+  _foodIdFilter: 1
   _isSerialReceive: 1
   _receiveRate: 0.2
   _mode: 0
-  _isRemoteInit: 0
+  _isRemoteInit: 1
   _adder: {fileID: 0}
   _remover: {fileID: 0}
 --- !u!1 &4710917714455459861
@@ -373,6 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _storage: {fileID: 7155758622551359392}
   _inventoryHolder: {fileID: 6352886986957808832}
+  _productReceiver: {fileID: 0}
   _bowls:
   - {fileID: 995524689317250001}
   - {fileID: 1874636788740503776}
@@ -394,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _places: []
   _isSortable: 0
-  _isRemoteInit: 0
+  _isRemoteInit: 1
   _isModifyRotation: 0
   _adderMono: {fileID: 0}
   _removerMono: {fileID: 0}
@@ -563,6 +565,10 @@ PrefabInstance:
     - target: {fileID: 767906015032700916, guid: f003213573d8dc14eb8b73211bd82225, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624410425686242124, guid: f003213573d8dc14eb8b73211bd82225, type: 3}
+      propertyPath: _isValidate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7465137993590127624, guid: f003213573d8dc14eb8b73211bd82225, type: 3}
       propertyPath: m_Name

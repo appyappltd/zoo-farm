@@ -16,7 +16,7 @@ namespace Logic.Interactions.Validators
             if (inventory is null)
                 throw new NullReferenceException(nameof(inventory));
 
-            if (inventory.TryPeek(ItemId.Medical, out IItem tool) == false)
+            if (inventory.TryPeek(new ItemFilter(ItemId.Medical), out IItem tool) == false)
                 return true;
 
             MedicalToolItemData toolId = (MedicalToolItemData) tool.ItemData;

@@ -13,6 +13,7 @@ namespace Logic.Animals.AnimalFeeders
         [Header("References")]
         [SerializeField] private Storage _storage;
         [SerializeField] private InventoryHolder _inventoryHolder;
+        [SerializeField] private ProductReceiver _productReceiver;
         [SerializeField] private Bowl[] _bowls;
         
         [Space] [Header("Settings")]
@@ -31,6 +32,7 @@ namespace Logic.Animals.AnimalFeeders
             ConstructBowls();
             _inventoryHolder.Construct(_maxFoodPerBowl * _bowls.Length + 1);
             _storage.Construct(_inventoryHolder.Inventory);
+            _productReceiver.Construct(_inventoryHolder.Inventory);
             _animalFeeder = new AnimalFeeder(_bowls, _foodID);
             feederService.Register(_animalFeeder);
         }

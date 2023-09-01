@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data.ItemsData;
+using Logic.Foods.FoodSettings;
 using Logic.Storages.Items;
 
 namespace Logic.Storages
@@ -75,7 +76,7 @@ namespace Logic.Storages
             return result;
         }
 
-        public bool TryPeek(ItemId byId, out IItem item)
+        public bool TryPeek(ItemFilter filter, out IItem item)
         {
             item = null;
 
@@ -84,8 +85,19 @@ namespace Logic.Storages
 
             if (_weight <= 0)
                 return false;
+            
+            _cashedGetItem = _items.FindLast(found =>
+            {
+                if (filter.Contains(found.ItemId) == false)
+                    return false;
+                
+                if (found.ItemId.HasFlag(ItemId.Food))
+                    return filter.FoodIdFilter == FoodId.All || filter.FoodIdFilter == ((FoodItemData) found.ItemData).FoodId;
 
-            _cashedGetItem = _items.FindLast(found => (found.ItemId & byId) > 0);
+                return true;
+
+            });
+                
 
             if (_cashedGetItem is null)
                 return false;
@@ -105,11 +117,11 @@ namespace Logic.Storages
             return false;
         }
 
-        public bool TryGet(ItemId byId, out IItem result)
+        public bool TryGet(ItemFilter filter, out IItem result)
         {
             result = null;
 
-            if (TryPeek(byId, out _))
+            if (TryPeek(filter, out _))
             {
                 result = Get();
                 return true;

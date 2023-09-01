@@ -69,7 +69,7 @@ namespace Logic.Houses
             _bowl.Clear();
             _barIconView.Enable();
 
-            while (_inventoryHolder.Inventory.TryGet(ItemId.All, out IItem result))
+            while (_inventoryHolder.Inventory.TryGet(new ItemFilter(ItemId.All), out IItem result))
                 result.Destroy();
         }
 

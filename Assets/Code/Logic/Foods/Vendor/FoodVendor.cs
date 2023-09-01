@@ -71,20 +71,18 @@ namespace Logic.Foods.Vendor
             return handItem;
         }
 
-        bool IGetItem.TryPeek(ItemId byId, out IItem item)
+        bool IGetItem.TryPeek(ItemFilter filter, out IItem item)
         {
-            if ((byId & ItemId.Food) == 0)
-            {
-                item = null;
-                return false;
-            }
-
-            return _readyFoods.TryPeek(out item);
+            if (filter.Contains(ItemId.Food))
+                return _readyFoods.TryPeek(out item);
+            
+            item = null;
+            return false;
         }
 
-        bool IGetItem.TryGet(ItemId byId, out IItem result)
+        bool IGetItem.TryGet(ItemFilter filter, out IItem result)
         {
-            if (((IGetItem) this).TryPeek(byId, out result))
+            if (((IGetItem) this).TryPeek(filter, out result))
             {
                 result = ((IGetItem) this).Get();
                 return true;
