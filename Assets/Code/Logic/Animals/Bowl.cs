@@ -19,8 +19,10 @@ namespace Logic.Animals
 #endif
 
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
+        private readonly List<RoutineSequence> _routines = new List<RoutineSequence>();
 
         [SerializeField] private Transform _bowlPlace;
+        [SerializeField] private Transform _eatPlace;
 
         private IInventory _inventory;
         private ProgressBar _food;
@@ -28,10 +30,10 @@ namespace Logic.Animals
 
         private bool _isReplenishing;
         private int _foodLeft;
-
-        private List<RoutineSequence> _routines = new List<RoutineSequence>();
-
+        private int _maxFoodAmount;
+        
         public IProgressBar ProgressBarView => _food;
+        public Transform EatPlace => _eatPlace;
 
         private void OnDestroy()
         {
@@ -46,9 +48,24 @@ namespace Logic.Animals
 
         public void Construct(IInventory inventory)
         {
+            _maxFoodAmount = _inventory.MaxWeight; 
             _inventory = inventory;
-            _food = new ProgressBar(_inventory.MaxWeight, 0);
+            _food = new ProgressBar(_inventory.MaxWeight);
+            Subscribe();
+            _isReplenishing = true;
+        }
 
+        public void Construct(IInventory inventory, int maxFoodAmount)
+        {
+            _maxFoodAmount = maxFoodAmount;
+            _inventory = inventory;
+            _food = new ProgressBar(maxFoodAmount);
+            Subscribe();
+            _isReplenishing = true;
+        }
+        
+        private void Subscribe()
+        {
             _inventory.Added += ReplenishFromInventory;
             _food.Empty += OnEmptyFood;
             _food.Full += OnFullFood;
@@ -56,8 +73,6 @@ namespace Logic.Animals
 #if UNITY_EDITOR
             _compositeDisposable.Add(_food.Current.Then((f => _foodValue = f)));
 #endif
-
-            _isReplenishing = true;
         }
 
         private void ReplenishFromInventory(IItem item) =>
@@ -91,7 +106,7 @@ namespace Logic.Animals
             if (_inventory.TryGet(ItemId.Food, out IItem item))
             {
                 _foodLeft--;
-                item.Mover.Move(_bowlPlace, _bowlPlace);
+                item.Mover.Move(EatPlace, EatPlace);
                 _eatenFood = item;
             }
         }
@@ -111,7 +126,7 @@ namespace Logic.Animals
         private void OnFullFood()
         {
             _isReplenishing = false;
-            _foodLeft = _inventory.Weight;
+            _foodLeft = _maxFoodAmount;
         }
 
         public void Clear()

@@ -1,6 +1,7 @@
 using System;
 using AYellowpaper;
 using Data.ItemsData;
+using Logic.Foods.FoodSettings;
 using Logic.Interactions;
 using Logic.Player;
 using Logic.Storages.Items;
@@ -15,6 +16,10 @@ namespace Logic.Storages
         [SerializeField] private HumanInteraction _playerInteraction;
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] private ItemId _itemIdFilter;
+        
+        [ShowIf(nameof(_itemIdFilter), ItemId.Food)]
+        [SerializeField] [EnumFlags] private FoodId _foodIdFilter;
+        
         [SerializeField] private bool _isSerialReceive;
 
         [SerializeField] [ShowIf("_isSerialReceive")] [Min(.0f)]
@@ -96,9 +101,8 @@ namespace Logic.Storages
 
         private void TryReceive()
         {
-            if (_sender.TryPeek(_itemIdFilter, out IItem item))
-                if (_receiver.CanAdd(item))
-                    Receive();
+            if (_sender.TryPeek(_itemIdFilter, out IItem item) && _receiver.CanAdd(item))
+                Receive();
         }
 
         private void ApplyRemoteInventory(IInventory remoteInventory)

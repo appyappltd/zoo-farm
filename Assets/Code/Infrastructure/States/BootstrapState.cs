@@ -7,6 +7,7 @@ using Services.Animals;
 using Services.Breeding;
 using Services.Camera;
 using Services.Effects;
+using Services.Feeders;
 using Services.Food;
 using Services.Input;
 using Services.MedicalBeds;
@@ -60,6 +61,7 @@ namespace Infrastructure.States
             Register<IFoodService>(new FoodService());
             Register<IMedicalBedsReporter>(new MedicalBedsReporter());
             Register<ICameraOperatorService>(new CameraOperatorService());
+            Register<IAnimalFeederService>(new AnimalFeederService());
             Register<IEffectService>(new EffectService(Get<IPoolService>()));
             Register<IAnimalsService>(
                 new AnimalsService(

@@ -27,5 +27,15 @@ namespace Logic.Storages
             _inventory.Removed += item => _weight -= item.Weight;
 #endif
         }
+        
+        public void Construct(int maxWeight)
+        {
+            _inventory = new Inventory(maxWeight);
+            
+#if UNITY_EDITOR
+            _inventory.Added += item => _weight += item.Weight;
+            _inventory.Removed += item => _weight -= item.Weight;
+#endif
+        }
     }
 }
