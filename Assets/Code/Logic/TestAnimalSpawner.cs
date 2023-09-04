@@ -6,6 +6,7 @@ using NaughtyAttributes;
 using Services;
 using Services.AnimalHouses;
 using Services.Animals;
+using Services.Feeders;
 using UnityEngine;
 
 namespace Logic
@@ -19,11 +20,13 @@ namespace Logic
         private IGameFactory _gameFactory;
         private IAnimalHouseService _houseService;
         private IAnimalsService _animalService;
+        private IAnimalFeederService _feeder;
 
         private void Awake()
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _houseService = AllServices.Container.Single<IAnimalHouseService>();
+            _feeder = AllServices.Container.Single<IAnimalFeederService>();
             _animalService = AllServices.Container.Single<IAnimalsService>();
         }
 
@@ -32,9 +35,26 @@ namespace Logic
         {
             var animal = _gameFactory.CreateAnimal(_animalData, _spawnPoint.position,
                 _spawnPoint.rotation).GetComponent<Animal>();
-            _houseService.TakeQueueToHouse(new QueueToHouse(animal, () => { }));
+            
+            if (_feeder.HasFeeder(animal.AnimalId.EdibleFood))
+            {
+                animal.AttachFeeder(_feeder.GetFeeder(animal.AnimalId.EdibleFood));
+            }
+            else
+            {
+                void OnUpdatedFeederService()
+                {
+                    if (_feeder.HasFeeder(animal.AnimalId.EdibleFood))
+                    {
+                        _feeder.Updated -= OnUpdatedFeederService;
+                        animal.AttachFeeder(_feeder.GetFeeder(animal.AnimalId.EdibleFood));
+                    }
+                }
+                
+                _feeder.Updated += OnUpdatedFeederService;
+            }
         }
-        
+
         [Button]
         private void Release()
         {

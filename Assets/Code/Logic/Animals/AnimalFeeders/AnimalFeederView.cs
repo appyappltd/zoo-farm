@@ -2,8 +2,6 @@ using System.Diagnostics;
 using Logic.Foods.FoodSettings;
 using Logic.Storages;
 using NaughtyAttributes;
-using Services;
-using Services.Feeders;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalFeeders
@@ -34,8 +32,8 @@ namespace Logic.Animals.AnimalFeeders
             _inventoryHolder.Construct(_maxFoodPerBowl * _bowls.Length + 1);
             _storage.Construct(_inventoryHolder.Inventory);
             _productReceiver.Construct(_inventoryHolder.Inventory);
-            _animalFeeder = new AnimalFeeder(_bowls, _foodID);
             ConstructBowls();
+            _animalFeeder = new AnimalFeeder(_bowls, _inventoryHolder.Inventory, _foodID);
         }
 
         private void ConstructBowls()

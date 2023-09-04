@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Logic.Animals.AnimalsStateMachine.Transitions;
+using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Animals.AnimalsStateMachine.States;
@@ -41,24 +42,32 @@ namespace Logic.Animals.AnimalsStateMachine
         [SerializeField] private Vector2 _idleDelayRange;
         [SerializeField] private float _placeOffset;
 
-        private Transform _restPlace;
-        private Transform _eatPlace;
+        // private Transform _restPlace;
+        // private Transform _eatPlace;
 
         private ForceMove _forceMove;
         private Idle _forceIdle;
         private ForceEat _forceEat;
         private FollowToBreed _followToBreeding;
         private BreedingIdle _breeding;
+        private AnimalFeeder _feeder;
 
         public void Construct(Transform houseRestPlace, Transform houseEatPlace)
         {
-            _restPlace = houseRestPlace;
-            _eatPlace = houseEatPlace;
+            // _restPlace = houseRestPlace;
+            // _eatPlace = houseEatPlace;
             
             SetUp();
             EnableStatIndicators();
         }
 
+        public void Construct(AnimalFeeder feeder)
+        {
+            _feeder = feeder;
+            SetUp();
+            EnableStatIndicators();
+        }
+        
         public void ForceMove(Transform to)
         {
             _forceMove.SetNewPosition(to);
@@ -88,17 +97,30 @@ namespace Logic.Animals.AnimalsStateMachine
         private void SetUp()
         {
             Cleanup();
-            
-            Bowl bowl = _eatPlace.GetComponent<Bowl>();
 
-            State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, _hungerDelay, bowl.ProgressBarView);
+            Transition fullBowl = new FullBowl();
+            Transition fullPeppiness = GetOnFullActionTransition(_peppiness.ProgressBar);
+            Transition fullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
+            Transition forceFullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
+            Transition emptyPeppiness = GetOnEmptyActionTransition(_peppiness.ProgressBar);
+            Transition emptySatiety = GetOnEmptyActionTransition(_satiety.ProgressBar);
+            Transition emptySatietyAndHasFreeBowl = new EmptySatietyAndHasFreeBowl(_satiety.ProgressBar, _feeder);
+            Transition randomDelay = new RandomTimerTransition(_idleDelayRange.y, _idleDelayRange.x);
+            Transition inRestPlace = new TargetInRange(_mover.transform, null, _placeOffset);
+            Transition inEatPlace = new TargetInRange(_mover.transform, null, _placeOffset);
+            Transition reachTarget = new ReachDestinationTransition(_mover);
+            Transition forceReachTarget = new ReachDestinationTransition(_mover);
+            Transition reachedBreeding = new ReachDestinationTransition(_mover, _breedingPositionOffset);
+            Transition waitForBreedingProcess = new TimerTransition(2f);
+            
+            State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, _hungerDelay, _feeder);
             State rest = new Rest(_animator, _peppiness, _peppinessReplanishSpeed);
             State idle = new Idle(_animator);
             State waitForFood = new Idle(_animator);
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
-            State moveToRest = new MoveTo(_animator, _mover, _restPlace);
-            State moveToEat = new MoveToAndRotate(_animator, _mover, _eatPlace, _aligner);
-            
+            State moveToRest = new MoveTo(_animator, _mover, null);
+            State moveToEat = new MoveToEat(_animator, _mover, null, _aligner, _feeder, (Eat) eat, (FullBowl) fullBowl, (DistanceTo) inEatPlace);
+
             _followToBreeding = new FollowToBreed(_animator, _mover, _satiety);
             _breeding = new BreedingIdle(_animator, _satiety);
 
@@ -106,19 +128,6 @@ namespace Logic.Animals.AnimalsStateMachine
             _forceMove = new ForceMove(_animator, _mover, _aligner);
             _forceEat = new ForceEat(_animator, _satiety, _satietyReplanishSpeed);
 
-            Transition fullBowl = GetOnFullActionTransition(bowl.ProgressBarView);
-            Transition fullPeppiness = GetOnFullActionTransition(_peppiness.ProgressBar);
-            Transition fullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
-            Transition forceFullSatiety = GetOnFullActionTransition(_satiety.ProgressBar);
-            Transition emptyPeppiness = GetOnEmptyActionTransition(_peppiness.ProgressBar);
-            Transition emptySatiety = GetOnEmptyActionTransition(_satiety.ProgressBar);
-            Transition randomDelay = new RandomTimerTransition(_idleDelayRange.y, _idleDelayRange.x);
-            Transition inRestPlace = new TargetInRange(_mover.transform, _restPlace, _placeOffset);
-            Transition inEatPlace = new TargetInRange(_mover.transform, _eatPlace, _placeOffset);
-            Transition reachTarget = new ReachDestinationTransition(_mover);
-            Transition forceReachTarget = new ReachDestinationTransition(_mover);
-            Transition reachedBreeding = new ReachDestinationTransition(_mover, _breedingPositionOffset);
-            Transition waitForBreedingProcess = new TimerTransition(2f);
 
             Init(idle, new Dictionary<State, Dictionary<Transition, State>>
             {
@@ -154,7 +163,7 @@ namespace Logic.Animals.AnimalsStateMachine
                 {
                     idle, new Dictionary<Transition, State>
                     {
-                        {emptySatiety, moveToEat},
+                        {emptySatietyAndHasFreeBowl, moveToEat},
                         {emptyPeppiness, moveToRest},
                         {randomDelay, wander},
                     }

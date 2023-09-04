@@ -1,3 +1,4 @@
+using Logic.Animals.AnimalFeeders;
 using Logic.Houses;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Animals.AnimalsBehaviour.Emotions;
@@ -38,7 +39,6 @@ namespace Logic.Animals.AnimalsBehaviour
             _emotionService = new PersonalEmotionService(_emotionProvider);
             _statProvider.Construct(beginStats);
             _happinessFactor.Construct(_statProvider.Satiety);
-            
             _emotionService.Show(EmotionId.Homeless);
         }
 
@@ -48,6 +48,12 @@ namespace Logic.Animals.AnimalsBehaviour
             Activate();
         }
 
+        public void AttachFeeder(AnimalFeeder feeder)
+        {
+            _stateMachine.Construct(feeder);
+            Activate();
+        }
+        
         public void ForceMove(Transform to) =>
             _stateMachine.ForceMove(to);
 

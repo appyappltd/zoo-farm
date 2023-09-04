@@ -1,7 +1,7 @@
 ﻿using Progress;
 using StateMachineBase;
 
-namespace Logic.Animals.AnimalsStateMachine.Transitions
+namespace Code.Logic.Animals.AnimalsStateMachine.Transitions
 {
     public class BarEmptyTransition : Transition
     {

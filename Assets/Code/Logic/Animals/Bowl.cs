@@ -37,11 +37,7 @@ namespace Logic.Animals
         public IProgressBar ProgressBarView => _food;
         public Transform BowlPlace => _bowlPlace;
 
-        public Transform EatPlace
-        {
-            get => _eatPlace;
-            set => _eatPlace = value;
-        }
+        public Transform EatPlace => _eatPlace;
 
         private void OnDestroy()
         {
@@ -67,6 +63,7 @@ namespace Logic.Animals
         public void Construct(IInventory inventory, int maxFoodAmount)
         {
             _maxFoodAmount = maxFoodAmount;
+            _itemFilter = new ItemFilter(ItemId.Food, FoodId.All);
             _inventory = inventory;
             _food = new ProgressBar(maxFoodAmount);
             Subscribe();
@@ -75,7 +72,7 @@ namespace Logic.Animals
         
         private void Subscribe()
         {
-            _inventory.Added += ReplenishFromInventory;
+            // _inventory.Added += ReplenishFromInventory;
             _food.Empty += OnEmptyFood;
             _food.Full += OnFullFood;
             _compositeDisposable.Add(_food.Current.Then(OnSpend));
@@ -84,7 +81,7 @@ namespace Logic.Animals
 #endif
         }
 
-        private void ReplenishFromInventory(IItem item) =>
+        public void ReplenishFromInventory(IItem item) =>
             Replenish(item.Weight);
 
         private void Replenish(int amount)

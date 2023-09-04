@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _foodName: Carrot
   _handItemData: {fileID: 11400000, guid: 49385c961d57c2e4e88ac3fa82700407, type: 2}
-  _produceDurationRange: {x: 1.9003047, y: 2.453599}
+  _produceDurationRange: {x: 0.2599361, y: 0.6726273}
   _maxStockQuantity: 1

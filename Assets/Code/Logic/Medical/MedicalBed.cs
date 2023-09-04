@@ -3,6 +3,7 @@ using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Data.ItemsData;
 using Infrastructure.Factory;
+using Logic.Animals.AnimalFeeders;
 using Logic.Effects;
 using Logic.Storages;
 using Logic.Storages.Items;
@@ -10,6 +11,7 @@ using NTC.Global.Cache;
 using Services;
 using Services.AnimalHouses;
 using Services.Effects;
+using Services.Feeders;
 using UnityEngine;
 
 namespace Logic.Medical
@@ -21,14 +23,15 @@ namespace Logic.Medical
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] [Range(0f, 5f)] private float _healingTime = 2.5f;
 
+        private IGameFactory _gameFactory;
+        private IAnimalHouseService _houseService;
+        private IAnimalFeederService _feederService;
+        
         private AnimalItemData _animalData;
         private MedicalToolItemData _medicalToolData;
 
         private IItem _animalItem;
         private IItem _medToolItem;
-
-        private IGameFactory _gameFactory;
-        private IAnimalHouseService _houseService;
 
         private EffectSpawner _effectSpawner;
         private Effect _workingEffect;
@@ -50,16 +53,19 @@ namespace Logic.Medical
             Construct(
                 AllServices.Container.Single<IGameFactory>(),
                 AllServices.Container.Single<IAnimalHouseService>(),
-                AllServices.Container.Single<IEffectService>());
+                AllServices.Container.Single<IEffectService>(),
+                AllServices.Container.Single<IAnimalFeederService>());
         }
 
         private void OnDestroy() =>
             _effectSpawner.Dispose();
 
-        private void Construct(IGameFactory gameFactory, IAnimalHouseService houseService, IEffectService effectService)
+        private void Construct(IGameFactory gameFactory, IAnimalHouseService houseService, IEffectService effectService,
+            IAnimalFeederService animalFeederService)
         {
             _gameFactory = gameFactory;
             _houseService = houseService;
+            _feederService = animalFeederService;
             
             _effectSpawner = new EffectSpawner(effectService);
             _effectSpawner.InitEffect(EffectId.HealingPluses, _spawnPlace.position, Quaternion.LookRotation(Vector3.up));
@@ -112,13 +118,31 @@ namespace Logic.Medical
             RemoveItem(_animalItem);
             RemoveItem(_medToolItem);
 
-            QueueToHouse queueToHouse = new QueueToHouse(_healingAnimal,() =>
+            if (_feederService.HasFeeder(_healingAnimal.AnimalId.EdibleFood))
             {
-                FreeTheBad();
-                FeedUp.Invoke();
-            });
-            
-            _houseService.TakeQueueToHouse(queueToHouse);
+                ConstructAnimal();
+            }
+            else
+            {
+                _feederService.Updated += OnUpdatedFeederService;
+            }
+        }
+
+        private void OnUpdatedFeederService()
+        {
+            if (_feederService.HasFeeder(_healingAnimal.AnimalId.EdibleFood))
+            {
+                _feederService.Updated -= OnUpdatedFeederService;
+                ConstructAnimal();
+            }
+        }
+
+        private void ConstructAnimal()
+        {
+            AnimalFeeder feeder = _feederService.GetFeeder(_healingAnimal.AnimalId.EdibleFood);
+            _healingAnimal.AttachFeeder(feeder);
+            FreeTheBad();
+            FeedUp.Invoke();
         }
 
         private void FreeTheBad()

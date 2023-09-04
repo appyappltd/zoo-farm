@@ -8,7 +8,7 @@ namespace Logic.Storages
 {
     public class Storage : MonoBehaviour
     {
-        private readonly IItem[] _items = new IItem[10];
+        private readonly IItem[] _items = new IItem[16];
 
         [SerializeField] private Transform[] _places;
 

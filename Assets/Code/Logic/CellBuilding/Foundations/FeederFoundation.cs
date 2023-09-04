@@ -43,7 +43,7 @@ namespace Logic.CellBuilding.Foundations
 
         protected override void CreateBuilding(ChoseInteractionProvider choseZone, FoodId associatedType)
         {
-            _feederService.Register(GameFactory
+            _feederService.RegisterFeeder(GameFactory
                 .CreateFeeder(SelfTransform.position, SelfTransform.rotation, associatedType)
                 .GetComponent<AnimalFeederView>().Feeder);
         }

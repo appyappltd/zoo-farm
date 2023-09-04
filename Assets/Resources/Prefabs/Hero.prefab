@@ -6800,7 +6800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1740541368045271350}
-  _speed: 1.35
+  _speed: 2
 --- !u!143 &6386952338648535645
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6908,7 +6908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 0
-  _maxWeight: 3
+  _maxWeight: 4
 --- !u!114 &4233403076897180460
 MonoBehaviour:
   m_ObjectHideFlags: 0
