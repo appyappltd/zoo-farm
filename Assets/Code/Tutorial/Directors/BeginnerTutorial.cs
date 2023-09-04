@@ -12,6 +12,7 @@ namespace Tutorial.Directors
     public class BeginnerTutorial : TutorialDirector
     {
         [SerializeField] private Transform _firstHouse;
+        [SerializeField] private Transform _firstFeeder;
         [SerializeField] private Transform _animalTransmittingView;
         [SerializeField] private Transform _firstMedToolSpawnPoint;
         [SerializeField] private Transform _firstMedBedSpawnPoint;
@@ -28,7 +29,7 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialTriggerStatic _bowlFull;
         [SerializeField] private TutorialTriggerStatic _bowlEmpty;
         [SerializeField] private TutorialTriggerStatic _animalReleased;
-        [SerializeField] private TutorialTriggerStatic _houseBuilt;
+        [SerializeField] private TutorialTriggerStatic _feederBuilt;
         [SerializeField] private TutorialTriggerStatic _firstVolunteerSpawned;
         [SerializeField] private TutorialTriggerStatic _foodVendorSpawned;
         [SerializeField] private TutorialTriggerStatic _animalHouseSpawned;
@@ -36,6 +37,7 @@ namespace Tutorial.Directors
         [SerializeField] private MedBedGridOperator _medBedGridOperator;
         [SerializeField] private MedToolGridOperator _medToolGridOperator;
         [SerializeField] private HouseGridOperator _houseGridOperator;
+        [SerializeField] private FeederGridOperator _feederGridOperator;
         [SerializeField] private GardenBedGridOperator _gardenBedGridOperator;
         [SerializeField] private KeeperGridOperator _keeperGridOperator;
         [SerializeField] private VolunteerSpawner _volunteerSpawner;
@@ -112,13 +114,14 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_animalHealed));
             TutorialModules.Add(new TutorialAction(() =>
             {
-                _houseGridOperator.ShowNextBuildCell();
-                _arrow.Move(_firstHouse.position);
-                _cameraOperatorService.Focus(_firstHouse);
+                _feederGridOperator.ShowNextBuildCell();
+                // _houseGridOperator.ShowNextBuildCell();
+                _arrow.Move(_firstFeeder.position);
+                _cameraOperatorService.Focus(_firstFeeder);
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.HouseFocusToPlayerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_houseBuilt));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_feederBuilt));
             TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.HouseBuiltToAnimalFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.Focus(_animalTransform)));
@@ -136,9 +139,9 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.PlantBuiltToPlantBuilt, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_gardenBedGridOperator.BuildCellPosition)));
             TutorialModules.Add(new TutorialTriggerAwaiter(_foodVendorSpawned));
-            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstHouse.position)));
-            TutorialModules.Add(new TutorialTriggerAwaiter(_bowlFull));
-            TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
+            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_firstFeeder.position)));
+            // TutorialModules.Add(new TutorialTriggerAwaiter(_bowlFull));
+            // TutorialModules.Add(new TutorialAction(() => _arrow.Hide()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_bowlEmpty));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.BowlEmptyToReleaserFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
@@ -161,15 +164,15 @@ namespace Tutorial.Directors
                 _arrow.Hide();
                 _volunteerSpawner.Spawn();
                 _medToolGridOperator.ShowNextBuildCell();
-                _houseGridOperator.ShowNextBuildCell();
+                // _houseGridOperator.ShowNextBuildCell();
             }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 ActivateAutoBuild(_medBedGridOperator);
-                ActivateAutoBuild(_houseGridOperator);
-                ActivateAutoBuild(_houseGridOperator);
-                _houseGridOperator.ShowNextBuildCell();
+                // ActivateAutoBuild(_houseGridOperator);
+                // ActivateAutoBuild(_houseGridOperator);
+                // _houseGridOperator.ShowNextBuildCell();
             }));
             
             // Ожидание выполнения цели выпуска трёх зебр
