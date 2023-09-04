@@ -14,12 +14,12 @@ namespace Logic.CellBuilding.Foundations
 {
     public abstract class Foundation<TEnum> : IFoundation where TEnum : Enum
     {
+        protected readonly Transform SelfTransform;
         protected readonly IStaticDataService StaticData;
         protected readonly IPersistentProgressService PersistentProgress;
         protected readonly IGameFactory GameFactory;
         
         private readonly ITransformGrid _transformGrid;
-        protected readonly Transform SelfTransform;
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
         private readonly Dictionary<TEnum, ChoseInteractionProvider> _choseInteractions =

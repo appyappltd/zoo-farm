@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
@@ -29,6 +30,6 @@ namespace Logic.LevelGoals
 
                 return list.Distinct().ToArray();
             }
-        }   
+        }
     }
 }
