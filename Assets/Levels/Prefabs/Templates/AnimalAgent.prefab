@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 100
-  _changeSpeed: 0.2
+  _changeSpeed: 0
   _turn: 1
 --- !u!1 &8028202539732130314
 GameObject:

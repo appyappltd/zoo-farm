@@ -87,9 +87,9 @@ namespace Logic.Animals.AnimalsStateMachine
             ForceState(_forceEat);
         }
 
-        public void MoveBreeding(IAnimal second, Action onBreedingBegin, Action onBreedingComplete)
+        public void MoveBreeding(Transform breedPlace, Action onBreedingBegin, Action onBreedingComplete)
         {
-            _followToBreeding.Init(second.Transform);
+            _followToBreeding.Init(breedPlace);
             _breeding.Init(onBreedingBegin, onBreedingComplete);
             ForceState(_followToBreeding);
         }

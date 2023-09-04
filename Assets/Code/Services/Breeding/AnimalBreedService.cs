@@ -7,12 +7,14 @@ using Logic.Animals;
 using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.Emotions;
+using Logic.Breeding;
 using Services.AnimalHouses;
 using Services.Animals;
 using Services.Effects;
 using Services.Feeders;
 using Tools.Constants;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Services.Breeding
 {
@@ -21,43 +23,33 @@ namespace Services.Breeding
         private readonly IEffectService _effectService;
         private readonly IGameFactory _gameFactory;
         private readonly IAnimalFeederService _feederService;
-        private readonly IAnimalsService _animalsService;
 
         private readonly Dictionary<IAnimal, Action> _disposes = new Dictionary<IAnimal, Action>();
         private readonly List<IAnimal> _breedingReadyAnimals = new List<IAnimal>();
-
-        private IEnumerable<AnimalType> _typesEnumerator = new List<AnimalType>();
-
-        //TODO: добавить в статик дату
-        private Vector2 _pairFoundingDelay = new Vector2(10f, 20f);
-
-        private RoutineSequence _pairFounding;
-        private bool _isFirstLoad = true;
 
         public AnimalBreedService(IEffectService effectService, IGameFactory gameFactory, IAnimalFeederService feederService, IAnimalsService animalsService)
         {
             _effectService = effectService;
             _gameFactory = gameFactory;
             _feederService = feederService;
-            _animalsService = animalsService;
 
-            _animalsService.Registered += Register;
-            _animalsService.Released += Unregister;
+            animalsService.Registered += Register;
+            animalsService.Released += Unregister;
         }
 
         public void Register(IAnimal animal)
         {
-            void LocalSatietyOnFull() => OnSatietyFull(animal);
-            animal.Stats.Satiety.Full += LocalSatietyOnFull;
-            _disposes.Add(animal, () => animal.Stats.Satiety.Full -= LocalSatietyOnFull);
+            void OnSatietyFull() => _breedingReadyAnimals.Add(animal);
+            void OnSatietyEmpty() => _breedingReadyAnimals.Remove(animal);
             
-            if (_isFirstLoad)
+            animal.Stats.Satiety.Full += OnSatietyFull;
+            animal.Stats.Satiety.Empty += OnSatietyEmpty;
+            
+            _disposes.Add(animal, () =>
             {
-                _isFirstLoad = false;
-                _pairFounding = new RoutineSequence();
-                _pairFounding.WaitForRandomSeconds(_pairFoundingDelay).Then(FindPairs);
-                _pairFounding.Play();
-            }
+                animal.Stats.Satiety.Full -= OnSatietyFull;
+                animal.Stats.Satiety.Empty -= OnSatietyEmpty;
+            });
         }
 
         public void Unregister(IAnimal animal)
@@ -75,92 +67,41 @@ namespace Services.Breeding
             throw new ArgumentNullException(nameof(dispose));
         }
 
-        private void OnSatietyFull(IAnimal animal) =>
-            _breedingReadyAnimals.Add(animal);
-
-        private void FindPairs()
+        public IEnumerable<AnimalType> GetAvailablePairTypes()
         {
-            Debug.Log("FindPairs");
-            
-            using IEnumerator<AnimalType> enumerator = _typesEnumerator.GetEnumerator();
-
-            if (enumerator.MoveNext())
-                FindSinglePair(enumerator);
-            else
-                _typesEnumerator = _breedingReadyAnimals.Select(animal => animal.AnimalId.Type).Distinct();
-            
-            _pairFounding.Play();
-        }
-
-        private void FindSinglePair(IEnumerator<AnimalType> enumerator)
-        {
-            AnimalType animalType = enumerator.Current;
-
-            // if (_houseService.HasEmptyHouse(animalType) == false)
-            // {
-            //     Debug.Log("No empty house");
-            //     return;
-            // }
-
-            if (TryFindPair(animalType, out AnimalPair animalPair))
+            using (ListPool<AnimalType>.Get(out List<AnimalType> result))
             {
-                Debug.Log($"Pair found {animalPair}");
-                BeginBreeding(animalPair.First, animalPair.Second);
-                return;
+                IEnumerable<IGrouping<AnimalType, IAnimal>> groups = _breedingReadyAnimals.GroupBy(animal => animal.AnimalId.Type);
+                
+                foreach (IGrouping<AnimalType, IAnimal> group in groups)
+                    if (group.Count() >= AnimalPair.PairCount)
+                        result.Add(group.Key);
+
+                return result;
             }
-            
-            Debug.Log($"Pair not found");
         }
 
-        private bool TryFindPair(AnimalType breedingAnimalType, out AnimalPair pair)
+        public bool TryBreeding(AnimalType breedingAnimalType, out AnimalPair pair)
         {
-            IAnimal[] ready = _breedingReadyAnimals.Where(animal => animal.AnimalId.Type == breedingAnimalType && IsBreedingReady(animal)).ToArray();
-            pair = new AnimalPair();
-            
+            IAnimal[] ready = _breedingReadyAnimals.Where(animal => animal.AnimalId.Type == breedingAnimalType).ToArray();
+
             if (ready.Count() >= AnimalPair.PairCount)
             {
-                pair = new AnimalPair(ready[0], ready[1]);
+                pair =  new AnimalPair(ready[0], ready[1]);
                 return true;
             }
 
+            pair = new AnimalPair();
             return false;
         }
 
-        private void BeginBreeding(IAnimal first, IAnimal second)
+        public void BeginBreeding(AnimalPair pair, Transform at)
         {
-            _breedingReadyAnimals.Remove(first);
-            _breedingReadyAnimals.Remove(second);
+            _breedingReadyAnimals.Remove(pair.First);
+            _breedingReadyAnimals.Remove(pair.Second);
 
-            first.StateMachine.MoveBreeding(second, 
-                () => OnBreedingBegin(first, second),
-                () => OnBreedingComplete(first, second));
-            second.StateMachine.MoveBreeding(first, () => { }, () => { });
-            
-            first.Emotions.Show(EmotionId.Breeding);
-            second.Emotions.Show(EmotionId.Breeding);
+            BreedingProcess breedingProcess = new BreedingProcess(_effectService, _gameFactory, _feederService, pair, at);
+            breedingProcess.Start();
         }
-
-        private void OnBreedingComplete(IAnimal first, IAnimal second)
-        {
-            Vector3 centerAnimalsPosition = GetPositionBetweenAnimals(first.Transform, second.Transform);
-            Animal newAnimal = _gameFactory.CreateAnimal(first, centerAnimalsPosition, Quaternion.identity);
-            AnimalFeeder feeder = _feederService.GetFeeder(newAnimal.AnimalId.EdibleFood);
-            newAnimal.AttachFeeder(feeder);
-            
-            first.Emotions.Suppress(EmotionId.Breeding);
-            second.Emotions.Suppress(EmotionId.Breeding);
-        }
-
-        private void OnBreedingBegin(IAnimal first, IAnimal second)
-        {
-            Vector3 centerAnimalsPosition = GetPositionBetweenAnimals(first.Transform, second.Transform);
-            _effectService.SpawnEffect(EffectId.Hearts, centerAnimalsPosition, Quaternion.LookRotation(Vector3.up));
-        }
-
-        private bool IsBreedingReady(IAnimal animal) =>
-            animal.Stats.Satiety.IsEmpty == false;
-
-        private Vector3 GetPositionBetweenAnimals(Transform first, Transform second) =>
-            (first.position - second.position) * Arithmetic.ToHalf + second.position;
     }
 }
