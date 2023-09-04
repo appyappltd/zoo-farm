@@ -4,11 +4,13 @@ using System.Linq;
 using DelayRoutines;
 using Infrastructure.Factory;
 using Logic.Animals;
+using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Services.AnimalHouses;
 using Services.Animals;
 using Services.Effects;
+using Services.Feeders;
 using Tools.Constants;
 using UnityEngine;
 
@@ -18,7 +20,7 @@ namespace Services.Breeding
     {
         private readonly IEffectService _effectService;
         private readonly IGameFactory _gameFactory;
-        private readonly IAnimalHouseService _houseService;
+        private readonly IAnimalFeederService _feederService;
         private readonly IAnimalsService _animalsService;
 
         private readonly Dictionary<IAnimal, Action> _disposes = new Dictionary<IAnimal, Action>();
@@ -26,16 +28,17 @@ namespace Services.Breeding
 
         private IEnumerable<AnimalType> _typesEnumerator = new List<AnimalType>();
 
-        private Vector2 _pairFoundingDelay = new Vector2(3f, 8f);
+        //TODO: добавить в статик дату
+        private Vector2 _pairFoundingDelay = new Vector2(10f, 20f);
 
         private RoutineSequence _pairFounding;
         private bool _isFirstLoad = true;
 
-        public AnimalBreedService(IEffectService effectService, IGameFactory gameFactory, IAnimalHouseService houseService, IAnimalsService animalsService)
+        public AnimalBreedService(IEffectService effectService, IGameFactory gameFactory, IAnimalFeederService feederService, IAnimalsService animalsService)
         {
             _effectService = effectService;
             _gameFactory = gameFactory;
-            _houseService = houseService;
+            _feederService = feederService;
             _animalsService = animalsService;
 
             _animalsService.Registered += Register;
@@ -93,11 +96,11 @@ namespace Services.Breeding
         {
             AnimalType animalType = enumerator.Current;
 
-            if (_houseService.HasEmptyHouse(animalType) == false)
-            {
-                Debug.Log("No empty house");
-                return;
-            }
+            // if (_houseService.HasEmptyHouse(animalType) == false)
+            // {
+            //     Debug.Log("No empty house");
+            //     return;
+            // }
 
             if (TryFindPair(animalType, out AnimalPair animalPair))
             {
@@ -141,7 +144,8 @@ namespace Services.Breeding
         {
             Vector3 centerAnimalsPosition = GetPositionBetweenAnimals(first.Transform, second.Transform);
             Animal newAnimal = _gameFactory.CreateAnimal(first, centerAnimalsPosition, Quaternion.identity);
-            _houseService.TakeQueueToHouse(new QueueToHouse(newAnimal, () => { }));
+            AnimalFeeder feeder = _feederService.GetFeeder(newAnimal.AnimalId.EdibleFood);
+            newAnimal.AttachFeeder(feeder);
             
             first.Emotions.Suppress(EmotionId.Breeding);
             second.Emotions.Suppress(EmotionId.Breeding);

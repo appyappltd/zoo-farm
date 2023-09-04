@@ -79,7 +79,7 @@ namespace Infrastructure.States
             Register<IAnimalBreedService>(
                 new AnimalBreedService(Get<IEffectService>(),
                     Get<IGameFactory>(),
-                    Get<IAnimalHouseService>(),
+                    Get<IAnimalFeederService>(),
                     Get<IAnimalsService>()));
             Register<IUIFactory>(
                 new UIFactory(
