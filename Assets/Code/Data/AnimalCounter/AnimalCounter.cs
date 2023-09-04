@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
+using Services;
 using Services.Animals;
+using Tools;
 
 namespace Data
 {
@@ -11,8 +13,14 @@ namespace Data
         private readonly Dictionary<AnimalType, AnimalCountData> _countDatas = new Dictionary<AnimalType, AnimalCountData>();
         private readonly Dictionary<AnimalId, AnimalSatietyObserver> _satietyObservers = new Dictionary<AnimalId, AnimalSatietyObserver>();
         private readonly List<AnimalType> _availableTypes = new List<AnimalType>();
+        private readonly IGlobalSettings _globalsettings;
 
         public event Action<AnimalType, AnimalCountData> Updated = (_, _) => { };
+
+        public AnimalCounter()
+        {
+            _globalsettings = AllServices.Container.Single<IGlobalSettings>();
+        }
 
         public void Register(IAnimal animal)
         {
@@ -29,7 +37,16 @@ namespace Data
                 _countDatas.Add(animalType, animalCountData);
             }
 
-            _satietyObservers.Add(animal.AnimalId, new AnimalSatietyObserver(animal, this));
+            if (_globalsettings.CanLetHungryAnimalsRelease == false)
+            {
+                _satietyObservers.Add(animal.AnimalId, new AnimalSatietyObserver(animal, this));
+                
+            }
+            else
+            {
+                _countDatas[animalType] = _countDatas[animalType].AddReleaseReady();
+            }
+
             Updated.Invoke(animalType, _countDatas[animalType]);
         }
 
@@ -43,10 +60,17 @@ namespace Data
             
             _countDatas[animalType] = _countDatas[animalType].RemoveTotal();
 
-            AnimalSatietyObserver animalSatietyObserver = _satietyObservers[animalId];
-            animalSatietyObserver.Dispose();
-            _satietyObservers.Remove(animalId);
-            
+            if (_globalsettings.CanLetHungryAnimalsRelease == false)
+            {
+                AnimalSatietyObserver animalSatietyObserver = _satietyObservers[animalId];
+                animalSatietyObserver.Dispose();
+                _satietyObservers.Remove(animalId);
+            }
+            else
+            {
+                _countDatas[animalType] = _countDatas[animalType].RemoveReleaseReady();
+            }
+
             Updated.Invoke(animalType, _countDatas[animalType]);
         }
 

@@ -4418,6 +4418,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1280148841}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _bowlEmpty
+      value: 
+      objectReference: {fileID: 11400000, guid: e7c35ae65949e6345b72a7baec7e61e3, type: 2}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _firstHouse
       value: 
       objectReference: {fileID: 1664673009}
