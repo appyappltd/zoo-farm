@@ -7,6 +7,7 @@ namespace Logic.Translators
         event Action<ITranslatable> Begin;
         event Action<ITranslatable> End;
         void Play();
+        void Stop(bool atCycleEnd);
         bool TryUpdate();
         void Enable();
         void Disable();

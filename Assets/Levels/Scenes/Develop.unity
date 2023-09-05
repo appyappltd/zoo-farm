@@ -4538,7 +4538,7 @@ MonoBehaviour:
   - {fileID: 1395572913}
   _isSortable: 0
   _isRemoteInit: 1
-  _isModifyRotation: 0
+  _isModifyRotation: 1
   _adderMono: {fileID: 0}
   _removerMono: {fileID: 0}
 --- !u!4 &1521543074
@@ -8102,11 +8102,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInteraction: {fileID: 170556002150125378}
   _timerOperator: {fileID: 2620229155442167106}
-  _itemIdFilter: 8
+  _itemIdFilter: 16
   _foodIdFilter: 0
-  _isSerialReceive: 1
+  _isSerialReceive: 0
   _receiveRate: 0.2
-  _mode: 0
+  _mode: 1
   _isRemoteInit: 1
   _adder: {fileID: 0}
   _remover: {fileID: 0}
@@ -8273,27 +8273,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalScale.x
-      value: 14.68
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalScale.y
-      value: 14.68
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalScale.z
-      value: 14.68
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.19
+      value: 0.501
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8321,6 +8321,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974961875977447052, guid: 59497999b22ec9347b03e84896037938, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25654119585548d78dd36e0eb51b9dcb, type: 3}
   m_Name: Carrot
   m_EditorClassIdentifier: 
-  _foodName: Carrot
-  _handItemData: {fileID: 11400000, guid: 49385c961d57c2e4e88ac3fa82700407, type: 2}
+  _foodId: 1
   _produceDurationRange: {x: 0.2599361, y: 0.6726273}
   _maxStockQuantity: 1

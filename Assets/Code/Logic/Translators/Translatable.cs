@@ -25,6 +25,7 @@ namespace Logic.Translators
         private Func<T, T, float, T> _valueLerp;
 
         private float _delta;
+        private bool _isLastCycle;
 
         private bool IsComplete => _delta >= FinalTranslateValue;
         public bool IsPreload => _isPreload;
@@ -52,7 +53,17 @@ namespace Logic.Translators
             
             Restart();
         }
-        
+
+        public void Stop(bool atCycleEnd)
+        {
+            _isLastCycle = true;
+            
+            if (atCycleEnd)
+                return;
+
+            _delta = FinalTranslateValue;
+        }
+
         public void Play(T from, T to)
         {
             if (_isPreload)
@@ -79,7 +90,7 @@ namespace Logic.Translators
             {
                 End.Invoke(this);
 
-                if (_isLooped == false)
+                if (_isLooped == false || _isLastCycle)
                     return false;
                 
                 Restart();

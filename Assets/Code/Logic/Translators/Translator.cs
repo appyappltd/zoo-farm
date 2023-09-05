@@ -31,6 +31,12 @@ namespace Logic.Translators
                 enabled = false;
         }
 
+        public void RemoveAllTranslatables()
+        {
+            _translatables.Clear();
+            enabled = false;
+        }
+        
         protected void UpdateTranslatable()
         {
             for (var index = 0; index < _translatables.Count; index++)

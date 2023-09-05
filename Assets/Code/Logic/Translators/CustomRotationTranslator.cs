@@ -6,7 +6,7 @@ namespace Logic.Translators
     {
         protected override void ApplyTranslation(Vector3 value)
         {
-            transform.rotation = Quaternion.Euler(value);
+            transform.localRotation = Quaternion.Euler(value);
         }
     }
 }

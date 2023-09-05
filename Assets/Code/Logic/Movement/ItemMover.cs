@@ -88,6 +88,8 @@ namespace Logic.Movement
         private void FinishTranslation()
         {
             enabled = false;
+            transform.position = _target.position;
+            
             transform.SetParent(_finalParent, true);
 
             if (_finalParent)
