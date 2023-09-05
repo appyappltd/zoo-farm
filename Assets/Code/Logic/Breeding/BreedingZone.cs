@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using AYellowpaper;
@@ -29,6 +30,7 @@ namespace Logic.Breeding
             new Dictionary<AnimalType, ChoseInteractionProvider>();
 
         [Header("References")]
+        [SerializeField] private Transform _heartPosition;
         [SerializeField] private RunTranslator _translator;
         [SerializeField] private InterfaceReference<ITransformGrid, MonoBehaviour> _interactionsGrid;
         [SerializeField] private InventoryHolder _inventoryHolder;
@@ -46,6 +48,7 @@ namespace Logic.Breeding
         private IGameFactory _gameFactory;
         
         private BreedingCurrencySpawner _currencySpawner;
+        private IItem _heart;
 
         private void Awake()
         {
@@ -95,7 +98,10 @@ namespace Logic.Breeding
             void OnChosen(Human human)
             {
                 if (_breedService.TryBreeding(associatedType, out AnimalPair pair))
-                    _breedService.BeginBreeding(pair, _breedingPlace);
+                {
+                    _breedService.BeginBreeding(pair, _breedingPlace, OnBreedingBegins);
+                    _heart.Mover.Move(_heartPosition, _heartPosition, true);
+                }
                 
                 _interactionsGrid.Value.RemoveAll();
 
@@ -107,9 +113,28 @@ namespace Logic.Breeding
             choseZone.Interaction.Interacted += OnChosen;
             _disposable.Add(new EventDisposer(() => choseZone.Interaction.Interacted -= OnChosen));
         }
-        
-        private void OnRemovedItem(IItem _)
+
+        private void OnBreedingBegins()
         {
+            if (_heart.TranslatableAgent.Main is CustomScaleTranslatable scaleTranslatable)
+            {
+                scaleTranslatable.Play(Vector3.one, Vector3.zero);
+                _translator.AddTranslatable(scaleTranslatable);
+
+                void OnEndTranslate(ITranslatable _)
+                {
+                    scaleTranslatable.End -= OnEndTranslate;
+                    _currencySpawner.ReturnItem(_heart);
+                }
+
+                scaleTranslatable.End += OnEndTranslate;
+            }
+        }
+
+        private void OnRemovedItem(IItem item)
+        {
+            _heart = item;
+            
             foreach (var pairType in _breedService.GetAvailablePairTypes()) 
                 _interactionsGrid.Value.AddCell(_choseInteractions[pairType].transform);
         }

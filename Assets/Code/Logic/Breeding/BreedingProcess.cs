@@ -1,3 +1,4 @@
+using System;
 using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Animals.AnimalFeeders;
@@ -5,7 +6,6 @@ using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Services.Effects;
 using Services.Feeders;
-using Tools.Constants;
 using UnityEngine;
 
 namespace Logic.Breeding
@@ -17,18 +17,20 @@ namespace Logic.Breeding
         private readonly IAnimalFeederService _feederService;
         private readonly AnimalPair _pair;
         private readonly Transform _at;
+        private readonly Action _onBeginsCallback;
 
         private int _animalsInPlaceCount;
 
-        public BreedingProcess(IEffectService effectService, IGameFactory gameFactory, IAnimalFeederService feederService, AnimalPair pair, Transform at)
+        public BreedingProcess(IEffectService effectService, IGameFactory gameFactory, IAnimalFeederService feederService, AnimalPair pair, Transform at, Action onBeginsCallback = null)
         {
             _effectService = effectService;
             _gameFactory = gameFactory;
             _feederService = feederService;
             _pair = pair;
             _at = at;
+            _onBeginsCallback = onBeginsCallback ?? (() =>{ }) ;
         }
-
+        
         public void Start()
         {
             IAnimal first = _pair.First;
@@ -61,7 +63,10 @@ namespace Logic.Breeding
             second.Emotions.Suppress(EmotionId.Breeding);
         }
 
-        private void SpawnBreedingEffects() =>
+        private void SpawnBreedingEffects()
+        {
+            _onBeginsCallback.Invoke();
             _effectService.SpawnEffect(EffectId.Hearts, _at.position, Quaternion.LookRotation(Vector3.up));
+        }
     }
 }

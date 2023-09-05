@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Data.ItemsData;
 using DelayRoutines;
@@ -38,6 +39,21 @@ namespace Logic.Breeding
             _spawnRoutine.Play();
         }
 
+        public void ReturnItem(IItem item)
+        {
+            if (item is HandItem handItem)
+            {
+                if (_breedingCurrencies.Contains(handItem))
+                    throw new InvalidOperationException();
+
+                handItem.gameObject.Disable();
+                _breedingCurrencies.Push(handItem);
+                return;
+            }
+
+            throw new NullReferenceException(nameof(handItem));
+        }
+        
         private void InitBreedingCurrencies()
         {
             int itemsWeight = 0;
