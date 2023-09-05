@@ -67,17 +67,26 @@ namespace Services.Breeding
             throw new ArgumentNullException(nameof(dispose));
         }
 
-        public IEnumerable<AnimalType> GetAvailablePairTypes()
+        public ICollection<AnimalType> GetAvailablePairTypes()
         {
             using (ListPool<AnimalType>.Get(out List<AnimalType> result))
             {
                 IEnumerable<IGrouping<AnimalType, IAnimal>> groups = _breedingReadyAnimals.GroupBy(animal => animal.AnimalId.Type);
                 
                 foreach (IGrouping<AnimalType, IAnimal> group in groups)
+                {
+                    Debug.Log($"Group: {group.Key}, count: {group.Count()}");
+                    
                     if (group.Count() >= AnimalPair.PairCount)
+                    {
+                        Debug.Log("Add result");
                         result.Add(group.Key);
+                    }
+                    
+                }
 
-                return result;
+                Debug.Log(result.Count);
+                return result.ToArray();
             }
         }
 

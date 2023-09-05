@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using AYellowpaper;
 using Infrastructure.Factory;
 using Logic.Animals;
@@ -8,12 +8,15 @@ using Logic.Player;
 using Logic.Storages;
 using Logic.Storages.Items;
 using Logic.TransformGrid;
+using NaughtyAttributes;
+using NTC.Global.System;
 using Observables;
 using Services;
 using Services.Breeding;
 using Services.PersistentProgress;
 using Services.StaticData;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Logic.Breeding
 {
@@ -23,7 +26,7 @@ namespace Logic.Breeding
         private readonly Dictionary<AnimalType, ChoseInteractionProvider> _choseInteractions =
             new Dictionary<AnimalType, ChoseInteractionProvider>();
         
-        [SerializeField] private InterfaceReference<ITransformGrid> _interactionsGrid;
+        [SerializeField] private InterfaceReference<ITransformGrid, MonoBehaviour> _interactionsGrid;
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private Storage _storage;
         [SerializeField] private ProductReceiver _productReceiver;
@@ -71,6 +74,7 @@ namespace Logic.Breeding
             {
                  ChoseInteractionProvider provider = _gameFactory.CreateChoseInteraction(Vector3.zero, Quaternion.identity, animalType);
                  provider.transform.SetParent(transform);
+                 provider.gameObject.Disable();
                  _choseInteractions.Add(animalType, provider);
                  
                  Subscribe(provider, animalType);
@@ -83,6 +87,8 @@ namespace Logic.Breeding
             {
                 if (_breedService.TryBreeding(associatedType, out AnimalPair pair))
                     _breedService.BeginBreeding(pair, _breedingPlace);
+                
+                _interactionsGrid.Value.RemoveAll();
 
 #if DEBUG
                 Debug.LogWarning($"Animals of {associatedType} type are not enough for reproduction");
@@ -93,10 +99,20 @@ namespace Logic.Breeding
             _disposable.Add(new EventDisposer(() => choseZone.Interaction.Interacted -= OnChosen));
         }
         
-        private void OnRemovedItem(IItem item)
+        private void OnRemovedItem(IItem _)
         {
             foreach (var pairType in _breedService.GetAvailablePairTypes()) 
                 _interactionsGrid.Value.AddCell(_choseInteractions[pairType].transform);
+        }
+        
+        [Button] [Conditional("UNITY_EDITOR")]
+        private void BeginBreed()
+        {
+            foreach (var pairType in _breedService.GetAvailablePairTypes())
+            {
+                Debug.Log($"AvailableBreedType {pairType}");
+                _interactionsGrid.Value.AddCell(_choseInteractions[pairType].transform);
+            }
         }
     }
 }
