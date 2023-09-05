@@ -19,8 +19,8 @@ namespace Logic.Translators
 
         private ReadOnlyCollection<ITranslatable> _translatables;
         
-        public ReadOnlyCollection<ITranslatable> SubTranslatables => _translatables;
-        public ITranslatable MainTranslatable => (ITranslatable) _mainTranslatable;
+        public ReadOnlyCollection<ITranslatable> Sub => _translatables;
+        public ITranslatable Main => (ITranslatable) _mainTranslatable;
         
         GameObject IPoolable.GameObject => gameObject;
 
@@ -31,9 +31,9 @@ namespace Logic.Translators
             if (_isAutoPlay)
             {
                 ITranslator translator = (ITranslator) _translator;
-                translator.AddTranslatable(MainTranslatable);
+                translator.AddTranslatable(Main);
 
-                foreach (ITranslatable translatable in SubTranslatables)
+                foreach (ITranslatable translatable in Sub)
                 {
                     translator.AddTranslatable(translatable);
                 }

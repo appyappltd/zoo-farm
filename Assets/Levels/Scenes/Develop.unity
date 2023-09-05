@@ -3982,7 +3982,7 @@ Transform:
   m_GameObject: {fileID: 1294577273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.33, y: 2.96, z: 4.91}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4304,7 +4304,7 @@ Transform:
   m_GameObject: {fileID: 1395572912}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.33, y: 2.96, z: -4.5}
+  m_LocalPosition: {x: 0, y: 0, z: -1.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4350,7 +4350,7 @@ Transform:
   m_GameObject: {fileID: 1472706510}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.33, y: 2.96, z: 0.08}
+  m_LocalPosition: {x: 0, y: 0, z: 1.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4550,7 +4550,7 @@ Transform:
   m_GameObject: {fileID: 1521543072}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.28, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8522,6 +8522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7728950574960500997}
+  - component: {fileID: 8160477046591092828}
   - component: {fileID: 8160477046591092827}
   - component: {fileID: 8160477046591092826}
   m_Layer: 7
@@ -8544,7 +8545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 0
-  _maxWeight: 3
+  _maxWeight: 12
 --- !u!114 &8160477046591092827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8557,6 +8558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cfa823dbf884ab7bfcf73346e0a82ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _translator: {fileID: 8160477046591092828}
   _interactionsGrid:
     _underlyingValue: {fileID: 2143196935}
   _inventoryHolder: {fileID: 8160477046591092826}
@@ -8564,6 +8566,19 @@ MonoBehaviour:
   _productReceiver: {fileID: 5909103672594433144}
   _interactionZone: {fileID: 170556002150125378}
   _breedingPlace: {fileID: 7728950574960500997}
+  _currencySpawnDelay: {x: 3, y: 5}
+--- !u!114 &8160477046591092828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160477046591092825}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65cd91c87cf643fd826caa5ce174ff02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8558870656303891916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5172055024219397017, guid: d6e9b9a308f549648964db3105c7e071, type: 3}

@@ -86,7 +86,7 @@ namespace Logic.Payment
                 return;
             
             _leftCoinsToPay.Value -= _currencyPerTick;
-            ITranslatable translatable = _spawner.Spawn().MainTranslatable;
+            ITranslatable translatable = _spawner.Spawn().Main;
             
             if (_leftCoinsToPay.Value <= 0)
             {

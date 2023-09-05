@@ -24,21 +24,21 @@ namespace Logic.Spawners
 
         protected override void OnSpawn(TranslatableAgent spawned)
         {
-            _translator.AddTranslatable(spawned.MainTranslatable);
+            _translator.AddTranslatable(spawned.Main);
 
-            if (spawned.MainTranslatable.IsPreload)
+            if (spawned.Main.IsPreload)
             {
-                spawned.MainTranslatable.Play();
+                spawned.Main.Play();
             }
             else
             {
-                ITranslatableParametric<Vector3> mainTranslatable = (ITranslatableParametric<Vector3>) spawned.MainTranslatable;
+                ITranslatableParametric<Vector3> mainTranslatable = (ITranslatableParametric<Vector3>) spawned.Main;
                 mainTranslatable.Play(_fromTransform.position + _fromPositionOffset, _toTransform.position);
             }
 
-            for (var index = 0; index < spawned.SubTranslatables.Count; index++)
+            for (var index = 0; index < spawned.Sub.Count; index++)
             {
-                ITranslatable translatable = spawned.SubTranslatables[index];
+                ITranslatable translatable = spawned.Sub[index];
                 _translator.AddTranslatable(translatable);
                 translatable.Play();
             }
@@ -48,8 +48,8 @@ namespace Logic.Spawners
         {
             void OnEndTranslatable(ITranslatable translatable) => returnAction.Invoke();
             
-            agent.MainTranslatable.End += OnEndTranslatable;
-            return () => agent.MainTranslatable.End -= OnEndTranslatable;
+            agent.Main.End += OnEndTranslatable;
+            return () => agent.Main.End -= OnEndTranslatable;
         }
     }
 }

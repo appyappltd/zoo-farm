@@ -97,12 +97,12 @@ namespace Logic.Spawners
         private void PlayTranslatables(TranslatableAgent agent)
         {
             ITranslatableParametric<Vector3> mainTranslatable =
-                (ITranslatableParametric<Vector3>) agent.MainTranslatable;
+                (ITranslatableParametric<Vector3>) agent.Main;
             mainTranslatable.Play(transform.position, GetRandomAroundPosition());
 
-            for (var index = 0; index < agent.SubTranslatables.Count; index++)
+            for (var index = 0; index < agent.Sub.Count; index++)
             {
-                ITranslatable translatable = agent.SubTranslatables[index];
+                ITranslatable translatable = agent.Sub[index];
                 translatable.Play();
             }
         }
@@ -112,9 +112,9 @@ namespace Logic.Spawners
 
         private void AddToTranslator(TranslatableAgent agent)
         {
-            _translator.AddTranslatable(agent.MainTranslatable);
+            _translator.AddTranslatable(agent.Main);
 
-            foreach (ITranslatable translatable in agent.SubTranslatables)
+            foreach (ITranslatable translatable in agent.Sub)
             {
                 _translator.AddTranslatable(translatable);
             }

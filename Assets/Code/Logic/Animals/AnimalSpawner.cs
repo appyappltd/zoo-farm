@@ -20,7 +20,7 @@ namespace Logic.Animals
         public HandItem SpawnAnimal(Vector3 at)
         {
             AnimalAndTreatToolPair pair = NextPair();
-            HandItem spawnedAnimal = _handItemFactory.CreateAnimal(at, Quaternion.identity, pair.AnimalStaticData.AnimalType);
+            HandItem spawnedAnimal = _handItemFactory.CreateAnimal(at, Quaternion.identity, pair.AnimalStaticData.AnimalType, pair);
             spawnedAnimal.Construct(new AnimalItemData(pair.AnimalStaticData, pair.TreatTool));
             return spawnedAnimal;
         }

@@ -8,29 +8,25 @@ namespace DelayRoutines
     public class RoutineSequence : IDisposable
     {
         private readonly GlobalUpdate _globalUpdate;
-
         private readonly List<IRoutine> _routines = new List<IRoutine>();
 
         private int _currentRoutineIndex = -1;
-
         private bool _isAutoKill;
+        private bool _isActive;
 
         private IRoutine FirstRoutine => _routines[0];
-
         private IRoutine LastRoutine => _routines[_currentRoutineIndex];
-
         private IRoutine ActiveRoutine => _routines.Find(routine => routine.IsActive);
 
+        public bool IsActive => _isActive;
+        
         public RoutineSequence()
         {
-            Debug.Log("New sequence");
             _globalUpdate = GlobalUpdate.Instance;
         }
 
-        void IDisposable.Dispose()
-        {
-            // Kill();
-        }
+        void IDisposable.Dispose() =>
+            Kill();
 
         /// <summary>
         /// Launch routine
@@ -43,6 +39,7 @@ namespace DelayRoutines
                 LastRoutine.AddNext(new Executor(Kill));
 
             _routines[mode == RoutinePlayMode.AtFirst ? 0 : _currentRoutineIndex].Play();
+            _isActive = true;
         }
 
         /// <summary>
@@ -69,8 +66,11 @@ namespace DelayRoutines
         /// <summary>
         /// Stops the routine but does not reset the pointer to the current tween.
         /// </summary>
-        public void Stop() =>
+        public void Stop()
+        {
+            _isActive = false;
             ActiveRoutine?.Stop();
+        }
 
         #region Wait
 

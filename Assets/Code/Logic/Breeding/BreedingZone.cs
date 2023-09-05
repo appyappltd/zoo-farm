@@ -8,6 +8,7 @@ using Logic.Player;
 using Logic.Storages;
 using Logic.Storages.Items;
 using Logic.TransformGrid;
+using Logic.Translators;
 using NaughtyAttributes;
 using NTC.Global.System;
 using Observables;
@@ -20,12 +21,15 @@ using Debug = UnityEngine.Debug;
 
 namespace Logic.Breeding
 {
+    [RequireComponent(typeof(RunTranslator))]
     public class BreedingZone : MonoBehaviour
     {
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         private readonly Dictionary<AnimalType, ChoseInteractionProvider> _choseInteractions =
             new Dictionary<AnimalType, ChoseInteractionProvider>();
-        
+
+        [Header("References")]
+        [SerializeField] private RunTranslator _translator;
         [SerializeField] private InterfaceReference<ITransformGrid, MonoBehaviour> _interactionsGrid;
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private Storage _storage;
@@ -33,13 +37,15 @@ namespace Logic.Breeding
         [SerializeField] private HumanInteraction _interactionZone;
         [SerializeField] private Transform _breedingPlace;
 
-        private IAnimalBreedService _breedService;
+        [Space] [Header("Settings")]
+        [SerializeField] [MinMaxSlider(0.1f, 30f)] private Vector2 _currencySpawnDelay;
         
-        private BreedingCurrencyContainer _currencyContainer;
-
+        private IAnimalBreedService _breedService;
         private IStaticDataService _staticData;
         private IPersistentProgressService _persistentProgress;
         private IGameFactory _gameFactory;
+        
+        private BreedingCurrencySpawner _currencySpawner;
 
         private void Awake()
         {
@@ -48,12 +54,6 @@ namespace Logic.Breeding
                 AllServices.Container.Single<IPersistentProgressService>(),
                 AllServices.Container.Single<IGameFactory>());
             CreateAllInteractions();
-            
-            _inventoryHolder.Construct();
-            _storage.Construct(_inventoryHolder.Inventory);
-            _productReceiver.Construct(_inventoryHolder.Inventory);
-            
-            _inventoryHolder.Inventory.Removed += OnRemovedItem;
         }
 
         private void OnDestroy() =>
@@ -66,6 +66,15 @@ namespace Logic.Breeding
             _persistentProgress = persistentProgress;
             _staticData = staticData;
             _breedService = breedService;
+            
+            _inventoryHolder.Construct();
+            _storage.Construct(_inventoryHolder.Inventory);
+            _productReceiver.Construct(_inventoryHolder.Inventory);
+            
+            _inventoryHolder.Inventory.Removed += OnRemovedItem;
+
+            _currencySpawner = new BreedingCurrencySpawner(gameFactory.HandItemFactory, _storage, _inventoryHolder.Inventory,
+                _currencySpawnDelay, _translator);
         }
 
         private void CreateAllInteractions()

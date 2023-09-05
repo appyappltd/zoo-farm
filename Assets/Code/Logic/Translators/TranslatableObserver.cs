@@ -12,14 +12,14 @@ namespace Logic.Translators
 
         private void OnEnable()
         {
-            _translatableAgent.MainTranslatable.End += OnEndTranslate;
-            _translatableAgent.MainTranslatable.Begin += OnBeginTranslate;
+            _translatableAgent.Main.End += OnEndTranslate;
+            _translatableAgent.Main.Begin += OnBeginTranslate;
         }
 
         private void OnDisable()
         {
-            _translatableAgent.MainTranslatable.End -= OnEndTranslate;
-            _translatableAgent.MainTranslatable.Begin -= OnBeginTranslate;
+            _translatableAgent.Main.End -= OnEndTranslate;
+            _translatableAgent.Main.Begin -= OnBeginTranslate;
         }
 
         private void OnEndTranslate(ITranslatable _) =>

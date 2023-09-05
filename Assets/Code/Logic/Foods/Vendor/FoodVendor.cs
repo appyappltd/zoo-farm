@@ -101,7 +101,6 @@ namespace Logic.Foods.Vendor
         {
             HandItem food = _factory.CreateFood(_spawnPlace.position, _spawnPlace.rotation, _vendorConfig.FoodId);
             food.transform.SetParent(transform, true);
-            food.Construct(_vendorConfig.HandItemData);
             _readyFoods.Push(food);
 
             if (_readyFoods.Count == _vendorConfig.MaxStockQuantity)

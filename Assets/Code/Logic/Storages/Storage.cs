@@ -27,12 +27,12 @@ namespace Logic.Storages
 
         private int _topIndex = -1;
 
-        public Action<IItem> Replenished = _ => { };
+        public event Action<IItem> Replenished = _ => { };
 
         private IAddItemObserver Adder => _adder;
         private IGetItemObserver Remover => _remover;
 
-        public Transform TopPlace => _places[_topIndex];
+        public Transform TopPlace => _places[Mathf.Max(0, _topIndex)];
 
         private void Awake() =>
             enabled = !_isRemoteInit;

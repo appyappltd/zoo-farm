@@ -55,7 +55,7 @@ namespace Infrastructure.Factory
             _progressService = progressService;
 
             FoodFactory = new FoodFactory(assets);
-            HandItemFactory = new HandItemFactory(assets);
+            HandItemFactory = new HandItemFactory(assets, staticDataService);
             EffectFactory = new EffectFactory(assets, staticDataService, poolService);
             
             _animalHouseBuilder = new AnimalHouseBuilder(houseService);
@@ -181,9 +181,6 @@ namespace Infrastructure.Factory
             volunteerObject.transform.SetParent(parent);
             return volunteerObject;
         }
-
-        public GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId) =>
-            _assets.Instantiate($"{AssetPath.HandItemPath}/{itemId}", at, rotation);
 
         public GameObject CreateKeeper(Vector3 at) =>
             _assets.Instantiate(AssetPath.KeeperPath, at);

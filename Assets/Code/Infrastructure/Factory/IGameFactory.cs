@@ -30,7 +30,6 @@ namespace Infrastructure.Factory
         GameObject CreateCollectibleCoin();
         GameObject CreateFoodVendor(Vector3 at, Quaternion rotation, FoodId foodId);
         GameObject CreateVolunteer(Vector3 at, Transform parent);
-        GameObject CreateHandItem(Vector3 at, Quaternion rotation, ItemId itemId);
         GameObject CreateKeeper(Vector3 markerBuildPosition);
         GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type);
         MedicalBed CreateMedBed(Vector3 at, Quaternion rotation);

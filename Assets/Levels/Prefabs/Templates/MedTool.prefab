@@ -345,6 +345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedTool
       objectReference: {fileID: 0}
+    - target: {fileID: 4860821192426651167, guid: dd5e035eb72563340be12d54b8396246, type: 3}
+      propertyPath: _translatableAgent
+      value: 
+      objectReference: {fileID: 2412960404571237366}
     - target: {fileID: 7685436483575180233, guid: dd5e035eb72563340be12d54b8396246, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -28,5 +28,8 @@ namespace Services.StaticData
         ScaleModifierConfig ScaleModifierById(ScaleModifierId id);
         AnimalItemStaticData AnimalItemDataById(AnimalType id);
         GoalConfig GoalConfigForLevel(string levelName);
+        FoodItemData FoodItemDataById(FoodId foodId);
+        MedicalToolItemData MedicalItemDataById(MedicalToolId medicalToolId);
+        DefaultItemData DefaultItemDataById(ItemId itemId);
     }
 }

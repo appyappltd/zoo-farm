@@ -19,7 +19,7 @@ namespace Tutorial
 
         private void Start()
         {
-            _translator.AddTranslatable(_translatableAgent.MainTranslatable);
+            _translator.AddTranslatable(_translatableAgent.Main);
             _playerInteraction.Interacted += OnEnter;
         }
 

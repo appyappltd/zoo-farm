@@ -29,6 +29,9 @@ namespace Services.StaticData
         private const string ScaleModifierPath = "StaticData/ScaleModifierConfigs";
         private const string AnimalItemsPath = "StaticData/HandItemConfigs/Animals";
         private const string LevelGoalConfigPath = "StaticData/LevelGoalConfigs";
+        private const string FoodConfigPath = "StaticData/HandItemConfigs/Food";
+        private const string MedicalConfigPath = "StaticData/HandItemConfigs/Medical";
+        private const string DefaultItemConfigPath = "StaticData/HandItemConfigs";
 
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
@@ -36,6 +39,9 @@ namespace Services.StaticData
         private Dictionary<ScaleModifierId, ScaleModifierConfig> _scaleModifierConfigs;
         private Dictionary<AnimalType, AnimalItemStaticData> _animalItemConfigs;
         private Dictionary<string, GoalConfig> _levelGoalConfigs;
+        private Dictionary<FoodId, FoodItemData> _foodConfigs;
+        private Dictionary<MedicalToolId, MedicalToolItemData> _medicalToolConfigs;
+        private Dictionary<ItemId, DefaultItemData> _defaultItemConfigs;
 
         private SpawnPlaceConfig _spawnPlaceConfig;
         private IconConfig _icons;
@@ -48,6 +54,9 @@ namespace Services.StaticData
             _scaleModifierConfigs = LoadFor<ScaleModifierId, ScaleModifierConfig>(ScaleModifierPath, x => x.ModifierId);
             _animalItemConfigs = LoadFor<AnimalType, AnimalItemStaticData>(AnimalItemsPath, x => x.AnimalType);
             _levelGoalConfigs = LoadFor<string, GoalConfig>(LevelGoalConfigPath, x => x.LevelName);
+            _foodConfigs = LoadFor<FoodId, FoodItemData>(FoodConfigPath, x => x.FoodId);
+            _medicalToolConfigs = LoadFor<MedicalToolId, MedicalToolItemData>(MedicalConfigPath, x => x.MedicineToolId);
+            _defaultItemConfigs = LoadFor<ItemId, DefaultItemData>(DefaultItemConfigPath, x => x.ItemId);
 
             _icons = Resources.Load<IconConfig>(IconsConfigPath);
             _spawnPlaceConfig = Resources.Load<SpawnPlaceConfig>(SpawnPlaceConfigPath);
@@ -75,6 +84,15 @@ namespace Services.StaticData
 
         public GoalConfig GoalConfigForLevel(string levelName) =>
             GetDataFor(levelName, _levelGoalConfigs);
+
+        public FoodItemData FoodItemDataById(FoodId foodId) =>
+            GetDataFor(foodId, _foodConfigs);
+
+        public MedicalToolItemData MedicalItemDataById(MedicalToolId medicalToolId) =>
+            GetDataFor(medicalToolId, _medicalToolConfigs);
+
+        public DefaultItemData DefaultItemDataById(ItemId itemId) =>
+            GetDataFor(itemId, _defaultItemConfigs);
 
         public ScaleModifierConfig ScaleModifierById(ScaleModifierId id) =>
             GetDataFor(id, _scaleModifierConfigs);
