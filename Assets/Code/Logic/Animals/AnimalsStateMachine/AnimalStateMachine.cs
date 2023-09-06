@@ -42,9 +42,6 @@ namespace Logic.Animals.AnimalsStateMachine
         [SerializeField] private Vector2 _idleDelayRange;
         [SerializeField] private float _placeOffset;
 
-        // private Transform _restPlace;
-        // private Transform _eatPlace;
-
         private ForceMove _forceMove;
         private Idle _forceIdle;
         private ForceEat _forceEat;
@@ -53,10 +50,7 @@ namespace Logic.Animals.AnimalsStateMachine
         private AnimalFeeder _feeder;
 
         public void Construct(Transform houseRestPlace, Transform houseEatPlace)
-        {
-            // _restPlace = houseRestPlace;
-            // _eatPlace = houseEatPlace;
-            
+        {           
             SetUp();
             EnableStatIndicators();
         }
@@ -74,10 +68,8 @@ namespace Logic.Animals.AnimalsStateMachine
             ForceState(_forceMove);
         }
 
-        public void SetForceBowl(Bowl bowl)
-        {
+        public void SetForceBowl(Bowl bowl) =>
             _forceEat.SetBowl(bowl);
-        }
 
         public void ForceIdle() =>
             ForceState(_forceIdle);
@@ -87,11 +79,16 @@ namespace Logic.Animals.AnimalsStateMachine
             ForceState(_forceEat);
         }
 
-        public void MoveBreeding(Transform breedPlace, Action onBreedingBegin, Action onBreedingComplete)
+        public void InitBreeding(Transform breedPlace, Action onBreedingBegin)
         {
-            _followToBreeding.Init(breedPlace);
-            _breeding.Init(onBreedingBegin, onBreedingComplete);
+            _followToBreeding.Init(breedPlace, onBreedingBegin);
             ForceState(_followToBreeding);
+        }
+
+        public void BeginBreeding(Action onBreedingComplete)
+        {
+            _breeding.Init(onBreedingComplete);
+            ForceState(_breeding);
         }
 
         private void SetUp()
@@ -134,7 +131,7 @@ namespace Logic.Animals.AnimalsStateMachine
                 {
                     _followToBreeding, new Dictionary<Transition, State>
                     {
-                        {reachedBreeding, _breeding}
+                        {reachedBreeding, _forceIdle}
                     }
                 },
                 {
@@ -144,9 +141,7 @@ namespace Logic.Animals.AnimalsStateMachine
                     }
                 },
                 {
-                    _forceIdle, new Dictionary<Transition, State>
-                    {
-                    }
+                    _forceIdle, new Dictionary<Transition, State>()
                 },
                 {
                     _forceMove, new Dictionary<Transition, State>

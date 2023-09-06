@@ -10,17 +10,10 @@ namespace Logic.Animals.AnimalsStateMachine.States
         private readonly StatIndicator _satiety;
 
         private Action _onBreedingComplete;
-        private Action _onBreedingBegin;
 
         public BreedingIdle(IPrimeAnimator animator, StatIndicator satiety) : base(animator)
         {
             _satiety = satiety;
-        }
-
-        protected override void OnEnter()
-        {
-            base.OnEnter();
-            _onBreedingBegin.Invoke();
         }
 
         protected override void OnExit()
@@ -29,10 +22,9 @@ namespace Logic.Animals.AnimalsStateMachine.States
             _satiety.ProgressBar.Reset();
         }
 
-        public void Init(Action onBreedingBegin, Action onBreedingComplete)
+        public void Init(Action onBreedingComplete)
         {
             _onBreedingComplete = onBreedingComplete;
-            _onBreedingBegin = onBreedingBegin;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using DelayRoutines;
 using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Animals.AnimalFeeders;
@@ -12,6 +13,8 @@ namespace Logic.Breeding
 {
     public class BreedingProcess
     {
+        private const float BeforeBreedingDelaySeconds = 0.25f;
+        
         private readonly IEffectService _effectService;
         private readonly IGameFactory _gameFactory;
         private readonly IAnimalFeederService _feederService;
@@ -20,15 +23,20 @@ namespace Logic.Breeding
         private readonly Action _onBeginsCallback;
 
         private int _animalsInPlaceCount;
+        private bool _isRunning;
+        private RoutineSequence _beforeBreedingDelay;
 
-        public BreedingProcess(IEffectService effectService, IGameFactory gameFactory, IAnimalFeederService feederService, AnimalPair pair, Transform at, Action onBeginsCallback = null)
+        public BreedingProcess(IEffectService effectService, IGameFactory gameFactory,
+            IAnimalFeederService feederService, AnimalPair pair, Transform at, Action onBeginsCallback = null)
         {
             _effectService = effectService;
             _gameFactory = gameFactory;
             _feederService = feederService;
             _pair = pair;
             _at = at;
-            _onBeginsCallback = onBeginsCallback ?? (() =>{ }) ;
+            _onBeginsCallback = onBeginsCallback ?? (() => { });
+
+            _beforeBreedingDelay = new RoutineSequence().WaitForSeconds(BeforeBreedingDelaySeconds).Then(StartBreedingState);
         }
         
         public void Start()
@@ -36,10 +44,8 @@ namespace Logic.Breeding
             IAnimal first = _pair.First;
             IAnimal second = _pair.Second;
 
-            first.StateMachine.MoveBreeding(_at, 
-                OnAnimalOnPlace,
-                () => OnBreedingComplete(first, second));
-            second.StateMachine.MoveBreeding(_at, OnAnimalOnPlace, () => { });
+            first.StateMachine.InitBreeding(_at, OnAnimalOnPlace);
+            second.StateMachine.InitBreeding(_at, OnAnimalOnPlace);
             
             first.Emotions.Show(EmotionId.Breeding);
             second.Emotions.Show(EmotionId.Breeding);
@@ -47,24 +53,38 @@ namespace Logic.Breeding
 
         private void OnAnimalOnPlace()
         {
-            _animalsInPlaceCount++;
+            if (_isRunning)
+                return;
 
+            _animalsInPlaceCount++;
+            
             if (_animalsInPlaceCount >= AnimalPair.PairCount)
-                SpawnBreedingEffects();
+            {
+                _isRunning = true;
+                _beforeBreedingDelay.Play();
+            }
         }
         
-        private void OnBreedingComplete(IAnimal first, IAnimal second)
+        private void OnBreedingComplete()
         {
+            IAnimal first = _pair.First;
+            IAnimal second = _pair.Second;
+            
             Animal newAnimal = _gameFactory.CreateAnimal(first, _at.position, Quaternion.identity);
             AnimalFeeder feeder = _feederService.GetFeeder(newAnimal.AnimalId.EdibleFood);
             newAnimal.AttachFeeder(feeder);
             
             first.Emotions.Suppress(EmotionId.Breeding);
             second.Emotions.Suppress(EmotionId.Breeding);
+
+            _isRunning = false;
         }
 
-        private void SpawnBreedingEffects()
+        private void StartBreedingState()
         {
+            _pair.First.StateMachine.BeginBreeding(OnBreedingComplete);
+            _pair.Second.StateMachine.BeginBreeding(() => { });
+            
             _onBeginsCallback.Invoke();
             _effectService.SpawnEffect(EffectId.Hearts, _at.position, Quaternion.LookRotation(Vector3.up));
         }

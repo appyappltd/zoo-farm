@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using AYellowpaper;
+using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Interactions;
@@ -99,8 +100,16 @@ namespace Logic.Breeding
             {
                 if (_breedService.TryBreeding(associatedType, out AnimalPair pair))
                 {
-                    _breedService.BeginBreeding(pair, _breedingPlace, OnBreedingBegins);
-                    _heart.Mover.Move(_heartPosition, _heartPosition, true);
+                    ItemFilter itemFilter = new ItemFilter(ItemId.BreedingCurrency);
+
+                    if (human.Inventory.TryGet(itemFilter, out IItem item))
+                    {
+                        _breedService.BeginBreeding(pair, _breedingPlace, OnBreedingBegins);
+                        item.Mover.Move(_heartPosition, _heartPosition, true);
+                    }
+                    
+                    _interactionsGrid.Value.RemoveAll();
+                    return;
                 }
                 
                 _interactionsGrid.Value.RemoveAll();
