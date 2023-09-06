@@ -1,9 +1,10 @@
+using Data.ItemsData;
 using Logic.Movement;
 using Logic.Storages.Items;
 using Logic.Translators;
 using UnityEngine;
 
-namespace Data.ItemsData
+namespace Logic.HandItems
 {
     [RequireComponent(typeof(ItemMover))]
     public class HandItem : MonoBehaviour, IItem
@@ -31,5 +32,14 @@ namespace Data.ItemsData
         {
             _itemData = itemData;
         }
+    }
+
+    public class AnimatedHandItem : HandItem, ITranslatableAnimated
+    {
+        
+    }
+
+    public interface ITranslatableAnimated
+    {
     }
 }
