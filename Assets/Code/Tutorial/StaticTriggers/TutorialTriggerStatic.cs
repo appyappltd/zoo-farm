@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Tutorial.StaticTriggers
 {
-    [CreateAssetMenu(menuName = "TutorialTriggerStatic", fileName = "NewTutorialTriggerStatic", order = 0)]
+    [CreateAssetMenu(menuName = "Tutorial/TutorialTriggerStatic", fileName = "NewTutorialTriggerStatic", order = 0)]
     public class TutorialTriggerStatic : ScriptableObject, ITutorialTriggerPayload
     {
         public event Action Triggered = () => { };

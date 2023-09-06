@@ -5,12 +5,15 @@ using Services;
 using Services.Camera;
 using Tutorial.StaticTriggers;
 using Tutorial.TimePresets;
+using Ui.Elements;
 using UnityEngine;
 
 namespace Tutorial.Directors
 {
     public class BeginnerTutorial : TutorialDirector
     {
+        
+        [Space] [Header("Transform References")]
         [SerializeField] private Transform _firstHouse;
         [SerializeField] private Transform _firstFeeder;
         [SerializeField] private Transform _animalTransmittingView;
@@ -18,6 +21,8 @@ namespace Tutorial.Directors
         [SerializeField] private Transform _firstMedBedSpawnPoint;
         [SerializeField] private Transform _animalReleaser;
         [SerializeField] private Transform _keeper;
+        
+        [Space] [Header("Triggers")]
         [SerializeField] private TutorialTriggerStatic _beginnerCoinsCollected;
         [SerializeField] private TutorialTriggerStatic _firstMedBadSpawned;
         [SerializeField] private TutorialTriggerStatic _firstHealingOptionSpawned;
@@ -33,7 +38,8 @@ namespace Tutorial.Directors
         [SerializeField] private TutorialTriggerStatic _firstVolunteerSpawned;
         [SerializeField] private TutorialTriggerStatic _foodVendorSpawned;
         [SerializeField] private TutorialTriggerStatic _animalHouseSpawned;
-        [SerializeField] private TutorialArrow _arrow;
+
+        [Space] [Header("Grids")]
         [SerializeField] private MedBedGridOperator _medBedGridOperator;
         [SerializeField] private MedToolGridOperator _medToolGridOperator;
         [SerializeField] private HouseGridOperator _houseGridOperator;
@@ -41,8 +47,17 @@ namespace Tutorial.Directors
         [SerializeField] private GardenBedGridOperator _gardenBedGridOperator;
         [SerializeField] private KeeperGridOperator _keeperGridOperator;
         [SerializeField] private VolunteerSpawner _volunteerSpawner;
+        
+        [Space] [Header("Configs")]
         [SerializeField] private BeginnerTutorialTimeDelayPreset _timeDelay;
+        [SerializeField] private TextSequence _tutorialTextSequence;
 
+        [Space] [Header("Other")]
+        [SerializeField] private TutorialArrow _arrow;
+        [SerializeField] private TextSetter _textSetter;
+        
+        private int _textPointer;
+        
         private ICameraOperatorService _cameraOperatorService;
         private TutorialInteractedTriggerContainer _healingOption;
         private TutorialInteractedTriggerContainer _medBed;
@@ -74,7 +89,11 @@ namespace Tutorial.Directors
 
         protected override void CollectModules()
         {
-            TutorialModules.Add(new TutorialAction(() => Debug.Log("Begin tutorial")));
+            TutorialModules.Add(new TutorialAction(() =>
+            {
+                ShowNextText();
+                Debug.Log("Begin tutorial");
+            }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_beginnerCoinsCollected));
             TutorialModules.Add(new TutorialAction(() =>
             {
@@ -90,6 +109,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                ShowNextText();
                 _volunteerSpawner.Spawn();
                 _arrow.Hide();
             }));
@@ -225,5 +245,8 @@ namespace Tutorial.Directors
 
         private void OnVolunteerSpawned(GameObject volunteerObject) =>
             _volunteerTransform = volunteerObject.transform;
+
+        private void ShowNextText() =>
+            _textSetter.SetText(_tutorialTextSequence.Next(ref _textPointer));
     }
 }

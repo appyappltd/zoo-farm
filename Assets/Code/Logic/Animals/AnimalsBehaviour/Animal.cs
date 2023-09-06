@@ -39,7 +39,6 @@ namespace Logic.Animals.AnimalsBehaviour
             _emotionService = new PersonalEmotionService(_emotionProvider);
             _statProvider.Construct(beginStats);
             _happinessFactor.Construct(_statProvider.Satiety);
-            _emotionService.Show(EmotionId.Homeless);
         }
 
         public void AttachHouse(AnimalHouse house)
