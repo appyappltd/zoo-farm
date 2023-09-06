@@ -6,7 +6,7 @@ namespace DelayRoutines
     {
         private Action _executedCallback;
 
-        public bool IsActive { get; protected set; }
+        public bool IsActive { get; private set; }
 
         protected Routine()
         {

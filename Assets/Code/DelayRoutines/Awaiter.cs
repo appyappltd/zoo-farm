@@ -26,7 +26,6 @@ namespace DelayRoutines
         {
             if (IsActive)
             {
-                IsActive = false;
                 Deactivate();
             }
         }
@@ -35,7 +34,6 @@ namespace DelayRoutines
         {
             if (IsActive == false)
             {
-                IsActive = true;
                 Activate();
             }
         }

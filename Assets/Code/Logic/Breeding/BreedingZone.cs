@@ -17,7 +17,6 @@ using Services;
 using Services.Breeding;
 using Services.PersistentProgress;
 using Services.StaticData;
-using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -124,6 +123,9 @@ namespace Logic.Breeding
         private void OnCancelZone()
         {
             ItemFilter itemFilter = new ItemFilter(ItemId.BreedingCurrency);
+
+            if (_cashedHuman is null)
+                return;
 
             if (_cashedHuman.Inventory.TryGet(itemFilter, out IItem item))
                 _inventoryHolder.Inventory.TryAdd(item);

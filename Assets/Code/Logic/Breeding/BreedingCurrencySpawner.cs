@@ -21,6 +21,8 @@ namespace Logic.Breeding
         private readonly IInventory _inventory;
         private readonly ITranslator _translator;
         private readonly RoutineSequence _spawnRoutine;
+
+        private bool _hasVacateCurrency;
         
         public BreedingCurrencySpawner(IHandItemFactory handItemFactory, Storage storage, IInventory inventory, Vector2 randomSpawnDelay, ITranslator translator)
         {
@@ -29,12 +31,13 @@ namespace Logic.Breeding
             _storage = storage;
             _inventory = inventory;
 
-            _inventory.Removed += OnRemoved;
-            
+            // _inventory.Removed += OnRemoved;
+
             _spawnRoutine = new RoutineSequence()
+                .WaitUntil(() => _breedingCurrencies.Count > 0)
                 .WaitForRandomSeconds(randomSpawnDelay)
                 .Then(TrySpawn);
-            
+
             InitBreedingCurrencies();
             _spawnRoutine.Play();
         }
@@ -48,12 +51,13 @@ namespace Logic.Breeding
 
                 handItem.gameObject.Disable();
                 _breedingCurrencies.Push(handItem);
+                EnableSpawning();
                 return;
             }
 
             throw new NullReferenceException(nameof(handItem));
         }
-        
+         
         private void InitBreedingCurrencies()
         {
             int itemsWeight = 0;
@@ -75,6 +79,8 @@ namespace Logic.Breeding
 
         private void TrySpawn()
         {
+            Debug.Log("TrySpawn");
+            
             if (_breedingCurrencies.TryPop(out HandItem item))
             {
                 item.transform.position = _storage.TopPlace.position;
@@ -87,11 +93,16 @@ namespace Logic.Breeding
                 }
 
                 _inventory.Add(item);
-                _spawnRoutine.Play();
+
+                if (_breedingCurrencies.TryPeek(out _))
+                    _spawnRoutine.Play();
             }
         }
 
-        private void OnRemoved(IItem _)
+        private void OnRemoved(IItem _) =>
+            EnableSpawning();
+
+        private void EnableSpawning()
         {
             if (_spawnRoutine.IsActive)
                 return;

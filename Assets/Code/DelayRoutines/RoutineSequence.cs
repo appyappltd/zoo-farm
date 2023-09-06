@@ -12,13 +12,12 @@ namespace DelayRoutines
 
         private int _currentRoutineIndex = -1;
         private bool _isAutoKill;
-        private bool _isActive;
 
         private IRoutine FirstRoutine => _routines[0];
         private IRoutine LastRoutine => _routines[_currentRoutineIndex];
         private IRoutine ActiveRoutine => _routines.Find(routine => routine.IsActive);
 
-        public bool IsActive => _isActive;
+        public bool IsActive => ActiveRoutine is not null;
         
         public RoutineSequence()
         {
@@ -39,7 +38,6 @@ namespace DelayRoutines
                 LastRoutine.AddNext(new Executor(Kill));
 
             _routines[mode == RoutinePlayMode.AtFirst ? 0 : _currentRoutineIndex].Play();
-            _isActive = true;
         }
 
         /// <summary>
@@ -66,11 +64,8 @@ namespace DelayRoutines
         /// <summary>
         /// Stops the routine but does not reset the pointer to the current tween.
         /// </summary>
-        public void Stop()
-        {
-            _isActive = false;
+        public void Stop() =>
             ActiveRoutine?.Stop();
-        }
 
         #region Wait
 
