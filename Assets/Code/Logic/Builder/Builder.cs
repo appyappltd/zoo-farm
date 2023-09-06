@@ -63,8 +63,8 @@ namespace Logic.Builder
                 position.Play(_components[i].transform.position, defPositions[i]);
                 scale.Play(_components[i].transform.localScale, defSizes[i]);
 
-                translator.AddTranslatable(position);
-                translator.AddTranslatable(scale);
+                translator.Add(position);
+                translator.Add(scale);
                 yield return new WaitForSeconds(_time);
             }
             isBuild = true;
@@ -83,8 +83,8 @@ namespace Logic.Builder
                                                                      Random.Range(_offset.x, _offset.y)));
                 scale.Play(_components[i].transform.localScale, Vector3.zero);
 
-                translator.AddTranslatable(position);
-                translator.AddTranslatable(scale);
+                translator.Add(position);
+                translator.Add(scale);
                 yield return new WaitForSeconds(_time);
             }
             isBuild = false;

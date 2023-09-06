@@ -10,7 +10,6 @@ namespace Logic.Storages.Items
         ItemId ItemId { get; }
         IItemMover Mover { get; }
         IItemData ItemData { get; }
-        TranslatableAgent TranslatableAgent { get; }
         public void Destroy();
     }
 }

@@ -31,11 +31,11 @@ namespace Logic.Translators
             if (_isAutoPlay)
             {
                 ITranslator translator = (ITranslator) _translator;
-                translator.AddTranslatable(Main);
+                translator.Add(Main);
 
                 foreach (ITranslatable translatable in Sub)
                 {
-                    translator.AddTranslatable(translatable);
+                    translator.Add(translatable);
                 }
             }
         }

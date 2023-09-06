@@ -2,6 +2,7 @@ using Data;
 using Data.ItemsData;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
+using Logic.Storages.Items;
 using Services.StaticData;
 using UnityEngine;
 

@@ -3,6 +3,7 @@ using Logic.Animals;
 using Data.ItemsData;
 using Logic.Foods.FoodSettings;
 using Logic.Medical;
+using Logic.Storages.Items;
 using UnityEngine;
 
 namespace Infrastructure.Factory

@@ -39,6 +39,7 @@ namespace Logic.Movement
         public void Move(Transform to, Action onMoveEnded, Transform finishParent = null, bool isModifyRotation = false,  bool isModifyScale = false)
         {
             _endMoveCallback = onMoveEnded ?? (() => { }) ;
+            _endMoveCallback += () => _endMoveCallback = () => { };
             Move(to, finishParent, isModifyRotation, isModifyScale);
         }
 

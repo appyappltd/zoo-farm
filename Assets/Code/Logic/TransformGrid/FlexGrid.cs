@@ -184,7 +184,7 @@ namespace Logic.TransformGrid
         private void Translate(ITranslatableParametric<Vector3> translatable, Vector3 from, Vector3 to)
         {
             translatable.Play(from, to);
-            _translator.Value.AddTranslatable(translatable);
+            _translator.Value.Add(translatable);
         }
     }
 }

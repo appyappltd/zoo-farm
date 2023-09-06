@@ -536,7 +536,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4860821192426651167, guid: dd5e035eb72563340be12d54b8396246, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7685436483575180233, guid: dd5e035eb72563340be12d54b8396246, type: 3}
@@ -551,10 +552,10 @@ PrefabInstance:
       addedObject: {fileID: 7821630425792275701}
     - targetCorrespondingSourceObject: {fileID: 4504083731493459700, guid: dd5e035eb72563340be12d54b8396246, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4485000063019914062}
+      addedObject: {fileID: 3139320863845902966}
     - targetCorrespondingSourceObject: {fileID: 4504083731493459700, guid: dd5e035eb72563340be12d54b8396246, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3139320863845902966}
+      addedObject: {fileID: 5924008187248621251}
   m_SourcePrefab: {fileID: 100100000, guid: dd5e035eb72563340be12d54b8396246, type: 3}
 --- !u!1 &3751058958513350898 stripped
 GameObject:
@@ -588,7 +589,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 0
       - m_Target: {fileID: 7821630425792275701}
         m_TargetAssemblyTypeName: Logic.Translators.Translatable`1[[UnityEngine.Vector3,
           UnityEngine
@@ -601,7 +602,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
 --- !u!114 &7821630425792275701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,23 +716,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4485000063019914062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3751058958513350898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcaf6d58d3d842c287a71957748483f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isAutoPlay: 1
-  _translator: {fileID: 3139320863845902966}
-  _mainTranslatable: {fileID: 4859950958146860384}
-  _subTranslatables:
-  - {fileID: 7821630425792275701}
 --- !u!114 &3139320863845902966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,6 +728,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65cd91c87cf643fd826caa5ce174ff02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5924008187248621251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751058958513350898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b8df62b42e4d3f8b010246c401e6db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scaleTranslatable: {fileID: 1075422644638908069}
+  _positionTranslatable: {fileID: 4859950958146860384}
+  _rotationTranslator: {fileID: 7821630425792275701}
 --- !u!4 &6928770120129435087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7685436483575180233, guid: dd5e035eb72563340be12d54b8396246, type: 3}

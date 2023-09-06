@@ -31,8 +31,7 @@ namespace Logic.Breeding
             _storage = storage;
             _inventory = inventory;
 
-            // _inventory.Removed += OnRemoved;
-
+            //TODO: Оптимизировать
             _spawnRoutine = new RoutineSequence()
                 .WaitUntil(() => _breedingCurrencies.Count > 0)
                 .WaitForRandomSeconds(randomSpawnDelay)
@@ -85,11 +84,12 @@ namespace Logic.Breeding
             {
                 item.transform.position = _storage.TopPlace.position;
 
-                if (item.TranslatableAgent.Main is CustomScaleTranslatable scaleTranslatable)
+                if (item is ITranslatableAnimated animated)
                 {
                     item.gameObject.Enable();
-                    scaleTranslatable.Play(Vector3.zero, Vector3.one);
-                    _translator.AddTranslatable(item.TranslatableAgent.Main);
+                    ITranslatableParametric<Vector3> animatedScaleTranslatable = animated.ScaleTranslatable;
+                    animatedScaleTranslatable.Play(Vector3.zero, Vector3.one);
+                    _translator.Add(animatedScaleTranslatable);
                 }
 
                 _inventory.Add(item);

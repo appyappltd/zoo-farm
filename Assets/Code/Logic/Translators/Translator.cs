@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NTC.Global.Cache;
 
@@ -14,24 +15,27 @@ namespace Logic.Translators
         private void OnValidate() =>
             enabled = false;
 
-        public void AddTranslatable(ITranslatable translatable)
+        public void Add(ITranslatable translatable)
         {
             if (_translatables.Contains(translatable))
-                return;
+                throw new InvalidOperationException(nameof(translatable));
 
             _translatables.Add(translatable);
             enabled = true;
         }
 
-        public void RemoveTranslatable(ITranslatable translatable)
+        public void Remove(ITranslatable translatable)
         {
+            if (_translatables.Contains(translatable) == false)
+                throw new InvalidOperationException(nameof(translatable));
+            
             _translatables.Remove(translatable);
 
             if (_translatables.Count <= 0)
                 enabled = false;
         }
 
-        public void RemoveAllTranslatables()
+        public void RemoveAll()
         {
             _translatables.Clear();
             enabled = false;
@@ -45,7 +49,7 @@ namespace Logic.Translators
 
                 if (translatable.TryUpdate() == false)
                 {
-                    RemoveTranslatable(translatable);
+                    Remove(translatable);
                 }
             }
         }

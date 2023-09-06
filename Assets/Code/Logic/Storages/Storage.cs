@@ -1,5 +1,6 @@
 using System;
 using Logic.Storages.Items;
+using Logic.Translators;
 using NaughtyAttributes;
 using Tools;
 using UnityEngine;
@@ -13,8 +14,9 @@ namespace Logic.Storages
         [SerializeField] private Transform[] _places;
 
         [SerializeField] private bool _isSortable;
-        [SerializeField] private bool _isRemoteInit;
         [SerializeField] private bool _isModifyRotation;
+        [SerializeField] private bool _isSupportAnimated;
+        [SerializeField] private bool _isRemoteInit;
 
         [HideIf("_isRemoteInit")] [SerializeField] [RequireInterface(typeof(IAddItemObserver))]
         private MonoBehaviour _adderMono;
@@ -25,6 +27,8 @@ namespace Logic.Storages
         private IAddItemObserver _adder;
         private IGetItemObserver _remover;
 
+        private Action<IItem> MoveItem;
+        private ITranslator _translator;
         private int _topIndex = -1;
 
         public event Action<IItem> Replenished = _ => { };
@@ -34,8 +38,20 @@ namespace Logic.Storages
 
         public Transform TopPlace => _places[Mathf.Max(0, _topIndex)];
 
-        private void Awake() =>
+        private void Awake()
+        {
+            if (_isSupportAnimated)
+            {
+                _translator = gameObject.AddComponent<RunTranslator>();
+                MoveItem = MoveItemWithCallback;
+            }
+            else
+            {
+                MoveItem = MoveItemNoneCallback;
+            }
+            
             enabled = !_isRemoteInit;
+        }
 
         private void OnDestroy()
         {
@@ -93,7 +109,7 @@ namespace Logic.Storages
         private void PlaceItem(IItem item)
         {
             _topIndex++;
-            item.Mover.Move(TopPlace, TopPlace, _isModifyRotation);
+            MoveItem.Invoke(item);
             _items[_topIndex] = item;
             Replenished.Invoke(item);
         }
@@ -105,7 +121,10 @@ namespace Logic.Storages
                 int revertItemIndex = Array.IndexOf(_items, item);
                 Sort(revertItemIndex);
             }
-            
+
+            if (_isSupportAnimated)
+                StopAnimation(item);
+
             _topIndex--;
         }
 
@@ -117,6 +136,48 @@ namespace Logic.Storages
                 Transform finishParent = _places[i];
                 _items[i].Mover.Move(finishParent, finishParent);
             }
+        }
+
+        private void StopAnimation(IItem item)
+        {
+            Debug.Log("StopAnimation");
+            
+            if (item is not ITranslatableAnimated animated)
+                return;
+            
+            foreach (ITranslatableParametric<Vector3> translatable in animated.GetAllTranslatables())
+            {
+                if (translatable.IsPreload == false)
+                    continue;
+                
+                translatable.Stop(false);
+            }
+        }
+        
+        private void StartAnimation(IItem item)
+        {
+            Debug.Log("StartAnimation");
+            
+            if (item is not ITranslatableAnimated animated)
+                return;
+
+            foreach (ITranslatableParametric<Vector3> translatable in animated.GetAllTranslatables())
+            {
+                if (translatable.IsPreload)
+                {
+                    translatable.Play();
+                    _translator.Add(translatable);
+                }
+            }
+        }
+
+        private void MoveItemNoneCallback(IItem item) =>
+            item.Mover.Move(TopPlace, TopPlace, _isModifyRotation);
+
+        private void MoveItemWithCallback(IItem item)
+        {
+            void Proxy() => StartAnimation(item);
+            item.Mover.Move(TopPlace, Proxy, TopPlace, _isModifyRotation);
         }
     }
 }

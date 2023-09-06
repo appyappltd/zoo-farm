@@ -50,7 +50,8 @@ namespace Logic.Translators
         {
             if (_isPreload == false)
                 throw new Exception("Preload is not enabled");
-            
+
+            _isLastCycle = false;
             Restart();
         }
 

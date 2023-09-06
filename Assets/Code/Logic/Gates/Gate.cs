@@ -56,7 +56,7 @@ namespace Logic.Gates
             {
                 Door door = _doors[index];
                 door.Translatable.Play(door.CurrentLocation, door.OpenedLocation);
-                _translator.AddTranslatable(door.Translatable);
+                _translator.Add(door.Translatable);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Logic.Gates
             {
                 Door door = _doors[index];
                 door.Translatable.Play(door.CurrentLocation, door.ClosedLocation);
-                _translator.AddTranslatable(door.Translatable);
+                _translator.Add(door.Translatable);
             }
         }
 

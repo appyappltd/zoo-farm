@@ -112,11 +112,11 @@ namespace Logic.Spawners
 
         private void AddToTranslator(TranslatableAgent agent)
         {
-            _translator.AddTranslatable(agent.Main);
+            _translator.Add(agent.Main);
 
             foreach (ITranslatable translatable in agent.Sub)
             {
-                _translator.AddTranslatable(translatable);
+                _translator.Add(translatable);
             }
         }
     }

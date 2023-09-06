@@ -1,6 +1,7 @@
 using Data;
 using Data.ItemsData;
 using Infrastructure.Factory;
+using Logic.Storages.Items;
 using Services;
 using StaticData;
 using UnityEngine;

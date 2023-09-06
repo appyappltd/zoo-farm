@@ -24,7 +24,7 @@ namespace Logic.Spawners
 
         protected override void OnSpawn(TranslatableAgent spawned)
         {
-            _translator.AddTranslatable(spawned.Main);
+            _translator.Add(spawned.Main);
 
             if (spawned.Main.IsPreload)
             {
@@ -39,7 +39,7 @@ namespace Logic.Spawners
             for (var index = 0; index < spawned.Sub.Count; index++)
             {
                 ITranslatable translatable = spawned.Sub[index];
-                _translator.AddTranslatable(translatable);
+                _translator.Add(translatable);
                 translatable.Play();
             }
         }

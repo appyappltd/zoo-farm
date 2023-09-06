@@ -49,7 +49,7 @@ namespace Logic.Breeding
         
         private BreedingCurrencySpawner _currencySpawner;
         private IItem _takenHeart;
-        private Human _cashedHuman;
+        private IHuman _cashedHuman;
 
         private void Awake()
         {
@@ -90,7 +90,7 @@ namespace Logic.Breeding
 
         private void Subscribe(ChoseInteractionProvider choseZone, AnimalType associatedType)
         {
-            void OnChosen(Human human)
+            void OnChosen(IHuman human)
             {
                 if (_breedService.TryBreeding(associatedType, out AnimalPair pair))
                 {
@@ -148,19 +148,20 @@ namespace Logic.Breeding
 
         private void OnBreedingBegins()
         {
-            if (_takenHeart.TranslatableAgent.Main is not CustomScaleTranslatable scaleTranslatable)
+            if (_takenHeart is not ITranslatableAnimated animated)
                 return;
-            
-            scaleTranslatable.Play(Vector3.one, Vector3.zero);
-            _translator.AddTranslatable(scaleTranslatable);
+
+            ITranslatableParametric<Vector3> animatedScaleTranslatable = animated.ScaleTranslatable;
+            animatedScaleTranslatable.Play(Vector3.one, Vector3.zero);
+            _translator.Add(animatedScaleTranslatable);
 
             void OnEndTranslate(ITranslatable _)
             {
-                scaleTranslatable.End -= OnEndTranslate;
+                animatedScaleTranslatable.End -= OnEndTranslate;
                 _currencySpawner.ReturnItem(_takenHeart);
             }
 
-            scaleTranslatable.End += OnEndTranslate;
+            animatedScaleTranslatable.End += OnEndTranslate;
         }
 
         private void OnRemovedItem(IItem item)
