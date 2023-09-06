@@ -30,7 +30,7 @@ namespace Services.StaticData
         private const string AnimalItemsPath = "StaticData/HandItemConfigs/Animals";
         private const string LevelGoalConfigPath = "StaticData/LevelGoalConfigs";
         private const string FoodConfigPath = "StaticData/HandItemConfigs/Food";
-        private const string MedicalConfigPath = "StaticData/HandItemConfigs/Medical";
+        private const string MedicalConfigPath = "StaticData/HandItemConfigs/MedicalTools";
         private const string DefaultItemConfigPath = "StaticData/HandItemConfigs";
 
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
