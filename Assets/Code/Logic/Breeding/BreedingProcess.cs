@@ -21,10 +21,10 @@ namespace Logic.Breeding
         private readonly AnimalPair _pair;
         private readonly Transform _at;
         private readonly Action _onBeginsCallback;
+        private readonly RoutineSequence _beforeBreedingDelay;
 
         private int _animalsInPlaceCount;
         private bool _isRunning;
-        private RoutineSequence _beforeBreedingDelay;
 
         public BreedingProcess(IEffectService effectService, IGameFactory gameFactory,
             IAnimalFeederService feederService, AnimalPair pair, Transform at, Action onBeginsCallback = null)
@@ -36,7 +36,9 @@ namespace Logic.Breeding
             _at = at;
             _onBeginsCallback = onBeginsCallback ?? (() => { });
 
-            _beforeBreedingDelay = new RoutineSequence().WaitForSeconds(BeforeBreedingDelaySeconds).Then(StartBreedingState);
+            _beforeBreedingDelay = new RoutineSequence()
+                .WaitForSeconds(BeforeBreedingDelaySeconds)
+                .Then(StartBreedingState);
         }
         
         public void Start()
@@ -70,6 +72,7 @@ namespace Logic.Breeding
             IAnimal first = _pair.First;
             IAnimal second = _pair.Second;
             
+            //TODO: Инкапсулировать инициализацию животного в билдер в фабрике  
             Animal newAnimal = _gameFactory.CreateAnimal(first, _at.position, Quaternion.identity);
             AnimalFeeder feeder = _feederService.GetFeeder(newAnimal.AnimalId.EdibleFood);
             newAnimal.AttachFeeder(feeder);

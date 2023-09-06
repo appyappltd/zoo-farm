@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using AYellowpaper;
@@ -18,6 +17,7 @@ using Services;
 using Services.Breeding;
 using Services.PersistentProgress;
 using Services.StaticData;
+using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -49,7 +49,8 @@ namespace Logic.Breeding
         private IGameFactory _gameFactory;
         
         private BreedingCurrencySpawner _currencySpawner;
-        private IItem _heart;
+        private IItem _takenHeart;
+        private Human _cashedHuman;
 
         private void Awake()
         {
@@ -60,8 +61,13 @@ namespace Logic.Breeding
             CreateAllInteractions();
         }
 
-        private void OnDestroy() =>
+        private void OnDestroy()
+        {
+            _inventoryHolder.Inventory.Removed -= OnRemovedItem;
+            _interactionZone.Canceled -= OnCancelZone;
+            _interactionZone.Interacted -= OnInteractedZone;
             _disposable.Dispose();
+        }
 
         private void Construct(IAnimalBreedService breedService, IStaticDataService staticData,
             IPersistentProgressService persistentProgress, IGameFactory gameFactory)
@@ -76,22 +82,11 @@ namespace Logic.Breeding
             _productReceiver.Construct(_inventoryHolder.Inventory);
             
             _inventoryHolder.Inventory.Removed += OnRemovedItem;
+            _interactionZone.Canceled += OnCancelZone;
+            _interactionZone.Interacted += OnInteractedZone;
 
             _currencySpawner = new BreedingCurrencySpawner(gameFactory.HandItemFactory, _storage, _inventoryHolder.Inventory,
                 _currencySpawnDelay, _translator);
-        }
-
-        private void CreateAllInteractions()
-        {
-            foreach (AnimalType animalType in _staticData.GoalConfigForLevel(_persistentProgress.Progress.LevelData.LevelKey).GetAnimalsToRelease())
-            {
-                 ChoseInteractionProvider provider = _gameFactory.CreateChoseInteraction(Vector3.zero, Quaternion.identity, animalType);
-                 provider.transform.SetParent(transform);
-                 provider.gameObject.Disable();
-                 _choseInteractions.Add(animalType, provider);
-                 
-                 Subscribe(provider, animalType);
-            }
         }
 
         private void Subscribe(ChoseInteractionProvider choseZone, AnimalType associatedType)
@@ -123,28 +118,54 @@ namespace Logic.Breeding
             _disposable.Add(new EventDisposer(() => choseZone.Interaction.Interacted -= OnChosen));
         }
 
+        private void OnInteractedZone(Human human) =>
+            _cashedHuman = human;
+
+        private void OnCancelZone()
+        {
+            ItemFilter itemFilter = new ItemFilter(ItemId.BreedingCurrency);
+
+            if (_cashedHuman.Inventory.TryGet(itemFilter, out IItem item))
+                _inventoryHolder.Inventory.TryAdd(item);
+            
+            _interactionsGrid.Value.RemoveAll();
+        }
+
+        private void CreateAllInteractions()
+        {
+            foreach (AnimalType animalType in _staticData.GoalConfigForLevel(_persistentProgress.Progress.LevelData.LevelKey).GetAnimalsToRelease())
+            {
+                 ChoseInteractionProvider provider = _gameFactory.CreateChoseInteraction(Vector3.zero, Quaternion.identity, animalType);
+                 provider.transform.SetParent(transform);
+                 provider.gameObject.Disable();
+                 _choseInteractions.Add(animalType, provider);
+                 
+                 Subscribe(provider, animalType);
+            }
+        }
+
         private void OnBreedingBegins()
         {
-            if (_heart.TranslatableAgent.Main is CustomScaleTranslatable scaleTranslatable)
+            if (_takenHeart.TranslatableAgent.Main is not CustomScaleTranslatable scaleTranslatable)
+                return;
+            
+            scaleTranslatable.Play(Vector3.one, Vector3.zero);
+            _translator.AddTranslatable(scaleTranslatable);
+
+            void OnEndTranslate(ITranslatable _)
             {
-                scaleTranslatable.Play(Vector3.one, Vector3.zero);
-                _translator.AddTranslatable(scaleTranslatable);
-
-                void OnEndTranslate(ITranslatable _)
-                {
-                    scaleTranslatable.End -= OnEndTranslate;
-                    _currencySpawner.ReturnItem(_heart);
-                }
-
-                scaleTranslatable.End += OnEndTranslate;
+                scaleTranslatable.End -= OnEndTranslate;
+                _currencySpawner.ReturnItem(_takenHeart);
             }
+
+            scaleTranslatable.End += OnEndTranslate;
         }
 
         private void OnRemovedItem(IItem item)
         {
-            _heart = item;
+            _takenHeart = item;
             
-            foreach (var pairType in _breedService.GetAvailablePairTypes()) 
+            foreach (var pairType in _breedService.GetAvailablePairTypes())
                 _interactionsGrid.Value.AddCell(_choseInteractions[pairType].transform);
         }
         
