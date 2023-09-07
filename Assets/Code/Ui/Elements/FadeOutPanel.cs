@@ -5,7 +5,6 @@ using DelayRoutines;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using Tools;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Ui.Elements
@@ -23,6 +22,7 @@ namespace Ui.Elements
         private RoutineSequence _commandAwaiter;
         private TowardMover<float> _towardMover;
 
+        private Action _onEndCallback = () => { };
 
         private void Awake()
         {
@@ -34,11 +34,17 @@ namespace Ui.Elements
                 .LoopWhile(() => _commands.Count > 0);
         }
 
-        public void Show()
+        public void Show(Action onShowCallback = null)
         {
+            onShowCallback ??= () => { };
+            
             if (enabled)
             {
-                _commands.Enqueue(PlayForward);
+                _commands.Enqueue(() =>
+                {
+                    PlayForward();
+                    AppendCallback(onShowCallback);
+                });
 
                 if (_commandAwaiter.IsActive == false)
                     _commandAwaiter.Play();
@@ -46,14 +52,21 @@ namespace Ui.Elements
                 return;
             }
 
+            AppendCallback(onShowCallback);
             PlayForward();
         }
 
-        public void Hide()
+        public void Hide(Action onHideCallback = null)
         {
+            onHideCallback ??= () => { };
+            
             if (enabled)
             {
-                _commands.Enqueue(PlayReverse);
+                _commands.Enqueue(() =>
+                {
+                    PlayReverse();
+                    AppendCallback(onHideCallback);
+                });
                 
                 if (_commandAwaiter.IsActive == false)
                     _commandAwaiter.Play();
@@ -61,6 +74,7 @@ namespace Ui.Elements
                 return;
             }
             
+            AppendCallback(onHideCallback);
             PlayReverse();
         }
 
@@ -70,7 +84,16 @@ namespace Ui.Elements
             _canvasGroup.alpha = _modifyCurve.Evaluate(lerpValue);
 
             if (isActive != enabled)
+            {
                 enabled = isActive;
+                OnEnd();
+            }
+        }
+
+        private void OnEnd()
+        {
+            _onEndCallback.Invoke();
+            _onEndCallback = () => { };
         }
 
         private void PlayForward()
@@ -84,6 +107,9 @@ namespace Ui.Elements
             _towardMover.Reverse();
             enabled = true;
         }
+
+        private void AppendCallback(Action callback)=>
+            _onEndCallback = callback;
 
         private void ExecuteCommand()
         {
