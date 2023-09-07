@@ -17,9 +17,9 @@ namespace Tools
         
         private float _delta;
         private bool _isForward = true;
-        private bool _isActive;
+        private bool _isActive = true;
 
-        private bool IsComplete => _delta > FinalValue;
+        private bool IsComplete => _delta >= FinalValue;
 
         public TowardMover(TValue from, TValue to, Func<TValue, TValue, float, TValue> lerp)
         {
@@ -31,18 +31,15 @@ namespace Tools
 
         public bool TryUpdate(float deltaTime, out TValue lerpValue)
         {
-            _isActive = true;
             _delta = Mathf.MoveTowards(_delta, FinalValue, deltaTime);
             lerpValue = _lerpFunc.Invoke(_begin, _end, _delta);
 
             bool _isComplete = IsComplete;
-
+            
             if (_isComplete)
-            {
-                _isActive = false;
-            }
+                lerpValue = _end;
 
-            return !_isComplete;
+            return !IsComplete;
         }
 
         public void Reset()

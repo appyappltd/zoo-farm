@@ -56,6 +56,7 @@ namespace Tutorial.Directors
         [Space] [Header("Other")]
         [SerializeField] private TutorialArrow _arrow;
         [SerializeField] private TextSetter _textSetter;
+        [SerializeField] private FadeOutPanel _textFadeOutPanel;
         
         private int _textPointer;
         
@@ -110,6 +111,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstHealingOptionSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                HideText();
                 ShowNextText();
                 _volunteerSpawner.Spawn();
                 _arrow.Hide();
@@ -247,7 +249,13 @@ namespace Tutorial.Directors
         private void OnVolunteerSpawned(GameObject volunteerObject) =>
             _volunteerTransform = volunteerObject.transform;
 
-        private void ShowNextText() =>
+        private void ShowNextText()
+        {
             _textSetter.SetText(_tutorialTextSequence.Next(ref _textPointer));
+            _textFadeOutPanel.Show();
+        }
+
+        private void HideText() =>
+            _textFadeOutPanel.Hide();
     }
 }

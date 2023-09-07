@@ -4628,6 +4628,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1408503331}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _textFadeOutPanel
+      value: 
+      objectReference: {fileID: 1524833158}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _volunteerSpawner
       value: 
       objectReference: {fileID: 1687827295}
@@ -4725,7 +4729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6059995594315202168, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6959351133734451212, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: m_SortingLayer
@@ -4746,6 +4750,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4502504369033706847, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1524833156}
+    - targetCorrespondingSourceObject: {fileID: 4502504369033706847, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1524833158}
   m_SourcePrefab: {fileID: 100100000, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
 --- !u!1 &1524833153 stripped
 GameObject:
@@ -4782,10 +4789,48 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524833153}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1524833158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524833153}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce01a9aac12340298121cfe114121ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 1524833156}
+  _speed: 2
+  _modifyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1539480958
 GameObject:
   m_ObjectHideFlags: 0

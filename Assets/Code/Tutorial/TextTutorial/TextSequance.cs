@@ -15,8 +15,7 @@ namespace Tutorial.TextTutorial
              if (pointer >= _texts.Count)
                  return End;
              
-             pointer++;
-             return _texts[pointer];
+             return _texts[pointer++];
          }
      }
  }
