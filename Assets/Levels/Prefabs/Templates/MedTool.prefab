@@ -399,9 +399,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4504083731493459700, guid: dd5e035eb72563340be12d54b8396246, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1269673199937553730}
-    - targetCorrespondingSourceObject: {fileID: 4504083731493459700, guid: dd5e035eb72563340be12d54b8396246, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8768081159347200387}
   m_SourcePrefab: {fileID: 100100000, guid: dd5e035eb72563340be12d54b8396246, type: 3}
 --- !u!1 &3879724824152832763 stripped
@@ -409,20 +406,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4504083731493459700, guid: dd5e035eb72563340be12d54b8396246, type: 3}
   m_PrefabInstance: {fileID: 816899095819742223}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1269673199937553730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3879724824152832763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df3ca83bd38e440d8781c5f116dfda1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _handItem: {fileID: 0}
-  _medicalToolItemData: {fileID: 0}
 --- !u!114 &8768081159347200387
 MonoBehaviour:
   m_ObjectHideFlags: 0
