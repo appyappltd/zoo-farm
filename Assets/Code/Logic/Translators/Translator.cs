@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using NTC.Global.Cache;
 
@@ -18,7 +17,7 @@ namespace Logic.Translators
         public void Add(ITranslatable translatable)
         {
             if (_translatables.Contains(translatable))
-                throw new InvalidOperationException(nameof(translatable));
+                return;
 
             _translatables.Add(translatable);
             enabled = true;
@@ -27,7 +26,7 @@ namespace Logic.Translators
         public void Remove(ITranslatable translatable)
         {
             if (_translatables.Contains(translatable) == false)
-                throw new InvalidOperationException(nameof(translatable));
+                return;
             
             _translatables.Remove(translatable);
 

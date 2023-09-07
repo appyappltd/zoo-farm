@@ -6846,8 +6846,9 @@ MonoBehaviour:
   - {fileID: 8137868852453055081}
   - {fileID: 5936875780444958822}
   _isSortable: 1
-  _isRemoteInit: 1
   _isModifyRotation: 1
+  _isSupportAnimated: 0
+  _isRemoteInit: 1
   _adderMono: {fileID: 0}
   _removerMono: {fileID: 0}
 --- !u!114 &7803516307033350702
@@ -7447,8 +7448,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 446665839
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 39fbefacd8644a6408d23c04d61feaf3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
