@@ -17,7 +17,6 @@ namespace Tools
         
         private float _delta;
         private bool _isForward = true;
-        private bool _isActive = true;
 
         private bool IsComplete => _delta >= FinalValue;
 
