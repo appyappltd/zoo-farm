@@ -1,13 +1,10 @@
-﻿using Code.Logic.NPC.Keepers.KeepersStateMachine;
-using Logic;
-using Logic.CellBuilding;
+﻿using Logic.CellBuilding;
+using Logic.NPC.Keepers.KeepersStateMachine;
 using Logic.Player;
-using Logic.Storages;
-using Observables;
 using Services.AnimalHouses;
 using UnityEngine;
 
-namespace Code.Logic.NPC.Keepers
+namespace Logic.NPC.Keepers
 {
     public class Keeper : Human
     {

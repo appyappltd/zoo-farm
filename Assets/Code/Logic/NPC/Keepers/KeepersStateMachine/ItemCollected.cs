@@ -2,7 +2,7 @@ using Logic.Storages;
 using Logic.Storages.Items;
 using StateMachineBase;
 
-namespace Code.Logic.NPC.Keepers.KeepersStateMachine
+namespace Logic.NPC.Keepers.KeepersStateMachine
 {
     internal class ItemCollected : Transition
     {

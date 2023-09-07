@@ -1,7 +1,7 @@
 using Services;
 using UnityEngine;
 
-namespace Tools
+namespace Tools.Global
 {
     public class ReleaseSettings : MonoBehaviour
     {

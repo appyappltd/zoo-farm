@@ -1,5 +1,6 @@
 using System;
 using Logic.Interactions;
+using Logic.Interactions.Views;
 using Logic.Player;
 using Logic.Storages;
 using NTC.Global.System;

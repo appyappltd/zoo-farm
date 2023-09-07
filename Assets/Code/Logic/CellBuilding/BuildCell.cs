@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using AYellowpaper;
 using Logic.Interactions;
+using Logic.Interactions.Views;
 using Logic.Payment;
 using NaughtyAttributes;
 using Tools.Extension;

@@ -1,7 +1,8 @@
 using NTC.Global.Cache;
+using Tools;
 using UnityEngine;
 
-namespace Tutorial
+namespace Ui.Elements
 {
     public class FadeOutPanel : MonoCache, IShowable, IHidable
     {
@@ -28,15 +29,5 @@ namespace Tutorial
         {
             
         }
-    }
-
-    public interface IHidable
-    {
-        void Hide();
-    }
-
-    public interface IShowable
-    {
-        void Show();
     }
 }

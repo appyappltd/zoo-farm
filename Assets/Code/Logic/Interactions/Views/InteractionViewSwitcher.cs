@@ -1,6 +1,6 @@
 using NTC.Global.System;
 
-namespace Logic.Interactions
+namespace Logic.Interactions.Views
 {
     public class InteractionViewSwitcher
     {

@@ -10,6 +10,7 @@ using Logic.Spawners;
 using Services;
 using Services.PersistentProgress;
 using Ui;
+using Ui.LevelGoalPanel;
 using UnityEngine;
 
 namespace Infrastructure.Factory

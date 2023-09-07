@@ -1,4 +1,4 @@
-namespace Logic.TransformGrid
+namespace Logic.TransformGrid.AlignEnums
 {
     public enum HorizontalAlign : byte
     {

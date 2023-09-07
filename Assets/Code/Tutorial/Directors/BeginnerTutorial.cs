@@ -4,6 +4,7 @@ using NTC.Global.Cache;
 using Services;
 using Services.Camera;
 using Tutorial.StaticTriggers;
+using Tutorial.TextTutorial;
 using Tutorial.TimePresets;
 using Ui.Elements;
 using UnityEngine;

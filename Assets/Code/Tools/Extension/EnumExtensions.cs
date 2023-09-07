@@ -1,4 +1,5 @@
 using Logic.TransformGrid;
+using Logic.TransformGrid.AlignEnums;
 
 namespace Tools.Extension
 {

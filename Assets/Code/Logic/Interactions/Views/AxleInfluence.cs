@@ -1,4 +1,4 @@
-namespace Logic.Interactions
+namespace Logic.Interactions.Views
 {
     public enum AxleInfluence
     {

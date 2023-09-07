@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Code.Infrastructure.Builders;
 using Logic.Interactions;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
@@ -18,6 +17,7 @@ using Services.Pools;
 using Services.Randomizer;
 using Services.StaticData;
 using Ui;
+using Ui.LevelGoalPanel;
 using UnityEngine;
 
 namespace Infrastructure.Factory

@@ -5,7 +5,7 @@ using Progress;
 using Ui;
 using UnityEngine;
 
-namespace Logic.Foods.Carrot
+namespace Logic.Foods
 {
     public class Refrigerator : MonoBehaviour, IProgressBarProvider
     {

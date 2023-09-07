@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Tutorial
+namespace Tools
 {
     public class TowardMover<TValue>
     {

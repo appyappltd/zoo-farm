@@ -5,7 +5,7 @@ using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
 
-namespace Logic.Interactions
+namespace Logic.Interactions.Views
 {
     public class InteractionView : MonoCache
     {

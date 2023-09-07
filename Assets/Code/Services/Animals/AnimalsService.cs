@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
+using Data.AnimalCounter;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services.AnimalHouses;
 using Services.Breeding;
 using Tools;
 using Tools.Comparers;
+using Tools.Global;
 using UnityEngine;
 
 namespace Services.Animals

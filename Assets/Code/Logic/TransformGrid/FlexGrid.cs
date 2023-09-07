@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AYellowpaper;
+using Logic.TransformGrid.AlignEnums;
 using Logic.Translators;
 using NaughtyAttributes;
 using NTC.Global.System;

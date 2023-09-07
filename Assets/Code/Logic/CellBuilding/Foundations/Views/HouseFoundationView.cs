@@ -1,4 +1,5 @@
 using Data;
+using Data.AnimalCounter;
 using Infrastructure.Factory;
 using Logic.Houses;
 using Services;

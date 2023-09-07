@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Data;
+using Data.AnimalCounter;
 using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 

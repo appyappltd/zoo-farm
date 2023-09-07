@@ -2,7 +2,7 @@ using Logic.Medical;
 using Services.StaticData;
 using UnityEngine;
 
-namespace Code.Infrastructure.Builders
+namespace Infrastructure.Builders
 {
     public class MedStandBuilder
     {

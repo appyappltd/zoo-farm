@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data;
+using Data.AnimalCounter;
 using Infrastructure.Factory;
 using Logic.Animals;
 using Logic.Interactions;

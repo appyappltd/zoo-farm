@@ -5,7 +5,7 @@ using Services.Animals;
 using Services.StaticData;
 using UnityEngine;
 
-namespace Code.Infrastructure.Builders
+namespace Infrastructure.Builders
 {
     public class AnimalBuilder
     {

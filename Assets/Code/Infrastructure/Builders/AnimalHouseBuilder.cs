@@ -2,7 +2,7 @@ using Logic.Animals;
 using Services.AnimalHouses;
 using UnityEngine;
 
-namespace Code.Infrastructure.Builders
+namespace Infrastructure.Builders
 {
     public class AnimalHouseBuilder
     {

@@ -1,4 +1,4 @@
-namespace Logic.Storages
+namespace Logic.Upgrades
 {
     public interface IImprovable
     {

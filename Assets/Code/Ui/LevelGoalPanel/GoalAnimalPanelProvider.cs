@@ -1,7 +1,7 @@
 using Ui.Elements;
 using UnityEngine;
 
-namespace Ui
+namespace Ui.LevelGoalPanel
 {
     public class GoalAnimalPanelProvider : MonoBehaviour
     {

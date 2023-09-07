@@ -1,9 +1,8 @@
 using AYellowpaper;
-using Logic.Player;
 using NTC.Global.Cache;
 using UnityEngine;
 
-namespace Logic.Interactions
+namespace Logic.Interactions.Views
 {
     public class InteractionViewRejector : MonoCache
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
- using UnityEngine;
- 
- namespace Tutorial
+using UnityEngine;
+
+namespace Tutorial.TextTutorial
  {
      [CreateAssetMenu(menuName = "Tutorial/Tutorial Text Sequence", fileName = "NewTutorialTextSequence", order = 0)]
      public class TextSequence : ScriptableObject

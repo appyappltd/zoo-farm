@@ -9,6 +9,7 @@ using Infrastructure.Factory;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Foods.FoodSettings;
 using Logic.Interactions;
+using Logic.Interactions.Views;
 using Logic.Player;
 using Logic.SpriteUtils;
 using Logic.Storages;

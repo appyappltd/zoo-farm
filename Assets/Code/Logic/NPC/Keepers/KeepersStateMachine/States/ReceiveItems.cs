@@ -2,7 +2,7 @@
 using Logic.Storages;
 using StateMachineBase.States;
 
-namespace Code.Logic.NPC.Keepers.KeepersStateMachine.States
+namespace Logic.NPC.Keepers.KeepersStateMachine.States
 {
     public class ReceiveItems : Idle
     {

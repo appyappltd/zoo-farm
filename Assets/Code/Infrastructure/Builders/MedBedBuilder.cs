@@ -2,7 +2,7 @@ using Logic.Medical;
 using Services.MedicalBeds;
 using UnityEngine;
 
-namespace Code.Infrastructure.Builders
+namespace Infrastructure.Builders
 {
     public class MedBedBuilder
     {

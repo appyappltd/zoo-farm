@@ -1,6 +1,6 @@
 using Services;
 
-namespace Tools
+namespace Tools.Global
 {
     public class GlobalDebugSettings : IGlobalSettings
     {

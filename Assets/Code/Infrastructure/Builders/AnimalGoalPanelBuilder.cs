@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Logic.Animals;
 using Services.StaticData;
 using Ui;
+using Ui.LevelGoalPanel;
 using UnityEngine;
 
 namespace Infrastructure.Builders

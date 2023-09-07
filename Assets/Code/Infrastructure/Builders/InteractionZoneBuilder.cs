@@ -1,11 +1,11 @@
-using Logic.Interactions;
 using Logic.Animals;
 using Logic.Foods.FoodSettings;
+using Logic.Interactions;
 using Services.Animals;
 using Services.StaticData;
 using UnityEngine;
 
-namespace Code.Infrastructure.Builders
+namespace Infrastructure.Builders
 {
     public class InteractionZoneBuilder
     {

@@ -4,7 +4,7 @@ using Logic.Storages.Items;
 using NTC.Global.System;
 using UnityEngine;
 
-namespace Logic.Foods.Carrot
+namespace Logic.Foods
 {
     [RequireComponent(typeof(FoodVendor))]
     public class CarrotField : MonoBehaviour

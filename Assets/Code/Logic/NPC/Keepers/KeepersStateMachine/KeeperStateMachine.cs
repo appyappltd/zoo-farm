@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Logic.Animals;
-using Code.Logic.NPC.Keepers.KeepersStateMachine.States;
 using Logic.Foods.Vendor;
 using Logic.Movement;
-using Logic.NPC;
+using Logic.NPC.Keepers.KeepersStateMachine.States;
 using Logic.NPC.Keepers.KeepersStateMachine.Transitions;
 using Logic.Storages;
 using NaughtyAttributes;
@@ -15,7 +14,7 @@ using StateMachineBase.States;
 using StateMachineBase.Transitions;
 using UnityEngine;
 
-namespace Code.Logic.NPC.Keepers.KeepersStateMachine
+namespace Logic.NPC.Keepers.KeepersStateMachine
 {
     public class KeeperStateMachine : StateMachine
     {

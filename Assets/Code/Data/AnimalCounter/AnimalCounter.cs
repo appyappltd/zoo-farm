@@ -4,9 +4,9 @@ using Logic.Animals;
 using Logic.Animals.AnimalsBehaviour;
 using Services;
 using Services.Animals;
-using Tools;
+using Tools.Global;
 
-namespace Data
+namespace Data.AnimalCounter
 {
     public class AnimalCounter : IAnimalCounter, IDisposable
     {

@@ -1,5 +1,6 @@
 using Data;
- using Logic.Animals;
+using Data.AnimalCounter;
+using Logic.Animals;
  using Logic.Storages;
  using Services.Animals;
  using UnityEngine;

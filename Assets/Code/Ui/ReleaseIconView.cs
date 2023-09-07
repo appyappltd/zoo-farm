@@ -1,4 +1,5 @@
 using Data;
+using Data.AnimalCounter;
 using Logic.Animals;
 using Services.Animals;
 using Services.StaticData;
