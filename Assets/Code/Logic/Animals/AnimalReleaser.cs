@@ -22,7 +22,7 @@ namespace Logic.Animals
         [Header("References")]
         [SerializeField] private LevelGoalView _levelGoal;
         [SerializeField] private AnimalInteraction _animalInteraction;
-        [SerializeField] private TutorialTriggerStatic _animalReleasedTrigger;
+        [SerializeField] private TutorialTriggerScriptableObject _animalReleasedTrigger;
         [SerializeField] private CollectibleCoinSpawner _spawner;
         [SerializeField] private Transform _releaseOutPlace;
         [SerializeField] private Gate _gate;

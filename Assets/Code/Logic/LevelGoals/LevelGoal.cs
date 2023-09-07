@@ -11,7 +11,6 @@ namespace Logic.LevelGoals
 {
     public class LevelGoal : IDisposable
     {
-        private GoalProgress _goalProgress;
         private readonly IAnimalsService _animalsService;
         private readonly ReleaseInteractionsGrid _releaseInteractionsGrid;
         private readonly GoalConfig _goalConfig;
@@ -19,9 +18,12 @@ namespace Logic.LevelGoals
         private readonly AnimalInteraction _animalInteraction;
         private readonly bool _isDeactivateOnRelease;
 
+        private GoalProgress _goalProgress;
         private int _currentGoalStage;
 
         public event Action Updated = () => { };
+
+        public IGoalProgressView Progress => _goalProgress;
 
         public LevelGoal(IAnimalsService animalsService, AnimalInteraction animalInteraction,
             ReleaseInteractionsGrid releaseInteractionsGrid, GoalConfig goalConfig, CollectibleCoinSpawner coinSpawner, bool isDeactivateOnRelease)
@@ -43,8 +45,6 @@ namespace Logic.LevelGoals
             _goalProgress = new GoalProgress(_goalConfig.Goals[_currentGoalStage]);
             _goalProgress.Compleated += OnGoalCompleated;
         }
-
-        public IGoalProgressView Progress => _goalProgress;
 
         public void Dispose()
         {

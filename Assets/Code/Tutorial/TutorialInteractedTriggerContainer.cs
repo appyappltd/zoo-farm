@@ -8,7 +8,7 @@ namespace Tutorial
     public class TutorialInteractedTriggerContainer : MonoBehaviour
     {
         [SerializeField] private HumanInteraction _playerInteraction;
-        [SerializeField] private TutorialTriggerStatic _staticTrigger;
+        [SerializeField] private TutorialTriggerScriptableObject _staticTrigger;
 
         private void OnEnable() =>
             _playerInteraction.Interacted += OnComplete;

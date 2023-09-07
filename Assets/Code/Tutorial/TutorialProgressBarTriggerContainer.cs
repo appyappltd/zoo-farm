@@ -12,11 +12,11 @@ namespace Tutorial
         
         [SerializeField] private bool _isTriggerOnFull;
         [SerializeField] [ShowIf("_isTriggerOnFull")]
-        private TutorialTriggerStatic _staticTriggerFull;
+        private TutorialTriggerScriptableObject _staticTriggerFull;
         
         [SerializeField] private bool _isTriggerOnEmpty;
         [SerializeField] [ShowIf("_isTriggerOnEmpty")]
-        private TutorialTriggerStatic _staticTriggerEmpty;
+        private TutorialTriggerScriptableObject _staticTriggerEmpty;
         
         private void OnEnable()
         {

@@ -7,7 +7,7 @@ namespace Logic.Medical
     public class MedicalBedTutorialObserver : MonoBehaviour
     {
         [SerializeField] private MedicalBed _medicalBed;
-        [SerializeField] private TutorialTriggerStatic _animalHealed;
+        [SerializeField] private TutorialTriggerScriptableObject _animalHealed;
         
         private void OnEnable()
         {

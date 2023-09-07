@@ -5,6 +5,7 @@ using Logic.Animals.AnimalsBehaviour;
 using Services;
 using Services.Animals;
 using Tools.Global;
+using Unity.VisualScripting;
 
 namespace Data.AnimalCounter
 {
@@ -13,13 +14,13 @@ namespace Data.AnimalCounter
         private readonly Dictionary<AnimalType, AnimalCountData> _countDatas = new Dictionary<AnimalType, AnimalCountData>();
         private readonly Dictionary<AnimalId, AnimalSatietyObserver> _satietyObservers = new Dictionary<AnimalId, AnimalSatietyObserver>();
         private readonly List<AnimalType> _availableTypes = new List<AnimalType>();
-        private readonly IGlobalSettings _globalsettings;
+        private readonly IGlobalSettings _globalSettings;
 
         public event Action<AnimalType, AnimalCountData> Updated = (_, _) => { };
 
         public AnimalCounter()
         {
-            _globalsettings = AllServices.Container.Single<IGlobalSettings>();
+            _globalSettings = AllServices.Container.Single<IGlobalSettings>();
         }
 
         public void Register(IAnimal animal)
@@ -37,7 +38,7 @@ namespace Data.AnimalCounter
                 _countDatas.Add(animalType, animalCountData);
             }
 
-            if (_globalsettings.CanLetHungryAnimalsRelease == false)
+            if (_globalSettings.CanLetHungryAnimalsRelease == false)
             {
                 _satietyObservers.Add(animal.AnimalId, new AnimalSatietyObserver(animal, this));
                 
@@ -60,7 +61,7 @@ namespace Data.AnimalCounter
             
             _countDatas[animalType] = _countDatas[animalType].RemoveTotal();
 
-            if (_globalsettings.CanLetHungryAnimalsRelease == false)
+            if (_globalSettings.CanLetHungryAnimalsRelease == false)
             {
                 AnimalSatietyObserver animalSatietyObserver = _satietyObservers[animalId];
                 animalSatietyObserver.Dispose();

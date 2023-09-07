@@ -133,6 +133,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 2665870742474615102, guid: 341b92b24a0b11446835fa56045b83b1, type: 3}
+      propertyPath: _isTriggerOnFull
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665870742474615102, guid: 341b92b24a0b11446835fa56045b83b1, type: 3}
+      propertyPath: _staticTriggerFull
+      value: 
+      objectReference: {fileID: 11400000, guid: 3db571305cc66b6419c30a0a6b68716f, type: 2}
+    - target: {fileID: 2665870742474615102, guid: 341b92b24a0b11446835fa56045b83b1, type: 3}
+      propertyPath: _staticTriggerEmpty
+      value: 
+      objectReference: {fileID: 11400000, guid: ab2ed29edff4be64f8aeaa9565fd0c6c, type: 2}
     - target: {fileID: 2843479921411633752, guid: 341b92b24a0b11446835fa56045b83b1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0

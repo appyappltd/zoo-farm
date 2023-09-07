@@ -5,7 +5,7 @@ namespace Logic
 {
     public class ChildCountObserver : MonoBehaviour
     {
-        [SerializeField] private TutorialTriggerStatic _hasNoChild;
+        [SerializeField] private TutorialTriggerScriptableObject _hasNoChild;
 
         private void OnTransformChildrenChanged()
         {

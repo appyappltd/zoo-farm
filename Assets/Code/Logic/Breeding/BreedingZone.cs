@@ -17,6 +17,8 @@ using Services;
 using Services.Breeding;
 using Services.PersistentProgress;
 using Services.StaticData;
+using Tutorial;
+using Tutorial.StaticTriggers;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -38,6 +40,7 @@ namespace Logic.Breeding
         [SerializeField] private ProductReceiver _productReceiver;
         [SerializeField] private HumanInteraction _interactionZone;
         [SerializeField] private Transform _breedingPlace;
+        [SerializeField] private TutorialTriggerScriptableObject _breedingCompleteTrigger;
 
         [Space] [Header("Settings")]
         [SerializeField] [MinMaxSlider(0.1f, 30f)] private Vector2 _currencySpawnDelay;

@@ -6,7 +6,7 @@ namespace Tutorial
 {
     public class TutorialTriggerStaticContainer : MonoBehaviour
     {
-        [SerializeField] private TutorialTriggerStatic _trigger;
+        [SerializeField] private TutorialTriggerScriptableObject _trigger;
         [SerializeField] private bool _IsTriggerOnEnable;
         [SerializeField] private bool _IsTriggerOnDisable;
 

@@ -4,7 +4,7 @@ namespace Logic.CellBuilding
     {
         protected override void BuildCell(BuildPlaceMarker marker)
         {
-            GameFactory.CreateBreedingHouse(marker.BuildPosition, marker.Location.Rotation);
+            GameFactory.CreateBreedingPlace(marker.BuildPosition, marker.Location.Rotation);
         }
     }
 }
