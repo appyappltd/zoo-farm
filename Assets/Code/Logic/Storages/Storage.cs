@@ -1,8 +1,8 @@
 using System;
+using AYellowpaper;
 using Logic.Storages.Items;
 using Logic.Translators;
 using NaughtyAttributes;
-using Tools;
 using UnityEngine;
 
 namespace Logic.Storages
@@ -15,23 +15,22 @@ namespace Logic.Storages
 
         [SerializeField] private bool _isSortable;
         [SerializeField] private bool _isModifyRotation;
-        [SerializeField] private bool _isSupportAnimated;
         [SerializeField] private bool _isRemoteInit;
 
-        [HideIf("_isRemoteInit")] [SerializeField] [RequireInterface(typeof(IAddItemObserver))]
+        [HideIf(nameof(_isRemoteInit))] [SerializeField] [Tools.RequireInterface(typeof(IAddItemObserver))]
         private MonoBehaviour _adderMono;
 
-        [HideIf("_isRemoteInit")] [SerializeField] [RequireInterface(typeof(IGetItemObserver))]
+        [HideIf(nameof(_isRemoteInit))] [SerializeField] [Tools.RequireInterface(typeof(IGetItemObserver))]
         private MonoBehaviour _removerMono;
 
+        [SerializeField] private bool _isSupportAnimated;
+        [SerializeField] [ShowIf(nameof(_isSupportAnimated))] private InterfaceReference<ITranslator, MonoBehaviour> _translator;
+        
         private IAddItemObserver _adder;
         private IGetItemObserver _remover;
 
         private Action<IItem> MoveItem;
-        private ITranslator _translator;
         private int _topIndex = -1;
-
-        public event Action<IItem> Replenished = _ => { };
 
         private IAddItemObserver Adder => _adder;
         private IGetItemObserver Remover => _remover;
@@ -41,29 +40,20 @@ namespace Logic.Storages
         private void Awake()
         {
             if (_isSupportAnimated)
-            {
-                _translator = gameObject.AddComponent<RunTranslator>();
                 MoveItem = MoveItemWithCallback;
-            }
             else
-            {
                 MoveItem = MoveItemNoneCallback;
-            }
-            
+
             enabled = !_isRemoteInit;
         }
 
         private void OnDestroy()
         {
             if (Adder is not null)
-            {
                 Adder.Added -= PlaceItem;
-            }
 
             if (Remover is not null)
-            {
                 Remover.Removed -= RevertItem;
-            }
         }
 
         private void OnEnable()
@@ -111,7 +101,6 @@ namespace Logic.Storages
             _topIndex++;
             MoveItem.Invoke(item);
             _items[_topIndex] = item;
-            Replenished.Invoke(item);
         }
 
         private void RevertItem(IItem item)
@@ -140,8 +129,6 @@ namespace Logic.Storages
 
         private void StopAnimation(IItem item)
         {
-            Debug.Log("StopAnimation");
-            
             if (item is not ITranslatableAnimated animated)
                 return;
             
@@ -156,8 +143,6 @@ namespace Logic.Storages
         
         private void StartAnimation(IItem item)
         {
-            Debug.Log("StartAnimation");
-            
             if (item is not ITranslatableAnimated animated)
                 return;
 
@@ -166,7 +151,7 @@ namespace Logic.Storages
                 if (translatable.IsPreload)
                 {
                     translatable.Play();
-                    _translator.Add(translatable);
+                    _translator.Value.Add(translatable);
                 }
             }
         }

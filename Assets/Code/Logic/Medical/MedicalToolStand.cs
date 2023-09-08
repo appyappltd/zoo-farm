@@ -1,8 +1,9 @@
 using System;
-using Data.ItemsData;
+using AYellowpaper;
 using Infrastructure.Factory;
 using Logic.Storages;
 using Logic.Storages.Items;
+using Logic.Translators;
 using Services;
 using Services.MedicalBeds;
 using StaticData;
@@ -11,8 +12,9 @@ using UnityEngine;
 namespace Logic.Medical
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class MedicalToolStand : MonoBehaviour, IGetItem
+    public class MedicalToolStand : MonoBehaviour, IGetItem, IAddItemObserver
     {
+        [SerializeField] private InterfaceReference<ITranslator, MonoBehaviour> _translator;
         [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] private Transform _spawnPlace;
         [SerializeField] private SpriteRenderer _icon;
@@ -24,6 +26,7 @@ namespace Logic.Medical
         private MedicalToolId _toolId;
 
         public event Action<IItem> Removed = _ => { };
+        public event Action<IItem> Added = _ => { };
 
         public MedicalToolId ToolId => _toolId;
 
@@ -78,8 +81,18 @@ namespace Logic.Medical
             return false;
         }
 
-        private void OnRespawn() =>
+        private void OnRespawn()
+        {
             _toolItem = _handItemFactory.CreateMedicalToolItem(_spawnPlace.position, Quaternion.identity, _toolId);
+            
+            if (_toolItem is AnimatedItem animatedItem)
+            {
+                animatedItem.ScaleTranslatable.Play(Vector3.zero, Vector3.one);
+                _translator.Value.Add(animatedItem.ScaleTranslatable);
+            }
+            
+            Added.Invoke(_toolItem);
+        }
 
         private void PlayRespawnDelay() =>
             _timerOperator.Restart();

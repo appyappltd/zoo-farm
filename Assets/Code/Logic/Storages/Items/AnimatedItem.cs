@@ -19,11 +19,19 @@ namespace Logic.Storages.Items
         {
             using (ListPool<ITranslatableParametric<Vector3>>.Get(out var tempList))
             {
-                tempList.Add(_scaleTranslatable);
-                tempList.Add(_positionTranslatable);
-                tempList.Add(_rotationTranslator);
+                TryAdd(tempList, _scaleTranslatable);
+                TryAdd(tempList, _positionTranslatable);
+                TryAdd(tempList, _rotationTranslator);
 
                 return tempList.ToArray();
+            }
+        }
+
+        private void TryAdd(List<ITranslatableParametric<Vector3>> tempList, ITranslatableParametric<Vector3> translatable)
+        {
+            if (translatable is not null)
+            {
+                tempList.Add(translatable);
             }
         }
     }

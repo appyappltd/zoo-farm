@@ -7,12 +7,14 @@ namespace Logic
 {
     public class Trash : MonoBehaviour, IAddItem
     {
+        [SerializeField] private Transform _finishPlace;
+
         public event Action<IItem> Added = _ => { };
 
         public void Add(IItem item)
         {
             Added.Invoke(item);
-            item.Mover.Move(transform, item.Destroy, null, false, true);
+            item.Mover.Move(_finishPlace, item.Destroy, null, false, true);
         }
 
         public bool CanAdd(IItem item) =>

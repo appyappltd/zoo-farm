@@ -13,7 +13,6 @@ using UnityEngine.Pool;
 
 namespace Logic.TransformGrid
 {
-    [RequireComponent(typeof(RunTranslator))]
     public class FlexGrid : MonoBehaviour, ITransformGrid
     {
         private const float DebugRadius = 0.5f;

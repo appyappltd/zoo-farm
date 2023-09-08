@@ -107,7 +107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2133598663705385246}
-  - component: {fileID: 6118964302786056037}
   - component: {fileID: 357529286420656916}
   m_Layer: 7
   m_Name: FlexGrid
@@ -131,18 +130,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4545321215296862429}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6118964302786056037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2642027289085156150}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65cd91c87cf643fd826caa5ce174ff02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &357529286420656916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _translator:
-    _underlyingValue: {fileID: 6118964302786056037}
+    _underlyingValue: {fileID: 7403654478897976364}
   _align: 11
   _space: 2
   _horizontalClamp: 2
@@ -227,7 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heartPosition: {fileID: 6892091422291692097}
-  _translator: {fileID: 7403654478897976364}
+  _translator:
+    _underlyingValue: {fileID: 7403654478897976364}
   _interactionsGrid:
     _underlyingValue: {fileID: 357529286420656916}
   _inventoryHolder: {fileID: 63307916589352528}
@@ -350,10 +338,12 @@ MonoBehaviour:
   - {fileID: 5218192947961593074}
   _isSortable: 0
   _isModifyRotation: 1
-  _isSupportAnimated: 1
   _isRemoteInit: 1
   _adderMono: {fileID: 0}
   _removerMono: {fileID: 0}
+  _isSupportAnimated: 1
+  _translator:
+    _underlyingValue: {fileID: 7403654478897976364}
 --- !u!1 &5770989603622715481
 GameObject:
   m_ObjectHideFlags: 0

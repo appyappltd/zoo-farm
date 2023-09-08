@@ -32,7 +32,7 @@ namespace Logic.Breeding
 
         [Header("References")]
         [SerializeField] private Transform _heartPosition;
-        [SerializeField] private RunTranslator _translator;
+        [SerializeField] private InterfaceReference<ITranslator, MonoBehaviour> _translator;
         [SerializeField] private InterfaceReference<ITransformGrid, MonoBehaviour> _interactionsGrid;
         [SerializeField] private InventoryHolder _inventoryHolder;
         [SerializeField] private Storage _storage;
@@ -87,7 +87,7 @@ namespace Logic.Breeding
             _interactionZone.Interacted += OnInteractedZone;
 
             _currencySpawner = new BreedingCurrencySpawner(gameFactory.HandItemFactory, _storage, _inventoryHolder.Inventory,
-                _currencySpawnDelay, _translator);
+                _currencySpawnDelay, _translator.Value);
         }
 
         private void Subscribe(ChoseInteractionProvider choseZone, AnimalType associatedType)
@@ -155,7 +155,7 @@ namespace Logic.Breeding
 
             ITranslatableParametric<Vector3> animatedScaleTranslatable = animated.ScaleTranslatable;
             animatedScaleTranslatable.Play(Vector3.one, Vector3.zero);
-            _translator.Add(animatedScaleTranslatable);
+            _translator.Value.Add(animatedScaleTranslatable);
             _breedingCompleteTrigger.Trigger();
 
             void OnEndTranslate(ITranslatable _)
