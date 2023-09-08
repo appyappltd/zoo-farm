@@ -15,7 +15,6 @@ namespace Logic.NPC.Volunteers.Queue
         [SerializeField] private InterfaceReference<ITranslator, MonoBehaviour> _translator;
         [SerializeField] private InterfaceReference<ITranslatableParametric<Vector3>, MonoBehaviour> _scaleTranslatable;
         [SerializeField] private HumanInteraction _playerInteraction;
-        [SerializeField] private GameObject _interactionView;
         [SerializeField] private InteractionView _interactionSine;
         [SerializeField] private InteractionViewRejector _interactionRejector;
         [SerializeField] private ProductReceiver _productReceiver;
@@ -25,7 +24,7 @@ namespace Logic.NPC.Volunteers.Queue
         public event Action<QueuePlace> Vacated = _ => { };
         public event Action<QueuePlace> Hidden = _ => { };
         
-        private void Awake()
+        private void Start()
         {
             _playerInteraction.transform.localScale = Vector3.zero;
             _playerInteraction.Interacted += OnInteracted;
