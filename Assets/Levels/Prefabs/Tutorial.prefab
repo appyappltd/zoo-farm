@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 921328543967882414}
   - component: {fileID: 4539937626717491165}
   - component: {fileID: 241569520641417643}
+  - component: {fileID: 3036204929080553938}
+  - component: {fileID: 2295173769536330006}
   m_Layer: 0
   m_Name: TextPanel
   m_TagString: Untagged
@@ -179,9 +181,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e304f8745515034448856c17649da82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isUi: 0
+  _isUi: 1
   _textSprite: {fileID: 0}
-  _textUi: {fileID: 0}
+  _textUi: {fileID: 4539937626717491165}
+--- !u!225 &3036204929080553938
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502504369033706847}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &2295173769536330006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502504369033706847}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce01a9aac12340298121cfe114121ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 3036204929080553938}
+  _speed: 2
+  _modifyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5233479744422050132
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,21 +329,27 @@ MonoBehaviour:
   _animalTakenInteracted: {fileID: 11400000, guid: ccb1957ad03979945b3ac1cfa4b3759a, type: 2}
   _animalHealed: {fileID: 11400000, guid: 840349fadbd6b864ba0a2cbc1fc12cb8, type: 2}
   _bowlFull: {fileID: 11400000, guid: 3db571305cc66b6419c30a0a6b68716f, type: 2}
-  _bowlEmpty: {fileID: 11400000, guid: e7c35ae65949e6345b72a7baec7e61e3, type: 2}
+  _bowlEmpty: {fileID: 11400000, guid: ab2ed29edff4be64f8aeaa9565fd0c6c, type: 2}
   _animalReleased: {fileID: 11400000, guid: 96f580ebf4425f845b82d88379736969, type: 2}
   _feederBuilt: {fileID: 11400000, guid: d136b64d585bbf04bba90184a40c1304, type: 2}
   _firstVolunteerSpawned: {fileID: 11400000, guid: 401bb94112b73af4c80859d08e881d65, type: 2}
   _foodVendorSpawned: {fileID: 11400000, guid: 8e2a395fa87dba54eb30e96ad61473e8, type: 2}
-  _animalHouseSpawned: {fileID: 11400000, guid: e732381ca729594488badb8a3cb35c7c, type: 2}
-  _arrow: {fileID: 194688275876741893}
+  _goalComplete: {fileID: 11400000, guid: d9b5c10c410312046b3a5bb7ba2ebfcf, type: 2}
+  _breedingZoneSpawned: {fileID: 11400000, guid: 8959be8459c4d7249ae586d112bd3695, type: 2}
+  _breedingBegin: {fileID: 11400000, guid: fb05aba297c6a004ab26d4c1c327409f, type: 2}
   _medBedGridOperator: {fileID: 0}
   _medToolGridOperator: {fileID: 0}
-  _houseGridOperator: {fileID: 0}
   _feederGridOperator: {fileID: 0}
   _gardenBedGridOperator: {fileID: 0}
+  _breedingZoneGridOperator: {fileID: 0}
   _keeperGridOperator: {fileID: 0}
   _volunteerSpawner: {fileID: 0}
   _timeDelay: {fileID: 11400000, guid: 714d5636901859f4ea1639112dc007e1, type: 2}
+  _tutorialTextSequence: {fileID: 11400000, guid: 054f830b81f68c64daed7de415cfc5f5, type: 2}
+  _arrow: {fileID: 194688275876741893}
+  _textSetter: {fileID: 241569520641417643}
+  _textFadeOutPanel: {fileID: 2295173769536330006}
+  _levelGoalView: {fileID: 0}
 --- !u!1 &6059995594315202168
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +409,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1966610043
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &5677205871730758979
@@ -453,6 +511,18 @@ PrefabInstance:
     - target: {fileID: 3066754098659389321, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_Center.y
       value: -3.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131016720746216102, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131016720746216102, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
+      propertyPath: m_SortingOrder
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131016720746216102, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 446665839
       objectReference: {fileID: 0}
     - target: {fileID: 3341248301948015455, guid: 81dbdf6d084025949987bf47a4e00f30, type: 3}
       propertyPath: m_LocalPosition.y

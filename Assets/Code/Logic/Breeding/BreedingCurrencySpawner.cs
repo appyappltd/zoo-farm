@@ -34,11 +34,12 @@ namespace Logic.Breeding
             //TODO: Оптимизировать
             _spawnRoutine = new RoutineSequence()
                 .WaitUntil(() => _breedingCurrencies.Count > 0)
+                .Then(TrySpawn)
                 .WaitForRandomSeconds(randomSpawnDelay)
-                .Then(TrySpawn);
+                .LoopWhile(() => _breedingCurrencies.TryPeek(out _));
 
             InitBreedingCurrencies();
-            _spawnRoutine.Play();
+            EnableSpawning();
         }
 
         public void ReturnItem(IItem item)
@@ -78,29 +79,26 @@ namespace Logic.Breeding
 
         private void TrySpawn()
         {
-            Debug.Log("TrySpawn");
-            
             if (_breedingCurrencies.TryPop(out HandItem item))
             {
-                item.transform.position = _storage.TopPlace.position;
-
-                if (item is ITranslatableAnimated animated)
-                {
-                    item.gameObject.Enable();
-                    ITranslatableParametric<Vector3> animatedScaleTranslatable = animated.ScaleTranslatable;
-                    animatedScaleTranslatable.Play(Vector3.zero, Vector3.one);
-                    _translator.Add(animatedScaleTranslatable);
-                }
-
-                _inventory.Add(item);
-
-                if (_breedingCurrencies.TryPeek(out _))
-                    _spawnRoutine.Play();
+                Spawn(item);
             }
         }
 
-        private void OnRemoved(IItem _) =>
-            EnableSpawning();
+        private void Spawn(HandItem item)
+        {
+            item.transform.position = _storage.TopPlace.position;
+
+            if (item is ITranslatableAnimated animated)
+            {
+                item.gameObject.Enable();
+                ITranslatableParametric<Vector3> animatedScaleTranslatable = animated.ScaleTranslatable;
+                animatedScaleTranslatable.Play(Vector3.zero, Vector3.one);
+                _translator.Add(animatedScaleTranslatable);
+            }
+
+            _inventory.Add(item);
+        }
 
         private void EnableSpawning()
         {

@@ -17,7 +17,6 @@ using Services;
 using Services.Breeding;
 using Services.PersistentProgress;
 using Services.StaticData;
-using Tutorial;
 using Tutorial.StaticTriggers;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -157,6 +156,7 @@ namespace Logic.Breeding
             ITranslatableParametric<Vector3> animatedScaleTranslatable = animated.ScaleTranslatable;
             animatedScaleTranslatable.Play(Vector3.one, Vector3.zero);
             _translator.Add(animatedScaleTranslatable);
+            _breedingCompleteTrigger.Trigger();
 
             void OnEndTranslate(ITranslatable _)
             {

@@ -38,7 +38,7 @@ namespace Infrastructure.Factory
         Animal CreateAnimal(AnimalItemStaticData animalData, Vector3 at, Quaternion rotation);
         Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation);
         GameObject CreateHouseFoundation(Vector3 markerBuildPosition, Quaternion locationRotation);
-        IAnimalHouse CreateBreedingPlace(Vector3 at, Quaternion rotation);
+        GameObject CreateBreedingPlace(Vector3 at, Quaternion rotation);
         ReleaseInteractionProvider CreateReleaseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);
         IAnimalHouse CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType);
         ChoseInteractionProvider CreateChoseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);

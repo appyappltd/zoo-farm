@@ -73,7 +73,7 @@ namespace Logic.NPC.Volunteers
         public void DeactivateTransmitting()
         {
             _isReadyTransmitting = false;
-            _queuePlace.Hide();
+            // _queuePlace.Hide();
         }
 
         private void OnRemove(IItem _) =>

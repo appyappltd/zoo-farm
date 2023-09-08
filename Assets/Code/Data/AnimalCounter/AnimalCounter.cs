@@ -38,14 +38,13 @@ namespace Data.AnimalCounter
                 _countDatas.Add(animalType, animalCountData);
             }
 
-            if (_globalSettings.CanLetHungryAnimalsRelease == false)
+            if (_globalSettings.CanLetHungryAnimalsRelease)
             {
-                _satietyObservers.Add(animal.AnimalId, new AnimalSatietyObserver(animal, this));
-                
+                _countDatas[animalType] = _countDatas[animalType].AddReleaseReady();
             }
             else
             {
-                _countDatas[animalType] = _countDatas[animalType].AddReleaseReady();
+                _satietyObservers.Add(animal.AnimalId, new AnimalSatietyObserver(animal, this));
             }
 
             Updated.Invoke(animalType, _countDatas[animalType]);
@@ -143,14 +142,20 @@ namespace Data.AnimalCounter
 
             private void OnEmptySatiety()
             {
-                _isFullBar = false;
-                RemoveFromRelease();
+                if (_isFullBar)
+                {
+                    RemoveFromRelease();
+                    _isFullBar = false;
+                }
             }
 
             private void OnFullSatiety()
             {
-                _isFullBar = true;
-                AddToRelease();
+                if (_isFullBar == false)
+                {
+                    _isFullBar = true;
+                    AddToRelease();
+                }
             }
 
             private void AddToRelease() =>

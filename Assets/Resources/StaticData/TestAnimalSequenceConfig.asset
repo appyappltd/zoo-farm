@@ -20,7 +20,7 @@ MonoBehaviour:
   - _animalStaticData: {fileID: 11400000, guid: 14e0be8f307eac8419a5196c273f16eb, type: 2}
     _treatTool: 3
   - _animalStaticData: {fileID: 11400000, guid: c28f330c2e6739443a64aa95982dc214, type: 2}
-    _treatTool: 4
+    _treatTool: 1
   - _animalStaticData: {fileID: 11400000, guid: 14e0be8f307eac8419a5196c273f16eb, type: 2}
     _treatTool: 3
   - _animalStaticData: {fileID: 11400000, guid: c28f330c2e6739443a64aa95982dc214, type: 2}

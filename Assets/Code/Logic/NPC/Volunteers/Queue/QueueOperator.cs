@@ -22,6 +22,7 @@ namespace Logic.NPC.Volunteers.Queue
             {
                 QueuePlace queuePlace = _places[i];
                 queuePlace.Vacated += OnVacatedPlace;
+                queuePlace.Hidden += OnHiddenPlace;
             }
         }
 
@@ -37,11 +38,19 @@ namespace Logic.NPC.Volunteers.Queue
             return queuePlace;
         }
 
-        private void OnVacatedPlace(QueuePlace vacated)
+        private void OnHiddenPlace(QueuePlace hidden)
         {
-            int vacateIndex = FindVacateIndex(vacated);
+            int vacateIndex = FindVacateIndex(hidden);
             Move(vacateIndex);
             FreeQueue();
+        }
+
+        private void OnVacatedPlace(QueuePlace vacated)
+        {
+            for (int i = FindVacateIndex(vacated); i < _places.Length; i++)
+            {
+                _places[i].Hide();
+            }
         }
 
         private void Move(int fromIndex)
@@ -64,7 +73,9 @@ namespace Logic.NPC.Volunteers.Queue
         private void MoveQueueInArray(int fromIndex)
         {
             for (int i = fromIndex + 1; i < _places.Length; i++)
+            {
                 _places[i - 1] = _places[i];
+            }
         }
 
         private void MoveQueueTransforms()

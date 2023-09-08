@@ -20,5 +20,7 @@ namespace Tutorial.TimePresets
         [Range(0, 6f)] public float ThirdVolunteerFocusToPlayerFocus = 4f;
         [Range(0, 6f)] public float KeeperGridFocusToPlayerFocus = 3f;
         [Range(0, 6f)] public float BreedingBeginToBreedingComplete = 3f;
+        [Range(0, 6f)] public float BreedingZoneFocusToPlayerFocus = 3f;
+        [Range(0, 6f)] public float BreedingZoneSpawnedToArrowMove = 1f;
     }
 }

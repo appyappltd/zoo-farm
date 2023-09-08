@@ -30,8 +30,11 @@ namespace Progress
         public override string ToString() =>
             $"Bar {Current.Value}/{Max}";
 
-        public void Reset() =>
+        public void Reset()
+        {
+            Empty.Invoke();
             Current.Value = ZeroUnit;
+        }
 
         public void SetMinNonZero()
         {

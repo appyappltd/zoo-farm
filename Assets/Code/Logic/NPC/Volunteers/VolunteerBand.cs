@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Logic.Animals;
-using Data.ItemsData;
 using Infrastructure.Factory;
 using Logic.NPC.Volunteers.Queue;
 using Logic.NPC.Volunteers.VolunteersStateMachine;

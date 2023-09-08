@@ -212,6 +212,7 @@ namespace Tutorial.Directors
                 ShowNextText();
                 _volunteerSpawner.Spawn();
                 _medBedGridOperator.ShowNextBuildCell();
+                _medToolGridOperator.ShowNextBuildCell();
                 _arrow.Move(_medBedGridOperator.BuildCellPosition);
             }));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstMedBadSpawned));
@@ -222,11 +223,11 @@ namespace Tutorial.Directors
                 _cameraOperatorService.Focus(_volunteerTransform);
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.ThirdVolunteerFocusToPlayerFocus, GlobalUpdate.Instance));
-            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
-            TutorialModules.Add(new TutorialAction(() => ActivateAutoBuild(_medBedGridOperator)));
-            TutorialModules.Add(new TutorialAction(() => _arrow.Move(_animalReleaser.position)));
             TutorialModules.Add(new TutorialAction(() =>
             {
+                _cameraOperatorService.FocusOnDefault();
+                _arrow.Move(_animalReleaser.position);
+                
                 void OnHasBreedingPair(AnimalType type, AnimalCountData data)
                 {
                     if (data.ReleaseReady >= AnimalPair.PairCount)
@@ -249,7 +250,10 @@ namespace Tutorial.Directors
                 _cameraOperatorService.Focus(_breedingZoneGridOperator.BuildCellPosition);
                 _arrow.Move(_breedingZoneGridOperator.BuildCellPosition);
             }));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.BreedingZoneFocusToPlayerFocus, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_breedingZoneSpawned));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.BreedingZoneSpawnedToArrowMove, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 HideText();
@@ -261,7 +265,10 @@ namespace Tutorial.Directors
             {
                 ShowNextText();
                 _arrow.Move(_animalReleaser.position);
+                _cameraOperatorService.Focus(_animalReleaser.position);
             }));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.AnimalReleaserFocusToPlayerFocus, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_goalComplete));
             TutorialModules.Add(new TutorialAction(() =>
             {
@@ -300,8 +307,11 @@ namespace Tutorial.Directors
         private void OnVolunteerSpawned(GameObject volunteerObject) =>
             _volunteerTransform = volunteerObject.transform;
         
-        private void OnBreedingZoneSpawned(GameObject breedingZone) =>
+        private void OnBreedingZoneSpawned(GameObject breedingZone)
+        {
+            Debug.Log(breedingZone);
             _breedingZoneTransform = breedingZone.transform;
+        }
 
         private void ShowNextText() =>
             _textFadeOutPanel.Show();
