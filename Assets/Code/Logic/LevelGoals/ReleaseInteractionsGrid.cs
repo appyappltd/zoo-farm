@@ -30,13 +30,6 @@ namespace Logic.LevelGoals
             _transformGrid = transformGrid;
             _gameFactory = gameFactory;
             
-            Debug.Log("Types");
-            foreach (var type in releaseTypes)
-            {
-                Debug.Log(type);
-            }
-
-
             foreach (AnimalType type in releaseTypes)
                 InitNewInteractionZone(type);
         }

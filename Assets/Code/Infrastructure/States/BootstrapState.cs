@@ -44,9 +44,7 @@ namespace Infrastructure.States
         public void Enter() =>
             _sceneLoader.Load(LevelNames.Initial, EnterLoadLevel);
 
-        public void Exit()
-        {
-        }
+        public void Exit() { }
 
         private void RegisterServices()
         {

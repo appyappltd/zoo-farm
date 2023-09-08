@@ -53,6 +53,7 @@ namespace Logic.Animals
             IPersistentProgressService persistenceProgress)
         {
             _animalService = animalsService;
+
             GoalConfig goalConfig = staticData.GoalConfigForLevel(persistenceProgress.Progress.LevelData.LevelKey);
             
             _levelGoal.Construct(gameFactory, animalsService, goalConfig);

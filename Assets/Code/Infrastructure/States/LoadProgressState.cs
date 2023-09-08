@@ -26,6 +26,8 @@ namespace Infrastructure.States
             _gameStateMachine.Enter<LoadLevelState, string>(GetFirstScene());
         }
 
+        public void Exit() { }
+
         private string GetFirstScene()
         {
             string sceneName;
@@ -37,8 +39,6 @@ namespace Infrastructure.States
 #endif
             return sceneName;
         }
-
-        public void Exit() { }
 
         private void LoadProgressOrInitNew()
         {
@@ -58,7 +58,7 @@ namespace Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            Debug.Log("new progress");
+            Debug.Log("New Progress");
             var progress = new PlayerProgress(GetFirstScene());
             return progress;
         }

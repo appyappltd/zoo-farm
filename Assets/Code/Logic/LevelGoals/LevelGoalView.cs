@@ -5,6 +5,7 @@ using Logic.Animals;
 using Logic.Interactions;
 using Logic.Spawners;
 using Logic.TransformGrid;
+using NTC.Global.System;
 using Services.Animals;
 using Tutorial.StaticTriggers;
 using Ui.LevelGoalPanel;
@@ -29,13 +30,16 @@ namespace Logic.LevelGoals
         public event Action<AnimalType> ReleaseInteraction
         {
             add => _releaseInteractions.ReleaseInteracted += value;
-            remove => _releaseInteractions.ReleaseInteracted -= value;
+            remove => _releaseInteractions.IfNotNull(() => _releaseInteractions.ReleaseInteracted -= value);
         }
 
         private void OnDestroy()
         {
+            if (_goal is null)
+                return;
+
             Unsubscribe();
-            _releaseInteractions.Dispose(); 
+            _releaseInteractions.Dispose();
             Goal.Dispose();
             _goalPanelView.Dispose();
         }
@@ -52,8 +56,10 @@ namespace Logic.LevelGoals
         private void Subscribe() =>
             _goal.Updated += TriggerGoalComplete;
 
-        private void Unsubscribe() =>
-            _goal.Updated -= TriggerGoalComplete;
+        private void Unsubscribe()
+        {
+            _goal.IfNotNull(() => _goal.Updated -= TriggerGoalComplete);
+        }
 
         private void TriggerGoalComplete() =>
             _goalCompleteTrigger.Trigger();

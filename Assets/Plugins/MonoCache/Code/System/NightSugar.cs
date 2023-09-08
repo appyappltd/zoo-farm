@@ -8,15 +8,27 @@ namespace NTC.Global.System
         public static void IfNotNull<T>(this T component, Action<T> action) where T : Component
         {
             if (component != null)
-                action?.Invoke(component);
+                action.Invoke(component);
         }
 
         public static void IfNull<T>(this T component, Action<T> action) where T : Component
         {
             if (component == null)
-                action?.Invoke(component);
+                action.Invoke(component);
         }
 
+        public static void IfNotNull<T>(this T component, Action action)
+        {
+            if (component != null)
+                action.Invoke();
+        }
+
+        public static void IfNull<T>(this T component, Action action)
+        {
+            if (component == null)
+                action.Invoke();
+        }
+        
         public static void Enable(this Component component)
         {
             if (component is MonoBehaviour monoBehaviour)
