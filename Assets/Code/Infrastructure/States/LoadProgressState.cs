@@ -44,16 +44,17 @@ namespace Infrastructure.States
         {
             if (_saveLoadProgress.LoadProgress(out GlobalData globalData, out LevelData levelData))
             {
-                _progressService.Progress = new PlayerProgress(GetFirstScene())
+                var loadedProgress = new PlayerProgress(GetFirstScene())
                 {
                     GlobalData = globalData,
                     LevelData = levelData
                 };
 
+                _progressService.Init(loadedProgress);
                 return;
             }
 
-            _progressService.Progress = NewProgress();
+            _progressService.Init(NewProgress());
         }
 
         private PlayerProgress NewProgress()

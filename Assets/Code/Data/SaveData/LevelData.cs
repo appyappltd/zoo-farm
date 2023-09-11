@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Services.PersistentProgressGeneric;
 
 namespace Data.SaveData
 {
     [Serializable]
-    public class LevelData
+    public class LevelData : IProgressKey
     {
         public string LevelKey;
         public PlayerLocationData PlayerLocationData;
