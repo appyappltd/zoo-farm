@@ -1,3 +1,4 @@
+using System;
 using NTC.Global.Cache;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,7 +10,8 @@ namespace DelayRoutines
     {
         private readonly Vector2 _timeRange;
 
-        public RandomTimeAwaiter(Vector2 timeRange, GlobalUpdate globalUpdate) : base(globalUpdate) =>
+        public RandomTimeAwaiter(Vector2 timeRange, GlobalUpdate globalUpdate, Action<GlobalUpdate, Awaiter> addUpdater,
+            Action<GlobalUpdate, Awaiter> removeUpdater) : base(globalUpdate, addUpdater, removeUpdater) =>
             _timeRange = timeRange;
 
         protected override float GetWaitTime() =>

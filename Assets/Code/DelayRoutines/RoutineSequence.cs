@@ -10,6 +10,9 @@ namespace DelayRoutines
         private readonly GlobalUpdate _globalUpdate;
         private readonly List<IRoutine> _routines = new List<IRoutine>();
 
+        private readonly Action<GlobalUpdate, Awaiter> _addUpdater;
+        private readonly Action<GlobalUpdate, Awaiter> _removeUpdater;
+        
         private int _currentRoutineIndex = -1;
         private bool _isAutoKill;
 
@@ -19,9 +22,20 @@ namespace DelayRoutines
 
         public bool IsActive => ActiveRoutine is not null;
         
-        public RoutineSequence()
+        public RoutineSequence(RoutineUpdateMod updateMod = RoutineUpdateMod.Run)
         {
             _globalUpdate = GlobalUpdate.Instance;
+
+            if (updateMod == RoutineUpdateMod.Run)
+            {
+                _addUpdater = (globalUpdate, self) => globalUpdate.AddRunSystem(self);
+                _removeUpdater = (globalUpdate, self) => globalUpdate.RemoveRunSystem(self);
+            }
+            else
+            {
+                _addUpdater = (globalUpdate, self) => globalUpdate.AddFixedRunSystem(self);
+                _removeUpdater = (globalUpdate, self) => globalUpdate.RemoveFixedRunSystem(self);
+            }
         }
 
         void IDisposable.Dispose() =>
@@ -76,7 +90,7 @@ namespace DelayRoutines
         /// <returns>Self routine</returns>
         public RoutineSequence WaitForSeconds(float seconds)
         {
-            AddToSequence(new ConstTimeAwaiter(seconds, _globalUpdate));
+            AddToSequence(new ConstTimeAwaiter(seconds, _globalUpdate, _addUpdater, _removeUpdater));
             return this;
         }
 
@@ -87,7 +101,7 @@ namespace DelayRoutines
         /// <returns>Self routine</returns>
         public RoutineSequence WaitForRandomSeconds(Vector2 timeRange)
         {
-            AddToSequence(new RandomTimeAwaiter(timeRange, _globalUpdate));
+            AddToSequence(new RandomTimeAwaiter(timeRange, _globalUpdate, _addUpdater, _removeUpdater));
             return this;
         }
 
@@ -98,7 +112,7 @@ namespace DelayRoutines
         /// <returns>Self routine</returns>
         public RoutineSequence WaitForEvent(Action action)
         {
-            AddToSequence(new EventAwaiter(action, _globalUpdate));
+            AddToSequence(new EventAwaiter(action, _globalUpdate, _addUpdater, _removeUpdater));
             return this;
         }
 
@@ -120,7 +134,7 @@ namespace DelayRoutines
         /// <returns>elf routine</returns>
         public RoutineSequence WaitUntil(Func<bool> waitFor)
         {
-            AddToSequence(new UntilAwaiter(waitFor, _globalUpdate));
+            AddToSequence(new UntilAwaiter(waitFor, _globalUpdate, _addUpdater, _removeUpdater));
             return this;
         }
 
@@ -131,7 +145,7 @@ namespace DelayRoutines
         /// <returns></returns>
         public RoutineSequence WaitWhile(Func<bool> waitFor)
         {
-            AddToSequence(new WhileAwaiter(waitFor, _globalUpdate));
+            AddToSequence(new WhileAwaiter(waitFor, _globalUpdate, _addUpdater, _removeUpdater));
             return this;
         }
 

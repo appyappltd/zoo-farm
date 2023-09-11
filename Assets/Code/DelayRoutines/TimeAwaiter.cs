@@ -1,5 +1,5 @@
-﻿using NTC.Global.Cache;
-using UnityEngine;
+﻿using System;
+using NTC.Global.Cache;
 
 namespace DelayRoutines
 {
@@ -7,7 +7,8 @@ namespace DelayRoutines
     {
         private float _elapsedTime;
 
-        protected TimeAwaiter(GlobalUpdate globalUpdate) : base(globalUpdate) { }
+        protected TimeAwaiter(GlobalUpdate globalUpdate, Action<GlobalUpdate, Awaiter> addUpdater,
+            Action<GlobalUpdate, Awaiter> removeUpdater) : base(globalUpdate, addUpdater, removeUpdater) { }
 
         protected override void OnPlay()
         {
@@ -17,9 +18,9 @@ namespace DelayRoutines
 
         protected abstract float GetWaitTime();
 
-        public override void OnRun()
+        protected override void OnUpdate(float deltaTime)
         {
-            _elapsedTime -= Time.deltaTime;
+            _elapsedTime -= deltaTime;
 
             if (_elapsedTime <= 0)
             {

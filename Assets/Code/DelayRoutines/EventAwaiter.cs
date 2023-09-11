@@ -8,13 +8,17 @@ namespace DelayRoutines
     {
         private Action _callback;
 
-        public EventAwaiter(Action callback, GlobalUpdate globalUpdate) : base(globalUpdate)
+        public EventAwaiter(Action callback, GlobalUpdate globalUpdate, Action<GlobalUpdate, Awaiter> addUpdater,
+            Action<GlobalUpdate, Awaiter> removeUpdater) : base(globalUpdate, addUpdater, removeUpdater)
         {
             _callback = callback;
             Deactivate();
             _callback += Next;
         }
 
-        public override void OnRun() { }
+        protected override void OnUpdate(float deltaTime)
+        {
+            
+        }
     }
 }
