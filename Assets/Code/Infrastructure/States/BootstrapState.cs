@@ -1,6 +1,5 @@
 ﻿using Infrastructure.AssetManagement;
 using Infrastructure.Factory;
-using Logic.Animals;
 using Services;
 using Services.AnimalHouses;
 using Services.Animals;
@@ -16,7 +15,6 @@ using Services.Pools;
 using Services.Randomizer;
 using Services.SaveLoad;
 using Services.StaticData;
-using Tools;
 using Tools.Global;
 using Ui.Factory;
 using Ui.Services;
