@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: _maxSpeed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6176900249568832793, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 7618022627873738006}
     - target: {fileID: 8643315356767832591, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: m_Name
       value: Giraffe
@@ -212,5 +216,10 @@ Transform:
 --- !u!95 &7566188432034735098 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95097386643323920, guid: 29ea63ea869ceed4fa1951ee013c517a, type: 3}
+  m_PrefabInstance: {fileID: 7516889150220984298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7618022627873738006 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137920457149354748, guid: 29ea63ea869ceed4fa1951ee013c517a, type: 3}
   m_PrefabInstance: {fileID: 7516889150220984298}
   m_PrefabAsset: {fileID: 0}

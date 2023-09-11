@@ -6,7 +6,7 @@ namespace Logic.Effects
     public class OnRenderEffectShower : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _particleSystem;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Renderer _spriteRenderer;
 
         [SerializeField] private Vector2 _randomPreShowDelay;
         [SerializeField] private float _afterShowDelay;
@@ -18,10 +18,18 @@ namespace Logic.Effects
             _routine = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .WaitUntil(() => _spriteRenderer.isVisible)
                 .WaitForRandomSeconds(_randomPreShowDelay)
-                .Then(_particleSystem.Play)
+                .Then(() =>
+                {
+                    Debug.Log("Play");
+                    _particleSystem.Play();
+                })
                 .WaitForSeconds(_afterShowDelay)
                 .LoopWhile(() => enabled);
         }
+
+
+        private void Start() =>
+            _routine.Play();
 
         private void OnDestroy() =>
             _routine.Kill();

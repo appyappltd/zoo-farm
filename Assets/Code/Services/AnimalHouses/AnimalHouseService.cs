@@ -90,8 +90,9 @@ namespace Services.AnimalHouses
             {
 #if DEBUG
                 throw new NullReferenceException(HouseNotFoundException);
-#endif
+#else
                 return;
+#endif
             }
 
             attachedHouse.DetachAnimal();

@@ -4,6 +4,7 @@ using Logic.Animals.AnimalsStateMachine.Transitions;
 using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
+using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Animals.AnimalsStateMachine.States;
 using Logic.Movement;
 using NaughtyAttributes;
