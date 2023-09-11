@@ -9,6 +9,7 @@ namespace Logic.Translators
         void Play();
         void Stop(bool atCycleEnd);
         bool TryUpdate();
+        void ResetToDefault();
         void Enable();
         void Disable();
         bool IsPreload { get; }

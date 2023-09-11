@@ -108,7 +108,6 @@ namespace Services.Animals
         private void ReleaseAnimal(IAnimal releasedAnimal)
         {
             Unregister(releasedAnimal);
-            _houseService.VacateHouse(releasedAnimal.AnimalId);
             Released.Invoke(releasedAnimal);
 
 #if DEBUG

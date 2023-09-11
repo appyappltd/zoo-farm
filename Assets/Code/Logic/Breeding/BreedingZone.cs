@@ -52,6 +52,7 @@ namespace Logic.Breeding
         private BreedingCurrencySpawner _currencySpawner;
         private IItem _takenHeart;
         private IHuman _cashedHuman;
+        private bool _isInProgress;
 
         private void Awake()
         {
@@ -94,21 +95,23 @@ namespace Logic.Breeding
         {
             void OnChosen(IHuman human)
             {
+                if (_isInProgress)
+                    return;
+
                 if (_breedService.TryBreeding(associatedType, out AnimalPair pair))
                 {
                     ItemFilter itemFilter = new ItemFilter(ItemId.BreedingCurrency);
 
                     if (human.Inventory.TryGet(itemFilter, out IItem item))
                     {
-                        _breedService.BeginBreeding(pair, _breedingPlace, OnBreedingBegins);
+                        _isInProgress = true;
+                        _breedService.BeginBreeding(pair, _breedingPlace, OnBreedingBegins, OnBreedingComplete);
                         item.Mover.Move(_heartPosition, _heartPosition, true);
                     }
                     
                     _interactionsGrid.Value.RemoveAll();
                     return;
                 }
-                
-                _interactionsGrid.Value.RemoveAll();
 
 #if DEBUG
                 Debug.LogWarning($"Animals of {associatedType} type are not enough for reproduction");
@@ -128,6 +131,9 @@ namespace Logic.Breeding
 
             if (_cashedHuman is null)
                 return;
+
+            if (_isInProgress)
+                _interactionZone.Deactivate();
 
             if (_cashedHuman.Inventory.TryGet(itemFilter, out IItem item))
                 _inventoryHolder.Inventory.TryAdd(item);
@@ -167,8 +173,17 @@ namespace Logic.Breeding
             animatedScaleTranslatable.End += OnEndTranslate;
         }
 
+        private void OnBreedingComplete()
+        {
+            _isInProgress = false;
+            _interactionZone.Activate();
+        }
+
         private void OnRemovedItem(IItem item)
         {
+            if (_isInProgress)
+                return;
+
             _takenHeart = item;
             
             foreach (var pairType in _breedService.GetAvailablePairTypes())

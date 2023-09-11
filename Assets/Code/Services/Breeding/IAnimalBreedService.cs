@@ -12,6 +12,6 @@ namespace Services.Breeding
         void Unregister(IAnimal animal);
         ICollection<AnimalType> GetAvailablePairTypes();
         bool TryBreeding(AnimalType breedingAnimalType, out AnimalPair pair);
-        void BeginBreeding(AnimalPair pair, Transform at, Action onBeginsCallback = null);
+        void BeginBreeding(AnimalPair pair, Transform at, Action onBeginsCallback = null, Action onCompleteCallback = null);
     }
 }

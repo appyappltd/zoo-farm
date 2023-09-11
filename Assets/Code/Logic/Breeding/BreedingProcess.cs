@@ -18,16 +18,18 @@ namespace Logic.Breeding
         private readonly IEffectService _effectService;
         private readonly IGameFactory _gameFactory;
         private readonly IAnimalFeederService _feederService;
-        private readonly AnimalPair _pair;
+        
         private readonly Transform _at;
-        private readonly Action _onBeginsCallback;
         private readonly RoutineSequence _beforeBreedingDelay;
+        private readonly AnimalPair _pair;
+        private readonly Action _onBeginsCallback;
+        private readonly Action _onCompleteCallback;
 
         private int _animalsInPlaceCount;
         private bool _isRunning;
 
         public BreedingProcess(IEffectService effectService, IGameFactory gameFactory,
-            IAnimalFeederService feederService, AnimalPair pair, Transform at, Action onBeginsCallback = null)
+            IAnimalFeederService feederService, AnimalPair pair, Transform at, Action onBeginsCallback = null, Action onCompleteCallback = null)
         {
             _effectService = effectService;
             _gameFactory = gameFactory;
@@ -35,6 +37,7 @@ namespace Logic.Breeding
             _pair = pair;
             _at = at;
             _onBeginsCallback = onBeginsCallback ?? (() => { });
+            _onCompleteCallback = onCompleteCallback ?? (() => { });
 
             _beforeBreedingDelay = new RoutineSequence()
                 .WaitForSeconds(BeforeBreedingDelaySeconds)
@@ -80,6 +83,7 @@ namespace Logic.Breeding
             first.Emotions.Suppress(EmotionId.Breeding);
             second.Emotions.Suppress(EmotionId.Breeding);
 
+            _onCompleteCallback.Invoke();
             _isRunning = false;
         }
 

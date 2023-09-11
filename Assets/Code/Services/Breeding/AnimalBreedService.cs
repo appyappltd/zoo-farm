@@ -104,12 +104,13 @@ namespace Services.Breeding
             return false;
         }
 
-        public void BeginBreeding(AnimalPair pair, Transform at, Action onBeginsCallback)
+        public void BeginBreeding(AnimalPair pair, Transform at, Action onBeginsCallback = null, Action onCompleteCallback = null)
         {
             _breedingReadyAnimals.Remove(pair.First);
             _breedingReadyAnimals.Remove(pair.Second);
 
-            BreedingProcess breedingProcess = new BreedingProcess(_effectService, _gameFactory, _feederService, pair, at, onBeginsCallback);
+            BreedingProcess breedingProcess = new BreedingProcess(_effectService, _gameFactory, _feederService, pair,
+                at, onBeginsCallback, onCompleteCallback);
             breedingProcess.Start();
         }
     }

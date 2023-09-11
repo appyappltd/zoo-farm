@@ -70,6 +70,12 @@ namespace Logic.Interactions
 
 #endif
 
+        public void Activate() =>
+            enabled = true;
+
+        public void Deactivate() =>
+            enabled = false;
+
         protected override void OnDisabled()
         {
             base.OnDisabled();

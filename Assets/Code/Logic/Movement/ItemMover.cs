@@ -32,14 +32,13 @@ namespace Logic.Movement
         private void Awake()
         {
             _scaleModifier = new DistanceBasedScaleModifier();
-            _moving += Translate;
+            _moving = Translate;
             enabled = false;
         }
 
         public void Move(Transform to, Action onMoveEnded, Transform finishParent = null, bool isModifyRotation = false,  bool isModifyScale = false)
         {
             _endMoveCallback = onMoveEnded ?? (() => { }) ;
-            _endMoveCallback += () => _endMoveCallback = () => { };
             Move(to, finishParent, isModifyRotation, isModifyScale);
         }
 
@@ -67,9 +66,11 @@ namespace Logic.Movement
 
         protected override void Run()
         {
-            _moving.Invoke(GetDistanceToTarget());
+            float distance = GetDistanceToTarget();
+            
+            _moving.Invoke(distance);
 
-            if (IsFinished())
+            if (IsFinished(distance))
                 FinishTranslation();
         }
 
@@ -104,10 +105,11 @@ namespace Logic.Movement
 
             Ended.Invoke();
             _endMoveCallback.Invoke();
+            _endMoveCallback = () => { };
         }
 
-        private bool IsFinished() =>
-            GetDistanceToTarget() < _errorOffset;
+        private bool IsFinished(float distance) =>
+            distance < _errorOffset;
 
         private Quaternion GetFinalRotation() =>
             _isModifyRotation

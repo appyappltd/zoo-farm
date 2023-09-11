@@ -57,11 +57,15 @@ namespace Logic.Translators
 
         public void Stop(bool atCycleEnd)
         {
+            if (IsComplete)
+                return;
+            
             _isLastCycle = true;
             
             if (atCycleEnd)
                 return;
 
+            End = _ => { };
             _delta = FinalTranslateValue;
         }
 
@@ -69,18 +73,12 @@ namespace Logic.Translators
         {
             if (_isPreload)
                 throw new Exception("You are trying to set the settings that are predefined");
-
+            
             _from = from;
             _to = to;
             
             Restart();
         }
-
-        public void Enable() =>
-            gameObject.Enable();
-
-        public void Disable() =>
-            gameObject.Disable();
 
         public bool TryUpdate()
         {
@@ -102,16 +100,23 @@ namespace Logic.Translators
             delta = _deltaModifiers.Invoke(delta);
             T value = _valueLerp.Invoke(_from, _to, delta);
 
-            for (int index = 0; index < _valueModifiers.GetInvocationList().Length; index++)
-            {
-                Delegate @delegate = _valueModifiers.GetInvocationList()[index];
-                Func<T, float, T> variable = (Func<T, float, T>) @delegate;
-                value = variable.Invoke(value, delta);
-            }
-
+            value = ModifyTranslation(value, delta);
             ApplyTranslation(value);
             return true;
         }
+
+        public void ResetToDefault()
+        {
+            T value = _valueLerp.Invoke(_from, _to, 0);
+            value = ModifyTranslation(value, 0);
+            ApplyTranslation(value);
+        }
+        
+        public void Enable() =>
+            gameObject.Enable();
+
+        public void Disable() =>
+            gameObject.Disable();
 
         protected void AddDeltaModifier(Func<float, float> func) =>
             _deltaModifiers += func ?? throw new NullReferenceException();
@@ -123,6 +128,18 @@ namespace Logic.Translators
         {
             _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.smoothDeltaTime);
             return _delta;
+        }
+
+        private T ModifyTranslation(T value, float delta)
+        {
+            for (int index = 0; index < _valueModifiers.GetInvocationList().Length; index++)
+            {
+                Delegate @delegate = _valueModifiers.GetInvocationList()[index];
+                Func<T, float, T> variable = (Func<T, float, T>) @delegate;
+                value = variable.Invoke(value, delta);
+            }
+
+            return value;
         }
 
         private void Restart()

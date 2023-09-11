@@ -112,7 +112,7 @@ namespace Logic.Storages
             }
 
             if (_isSupportAnimated)
-                StopAnimation(item);
+                StopAnimation(_topIndex);
 
             _topIndex--;
         }
@@ -127,26 +127,25 @@ namespace Logic.Storages
             }
         }
 
-        private void StopAnimation(IItem item)
+        private void StopAnimation(int placeIndex)
         {
-            if (item is not ITranslatableAnimated animated)
-                return;
+            var translatables = _places[placeIndex].GetComponents<ITranslatableParametric<Vector3>>();
             
-            foreach (ITranslatableParametric<Vector3> translatable in animated.GetAllTranslatables())
+            foreach (ITranslatableParametric<Vector3> translatable in translatables)
             {
                 if (translatable.IsPreload == false)
                     continue;
                 
                 translatable.Stop(false);
+                translatable.ResetToDefault();
             }
         }
         
-        private void StartAnimation(IItem item)
+        private void StartAnimation(int placeIndex)
         {
-            if (item is not ITranslatableAnimated animated)
-                return;
-
-            foreach (ITranslatableParametric<Vector3> translatable in animated.GetAllTranslatables())
+            var translatables = _places[placeIndex].GetComponents<ITranslatableParametric<Vector3>>();
+            
+            foreach (ITranslatableParametric<Vector3> translatable in translatables)
             {
                 if (translatable.IsPreload)
                 {
@@ -161,8 +160,8 @@ namespace Logic.Storages
 
         private void MoveItemWithCallback(IItem item)
         {
-            void Proxy() => StartAnimation(item);
-            item.Mover.Move(TopPlace, Proxy, TopPlace, _isModifyRotation);
+            int topIndex = _topIndex;
+            item.Mover.Move(TopPlace, () => StartAnimation(topIndex), TopPlace, _isModifyRotation);
         }
     }
 }
