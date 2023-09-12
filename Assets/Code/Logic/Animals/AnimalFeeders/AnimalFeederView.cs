@@ -2,8 +2,9 @@ using System.Diagnostics;
 using Logic.Foods.FoodSettings;
 using Logic.Storages;
 using NaughtyAttributes;
+using Services;
+using Services.StaticData;
 using Ui;
-using Ui.Elements;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalFeeders
@@ -17,17 +18,23 @@ namespace Logic.Animals.AnimalFeeders
         [SerializeField] private Bowl[] _bowls;
         
         [Space] [Header("Settings")]
-        [SerializeField] private FoodId _foodID;
+        [SerializeField] private FoodId _foodId;
         [SerializeField] private int _maxFoodPerBowl;
 
+        private IStaticDataService _staticData;
+        
         private AnimalFeeder _animalFeeder;
 
         public AnimalFeeder Feeder => _animalFeeder;
 
         private void Awake()
         {
+            Construct(AllServices.Container.Single<IStaticDataService>());
             Init();
         }
+
+        private void Construct(IStaticDataService staticData) =>
+            _staticData = staticData;
 
         private void Init()
         {
@@ -35,7 +42,7 @@ namespace Logic.Animals.AnimalFeeders
             _storage.Construct(_inventoryHolder.Inventory);
             _productReceiver.Construct(_inventoryHolder.Inventory);
             ConstructBowls();
-            _animalFeeder = new AnimalFeeder(_bowls, _inventoryHolder.Inventory, _foodID);
+            _animalFeeder = new AnimalFeeder(_bowls, _inventoryHolder.Inventory, _foodId);
         }
 
         private void ConstructBowls()
@@ -46,7 +53,7 @@ namespace Logic.Animals.AnimalFeeders
                 bowl.Construct(_inventoryHolder.Inventory, _maxFoodPerBowl);
 
                 BarIconView barIcon = bowl.GetComponentInChildren<BarIconView>();
-                barIcon.Construct(bowl.ProgressBarView);
+                barIcon.Construct(bowl.ProgressBarView, _staticData.IconByFoodType(_foodId));
             }
         }
 

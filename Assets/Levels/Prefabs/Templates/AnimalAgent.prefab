@@ -598,6 +598,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5853824301467310379}
     m_Modifications:
+    - target: {fileID: 117306346615242139, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 824840818623168513, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -638,6 +642,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2003379001618870065, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: _foodIcon
+      value: 
+      objectReference: {fileID: 95084914286359787}
     - target: {fileID: 2638663326910131590, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
       propertyPath: m_Name
       value: Emotions
@@ -650,11 +658,28 @@ PrefabInstance:
       propertyPath: _satietyBarIndicator
       value: 
       objectReference: {fileID: 4985158875982950670}
+    - target: {fileID: 6255589725130966609, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236145439531591523, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236145439531591523, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+--- !u!212 &95084914286359787 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8236145439531591523, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}
+  m_PrefabInstance: {fileID: 8294897801359430536}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7552548722606521529 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2003379001618870065, guid: f8f658d8ef9fcf94d881767634759b7d, type: 3}

@@ -1,4 +1,3 @@
-using System;
 using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Animals.AnimalsBehaviour.Emotions;
@@ -40,8 +39,11 @@ namespace Logic.Animals.AnimalsBehaviour
         {
             _staticDataService = staticDataService;
             _animalId = animalId;
+            _emotionProvider.Construct(_staticDataService.IconByFoodType(animalId.EdibleFood));
             _emotionService = new PersonalEmotionService(_emotionProvider);
             _statProvider.Construct(beginStats);
+            
+            //TODO: удалить
             _happinessFactor.Construct(_statProvider.Satiety);
 
             _emotionObserver = new SatietyEmotionObserver(_statProvider.Satiety, _emotionService);

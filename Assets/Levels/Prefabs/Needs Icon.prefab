@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _needText: {fileID: 433205188578276107}
+  _icon: {fileID: 6570572228367778576}
   _isDeactivateOnFull: 1
   _delayBeforeDeactivate: 2
 --- !u!1 &6690961032625622828

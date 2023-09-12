@@ -9,12 +9,15 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
          private EmotionView _currentEmotion;
  
          [SerializeField] private SerializedDictionary<EmotionId, EmotionView> _emotions;
- 
-         private void Awake()
-         {
-             _currentEmotion = _emotions[EmotionId.Hunger];
-         }
- 
+
+         [SerializeField] private SpriteRenderer _foodIcon;
+
+         private void Awake() =>
+             _currentEmotion = _emotions[EmotionId.None];
+
+         public void Construct(Sprite foodIcon) =>
+             _foodIcon.sprite = foodIcon;
+
          public void ChangeEmotion(EmotionId id)
          {
              _currentEmotion.Hide();

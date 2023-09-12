@@ -13,6 +13,7 @@ namespace Ui
 
         [Header("References")]
         [SerializeField] private TextSetter _needText;
+        [SerializeField] private SpriteRenderer _icon;
 
         [Space] [Header("Settings")]
         [SerializeField] private bool _isDeactivateOnFull = true;
@@ -33,6 +34,12 @@ namespace Ui
             }
         }
 
+        public void Construct(IProgressBarView progressBar, Sprite icon)
+        {
+            _icon.sprite = icon;
+            Construct(progressBar);
+        }
+        
         public void Construct(IProgressBarView progressBar)
         {
             UpdateText(progressBar.Current.Value, progressBar.Max);

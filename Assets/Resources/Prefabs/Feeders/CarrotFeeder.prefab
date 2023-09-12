@@ -118,6 +118,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 939106315740059834, guid: 341b92b24a0b11446835fa56045b83b1, type: 3}
+      propertyPath: _foodId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 939106315740059834, guid: 341b92b24a0b11446835fa56045b83b1, type: 3}
       propertyPath: _storage
       value: 
       objectReference: {fileID: 1359714068486380692}
