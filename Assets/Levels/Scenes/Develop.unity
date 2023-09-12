@@ -4451,6 +4451,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1408503331}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: _textFadeOutPanel
+      value: 
+      objectReference: {fileID: 1332847374}
+    - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _volunteerSpawner
       value: 
       objectReference: {fileID: 1687827295}
@@ -8066,6 +8070,18 @@ PrefabInstance:
       propertyPath: _gate
       value: 
       objectReference: {fileID: 1605814448}
+    - target: {fileID: 6212852764711831163, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: _isLooped
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212852764711831163, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: _isValidate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212852764711831163, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+      propertyPath: _timerOperator
+      value: 
+      objectReference: {fileID: 7798346275492091958}
     - target: {fileID: 6323573373766255624, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -8090,6 +8106,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+--- !u!114 &7798346275492091958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5802687526132514149, guid: b121c1251f3e7af49a502d8420bb8883, type: 3}
+  m_PrefabInstance: {fileID: 7798346275492091957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7453362d9c4da71498f26f48391cc381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7996700566612449743
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using Logic.Storages;
 using Services;
 using Services.MedicalBeds;
 using UnityEngine;
@@ -12,7 +11,7 @@ namespace Logic.Interactions.Validators
         private void Awake() =>
             _medicalBedsReporter = AllServices.Container.Single<IMedicalBedsReporter>();
 
-        public bool IsValid(IInventory inventory = default) =>
+        public bool IsValid<T>(T target = default) =>
             _medicalBedsReporter.HasFreeBeds();
     }
 }

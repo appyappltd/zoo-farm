@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using AYellowpaper;
 using DelayRoutines;
 using Logic.Interactions.Validators;
-using Logic.Player;
 using NaughtyAttributes;
 using Observer;
 using UnityEngine;
@@ -11,7 +10,7 @@ using UnityEngine;
 namespace Logic.Interactions
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone where T : IHuman
+    public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone
     {
         private readonly HashSet<Action> _interactionSubs = new HashSet<Action>();
 
@@ -142,7 +141,7 @@ namespace Logic.Interactions
             }
         }
 
-        private bool Validate(T hero)
+        private bool Validate(T target)
         {
             if (_isValidate == false)
                 return true;
@@ -150,7 +149,7 @@ namespace Logic.Interactions
             bool isAllValid = true;
 
             for (var index = 0; index < _interactionValidators.Length; index++)
-                isAllValid &= _interactionValidators[index].Value.IsValid(hero.Inventory);
+                isAllValid &= _interactionValidators[index].Value.IsValid(target);
 
             return isAllValid;
         }

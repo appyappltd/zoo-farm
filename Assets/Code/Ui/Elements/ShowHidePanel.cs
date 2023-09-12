@@ -6,7 +6,6 @@ using NaughtyAttributes;
 using NTC.Global.Cache;
 using Tools;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Ui.Elements
 {
@@ -138,22 +137,12 @@ namespace Ui.Elements
         [Button] [Conditional("UNITY_EDITOR")]
         private void TestShow()
         {
-            void Log()
-            {
-                Debug.Log($"OnShow");
-            }
-            
             Show();
         }
         
         [Button] [Conditional("UNITY_EDITOR")]
         private void TestHide()
         {
-            void Log()
-            {
-                Debug.Log($"OnHide");
-            }
-            
             Hide();
         }
 

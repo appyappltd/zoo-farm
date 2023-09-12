@@ -1,8 +1,6 @@
-using Data;
 using Data.AnimalCounter;
 using Logic.Animals;
- using Logic.Storages;
- using Services.Animals;
+using Services.Animals;
  using UnityEngine;
  
  namespace Logic.Interactions.Validators
@@ -18,7 +16,7 @@ using Logic.Animals;
              _counter = animalsService.AnimalCounter;
          }
  
-         public bool IsValid(IInventory inventory = default) =>
+         public bool IsValid<T>(T target = default) =>
              _counter.GetAnimalCountData(_validateType).ReleaseReady > 0;
      }
  }
