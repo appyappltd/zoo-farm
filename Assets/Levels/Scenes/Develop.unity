@@ -4485,7 +4485,7 @@ PrefabInstance:
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _animalTransmittingView
       value: 
-      objectReference: {fileID: 1562965935}
+      objectReference: {fileID: 0}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _firstMedToolSpawnPoint
       value: 
@@ -4778,11 +4778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPlace: {fileID: 11400000, guid: 04dc449c987ac924aa82c6bc8cf7e7f1, type: 2}
---- !u!4 &1562965935 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8166403102283085595, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-  m_PrefabInstance: {fileID: 5407715211302104929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1568271951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6985,7 +6980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _isAutoBuild
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _buildCosts.Array.data[0]
@@ -7794,25 +7789,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2873095269185922691, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 952897521603987935, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 2227116700998199054, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 3751033419727276114, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 123576450595195089, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 3121311145541265293, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
 --- !u!114 &6287656187672064358 stripped
 MonoBehaviour:

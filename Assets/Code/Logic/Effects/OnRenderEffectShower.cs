@@ -18,11 +18,7 @@ namespace Logic.Effects
             _routine = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .WaitUntil(() => _spriteRenderer.isVisible)
                 .WaitForRandomSeconds(_randomPreShowDelay)
-                .Then(() =>
-                {
-                    Debug.Log("Play");
-                    _particleSystem.Play();
-                })
+                .Then(_particleSystem.Play)
                 .WaitForSeconds(_afterShowDelay)
                 .LoopWhile(() => enabled);
         }

@@ -40,6 +40,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
         {
             _barIndicator.ProgressBar.Reset();
             _bowlBarOperator = new ProgressBarOperator(_bowl.ProgressBarView, _changingSpeed, true);
+            _emotionService.Show(EmotionId.Eating);
             base.OnEnter();
         }
 

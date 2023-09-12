@@ -15,7 +15,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
 
         protected override void OnEnter()
         {
-            _emotionService.Show(EmotionId.Eating);
+            _emotionService.Suppress(EmotionId.Hunger);
             base.OnEnter();
         }
     }

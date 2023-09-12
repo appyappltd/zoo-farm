@@ -14,22 +14,28 @@ namespace Logic.Animals.AnimalsBehaviour
             _satietyBar = satietyBar;
             _emotionService = emotionService;
 
-            _satietyBar.Empty += ShowEmotion;
-            _satietyBar.Full += SuppressEmotion;
+            _satietyBar.Empty += OnEmpty;
+            _satietyBar.Full += OnFull;
             
             _emotionService.Show(EmotionId.Hunger);
         }
 
-        private void SuppressEmotion() =>
+        private void OnFull()
+        {
             _emotionService.Suppress(EmotionId.Hunger);
+            _emotionService.Show(EmotionId.Happy);
+        }
 
-        private void ShowEmotion() =>
+        private void OnEmpty()
+        {
+            _emotionService.Suppress(EmotionId.Happy);
             _emotionService.Show(EmotionId.Hunger);
+        }
 
         public void Dispose()
         {
-            _satietyBar.Empty -= ShowEmotion;
-            _satietyBar.Full -= SuppressEmotion;
+            _satietyBar.Empty -= OnEmpty;
+            _satietyBar.Full -= OnFull;
         }
     }
 }
