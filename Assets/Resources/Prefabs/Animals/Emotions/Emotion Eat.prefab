@@ -24,6 +24,14 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1542077001986638303, guid: afb3f341d55055f4885a4f5cce61cec3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019396900305438562, guid: afb3f341d55055f4885a4f5cce61cec3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8925181187248011682, guid: afb3f341d55055f4885a4f5cce61cec3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -66,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9121932527294659752, guid: afb3f341d55055f4885a4f5cce61cec3, type: 3}
       propertyPath: m_Name
-      value: Emotion Eat Variant
+      value: Emotion Eat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

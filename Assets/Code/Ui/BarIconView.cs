@@ -1,4 +1,5 @@
 using DelayRoutines;
+using NTC.Global.System;
 using Observables;
 using Progress;
 using Ui.Elements;
@@ -45,14 +46,11 @@ namespace Ui
                 _deactivate = new RoutineSequence();
                 _deactivate
                     .WaitForSeconds(_delayBeforeDeactivate)
-                    .Then(() => gameObject.SetActive(false));
+                    .Then(() => gameObject.Disable());
                 
                 progressBar.Empty += ActivateView;
                 progressBar.Full += DeactivateView;
             }
-
-            Transform selfTransform = transform;
-            selfTransform.forward = Camera.main.transform.forward;
 
             _barView = progressBar;
         }
@@ -61,7 +59,7 @@ namespace Ui
             _deactivate.Play();
 
         private void ActivateView() =>
-            gameObject.SetActive(true);
+            gameObject.Enable();
 
         private void UpdateText(float value, float max) =>
             _needText.SetText($"{Mathf.Round(value)}/{max}");

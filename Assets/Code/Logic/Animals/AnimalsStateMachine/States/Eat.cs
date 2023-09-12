@@ -3,8 +3,8 @@ using DelayRoutines;
 using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
+using Logic.Animals.AnimalsBehaviour.Emotions;
 using Progress;
-using StateMachineBase;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine.States
@@ -13,20 +13,24 @@ namespace Logic.Animals.AnimalsStateMachine.States
     {
         private readonly StatIndicator _barIndicator;
         private readonly AnimalFeeder _feeder;
-        private readonly RoutineSequence _routineSequence = new RoutineSequence();
+        private readonly PersonalEmotionService _emotionService;
+        private readonly RoutineSequence _routineSequence;
         private readonly float _changingSpeed;
         
         private ProgressBarOperator _bowlBarOperator;
         private Bowl _bowl;
 
         public Eat(AnimalAnimator animator, StatIndicator barIndicator, float changingSpeed,
-            float hungerDelay, AnimalFeeder feeder)
+            float hungerDelay, AnimalFeeder feeder, PersonalEmotionService emotionService)
             : base(animator, barIndicator, changingSpeed)
         {
             _feeder = feeder;
+            _emotionService = emotionService;
             _changingSpeed = changingSpeed;
             _barIndicator = barIndicator;
-            _routineSequence.WaitForSeconds(hungerDelay).Then(() => barIndicator.enabled = true);
+            _routineSequence = new RoutineSequence()
+                .WaitForSeconds(hungerDelay)
+                .Then(barIndicator.Enable);
         }
 
         protected override void PlayAnimation(AnimalAnimator animator) =>
@@ -44,6 +48,7 @@ namespace Logic.Animals.AnimalsStateMachine.States
             _routineSequence.Play();
             _feeder.VacateBowl(_bowl);
             _bowl = null;
+            _emotionService.Suppress(EmotionId.Eating);
         }
 
         protected override void OnUpdate()
@@ -52,11 +57,9 @@ namespace Logic.Animals.AnimalsStateMachine.States
             _bowlBarOperator.Update(Time.deltaTime);
         }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             _routineSequence.Kill();
-        }
-        
+
         public void ApplyBowl(Bowl bowl) =>
             _bowl = bowl ? bowl : throw new NullReferenceException(nameof(bowl));
     }

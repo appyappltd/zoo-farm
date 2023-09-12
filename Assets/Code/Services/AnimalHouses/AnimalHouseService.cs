@@ -180,7 +180,7 @@ namespace Services.AnimalHouses
         private void TakeHouse(AnimalHouse builtHouse, IAnimal animal)
         {
             builtHouse.AttachAnimal(animal.AnimalId);
-            animal.AttachHouse(builtHouse);
+            //animal.AttachHouse(builtHouse);
         }
     }
 }

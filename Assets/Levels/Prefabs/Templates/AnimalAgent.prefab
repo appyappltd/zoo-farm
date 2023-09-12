@@ -245,6 +245,7 @@ MonoBehaviour:
   _animator: {fileID: 1584153114449162156}
   _mover: {fileID: 5921953604120698182}
   _aligner: {fileID: 2475102383029443612}
+  _animal: {fileID: 5340628444517854784}
   _vitality: {fileID: 6272545603082111471}
   _satiety: {fileID: 4985158875982950670}
   _peppiness: {fileID: 4862242970874921462}

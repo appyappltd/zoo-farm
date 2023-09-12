@@ -2,6 +2,8 @@ using System.Diagnostics;
 using Logic.Foods.FoodSettings;
 using Logic.Storages;
 using NaughtyAttributes;
+using Ui;
+using Ui.Elements;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalFeeders
@@ -42,6 +44,9 @@ namespace Logic.Animals.AnimalFeeders
             {
                 Bowl bowl = _bowls[index];
                 bowl.Construct(_inventoryHolder.Inventory, _maxFoodPerBowl);
+
+                BarIconView barIcon = bowl.GetComponentInChildren<BarIconView>();
+                barIcon.Construct(bowl.ProgressBarView);
             }
         }
 

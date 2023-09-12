@@ -72,7 +72,6 @@ namespace Logic.Animals
         
         private void Subscribe()
         {
-            // _inventory.Added += ReplenishFromInventory;
             _food.Empty += OnEmptyFood;
             _food.Full += OnFullFood;
             _compositeDisposable.Add(_food.Current.Then(OnSpend));

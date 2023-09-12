@@ -4,7 +4,6 @@ using Logic.Animals.AnimalsStateMachine.Transitions;
 using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
-using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Animals.AnimalsStateMachine.States;
 using Logic.Movement;
 using NaughtyAttributes;
@@ -22,7 +21,8 @@ namespace Logic.Animals.AnimalsStateMachine
         [SerializeField] private AnimalAnimator _animator;
         [SerializeField] private NavMeshMover _mover;
         [SerializeField] private Aligner _aligner;
-
+        [SerializeField] private Animal _animal;
+        
         [Space] [Header("Stats")]
         [SerializeField] private StatIndicator _vitality;
 
@@ -49,12 +49,6 @@ namespace Logic.Animals.AnimalsStateMachine
         private FollowToBreed _followToBreeding;
         private BreedingIdle _breeding;
         private AnimalFeeder _feeder;
-
-        public void Construct(Transform houseRestPlace, Transform houseEatPlace)
-        {           
-            SetUp();
-            EnableStatIndicators();
-        }
 
         public void Construct(AnimalFeeder feeder)
         {
@@ -111,10 +105,10 @@ namespace Logic.Animals.AnimalsStateMachine
             Transition reachedBreeding = new ReachDestinationTransition(_mover, _breedingPositionOffset);
             Transition waitForBreedingProcess = new TimerTransition(2f);
             
-            State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, _hungerDelay, _feeder);
+            State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, _hungerDelay, _feeder, _animal.Emotions);
             State rest = new Rest(_animator, _peppiness, _peppinessReplanishSpeed);
             State idle = new Idle(_animator);
-            State waitForFood = new Idle(_animator);
+            State waitForFood = new WaitForFood(_animator, _animal.Emotions);
             State wander = new Wander(_animator, _mover, _maxWanderDistance);
             State moveToRest = new MoveTo(_animator, _mover, null);
             State moveToEat = new MoveToEat(_animator, _mover, null, _aligner, _feeder, (Eat) eat, (FullBowl) fullBowl, (DistanceTo) inEatPlace);

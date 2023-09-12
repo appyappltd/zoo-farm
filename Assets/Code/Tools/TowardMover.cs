@@ -8,6 +8,7 @@ namespace Tools
         private const float FinalValue = 1;
         
         private readonly Func<TValue, TValue, float, TValue> _lerpFunc;
+        private readonly AnimationCurve _curve;
         
         private readonly TValue _from;
         private readonly TValue _to;
@@ -20,18 +21,20 @@ namespace Tools
 
         private bool IsComplete => _delta >= FinalValue;
 
-        public TowardMover(TValue from, TValue to, Func<TValue, TValue, float, TValue> lerp)
+        public TowardMover(TValue from, TValue to, Func<TValue, TValue, float, TValue> lerp, AnimationCurve curve)
         {
             _to = to;
             _from = from;
             _lerpFunc = lerp;
+            _curve = curve;
+            
             Reset();
         }
 
         public bool TryUpdate(float deltaTime, out TValue lerpValue)
         {
             _delta = Mathf.MoveTowards(_delta, FinalValue, deltaTime);
-            lerpValue = _lerpFunc.Invoke(_begin, _end, _delta);
+            lerpValue = _lerpFunc.Invoke(_begin, _end, _curve.Evaluate(_delta));
 
             bool _isComplete = IsComplete;
             

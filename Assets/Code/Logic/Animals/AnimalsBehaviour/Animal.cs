@@ -1,5 +1,5 @@
+using System;
 using Logic.Animals.AnimalFeeders;
-using Logic.Houses;
 using Logic.Animals.AnimalsBehaviour.AnimalStats;
 using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Animals.AnimalsStateMachine;
@@ -19,9 +19,10 @@ namespace Logic.Animals.AnimalsBehaviour
         [SerializeField] private StatsProvider _statProvider;
         [SerializeField] private HappinessFactor _happinessFactor;
 
+        private IStaticDataService _staticDataService;
         private PersonalEmotionService _emotionService;
         private AnimalId _animalId;
-        private IStaticDataService _staticDataService;
+        private SatietyEmotionObserver _emotionObserver;
 
         public Transform Transform => transform;
         public AnimalId AnimalId => _animalId;
@@ -32,6 +33,9 @@ namespace Logic.Animals.AnimalsBehaviour
         public AnimalAnimator Animator => _animator;
         public PersonalEmotionService Emotions => _emotionService;
 
+        private void OnDestroy() =>
+            _emotionObserver.Dispose();
+
         public void Construct(AnimalId animalId, BeginStats beginStats, IStaticDataService staticDataService)
         {
             _staticDataService = staticDataService;
@@ -39,12 +43,8 @@ namespace Logic.Animals.AnimalsBehaviour
             _emotionService = new PersonalEmotionService(_emotionProvider);
             _statProvider.Construct(beginStats);
             _happinessFactor.Construct(_statProvider.Satiety);
-        }
 
-        public void AttachHouse(AnimalHouse house)
-        {
-            _stateMachine.Construct(house.FeedingPlace, house.EatPlace);
-            Activate();
+            _emotionObserver = new SatietyEmotionObserver(_statProvider.Satiety, _emotionService);
         }
 
         public void AttachFeeder(AnimalFeeder feeder)
@@ -62,13 +62,12 @@ namespace Logic.Animals.AnimalsBehaviour
         private void Activate()
         {
             _jumper.Jump();
-            Emotions.Show(EmotionId.Hunger);
         }
 
         public override string ToString() =>
             $"Animal {_animalId.Type} (id: {_animalId.ID}\nStats:\n" +
-            $"  Vitality - {_statProvider.Vitality.CurrentNormalized}/1,\n" +
-            $"  Satiety - {_statProvider.Satiety.CurrentNormalized}/1,\n " +
-            $" Peppiness - {_statProvider.Peppiness.CurrentNormalized}/1,\n)";
+            $"Vitality - {_statProvider.Vitality.CurrentNormalized}/1,\n" +
+            $"Satiety - {_statProvider.Satiety.CurrentNormalized}/1,\n " +
+            $"Peppiness - {_statProvider.Peppiness.CurrentNormalized}/1,\n)";
     }
 }

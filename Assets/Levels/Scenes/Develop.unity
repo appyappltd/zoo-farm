@@ -4005,6 +4005,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5375905006793975005, guid: b417c0c8281b4cc4ead9f226e84d8877, type: 3}
   m_PrefabInstance: {fileID: 2477406176290728825}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1332847367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4502504369033706847, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+  m_PrefabInstance: {fileID: 1524833152}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1332847370 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 3036204929080553938, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+  m_PrefabInstance: {fileID: 1524833152}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1332847374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332847367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65cb3c2fe824dd983f7dbff3f6e6f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _from: 0
+  _to: 1
+  _speed: 1
+  _modifyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _canvasGroup: {fileID: 1332847370}
 --- !u!4 &1338258443 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9168263079686510482, guid: 12e12b1370333804298e591543781a29, type: 3}
@@ -4524,10 +4574,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2295173769536330006, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4502504369033706847, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1332847374}
   m_SourcePrefab: {fileID: 100100000, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
 --- !u!1 &1539480958
 GameObject:
