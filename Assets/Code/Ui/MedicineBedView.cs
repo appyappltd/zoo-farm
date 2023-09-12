@@ -19,7 +19,7 @@ namespace Ui
         [SerializeField] private MedicalBed _medicalBed;
         [SerializeField] private MedToolStandConfig[] _medTools;
 
-        private Dictionary<MedicalToolId, Sprite> _toolSprites;
+        private Dictionary<TreatToolId, Sprite> _toolSprites;
 
         private void Awake()
         {

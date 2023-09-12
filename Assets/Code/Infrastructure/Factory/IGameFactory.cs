@@ -34,7 +34,7 @@ namespace Infrastructure.Factory
         GameObject CreateKeeper(Vector3 markerBuildPosition);
         GameObject CreateAnimalChild(Vector3 at, Quaternion rotation, AnimalType type);
         MedicalBed CreateMedBed(Vector3 at, Quaternion rotation);
-        MedicalToolStand CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType);
+        MedicalToolStand CreateMedToolStand(Vector3 at, Quaternion rotation, TreatToolId toolIdType);
         Animal CreateAnimal(AnimalItemStaticData animalData, Vector3 at, Quaternion rotation);
         Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation);
         GameObject CreateHouseFoundation(Vector3 markerBuildPosition, Quaternion locationRotation);

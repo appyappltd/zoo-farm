@@ -13,7 +13,7 @@ namespace Infrastructure.Builders
             _staticDataService = staticDataService;
         }
 
-        public MedicalToolStand Build(GameObject medicalStandObject, MedicalToolId toolId)
+        public MedicalToolStand Build(GameObject medicalStandObject, TreatToolId toolId)
         {
             var medicalStand = medicalStandObject.GetComponent<MedicalToolStand>();
             medicalStand.Construct(_staticDataService.MedStandConfigById(toolId));

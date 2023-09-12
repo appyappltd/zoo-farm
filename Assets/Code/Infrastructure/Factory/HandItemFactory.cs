@@ -38,7 +38,7 @@ namespace Infrastructure.Factory
             return _handItemBuilder.Build(itemObject, foodId);
         }
 
-        public HandItem CreateMedicalToolItem(Vector3 at, Quaternion rotation, MedicalToolId toolId)
+        public HandItem CreateMedicalToolItem(Vector3 at, Quaternion rotation, TreatToolId toolId)
         {
             GameObject itemObject =
                 _assets.Instantiate($"{AssetPath.HandItemPath}/{ItemId.Medical}/{toolId}", at, rotation);

@@ -1,6 +1,7 @@
 using AYellowpaper.SerializedCollections;
 using Logic.Animals;
 using Logic.Foods.FoodSettings;
+using Logic.Medical;
 using UnityEngine;
 
 namespace StaticData
@@ -10,5 +11,6 @@ namespace StaticData
     {
         public SerializedDictionary<AnimalType, Sprite> AnimalIcons;
         public SerializedDictionary<FoodId, Sprite> FoodIcons;
+        public SerializedDictionary<TreatToolId, Sprite> TreatToolsIcons;
     }
 }

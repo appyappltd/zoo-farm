@@ -3909,6 +3909,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1170248476581970021, guid: 79db9f52301fc87429c37e8529653ffb, type: 3}
   m_PrefabInstance: {fileID: 298400371}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1273183979 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 31385790775815282, guid: 79cdfa2766478e5498a7fec1ceecc522, type: 3}
+  m_PrefabInstance: {fileID: 5407715211302104929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1280148840 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2117372345816672441, guid: 26d6a06a289e8984999e12bdfe0536db, type: 3}
@@ -4485,7 +4490,7 @@ PrefabInstance:
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _animalTransmittingView
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1273183979}
     - target: {fileID: 591090670202826532, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: _firstMedToolSpawnPoint
       value: 

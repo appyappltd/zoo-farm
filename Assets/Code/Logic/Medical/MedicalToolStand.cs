@@ -23,12 +23,12 @@ namespace Logic.Medical
         private IHandItemFactory _handItemFactory;
         private IMedicalBedsReporter _medicalBedsReporter;
         private IItem _toolItem;
-        private MedicalToolId _toolId;
+        private TreatToolId _toolId;
 
         public event Action<IItem> Removed = _ => { };
         public event Action<IItem> Added = _ => { };
 
-        public MedicalToolId ToolId => _toolId;
+        public TreatToolId ToolId => _toolId;
 
         private void Awake()
         {

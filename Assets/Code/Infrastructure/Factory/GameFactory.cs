@@ -169,7 +169,7 @@ namespace Infrastructure.Factory
             return _medBedBuilder.Build(medicalBedObject);
         }
 
-        public MedicalToolStand CreateMedToolStand(Vector3 at, Quaternion rotation, MedicalToolId toolIdType)
+        public MedicalToolStand CreateMedToolStand(Vector3 at, Quaternion rotation, TreatToolId toolIdType)
         {
             GameObject medToolStandObject = _assets.Instantiate($"{AssetPath.MedToolStandPath}/MedStand{toolIdType}", at, rotation);
             return _medStandBuilder.Build(medToolStandObject, toolIdType);

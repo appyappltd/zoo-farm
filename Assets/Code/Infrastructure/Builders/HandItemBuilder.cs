@@ -32,7 +32,7 @@ namespace Infrastructure.Builders
             return item;
         }
 
-        public HandItem Build(GameObject itemObject, MedicalToolId medicalToolId)
+        public HandItem Build(GameObject itemObject, TreatToolId medicalToolId)
         {
             HandItem item = itemObject.GetComponent<HandItem>();
             MedicalToolItemData foodItemData = _staticData.MedicalItemDataById(medicalToolId);

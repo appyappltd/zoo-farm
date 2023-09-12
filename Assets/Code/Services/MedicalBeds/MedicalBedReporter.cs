@@ -9,7 +9,7 @@ namespace Services.MedicalBeds
     public class MedicalBedsReporter : IMedicalBedsReporter
     {
         private readonly List<MedicalBed> _medicalBeds = new List<MedicalBed>();
-        private readonly List<MedicalToolId> _neededTools = new List<MedicalToolId>();
+        private readonly List<TreatToolId> _neededTools = new List<TreatToolId>();
 
         public event Action Updated = () => { };
 
@@ -50,7 +50,7 @@ namespace Services.MedicalBeds
             Updated.Invoke();
         }
 
-        public bool IsNeeds(MedicalToolId toolId) =>
+        public bool IsNeeds(TreatToolId toolId) =>
             _neededTools.Contains(toolId);
 
         private void OnItemRemoved(IItem item)

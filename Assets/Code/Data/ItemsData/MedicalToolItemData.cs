@@ -8,6 +8,6 @@ namespace Data.ItemsData
     {
         [field: SerializeField] public ItemId ItemId { get; private set; }
         [field: SerializeField] public int Weight { get; private set; }
-        public MedicalToolId MedicineToolId;
+        public TreatToolId MedicineToolId;
     }
 }

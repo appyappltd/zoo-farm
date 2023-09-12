@@ -9,9 +9,9 @@ using Logic.Storages;
 using Logic.Storages.Items;
 using NTC.Global.Cache;
 using Services;
-using Services.AnimalHouses;
 using Services.Effects;
 using Services.Feeders;
+using Services.StaticData;
 using UnityEngine;
 
 namespace Logic.Medical
@@ -24,7 +24,6 @@ namespace Logic.Medical
         [SerializeField] [Range(0f, 5f)] private float _healingTime = 2.5f;
 
         private IGameFactory _gameFactory;
-        private IAnimalHouseService _houseService;
         private IAnimalFeederService _feederService;
         
         private AnimalItemData _animalData;
@@ -39,6 +38,7 @@ namespace Logic.Medical
         private IAnimal _healingAnimal;
         private byte Id;
         private bool _isFree = true;
+        private IStaticDataService _staticData;
 
         public event Action<IItem> Added = _ => { };
         public event Action<IItem> Removed = _ => { };
@@ -46,13 +46,13 @@ namespace Logic.Medical
         public event Action FeedUp = () => { };
 
         public bool IsFree => _isFree;
-        public MedicalToolId ThreatTool => _animalData?.TreatToolId ?? MedicalToolId.None;
+        public TreatToolId ThreatTool => _animalData?.TreatToolId ?? TreatToolId.None;
 
         private void Awake()
         {
             Construct(
                 AllServices.Container.Single<IGameFactory>(),
-                AllServices.Container.Single<IAnimalHouseService>(),
+                AllServices.Container.Single<IStaticDataService>(),
                 AllServices.Container.Single<IEffectService>(),
                 AllServices.Container.Single<IAnimalFeederService>());
         }
@@ -60,11 +60,11 @@ namespace Logic.Medical
         private void OnDestroy() =>
             _effectSpawner.Dispose();
 
-        private void Construct(IGameFactory gameFactory, IAnimalHouseService houseService, IEffectService effectService,
+        private void Construct(IGameFactory gameFactory, IStaticDataService staticData, IEffectService effectService,
             IAnimalFeederService animalFeederService)
         {
             _gameFactory = gameFactory;
-            _houseService = houseService;
+            _staticData = staticData;
             _feederService = animalFeederService;
             
             _effectSpawner = new EffectSpawner(effectService);
@@ -81,6 +81,7 @@ namespace Logic.Medical
             {
                 _animalData = item.ItemData as AnimalItemData;
                 _animalItem = item;
+                ShowThreatTool();
                 _isFree = false;
             }
             else if (ItemIsMedTool(item))
@@ -104,6 +105,9 @@ namespace Logic.Medical
             Add(item);
             return true;
         }
+
+        private void ShowThreatTool() =>
+            _animalItem.GetComponent<AnimatedSpriteSetter>().ChangeSprite(_staticData.IconByTreatToolType(_animalData.TreatToolId));
 
         private void OnHealed()
         {

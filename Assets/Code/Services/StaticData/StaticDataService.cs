@@ -35,12 +35,12 @@ namespace Services.StaticData
 
         private Dictionary<EmotionId, EmotionConfig> _emotionConfigs;
         private Dictionary<WindowId, WindowConfig> _windows;
-        private Dictionary<MedicalToolId, MedToolStandConfig> _medStandConfigs;
+        private Dictionary<TreatToolId, MedToolStandConfig> _medStandConfigs;
         private Dictionary<ScaleModifierId, ScaleModifierConfig> _scaleModifierConfigs;
         private Dictionary<AnimalType, AnimalItemStaticData> _animalItemConfigs;
         private Dictionary<string, GoalConfig> _levelGoalConfigs;
         private Dictionary<FoodId, FoodItemData> _foodConfigs;
-        private Dictionary<MedicalToolId, MedicalToolItemData> _medicalToolConfigs;
+        private Dictionary<TreatToolId, MedicalToolItemData> _medicalToolConfigs;
         private Dictionary<ItemId, DefaultItemData> _defaultItemConfigs;
 
         private SpawnPlaceConfig _spawnPlaceConfig;
@@ -50,12 +50,12 @@ namespace Services.StaticData
         public void Load()
         {
             _emotionConfigs = LoadFor<EmotionId, EmotionConfig>(EmotionConfigPath, x => x.Name);
-            _medStandConfigs = LoadFor<MedicalToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
+            _medStandConfigs = LoadFor<TreatToolId, MedToolStandConfig>(MedStandConfigPath, x => x.Type);
             _scaleModifierConfigs = LoadFor<ScaleModifierId, ScaleModifierConfig>(ScaleModifierPath, x => x.ModifierId);
             _animalItemConfigs = LoadFor<AnimalType, AnimalItemStaticData>(AnimalItemsPath, x => x.AnimalType);
             _levelGoalConfigs = LoadFor<string, GoalConfig>(LevelGoalConfigPath, x => x.LevelName);
             _foodConfigs = LoadFor<FoodId, FoodItemData>(FoodConfigPath, x => x.FoodId);
-            _medicalToolConfigs = LoadFor<MedicalToolId, MedicalToolItemData>(MedicalConfigPath, x => x.MedicineToolId);
+            _medicalToolConfigs = LoadFor<TreatToolId, MedicalToolItemData>(MedicalConfigPath, x => x.MedicineToolId);
             _defaultItemConfigs = LoadFor<ItemId, DefaultItemData>(DefaultItemConfigPath, x => x.ItemId);
 
             _icons = Resources.Load<IconConfig>(IconsConfigPath);
@@ -82,13 +82,16 @@ namespace Services.StaticData
         public Sprite IconByFoodType(FoodId foodId) =>
             _icons.FoodIcons[foodId];
 
+        public Sprite IconByTreatToolType(TreatToolId treatToolId) =>
+            _icons.TreatToolsIcons[treatToolId];
+
         public GoalConfig GoalConfigForLevel(string levelName) =>
             GetDataFor(levelName, _levelGoalConfigs);
 
         public FoodItemData FoodItemDataById(FoodId foodId) =>
             GetDataFor(foodId, _foodConfigs);
 
-        public MedicalToolItemData MedicalItemDataById(MedicalToolId medicalToolId) =>
+        public MedicalToolItemData MedicalItemDataById(TreatToolId medicalToolId) =>
             GetDataFor(medicalToolId, _medicalToolConfigs);
 
         public DefaultItemData DefaultItemDataById(ItemId itemId) =>
@@ -106,7 +109,7 @@ namespace Services.StaticData
         public ParticleConfig ParticlesConfig() =>
             _particlesConfig;
 
-        public MedToolStandConfig MedStandConfigById(MedicalToolId toolIdId) =>
+        public MedToolStandConfig MedStandConfigById(TreatToolId toolIdId) =>
             GetDataFor(toolIdId, _medStandConfigs);
 
         public WindowBase WindowById(WindowId windowId) =>

@@ -20,16 +20,17 @@ namespace Services.StaticData
         Emotion EmotionById(EmotionId emotionId);
         WindowBase WindowById(WindowId windowId);
         Transform SpawnPlaceById(SpawnPlaceId placeId);
-        MedToolStandConfig MedStandConfigById(MedicalToolId toolIdId);
+        MedToolStandConfig MedStandConfigById(TreatToolId toolIdId);
         Sprite IconByAnimalType(AnimalType animalIdType);
         Sprite IconByFoodType(FoodId foodId);
+        Sprite IconByTreatToolType(TreatToolId treatToolId);
         ParticleSystem ParticlesById(EffectId id);
         ParticleConfig ParticlesConfig();
         ScaleModifierConfig ScaleModifierById(ScaleModifierId id);
         AnimalItemStaticData AnimalItemDataById(AnimalType id);
         GoalConfig GoalConfigForLevel(string levelName);
         FoodItemData FoodItemDataById(FoodId foodId);
-        MedicalToolItemData MedicalItemDataById(MedicalToolId medicalToolId);
+        MedicalToolItemData MedicalItemDataById(TreatToolId medicalToolId);
         DefaultItemData DefaultItemDataById(ItemId itemId);
     }
 }

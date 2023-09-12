@@ -7,16 +7,16 @@ namespace Data.ItemsData
     public class AnimalItemData : IItemData
     {
         private readonly AnimalItemStaticData _data;
-        private readonly MedicalToolId _treatToolId;
+        private readonly TreatToolId _treatToolId;
 
         public ItemId ItemId => _data.ItemId;
         public int Weight => _data.Weight;
         public AnimalType Type => _data.AnimalType;
-        public MedicalToolId TreatToolId => _treatToolId;
+        public TreatToolId TreatToolId => _treatToolId;
         public BeginStats BeginStats => _data.BeginStats;
         public AnimalItemStaticData StaticData => _data;
 
-        public AnimalItemData(AnimalItemStaticData data, MedicalToolId treatToolId)
+        public AnimalItemData(AnimalItemStaticData data, TreatToolId treatToolId)
         {
             _data = data;
             _treatToolId = treatToolId;

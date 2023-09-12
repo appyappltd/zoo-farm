@@ -7,7 +7,7 @@ namespace Services.MedicalBeds
     {
         void Register(MedicalBed medicalBed);
         bool HasFreeBeds();
-        bool IsNeeds(MedicalToolId toolId);
+        bool IsNeeds(TreatToolId toolId);
         void Cleanup();
         event Action Updated;
     }

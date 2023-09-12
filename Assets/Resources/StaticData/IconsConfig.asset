@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimalIcons:
     _serializedList:
+    - Key: 0
+      Value: {fileID: 21300000, guid: 979cdbafd1f631c45984521c458699d2, type: 3}
     - Key: 1
       Value: {fileID: 21300000, guid: eded923f5b72d444b92ece2076e90a91, type: 3}
     - Key: 2
@@ -27,10 +29,22 @@ MonoBehaviour:
   FoodIcons:
     _serializedList:
     - Key: 0
-      Value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+      Value: {fileID: 21300000, guid: 979cdbafd1f631c45984521c458699d2, type: 3}
     - Key: 1
       Value: {fileID: 21300000, guid: c138f281722bb0e4abc851711d07cc65, type: 3}
     - Key: 2
       Value: {fileID: 21300000, guid: caeebabe30686b247a404a604dac83d4, type: 3}
     - Key: 255
       Value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  TreatToolsIcons:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 21300000, guid: 979cdbafd1f631c45984521c458699d2, type: 3}
+    - Key: 1
+      Value: {fileID: 21300000, guid: b212e4dcdaf5b264dae2d42dae0f0580, type: 3}
+    - Key: 2
+      Value: {fileID: 21300000, guid: 5a7d17443091ddd43b384eb516a22485, type: 3}
+    - Key: 3
+      Value: {fileID: 21300000, guid: 8bcbda62b6418bf428785b6d4682efc3, type: 3}
+    - Key: 4
+      Value: {fileID: 21300000, guid: fd25a4e0782652140ab83c1a7ef9a0d6, type: 3}

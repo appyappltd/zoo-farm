@@ -6,8 +6,8 @@ namespace Logic.CellBuilding
 {
     public class MedToolMarker : BuildPlaceMarker
     {
-        [FormerlySerializedAs("_toolType")] [SerializeField] private MedicalToolId _toolId;
+        [FormerlySerializedAs("_toolType")] [SerializeField] private TreatToolId _toolId;
 
-        public MedicalToolId ToolId => _toolId;
+        public TreatToolId ToolId => _toolId;
     }
 }

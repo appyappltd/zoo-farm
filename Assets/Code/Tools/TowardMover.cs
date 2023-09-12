@@ -61,17 +61,13 @@ namespace Tools
         public void Forward()
         {
             if (_isForward == false)
-            {
                 Switch();
-            }
         }
 
         public void Reverse()
         {
             if (_isForward)
-            {
                 Switch();
-            }
         }
     }
 }

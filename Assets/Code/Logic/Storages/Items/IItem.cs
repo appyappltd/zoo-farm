@@ -1,10 +1,9 @@
 using Data.ItemsData;
 using Logic.Movement;
-using Logic.Translators;
 
 namespace Logic.Storages.Items
 {
-    public interface IItem
+    public interface IItem : IComponent
     {
         int Weight { get; }
         ItemId ItemId { get; }

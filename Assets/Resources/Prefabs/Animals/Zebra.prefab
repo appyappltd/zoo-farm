@@ -13,20 +13,16 @@ PrefabInstance:
       value: Zebra
       objectReference: {fileID: 0}
     - target: {fileID: 4276639213802658, guid: dbb4f63164fde934ca66b89ae15021b1, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4276639213802658, guid: dbb4f63164fde934ca66b89ae15021b1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4276639213802658, guid: dbb4f63164fde934ca66b89ae15021b1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4276639213802658, guid: dbb4f63164fde934ca66b89ae15021b1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4276639213802658, guid: dbb4f63164fde934ca66b89ae15021b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -75,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 95170663367824200, guid: dbb4f63164fde934ca66b89ae15021b1, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: fe5643bba2d4b7943ab7b010671f3a84, type: 2}
+      objectReference: {fileID: 9100000, guid: c09d4cc1f009a46458d65f3075688cb1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

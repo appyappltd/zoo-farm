@@ -9,9 +9,9 @@ namespace Data
     public struct AnimalAndTreatToolPair
     {
         [SerializeField] private AnimalItemStaticData _animalStaticData;
-        [SerializeField] private MedicalToolId _treatTool;
+        [SerializeField] private TreatToolId _treatTool;
 
         public AnimalItemStaticData AnimalStaticData => _animalStaticData;
-        public MedicalToolId TreatTool => _treatTool;
+        public TreatToolId TreatTool => _treatTool;
     }
 }
