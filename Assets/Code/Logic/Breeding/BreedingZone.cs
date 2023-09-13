@@ -14,6 +14,7 @@ using NaughtyAttributes;
 using NTC.Global.System;
 using Observables;
 using Services;
+using Services.Animals;
 using Services.Breeding;
 using Services.PersistentProgress;
 using Services.StaticData;
@@ -59,7 +60,8 @@ namespace Logic.Breeding
             Construct(AllServices.Container.Single<IAnimalBreedService>(),
                 AllServices.Container.Single<IStaticDataService>(),
                 AllServices.Container.Single<IPersistentProgressService>(),
-                AllServices.Container.Single<IGameFactory>());
+                AllServices.Container.Single<IGameFactory>(),
+                AllServices.Container.Single<IAnimalsService>());
             CreateAllInteractions();
         }
 
@@ -72,7 +74,7 @@ namespace Logic.Breeding
         }
 
         private void Construct(IAnimalBreedService breedService, IStaticDataService staticData,
-            IPersistentProgressService persistentProgress, IGameFactory gameFactory)
+            IPersistentProgressService persistentProgress, IGameFactory gameFactory, IAnimalsService animalsService)
         {
             _gameFactory = gameFactory;
             _persistentProgress = persistentProgress;
@@ -87,7 +89,7 @@ namespace Logic.Breeding
             _interactionZone.Canceled += OnCancelZone;
             _interactionZone.Interacted += OnInteractedZone;
 
-            _currencySpawner = new BreedingCurrencySpawner(gameFactory.HandItemFactory, _storage, _inventoryHolder.Inventory,
+            _currencySpawner = new BreedingCurrencySpawner(gameFactory.HandItemFactory, animalsService.AnimalCounter, _storage, _inventoryHolder.Inventory,
                 _currencySpawnDelay, _translator.Value);
         }
 

@@ -1,45 +1,57 @@
 using System;
 using System.Collections.Generic;
-using Data.ItemsData;
+using Data.AnimalCounter;
 using DelayRoutines;
 using Infrastructure.Factory;
+using Logic.Animals;
 using Logic.Storages;
 using Logic.Storages.Items;
 using Logic.Translators;
 using NTC.Global.System;
+using Services.Animals;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Logic.Breeding
 {
-    public class BreedingCurrencySpawner
+    public class BreedingCurrencySpawner : IDisposable 
     {
         private readonly Stack<HandItem> _breedingCurrencies = new Stack<HandItem>();
 
         private readonly IHandItemFactory _handItemFactory;
+        private readonly IAnimalCounter _animalCounter;
         private readonly Storage _storage;
         private readonly IInventory _inventory;
         private readonly ITranslator _translator;
         private readonly RoutineSequence _spawnRoutine;
 
         private bool _hasVacateCurrency;
-        
-        public BreedingCurrencySpawner(IHandItemFactory handItemFactory, Storage storage, IInventory inventory, Vector2 randomSpawnDelay, ITranslator translator)
+        private int _maxCurrenciesCount;
+        private int _readyPairsCount;
+
+        public BreedingCurrencySpawner(IHandItemFactory handItemFactory, IAnimalCounter animalCounter, Storage storage, IInventory inventory, Vector2 randomSpawnDelay, ITranslator translator)
         {
-            _translator = translator;
             _handItemFactory = handItemFactory;
+            _animalCounter = animalCounter;
             _storage = storage;
             _inventory = inventory;
-
-            //TODO: Оптимизировать
-            _spawnRoutine = new RoutineSequence()
-                .WaitUntil(() => _breedingCurrencies.Count > 0)
+            _translator = translator;
+            
+            _spawnRoutine = new RoutineSequence(RoutineUpdateMod.FixedRun)
+                .WaitUntil(HasNewPair)
                 .Then(TrySpawn)
                 .WaitForRandomSeconds(randomSpawnDelay)
-                .LoopWhile(() => _breedingCurrencies.TryPeek(out _));
+                .LoopWhile(HasFreeCurrency);
 
+            Subscribe();
             InitBreedingCurrencies();
             EnableSpawning();
+        }
+
+        public void Dispose()
+        {
+            Unsubscribe();
+            _spawnRoutine.Kill();
         }
 
         public void ReturnItem(IItem item)
@@ -57,7 +69,7 @@ namespace Logic.Breeding
 
             throw new NullReferenceException(nameof(handItem));
         }
-         
+
         private void InitBreedingCurrencies()
         {
             int itemsWeight = 0;
@@ -75,6 +87,28 @@ namespace Logic.Breeding
                 else
                     Object.Destroy(item);
             }
+
+            
+            _maxCurrenciesCount = _breedingCurrencies.Count;
+            _readyPairsCount = _animalCounter.TotalBreedingReadyPairsCount;
+        }
+
+        private void Subscribe() =>
+            _animalCounter.Updated += OnAnimalCounterUpdated;
+
+        private void Unsubscribe() =>
+            _animalCounter.Updated += OnAnimalCounterUpdated;
+
+        private void OnAnimalCounterUpdated(AnimalType _, AnimalCountData __) =>
+            _readyPairsCount = _animalCounter.TotalBreedingReadyPairsCount;
+
+        private bool HasFreeCurrency() =>
+            _breedingCurrencies.TryPeek(out _);
+
+        private bool HasNewPair()
+        {
+            // Debug.Log($"breedingCurrencies.Count - {_breedingCurrencies.Count}, _readyPairsCount - {_readyPairsCount}, _maxCurrenciesCount - {_maxCurrenciesCount}, spawnedCount - {_maxCurrenciesCount - _breedingCurrencies.Count}");
+            return _breedingCurrencies.Count > 0 && _readyPairsCount > _maxCurrenciesCount - _breedingCurrencies.Count;
         }
 
         private void TrySpawn()

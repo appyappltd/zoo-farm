@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4539937626717491165}
   - component: {fileID: 241569520641417643}
   - component: {fileID: 3036204929080553938}
-  - component: {fileID: 2295173769536330006}
+  - component: {fileID: 6555431359478124333}
   m_Layer: 0
   m_Name: TextPanel
   m_TagString: Untagged
@@ -67,10 +67,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5447924172773018695}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1763279, y: 0.69619125}
-  m_AnchorMax: {x: 0.8658008, y: 0.7694682}
-  m_AnchoredPosition: {x: -3.2700195, y: 0.32000732}
-  m_SizeDelta: {x: 1.8999939, y: 0.62999725}
+  m_AnchorMin: {x: 0.1742993, y: 0.84000003}
+  m_AnchorMax: {x: 0.86600006, y: 0.91334313}
+  m_AnchoredPosition: {x: -2, y: 0}
+  m_SizeDelta: {x: -0.1000061, y: 0.6300049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &921328543967882414
 CanvasRenderer:
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -102,8 +102,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0422\u0435\u043A\u0441\u0442\u043E\u0432\u044B\u0439 \u0442\u0443\u0442\u043E\u0440\u0438\u0430\u043B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 37c3ee69e67c380428897ec1ab753838, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 37c3ee69e67c380428897ec1ab753838, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -196,20 +196,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &2295173769536330006
+--- !u!114 &6555431359478124333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4502504369033706847}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce01a9aac12340298121cfe114121ef1, type: 3}
+  m_Script: {fileID: 11500000, guid: c65cb3c2fe824dd983f7dbff3f6e6f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 3036204929080553938}
-  _speed: 2
+  _from: 0
+  _to: 1
+  _speed: 1
   _modifyCurve:
     serializedVersion: 2
     m_Curve:
@@ -225,8 +226,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -234,37 +235,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &5233479744422050132
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 601386070069414713}
-  m_Layer: 0
-  m_Name: AnimalFollower
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &601386070069414713
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5233479744422050132}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2802226902126316852}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _canvasGroup: {fileID: 3036204929080553938}
 --- !u!1 &5620393384535410121
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +266,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 601386070069414713}
   - {fileID: 5822002433234555347}
   - {fileID: 5447924172773018695}
   m_Father: {fileID: 5319161966910484852}
@@ -348,7 +318,7 @@ MonoBehaviour:
   _tutorialTextSequence: {fileID: 11400000, guid: 054f830b81f68c64daed7de415cfc5f5, type: 2}
   _arrow: {fileID: 194688275876741893}
   _textSetter: {fileID: 241569520641417643}
-  _textFadeOutPanel: {fileID: 2295173769536330006}
+  _textFadeOutPanel: {fileID: 6555431359478124333}
   _levelGoalView: {fileID: 0}
 --- !u!1 &6059995594315202168
 GameObject:

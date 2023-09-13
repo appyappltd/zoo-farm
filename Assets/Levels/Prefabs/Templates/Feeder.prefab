@@ -973,6 +973,7 @@ GameObject:
   - component: {fileID: 939106315740059834}
   - component: {fileID: 6352886986957808832}
   - component: {fileID: 3445139197766209889}
+  - component: {fileID: 8709827440806896095}
   m_Layer: 0
   m_Name: Feeder
   m_TagString: Untagged
@@ -1051,6 +1052,22 @@ MonoBehaviour:
   _trigger: {fileID: 11400000, guid: d136b64d585bbf04bba90184a40c1304, type: 2}
   _IsTriggerOnEnable: 1
   _IsTriggerOnDisable: 0
+--- !u!114 &8709827440806896095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716222801967785466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 3.5, y: 1, z: 3.5}
+  m_Center: {x: 0, y: 0.45, z: 0}
+  m_Area: 3
+  m_AffectedAgents: ffffffff
 --- !u!1 &5484136263461233970
 GameObject:
   m_ObjectHideFlags: 0

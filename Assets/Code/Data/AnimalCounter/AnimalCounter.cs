@@ -5,7 +5,6 @@ using Logic.Animals.AnimalsBehaviour;
 using Services;
 using Services.Animals;
 using Tools.Global;
-using Unity.VisualScripting;
 
 namespace Data.AnimalCounter
 {
@@ -22,6 +21,8 @@ namespace Data.AnimalCounter
         {
             _globalSettings = AllServices.Container.Single<IGlobalSettings>();
         }
+
+        public int TotalBreedingReadyPairsCount => GetTotalReadyPairsCount();
 
         public void Register(IAnimal animal)
         {
@@ -95,6 +96,16 @@ namespace Data.AnimalCounter
             
             _countDatas.Clear();
             _satietyObservers.Clear();
+        }
+
+        private int GetTotalReadyPairsCount()
+        {
+            int resultCount = 0;
+            
+            foreach (var countData in _countDatas)
+                resultCount += countData.Value.ReleaseReady;
+
+            return resultCount / AnimalPair.PairCount;
         }
 
         private void AddReleaseReady(AnimalType animalType)

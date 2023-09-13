@@ -256,7 +256,7 @@ MonoBehaviour:
   _maxWanderDistance: 4
   _breedingPositionOffset: 0.65
   _idleDelayRange: {x: 2, y: 5}
-  _placeOffset: 0.12
+  _placeOffset: 0.15
 --- !u!114 &1117839774714342269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,7 +353,7 @@ Transform:
   m_GameObject: {fileID: 8643315356767832591}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6104121, y: 0.00000047683716, z: -4.610155}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -371,12 +371,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 8643315356767832591}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 0.3
   m_Speed: 1
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 0
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 0.05
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -399,7 +399,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
