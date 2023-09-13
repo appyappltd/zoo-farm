@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1168072208225086624, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1168072208225086624, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingOrder
@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2721131473033528982, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2721131473033528982, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingOrder
@@ -201,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3342697085701880409, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3342697085701880409, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingOrder
@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3831633965497023838, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3831633965497023838, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingOrder
@@ -233,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4321354528490082950, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4321354528490082950, guid: 13d886b5e71903d48bc746abb1032985, type: 3}
       propertyPath: m_SortingOrder
@@ -349,11 +349,11 @@ MonoBehaviour:
   _sine: {fileID: 6017365764647493401}
   _isSupportLoopedInteraction: 0
   _axleInfluence: 0
-  _defaultSize: 1
-  _maxSize: 1.15
-  _decreaseTime: 0.25
-  _isCustomIncreaseTime: 0
-  _increaseTime: 0.25
+  _defaultSize: 0
+  _maxSize: 1
+  _decreaseTime: 0.1
+  _isCustomIncreaseTime: 1
+  _increaseTime: 0.1
 --- !u!4 &6017365764647493401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5979228235420368970, guid: 13d886b5e71903d48bc746abb1032985, type: 3}

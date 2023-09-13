@@ -4507,6 +4507,54 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 3036204929080553938, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_margin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 37c3ee69e67c380428897ec1ab753838, type: 2}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_enableKerning
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 37c3ee69e67c380428897ec1ab753838, type: 2}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: checkPaddingRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_enableExtraPadding
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_overrideHtmlColors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539937626717491165, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
+      propertyPath: m_IsTextObjectScaleStatic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4743087353075430414, guid: ffc7364b94cd82a499477b0b5e19c46b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.86600006
