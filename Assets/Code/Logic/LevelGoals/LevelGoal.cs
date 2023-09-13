@@ -35,9 +35,18 @@ namespace Logic.LevelGoals
             _coinSpawner = coinSpawner;
             _isDeactivateOnRelease = isDeactivateOnRelease;
             
+            
             UpdateProgress();
-            _animalsService.Registered += OnRegistered;
             _animalInteraction.Interacted += OnAnimalPassGates;
+            _animalsService.AnimalCounter.Updated += OnAnimalCountUpdated;
+        }
+
+        private void OnAnimalCountUpdated(AnimalType type, AnimalCountData counts)
+        {
+            if (counts.ReleaseReady <= 0)
+                _releaseInteractionsGrid.DeactivateZone(type);
+            else
+                _releaseInteractionsGrid.ActivateZone(type);
         }
 
         private void UpdateProgress()
@@ -51,8 +60,8 @@ namespace Logic.LevelGoals
             _releaseInteractionsGrid.Dispose();
             
             _goalProgress.Compleated -= OnGoalCompleated;
-            _animalsService.Registered -= OnRegistered;
             _animalInteraction.Interacted -= OnAnimalPassGates;
+            _animalsService.AnimalCounter.Updated -= OnAnimalCountUpdated;
         }
 
         public SingleGoalData GetCurrentGoal() =>

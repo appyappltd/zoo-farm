@@ -10,6 +10,7 @@ using NTC.Global.System;
 using Tools.Extension;
 using UnityEngine;
 using UnityEngine.Pool;
+using Debug = UnityEngine.Debug;
 
 namespace Logic.TransformGrid
 {
@@ -46,6 +47,14 @@ namespace Logic.TransformGrid
 
         public void AddCell(Transform cellTransform)
         {
+            if (_cells.Contains(cellTransform))
+            {
+#if DEBUG
+                Debug.LogWarning($"This cell {cellTransform} is already contained in the grid");
+#endif
+                return;
+            }
+
             if (_cells.Count >= MaxSize)
                 throw new ArgumentOutOfRangeException(nameof(_cells.Count));
 
@@ -63,6 +72,14 @@ namespace Logic.TransformGrid
 
         public void RemoveCell(Transform cellTransform)
         {
+            if (_cells.Contains(cellTransform) == false)
+            {
+#if DEBUG
+                Debug.LogWarning($"This cell {cellTransform} is not contained in the grid");
+#endif
+                return;
+            }
+            
             if (_cells.Count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(_cells.Count));
             

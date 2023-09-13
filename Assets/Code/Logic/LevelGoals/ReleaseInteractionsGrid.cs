@@ -72,8 +72,6 @@ namespace Logic.LevelGoals
 
         private bool Validate(AnimalType withType, out HeroInteraction interaction, bool shouldBeActive)
         {
-            Debug.Log($"Validate animal type {withType}");
-            
             if (_interactions.TryGetValue(withType, out interaction))
                 return interaction.gameObject.activeInHierarchy == shouldBeActive;
 

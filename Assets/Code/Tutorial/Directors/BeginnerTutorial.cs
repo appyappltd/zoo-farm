@@ -206,6 +206,7 @@ namespace Tutorial.Directors
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.AnimalReleaserFocusToPlayerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTriggerAwaiter(_goalComplete));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.GoalCompleteToVolunteersSpawn, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 HideText();
@@ -214,20 +215,20 @@ namespace Tutorial.Directors
                 _medBedGridOperator.ShowNextBuildCell();
                 _medToolGridOperator.ShowNextBuildCell();
                 _arrow.Move(_medBedGridOperator.BuildCellPosition);
+                _cameraOperatorService.Focus(_volunteerTransform);
             }));
+            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.ThirdVolunteerFocusToPlayerFocus, GlobalUpdate.Instance));
+            TutorialModules.Add(new TutorialAction(_cameraOperatorService.FocusOnDefault));
             TutorialModules.Add(new TutorialTriggerAwaiter(_firstMedBadSpawned));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _arrow.Hide();
                 _volunteerSpawner.Spawn();
-                _cameraOperatorService.Focus(_volunteerTransform);
             }));
-            TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.ThirdVolunteerFocusToPlayerFocus, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>
             {
                 _cameraOperatorService.FocusOnDefault();
-                _arrow.Move(_animalReleaser.position);
-                
+
                 void OnHasBreedingPair(AnimalType type, AnimalCountData data)
                 {
                     if (data.ReleaseReady >= AnimalPair.PairCount)

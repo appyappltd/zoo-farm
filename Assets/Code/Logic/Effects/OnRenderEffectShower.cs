@@ -23,11 +23,13 @@ namespace Logic.Effects
                 .LoopWhile(() => enabled);
         }
 
-
         private void Start() =>
             _routine.Play();
 
-        private void OnDestroy() =>
+        private void OnDestroy()
+        {
+            Debug.Log("Happy effect kill");
             _routine.Kill();
+        }
     }
 }
