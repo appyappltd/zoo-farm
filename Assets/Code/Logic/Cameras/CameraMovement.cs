@@ -1,13 +1,15 @@
 using System;
+using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Logic.Cameras
 {
     public class CameraMovement : MonoCache
     {
-        [FormerlySerializedAs("smoothing")] [SerializeField] private float _smoothing;
+        [SerializeField] private float _smoothing;
+        [SerializeField] private float _maxSpeed;
+        [SerializeField] [Min(0f)] [MaxValue(1f)] private float _power = 0.5f;
 
         private Transform followTarget;
         private Transform parentTransform;
@@ -37,10 +39,11 @@ namespace Logic.Cameras
 
         private void MoveToPosition()
         {
-            parentTransform.position = Vector3.Lerp(
+            parentTransform.position =
+                Vector3.Lerp(
                 parentTransform.position,
                 toPosition,
-                _smoothing * Time.smoothDeltaTime);
+                _smoothing * Time.smoothDeltaTime / Mathf.Pow(Vector3.Distance(parentTransform.position, toPosition),  1f - _power));
         }
         
         private void FollowToTarget()
@@ -48,7 +51,7 @@ namespace Logic.Cameras
             parentTransform.position = Vector3.Lerp(
                 parentTransform.position,
                 followTarget.position,
-                _smoothing * Time.smoothDeltaTime);
+                _smoothing * Time.smoothDeltaTime / Mathf.Pow(Vector3.Distance(parentTransform.position, followTarget.position), 1f - _power));
         }
     }
 }

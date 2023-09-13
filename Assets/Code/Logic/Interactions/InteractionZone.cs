@@ -116,11 +116,9 @@ namespace Logic.Interactions
         protected override void OnTargetExited(T target)
         {
             if (_awaitingUnlock.Contains(target))
-            {
                 _awaitingUnlock.Remove(target);
-            }
-            
-            if (_cashedTarget.Equals(target))
+
+            if (target.Equals(_cashedTarget))
             {
                 _isLocked = false;
                 Canceled.Invoke();
