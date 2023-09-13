@@ -7009,6 +7009,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 421909449895893901, guid: 7d76a5bbdd54fba45bc22b9daae9700a, type: 3}
+      propertyPath: _foodIdFilter
+      value: 255
+      objectReference: {fileID: 0}
     - target: {fileID: 818227905858976498, guid: 7d76a5bbdd54fba45bc22b9daae9700a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.91

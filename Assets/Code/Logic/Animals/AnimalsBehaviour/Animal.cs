@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour
 {
+    [SelectionBase]
     public class Animal : MonoBehaviour, IAnimal
     {
         [SerializeField] private NavMeshMover _mover;
