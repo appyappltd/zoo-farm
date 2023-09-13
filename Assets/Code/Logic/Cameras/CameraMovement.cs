@@ -8,7 +8,6 @@ namespace Logic.Cameras
     public class CameraMovement : MonoCache
     {
         [SerializeField] private float _smoothing;
-        [SerializeField] private float _maxSpeed;
         [SerializeField] [Min(0f)] [MaxValue(1f)] private float _power = 0.5f;
 
         private Transform followTarget;
