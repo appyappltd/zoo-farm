@@ -6866,6 +6866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 0
   _maxWeight: 4
+  _isMultiType: 0
 --- !u!114 &4233403076897180460
 MonoBehaviour:
   m_ObjectHideFlags: 0

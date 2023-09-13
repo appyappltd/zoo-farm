@@ -11,18 +11,20 @@ namespace Logic.Storages
     public class Inventory : IInventory, IImprovable
     {
         private const string ImproveWeightException = "Improve weight value must be grater then zero";
-        
-        private int _maxWeight;
-        private readonly List<IItem> _items = new List<IItem>();
 
+        private readonly List<IItem> _items = new List<IItem>();
+        private readonly bool _isMultiType;
+
+        private int _maxWeight;
         private int _weight;
         private IItem _cashedGetItem;
 
         private bool _isActive;
 
-        public Inventory(int maxWeight, List<IItem> items = null)
+        public Inventory(int maxWeight, bool isMultiType = false, List<IItem> items = null)
         {
             _maxWeight = maxWeight;
+            _isMultiType = isMultiType;
             _isActive = true;
 
             if (items is not null)
@@ -64,7 +66,24 @@ namespace Logic.Storages
             if (_isActive == false)
                 return false;
 
-            return item.Weight + _weight <= _maxWeight;
+            bool _isCan = item.Weight + _weight <= _maxWeight;
+
+            if (_isMultiType == false)
+                _isCan &= ValidateItemType(item);
+
+            return _isCan;
+        }
+
+        private bool ValidateItemType(IItem item)
+        {
+            ItemId storeType = GetStoreItemId();
+
+            if (storeType.HasFlag(item.ItemId) == false)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public IItem Get()
@@ -129,6 +148,12 @@ namespace Logic.Storages
             }
 
             return false;
+        }
+
+        private ItemId GetStoreItemId()
+        {
+            var storeItem = _items.FirstOrDefault();
+            return storeItem is null ? ItemId.All : storeItem.ItemId;
         }
     }
 }

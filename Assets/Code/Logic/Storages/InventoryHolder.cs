@@ -10,6 +10,7 @@ namespace Logic.Storages
 #endif
         
         [SerializeField] private int _maxWeight;
+        [SerializeField] private bool _isMultiType;
 
         private IInventory _inventory;
         
@@ -20,7 +21,7 @@ namespace Logic.Storages
 
         public void Construct()
         {
-            _inventory = new Inventory(_maxWeight);
+            _inventory = new Inventory(_maxWeight, _isMultiType);
             
 #if UNITY_EDITOR
             _inventory.Added += item => _weight += item.Weight;
@@ -30,7 +31,7 @@ namespace Logic.Storages
         
         public void Construct(int maxWeight)
         {
-            _inventory = new Inventory(maxWeight);
+            _inventory = new Inventory(maxWeight, _isMultiType);
             
 #if UNITY_EDITOR
             _inventory.Added += item => _weight += item.Weight;
