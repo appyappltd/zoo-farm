@@ -71,6 +71,7 @@ namespace Logic.Breeding
             _interactionZone.Canceled -= OnCancelZone;
             _interactionZone.Interacted -= OnInteractedZone;
             _disposable.Dispose();
+            _currencySpawner.Dispose();
         }
 
         private void Construct(IAnimalBreedService breedService, IStaticDataService staticData,
