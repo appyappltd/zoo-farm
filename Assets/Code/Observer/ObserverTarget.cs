@@ -22,7 +22,7 @@ namespace Observer
         protected override void OnDisabled() =>
             Observer.Entered -= OnTriggerObserverEntered;
 
-        protected abstract void OnTargetEntered(TTarget _);
+        protected abstract void OnTargetEntered(TTarget target);
 
         protected virtual void GetObserver() =>
             Observer ??= GetComponent<TObserver>();

@@ -6,14 +6,10 @@ namespace Observables
     {
         private readonly Action _unsubscribe;
 
-        public EventDisposer(Action unsubscribe)
-        {
+        public EventDisposer(Action unsubscribe) =>
             _unsubscribe = unsubscribe;
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             _unsubscribe.Invoke();
-        }
     }
 }

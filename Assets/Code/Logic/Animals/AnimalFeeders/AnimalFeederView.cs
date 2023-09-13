@@ -1,7 +1,10 @@
+using System;
 using System.Diagnostics;
 using Logic.Foods.FoodSettings;
+using Logic.Interactions;
 using Logic.Storages;
 using NaughtyAttributes;
+using Observables;
 using Services;
 using Services.StaticData;
 using Ui;
@@ -11,6 +14,8 @@ namespace Logic.Animals.AnimalFeeders
 {
     public class AnimalFeederView : MonoBehaviour
     {
+        private readonly CompositeDisposable _disposable = new CompositeDisposable();
+        
         [Header("References")]
         [SerializeField] private Storage _storage;
         [SerializeField] private InventoryHolder _inventoryHolder;
@@ -22,7 +27,6 @@ namespace Logic.Animals.AnimalFeeders
         [SerializeField] private int _maxFoodPerBowl;
 
         private IStaticDataService _staticData;
-        
         private AnimalFeeder _animalFeeder;
 
         public AnimalFeeder Feeder => _animalFeeder;
@@ -32,6 +36,9 @@ namespace Logic.Animals.AnimalFeeders
             Construct(AllServices.Container.Single<IStaticDataService>());
             Init();
         }
+
+        private void OnDestroy() =>
+            _disposable.Dispose();
 
         private void Construct(IStaticDataService staticData) =>
             _staticData = staticData;
@@ -54,6 +61,17 @@ namespace Logic.Animals.AnimalFeeders
 
                 BarIconView barIcon = bowl.GetComponentInChildren<BarIconView>();
                 barIcon.Construct(bowl.ProgressBarView, _staticData.IconByFoodType(_foodId));
+                
+                AnimalInteraction interactionZone = bowl.GetComponentInChildren<AnimalInteraction>();
+
+                void OnFull() => interactionZone.Deactivate();
+                void OnEmpty() => interactionZone.Activate();
+                
+                bowl.ProgressBarView.Full += OnFull;
+                bowl.ProgressBarView.Empty += OnEmpty;
+                
+                _disposable.Add(new EventDisposer(() => bowl.ProgressBarView.Full -= OnFull));
+                _disposable.Add(new EventDisposer(() => bowl.ProgressBarView.Empty -= OnEmpty));
             }
         }
 

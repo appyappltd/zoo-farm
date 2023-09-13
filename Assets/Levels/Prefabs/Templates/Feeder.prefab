@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 2145086950951535219}
   - component: {fileID: 3322563570554547623}
   - component: {fileID: 7518029786020747192}
+  - component: {fileID: 8371634580991778334}
   m_Layer: 0
   m_Name: AnimalInteraction
   m_TagString: Untagged
@@ -178,9 +179,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 1.5
   _isLooped: 0
-  _isValidate: 0
+  _isValidate: 1
   _validationMode: 0
-  _interactionValidators: []
+  _interactionValidators:
+  - _underlyingValue: {fileID: 8371634580991778334}
   _timerOperator: {fileID: 3690013287213970323}
 --- !u!114 &3690013287213970323
 MonoBehaviour:
@@ -254,6 +256,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &8371634580991778334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533198828395172790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c701c1d572854a36999a3d5f3d98bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1738862909010854770
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +605,7 @@ GameObject:
   - component: {fileID: 5260219861623577308}
   - component: {fileID: 1569628813705798340}
   - component: {fileID: 1791397857076525352}
+  - component: {fileID: 2986051398545813925}
   m_Layer: 0
   m_Name: AnimalInteraction
   m_TagString: Untagged
@@ -627,9 +642,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 1.5
   _isLooped: 0
-  _isValidate: 0
+  _isValidate: 1
   _validationMode: 0
-  _interactionValidators: []
+  _interactionValidators:
+  - _underlyingValue: {fileID: 2986051398545813925}
   _timerOperator: {fileID: 2909146273050019489}
 --- !u!114 &2909146273050019489
 MonoBehaviour:
@@ -703,6 +719,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &2986051398545813925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2817413392741647600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c701c1d572854a36999a3d5f3d98bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3040234090593182133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,6 +1065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 0
   _maxWeight: 16
+  _isMultiType: 0
 --- !u!114 &3445139197766209889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1082,6 +1111,7 @@ GameObject:
   - component: {fileID: 4967844923461678858}
   - component: {fileID: 7788490629398357262}
   - component: {fileID: 7010548662617818749}
+  - component: {fileID: 1935556503422006143}
   m_Layer: 0
   m_Name: AnimalInteraction
   m_TagString: Untagged
@@ -1118,9 +1148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 1.5
   _isLooped: 0
-  _isValidate: 0
+  _isValidate: 1
   _validationMode: 0
-  _interactionValidators: []
+  _interactionValidators:
+  - _underlyingValue: {fileID: 1935556503422006143}
   _timerOperator: {fileID: 3770964749984010237}
 --- !u!114 &3770964749984010237
 MonoBehaviour:
@@ -1194,6 +1225,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1935556503422006143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5484136263461233970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c701c1d572854a36999a3d5f3d98bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5797640531445333124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,6 +1509,7 @@ GameObject:
   - component: {fileID: 7150969802873460269}
   - component: {fileID: 8767771728910130884}
   - component: {fileID: 6131029365179823751}
+  - component: {fileID: 8168980379432410037}
   m_Layer: 0
   m_Name: AnimalInteraction
   m_TagString: Untagged
@@ -1502,9 +1546,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDelay: 1.5
   _isLooped: 0
-  _isValidate: 0
+  _isValidate: 1
   _validationMode: 0
-  _interactionValidators: []
+  _interactionValidators:
+  - _underlyingValue: {fileID: 8168980379432410037}
   _timerOperator: {fileID: 4730770701596163174}
 --- !u!114 &4730770701596163174
 MonoBehaviour:
@@ -1578,6 +1623,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &8168980379432410037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426482449276393940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c701c1d572854a36999a3d5f3d98bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8439776520105124992
 GameObject:
   m_ObjectHideFlags: 0

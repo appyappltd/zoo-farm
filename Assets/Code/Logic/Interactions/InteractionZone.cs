@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AYellowpaper;
 using DelayRoutines;
 using Logic.Interactions.Validators;
@@ -13,32 +14,33 @@ namespace Logic.Interactions
     public class InteractionZone<T> : ObserverTargetExit<T, TriggerObserverExit>, IInteractionZone
     {
         private readonly HashSet<Action> _interactionSubs = new HashSet<Action>();
+        private readonly List<T> _awaitingUnlock = new List<T>();
 
+        [SerializeField] private TimerOperator _timerOperator;
         [SerializeField] private float _interactionDelay;
         [SerializeField] private bool _isLooped;
         [SerializeField] private bool _isValidate;
-        [SerializeField] [ShowIf(nameof(_isValidate))] private ValidationMode _validationMode;
+
+        [SerializeField] [ShowIf(nameof(_isValidate))]
+        private ValidationMode _validationMode;
 
         [SerializeField] [ShowIf("_isValidate")]
         private InterfaceReference<IInteractionValidator, MonoBehaviour>[] _interactionValidators;
 
-        private bool _isLock;
+        private bool _isLocked;
         private RoutineSequence _waitToUnlock;
+        private T _cashedTarget;
 
 #if UNITY_EDITOR
         private float _prevDelayValue;
 #endif
-
-        [SerializeField] private TimerOperator _timerOperator;
-
-        private T _cashed;
 
         public event Action<T> Interacted = _ => { };
 
         event Action IInteractionZone.Interacted
         {
             add => _interactionSubs.Add(value);
-            remove =>  _interactionSubs.Remove(value);
+            remove => _interactionSubs.Remove(value);
         }
 
         public event Action Entered = () => { };
@@ -72,30 +74,28 @@ namespace Logic.Interactions
         public void Activate() =>
             enabled = true;
 
-        public void Deactivate() =>
+        public void Deactivate()
+        {
+            Canceled.Invoke();
             enabled = false;
+        }
 
         protected override void OnDisabled()
         {
             base.OnDisabled();
-            _isLock = false;
+            _isLocked = false;
             StopDelayedInteraction();
         }
 
-        protected override void OnTargetEntered(T hero)
+        protected override void OnTargetEntered(T target)
         {
-            if (_isLock)
+            if (_isLocked)
             {
-                _waitToUnlock = new RoutineSequence();
-                _waitToUnlock
-                    .WaitUntil(() => _isLock == false)
-                    .Then(() => OnTargetEntered(hero))
-                    .SetAutoKill(true)
-                    .Play();
+                _awaitingUnlock.Add(target);
                 return;
             }
 
-            TryValidateEnter(hero);
+            TryValidateEnter(target);
         }
 
         private void TryValidateEnter(T hero)
@@ -113,20 +113,31 @@ namespace Logic.Interactions
             }
         }
 
-        protected override void OnTargetExited(T _)
+        protected override void OnTargetExited(T target)
         {
-            _isLock = false;
-            Canceled.Invoke();
-            StopDelayedInteraction();
+            if (_awaitingUnlock.Contains(target))
+            {
+                _awaitingUnlock.Remove(target);
+            }
+            
+            if (_cashedTarget.Equals(target))
+            {
+                _isLocked = false;
+                Canceled.Invoke();
+                StopDelayedInteraction();
+                
+                if (_awaitingUnlock.Any())
+                    TryValidateEnter(_awaitingUnlock.First());
+            }
         }
 
         private void OnDelayPassed()
         {
             if (_isLooped)
             {
-                Interacted.Invoke(_cashed);
-                
-                if (Validate(_cashed))
+                Interacted.Invoke(_cashedTarget);
+
+                if (Validate(_cashedTarget))
                 {
                     InvokeDelayedInteraction();
                 }
@@ -137,7 +148,7 @@ namespace Logic.Interactions
             }
             else
             {
-                Interacted.Invoke(_cashed);
+                Interacted.Invoke(_cashedTarget);
             }
         }
 
@@ -162,8 +173,8 @@ namespace Logic.Interactions
 
         private void InvokeEntered(T hero)
         {
-            _isLock = true;
-            _cashed = hero;
+            _isLocked = true;
+            _cashedTarget = hero;
             Entered.Invoke();
         }
 
