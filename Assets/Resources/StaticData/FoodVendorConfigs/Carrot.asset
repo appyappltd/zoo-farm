@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Carrot
   m_EditorClassIdentifier: 
   _foodId: 1
-  _produceDurationRange: {x: 0, y: 0.39546895}
+  _produceDurationRange: {x: 2, y: 3}
   _maxStockQuantity: 1

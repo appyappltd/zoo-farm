@@ -27,6 +27,8 @@ namespace Ui.Elements
 
         private void Awake()
         {
+            enabled = false;
+            
             _towardMover = new TowardMover<TValue>(_from, _to, GetLerpFunction(), _modifyCurve);
 
             _commandAwaiter = new RoutineSequence()

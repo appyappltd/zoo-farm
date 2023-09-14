@@ -108,6 +108,7 @@ namespace Logic.Breeding
                     if (human.Inventory.TryGet(itemFilter, out IItem item))
                     {
                         _isInProgress = true;
+                        _interactionZone.Deactivate();
                         _breedService.BeginBreeding(pair, _breedingPlace, OnBreedingBegins, OnBreedingComplete);
                         item.Mover.Move(_heartPosition, _heartPosition, true);
                     }
@@ -134,9 +135,6 @@ namespace Logic.Breeding
 
             if (_cashedHuman is null)
                 return;
-
-            if (_isInProgress)
-                _interactionZone.Deactivate();
 
             if (_cashedHuman.Inventory.TryGet(itemFilter, out IItem item))
                 _inventoryHolder.Inventory.TryAdd(item);

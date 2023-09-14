@@ -31,11 +31,17 @@ namespace Logic
             Reset();
         }
 
-        public void Pause() =>
-            enabled = false;
+        public void Pause()
+        {
+            if (enabled)
+                enabled = false;
+        }
 
-        public void Play() =>
-            enabled = true;
+        public void Play()
+        {
+            if (enabled == false)
+                enabled = true;
+        }
 
         public void Restart()
         {
