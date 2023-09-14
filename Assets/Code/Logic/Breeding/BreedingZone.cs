@@ -147,7 +147,9 @@ namespace Logic.Breeding
             foreach (AnimalType animalType in _staticData.GoalConfigForLevel(_persistentProgress.Progress.LevelData.LevelKey).GetAnimalsToRelease())
             {
                  ChoseInteractionProvider provider = _gameFactory.CreateChoseInteraction(Vector3.zero, Quaternion.identity, animalType);
-                 provider.transform.SetParent(transform);
+                 Transform transform = provider.transform;
+                 transform.SetParent(transform);
+                 transform.localScale = Vector3.zero;
                  provider.gameObject.Disable();
                  _choseInteractions.Add(animalType, provider);
                  
