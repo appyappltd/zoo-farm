@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZebraItem
   m_EditorClassIdentifier: 
   <ItemId>k__BackingField: 2
-  <Weight>k__BackingField: 3
+  <Weight>k__BackingField: 2
   AnimalType: 1
   EdibleFood: 1
   BeginStats:

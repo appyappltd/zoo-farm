@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Syringe
   m_EditorClassIdentifier: 
   <ItemId>k__BackingField: 4
-  <Weight>k__BackingField: 3
+  <Weight>k__BackingField: 2
   MedicineToolId: 3

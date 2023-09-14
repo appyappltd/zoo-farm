@@ -80,7 +80,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 306403883730262677, guid: c53993c81303ede44aec28537e83c2e4, type: 3}
       propertyPath: m_Name
-      value: MedStandSyringe Variant
+      value: MedStandSyringe
       objectReference: {fileID: 0}
     - target: {fileID: 4913715905252603838, guid: c53993c81303ede44aec28537e83c2e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -121,6 +121,26 @@ PrefabInstance:
     - target: {fileID: 4913715905252603838, guid: c53993c81303ede44aec28537e83c2e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337862633467492500, guid: c53993c81303ede44aec28537e83c2e4, type: 3}
+      propertyPath: _to.y
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337862633467492500, guid: c53993c81303ede44aec28537e83c2e4, type: 3}
+      propertyPath: _to.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337862633467492500, guid: c53993c81303ede44aec28537e83c2e4, type: 3}
+      propertyPath: _from.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337862633467492500, guid: c53993c81303ede44aec28537e83c2e4, type: 3}
+      propertyPath: _from.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818856503483012371, guid: c53993c81303ede44aec28537e83c2e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

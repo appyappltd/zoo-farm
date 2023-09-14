@@ -14,7 +14,7 @@ NavMeshProjectSettings:
   - name: Feeder
     cost: 100
   - name: Danger
-    cost: 1000
+    cost: 1
   - name: 
     cost: 1
   - name: 
