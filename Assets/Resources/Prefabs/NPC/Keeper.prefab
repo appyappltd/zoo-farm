@@ -1627,10 +1627,13 @@ MonoBehaviour:
   - {fileID: 9048133879567757923}
   - {fileID: 5556209049492336628}
   _isSortable: 1
-  _isRemoteInit: 1
   _isModifyRotation: 1
+  _isRemoteInit: 1
   _adderMono: {fileID: 0}
   _removerMono: {fileID: 0}
+  _isSupportAnimated: 0
+  _translator:
+    _underlyingValue: {fileID: 0}
 --- !u!136 &9072987988198101141
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1683,6 +1686,7 @@ MonoBehaviour:
   _rotateSpeed: 5
   _isAlignAtEnd: 0
   _aligner: {fileID: 0}
+  _areaMask: 29
 --- !u!195 &6147026489688025821
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1703,7 +1707,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 29
   m_ObstacleAvoidanceType: 1
 --- !u!114 &3680925168905657938
 MonoBehaviour:
@@ -1745,6 +1749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 0
   _maxWeight: 4
+  _isMultiType: 0
 --- !u!114 &6417601466712274811
 MonoBehaviour:
   m_ObjectHideFlags: 0

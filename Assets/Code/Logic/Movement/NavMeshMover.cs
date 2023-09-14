@@ -12,6 +12,7 @@ namespace Logic.Movement
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private bool _isAlignAtEnd;
         [SerializeField] [ShowIf("_isAlignAtEnd")] private Aligner _aligner;
+        [SerializeField] private int _areaMask;
 
         private Quaternion _finalRotation;
 
@@ -20,8 +21,10 @@ namespace Logic.Movement
         public float StoppingDistance => _agent.stoppingDistance;
         public float NormalizedSpeed => _agent.speed / _maxSpeed;
 
-        private void Start() =>
+        private void Awake()
+        {
             _agent.speed = _maxSpeed;
+        }
 
         protected override void Run()
         {
@@ -58,9 +61,8 @@ namespace Logic.Movement
             _agent.speed = normalizedSpeed * _maxSpeed;
         }
 
-        public void SetLocation(Location location)
+        public bool SetLocation(Location location)
         {
-            SetDestination(location.Position);
             _finalRotation = location.Rotation;
 
 #if DEBUG
@@ -68,15 +70,34 @@ namespace Logic.Movement
             {
                 Debug.LogWarning("You set the final rotation, but its application is not enabled");
             }
+
 #endif
+            return SetDestination(location.Position);
         }
 
-        public void SetDestination(Vector3 destination)
+        public bool SetDestination(Vector3 destination, bool isIgnoreLayerMask = false)
         {
             NavMeshPath path = new NavMeshPath();
 
             if (_agent.CalculatePath(destination, path))
             {
+                if (isIgnoreLayerMask == false &&
+                    NavMesh.SamplePosition(destination, out NavMeshHit endNavHit, 2f, NavMesh.AllAreas))
+                {
+                    int pathEndZoneIndex = endNavHit.mask;
+#if DEBUG
+                    Debug.Log("Индекс зоны назначения: " + pathEndZoneIndex);
+                    Debug.DrawRay(destination, Vector3.up * 50, Color.red, 10f);
+#endif
+                    if ((pathEndZoneIndex & _areaMask) == 0)
+                    {
+#if DEBUG
+                        Debug.LogWarning("Destination is not on valid area layer");
+#endif
+                        return false;
+                    }
+                }
+
 #if DEBUG
                 for (int index = 1; index < path.corners.Length; index++)
                 {
@@ -89,13 +110,16 @@ namespace Logic.Movement
                 enabled = true;
                 _agent.isStopped = false;
                 _agent.SetPath(path);
-                return;
+                return true;
             }
+
 
             // SetDestination(destination);
 #if DEBUG
             Debug.LogWarning("Path cannot be found");
 #endif
+
+            return false;
         }
 
         private void Rotate()

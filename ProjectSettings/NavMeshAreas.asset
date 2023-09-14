@@ -12,9 +12,9 @@ NavMeshProjectSettings:
   - name: Jump
     cost: 2
   - name: Feeder
-    cost: 99999
-  - name: 
-    cost: 1
+    cost: 100
+  - name: Danger
+    cost: 1000
   - name: 
     cost: 1
   - name: 

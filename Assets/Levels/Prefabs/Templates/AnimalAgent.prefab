@@ -382,7 +382,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.6
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 29
   m_ObstacleAvoidanceType: 1
 --- !u!65 &883239242940706050
 BoxCollider:
@@ -435,6 +435,7 @@ MonoBehaviour:
   _rotateSpeed: 5
   _isAlignAtEnd: 1
   _aligner: {fileID: 2475102383029443612}
+  _areaMask: 13
 --- !u!114 &4427930827428211018
 MonoBehaviour:
   m_ObjectHideFlags: 0

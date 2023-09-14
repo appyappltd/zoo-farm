@@ -10,8 +10,11 @@ namespace Logic.Animals.AnimalsStateMachine
     {
         private readonly Aligner _aligner;
 
-        public ForceMove(IPrimeAnimator animator, NavMeshMover mover, Aligner aligner) : base(animator, mover, null) =>
+        public ForceMove(IPrimeAnimator animator, NavMeshMover mover, Aligner aligner) : base(animator, mover, null)
+        {
             _aligner = aligner;
+            IsIgnoreAreaMask = true;
+        }
 
         protected override void OnEnter()
         {

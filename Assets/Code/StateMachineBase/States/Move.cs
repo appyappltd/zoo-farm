@@ -9,6 +9,8 @@ namespace StateMachineBase.States
         private readonly IPrimeAnimator _animator;
         private readonly NavMeshMover _mover;
 
+        protected bool IsIgnoreAreaMask;
+
         public Move(IPrimeAnimator animator, NavMeshMover mover) : base(animator)
         {
             _animator = animator;
@@ -20,7 +22,7 @@ namespace StateMachineBase.States
         protected override void OnEnter()
         {
             _animator.SetMove();
-            UpdateDestination();
+            UpdateDestination(IsIgnoreAreaMask);
         }
 
         protected override void OnExit()
@@ -31,10 +33,10 @@ namespace StateMachineBase.States
         protected override void OnUpdate() =>
             Animator.SetSpeed(_mover.NormalizedSpeed);
 
-        protected void UpdateDestination()
+        protected void UpdateDestination(bool isIgnoreAreaMask = false)
         {
             Vector3 movePosition = GetMovePosition();
-            _mover.SetDestination(movePosition);
+            _mover.SetDestination(movePosition, isIgnoreAreaMask);
         }
     }
 }
