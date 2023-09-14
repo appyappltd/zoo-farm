@@ -183,7 +183,7 @@ namespace Tutorial.Directors
                 _cameraOperatorService.Focus(_gardenBedGridOperator.BuildCellPosition);
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.PlantFocusToPlayerFocus, GlobalUpdate.Instance));
-            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
+            TutorialModules.Add(new TutorialAction(_cameraOperatorService.FocusOnDefault));
             TutorialModules.Add(new TutorialTriggerAwaiter(_foodVendorSpawned));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.PlantBuiltToPlantBuilt, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => _arrow.Move(_gardenBedGridOperator.BuildCellPosition)));
@@ -204,7 +204,9 @@ namespace Tutorial.Directors
                 _arrow.Move(_animalReleaser.position);
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.AnimalReleaserFocusToPlayerFocus, GlobalUpdate.Instance));
-            TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
+            TutorialModules.Add(new TutorialAction(_cameraOperatorService.FocusOnDefault));
+            TutorialModules.Add(new TutorialTriggerAwaiter(_animalReleased));
+            TutorialModules.Add(new TutorialAction(_arrow.Hide));
             TutorialModules.Add(new TutorialTriggerAwaiter(_goalComplete));
             TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.GoalCompleteToVolunteersSpawn, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() =>

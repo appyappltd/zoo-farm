@@ -15,7 +15,7 @@ MonoBehaviour:
   MedicalToolSpawnedToVolunteerFocus: 1
   VolunteerFocusToArrowMoveToInteractionZone: 4
   ArrowMoveToInteractionZoneToPlayerFocus: 1
-  MedicalBedFocusToPlayerFocus: 3
+  MedicalBedFocusToPlayerFocus: 2
   HouseFocusToPlayerFocus: 3
   HouseBuiltToAnimalFocus: 0.2
   AnimalFocusToPlantFocus: 2
