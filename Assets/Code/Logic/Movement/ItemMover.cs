@@ -10,6 +10,7 @@ namespace Logic.Movement
     {
         [SerializeField] [Min(.0f)] private float _speed = 5.0f;
         [SerializeField] [Min(.0f)] private float _errorOffset = 0.1f;
+        [SerializeField] [MinValue(0f)] [MaxValue(1f)] private float _power = 0.5f;
         [SerializeField] private Vector3 _rotationOffset;
         [SerializeField] private bool _isCanChangeScale;
         [SerializeField] [ShowIf(nameof(_isCanChangeScale))] private AnimationCurve _scaleCurve;
@@ -32,7 +33,7 @@ namespace Logic.Movement
         private void Awake()
         {
             _scaleModifier = new DistanceBasedScaleModifier();
-            _moving = Translate;
+            _moving = LerpTranslate;
             enabled = false;
         }
 
@@ -80,6 +81,14 @@ namespace Logic.Movement
                 Time.deltaTime * _speed / distanceToTarget);
         }
 
+        private void LerpTranslate(float distance)
+        {
+            transform.position = Vector3.Lerp(
+                transform.position,
+                Target.position,
+                _speed * Time.smoothDeltaTime / Mathf.Pow(distance, 1f - _power));
+        }
+        
         private void Translate(float _)
         {
             Vector3 translateDirection = (Target.position - transform.position).normalized;
