@@ -93,7 +93,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1521786492241298, guid: dd5e035eb72563340be12d54b8396246, type: 3}
       propertyPath: _errorOffset
-      value: 0.01
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1521786492241298, guid: dd5e035eb72563340be12d54b8396246, type: 3}
       propertyPath: _rotationOffset.x

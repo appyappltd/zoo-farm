@@ -11,7 +11,8 @@ namespace Logic.Movement
     {
         private const float MinDistance = 0f;
         
-        [SerializeField] [Min(.0f)] private float _speed = 5.0f;
+        [SerializeField] [Min(.0f)] private float _moveSpeed = 5.0f;
+        [SerializeField] [Min(.0f)] private float _rotateSpeed = 5.0f;
         [SerializeField] [Min(.0f)] private float _errorOffset = 0.1f;
         [SerializeField] [MinValue(0f)] [MaxValue(1f)] private float _power = 0.5f;
         [SerializeField] private Vector3 _rotationOffset;
@@ -76,21 +77,16 @@ namespace Logic.Movement
         {
             float distance = GetDistanceToTarget();
 
-            if (_towardMover.TryUpdate(Time.deltaTime * _speed, out float lerped))
-            {
-                
-            }
-            
             _moving.Invoke(distance);
 
             if (IsFinished(distance))
                 FinishTranslation();
         }
 
-        private void TowardTranslate(float distance)
+        private void TowardTranslate(float _)
         {
-            _towardMover.TryUpdate(Time.deltaTime * _speed, out float lerped);
-            
+            _towardMover.TryUpdate(Time.deltaTime * _moveSpeed, out float lerped);
+
             transform.position = Vector3.Lerp(
                 transform.position,
                 Target.position,
@@ -100,7 +96,7 @@ namespace Logic.Movement
         private void Rotate(float distanceToTarget)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, GetFinalRotation(),
-                Time.deltaTime * _speed / distanceToTarget);
+                Time.deltaTime * _rotateSpeed / distanceToTarget);
         }
 
         private void LerpTranslate(float distance)
@@ -108,13 +104,13 @@ namespace Logic.Movement
             transform.position = Vector3.Lerp(
                 transform.position,
                 Target.position,
-                _speed * Time.deltaTime / Mathf.Pow( Mathf.Max(distance, MinDistance), 1f - _power));
+                _moveSpeed * Time.deltaTime / Mathf.Pow( Mathf.Max(distance, MinDistance), 1f - _power));
         }
         
         private void Translate(float distance)
         {
             Vector3 translateDirection = (Target.position - transform.position).normalized;
-            Vector3 deltaTranslation = translateDirection * _speed * Time.smoothDeltaTime;
+            Vector3 deltaTranslation = translateDirection * _moveSpeed * Time.smoothDeltaTime;
             transform.Translate(deltaTranslation, Space.World);
         }
 
