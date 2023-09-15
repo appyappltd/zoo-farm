@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Data.SaveData;
 using Infrastructure.Factory;
 using Services.PersistentProgress;
@@ -27,29 +26,18 @@ namespace Services.SaveLoad
         public void Register<TProgress>(IProgressReaderRegistrable reader) where TProgress : IProgressKey
         {
             if (_progressObservers.TryGetValue(typeof(TProgress), out IProgressObserver progressObserver))
-            {
                 progressObserver.Add((ISavedProgressReaderGeneric<TProgress>) reader);
-            }
             else
-            {
                 _progressObservers.Add(typeof(TProgress),
                     new ProgressObserver<TProgress>((ISavedProgressReaderGeneric<TProgress>) reader));
-            }
-            
+
             ((ISavedProgressReaderGeneric<TProgress>) reader).LoadProgress(_progressService.GetProgress<TProgress>());
         }
 
-        private void Update<TKey>(TKey key, ISavedProgressGeneric<TKey> updater) where TKey : IProgressKey
-        {
-            
-        }
-        
         public void SaveProgress()
         {
             foreach (var observer in _progressObservers)
-            {
                 observer.Value.UpdateProgress(_progressService);
-            }
 
             string globalDataLastLevel = GetCurrentLevelKey();
             _progressService.Progress.GlobalData.LastLevel = globalDataLastLevel;
@@ -88,10 +76,5 @@ namespace Services.SaveLoad
 
         private static string GetCurrentLevelKey() =>
             SceneManager.GetActiveScene().name;
-    }
-
-    public class ProgressObserver
-    {
-        
     }
 }
