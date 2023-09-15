@@ -35,14 +35,12 @@ namespace Logic.Coins
         private void OnEnter(Hero hero)
         {
             _wallet = hero.Wallet;
-            _itemMover.Ended += OnCollected;
-            _itemMover.Move(hero.transform);
+            _itemMover.Move(hero.transform, OnCollected, null, false, true);
         }
         
         private void OnCollected()
         {
             _wallet.TryAdd(_amount);
-            _itemMover.Ended -= OnCollected;
         }
 
     }

@@ -365,7 +365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -1363,7 +1363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -1854,7 +1854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -3434,7 +3434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -3805,7 +3805,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -4227,7 +4227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -4562,7 +4562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -5077,7 +5077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -5217,7 +5217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -8274,7 +8274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _errorOffset
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _isCanChangeScale
@@ -8298,27 +8298,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _scaleCurve.m_Curve.Array.data[0].inSlope
-      value: -2.4358978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _scaleCurve.m_Curve.Array.data[1].inSlope
-      value: -0.06783143
+      value: -2.5678616
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _scaleCurve.m_Curve.Array.data[0].outSlope
-      value: -2.4358978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _scaleCurve.m_Curve.Array.data[1].inWeight
-      value: 0.12140876
+      value: 0.05856538
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _scaleCurve.m_Curve.Array.data[1].outSlope
-      value: -0.06783143
+      value: -2.5678616
       objectReference: {fileID: 0}
     - target: {fileID: 1771061685056778676, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: _scaleCurve.m_Curve.Array.data[0].outWeight
-      value: 0.051436514
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6202977159412119918, guid: cbd3dde5f2704c24f9a6f938752ebbce, type: 3}
       propertyPath: m_Name

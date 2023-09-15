@@ -75,6 +75,11 @@ namespace Logic.Movement
         protected override void Run()
         {
             float distance = GetDistanceToTarget();
+
+            if (_towardMover.TryUpdate(Time.deltaTime * _speed, out float lerped))
+            {
+                
+            }
             
             _moving.Invoke(distance);
 
