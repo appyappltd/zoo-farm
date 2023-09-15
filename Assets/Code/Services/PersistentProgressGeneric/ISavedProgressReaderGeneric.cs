@@ -1,7 +1,7 @@
 namespace Services.PersistentProgressGeneric
 {
-    public interface ISavedProgressReaderGeneric<in TProgress>
+    public interface ISavedProgressReaderGeneric<TProgress>
     {
-        void LoadProgress(TProgress progress);
+        void LoadProgress(in TProgress progress);
     }
 }
