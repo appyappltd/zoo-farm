@@ -29,6 +29,7 @@ namespace Services.PersistentProgress
 
                 if (typeof(IProgressKey).IsAssignableFrom(field.FieldType))
                 {
+                    _progressKeys.Add(field.FieldType, (IProgressKey) field.GetValue(obj));
                     FindFields(field.GetValue(obj));
                 }
             }
@@ -36,5 +37,8 @@ namespace Services.PersistentProgress
         
         public TProgress GetProgress<TProgress>() where TProgress : IProgressKey =>
             _progressKeys[typeof(TProgress)] as TProgress;
+
+        public IProgressKey GetProgress(Type byType) =>
+            _progressKeys[byType];
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Data.SaveData;
 using Infrastructure.Factory;
 using Services.PersistentProgress;
@@ -15,38 +16,39 @@ namespace Services.SaveLoad
         private const string GlobalProgressKey = "GlobalProgress";
 
         private readonly IPersistentProgressService _progressService;
-        private readonly IGameFactory _gameFactory;
 
-        private readonly Dictionary<Type, ProgressObserver<IProgressKey>> _progressObservers = new();
+        private readonly Dictionary<Type, IProgressObserver> _progressObservers = new();
 
         public SaveLoadService(IPersistentProgressService progressService, IGameFactory gameFactory)
         {
             _progressService = progressService;
-            _gameFactory = gameFactory;
         }
 
-        public void Register<TProgress>(ISavedProgressReaderGeneric<TProgress> reader) where TProgress : IProgressKey
+        public void Register<TProgress>(IProgressReaderRegistrable reader) where TProgress : IProgressKey
         {
-            if (_progressObservers.TryGetValue(typeof(TProgress), out ProgressObserver<IProgressKey> progressObserver))
+            if (_progressObservers.TryGetValue(typeof(TProgress), out IProgressObserver progressObserver))
             {
-                ProgressObserver<TProgress> observer = progressObserver as ProgressObserver<TProgress>;
-                observer!.Add(reader);
+                progressObserver.Add((ISavedProgressReaderGeneric<TProgress>) reader);
             }
             else
             {
                 _progressObservers.Add(typeof(TProgress),
-                    new ProgressObserver<TProgress>(reader) as ProgressObserver<IProgressKey>);
+                    new ProgressObserver<TProgress>((ISavedProgressReaderGeneric<TProgress>) reader));
             }
+            
+            ((ISavedProgressReaderGeneric<TProgress>) reader).LoadProgress(_progressService.GetProgress<TProgress>());
         }
 
+        private void Update<TKey>(TKey key, ISavedProgressGeneric<TKey> updater) where TKey : IProgressKey
+        {
+            
+        }
+        
         public void SaveProgress()
         {
-            foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriters)
-                progressWriter.UpdateProgress(_progressService.Progress);
-
             foreach (var observer in _progressObservers)
             {
-
+                observer.Value.UpdateProgress(_progressService);
             }
 
             string globalDataLastLevel = GetCurrentLevelKey();
@@ -86,5 +88,10 @@ namespace Services.SaveLoad
 
         private static string GetCurrentLevelKey() =>
             SceneManager.GetActiveScene().name;
+    }
+
+    public class ProgressObserver
+    {
+        
     }
 }

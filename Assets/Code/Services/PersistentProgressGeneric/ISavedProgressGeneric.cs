@@ -1,7 +1,11 @@
 namespace Services.PersistentProgressGeneric
 {
-    public interface ISavedProgressGeneric<TProgress> : ISavedProgressReaderGeneric<TProgress> where TProgress : IProgressKey
+    public interface ISavedProgressGeneric<TProgress> : IProgressRegistrable, ISavedProgressReaderGeneric<TProgress> where TProgress : IProgressKey
     {
-        void UpdateProgress(ref TProgress progress);
+        void UpdateProgress(TProgress progress);
+    }
+    
+    public interface IProgressRegistrable
+    {
     }
 }

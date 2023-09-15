@@ -13,8 +13,10 @@ using Services.AnimalHouses;
 using Services.Animals;
 using Services.MedicalBeds;
 using Services.PersistentProgress;
+using Services.PersistentProgressGeneric;
 using Services.Pools;
 using Services.Randomizer;
+using Services.SaveLoad;
 using Services.StaticData;
 using Ui;
 using Ui.LevelGoalPanel;
@@ -36,6 +38,7 @@ namespace Infrastructure.Factory
         private readonly InteractionZoneBuilder _interactionZoneBuilder;
         private readonly AnimalGoalPanelBuilder _animalGoalPanelBuilder;
         private readonly IStaticDataService _staticDataService;
+        private ISaveLoadService _saveLoad;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -48,11 +51,11 @@ namespace Infrastructure.Factory
             IAnimalsService animalsService, IPoolService poolService, IMedicalBedsReporter medicalBedsReporter,
             IAnimalHouseService houseService)
         {
-            _staticDataService = staticDataService;
             _assets = assets;
             _poolService = poolService;
             _randomService = randomService;
             _progressService = progressService;
+            _staticDataService = staticDataService;
 
             FoodFactory = new FoodFactory(assets);
             HandItemFactory = new HandItemFactory(assets, staticDataService);
@@ -187,17 +190,13 @@ namespace Infrastructure.Factory
 
         #region RegisterProgress
 
-        private void Register(ISavedProgressReader progressReader)
+        private void Register(IProgressReaderRegistrable progressRegistrable)
         {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-
-            ProgressReaders.Add(progressReader);
         }
 
         private void RegisterProgressWatchers(GameObject gameObject)
         {
-            foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
+            foreach (IProgressReaderRegistrable progressReader in gameObject.GetComponentsInChildren<IProgressReaderRegistrable>())
                 Register(progressReader);
         }
 
