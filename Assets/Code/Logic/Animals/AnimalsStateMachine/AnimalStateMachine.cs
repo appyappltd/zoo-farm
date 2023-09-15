@@ -35,6 +35,9 @@ namespace Logic.Animals.AnimalsStateMachine
         [SerializeField] private float _peppinessReplanishSpeed;
         [SerializeField] private float _hungerDelay;
 
+        [Space][Header("Breeding Settings")]
+        [SerializeField] private float _breedingDuration;
+        
         [Space][Header("Move Settings")]
         [SerializeField] private float _maxWanderDistance;
         [SerializeField] private float _breedingPositionOffset;
@@ -103,7 +106,7 @@ namespace Logic.Animals.AnimalsStateMachine
             Transition reachTarget = new ReachDestinationTransition(_mover);
             Transition forceReachTarget = new ReachDestinationTransition(_mover);
             Transition reachedBreeding = new ReachDestinationTransition(_mover, _breedingPositionOffset);
-            Transition waitForBreedingProcess = new TimerTransition(2f);
+            Transition waitForBreedingProcess = new TimerTransition(_breedingDuration);
             
             State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, _hungerDelay, _feeder, _animal.Emotions);
             State rest = new Rest(_animator, _peppiness, _peppinessReplanishSpeed);
@@ -185,7 +188,7 @@ namespace Logic.Animals.AnimalsStateMachine
                 {
                     eat, new Dictionary<Transition, State>
                     {
-                        {fullSatiety, idle},
+                        {fullSatiety, wander},
                     }
                 },
                 {
