@@ -257,6 +257,8 @@ MonoBehaviour:
   _breedingPositionOffset: 0.65
   _idleDelayRange: {x: 2, y: 5}
   _placeOffset: 0.15
+  _breedingDuration: 2
+  _maxDurationMove: 15
 --- !u!114 &1117839774714342269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +329,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5853824301467310379}
   - component: {fileID: 4018047768978165459}
-  - component: {fileID: 883239242940706050}
   - component: {fileID: 1584153114449162156}
   - component: {fileID: 5921953604120698182}
   - component: {fileID: 4427930827428211018}
@@ -337,6 +338,7 @@ GameObject:
   - component: {fileID: 4633396415940825508}
   - component: {fileID: 5604806523560033372}
   - component: {fileID: 2475102383029443612}
+  - component: {fileID: 3901580358941252986}
   m_Layer: 8
   m_Name: AnimalAgent
   m_TagString: Untagged
@@ -382,29 +384,8 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.6
   m_BaseOffset: 0
-  m_WalkableMask: 29
+  m_WalkableMask: 56
   m_ObstacleAvoidanceType: 1
---- !u!65 &883239242940706050
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8643315356767832591}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6, y: 0.6, z: 0.6}
-  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!114 &1584153114449162156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +416,7 @@ MonoBehaviour:
   _rotateSpeed: 5
   _isAlignAtEnd: 1
   _aligner: {fileID: 2475102383029443612}
-  _areaMask: 13
+  _areaMask: 40
 --- !u!114 &4427930827428211018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,6 +572,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 5
+--- !u!135 &3901580358941252986
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8643315356767832591}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1001 &8294897801359430536
 PrefabInstance:
   m_ObjectHideFlags: 0

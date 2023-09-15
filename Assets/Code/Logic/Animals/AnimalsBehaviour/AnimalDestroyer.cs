@@ -1,19 +1,12 @@
-﻿using Logic.Interactions;
-using UnityEngine;
+﻿using Observer;
 
 namespace Logic.Animals.AnimalsBehaviour
 {
-    public class AnimalDestroyer : MonoBehaviour
+    public class AnimalDestroyer : ObserverTarget<IAnimal, ITriggerObserver>
     {
-        [SerializeField] private AnimalInteraction _animalInteraction;
-
-        private void Awake() =>
-            _animalInteraction.Interacted += OnInteracted;
-
-        private void OnDestroy() =>
-            _animalInteraction.Interacted -= OnInteracted;
-
-        private void OnInteracted(IAnimal animal) =>
+        protected override void OnTargetEntered(IAnimal animal)
+        {
             animal.Destroy();
+        }
     }
 }

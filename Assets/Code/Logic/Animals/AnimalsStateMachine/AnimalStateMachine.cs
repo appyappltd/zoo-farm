@@ -35,9 +35,6 @@ namespace Logic.Animals.AnimalsStateMachine
         [SerializeField] private float _peppinessReplanishSpeed;
         [SerializeField] private float _hungerDelay;
 
-        [Space][Header("Breeding Settings")]
-        [SerializeField] private float _breedingDuration;
-        
         [Space][Header("Move Settings")]
         [SerializeField] private float _maxWanderDistance;
         [SerializeField] private float _breedingPositionOffset;
@@ -45,6 +42,10 @@ namespace Logic.Animals.AnimalsStateMachine
         [MinMaxSlider(1f, 20f)]
         [SerializeField] private Vector2 _idleDelayRange;
         [SerializeField] private float _placeOffset;
+        
+        [Space][Header("Other Settings")]
+        [SerializeField] private float _breedingDuration;
+        [SerializeField] private float _maxDurationMove;
 
         private ForceMove _forceMove;
         private Idle _forceIdle;
@@ -107,7 +108,7 @@ namespace Logic.Animals.AnimalsStateMachine
             Transition forceReachTarget = new ReachDestinationTransition(_mover);
             Transition reachedBreeding = new ReachDestinationTransition(_mover, _breedingPositionOffset);
             Transition waitForBreedingProcess = new TimerTransition(_breedingDuration);
-            
+
             State eat = new Eat(_animator, _satiety, _satietyReplanishSpeed, _hungerDelay, _feeder, _animal.Emotions);
             State rest = new Rest(_animator, _peppiness, _peppinessReplanishSpeed);
             State idle = new Idle(_animator);
@@ -165,12 +166,14 @@ namespace Logic.Animals.AnimalsStateMachine
                     wander, new Dictionary<Transition, State>
                     {
                         {reachTarget, idle},
+                        {new TimerTransition(_maxDurationMove), wander},
                     }
                 },
                 {
                     moveToEat, new Dictionary<Transition, State>
                     {
                         {inEatPlace, waitForFood},
+                        {new TimerTransition(_maxDurationMove), idle},
                     }
                 },
                 {

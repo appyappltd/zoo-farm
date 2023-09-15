@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
 using UnityEngine.AI;
+using Debug = UnityEngine.Debug;
 
 namespace Logic.Movement
 {
@@ -85,7 +87,7 @@ namespace Logic.Movement
                     NavMesh.SamplePosition(destination, out NavMeshHit endNavHit, 2f, NavMesh.AllAreas))
                 {
                     int pathEndZoneIndex = endNavHit.mask;
-#if DEBUG
+#if UNITY_EDITOR
                     Debug.Log("Индекс зоны назначения: " + pathEndZoneIndex);
                     Debug.DrawRay(destination, Vector3.up * 50, Color.red, 10f);
 #endif
@@ -98,7 +100,7 @@ namespace Logic.Movement
                     }
                 }
 
-#if DEBUG
+#if UNITY_EDITOR
                 for (int index = 1; index < path.corners.Length; index++)
                 {
                     Vector3 cornerFrom = path.corners[index - 1];
@@ -131,5 +133,10 @@ namespace Logic.Movement
 
         private Quaternion GetLookRotation() =>
             Quaternion.LookRotation(_agent.steeringTarget - transform.position);
+
+        [Button]
+        [Conditional("UNITY_EDITOR")]
+        private void ReadAgentMask() =>
+            _areaMask = _agent.areaMask;
     }
 }
