@@ -1,4 +1,5 @@
 using Data.SaveData;
+using Services.PersistentProgressGeneric;
 
 namespace Services.SaveLoad
 {
@@ -6,5 +7,6 @@ namespace Services.SaveLoad
   {
     void SaveProgress();
     bool LoadProgress(out GlobalData globalData, out LevelData levelData);
+    void Register<TProgress>(ISavedProgressReaderGeneric<TProgress> reader) where TProgress : IProgressKey;
   }
 }
