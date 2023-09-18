@@ -1,4 +1,3 @@
-using Logic.Cameras;
 using UnityEngine;
 
 namespace Services.Camera
@@ -7,7 +6,7 @@ namespace Services.Camera
     {
         void Focus(Transform followTarget);
         void Focus(Vector3 onPosition);
-        void RegisterCamera(CameraMovement cameraMovement);
+        void RegisterCamera(UnityEngine.Camera camera);
         void FocusOnDefault();
         void SetAsDefault(Transform target);
     }

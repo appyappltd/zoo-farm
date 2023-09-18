@@ -37,7 +37,7 @@ namespace Services.Breeding
             animalsService.Released += Unregister;
         }
 
-        public void Register(IAnimal animal)
+        private void Register(IAnimal animal)
         {
             void OnSatietyFull() => _breedingReadyAnimals.Add(animal);
             void OnSatietyEmpty() => _breedingReadyAnimals.Remove(animal);
@@ -52,7 +52,7 @@ namespace Services.Breeding
             });
         }
 
-        public void Unregister(IAnimal animal)
+        private void Unregister(IAnimal animal)
         {
             if (_disposes.TryGetValue(animal, out Action dispose))
             {

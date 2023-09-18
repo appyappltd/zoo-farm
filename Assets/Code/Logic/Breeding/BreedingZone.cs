@@ -126,6 +126,21 @@ namespace Logic.Breeding
             _disposable.Add(new EventDisposer(() => choseZone.Interaction.Interacted -= OnChosen));
         }
 
+        private void CreateAllInteractions()
+        {
+            foreach (AnimalType animalType in _staticData.GoalConfigForLevel(_persistentProgress.Progress.LevelData.LevelKey).GetAnimalsToRelease())
+            {
+                ChoseInteractionProvider provider = _gameFactory.CreateChoseInteraction(Vector3.zero, Quaternion.identity, animalType);
+                Transform transform = provider.transform;
+                transform.SetParent(transform);
+                transform.localScale = Vector3.zero;
+                provider.gameObject.Disable();
+                _choseInteractions.Add(animalType, provider);
+                 
+                Subscribe(provider, animalType);
+            }
+        }
+
         private void OnInteractedZone(Human human) =>
             _cashedHuman = human;
 
@@ -140,21 +155,6 @@ namespace Logic.Breeding
                 _inventoryHolder.Inventory.TryAdd(item);
             
             _interactionsGrid.Value.RemoveAll();
-        }
-
-        private void CreateAllInteractions()
-        {
-            foreach (AnimalType animalType in _staticData.GoalConfigForLevel(_persistentProgress.Progress.LevelData.LevelKey).GetAnimalsToRelease())
-            {
-                 ChoseInteractionProvider provider = _gameFactory.CreateChoseInteraction(Vector3.zero, Quaternion.identity, animalType);
-                 Transform transform = provider.transform;
-                 transform.SetParent(transform);
-                 transform.localScale = Vector3.zero;
-                 provider.gameObject.Disable();
-                 _choseInteractions.Add(animalType, provider);
-                 
-                 Subscribe(provider, animalType);
-            }
         }
 
         private void OnBreedingBegins()

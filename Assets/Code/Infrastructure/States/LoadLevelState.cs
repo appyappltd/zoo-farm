@@ -81,11 +81,11 @@ namespace Infrastructure.States
 
         private void FollowCamera(Transform heroTransform)
         {
-            CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
-            cameraMovement.Follow(heroTransform);
-            cameraMovement.transform.parent.position = heroTransform.position;
-            _cameraService.RegisterCamera(cameraMovement);
+            Camera main = Camera.main;
+            _cameraService.RegisterCamera(main);
             _cameraService.SetAsDefault(heroTransform);
+            _cameraService.Focus(heroTransform);
+            main!.transform.parent.position = heroTransform.position;
         }
 
         private void InitUIRoot() =>

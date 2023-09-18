@@ -8,7 +8,6 @@ namespace Logic
 {
     public class TestCameraOperator : MonoBehaviour
     {
-        [SerializeField] private CameraMovement _camera;
         [SerializeField] private Transform _target;
         [SerializeField] private Vector3 _position;
         
@@ -17,7 +16,6 @@ namespace Logic
         private void Awake()
         {
             _cameraService = AllServices.Container.Single<ICameraOperatorService>();
-            _cameraService.RegisterCamera(_camera);
         }
 
         [Button("Follow", EButtonEnableMode.Playmode)]
