@@ -23,6 +23,7 @@ namespace Logic.Animals.AnimalsBehaviour
         private PersonalEmotionService _emotionService;
         private AnimalId _animalId;
         private SatietyEmotionObserver _emotionObserver;
+        private Renderer _renderer;
 
         public Transform Transform => transform;
         public AnimalId AnimalId => _animalId;
@@ -32,6 +33,7 @@ namespace Logic.Animals.AnimalsBehaviour
         public NavMeshMover Mover => _mover;
         public AnimalAnimator Animator => _animator;
         public PersonalEmotionService Emotions => _emotionService;
+        public bool IsVisible => _renderer.isVisible;
 
         private void OnDestroy() =>
             _emotionObserver.Dispose();
@@ -48,6 +50,10 @@ namespace Logic.Animals.AnimalsBehaviour
             _happinessFactor.Construct(_statProvider.Satiety);
 
             _emotionObserver = new SatietyEmotionObserver(_statProvider.Satiety, _emotionService);
+
+            _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+            Debug.Log(_renderer);
         }
 
         public void AttachFeeder(AnimalFeeder feeder)

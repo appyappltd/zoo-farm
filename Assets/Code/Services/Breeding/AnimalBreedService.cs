@@ -1,18 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DelayRoutines;
 using Infrastructure.Factory;
 using Logic.Animals;
-using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour;
-using Logic.Animals.AnimalsBehaviour.Emotions;
 using Logic.Breeding;
-using Services.AnimalHouses;
 using Services.Animals;
+using Services.Camera;
 using Services.Effects;
 using Services.Feeders;
-using Tools.Constants;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -23,12 +19,14 @@ namespace Services.Breeding
         private readonly IEffectService _effectService;
         private readonly IGameFactory _gameFactory;
         private readonly IAnimalFeederService _feederService;
+        private readonly ICameraOperatorService _cameraService;
 
         private readonly Dictionary<IAnimal, Action> _disposes = new Dictionary<IAnimal, Action>();
         private readonly List<IAnimal> _breedingReadyAnimals = new List<IAnimal>();
 
-        public AnimalBreedService(IEffectService effectService, IGameFactory gameFactory, IAnimalFeederService feederService, IAnimalsService animalsService)
+        public AnimalBreedService(IEffectService effectService, IGameFactory gameFactory, IAnimalFeederService feederService, IAnimalsService animalsService, ICameraOperatorService cameraService)
         {
+            _cameraService = cameraService;
             _effectService = effectService;
             _gameFactory = gameFactory;
             _feederService = feederService;
@@ -109,7 +107,7 @@ namespace Services.Breeding
             _breedingReadyAnimals.Remove(pair.First);
             _breedingReadyAnimals.Remove(pair.Second);
 
-            BreedingProcess breedingProcess = new BreedingProcess(_effectService, _gameFactory, _feederService, pair,
+            BreedingProcess breedingProcess = new BreedingProcess(_effectService, _gameFactory, _cameraService, _feederService, pair,
                 at, onBeginsCallback, onCompleteCallback);
             breedingProcess.Start();
         }

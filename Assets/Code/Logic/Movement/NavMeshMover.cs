@@ -34,26 +34,18 @@ namespace Logic.Movement
             CheckForEndMove();
         }
 
-        private void CheckForEndMove()
-        {
-            if (_agent.isStopped == false)
-                return;
-            
-            Stop();
-
-            if (_isAlignAtEnd)
-                _aligner.Aligne(_finalRotation);
-        }
+        public void Warp(Vector3 warpPoint) =>
+            _agent.Warp(warpPoint);
 
         public void Stop()
         {
             enabled = false;
             _agent.isStopped = true;
         }
-        
+
         public void ActivateAlignAtEnd() =>
             _isAlignAtEnd = true;
-        
+
         public void DeactivateAlignAtEnd() =>
             _isAlignAtEnd = false;
 
@@ -122,6 +114,17 @@ namespace Logic.Movement
 #endif
 
             return false;
+        }
+
+        private void CheckForEndMove()
+        {
+            if (_agent.isStopped == false)
+                return;
+            
+            Stop();
+
+            if (_isAlignAtEnd)
+                _aligner.Aligne(_finalRotation);
         }
 
         private void Rotate()

@@ -7661,11 +7661,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _isAutoBuild
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _buildCosts.Array.data[0]
-      value: 200
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6557604995432691923, guid: e8ea65095d316034db35b3584f7ee148, type: 3}
       propertyPath: _buildCosts.Array.data[1]
@@ -8294,7 +8294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5960971514541771133, guid: dd61dc97b72e379459c79b1e7afe6f98, type: 3}
       propertyPath: _isAutoBuild
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5960971514541771133, guid: dd61dc97b72e379459c79b1e7afe6f98, type: 3}
       propertyPath: _buildOffset.x
@@ -8983,7 +8983,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2520814213836817956, guid: d6e9b9a308f549648964db3105c7e071, type: 3}
       propertyPath: _isAutoBuild
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2520814213836817956, guid: d6e9b9a308f549648964db3105c7e071, type: 3}
       propertyPath: _buildCosts.Array.data[0]

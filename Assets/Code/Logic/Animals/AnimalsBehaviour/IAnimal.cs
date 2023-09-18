@@ -1,5 +1,4 @@
 using Logic.Animals.AnimalFeeders;
-using Logic.Houses;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour
@@ -9,5 +8,6 @@ namespace Logic.Animals.AnimalsBehaviour
         void Destroy();
         void ForceMove(Transform to);
         void AttachFeeder(AnimalFeeder feeder);
+        bool IsVisible { get; }
     }
 }

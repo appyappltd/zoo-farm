@@ -120,6 +120,10 @@ PrefabInstance:
       propertyPath: _animator
       value: 
       objectReference: {fileID: 7716649663770312991}
+    - target: {fileID: 5340628444517854784, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 6552196037698876607}
     - target: {fileID: 5853824301467310379, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -79,7 +79,8 @@ namespace Infrastructure.States
                 new AnimalBreedService(Get<IEffectService>(),
                     Get<IGameFactory>(),
                     Get<IAnimalFeederService>(),
-                    Get<IAnimalsService>()));
+                    Get<IAnimalsService>(),
+                    Get<ICameraOperatorService>()));
             Register<IUIFactory>(
                 new UIFactory(
                     Get<IAssetProvider>(),

@@ -9,5 +9,6 @@ namespace Services.Camera
         void RegisterCamera(UnityEngine.Camera camera);
         void FocusOnDefault();
         void SetAsDefault(Transform target);
+        Vector3 GetClosestRayPoint(Ray ray, float offset);
     }
 }
