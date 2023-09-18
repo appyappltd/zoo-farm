@@ -42,6 +42,5 @@ namespace Logic.Coins
         {
             _wallet.TryAdd(_amount);
         }
-
     }
 }

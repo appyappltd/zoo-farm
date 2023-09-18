@@ -18,7 +18,6 @@ namespace Tutorial.Directors
     public class BeginnerTutorial : TutorialDirector
     {
         [Space] [Header("Transform References")]
-        [SerializeField] private Transform _firstHouse;
         [SerializeField] private Transform _firstFeeder;
         [SerializeField] private Transform _animalTransmittingView;
         [SerializeField] private Transform _firstMedToolSpawnPoint;
@@ -281,13 +280,6 @@ namespace Tutorial.Directors
             }));
             TutorialModules.Add(new TutorialTimeAwaiter(4f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(HideText));
-            // TutorialModules.Add(new TutorialAction(() =>
-            // {
-            //     _cameraOperatorService.Focus(_keeper);
-            //     _keeperGridOperator.ShowNextBuildCell();
-            // }));
-            // TutorialModules.Add(new TutorialTimeAwaiter(_timeDelay.KeeperGridFocusToPlayerFocus, GlobalUpdate.Instance));
-            // TutorialModules.Add(new TutorialAction(() => _cameraOperatorService.FocusOnDefault()));
             TutorialModules.Add(new TutorialTimeAwaiter(3f, GlobalUpdate.Instance));
             TutorialModules.Add(new TutorialAction(() => Destroy(gameObject)));
         }

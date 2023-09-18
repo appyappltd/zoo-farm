@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4539937626717491165}
   - component: {fileID: 241569520641417643}
   - component: {fileID: 3036204929080553938}
-  - component: {fileID: 6555431359478124333}
+  - component: {fileID: 2804755624839449482}
   m_Layer: 0
   m_Name: TextPanel
   m_TagString: Untagged
@@ -193,10 +193,10 @@ CanvasGroup:
   m_GameObject: {fileID: 4502504369033706847}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &6555431359478124333
+--- !u!114 &2804755624839449482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4502504369033706847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c65cb3c2fe824dd983f7dbff3f6e6f2b, type: 3}
+  m_Script: {fileID: 11500000, guid: b87108505a38401c90e19fbd56d0ff6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _from: 0
@@ -226,8 +226,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   _tutorialTextSequence: {fileID: 11400000, guid: 054f830b81f68c64daed7de415cfc5f5, type: 2}
   _arrow: {fileID: 194688275876741893}
   _textSetter: {fileID: 241569520641417643}
-  _textFadeOutPanel: {fileID: 6555431359478124333}
+  _textFadeOutPanel: {fileID: 2804755624839449482}
   _levelGoalView: {fileID: 0}
 --- !u!1 &6059995594315202168
 GameObject:
