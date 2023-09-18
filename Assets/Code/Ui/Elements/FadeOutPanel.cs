@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Ui.Elements
 {
-    public class FadeOutPanel : ShowHidePanel<float>
+    public class FadeOutPanel : ShowHide<float>
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 

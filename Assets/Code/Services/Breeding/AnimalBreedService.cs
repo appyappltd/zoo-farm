@@ -102,7 +102,7 @@ namespace Services.Breeding
             return false;
         }
 
-        public void BeginBreeding(AnimalPair pair, Transform at, Action onBeginsCallback = null, Action onCompleteCallback = null)
+        public void BeginBreeding(AnimalPair pair, BreedingPositions at, Action onBeginsCallback = null, Action onCompleteCallback = null)
         {
             _breedingReadyAnimals.Remove(pair.First);
             _breedingReadyAnimals.Remove(pair.Second);

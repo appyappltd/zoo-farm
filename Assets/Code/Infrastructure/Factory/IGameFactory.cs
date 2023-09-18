@@ -36,7 +36,7 @@ namespace Infrastructure.Factory
         MedicalBed CreateMedBed(Vector3 at, Quaternion rotation);
         MedicalToolStand CreateMedToolStand(Vector3 at, Quaternion rotation, TreatToolId toolIdType);
         Animal CreateAnimal(AnimalItemStaticData animalData, Vector3 at, Quaternion rotation);
-        Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation);
+        Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation, Transform atChild);
         GameObject CreateHouseFoundation(Vector3 markerBuildPosition, Quaternion locationRotation);
         GameObject CreateBreedingPlace(Vector3 at, Quaternion rotation);
         ReleaseInteractionProvider CreateReleaseInteraction(Vector3 at, Quaternion rotation, AnimalType withType);

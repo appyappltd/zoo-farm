@@ -117,7 +117,7 @@ namespace Logic.Animals.AnimalsStateMachine
             State moveToRest = new MoveTo(_animator, _mover, null);
             State moveToEat = new MoveToEat(_animator, _mover, null, _aligner, _feeder, (Eat) eat, (FullBowl) fullBowl, (DistanceTo) inEatPlace);
 
-            _followToBreeding = new FollowToBreed(_animator, _mover, _satiety);
+            _followToBreeding = new FollowToBreed(_animator, _mover, null, _aligner, _satiety);
             _breeding = new BreedingIdle(_animator, _satiety);
 
             _forceIdle = new Idle(_animator);

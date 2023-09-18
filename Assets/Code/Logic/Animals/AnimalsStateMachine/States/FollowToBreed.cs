@@ -7,20 +7,16 @@ using UnityEngine;
 
 namespace Logic.Animals.AnimalsStateMachine.States
 {
-    public class FollowToBreed : Move
+    public class FollowToBreed : MoveToAndRotate
     {
         private readonly StatIndicator _satiety;
         
-        private Transform _breedingPlace;
         private Action _onBreedingBegin;
 
-        public FollowToBreed(IPrimeAnimator animator, NavMeshMover mover, StatIndicator satiety) : base(animator, mover)
+        public FollowToBreed(IPrimeAnimator animator, NavMeshMover mover, Transform target, Aligner aligner, StatIndicator satiety) : base(animator, mover, target, aligner)
         {
             _satiety = satiety;
         }
-
-        protected override Vector3 GetMovePosition() =>
-            _breedingPlace.position;
 
         protected override void OnEnter()
         {
@@ -34,10 +30,10 @@ namespace Logic.Animals.AnimalsStateMachine.States
             base.OnExit();
         }
 
-        public void Init(Transform followAnimal, Action onBreedingBegin)
+        public void Init(Transform breedingPlace, Action onBreedingBegin)
         {
             _onBreedingBegin = onBreedingBegin;
-            _breedingPlace = followAnimal;
+            Target = breedingPlace;
         }
     }
 }

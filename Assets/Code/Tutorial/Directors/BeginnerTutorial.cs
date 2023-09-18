@@ -12,6 +12,7 @@ using Tutorial.TextTutorial;
 using Tutorial.TimePresets;
 using Ui.Elements;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Tutorial.Directors
 {

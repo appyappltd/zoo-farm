@@ -5,9 +5,11 @@ using Logic.Animals;
 using Logic.Animals.AnimalFeeders;
 using Logic.Animals.AnimalsBehaviour;
 using Logic.Animals.AnimalsBehaviour.Emotions;
+using NTC.Global.System;
 using Services.Camera;
 using Services.Effects;
 using Services.Feeders;
+using Tools;
 using UnityEngine;
 
 namespace Logic.Breeding
@@ -16,23 +18,24 @@ namespace Logic.Breeding
     {
         private const float BeforeBreedingDelaySeconds = 0.25f;
         private const float WarpOffset = 0f;
-        
+
         private readonly IEffectService _effectService;
         private readonly IGameFactory _gameFactory;
         private readonly IAnimalFeederService _feederService;
         private readonly ICameraOperatorService _cameraService;
-
-        private readonly Transform _at;
+        
         private readonly RoutineSequence _beforeBreedingDelay;
         private readonly AnimalPair _pair;
+        private readonly BreedingPositions _at;
         private readonly Action _onBeginsCallback;
         private readonly Action _onCompleteCallback;
+        private readonly IShowHide _scaleChanger;
 
         private int _animalsInPlaceCount;
         private bool _isRunning;
 
         public BreedingProcess(IEffectService effectService, IGameFactory gameFactory, ICameraOperatorService cameraService,
-            IAnimalFeederService feederService, AnimalPair pair, Transform at, Action onBeginsCallback = null, Action onCompleteCallback = null)
+            IAnimalFeederService feederService, AnimalPair pair, BreedingPositions at, Action onBeginsCallback = null, Action onCompleteCallback = null)
         {
             _effectService = effectService;
             _gameFactory = gameFactory;
@@ -40,6 +43,8 @@ namespace Logic.Breeding
             _feederService = feederService;
             _pair = pair;
             _at = at;
+            _scaleChanger = _at.Child.GetComponent<IShowHide>();
+            _scaleChanger.Hide();
             _onBeginsCallback = onBeginsCallback ?? (() => { });
             _onCompleteCallback = onCompleteCallback ?? (() => { });
 
@@ -56,8 +61,8 @@ namespace Logic.Breeding
             TryWarpAnimalToCameraEdge(first);
             TryWarpAnimalToCameraEdge(second);
             
-            first.StateMachine.InitBreeding(_at, OnAnimalOnPlace);
-            second.StateMachine.InitBreeding(_at, OnAnimalOnPlace);
+            first.StateMachine.InitBreeding(_at.First, OnAnimalOnPlace);
+            second.StateMachine.InitBreeding(_at.Second, OnAnimalOnPlace);
             
             first.Emotions.Show(EmotionId.Breeding);
             second.Emotions.Show(EmotionId.Breeding);
@@ -82,10 +87,16 @@ namespace Logic.Breeding
             IAnimal first = _pair.First;
             IAnimal second = _pair.Second;
             
-            Animal newAnimal = _gameFactory.CreateAnimal(first, _at.position, Quaternion.identity);
-            AnimalFeeder feeder = _feederService.GetFeeder(newAnimal.AnimalId.EdibleFood);
-            newAnimal.AttachFeeder(feeder);
+            Animal newAnimal = _gameFactory.CreateAnimal(first, _at.Child.position, Quaternion.identity, _at.Child);
             
+            _scaleChanger.Show(() =>
+            {
+                AnimalFeeder feeder = _feederService.GetFeeder(newAnimal.AnimalId.EdibleFood);
+                newAnimal.AttachFeeder(feeder);
+                _scaleChanger.Hide();
+                newAnimal.transform.Unparent();
+            });
+
             first.Emotions.Suppress(EmotionId.Breeding);
             second.Emotions.Suppress(EmotionId.Breeding);
 
@@ -102,7 +113,7 @@ namespace Logic.Breeding
             second.StateMachine.BeginBreeding(() => { });
             
             _onBeginsCallback.Invoke();
-            _effectService.SpawnEffect(EffectId.Hearts, _at.position, Quaternion.LookRotation(Vector3.up));
+            _effectService.SpawnEffect(EffectId.Hearts, _at.Center.position, Quaternion.LookRotation(Vector3.up));
         }
 
         private void TryWarpAnimalToCameraEdge(IAnimal first)
@@ -111,7 +122,7 @@ namespace Logic.Breeding
                 return;
 
             Vector3 animalPosition = first.Transform.position;
-            Vector3 toCameraDirection = _at.position - animalPosition;
+            Vector3 toCameraDirection = _at.Center.position - animalPosition;
             Vector3 warpPoint = _cameraService.GetClosestRayPoint(new Ray(animalPosition, toCameraDirection), WarpOffset);
             first.Mover.Warp(warpPoint);
             Debug.Log($"Animal {first} warp from {animalPosition}, to {warpPoint}");

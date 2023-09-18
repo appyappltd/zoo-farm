@@ -39,8 +39,10 @@ namespace Logic.Breeding
         [SerializeField] private Storage _storage;
         [SerializeField] private ProductReceiver _productReceiver;
         [SerializeField] private HumanInteraction _interactionZone;
-        [SerializeField] private Transform _breedingPlace;
         [SerializeField] private TutorialTriggerScriptableObject _breedingCompleteTrigger;
+        [SerializeField] private Transform _firstAnimalPlace;
+        [SerializeField] private Transform _secondAnimalPlace;
+        [SerializeField] private Transform _childAnimalPlace;
 
         [Space] [Header("Settings")]
         [SerializeField] [MinMaxSlider(0.1f, 30f)] private Vector2 _currencySpawnDelay;
@@ -54,6 +56,7 @@ namespace Logic.Breeding
         private IItem _takenHeart;
         private IHuman _cashedHuman;
         private bool _isInProgress;
+        private BreedingPositions _breedingPositions;
 
         private void Awake()
         {
@@ -62,7 +65,6 @@ namespace Logic.Breeding
                 AllServices.Container.Single<IPersistentProgressService>(),
                 AllServices.Container.Single<IGameFactory>(),
                 AllServices.Container.Single<IAnimalsService>());
-            CreateAllInteractions();
         }
 
         private void OnDestroy()
@@ -81,6 +83,8 @@ namespace Logic.Breeding
             _persistentProgress = persistentProgress;
             _staticData = staticData;
             _breedService = breedService;
+            _breedingPositions =
+                new BreedingPositions(_firstAnimalPlace, _secondAnimalPlace, _childAnimalPlace, transform);
             
             _inventoryHolder.Construct();
             _storage.Construct(_inventoryHolder.Inventory);
@@ -92,6 +96,8 @@ namespace Logic.Breeding
 
             _currencySpawner = new BreedingCurrencySpawner(gameFactory.HandItemFactory, animalsService.AnimalCounter, _storage, _inventoryHolder.Inventory,
                 _currencySpawnDelay, _translator.Value);
+            
+            CreateAllInteractions();
         }
 
         private void Subscribe(ChoseInteractionProvider choseZone, AnimalType associatedType)
@@ -109,7 +115,7 @@ namespace Logic.Breeding
                     {
                         _isInProgress = true;
                         _interactionZone.Deactivate();
-                        _breedService.BeginBreeding(pair, _breedingPlace, OnBreedingBegins, OnBreedingComplete);
+                        _breedService.BeginBreeding(pair, _breedingPositions, OnBreedingBegins, OnBreedingComplete);
                         item.Mover.Move(_heartPosition, _heartPosition, true);
                     }
                     
