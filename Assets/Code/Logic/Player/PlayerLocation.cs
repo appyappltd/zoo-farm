@@ -9,13 +9,13 @@ namespace Logic.Player
 {
     public class PlayerLocation : MonoBehaviour, ISavedProgressGeneric<PlayerLocationData>
     {
-        private void Awake()
+        private void Start()
         {
             Construct(AllServices.Container.Single<ISaveLoadService>());
         }
 
         private void Construct(ISaveLoadService saveLoad) =>
-            saveLoad.Register<PlayerLocationData>(this);
+            saveLoad.Register(this);
 
         public void LoadProgress(in PlayerLocationData progress)
         {

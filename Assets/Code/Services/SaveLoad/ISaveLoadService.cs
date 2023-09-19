@@ -8,6 +8,6 @@ namespace Services.SaveLoad
   {
     void SaveProgress();
     bool LoadProgress(out GlobalData globalData, out LevelData levelData);
-    void Register<TProgress>(IProgressReaderRegistrable reader) where TProgress : IProgressKey;
+    void Register<TProgress>(ISavedProgressReaderGeneric<TProgress> reader) where TProgress : IProgressKey;
   }
 }

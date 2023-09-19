@@ -15,7 +15,6 @@ namespace Services.SaveLoad
         private const string GlobalProgressKey = "GlobalProgress";
 
         private readonly IPersistentProgressService _progressService;
-
         private readonly Dictionary<Type, IProgressObserver> _progressObservers = new();
 
         public SaveLoadService(IPersistentProgressService progressService, IGameFactory gameFactory)
@@ -23,15 +22,15 @@ namespace Services.SaveLoad
             _progressService = progressService;
         }
 
-        public void Register<TProgress>(IProgressReaderRegistrable reader) where TProgress : IProgressKey
+        public void Register<TProgress>(ISavedProgressReaderGeneric<TProgress> reader) where TProgress : IProgressKey
         {
             if (_progressObservers.TryGetValue(typeof(TProgress), out IProgressObserver progressObserver))
-                progressObserver.Add((ISavedProgressReaderGeneric<TProgress>) reader);
+                progressObserver.Add(reader);
             else
                 _progressObservers.Add(typeof(TProgress),
-                    new ProgressObserver<TProgress>((ISavedProgressReaderGeneric<TProgress>) reader));
+                    new ProgressObserver<TProgress>(reader));
 
-            ((ISavedProgressReaderGeneric<TProgress>) reader).LoadProgress(_progressService.GetProgress<TProgress>());
+            reader.LoadProgress(_progressService.GetProgress<TProgress>());
         }
 
         public void SaveProgress()
