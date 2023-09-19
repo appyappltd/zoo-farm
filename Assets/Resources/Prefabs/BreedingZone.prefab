@@ -958,8 +958,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.3009083, z: -0, w: 0.9536531}
   m_LocalPosition: {x: -1.5699997, y: 0, z: 1.6700001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2070886949195540075}
   m_LocalEulerAnglesHint: {x: 0, y: -35.024, z: 0}
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _from: {x: 0, y: 0, z: 0}
   _to: {x: 1, y: 1, z: 1}
-  _speed: 7
+  _speed: 5
   _modifyCurve:
     serializedVersion: 2
     m_Curve:

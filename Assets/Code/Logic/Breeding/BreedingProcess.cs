@@ -33,6 +33,7 @@ namespace Logic.Breeding
 
         private int _animalsInPlaceCount;
         private bool _isRunning;
+        private Animal _child;
 
         public BreedingProcess(IEffectService effectService, IGameFactory gameFactory, ICameraOperatorService cameraService,
             IAnimalFeederService feederService, AnimalPair pair, BreedingPositions at, Action onBeginsCallback = null, Action onCompleteCallback = null)
@@ -86,15 +87,13 @@ namespace Logic.Breeding
         {
             IAnimal first = _pair.First;
             IAnimal second = _pair.Second;
-            
-            Animal newAnimal = _gameFactory.CreateAnimal(first, _at.Child.position, Quaternion.identity, _at.Child);
-            
+
+            _child.transform.localScale = Vector3.one;
             _scaleChanger.Show(() =>
             {
-                AnimalFeeder feeder = _feederService.GetFeeder(newAnimal.AnimalId.EdibleFood);
-                newAnimal.AttachFeeder(feeder);
-                _scaleChanger.Hide();
-                newAnimal.transform.Unparent();
+                AnimalFeeder feeder = _feederService.GetFeeder(_child.AnimalId.EdibleFood);
+                _child.AttachFeeder(feeder);
+                _child.transform.Unparent();
             });
 
             first.Emotions.Suppress(EmotionId.Breeding);
@@ -114,6 +113,10 @@ namespace Logic.Breeding
             
             _onBeginsCallback.Invoke();
             _effectService.SpawnEffect(EffectId.Hearts, _at.Center.position, Quaternion.LookRotation(Vector3.up));
+            
+            _child = _gameFactory.CreateAnimal(first, _at.Child.position, _at.Child.rotation);
+            _child.transform.SetParent(_at.Child, true);
+            _scaleChanger.Hide();
         }
 
         private void TryWarpAnimalToCameraEdge(IAnimal first)

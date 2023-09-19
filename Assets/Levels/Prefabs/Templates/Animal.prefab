@@ -93,9 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8638602644969519916}
-  - component: {fileID: 5062255906830864564}
   - component: {fileID: 6901850329722103781}
   - component: {fileID: 6288118025700022820}
+  - component: {fileID: 3977906264041654017}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -120,19 +120,6 @@ Transform:
   - {fileID: 2717799237317247159}
   m_Father: {fileID: 8256080557312885242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5062255906830864564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2630466876669196884}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _toCameraOffset: 3
 --- !u!114 &6901850329722103781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +172,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3977906264041654017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2630466876669196884}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toCameraOffset: 3
 --- !u!1 &5188369794093752109
 GameObject:
   m_ObjectHideFlags: 0

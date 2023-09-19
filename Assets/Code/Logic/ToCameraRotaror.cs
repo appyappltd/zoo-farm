@@ -14,8 +14,8 @@ namespace Logic
         private void Awake()
         {
             _cameraTransform = Camera.main.transform;
-            LateRun();
             ShiftPosition();
+            LateRun();
         }
 
         public void UpdateRotation() =>
@@ -24,7 +24,13 @@ namespace Logic
         protected override void LateRun() =>
             transform.forward = _cameraTransform.forward;
 
-        private void ShiftPosition() =>
-            transform.position -= _cameraTransform.forward * _toCameraOffset;
+        private void ShiftPosition()
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.IsChildOf(transform))
+                    child.Translate(-Vector3.forward * _toCameraOffset, Space.Self);
+            }
+        }
     }
 }

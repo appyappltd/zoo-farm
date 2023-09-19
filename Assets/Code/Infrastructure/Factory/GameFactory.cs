@@ -91,9 +91,9 @@ namespace Infrastructure.Factory
             return _animalBuilder.Build(animal, animalData);
         }
 
-        public Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation, Transform parent = null)
+        public Animal CreateAnimal(IAnimal clone, Vector3 at, Quaternion rotation)
         {
-            GameObject animal = _assets.Instantiate($"{AssetPath.AnimalPath}/{clone.AnimalId.Type}", at, rotation, parent);
+            GameObject animal = _assets.Instantiate($"{AssetPath.AnimalPath}/{clone.AnimalId.Type}", at, rotation);
             AnimalItemStaticData animalData = _staticDataService.AnimalItemDataById(clone.AnimalId.Type);
             return _animalBuilder.Build(animal, animalData);
         }

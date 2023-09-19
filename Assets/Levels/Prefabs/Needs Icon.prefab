@@ -94,7 +94,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2733194465724316026}
   - component: {fileID: 2008307126301092606}
-  - component: {fileID: 7748261390110172698}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -142,19 +141,6 @@ MonoBehaviour:
   _decreaseTime: 0.25
   _isCustomIncreaseTime: 0
   _increaseTime: 0.25
---- !u!114 &7748261390110172698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3987080368842026864}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _toCameraOffset: 3
 --- !u!1 &4041253961553681086
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8427565507747873444}
   - component: {fileID: 3795157622060416634}
+  - component: {fileID: 5011053645763375964}
   m_Layer: 0
   m_Name: Needs Icon
   m_TagString: Untagged
@@ -416,6 +403,19 @@ MonoBehaviour:
   _icon: {fileID: 6570572228367778576}
   _isDeactivateOnFull: 1
   _delayBeforeDeactivate: 2
+--- !u!114 &5011053645763375964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955391714445456918}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toCameraOffset: 3
 --- !u!1 &6690961032625622828
 GameObject:
   m_ObjectHideFlags: 0

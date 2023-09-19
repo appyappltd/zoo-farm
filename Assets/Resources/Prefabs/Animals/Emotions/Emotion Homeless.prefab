@@ -78,9 +78,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9121932527294659752, guid: afb3f341d55055f4885a4f5cce61cec3, type: 3}
       propertyPath: m_Name
-      value: Emotion Homeless Variant
+      value: Emotion Homeless
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8561819455313995450, guid: afb3f341d55055f4885a4f5cce61cec3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
