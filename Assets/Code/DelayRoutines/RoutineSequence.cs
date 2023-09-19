@@ -59,7 +59,9 @@ namespace DelayRoutines
         /// </summary>
         public void Kill()
         {
-            Stop();
+            foreach (var routine in _routines)
+                routine.Stop();
+
             _routines.Clear();
             _currentRoutineIndex = 0;
         }
