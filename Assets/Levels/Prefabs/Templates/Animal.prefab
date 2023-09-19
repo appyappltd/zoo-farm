@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8256080557312885242}
   - component: {fileID: 6525108398949412447}
+  - component: {fileID: 3966233601815548908}
   m_Layer: 8
   m_Name: BubbleParent
   m_TagString: Untagged
@@ -215,6 +216,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toCameraOffset: 3
+--- !u!114 &3966233601815548908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373226867630193457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d1cd0068c04203ab31eb99ffe660cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _from: {x: 0, y: 0, z: 0}
+  _to: {x: 1, y: 1, z: 1}
+  _speed: 1
+  _modifyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &7465656485935678528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,4 +351,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 4398652746174957784}
   _showHidable:
-    _underlyingValue: {fileID: 0}
+    _underlyingValue: {fileID: 3966233601815548908}

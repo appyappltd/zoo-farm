@@ -1,9 +1,10 @@
 using System;
+using Tools;
 using UnityEngine;
 
 namespace Ui.Elements
 {
-    public class FadeOutPanel : ShowHide<float>
+    public class FadeOutPanel : ShowHide<float>, IShowHide
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 

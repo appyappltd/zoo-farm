@@ -1321,6 +1321,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zebra
       objectReference: {fileID: 0}
+    - target: {fileID: 7086280456069662208, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
+      propertyPath: _showHidable._underlyingValue
+      value: 
+      objectReference: {fileID: 7263196257981902860}
     - target: {fileID: 7466474546221203922, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
       propertyPath: _rotationOffset.x
       value: 0
@@ -1332,6 +1336,10 @@ PrefabInstance:
     - target: {fileID: 7466474546221203922, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
       propertyPath: _rotationOffset.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256080557312885242, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3823740206972028246, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
@@ -1348,3 +1356,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 951227949797535625, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
   m_PrefabInstance: {fileID: 6036770675079390176}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7263196257981902860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3966233601815548908, guid: 25fbcde155a3a0d46bd973b45056816d, type: 3}
+  m_PrefabInstance: {fileID: 6036770675079390176}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d1cd0068c04203ab31eb99ffe660cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
