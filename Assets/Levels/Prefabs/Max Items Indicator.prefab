@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2752514341977877657}
   - component: {fileID: 5734371206324880484}
-  - component: {fileID: 2555380510057526078}
   - component: {fileID: 7193327693684725242}
   - component: {fileID: 2960677186287885030}
   m_Layer: 6
@@ -52,19 +51,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scaleModifierId: 0
---- !u!114 &2555380510057526078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4224019558071565072}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8407ecaee0b243e4b1a0556e202a291e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _toCameraOffset: 3
 --- !u!23 &7193327693684725242
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -8124,6 +8124,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2650753951588018235, guid: e79bf4b1f4d95ab4eb8e85f24bc073fd, type: 3}
+      propertyPath: _toCameraOffset
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8995514118426674723, guid: e79bf4b1f4d95ab4eb8e85f24bc073fd, type: 3}
       propertyPath: m_Name
       value: Max Items Indicator
