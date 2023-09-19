@@ -9,6 +9,7 @@ using Services;
 using Services.StaticData;
 using Ui;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Logic.Animals.AnimalFeeders
 {
@@ -45,7 +46,7 @@ namespace Logic.Animals.AnimalFeeders
 
         private void Init()
         {
-            _inventoryHolder.Construct(_maxFoodPerBowl * _bowls.Length + 1);
+            _inventoryHolder.Construct(_maxFoodPerBowl * _bowls.Length);
             _storage.Construct(_inventoryHolder.Inventory);
             _productReceiver.Construct(_inventoryHolder.Inventory);
             ConstructBowls();
