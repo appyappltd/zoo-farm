@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using Logic.Foods.FoodSettings;
 using Logic.Interactions;
@@ -9,7 +8,6 @@ using Services;
 using Services.StaticData;
 using Ui;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Logic.Animals.AnimalFeeders
 {

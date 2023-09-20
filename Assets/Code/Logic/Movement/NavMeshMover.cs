@@ -3,7 +3,7 @@ using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
 using UnityEngine.AI;
-using Debug = UnityEngine.Debug;
+using Debug = Sisus.Debugging.Debug;
 
 namespace Logic.Movement
 {
@@ -58,14 +58,9 @@ namespace Logic.Movement
         public bool SetLocation(Location location)
         {
             _finalRotation = location.Rotation;
+            
+            Debug.LogIf(_isAlignAtEnd == false, "You set the final rotation, but its application is not enabled");
 
-#if DEBUG
-            if (_isAlignAtEnd == false)
-            {
-                Debug.LogWarning("You set the final rotation, but its application is not enabled");
-            }
-
-#endif
             return SetDestination(location.Position);
         }
 
@@ -79,17 +74,11 @@ namespace Logic.Movement
                     NavMesh.SamplePosition(destination, out NavMeshHit endNavHit, 2f, NavMesh.AllAreas))
                 {
                     int pathEndZoneIndex = endNavHit.mask;
-#if UNITY_EDITOR
-                    Debug.Log("Индекс зоны назначения: " + pathEndZoneIndex);
+                    
                     Debug.DrawRay(destination, Vector3.up * 50, Color.red, 10f);
-#endif
+                    
                     if ((pathEndZoneIndex & _areaMask) == 0)
-                    {
-#if DEBUG
-                        Debug.LogWarning("Destination is not on valid area layer");
-#endif
                         return false;
-                    }
                 }
 
 #if UNITY_EDITOR
@@ -106,12 +95,8 @@ namespace Logic.Movement
                 _agent.SetPath(path);
                 return true;
             }
-
-
-            // SetDestination(destination);
-#if DEBUG
+            
             Debug.LogWarning("Path cannot be found");
-#endif
 
             return false;
         }

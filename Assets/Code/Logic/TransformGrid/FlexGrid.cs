@@ -10,7 +10,7 @@ using NTC.Global.System;
 using Tools.Extension;
 using UnityEngine;
 using UnityEngine.Pool;
-using Debug = UnityEngine.Debug;
+using Debug = Sisus.Debugging.Debug;
 
 namespace Logic.TransformGrid
 {
@@ -49,9 +49,7 @@ namespace Logic.TransformGrid
         {
             if (_cells.Contains(cellTransform))
             {
-#if DEBUG
                 Debug.LogWarning($"This cell {cellTransform} is already contained in the grid");
-#endif
                 return;
             }
 
@@ -74,9 +72,7 @@ namespace Logic.TransformGrid
         {
             if (_cells.Contains(cellTransform) == false)
             {
-#if DEBUG
                 Debug.LogWarning($"This cell {cellTransform} is not contained in the grid");
-#endif
                 return;
             }
             
@@ -110,12 +106,6 @@ namespace Logic.TransformGrid
             
             ListPool<Transform>.Release(_tempCells);
         }
-        
-        [Button] [Conditional("UNITY_EDITOR")]
-        private void ManualRemove()
-        {
-            RemoveCell(_cells.GetRandom());
-        }
 
         private void MoveCells()
         {
@@ -129,6 +119,12 @@ namespace Logic.TransformGrid
                 
                 Translate(cell.GetComponent<CustomPositionTranslatable>(),  cell.localPosition, nextPosition);
             }
+        }
+
+        [Button] [Conditional("UNITY_EDITOR")]
+        private void ManualRemove()
+        {
+            RemoveCell(_cells.GetRandom());
         }
 
         private void UpdatePositions()

@@ -20,7 +20,7 @@ using Services.PersistentProgress;
 using Services.StaticData;
 using Tutorial.StaticTriggers;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using Debug = Sisus.Debugging.Debug;
 
 namespace Logic.Breeding
 {
@@ -122,10 +122,8 @@ namespace Logic.Breeding
                     _interactionsGrid.Value.RemoveAll();
                     return;
                 }
-
-#if DEBUG
+                
                 Debug.LogWarning($"Animals of {associatedType} type are not enough for reproduction");
-#endif
             }
 
             choseZone.Interaction.Interacted += OnChosen;
