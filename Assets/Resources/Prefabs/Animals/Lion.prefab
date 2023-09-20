@@ -81,6 +81,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c4eaf648fe54b24a855b63894e24ae9, type: 3}
+--- !u!137 &5485269952171298636 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137179322660260288, guid: 2c4eaf648fe54b24a855b63894e24ae9, type: 3}
+  m_PrefabInstance: {fileID: 5618465009093494412}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &5525063904660384728 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95759153349766484, guid: 2c4eaf648fe54b24a855b63894e24ae9, type: 3}
@@ -175,6 +180,14 @@ PrefabInstance:
       propertyPath: _maxSpeed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6176900249568832793, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 5485269952171298636}
+    - target: {fileID: 6751429907334080677, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 5485269952171298636}
     - target: {fileID: 8643315356767832591, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: m_Name
       value: Lion

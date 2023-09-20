@@ -4,6 +4,7 @@ using Logic.Animals;
 using Services;
 using Services.Animals;
 using UnityEngine;
+using Debug = Sisus.Debugging.Debug;
 
 namespace Tools
 {

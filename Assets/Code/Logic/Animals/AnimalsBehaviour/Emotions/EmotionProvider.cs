@@ -1,5 +1,7 @@
 using AYellowpaper.SerializedCollections;
 using Logic.Animals.AnimalsBehaviour.Emotions.EmotionsView;
+using Logic.Foods;
+using Logic.Foods.FoodSettings;
 using UnityEngine;
 
 namespace Logic.Animals.AnimalsBehaviour.Emotions
@@ -9,14 +11,13 @@ namespace Logic.Animals.AnimalsBehaviour.Emotions
          private EmotionView _currentEmotion;
  
          [SerializeField] private SerializedDictionary<EmotionId, EmotionView> _emotions;
-
-         [SerializeField] private SpriteRenderer _foodIcon;
+         [SerializeField] private FoodShower _foodShower;
 
          private void Awake() =>
              _currentEmotion = _emotions[EmotionId.None];
 
-         public void Construct(Sprite foodIcon) =>
-             _foodIcon.sprite = foodIcon;
+         public void Construct(FoodId foodId) =>
+             _foodShower.SetMaterial(foodId);
 
          public void ChangeEmotion(EmotionId id)
          {

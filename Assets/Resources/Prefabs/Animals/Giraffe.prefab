@@ -85,7 +85,15 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6176900249568832793, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 7618022627873738006}
+    - target: {fileID: 6176900249568832793, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 7618022627873738006}
+    - target: {fileID: 6751429907334080677, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: _renderer
       value: 
       objectReference: {fileID: 7618022627873738006}
     - target: {fileID: 8643315356767832591, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}

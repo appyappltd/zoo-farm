@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: _animator
       value: 
       objectReference: {fileID: 6508979208357273255}
+    - target: {fileID: 3371612453442111412, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: SubModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3999644325332059177, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -197,12 +201,28 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6176900249568832793, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 6552196037698876607}
+    - target: {fileID: 6176900249568832793, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: _spriteRenderer
       value: 
       objectReference: {fileID: 6552196037698876607}
+    - target: {fileID: 6751429907334080677, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 6552196037698876607}
+    - target: {fileID: 8267944922730262035, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8643315356767832591, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
       propertyPath: m_Name
       value: Zebra
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201711616739631965, guid: 6bb7fe74122c3a14e8a0f484cc7d78e8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

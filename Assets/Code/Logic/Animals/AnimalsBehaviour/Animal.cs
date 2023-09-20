@@ -42,7 +42,7 @@ namespace Logic.Animals.AnimalsBehaviour
         {
             _staticDataService = staticDataService;
             _animalId = animalId;
-            _emotionProvider.Construct(_staticDataService.IconByFoodType(animalId.EdibleFood));
+            _emotionProvider.Construct(animalId.EdibleFood);
             _emotionService = new PersonalEmotionService(_emotionProvider);
             _statProvider.Construct(beginStats);
             
@@ -52,8 +52,6 @@ namespace Logic.Animals.AnimalsBehaviour
             _emotionObserver = new SatietyEmotionObserver(_statProvider.Satiety, _emotionService);
 
             _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-
-            Debug.Log(_renderer);
         }
 
         public void AttachFeeder(AnimalFeeder feeder)

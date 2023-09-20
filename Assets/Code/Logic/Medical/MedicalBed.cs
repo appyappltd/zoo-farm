@@ -107,7 +107,7 @@ namespace Logic.Medical
         }
 
         private void ShowThreatTool() =>
-            _animalItem.GetComponent<MedicalToolShower>().SetTool(_animalData.TreatToolId);
+            _animalItem.GetComponent<MedicalToolShower>().SetMaterial(_animalData.TreatToolId);
 
         private void OnHealed()
         {
