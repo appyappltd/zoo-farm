@@ -13,8 +13,10 @@ using Services.AnimalHouses;
 using Services.Animals;
 using Services.MedicalBeds;
 using Services.PersistentProgress;
+using Services.PersistentProgressGeneric;
 using Services.Pools;
 using Services.Randomizer;
+using Services.SaveLoad;
 using Services.StaticData;
 using Ui;
 using Ui.LevelGoalPanel;
@@ -36,6 +38,7 @@ namespace Infrastructure.Factory
         private readonly InteractionZoneBuilder _interactionZoneBuilder;
         private readonly AnimalGoalPanelBuilder _animalGoalPanelBuilder;
         private readonly IStaticDataService _staticDataService;
+        private ISaveLoadService _saveLoad;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -48,11 +51,11 @@ namespace Infrastructure.Factory
             IAnimalsService animalsService, IPoolService poolService, IMedicalBedsReporter medicalBedsReporter,
             IAnimalHouseService houseService)
         {
-            _staticDataService = staticDataService;
             _assets = assets;
             _poolService = poolService;
             _randomService = randomService;
             _progressService = progressService;
+            _staticDataService = staticDataService;
 
             FoodFactory = new FoodFactory(assets);
             HandItemFactory = new HandItemFactory(assets, staticDataService);
@@ -80,14 +83,14 @@ namespace Infrastructure.Factory
         }
 
         public GameObject CreateHero(Vector3 at) =>
-            InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
+            _assets.Instantiate(AssetPath.HeroPath, at);
 
         public GameObject CreateHud() =>
             _assets.Instantiate(AssetPath.HudPath);
 
         public Animal CreateAnimal(AnimalItemStaticData animalData, Vector3 at, Quaternion rotation)
         {
-            GameObject animal = InstantiateRegistered($"{AssetPath.AnimalPath}/{animalData.AnimalType}", at, rotation);
+            GameObject animal = _assets.Instantiate($"{AssetPath.AnimalPath}/{animalData.AnimalType}", at, rotation);
             return _animalBuilder.Build(animal, animalData);
         }
 
@@ -103,7 +106,7 @@ namespace Infrastructure.Factory
 
         public GameObject CreateBreedingPlace(Vector3 at, Quaternion rotation)
         {
-            GameObject houseObject = InstantiateRegistered(AssetPath.BreedingZone, at, rotation);
+            GameObject houseObject = _assets.Instantiate(AssetPath.BreedingZone, at, rotation);
             return houseObject;
         }
 
@@ -144,7 +147,7 @@ namespace Infrastructure.Factory
 
         public IAnimalHouse CreateAnimalHouse(Vector3 at, Quaternion rotation, AnimalType animalType)
         {
-            GameObject houseObject = InstantiateRegistered($"{AssetPath.AnimalHousePath}/{animalType}House", at, rotation);
+            GameObject houseObject = _assets.Instantiate($"{AssetPath.AnimalHousePath}/{animalType}House", at, rotation);
             return _animalHouseBuilder.Build(houseObject);
         }
 
@@ -165,7 +168,7 @@ namespace Infrastructure.Factory
 
         public MedicalBed CreateMedBed(Vector3 at, Quaternion rotation)
         {
-            GameObject medicalBedObject = InstantiateRegistered(AssetPath.MedBed, at, rotation);
+            GameObject medicalBedObject = _assets.Instantiate(AssetPath.MedBed, at, rotation);
             return _medBedBuilder.Build(medicalBedObject);
         }
 
@@ -185,45 +188,41 @@ namespace Infrastructure.Factory
         public GameObject CreateKeeper(Vector3 at) =>
             _assets.Instantiate(AssetPath.KeeperPath, at);
 
-        #region RegisterProgress
-
-        private void Register(ISavedProgressReader progressReader)
-        {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-
-            ProgressReaders.Add(progressReader);
-        }
-
-        private void RegisterProgressWatchers(GameObject gameObject)
-        {
-            foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
-                Register(progressReader);
-        }
-
-        private GameObject InstantiateRegistered(string prefabPath)
-        {
-            GameObject gameObject = _assets.Instantiate(path: prefabPath);
-            RegisterProgressWatchers(gameObject);
-            return gameObject;
-        }
-
-        private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
-        {
-            GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
-            RegisterProgressWatchers(gameObject);
-
-            return gameObject;
-        }
-
-        private GameObject InstantiateRegistered(string prefabPath, Vector3 at, Quaternion rotation)
-        {
-            GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at, rotation);
-            RegisterProgressWatchers(gameObject);
-
-            return gameObject;
-        }
-
-        #endregion
+        // #region RegisterProgress
+        //
+        // private void Register(IProgressReaderRegistrable progressRegistrable)
+        // {
+        // }
+        //
+        // private void RegisterProgressWatchers(GameObject gameObject)
+        // {
+        //     foreach (IProgressReaderRegistrable progressReader in gameObject.GetComponentsInChildren<IProgressReaderRegistrable>())
+        //         Register(progressReader);
+        // }
+        //
+        // private GameObject InstantiateRegistered(string prefabPath)
+        // {
+        //     GameObject gameObject = _assets.Instantiate(path: prefabPath);
+        //     RegisterProgressWatchers(gameObject);
+        //     return gameObject;
+        // }
+        //
+        // private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
+        // {
+        //     GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
+        //     RegisterProgressWatchers(gameObject);
+        //
+        //     return gameObject;
+        // }
+        //
+        // private GameObject InstantiateRegistered(string prefabPath, Vector3 at, Quaternion rotation)
+        // {
+        //     GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at, rotation);
+        //     RegisterProgressWatchers(gameObject);
+        //
+        //     return gameObject;
+        // }
+        //
+        // #endregion
     }
 }

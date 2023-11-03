@@ -1,25 +1,35 @@
 using Data.SaveData;
-using Services.PersistentProgress;
+using Services;
+using Services.PersistentProgressGeneric;
+using Services.SaveLoad;
 using Tools.Extension;
 using UnityEngine;
 
 namespace Logic.Player
 {
-    public class PlayerLocation : MonoBehaviour, ISavedProgress
+    public class PlayerLocation : MonoBehaviour, ISavedProgressGeneric<PlayerLocationData>
     {
-        public void LoadProgress(PlayerProgress progress)
+        private void Start()
+        {
+            Construct(AllServices.Container.Single<ISaveLoadService>());
+        }
+
+        private void Construct(ISaveLoadService saveLoad) =>
+            saveLoad.Register(this);
+
+        public void LoadProgress(in PlayerLocationData progress)
         {
             CharacterController controller = GetComponent<CharacterController>();
             controller.enabled = false;
-            transform.position = progress.LevelData.PlayerLocationData.Position.AsUnityVector();
-            transform.rotation = Quaternion.Euler(progress.LevelData.PlayerLocationData.Rotation.AsUnityVector());
+            transform.position = progress.Position.AsUnityVector();
+            transform.rotation = Quaternion.Euler(progress.Rotation.AsUnityVector());
             controller.enabled = true;
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateProgress(PlayerLocationData progress)
         {
-            progress.LevelData.PlayerLocationData.Position = transform.position.AsVectorData();
-            progress.LevelData.PlayerLocationData.Rotation = transform.rotation.eulerAngles.AsVectorData();
+            progress.Position = transform.position.AsVectorData();
+            progress.Rotation = transform.rotation.eulerAngles.AsVectorData();
         }
     }
 }

@@ -1,9 +1,10 @@
 using System;
+using Services.PersistentProgressGeneric;
 
 namespace Data.SaveData
 {
     [Serializable]
-    public class PlayerProgress
+    public class PlayerProgress : IProgressKey
     {
         public GlobalData GlobalData;
         public LevelData LevelData;
